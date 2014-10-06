@@ -47,6 +47,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.05 (not released yet)
    \describe{ % begin describe 2.05
+   \item{New function \code{\link{nestedcontribution}}}{which computes the contribution of each species to the overall nestedness, based on Bascompte et al. 2003 and as used by Saavedra et al. 2011. Many thanks to Daniel Stouffer for contributing this function!}	
    \item{minor fixes in \code{\link{networklevel}}}{``weighted connectance'' was only returned when ``linkage density'' was in ``index'' call; now also available on its own. Also sligthly revised the help file.}
    \item{\code{\link{nested}} with option \option{weighted NODF} called the unsorted version of this function,}{while calling the same index in \code{\link{networklevel}} called the sorted. This is not nice (although not strictly wrong). Now both call the sorted version and users have to directly invoke \code{nestednodf} for the unsorted option. Many thanks to Julian Resasco for reporting!}
    } % end describe 2.05
