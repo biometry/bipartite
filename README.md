@@ -12,7 +12,7 @@ It falls onto the maintainer to submit new versions to CRAN for release. All non
 
 Since I do not use github everyday, please also send me an email if you add/change something (carsten.dormann@biom.uni-freiburg.de). Thanks!
 
-For maximal confusion, the actual package content is in the "bipartite" subfolder, while other material, such as test files, wishlists, comments etc. are directly in this folder.
+For maximal confusion, the actual package content is in the "bipartite" subfolder, while other material (such as test files, wishlists, comments, the current working package compiled etc.) are directly in this folder.
 
 Carsten
 
