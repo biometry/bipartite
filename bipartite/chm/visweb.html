@@ -1,0 +1,175 @@
+<html><head><title>Plotfunction to visualize a bipartite foodweb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>visweb(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   visweb">
+<param name="keyword" value=" Plotfunction to visualize a bipartite foodweb">
+</object>
+
+
+<h2>Plotfunction to visualize a bipartite foodweb</h2>
+
+
+<h3>Description</h3>
+
+<p>
+this function draws a foodweb as a grid using a matrix. colnames and rownames are used as labels and entries in the matrix are visualized by text and colours. now it can be used to plot bipartite webs in a Vazquez et al. 2009 style
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+visweb(web, type="nested",  prednames=TRUE, preynames=TRUE, labsize=1,
+  plotsize=12, square="interaction", text="no", frame=NULL, textsize=1,
+  textcol="red", pred.lablength=NULL, prey.lablength, clear=TRUE,
+  xlabel="", ylabel="", boxes=TRUE, circles=FALSE, circle.col="black",circle.min=0.2,
+  circle.max=2, outerbox.border="white", outerbox.col="white",
+  box.border="black", box.col="black")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey. </td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+type changes the sorting of rows and coloumns of the web and can be<br>
+<B>nested  </B>: (sorted by row/colSums)<br>
+<B>diagonal</B>: (highest number of interactions appear along the diagonal, good for showing compartments)<br>
+<B>none    </B>: (as is)<br>
+</td></tr>
+<tr valign="top"><td><code>prednames</code></td>
+<td>
+labels can be switched of by prednames=F</td></tr>
+<tr valign="top"><td><code>preynames</code></td>
+<td>
+labels can be switched of by preynames=F</td></tr>
+<tr valign="top"><td><code>labsize</code></td>
+<td>
+factor for size of labels </td></tr>
+<tr valign="top"><td><code>plotsize</code></td>
+<td>
+size of plot (length of width or height), depending on the dimension of the web in cm,  default is 12 cm.</td></tr>
+<tr valign="top"><td><code>square</code></td>
+<td>
+square is used to indicate number of interactions  and belonging to compartments by coloured grid cells<br>
+<B>interaction</B>: (level of grey indicates the number of intercation, white means no interaction)<br>
+<B>compartment</B>: (level of grey indicates belonging to the same compartment)<br>
+<B>black      </B>: (black grid cells if number of interaction is bigger than one)<br>
+<B>none       </B>: (no coloured squares are drawn)<br>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+number of interactions or belonging are plotted into each grid cell<br> 
+<B>interaction</B>: (number of interactions are drawn)<br>
+<B>compartment</B>: (belonging to same compartment indicated by capitel Letters)<br>
+<B>none       </B>: (no text is shown)<br>
+</td></tr>
+<tr valign="top"><td><code>frame</code></td>
+<td>
+a frame is drawn around each compartment (frame=TRUE), best used with type=&ldquo;diagonal&rdquo;  </td></tr>
+<tr valign="top"><td><code>textsize</code></td>
+<td>
+factor for size of text in squares, default=1 </td></tr>
+<tr valign="top"><td><code>textcol</code></td>
+<td>
+color of text in grid cells, default =&ldquo;red&rdquo;</td></tr>
+<tr valign="top"><td><code>pred.lablength</code></td>
+<td>
+length of predators (upper) labels that should be displayed</td></tr>
+<tr valign="top"><td><code>prey.lablength</code></td>
+<td>
+length of prey (lower) labels that should be displayed</td></tr>
+<tr valign="top"><td><code>clear</code></td>
+<td>
+delete species with no interactions (compulsory done for &ldquo;nested&rdquo; and &ldquo;diagonal&rdquo;) </td></tr>
+<tr valign="top"><td><code>xlabel</code></td>
+<td>
+label on the x-axis, make sure prey.lablength is set accordingly, default is empty</td></tr>
+<tr valign="top"><td><code>ylabel</code></td>
+<td>
+label on the y-axis, make sure pred.lablength is set accordingly, default is empty</td></tr>
+<tr valign="top"><td><code>boxes</code></td>
+<td>
+logical, if boxes should be drawn. Default is set to TRUE</td></tr>
+<tr valign="top"><td><code>circles</code></td>
+<td>
+logical, if circles in a Vazquez et al. style should be drawn. Default is set to FALSE, size and colours of circles and background can be set by the following arguments</td></tr>
+<tr valign="top"><td><code>circle.col</code></td>
+<td>
+Colour of circles, works only if circles=TRUE</td></tr>
+<tr valign="top"><td><code>circle.min</code></td>
+<td>
+minimal size of circles, use to rescale circles appropriately, default is 0.2</td></tr>
+<tr valign="top"><td><code>circle.max</code></td>
+<td>
+maximal size of circle, , use to rescale circles appropriately, default is 2</td></tr>
+<tr valign="top"><td><code>outerbox.border</code></td>
+<td>
+Colour of outerbox border if option circles=TRUE</td></tr>
+<tr valign="top"><td><code>outerbox.col</code></td>
+<td>
+Colour of background if option circles=TRUE</td></tr>
+<tr valign="top"><td><code>box.border</code></td>
+<td>
+Colour of border of boxes, if option square=&ldquo;b&rdquo; is set</td></tr>
+<tr valign="top"><td><code>box.col</code></td>
+<td>
+Colour of boxes, if option square=&ldquo;b&rdquo; is set</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+A plot window with appropriate size according to the dimensions of the web.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Bernd Gruber
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Vazquez, P.D., Chacoff, N.,P. and  Cagnolo, L. (in press, 2009. Evaluating multiple determinants of the structure of plant-animal mutualistic networks. Ecology.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+For a different plot on foodweb see <code><a href="plotweb.html">plotweb</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(Safariland)
+visweb(Safariland)
+visweb(Safariland, type="diagonal", square="compartment", text="none", frame=TRUE)
+visweb(Safariland, type="nested", text="compartment")
+
+visweb(Safariland, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, text="no")
+visweb(Safariland, circles=TRUE,  boxes=FALSE,  labsize=1,  text="no",circle.max=1.8, outerbox.border="black")
+visweb(Safariland, circles=TRUE,  boxes=TRUE, outerbox.col="orange", labsize=1, circle.max=1.8, text="no")
+
+visweb(Safariland,square="b",box.col="green",box.border="red")
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

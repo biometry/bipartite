@@ -1,0 +1,77 @@
+* check these functionalities: http://www.r-bloggers.com/the-ecology-of-data-matrices-a-metaphor-for-simultaneous-clustering/
+* plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
+* Guillaume & Latapy: implement random bipartite graph algorithm!
+* Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
+* Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
+* add option "weighted" to links per species in networklevel (copy-paste from grouplevel!)
+* web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
+* as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
+* check Poisot's python package and his package on network matri comparisons
+* implement normalised version of vulnerability and generality (in Bersier 2002)
+* compare betweenness in sna and igraph and tnet and Pajek
+* get rid of the dynload in function cm: find the bug in the C-code (possibly to do with the fopen/fclose?)
+* see Email Jochen 1.2.2013: Dolédec for multivariate stuff
+
+*JOCHEN new: specieslevel breaks when web has just one species pair (1x1 matrix) //found for: nodespec, nestedrank; should capture this with try and return NA for undefined indices; also for cases with a single resource (1x2matrix HL)
+
+IMPROVE: 
+* togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
+* C score: allow for weighting: compute only the 0110-patterns and return this value. Then compute (weighted) averages in group level.
+* external extinction sequence across trophic levels for second.extinct
+* plotting control in degreedistr (colours, line types etc)
+
+MODULARITY
+* optionally redirect computeModule output to a file (using "sink" in the function before and after the C-call?); this will allow monitoring of larger for loops without wading through the likelihoods of the function
+* two-level czvalues (e.g. weighted mean of the two trophic levels; see help file)
+(add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex))
+
+NEW:
+* check the C4b of Gilarranz: is it the same as Opsahl's?
+* quantitative modularity (Marcio Araujo et al. 2008 Ecology: Dieta1): currently only a windows-exe is available!
+* WINE-artiger von Marco
+Ara˙jo MS, Guimar„es PR, Svanb‰ck R, Pinheiro A, Guimar„es P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993
+(downloadable from https://webspace.utexas.edu/ma4775/software.html)
+
+
+* include all quantitative host-parasitoid webs
+
+
+* in second.extinct, use plot.it="higher"/"lower" to plot only one of the trophic levels (wish of Georg Anderson).
+
+* include robustnessLD50 (Dunne et al. 2002, MacFadyen et al. 2009) and revise help for robustness accordingly
+
+* use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
+
+
+* revise startup note in bipartite-package.Rd, saying that we usually assume quantitative webs to be of interaction frequencies and examples are for plant-pollinators if not stated otherwise
+This means: 
+- delete % before the first paragraph
+- add "Networks can be either binary (0/1 or FALSE/TRUE matrices) or quantitative (matrices containing estimates of pairwise interaction strength, usually assumed here to be interaction frequency)."
+- revise to be more inviting to other disciplines (social scientists)
+
+
+* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); not yet implemented in R, it seems!
+
+
+JOCHENF:
+-now:
+* search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
+* test specieslevel with empty.web=FALSE; decide where web.e must be used
+* better treatment of allowed index synonyms in species/group/networklevel (currently they are "not recognised" if they don't come with a allindex-namevariant)
+
+- future:
+* enable networklevel / grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel
+* functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
+* revise plotweb
+* npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
+* new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
+* if everybody's stupid index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
+
+
+
+In the .Rbuildignore file the syntax is a bit strange:
+\..* means (in Perl): starts with . (has to be escaped, hence \.) and is followed by characters ("."), and as many as you want ("*" is a wildcard).
+So \..* refers to any file/directory starting with a ".".
+To exclude specifically .hg, I guess it would be \..hg or so.
+
+It also doesn't seem to work ...

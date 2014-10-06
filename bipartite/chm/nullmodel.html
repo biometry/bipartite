@@ -1,0 +1,106 @@
+<html><head><title>Generates null models for network analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>nullmodel(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   nullmodel">
+<param name="keyword" value=" Generates null models for network analysis">
+</object>
+
+
+<h2>Generates null models for network analysis</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A function for convinient generation of null models for quantitative and binary networks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+nullmodel(web, N=1000, method="r2d", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+number of null models to be generated; defaults to 1000 (more might be better, less probably not).</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+Null model type. Can be given as an integer or name: 1/"r2dtable", 2/"swap.web", 3/"shuffle.web", 4/"mgen"; allows for partial match of names; methods 1 to 3 works for quantitative webs, 3 and 4 for binary.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+arguments to be passed to the function generating the specific null models</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is only a wrapper function to facilitate and standardise the generation of null models.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns a list of <code>N</code> null model-generated networks. Species names are (obviously) dropped.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann <a href="mailto:carsten.dormann@ufz.de">carsten.dormann@ufz.de</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+For the functions generating the null model network: <code><a href="shuffle.web.html">shuffle.web</a></code>, <code><a href="swap.web.html">swap.web</a></code>, <code><a href="vazquez.example.html">mgen</a></code>, <code>commsimulator</code> and <code>r2dtable</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+nullmodel(Safariland, N=2, method=1)
+nullmodel(Safariland&gt;0, N=2, method=4)
+# analysis example:
+obs &lt;- unlist(networklevel(Safariland, index="weighted nestedness"))
+nulls &lt;- nullmodel(Safariland, N=100, method=1)
+null &lt;- unlist(sapply(nulls, networklevel, index="weighted nestedness")) #takes a while ...
+
+plot(density(null), xlim=c(min(obs, min(null)), max(obs, max(null))), main="comparison of observed with null model Patefield")
+abline(v=obs, col="red", lwd=2)    
+
+praw &lt;- sum(null&gt;obs) / length(null)
+ifelse(praw &gt; 0.5, 1-praw, praw)    # P-value
+
+# comparison of null model 3 and 4 for binary:
+nulls3 &lt;- nullmodel(Safariland&gt;0, N=100, method=3)
+nulls4 &lt;- nullmodel(Safariland&gt;0, N=100, method=4)
+null3 &lt;- unlist(sapply(nulls3, networklevel, index="weighted nestedness"))
+null4 &lt;- unlist(sapply(nulls4, networklevel, index="weighted nestedness"))
+
+plot(density(null3), xlim=range(c(null3, null4)), lwd=2, main="comparison of null models")
+lines(density(null4), col="red", lwd=2)
+legend("topright", c("shuffle", "mgen"), col=c("black", "red"), lwd=c(2,2), bty="n", cex=1.5)
+abline(v=networklevel(Safariland&gt;0, index="weighted nestedness"))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.94 <a href="00Index.html">Index]</a></div>
+
+</body></html>

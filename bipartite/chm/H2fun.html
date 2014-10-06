@@ -1,0 +1,109 @@
+<html><head><title>Specialisation of a bipartite web.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>H2fun(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   H2fun">
+<param name="keyword" value=" Specialisation of a bipartite web.">
+</object>
+
+
+<h2>Specialisation of a bipartite web.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the overall level of specialisation of all partners in a bipartite web.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+H2fun(web)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix representing the interactions observed between higher trophic
+level species (columns) and lower trophic level species (rows). Usually this will
+be number of pollinators on each species of plants or number of parasitoids on
+each species of prey. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+H2' is an index describing the level of specialisation, or should one say: selectiveness,
+of an entire bipartite network (Blüthgen et al. 2006). It describes to which extent
+observed interactions deviate from those that would be expected given the species
+marginal sums. The more selective a species, the larger is H2' for the web. 
+</p>
+<p>
+H2' is an extension of d' (see <code><a href="dfun.html">dfun</a></code>) for the entire network. Check
+there for details on finding maximum and minimum H2 values for a given web.
+</p>
+<p>
+For internet implementation see also: <a href="http://nils.mib.man.ac.uk/~nils/stat/">http://nils.mib.man.ac.uk/~nils/stat/</a>
+</p>
+
+
+<h3>Value</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>H2</code></td>
+<td>
+The H2'-value for the web matrix.</td></tr>
+<tr valign="top"><td><code>H2min</code></td>
+<td>
+Heuristic minimum H2-value for the web matrix.</td></tr>
+<tr valign="top"><td><code>H2max</code></td>
+<td>
+Heuristic maximum H2-value for the web matrix.</td></tr>
+<tr valign="top"><td><code>H2uncorr</code></td>
+<td>
+Uncorrected H2-values (before ranging between min and max), rounded
+to three digits.</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann and Jochen Fründ
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Blüthgen, N., Menzel, F. and Blüthgen, N. (2006) Measuring specialization in species
+interaction networks. <EM>BMC Ecology</EM> <B>6</B>, 9
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="dfun.html">dfun</a></code> doing the same for each species in the web matrix.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+H2fun(Safariland)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,95 @@
+<html><head><title>Function to sort bipartite webs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>sortweb(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   sortweb">
+<param name="keyword" value=" Function to sort bipartite webs">
+</object>
+
+
+<h2>Function to sort bipartite webs</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function sorts bipartite webs by either increasing/decreasing row and  column totals or by a given sequence
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sortweb(web, sort.order="inc", sequence=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey. </td></tr>
+<tr valign="top"><td><code>sort.order</code></td>
+<td>
+sort.order can be either<br>
+<B>inc</B>: sorted by increasing row/column totals<br>
+<B>dec</B>: sorted by decreasing row/column totals<br>
+<B>seq</B>: sorted by a given order, see sequence for how to specify an order<br></td></tr>
+<tr valign="top"><td><code>sequence</code></td>
+<td>
+list of two with two named vectors: <code>seq.lower</code> and <code>seq.higher</code>, which specify the order in which species are sorted. To be able to sort by names obviously the given web must be a NAMED matrix, i.e. has column and row names. If you want to order an unnamed web, you can either order it by row/column totals are you have to simply specify the sequence as follows (example puts last row/column to the front):
+web[c(9, 1:8), c(27, 1:26)]</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns an ordered bipartite web.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Bernd Gruber
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Vazquez, P.D., Chacoff, N.,P. and  Cagnolo, L. (2009) Evaluating multiple determinants of the structure of plant-animal mutualistic networks. <EM>Ecology</EM>in press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+For plotting and ordered web see  <code><a href="plotweb.html">plotweb</a></code>, <span class="option">method="normal"</span> or  <code><a href="visweb.html">visweb</a></code>, <span class="option">type="none"</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(Safariland)
+web &lt;- Safariland
+
+sortweb(Safariland, sort.order="dec") 
+plotweb(sortweb(Safariland, sort.order="inc"), method="normal")   #rares species first
+visweb(sortweb(Safariland,sort.order="inc"), type="diagonal", square="compartment", text="none", frame=TRUE)
+
+# sorted by a given (here random) sequence
+sequence &lt;- list(seq.higher=sample(colnames(Safariland)), seq.lower=sample(rownames(Safariland)))
+web.ordered &lt;- sortweb(web, sort.order="seq", sequence=sequence)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

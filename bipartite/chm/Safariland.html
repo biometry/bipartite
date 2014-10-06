@@ -1,0 +1,89 @@
+<html><head><title>Pollination web in Argentina.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Safariland(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Safariland">
+<param name="keyword" value=" Pollination web in Argentina.">
+</object>
+
+
+<h2>Pollination web in Argentina.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This pollination web was published by Vazquez and Simberloff (2003). See there for
+details on how it was measured.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Safariland)</pre>
+
+
+<h3>Details</h3>
+
+<p>
+The dataset consists of a matrix with 9 rows, representing plant species and 27 columns,
+representing different pollinators. Values in the matrix are observed flower visitations.
+</p>
+<p>
+This dataset is fairly representative of a pollination web: more pollinators than plants,
+and an awful lot of zeros in the matrix.
+</p>
+<p>
+The study was conducted in four grazed and four ungrazed sites in and around Nahuel
+Huapi National Park and surrounding areas in Rio Negro, Argentina from September 1999
+to Feburary 2000. For each site, the plant-pollinator interaction network was described.
+</p>
+<p>
+The authors recorded their data by counting the number of visits of each flower visitor
+species to each plant species. Data are presented as an interaction frequency matrix,
+in which cells with positive integers indicate the frequency of interaction between
+a pair of species, and cells with zeros indicate no interaction.
+</p>
+
+
+<h3>Source</h3>
+
+<p>
+These data can be downloaded, together with the other datasets, on the NCEAS interactionweb
+website  <a href="http://www.nceas.ucsb.edu/interactionweb/html/datasets.html">http://www.nceas.ucsb.edu/interactionweb/html/datasets.html</a>. See also
+there for further details, both on the data and their usage.
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Vázquez, D. P. 2002 Interactions among Introduced Ungulates, Plants, and Pollinators:
+A Field Study in the Temperate Forest of the Southern Andes. Doctoral Dissertation
+Thesis, University of Tennessee, Knoxville, Tennessee, USA.
+</p>
+<p>
+Vázquez, D. P., and D. Simberloff. 2002 Ecological specialization and susceptibility
+to disturbance: conjectures and refutations. <EM>American Naturalist</EM> <B>159</B>, 606&ndash;623.
+</p>
+<p>
+Vázquez, D. P., and D. Simberloff. 2003 Changes in interaction biodiversity induced
+by an introduced ungulate. <EM>Ecology Letters</EM>, <B>6</B>, 1077&ndash;1083.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+plotweb(Safariland)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

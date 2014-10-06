@@ -1,0 +1,114 @@
+<html><head><title>Calculates the (normalised) mean number of checkerboard combinations (C-score) in a matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>C.score(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   C.score">
+<param name="keyword" value=" Calculates the (normalised) mean number of checkerboard combinations (C-score) in a matrix">
+</object>
+
+
+<h2>Calculates the (normalised) mean number of checkerboard combinations (C-score) in a matrix</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the C-score for all pollinator species; the C-score represents the average number of checkerboard units for each unique species pair.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+C.score(web, normalise = TRUE, FUN = mean, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix with pollinators as columns and plants as rows. Alternatively, when used on e.g. species occurrences across islands, rows are islands. </td></tr>
+<tr valign="top"><td><code>normalise</code></td>
+<td>
+Logical; if <code>TRUE</code> (default), the C-score is ranged between 0 (no checkerboards) and 1 (only checkerboards). For <code>FALSE</code> the standard value of mean number of checkerboard pairs is returned. This is somewhat awkward for comparing different data sets, that's what the normalisation is for.</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+Function to use when summarising the C-scores for each pairwise comparison. Defaults to <code>mean</code>, but other useful functions could be <code>median</code> (because C-scores are rather skewed) or <code>hist</code> (for a nice graph). </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Options to be passed on to FUN, e.g. <span class="option">na.rm=T</span> for matrices with many zeros and <span class="option">normalise=TRUE</span>. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+As a first step, any quantitative matrix is converted to a binary matrix of presences and absences.
+</p>
+<p>
+Then, the formula given in Stone and Roberts (1990) is calculated for all species combinations, by calling <code>designdist</code> from the package <span class="pkg">vegan</span>. See code for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns whatever the <span class="option">FUN</span> produces as output. Default would be a single value, i.e.~the mean C-score of the web.</p>
+
+<h3>Note</h3>
+
+<p>
+The normalisation uses the following logic: let A and B be the number of occurrences of each of the two species, respectively. Then J is the number of sites where both occur and P the total number of sites.
+The maximum value for C in each comparison is A*B, when they are exactly complementary and hence J=0. 
+However, if (A+B)&gt;length of vector(P), then there will be some co-occurrences and 
+hence J&gt;0=(A+B-P). The general maximum then becomes (A-A-B+P)(B-A-B+P)=(P-B)(P-A). 
+For (A+B)&lt;P, maximum is AB.
+</p>
+<p>
+The minimum is set to 0.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Gotelli, N.J. and Rohde, K. (2002) Co-occurrence of ectoparasites of marine fishes: a null model analysis. <EM>Ecology Letters</EM> <B>5</B>, 86&ndash;94
+</p>
+<p>
+Stone, L. and Roberts, A. (1990) The checkerboard score and species distributions. <EM>Oecologia</EM> <B>85</B>, 74&ndash;79
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="V.ratio.html">V.ratio</a></code> for another measure of species associations, <code>nestedchecker</code> in <span class="pkg">vegan</span>, which also calculates the C-score (even yielding the same value), but not its normalised version
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- matrix(c(1,0,0, 1,1,0, 1,1,0, 0,1,1, 0,0,1), 5,3,TRUE)
+C.score(m)
+C.score(m, normalise=FALSE)
+C.score(m, normalise=FALSE, FUN=print)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,6 @@
+sorry, new file to not mess up the UTF-8 format...
+
+* fix: niche overlap is given as an example for the effect of "weighted" (weighted mean) in grouplevel.Rd, but I think it's just one of the cases where weighted has NO effect !?
+
+* improve: we could use weighted also for the distance/overlap measures, weighted pairwise distances by their combined number of observations (e.g. the minimum of the pair?)
+* PIE seems to be implemented in R: It was generated using the ‘addpart’ function in R package stratigraph

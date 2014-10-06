@@ -1,0 +1,89 @@
+<html><head><title>Simulates extinction of a species from a bipartite network</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>extinction(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   extinction">
+<param name="keyword" value=" Simulates extinction of a species from a bipartite network">
+</object>
+
+
+<h2>Simulates extinction of a species from a bipartite network</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Following (how I remember) the paper of Memmott et al. (2004), this function deletes a column (e.g. pollinator) or row (e.g. plant). Only a helper function for <code><a href="second.extinct.html">second.extinct</a></code>, really.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+extinction(web, participant = "both", method = "random")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey. </td></tr>
+<tr valign="top"><td><code>participant</code></td>
+<td>
+Which level of participant to remove: <span class="option">lower</span> removes a row, <span class="option">higher</span> removes a row, <span class="option">both</span> randomly picks either row or column. Partial matching of strings implemented. </td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+Determines sequence of extinctions: <span class="option">random</span> removes a random participant, while <span class="option">abundance</span> removes the least abundant species first. Partial matching of strings implemented.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+In itself rather useless. Called repeatedly by <code><a href="second.extinct.html">second.extinct</a></code> to build an extinction sequence and accordingly a sequence of secondary extinctions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns the same matrix that was given as object, just with one row or column being turned into zeros.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Memmott, J., Waser, N. M. and Price, M. V. 2004 Tolerance of pollination networks to species extinctions. <EM>Proceedings of the Royal Society B</EM> <B>271</B>, 2605&ndash;2611
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="second.extinct.html">second.extinct</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+(w &lt;- extinction(Safariland, participant="low", method="abun"))
+empty(w, count=TRUE)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

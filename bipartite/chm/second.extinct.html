@@ -1,0 +1,144 @@
+<html><head><title>Secondary extinctions in bipartite networks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>second.extinct(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   second.extinct">
+<param name="keyword" value=" Secondary extinctions in bipartite networks">
+</object>
+
+
+<h2>Secondary extinctions in bipartite networks</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the consequences of removing a species from a bipartite network. With plotting and slope-estimation functionality.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+second.extinct(web, participant = "higher", method = "abun", nrep = 10,
+  details = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+Web is a matrix representing the interactions observed between higher
+trophic level species (columns) and lower trophic level species (rows). Usually
+this will be number of pollinators on each species of plants or number of parasitoids
+on each species of prey.</td></tr>
+<tr valign="top"><td><code>participant</code></td>
+<td>
+&ldquo;<code>high</code>&rdquo; (default) or &ldquo;<code>low</code>&rdquo; or &ldquo;<code>both</code>&rdquo;,
+depending if you want to exterminate higher trophic level species, lower trophic
+level species, or a randomly chosen species of both levels; partial matching.</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+Random deletion of a species (&ldquo;<code>random</code>&rdquo;) or according
+to its abundance, with least abundant going extinct first (&ldquo;<code>abundance</code>&rdquo;; default). </td></tr>
+<tr valign="top"><td><code>nrep</code></td>
+<td>
+Number of replicates of extermination sequence. Will not be considered
+for method abundance.</td></tr>
+<tr valign="top"><td><code>details</code></td>
+<td>
+Logical; returns details, i.e.~for each replicate the sequence of
+secondary extinctions. If set to <code>FALSE</code> (default), replicated runs will be averaged. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The procedure of this function is simple. For example imagine the web to represent
+a pollination web, in which pollinators die one by one. Set all entries of a  column
+to zero, see how may rows are now also all-zero (i.e. species that are now not pollinated
+any more), and count these as secondary extinctions of the primary exterminated pollinator. 
+</p>
+<p>
+Internally, each extermination is achieved by a call to <code><a href="extinction.html">extinction</a></code>,
+followed by a call to <code><a href="empty.html">empty</a></code>, which counts the number of all-zero columns
+and rows.
+</p>
+<p>
+Although written for pollination webs (hence the nomenclature of pollinator and plant),
+it can be similarly applied to other types of bipartite networks. It is called by
+<code><a href="networklevel.html">networklevel</a></code>.
+</p>
+<p>
+<span class="option">details=FALSE</span> will not work with <span class="option">participant="both"</span>, since
+sequences cannot be averaged, due to different lengths.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Function returns an object of class &ldquo;bipartite&rdquo; to ensure proper working of
+function plot.bipartite.
+<br>
+If <span class="option">details=FALSE</span>, the returned object contains a matrix with columns representing
+the number of species going extinct from one step to the next, averaged across all runs.
+<br>
+If <span class="option">details=FALSE</span>, the returned object will be a list of matrices containing
+the number of species going extinct at each step.
+<br>
+The objects attribute &ldquo;exterminated&rdquo; gives the name of the trophic level (pollinator
+or plant).</p>
+
+<h3>Note</h3>
+
+<p>
+Note: The length of an extinction sequence is obviously given by the number of species
+in the selected trophic level. When setting <span class="option">participant="both"</span>, lengths will
+differ for each replicate run, since it is unpredictable in which sequence species go
+extinct, and hence how many secondary extinctions will pre-empt further primary extinctions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Memmott, J., Waser, N. M. and Price, M. V. (2004) Tolerance of pollination networks
+to species extinctions. <EM>Proceedings of the Royal Society b</EM> <B>271</B>, 2605&ndash;2611.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="networklevel.html">networklevel</a></code> calls <code>second.extinct</code>; <code><a href="extinction.html">extinction</a></code>
+and <code><a href="empty.html">empty</a></code> are internal helper functions, and <code><a href="slope.bipartite.html">slope.bipartite</a></code>
+calculates extinction slopes from the output of <code>second.extinct</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+(ex &lt;- second.extinct(Safariland, participant="low", method="r", nrep=50, details=TRUE))
+(ex &lt;- second.extinct(Safariland, participant="low", method="r", nrep=50, details=FALSE))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

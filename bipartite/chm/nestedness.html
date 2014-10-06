@@ -1,0 +1,134 @@
+<html><head><title>Calculates nestedness temperature of presence/absence matrices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>nestedness(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   nestedness">
+<param name="keyword" value=" Calculates nestedness temperature of presence/absence matrices">
+</object>
+
+
+<h2>Calculates nestedness temperature of presence/absence matrices</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates matrix temperature using the binmatnest programm of Miguel Rodríguez-Gironés
+by calling a tweaked version of the C++ program binmatnest. For a full description what it does please refer to the paper of Miguel. In principle nestedness temperature is calculated by using a line of perfect order (using a genetic algorithm) to determine the reordering of rows and columns that leads to minimum matrix temperature of given size and fills. The deviation from this minimun temperature is the matrix temperature. In addition nestedness uses there different null models to check for statistical significance of the matrix temperature.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+nestedness(m, null.models = TRUE, n.nulls = 100, popsize = 30, n.ind = 7, 
+n.gen = 2000, binmatnestout=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>m</code></td>
+<td>
+<code>m</code> is the matrix object for which the temperature is calculated. <code>m</code> will be converted to a binary matrix as temperature is only based on binary data</td></tr>
+<tr valign="top"><td><code>null.models</code></td>
+<td>
+Logical; shall the three different null models to check for significance of the matrix temperature be calculated? The null models procedure is quite time consuming and therefore we added this switch. Defaults to <code>null.models</code>=TRUE.</td></tr>
+<tr valign="top"><td><code>n.nulls</code></td>
+<td>
+How many null models should be calculated. Defaults to <code>n.nulls=100</code>.</td></tr>
+<tr valign="top"><td><code>popsize</code></td>
+<td>
+For the genetic algorithm some parameters have to be initialised. First is <code>popsize</code>, default is 30</td></tr>
+<tr valign="top"><td><code>n.ind</code></td>
+<td>
+Second is number of individuals picked for the next generation. Default of <code>n.ind</code> is 7.</td></tr>
+<tr valign="top"><td><code>n.gen</code></td>
+<td>
+Third is the number of generations until the genetic algorithm stops. Default of <code>n.gen</code> is 2000.</td></tr>
+<tr valign="top"><td><code>binmatnestout</code></td>
+<td>
+if set to TRUE a file "binmat.out" is saved in the current working directory , which stores the original binmatnest output</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+There are several implementations of nestedness-calculators, most noticeably NTC (nestedness temperature calculator), BINMATNEST and aninhado (check Wikipedia's entry on the subject: <a href="http://en.wikipedia.org/wiki/Nestedness">http://en.wikipedia.org/wiki/Nestedness</a>). While we here use BINMATNEST, this does not disqualify any of the others. Miguel was simply the first we contacted and he was readily willing to share his code (applause).
+</p>
+<p>
+For details on what BINMATNEST does different, and better, than the original NTC see reference below. 
+</p>
+<p>
+Notice also that the original software BINMATNEST is available as a stand-alone application, too. Check out Miguel's homepage: <a href="http://www.eeza.csic.es/eeza/personales/rgirones.aspx">http://www.eeza.csic.es/eeza/personales/rgirones.aspx</a> or download directly: <a href="http://www.eeza.csic.es/eeza/personales/rgirones/File/BINMATNEST3.zip">http://www.eeza.csic.es/eeza/personales/rgirones/File/BINMATNEST3.zip</a>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+returns a list of matrix descriptors, such as
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>temperature </code></td>
+<td>
+the matrix temperature</td></tr>
+<tr valign="top"><td><code>parameters of genetic algorithms</code></td>
+<td>
+Parameters used for the genetic algorithm</td></tr>
+<tr valign="top"><td><code>nullmodels</code></td>
+<td>
+switch if null models have been calculated, 1 for yes, 0 for no</td></tr>
+<tr valign="top"><td><code>p, mean, var</code></td>
+<td>
+probability, mean temperature and variance of temperature for the three different null models</td></tr>
+<tr valign="top"><td><code>packing order</code></td>
+<td>
+the packing order of the most packed matrix (minimum temperature of a perfectly nested matrix using given size and fills.</td></tr>
+</table>
+
+<h3>Note</h3>
+
+<p>
+Make sure matrix <code>m</code> is valid, as error proofing in the C++ function does not fully work, and therefore it is possible that R may crash when using strange types of matrices, such as matrices with only one entry.
+</p>
+<p>
+Also, while this function returns exactly the same values as binmatnest, there seems to be the occassional glitch in the software, in that in unexplicable circumstances the matrix is inverted before calculating nestedness. We are currently trying to find the cause of this problem. Sorry!
+</p>
+<p>
+In the meantime, use <code>nestedtemp</code> in <span class="pkg">vegan</span> (as we do in <code>networklevel</code>)!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Bernd Gruber, based on C++-code by Miguel Rodríguez-Gironés.
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Rodríguez-Gironés M.A., and Santamaría L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence matrices. <EM>Journal of Biogeography</EM> <B>33</B>, 924&ndash;935
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(vazarr)
+nestedness(vazarr) # null models are calculated
+nestedness(vazarr, null.models=FALSE) # no null models, much faster for bigger matrices
+nestedness(vazarr, n.nulls=300, n.gen=300)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

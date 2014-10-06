@@ -1,0 +1,129 @@
+<html><head><title>Calculates standardised specialisation index d' (d prime) for each species in the lower trophic level of a bipartite network.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>dfun(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   dfun">
+<param name="keyword" value=" Calculates standardised specialisation index d' (d prime) for each species in the lower trophic level of a bipartite network.">
+</object>
+
+
+<h2>Calculates standardised specialisation index d' (d prime) for each species in the lower trophic level of a bipartite network.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function returns the specialisation index d', which expresses how specialised a given species is in relation to what resources are on offer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dfun(web, abuns=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.</td></tr>
+<tr valign="top"><td><code>abuns</code></td>
+<td>
+A vector of abundances for the HIGHER trophic level, usually from additional information. If none is given (default) marginal sums are used.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The d' index is derived from Kulback-Leibler distance (as is Shannon's diversity index), and calculates how strongly a species deviates from a random sampling of interacting partners available. It ranges from 0 (no specialisation) to 1 (perfect specialist). In the case of a pollination web, a pollinator may be occurring only on one plant species, but if this species is the most dominant one, there is limited evidence for specialisation. Hence this pollinator would receive a low value. In contrast, a pollinator that occurs only on the two rarest plants would have a very high value of d'.
+</p>
+<p>
+The idea of this index is laid out in Blüthgen et al. (2006). It basically calculates the Shannon-diversity for each column (delivering the raw d-values) and re-ranges them between the theoretical maximum and minimum (yielding values between 0 and 1). dmax is given analytically (see paper or code), but dmin must be found `heuristically', since the web can only contain integers. The idea behind the heuristic minimum is that d will be minimal when observed values differ least from expected values based on marginal distributions.
+</p>
+<p>
+The way this function is implemented, it calculates expected values for each cell based on the product of observed marginal sums (i.e. column and row sums) times <code>sum(web)</code>. Then it rounds off to integers and allocates the remaining interactions in two steps: First, all columns and rows with marginal sums of 0 obtain one interaction into the cell with the highest expected value. Secondly, all remaining interactions are distributed according to difference between present and expected value: those cells with highest discrepancy receive an interaction until the sum of all entries in the new web equals those in the original web. Now the d-values for this web are calculated and used as dmin.
+</p>
+<p>
+Simple rounding of expected values would lead to empty columns or rows, i.e. the dmin-web would be of lower dimension than the original web.
+</p>
+<p>
+dfun returns the d' values for the lower trophic level. Use <code>fun(t(web))</code> to get the d'-values for the higher trophic level (as does 'specieslevel').
+</p>
+<p>
+d' is one of several species-level network indices. It's generalisation to the entire interaction web is called H2'.
+</p>
+<p>
+The <code>abundances</code> vector allows to incorporate independent estimates of the abundances of the HIGHER trophic level. In a pollination web, pollinator abundances may be very different from those estimated by the interaction matrix column sums. This has also, obviously, large consequences for the specialisation: A plant being pollinated by a bee that is common on this plant, but very rare in general, will show a low specialisation unless bee abundances are corrected for. Data given in the abundance vector are here used in replacement for the row sums, both in the d-function itself, as well as in the calculation of the minimum ds.
+</p>
+<p>
+In contrast to <code><a href="H2fun.html">H2fun</a></code>, finding the minimum value of d violates marginal totals. The idea is that we look at each species in turn. Then, we estimate how its observed number of interactions can be distributed, given the marginal totals (i.e. if 5 interactions were observed, they cannot be put into a link that only has 3 interactions across all species). So, for each species the number of interactions never exceeds the total across all species, but if we would put the web together from this sequential scan, it may well do so. In our view, this is irrelevant, because we are interested in the potential of each species separately to be perfectly specialised (given the marginal totals), not for the entire web. We leave this to <code><a href="H2fun.html">H2fun</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dprime</code></td>
+<td>
+d'-value for each species</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+Raw d-value for each species, i.e. before ranging it between 0 and 1.</td></tr>
+<tr valign="top"><td><code>dmin</code></td>
+<td>
+Minimum d-value for each species, based on a perfect nesting of the matrix; see details.</td></tr>
+<tr valign="top"><td><code>dmax</code></td>
+<td>
+Maximum d-value theoretically possible given the observed number of interactions and the observed marginal distributions.</td></tr>
+</table>
+
+<h3>Note</h3>
+
+<p>
+As detailed above, deriving the dmin-values &lsquo;heuristically&rsquo; leaves room to some variation. We are very happy with this implementation, but you may want to program something yourself ...
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Jochen Fründ and Carsten F. Dormann
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Blüthgen, N., Menzel, F. and Blüthgen, N. (2006) Measuring specialization in species interaction networks. <EM>BMC Ecology</EM> <B>6</B>, 12
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="H2fun.html">H2fun</a></code> for a similar function for the entire network. <code><a href="specieslevel.html">specieslevel</a></code> for a method that, amongst other indices, calls <code>dfun</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+dfun(Safariland) # gives d-values for the lower trophic level
+# now using independent abundance estimates for higher trophic level:
+dfun(Safariland, abuns=runif(ncol(Safariland)))
+
+dfun(t(Safariland)) #gives d-values for the higher trophic level
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 1.01 <a href="00Index.html">Index]</a></div>
+
+</body></html>

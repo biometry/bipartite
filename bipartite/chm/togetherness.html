@@ -1,0 +1,90 @@
+<html><head><title>Calculates the number of identical co-presences and co-absences for species-on-islands</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>togetherness(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   togetherness">
+<param name="keyword" value=" Calculates the number of identical co-presences and co-absences for species-on-islands">
+</object>
+
+
+<h2>Calculates the number of identical co-presences and co-absences for species-on-islands</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Togetherness, or T-score, describes the level of similarity in the distributional pattern of two species. Originally proposed by Stone &amp; Roberts (1992) for biogeographical situations can it also be applied e.g.~to pollinators on different host plants.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+togetherness(web, normalise=TRUE, FUN = mean, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix with binary or counted interactions/links, where the higher trophic level is represented by columns.</td></tr>
+<tr valign="top"><td><code>normalise</code></td>
+<td>
+Logical; shall index be normalised to a range of 0-1?</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+The function to summarise species-pair T-scores with; defaults to mean.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed on to <code>FUN</code>, especially <code>na.rm=T</code> or colours for <code>hist</code>. </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns the average (default) togetherness of all species combinations.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Stone, L. and Roberts, A. (1992) Competitive exclusion, or species aggregation? An aid in deciding. <EM>Oecologia</EM> <B>91</B>, 419&ndash;424
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="C.score.html">C.score</a></code> for another of Stone &amp; Roberts' indices.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+(m &lt;- matrix(c(0,1,0,0,1,1,0,1,1,0), ncol=2, byrow=TRUE))
+togetherness(m)
+# or, with two togethernesses:
+(n &lt;- matrix(c(0,1,1,0,1,1,0,0,1,1,0,1,0,1), ncol=2, byrow=TRUE))
+togetherness(n, normalise=FALSE)
+
+data(Safariland)
+togetherness(m)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>

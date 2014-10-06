@@ -1,0 +1,104 @@
+<html><head><title>Calculates the functional specialisation index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>functspec(bipartite)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   functspec">
+<param name="keyword" value=" Calculates the functional specialisation index">
+</object>
+
+
+<h2>Calculates the functional specialisation index</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the functional specialisation index for all species in a bipartite network, separately for
+the higher and lower trophic level.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+functspec(web, inf.replace = NA)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>web</code></td>
+<td>
+A matrix with lower trophic level species as rows, higher trophic level 
+species as columns and number of interactions as entries.</td></tr>
+<tr valign="top"><td><code>inf.replace</code></td>
+<td>
+What should infinite geodesic distances (e.g. between compartments)
+be represented as? Defaults to <span class="option">NA</span>; only currently implemented alternative is 
+<span class="option">Inf</span>, which replaces infinite distances by the maximum path length plus 1.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This index aims to describe the functional specialisation of pollinators and was proposed by  Dalgaard et al. (2008). It is a purely qualitative measure. 
+</p>
+<p>
+After calculating the geodesic distances between species, i.e. the minimum number of steps from one species to another, these values are averaged for each species. This mean geodesic distance is interpreted as functional specialisation (Dalgaard et al. 2008).
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A list with two components, names &ldquo;higher&rdquo; and &ldquo;lower&rdquo;, both containing the functional specialisation index for each species.</p>
+
+<h3>Note</h3>
+
+<p>
+This index is as yet unevaluated. We don't know how it responds to true specialisation at all. In fact, it is a rather good example of how to get a new thing published without even having demonstrated in which way it differs from existing indices of specialisation (such as standardised d included in the function <code><a href="dfun.html">dfun</a></code>), 
+or how it performs on artificial data with known properties.
+</p>
+<p>
+One major disadvantage of any index based on path lenghts is its difficulty with compartments, i.e. species not linked to the rest of the network. There are, generally speaking, three ways to handle this: Firstly, ignore it (that is, set
+infinite distances to <code>NA</code>; our default). Secondly, leave it as it is (that is, leave infinite distances as infinite). This is not really an option, since then ALL species would have infinite specialisation values. Thirdly, replace infinite by the largest distance plus one (see comments in <code>geodist</code> in <span class="pkg">sna</span>). That would probably be a plausible thing to do, since we could argue that with a little bit extra observation we might have found a species linking a compartment to the rest of the network. However, this solution is &ldquo;not canonical&rdquo;, as put in <code>geodist</code> and hence biased to an unknown extent. To use this option, specify <span class="option">inf.replace=Inf</span>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Carsten F. Dormann <a href="mailto:carsten.dormann@ufz.de">carsten.dormann@ufz.de</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Dalsgaard, B., Martín González, A. M., Olesen, J. M., Timmermann, A., Andersen, L. H. and Ollerton, J. (2008) Pollination networks and functional specialization: a test using Lesser Antillean plant-hummingbird assemblages. <EM>Oikos</EM> <B>117</B>, 789&ndash;793
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+See also as <code><a href="specieslevel.html">specieslevel</a></code>, which calls <code>functspec</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Safariland)
+functspec(Safariland, inf.replace=Inf)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>bipartite</em> version 0.92 <a href="00Index.html">Index]</a></div>
+
+</body></html>
