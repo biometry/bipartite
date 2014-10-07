@@ -45,15 +45,18 @@ Ulrich, W. and Gotelli, N.J. (2007) Disentangling community patterns of nestedne
 }
 
 \examples{
-data(Safariland)
-nulls <- replicate(1000, discrepancy(commsimulator(Safariland, 
+\dontrun{
+#nulls <- replicate(100, discrepancy(commsimulator(Safariland, 
 		method="quasiswap")))
-hist(nulls)
+nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 100)
+null.res <- apply(nulls, 3, discrepancy)
+hist(null.res)
 obs <- discrepancy(Safariland)
 abline(v=obs, lwd=3, col="grey")
-c("p value"=min(sum(nulls>obs), sum(nulls<obs))/length(nulls))
+c("p value"=min(sum(null.res>obs), sum(null.res<obs))/length(null.res))
 # calculate Brualdi & Sanderson's Na-value (i.e. the z-score):
-c("N_a"=(unname(obs)-mean(nulls))/sd(nulls))
+c("N_a"=(unname(obs)-mean(null.res))/sd(null.res))
+}
 }
 
 \keyword{package}

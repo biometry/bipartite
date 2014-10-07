@@ -52,6 +52,10 @@ discrepancy(vazquenc)
 ## Not nice, this; it's a namespace issue; somehow permute::allPerms is not available to nesteddisc, forcing me to load all of vegan here! Don't know what's going wrong.
 ## OUTCOMMENTED because otherwise vegan would be loaded (through nested)! That would obviously affect the check of all following functions!
 
+# Check that this works, because vegan is being restructured and now has a function "nullmodel"!
+nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 100)
+apply(nulls, 3, discrepancy)
+
 # empty
 vazquenc[,3] <- 0
 empty(vazquenc, count=TRUE)

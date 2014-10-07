@@ -35,7 +35,7 @@ r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 
 \author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}}
 
-\seealso{ \code{\link{nullmodel}}, \code{\link{vaznull}}, \code{\link{mgen}}, \code{commsimulator} and \code{r2dtable}
+\seealso{ \code{\link{nullmodel}}, \code{\link{vaznull}}, \code{\link{mgen}}, \code{vegan::simulate} and \code{r2dtable}
 }
 
 \examples{

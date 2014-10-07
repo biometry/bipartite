@@ -39,8 +39,7 @@ identical) to the observed network. This is no error. It is reflecting the fact 
 
 \author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}}
 
-\seealso{ For the functions generating the null model network: \code{\link{shuffle.web}}, \code{\link{swap.web}}, \code{\link{vaznull}}, \code{\link{mgen}}, 
-\code{commsimulator} and \code{r2dtable}
+\seealso{ For the functions generating the null model network: \code{\link{shuffle.web}}, \code{\link{swap.web}}, \code{\link{vaznull}}, \code{\link{mgen}}, \code{vegan::simulate} and \code{r2dtable}
 }
 
 \examples{
