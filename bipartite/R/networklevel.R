@@ -188,7 +188,7 @@
             out$"specialisation asymmetry" <- SA 
         }
         #------------------
-        if (c("linkage density","weighted connectance") %in% index){
+        if (any(c("linkage density","weighted connectance") %in% index)){
             # for formula see Tylianakis et al. (2006), supplement.
             # N refers to prey, P to predators
             

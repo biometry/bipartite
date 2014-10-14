@@ -14,9 +14,10 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
             # option 'details' will be set to FALSE internally.\n")
           # details <- TRUE
     # }
-
+    if (participant=="both" & method=="external") stop("Sorry, that won't work. When you specify the sequence, you have to choose one of the two levels. 'both' won't work.")
+  
     one.second.extinct <- function(web=web, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col){
-		dead <- matrix(nrow=0, ncol=3)
+		    dead <- matrix(nrow=0, ncol=3)
         colnames(dead) <- c("no", "ext.lower", "ext.higher")
         m2 <- web
         i <- 1
@@ -73,9 +74,10 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
         return(dead2)
     }
 
-    if (is.vector(method)) sequence = method ### What is this for, I wonder?
+    if (is.vector(method)) sequence = method ### In case someone provides a sequence to the method, rather than ext.row or ext.col!
     if (pmatch(method, c("abundance", "random", "degree", "external")) %in% c(1,3,4)){# i.e. if "abundance", "degree" or "external"
         out <- one.second.extinct(web=web, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col)
+    
 		#test only:	one.second.extinct(web=web, participant=participant, method=method, ext.row=sample(9), ext.col=1:27)
 
     } else {

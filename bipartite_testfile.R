@@ -198,7 +198,7 @@ bs <- second.extinct(Safariland, method="random", participant="both", details=T)
 slope.bipartite(bs) # should return an error with an explanation
 bs <- second.extinct(Safariland, method="random", participant="both", details=F) 
 slope.bipartite(bs) # should work
-
+second.extinct(Safariland, participant="both", method="external", ext.row=1:9, ext.col=27:1) # should break!
 
 # slope.bipartite
 
