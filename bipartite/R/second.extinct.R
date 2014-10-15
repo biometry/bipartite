@@ -15,6 +15,11 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
           # details <- TRUE
     # }
     if (participant=="both" & method=="external") stop("Sorry, that won't work. When you specify the sequence, you have to choose one of the two levels. 'both' won't work.")
+    if (!is.null(ext.row) & length(ext.row) != NROW(web)) stop("The length of the external row vector is different from the numbers of rows in the network!")
+    if (!is.null(ext.col) & length(ext.col) != NCOL(web)) stop("The length of the external col vector is different from the numbers of cols in the network!")
+    if (participant == "higher" & method=="external" & is.null(ext.col)) stop("You need to provide an external sequence of extinction for the higher trophic level!")
+    if (participant == "lower" & method=="external" & is.null(ext.row)) stop("You need to provide an external sequence of extinction for the lower trophic level!")
+
   
     one.second.extinct <- function(web=web, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col){
 		    dead <- matrix(nrow=0, ncol=3)
