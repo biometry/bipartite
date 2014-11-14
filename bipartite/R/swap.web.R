@@ -71,22 +71,46 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
   }
 
 
-  downswap <- function(first, m, n, c.crit=1e4){
+  downswap <- function(first, m, n, c.crit=1e4, swap.method="random", verbose=TRUE){
       second <- first  # to have starting conditions when the algorithm gets trapped
+	  replace.counter <- 0
       while (m < n){
         mat <- findmat.full(first, c.crit=c.crit) # yields a 2 x 2 matrix with non-zero diagonal       
         while (is.null(mat)){
             first <- r2dtable(1, r=rowSums(second), c=colSums(second))[[1]]
             n <- sum(first>0)
             mat <- findmat.full(first)
-            cat("New null matrix needed: old one sucked.\n")
+            if (verbose) cat("New null matrix computed: old one had no manipulatable 2x2 entries.\n")
+            replace.counter <- replace.counter + 1
+            # if (replace.counter > 49) {
+            	# swap.method <- "not.random"
+            	# if (verbose) cat("Changed swapping algorithm due to cul-de-sac.\n")
+            # }
+            # print(replace.counter)
+            if (replace.counter >= 10) return(NULL)
         } 
+        if (replace.counter >= 10) return(NULL)
         # cat("2x2 matrix found ")
-        # swap:
-        mat.new <- mat
-        diag(mat.new) <- (diag(mat) - min(diag(mat)))
-        diag(mat.new[2:1, ]) <- diag(mat[2:1,]) + min(diag(mat))
-  		# check that we are not downswapping more than interactions still available:  
+        # swap.mat <- function(mat, method="random"){
+        	mat.new <- mat
+        	 if (swap.method=="random"){
+        		# new version, using always one entry to add to the other, irrespective of its size:
+        		mat.new[1, 1] <- mat[1,1] + mat[2,2]
+        		mat.new[2, 2] <- 0
+        		# Potentially, this can cause problems, in small matrices, when a large cell entry is move to a small one, thus making further manipulations impossible. In this case, I guess it may be fair to move back to the old algorithm?
+        	} else {
+        		# old version, using always the smallest entry to add to the larger entry:
+        		diag(mat.new) <- (diag(mat) - min(diag(mat)))
+        		diag(mat.new[2:1, ]) <- diag(mat[2:1,]) + min(diag(mat))
+        	}
+        	#return(mat.new)
+        #}
+        #if (is.null(mat)){
+        #	first <- r2dtable(1, r=rowSums(second), c=colSums(second))[[1]] 
+        #	swap.method <- "not.random"
+        #} else { mat.new <- swap.mat(mat, method=swap.method) }
+        
+  		# check that we are not downswapping more interactions than still available:  
         trial <- first
         trial[attr(mat, "rows"), attr(mat, "cols")] <- mat.new
 		if (sum(trial > 0) < m) next 
@@ -117,7 +141,11 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
     first <- r2dtable(1, r=rowSums(web), c=colSums(web))[[1]] # creates a null web with same marginal totals
     n <- sum(first>0)                         
     if (verbose) if (m > n) cat("Demands filling algorithm!\n") else cat("Demands emptying algorithm!\n")
-    if (m < n)  null <- downswap(first, m=m, n=n, c.crit=c.crit)
+    if (m < n)  {
+    	null <- downswap(first, m=m, n=n, c.crit=c.crit, swap.method="random", verbose=verbose)
+    	# for some small matrices, this will not work; then we go back to the non-random moving of cells in the downswap:
+    	if (is.null(null))  null <- downswap(first, m=m, n=n, c.crit=c.crit, swap.method="not.random", verbose=verbose)
+    }
     if (m >= n) null <- upswap(first, m=m, n=n)  
     # sum(null>0); sum(null) # for testing purposes
     null
@@ -133,5 +161,5 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
 }
 
 #data(Safariland)
-#swap.web(N=2, web=Safariland)
+#swap.web(N=2, web=Safariland, verbose=TRUE)
 #system.time(swap.web(10, Safariland))
