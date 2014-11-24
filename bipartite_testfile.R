@@ -20,6 +20,11 @@ visweb(as.one.mode(vazquenc, fill=NA), NA.col="green") #slow!
 
 # C.score
 C.score(Safariland, FUN=sd, normalise=T) # check that "any" functions works!
+m <- matrix(c(1,0, 1,0, 1,0, 0,1, 0,1, 0,1, 0,1), 7,2,TRUE)
+C.score(t(m), normalise=FALSE)
+C.score(m, normalise=FALSE)
+C.score(t(m), normalise=TRUE)
+C.score(m, normalise=TRUE)
 
 # compart
 compart(Safariland) # a comparted network
@@ -53,7 +58,7 @@ discrepancy(vazquenc)
 ## OUTCOMMENTED because otherwise vegan would be loaded (through nested)! That would obviously affect the check of all following functions!
 
 # Check that this works, because vegan is being restructured and now has a function "nullmodel"!
-nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 100)
+nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 10)
 apply(nulls, 3, discrepancy)
 
 # empty
@@ -115,8 +120,7 @@ BC(vazquenc, rescale=FALSE, weighted=FALSE)
 CC(vazquenc)
 
 # nested
-#nested(vazquenc, method="ALL")
-## OUTCOMMENTED because otherwise vegan would be loaded (through nested)! That would obviously affect the check of all following functions!
+nested(vazquenc, method="ALL")
 
 # nestedness
 nestedness(Safariland, n.nulls=20)[c(4, 9:20)]
@@ -148,6 +152,11 @@ nodespec(Safariland)
 nodespec(Safariland, inf.replace=Inf)
 
 # npartite ...
+
+# nullmodel
+nullmodel(motten1982, 2, "r2d")
+for (i in 1:6) nullmodel(motten1982, 2, i) # i=6 should return an error message!
+nullmodel(motten1982, 2, "mgen")
 
 # null.distr
 null.distr(2, vazquenc)

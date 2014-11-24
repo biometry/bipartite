@@ -1,0 +1,2314 @@
+Hmm ... looks like a package
+
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013)
+ restricted \write18 enabled.
+entering extended mode
+
+(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a1
+486a117a/Rd2.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/bk10.clo))
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/Rd.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+No file Rd2.aux.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/upquote/upquote.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [1{/usr/local/texl
+ive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (0.67839pt too wide) in paragraph at lines 48--49
+\T1/ptm/m/n/10 group (also us-ing func-tion [][]\T1/zi4/m/n/10 networklevel[][]
+[]\T1/ptm/m/n/10 ) or the in-di-vid-ual species (us-ing func-tion [][]\T1/zi4/m
+/n/10 specieslevel[][][]\T1/ptm/m/n/10 ).
+[2] (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+Overfull \hbox (0.65802pt too wide) in paragraph at lines 77--78
+[]\T1/ptm/m/n/10 this func-tion is based on R-code writ-ten by Diego Vázquez (m
+any thanks
+
+Overfull \hbox (0.73825pt too wide) in paragraph at lines 78--79
+[]\T1/ptm/m/n/10 ``weighted con-nectance'' was only re-turned when ``link-age d
+en-
+
+Overfull \hbox (15.5174pt too wide) in paragraph at lines 79--80
+[]\T1/ptm/m/n/10 while call-
+
+Overfull \hbox (15.52792pt too wide) in paragraph at lines 91--92
+[]\T1/ptm/m/n/10 Fixed
+
+Overfull \hbox (60.45862pt too wide) in paragraph at lines 92--93
+[]\T1/ptm/m/n/10 Should be `\T1/zi4/m/n/10 interaction push pull\T1/ptm/m/n/10 
+';
+[3]
+Overfull \hbox (23.71724pt too wide) in paragraph at lines 101--102
+[]\T1/ptm/m/n/10 Ghost text deleted. Thanks
+
+Overfull \hbox (2.03789pt too wide) in paragraph at lines 102--103
+\T1/ptm/m/n/10 non-interacting species from the net-work were al-ways ex-cluded
+ so far; new op-tion `\T1/zi4/m/n/10 FALSE\T1/ptm/m/n/10 '
+
+Overfull \hbox (0.55759pt too wide) in paragraph at lines 103--104
+[]\T1/ptm/m/n/10 ``pollination sup-port in-dex'' re-turned ``PSI''; ``PDI'' now
+ ref-
+
+Overfull \hbox (58.03842pt too wide) in paragraph at lines 104--105
+[]\T1/ptm/m/n/10 Previously, \T1/zi4/m/n/10 index="generality"
+
+Overfull \hbox (11.51964pt too wide) in paragraph at lines 104--105
+\T1/ptm/m/n/10 or \T1/zi4/m/n/10 "vulnerability" \T1/ptm/m/n/10 was iden-ti-cal
+ to \T1/zi4/m/n/10 "effective partners" \T1/ptm/m/n/10 with op-tion \T1/zi4/m/n
+/10 weighted=TRUE\T1/ptm/m/n/10 ,
+
+Overfull \hbox (21.48784pt too wide) in paragraph at lines 114--115
+[]\T1/ptm/m/n/10 Networks with only one species
+
+Overfull \hbox (7.78781pt too wide) in paragraph at lines 117--118
+[]\T1/ptm/m/n/10 This func-tion is a null model al-go-rithm like Pate-fields (\
+T1/zi4/m/n/10 r2dtable\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.60811pt too wide) in paragraph at lines 118--119
+[]\T1/ptm/m/n/10 Because some ob-ject was not deleted, mem-ory con-
+[4]
+Overfull \hbox (0.10701pt too wide) in paragraph at lines 131--132
+[]\T1/ptm/m/n/10 for ran-
+
+Overfull \hbox (9.63808pt too wide) in paragraph at lines 143--144
+\T1/ptm/m/n/10 Few user-visible changes, but com-plete re-structuring un-der th
+e hood. Op-tion `\T1/zi4/m/n/10 species number\T1/ptm/m/n/10 '
+
+Overfull \hbox (36.6884pt too wide) in paragraph at lines 149--150
+\T1/ptm/m/n/10 tri-bu-tions or ex-tinc-tion slopes are en-cour-aged to use the 
+func-tions [][]\T1/zi4/m/n/10 degreedistr[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/
+m/n/10 slope.bipartite[][][]\T1/ptm/m/n/10 ,
+[5]
+Overfull \hbox (22.77895pt too wide) in paragraph at lines 179--180
+[]\T1/ptm/m/n/10 failed to work for non-matrix data (i.e. \T1/zi4/m/n/10 data.f
+rames\T1/ptm/m/n/10 ). It now co-erces \T1/zi4/m/n/10 data.frames
+
+Overfull \hbox (24.64835pt too wide) in paragraph at lines 181--182
+\T1/ptm/m/n/10 to set only the de-fault for one func-tion ([][]\T1/zi4/m/n/10 n
+estedness[][][]\T1/ptm/m/n/10 ) to a faster set-ting (`\T1/zi4/m/n/10 null.mode
+ls=FALSE\T1/ptm/m/n/10 '),
+
+Overfull \hbox (5.77866pt too wide) in paragraph at lines 182--183
+[]\T1/ptm/m/n/10 Did not work if only one in-dex was given. 
+[6]
+Overfull \hbox (3.10707pt too wide) in paragraph at lines 224--225
+[]\T1/ptm/m/n/10 Galeano J., Pas-tor J.M. and Iriondo J.M. (2008) Weighted-Inte
+raction Nest-ed-ness Es-ti-ma-tor (WINE):
+[7] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [8]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.29701pt too wide) in paragraph at lines 400--402
+[]\T1/ptm/m/n/10 This func-tion cal-cu-lates be-tween-ness scores for nodes in 
+a weighted net-work based on the distance_w-
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 414--415
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[11] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (0.15688pt too wide) in paragraph at lines 458--459
+[]\T1/ptm/m/n/10 Observation of 38 in-di-vid-ual plants from 13 oil-flower spec
+ies of the fam-ily Mal-phigh-i-aceae. Flower
+[12]
+Overfull \hbox (4.62854pt too wide) in paragraph at lines 468--469
+[]\T1/ptm/m/n/10 Take from the NCEAS in-ter-ac-tion web database ([][]$\T1/zi4/
+m/n/10 http : / / www . nceas . ucsb . edu / interactionweb$[][]\T1/ptm/m/n/10 
+). 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.05087pt too wide) in paragraph at lines 569--570
+\T1/zi4/m/n/10 2010 / 03 / 20 / closeness-[]centrality-[]in-[]networks-[]with-[
+]disconnected-[]components/$[][] 
+[14]
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 571--572
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [16] [17]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [19] [20]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [22] [23]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [24] [25]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [26]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [27]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 1276--1277
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+[30] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.26828pt too wide) in paragraph at lines 1334--1335
+[]\T1/ptm/m/n/10 Option to anal-yse the web as bi-nary or as weighted net-work.
+ De-fault is `\T1/zi4/m/n/10 weighted=TRUE\T1/ptm/m/n/10 ',
+[31] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [32] [33]
+Overfull \hbox (19.68091pt too wide) in paragraph at lines 1431--1431
+ []\T1/zi4/m/n/9 sapply(frame2webs(testdata,type.out="list"), networklevel, ind
+ex=c("connectance", "C score"))[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [34] [35]
+Overfull \hbox (6.53783pt too wide) in paragraph at lines 1537--1538
+[]\T1/ptm/m/n/10 Logical; when com-put-ing "func-tional com-ple-men-tar-ity" se
+nsu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (56.71895pt too wide) in paragraph at lines 1546--1547
+\T1/ptm/m/n/10 weighted-quantitative ver-sion of some of them (`\T1/zi4/m/n/10 
+mean number of links\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 mean number of shared par
+tners\T1/ptm/m/n/10 ',
+[36]
+Overfull \hbox (28.78893pt too wide) in paragraph at lines 1565--1566
+\T1/ptm/m/n/10 study has used the ``wrong'' one, i.e. the one pre-sented here a
+s `\T1/zi4/m/n/10 cluster coefficient\T1/ptm/m/n/10 '. 
+[37] [38]
+Overfull \hbox (57.8184pt too wide) in paragraph at lines 1594--1595
+[]\T1/ptm/m/n/10 For some-what larger net-works (i.e. more than 2 dozen species
+ per level), `\T1/zi4/m/n/10 weighted cluster coefficient\T1/ptm/m/n/10 '
+
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 1617--1618
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+[39] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [40]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (1.29683pt too wide) in paragraph at lines 1725--1726
+[]\T1/ptm/m/n/10 This data set re-ports a community-level study of the pol-li-n
+a-tion bi-ol-ogy of alpine plants in Kosciusko
+[41] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [42]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [43]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [46]
+Overfull \hbox (39.78088pt too wide) in paragraph at lines 2005--2005
+ []\T1/zi4/m/n/10 mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autot
+ransform="sum", trials=100)[] 
+[47]
+Overfull \hbox (15.18097pt too wide) in paragraph at lines 2049--2049
+ []\T1/zi4/m/n/9 ## to interaction frequency in an observed matrix m (which is 
+the default of \TS1/zi4/m/n/9 '\T1/zi4/m/n/9 autotransform\TS1/zi4/m/n/9 '\T1/z
+i4/m/n/9 ):[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [48]
+Overfull \hbox (0.68758pt too wide) in paragraph at lines 2092--2093
+[]\T1/ptm/m/n/10 plotModuleWeb(moduleWebObject, plot-Mod-ules=TRUE, rank=FALSE,
+ weighted=TRUE, dis-play-
+
+Overfull \hbox (38.65608pt too wide) in paragraph at lines 2092--2093
+\T1/ptm/m/n/10 Al-a-bels=TRUE, dis-play-Bla-bels=TRUE, lab-size=1, plot-size=12
+, xla-bel="", yla-bel="", square.border="white",
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (0.92615pt too wide) in paragraph at lines 2195--2196
+\T1/ptm/m/n/10 than the de-fault. BC and CC use de-faults of sna::betweenness a
+nd sna::closeness,
+[51] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [52]
+Overfull \hbox (12.05038pt too wide) in paragraph at lines 2291--2292
+\T1/ptm/m/n/10 `\T1/zi4/m/n/10 binmatnest2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NOD
+F\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NODF2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 C.sco
+re\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 checker\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 we
+ighted NODF\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 wine\T1/ptm/m/n/10 ',
+[53]
+Overfull \hbox (7.4072pt too wide) in paragraph at lines 2338--2340
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M., Iriondo and J.M. 2008. Weighted-In
+teraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[54] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [55]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.76746pt too wide) in paragraph at lines 2441--2442
+[]\T1/ptm/m/n/10 For the ge-netic al-go-rithm some pa-ram-e-ters have to be ini
+-tialised. First is \T1/zi4/m/n/10 popsize\T1/ptm/m/n/10 ,
+[56]
+Overfull \hbox (22.23009pt too wide) in paragraph at lines 2453--2455
+\T1/ptm/m/n/10 or down-load di-rectly: [][]$\T1/zi4/m/n/10 http : / / www . eez
+a . csic . es / eeza / personales / rgirones / File / BINMATNEST3 .
+[57] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2508--2508
+ []\T1/zi4/m/n/10 nestedrank(web, method = "NODF", weighted=TRUE, normalise=TRU
+E, return.matrix=FALSE)[] 
+
+Overfull \hbox (16.22826pt too wide) in paragraph at lines 2526--2527
+[]\T1/ptm/m/n/10 will use \T1/ptm/b/n/10 ve-gan\T1/ptm/m/n/10 's \T1/zi4/m/n/10
+ nestednodf\T1/ptm/m/n/10 -function to ar-range the ma-trix. With `\T1/zi4/m/n/
+10 weighted=TRUE\T1/ptm/m/n/10 ',
+[58] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [59] [60]
+Overfull \hbox (15.06876pt too wide) in paragraph at lines 2652--2653
+[]\T1/ptm/m/n/10 Specifies how species are re-moved from ma-trix: `\T1/zi4/m/n/
+10 random\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 degree\T1/ptm/m/n/10 ' or `\T1/zi4/m
+/n/10 abundance\T1/ptm/m/n/10 '
+[61]
+Overfull \hbox (7.2578pt too wide) in paragraph at lines 2664--2665
+[]\T1/ptm/m/n/10 Logical; when com-put-ing ``func-tional com-ple-men-tar-ity'' 
+sensu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (33.72823pt too wide) in paragraph at lines 2666--2667
+\T1/ptm/m/n/10 back-ward com-pat-i-ble, the old \T1/zi4/m/n/10 networklevel\T1/
+ptm/m/n/10 -function is still avail-able (\T1/zi4/m/n/10 .networklevel\T1/ptm/m
+/n/10 )
+[62]
+Overfull \hbox (1.88756pt too wide) in paragraph at lines 2686--2687
+[]\T1/ptm/m/n/10 Balance be-tween num-bers in the two lev-els: pos-i-tive val-u
+es in-di-cate more higher-
+
+Overfull \hbox (29.2208pt too wide) in paragraph at lines 2690--2691
+\T1/ptm/m/n/10 un-der [][]$\T1/zi4/m/n/10 http : / / en . wikipedia . org / w /
+ index . php ? title = Clustering _ coefficient$[][]\T1/ptm/m/n/10 .
+
+Overfull \hbox (12.20682pt too wide) in paragraph at lines 2692--2693
+[]\T1/ptm/m/n/10 A nest-ed-ness ver-sion that con-sid-ers in-ter-ac-tion fre-qu
+en-cies (and is hence weighted),
+
+Overfull \hbox (49.09854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 web asym-me-try (see above). Pos-i-tive val-ues (only pos-si-ble
+ of `\T1/zi4/m/n/10 ISAmethod = "Bluethgen"\T1/ptm/m/n/10 ')
+
+Overfull \hbox (9.64854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 in-di-cate higher de-pen-dence in the higher trophic level. See 
+func-tion [][]\T1/zi4/m/n/10 specieslevel[][][]
+[63] [64] [65] [66]
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 2786--2787
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+
+Overfull \hbox (10.56714pt too wide) in paragraph at lines 2792--2793
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M. and Iriondo, J.M. (2008) Weighted-I
+nteraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[67] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (40.10756pt too wide) in paragraph at lines 2849--2850
+\T1/ptm/m/n/10 sented as? De-faults to `\T1/zi4/m/n/10 NA\T1/ptm/m/n/10 '; only
+ cur-rently im-ple-mented al-ter-na-tive is `\T1/zi4/m/n/10 inf.replace=Inf\T1/
+ptm/m/n/10 ',
+[68] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (23.78088pt too wide) in paragraph at lines 2912--2912
+ []\T1/zi4/m/n/10 npartite(as.one.mode.web, index=c("connectance", "links per s
+pecies", "mean degree"))[] 
+[69] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (10.86772pt too wide) in paragraph at lines 2969--2970
+[]\T1/ptm/m/n/10 This pack-age pro-vides sev-eral func-tions to gen-er-ate null
+ mod-els for the ob-served data (see [][]\T1/zi4/m/n/10 nullmodel[][][]\T1/ptm/
+m/n/10 ).
+[70] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [71] [72]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.15822pt too wide) in paragraph at lines 3091--3092
+[]\T1/ptm/m/n/10 Null model type. Can be given as an in-te-ger or name: 1/"r2dt
+able", 2/"swap.web",
+
+Overfull \hbox (0.4274pt too wide) in paragraph at lines 3091--3092
+\T1/ptm/m/n/10 3/"vaznull", 4/"shuf-fle.web", 5/"mgen"; al-lows for par-tial ma
+tch of names; meth-
+[73]
+Overfull \hbox (6.18094pt too wide) in paragraph at lines 3130--3130
+ []\T1/zi4/m/n/9 null <- unlist(sapply(nulls, networklevel, index="weighted nes
+tedness")) #takes a while ...[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [76] [77]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [78]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [79] [80]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [82] [83] [84]
+Overfull \hbox (66.9672pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 bil-ity) and an al-ter-na-tive func-tion that plots fully in-de-
+pen-dent abun-dance es-ti-mates (`\T1/zi4/m/n/10 abuns.type="independent"\T1/pt
+m/m/n/10 ').
+
+Overfull \hbox (53.03935pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 To change box (species) col-ors with `\T1/zi4/m/n/10 abuns.type=
+\TS1/zi4/m/n/10 '\T1/zi4/m/n/10 independent\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ', u
+se `\T1/zi4/m/n/10 low.abun.col\T1/ptm/m/n/10 ' and `\T1/zi4/m/n/10 high.abun.c
+ol\T1/ptm/m/n/10 '.
+
+Overfull \hbox (58.85849pt too wide) in paragraph at lines 3623--3624
+[]\T1/ptm/m/n/10 If you have to-tal abun-dance mea-sure but want to plot used a
+nd un-used re-sources, use `\T1/zi4/m/n/10 abuns.type=\TS1/zi4/m/n/10 '\T1/zi4/
+m/n/10 additional\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 '
+[85]
+Overfull \hbox (4.38089pt too wide) in paragraph at lines 3670--3670
+ []\T1/zi4/m/n/9 text.high.col=c("blue","red"), col.interaction=c("red",rep("gr
+een",26),rep("brown",242)),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [86] [87]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [88]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3820--3822
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+[89]
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3853--3854
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [91]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [94]
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 4080--4081
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+
+Overfull \hbox (4.03786pt too wide) in paragraph at lines 4096--4097
+[]\T1/ptm/m/n/10 Function re-turns an ob-ject of class ``bi-par-tite'' to en-su
+re proper work-ing of func-tion \T1/zi4/m/n/10 plot.bipartite\T1/ptm/m/n/10 . 
+[95] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [96]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [97] [98]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [99]
+Underfull \hbox (badness 10000) in paragraph at lines 4329--4333
+
+[100] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [101]
+Overfull \hbox (0.93637pt too wide) in paragraph at lines 4437--4438
+\T1/ptm/m/n/10 prop-er-ties. Some are em-bar-rass-ingly sim-ple (such as num-be
+r of in-ter-act-ing species for each species).
+[102] [103] [104]
+Overfull \hbox (23.58801pt too wide) in paragraph at lines 4497--4499
+[]\T1/ptm/m/n/10 Shannon di-ver-sity (when us-ing `\T1/zi4/m/n/10 logbase="e"\T
+1/ptm/m/n/10 ') or per-species gen-er-al-ity/vulnerability
+
+Overfull \hbox (21.38849pt too wide) in paragraph at lines 4497--4499
+\T1/ptm/m/n/10 (when us-ing `\T1/zi4/m/n/10 logbase=2\T1/ptm/m/n/10 ') of the i
+n-ter-ac-tions of each species. See also [][]\T1/zi4/m/n/10 networklevel[][][]
+[105] [106] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[107] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [108]
+[109] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [110]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [111]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [112]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [113] [114]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [115]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [116]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [117]
+Overfull \hbox (9.74776pt too wide) in paragraph at lines 5118--5119
+[]\T1/ptm/m/n/10 Bernd Gru-ber <bernd.gruber@canberra.edu.au> & Carsten F. Dor-
+mann <carsten.dormann@biom.uni-
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [119] [120]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.13792pt too wide) in paragraph at lines 5314--5315
+[]
+
+Overfull \hbox (5.38867pt too wide) in paragraph at lines 5316--5317
+[][][]\T1/zi4/m/n/10 robustness[][][] \T1/ptm/m/n/10 some-times in-ter-preted
+[121]
+Overfull \hbox (2.58801pt too wide) in paragraph at lines 5318--5319
+[]\T1/ptm/m/n/10 Failed to work for net-works with empty columns
+
+Overfull \hbox (9.68695pt too wide) in paragraph at lines 5331--5332
+[]\T1/ptm/m/n/10 This pa-per com-pares spe-cial-i-sa-tion in-dices, based
+
+Overfull \hbox (10.48772pt too wide) in paragraph at lines 5349--5350
+[]\T1/ptm/m/n/10 Some in-ter-ac-tions were lost when there were more rows than 
+columns.
+[122]
+Overfull \hbox (9.37816pt too wide) in paragraph at lines 5359--5360
+[]\T1/ptm/m/n/10 Gustavo Car-vallo has
+
+Overfull \hbox (2.41682pt too wide) in paragraph at lines 5361--5362
+[]\T1/ptm/m/n/10 bezerra2009 is a``full'' flower-visitation net-work of oil-col
+lecting bees in Brazil.
+
+Overfull \hbox (3.40817pt too wide) in paragraph at lines 5363--5364
+[]\T1/ptm/m/n/10 Betweenness and friends can-not be com-puted for fully com-
+
+Overfull \hbox (1.46814pt too wide) in paragraph at lines 5367--5368
+[]\T1/ptm/m/n/10 Robustness and weighted nest-ed-ness were wrapped
+
+Overfull \hbox (1.97824pt too wide) in paragraph at lines 5377--5378
+\T1/ptm/m/n/10 pro-vid-ing the in-spi-ra-tion and the code. This op-tion is als
+o now avail-able in [][]\T1/zi4/m/n/10 networklevel[][][]\T1/ptm/m/n/10 . 
+[123]
+Overfull \hbox (0.66762pt too wide) in paragraph at lines 5407--5408
+[]\T1/ptm/m/n/10 Fits a log-nor-mal or neg-a-tive bi-no-mial dis-tri-bu-tion to
+ the marginal
+[124]
+Overfull \hbox (2.93742pt too wide) in paragraph at lines 5435--5436
+[]\T1/ptm/m/n/10 So far, ran-dom ex-tinc-tion se-quences and
+[125]
+Overfull \hbox (3.53809pt too wide) in paragraph at lines 5489--5490
+[]\T1/ptm/m/n/10 By de-fault now sup-presses er-ror re-port-ing when
+[126]
+Overfull \hbox (2.54832pt too wide) in paragraph at lines 5525--5526
+[]\T1/ptm/m/n/10 This func-tion re-places the (now dep-re-cated) func-tion \T1/
+zi4/m/n/10 nestedness.corso
+
+Overfull \hbox (18.14723pt too wide) in paragraph at lines 5527--5528
+[]\T1/ptm/m/n/10 Another quan-ti-ta-tive pol-li-na-tion net-work from the NCEAS
+ database
+
+Overfull \hbox (15.43771pt too wide) in paragraph at lines 5540--5541
+[]\T1/ptm/m/n/10 Another pol-li-na-tion net-work from the NCEAS database (see [
+][]\T1/zi4/m/n/10 inouye1988[][][]\T1/ptm/m/n/10 ). 
+[127]
+Overfull \hbox (14.96771pt too wide) in paragraph at lines 5556--5557
+[]\T1/ptm/m/n/10 New fea-ture: ar-row=``center.up'', ar-row=``center.down'', ar
+-row=``center.both'':
+
+Overfull \hbox (14.30626pt too wide) in paragraph at lines 5590--5591
+[]\T1/ptm/m/n/10 Sometimes ad-di-tional in-for-ma-tion is avail-able and specie
+s
+[128]
+Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
+[]\T1/ptm/m/n/10 Calculates dis-crep-ancy ac-cord-ing to Brualdi & Sander-son (
+1999),
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [129]
+Underfull \hbox (badness 10000) in paragraph at lines 5663--5667
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5672--5677
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5678--5682
+
+[130] [131] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[132] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [133]
+Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
+ []\T1/zi4/m/n/9 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2])
+, as.vector(allin1[,,3]))),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [134] [135]
+Overfull \hbox (21.86957pt too wide) in paragraph at lines 5947--5949
+[]\T1/ptm/m/n/10 Marcelino de la Cruz \T1/zi4/m/n/10 <marcelino.delacruz@upm.es
+>\T1/ptm/m/n/10 , Juan M. Pas-tor \T1/zi4/m/n/10 <juanmanuel.pastor@upm.es>\T1/
+ptm/m/n/10 ,
+No file Rd2.ind.
+[136] (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.image.plot} has been referenced but does not exist, replaced by a fixed on
+e
+
+pdfTeX warning (dest): name{Rfn.t.test} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.r2dtable} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hclust} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.dist} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/us
+r/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
+/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
+1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
+s/utmri8a.pfb>
+Output written on Rd2.pdf (136 pages, 473306 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2013] (kpathsea + Thai support).
+Scanning input file ./Rd2.idx....done (601 entries accepted, 0 rejected).
+Sorting entries........done (6136 comparisons).
+Generating output file ./Rd2.ind....done (505 lines written, 0 warnings).
+Output written in ./Rd2.ind.
+Transcript written in ./Rd2.ilg.
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013)
+ restricted \write18 enabled.
+entering extended mode
+
+(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a1
+486a117a/Rd2.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/bk10.clo))
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/Rd.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(./Rd2.aux) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/upquote/upquote.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./Rd2.out) (./Rd2.out)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc
+[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2]) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (0.67839pt too wide) in paragraph at lines 48--49
+\T1/ptm/m/n/10 group (also us-ing func-tion [][]\T1/zi4/m/n/10 networklevel[][]
+[]\T1/ptm/m/n/10 ) or the in-di-vid-ual species (us-ing func-tion [][]\T1/zi4/m
+/n/10 specieslevel[][][]\T1/ptm/m/n/10 ).
+[3] (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+Overfull \hbox (0.65802pt too wide) in paragraph at lines 77--78
+[]\T1/ptm/m/n/10 this func-tion is based on R-code writ-ten by Diego Vázquez (m
+any thanks
+
+Overfull \hbox (0.73825pt too wide) in paragraph at lines 78--79
+[]\T1/ptm/m/n/10 ``weighted con-nectance'' was only re-turned when ``link-age d
+en-
+[4]
+Overfull \hbox (15.5174pt too wide) in paragraph at lines 79--80
+[]\T1/ptm/m/n/10 while call-
+
+Overfull \hbox (15.52792pt too wide) in paragraph at lines 91--92
+[]\T1/ptm/m/n/10 Fixed
+
+Overfull \hbox (60.45862pt too wide) in paragraph at lines 92--93
+[]\T1/ptm/m/n/10 Should be `\T1/zi4/m/n/10 interaction push pull\T1/ptm/m/n/10 
+';
+
+Overfull \hbox (23.71724pt too wide) in paragraph at lines 101--102
+[]\T1/ptm/m/n/10 Ghost text deleted. Thanks
+
+Overfull \hbox (2.03789pt too wide) in paragraph at lines 102--103
+\T1/ptm/m/n/10 non-interacting species from the net-work were al-ways ex-cluded
+ so far; new op-tion `\T1/zi4/m/n/10 FALSE\T1/ptm/m/n/10 '
+
+Overfull \hbox (0.55759pt too wide) in paragraph at lines 103--104
+[]\T1/ptm/m/n/10 ``pollination sup-port in-dex'' re-turned ``PSI''; ``PDI'' now
+ ref-
+
+Overfull \hbox (58.03842pt too wide) in paragraph at lines 104--105
+[]\T1/ptm/m/n/10 Previously, \T1/zi4/m/n/10 index="generality"
+
+Overfull \hbox (11.51964pt too wide) in paragraph at lines 104--105
+\T1/ptm/m/n/10 or \T1/zi4/m/n/10 "vulnerability" \T1/ptm/m/n/10 was iden-ti-cal
+ to \T1/zi4/m/n/10 "effective partners" \T1/ptm/m/n/10 with op-tion \T1/zi4/m/n
+/10 weighted=TRUE\T1/ptm/m/n/10 ,
+[5]
+Overfull \hbox (21.48784pt too wide) in paragraph at lines 114--115
+[]\T1/ptm/m/n/10 Networks with only one species
+
+Overfull \hbox (7.78781pt too wide) in paragraph at lines 117--118
+[]\T1/ptm/m/n/10 This func-tion is a null model al-go-rithm like Pate-fields (\
+T1/zi4/m/n/10 r2dtable\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.60811pt too wide) in paragraph at lines 118--119
+[]\T1/ptm/m/n/10 Because some ob-ject was not deleted, mem-ory con-
+
+Overfull \hbox (0.10701pt too wide) in paragraph at lines 131--132
+[]\T1/ptm/m/n/10 for ran-
+[6]
+Overfull \hbox (9.63808pt too wide) in paragraph at lines 143--144
+\T1/ptm/m/n/10 Few user-visible changes, but com-plete re-structuring un-der th
+e hood. Op-tion `\T1/zi4/m/n/10 species number\T1/ptm/m/n/10 '
+
+Overfull \hbox (36.6884pt too wide) in paragraph at lines 149--150
+\T1/ptm/m/n/10 tri-bu-tions or ex-tinc-tion slopes are en-cour-aged to use the 
+func-tions [][]\T1/zi4/m/n/10 degreedistr[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/
+m/n/10 slope.bipartite[][][]\T1/ptm/m/n/10 ,
+[7]
+Overfull \hbox (22.77895pt too wide) in paragraph at lines 179--180
+[]\T1/ptm/m/n/10 failed to work for non-matrix data (i.e. \T1/zi4/m/n/10 data.f
+rames\T1/ptm/m/n/10 ). It now co-erces \T1/zi4/m/n/10 data.frames
+
+Overfull \hbox (24.64835pt too wide) in paragraph at lines 181--182
+\T1/ptm/m/n/10 to set only the de-fault for one func-tion ([][]\T1/zi4/m/n/10 n
+estedness[][][]\T1/ptm/m/n/10 ) to a faster set-ting (`\T1/zi4/m/n/10 null.mode
+ls=FALSE\T1/ptm/m/n/10 '),
+
+Overfull \hbox (5.77866pt too wide) in paragraph at lines 182--183
+[]\T1/ptm/m/n/10 Did not work if only one in-dex was given. 
+[8]
+Overfull \hbox (3.10707pt too wide) in paragraph at lines 224--225
+[]\T1/ptm/m/n/10 Galeano J., Pas-tor J.M. and Iriondo J.M. (2008) Weighted-Inte
+raction Nest-ed-ness Es-ti-ma-tor (WINE):
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [9] [10]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.29701pt too wide) in paragraph at lines 400--402
+[]\T1/ptm/m/n/10 This func-tion cal-cu-lates be-tween-ness scores for nodes in 
+a weighted net-work based on the distance_w-
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 414--415
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[13] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (0.15688pt too wide) in paragraph at lines 458--459
+[]\T1/ptm/m/n/10 Observation of 38 in-di-vid-ual plants from 13 oil-flower spec
+ies of the fam-ily Mal-phigh-i-aceae. Flower
+
+Overfull \hbox (4.62854pt too wide) in paragraph at lines 468--469
+[]\T1/ptm/m/n/10 Take from the NCEAS in-ter-ac-tion web database ([][]$\T1/zi4/
+m/n/10 http : / / www . nceas . ucsb . edu / interactionweb$[][]\T1/ptm/m/n/10 
+). 
+[14] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.05087pt too wide) in paragraph at lines 569--570
+\T1/zi4/m/n/10 2010 / 03 / 20 / closeness-[]centrality-[]in-[]networks-[]with-[
+]disconnected-[]components/$[][] 
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 571--572
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[16] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [19] [20]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [22] [23]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [24] [25]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [26] [27]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [31]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 1276--1277
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+[32] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.26828pt too wide) in paragraph at lines 1334--1335
+[]\T1/ptm/m/n/10 Option to anal-yse the web as bi-nary or as weighted net-work.
+ De-fault is `\T1/zi4/m/n/10 weighted=TRUE\T1/ptm/m/n/10 ',
+[33] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [34] [35]
+Overfull \hbox (19.68091pt too wide) in paragraph at lines 1431--1431
+ []\T1/zi4/m/n/9 sapply(frame2webs(testdata,type.out="list"), networklevel, ind
+ex=c("connectance", "C score"))[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+Overfull \hbox (6.53783pt too wide) in paragraph at lines 1537--1538
+[]\T1/ptm/m/n/10 Logical; when com-put-ing "func-tional com-ple-men-tar-ity" se
+nsu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (56.71895pt too wide) in paragraph at lines 1546--1547
+\T1/ptm/m/n/10 weighted-quantitative ver-sion of some of them (`\T1/zi4/m/n/10 
+mean number of links\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 mean number of shared par
+tners\T1/ptm/m/n/10 ',
+[38]
+Overfull \hbox (28.78893pt too wide) in paragraph at lines 1565--1566
+\T1/ptm/m/n/10 study has used the ``wrong'' one, i.e. the one pre-sented here a
+s `\T1/zi4/m/n/10 cluster coefficient\T1/ptm/m/n/10 '. 
+[39] [40]
+Overfull \hbox (57.8184pt too wide) in paragraph at lines 1594--1595
+[]\T1/ptm/m/n/10 For some-what larger net-works (i.e. more than 2 dozen species
+ per level), `\T1/zi4/m/n/10 weighted cluster coefficient\T1/ptm/m/n/10 '
+
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 1617--1618
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+[41] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [42]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (1.29683pt too wide) in paragraph at lines 1725--1726
+[]\T1/ptm/m/n/10 This data set re-ports a community-level study of the pol-li-n
+a-tion bi-ol-ogy of alpine plants in Kosciusko
+[43] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [48]
+Overfull \hbox (39.78088pt too wide) in paragraph at lines 2005--2005
+ []\T1/zi4/m/n/10 mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autot
+ransform="sum", trials=100)[] 
+[49]
+Overfull \hbox (15.18097pt too wide) in paragraph at lines 2049--2049
+ []\T1/zi4/m/n/9 ## to interaction frequency in an observed matrix m (which is 
+the default of \TS1/zi4/m/n/9 '\T1/zi4/m/n/9 autotransform\TS1/zi4/m/n/9 '\T1/z
+i4/m/n/9 ):[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (0.68758pt too wide) in paragraph at lines 2092--2093
+[]\T1/ptm/m/n/10 plotModuleWeb(moduleWebObject, plot-Mod-ules=TRUE, rank=FALSE,
+ weighted=TRUE, dis-play-
+
+Overfull \hbox (38.65608pt too wide) in paragraph at lines 2092--2093
+\T1/ptm/m/n/10 Al-a-bels=TRUE, dis-play-Bla-bels=TRUE, lab-size=1, plot-size=12
+, xla-bel="", yla-bel="", square.border="white",
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [51]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [52]
+Overfull \hbox (0.92615pt too wide) in paragraph at lines 2195--2196
+\T1/ptm/m/n/10 than the de-fault. BC and CC use de-faults of sna::betweenness a
+nd sna::closeness,
+[53] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [54]
+Overfull \hbox (12.05038pt too wide) in paragraph at lines 2291--2292
+\T1/ptm/m/n/10 `\T1/zi4/m/n/10 binmatnest2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NOD
+F\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NODF2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 C.sco
+re\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 checker\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 we
+ighted NODF\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 wine\T1/ptm/m/n/10 ',
+[55]
+Overfull \hbox (7.4072pt too wide) in paragraph at lines 2338--2340
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M., Iriondo and J.M. 2008. Weighted-In
+teraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[56] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.76746pt too wide) in paragraph at lines 2441--2442
+[]\T1/ptm/m/n/10 For the ge-netic al-go-rithm some pa-ram-e-ters have to be ini
+-tialised. First is \T1/zi4/m/n/10 popsize\T1/ptm/m/n/10 ,
+[58]
+Overfull \hbox (22.23009pt too wide) in paragraph at lines 2453--2455
+\T1/ptm/m/n/10 or down-load di-rectly: [][]$\T1/zi4/m/n/10 http : / / www . eez
+a . csic . es / eeza / personales / rgirones / File / BINMATNEST3 .
+[59] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2508--2508
+ []\T1/zi4/m/n/10 nestedrank(web, method = "NODF", weighted=TRUE, normalise=TRU
+E, return.matrix=FALSE)[] 
+
+Overfull \hbox (16.22826pt too wide) in paragraph at lines 2526--2527
+[]\T1/ptm/m/n/10 will use \T1/ptm/b/n/10 ve-gan\T1/ptm/m/n/10 's \T1/zi4/m/n/10
+ nestednodf\T1/ptm/m/n/10 -function to ar-range the ma-trix. With `\T1/zi4/m/n/
+10 weighted=TRUE\T1/ptm/m/n/10 ',
+[60] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [61] [62]
+Overfull \hbox (15.06876pt too wide) in paragraph at lines 2652--2653
+[]\T1/ptm/m/n/10 Specifies how species are re-moved from ma-trix: `\T1/zi4/m/n/
+10 random\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 degree\T1/ptm/m/n/10 ' or `\T1/zi4/m
+/n/10 abundance\T1/ptm/m/n/10 '
+[63]
+Overfull \hbox (7.2578pt too wide) in paragraph at lines 2664--2665
+[]\T1/ptm/m/n/10 Logical; when com-put-ing ``func-tional com-ple-men-tar-ity'' 
+sensu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (33.72823pt too wide) in paragraph at lines 2666--2667
+\T1/ptm/m/n/10 back-ward com-pat-i-ble, the old \T1/zi4/m/n/10 networklevel\T1/
+ptm/m/n/10 -function is still avail-able (\T1/zi4/m/n/10 .networklevel\T1/ptm/m
+/n/10 )
+[64]
+Overfull \hbox (1.88756pt too wide) in paragraph at lines 2686--2687
+[]\T1/ptm/m/n/10 Balance be-tween num-bers in the two lev-els: pos-i-tive val-u
+es in-di-cate more higher-
+
+Overfull \hbox (29.2208pt too wide) in paragraph at lines 2690--2691
+\T1/ptm/m/n/10 un-der [][]$\T1/zi4/m/n/10 http : / / en . wikipedia . org / w /
+ index . php ? title = Clustering _ coefficient$[][]\T1/ptm/m/n/10 .
+
+Overfull \hbox (12.20682pt too wide) in paragraph at lines 2692--2693
+[]\T1/ptm/m/n/10 A nest-ed-ness ver-sion that con-sid-ers in-ter-ac-tion fre-qu
+en-cies (and is hence weighted),
+
+Overfull \hbox (49.09854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 web asym-me-try (see above). Pos-i-tive val-ues (only pos-si-ble
+ of `\T1/zi4/m/n/10 ISAmethod = "Bluethgen"\T1/ptm/m/n/10 ')
+
+Overfull \hbox (9.64854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 in-di-cate higher de-pen-dence in the higher trophic level. See 
+func-tion [][]\T1/zi4/m/n/10 specieslevel[][][]
+[65] [66] [67] [68]
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 2786--2787
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+
+Overfull \hbox (10.56714pt too wide) in paragraph at lines 2792--2793
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M. and Iriondo, J.M. (2008) Weighted-I
+nteraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[69] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (40.10756pt too wide) in paragraph at lines 2849--2850
+\T1/ptm/m/n/10 sented as? De-faults to `\T1/zi4/m/n/10 NA\T1/ptm/m/n/10 '; only
+ cur-rently im-ple-mented al-ter-na-tive is `\T1/zi4/m/n/10 inf.replace=Inf\T1/
+ptm/m/n/10 ',
+[70] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (23.78088pt too wide) in paragraph at lines 2912--2912
+ []\T1/zi4/m/n/10 npartite(as.one.mode.web, index=c("connectance", "links per s
+pecies", "mean degree"))[] 
+[71] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (10.86772pt too wide) in paragraph at lines 2969--2970
+[]\T1/ptm/m/n/10 This pack-age pro-vides sev-eral func-tions to gen-er-ate null
+ mod-els for the ob-served data (see [][]\T1/zi4/m/n/10 nullmodel[][][]\T1/ptm/
+m/n/10 ).
+[72] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [73] [74]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.15822pt too wide) in paragraph at lines 3091--3092
+[]\T1/ptm/m/n/10 Null model type. Can be given as an in-te-ger or name: 1/"r2dt
+able", 2/"swap.web",
+
+Overfull \hbox (0.4274pt too wide) in paragraph at lines 3091--3092
+\T1/ptm/m/n/10 3/"vaznull", 4/"shuf-fle.web", 5/"mgen"; al-lows for par-tial ma
+tch of names; meth-
+[75]
+Overfull \hbox (6.18094pt too wide) in paragraph at lines 3130--3130
+ []\T1/zi4/m/n/9 null <- unlist(sapply(nulls, networklevel, index="weighted nes
+tedness")) #takes a while ...[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [78] [79]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [81] [82]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [83]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [84] [85] [86]
+Overfull \hbox (66.9672pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 bil-ity) and an al-ter-na-tive func-tion that plots fully in-de-
+pen-dent abun-dance es-ti-mates (`\T1/zi4/m/n/10 abuns.type="independent"\T1/pt
+m/m/n/10 ').
+
+Overfull \hbox (53.03935pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 To change box (species) col-ors with `\T1/zi4/m/n/10 abuns.type=
+\TS1/zi4/m/n/10 '\T1/zi4/m/n/10 independent\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ', u
+se `\T1/zi4/m/n/10 low.abun.col\T1/ptm/m/n/10 ' and `\T1/zi4/m/n/10 high.abun.c
+ol\T1/ptm/m/n/10 '.
+
+Overfull \hbox (58.85849pt too wide) in paragraph at lines 3623--3624
+[]\T1/ptm/m/n/10 If you have to-tal abun-dance mea-sure but want to plot used a
+nd un-used re-sources, use `\T1/zi4/m/n/10 abuns.type=\TS1/zi4/m/n/10 '\T1/zi4/
+m/n/10 additional\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 '
+[87]
+Overfull \hbox (4.38089pt too wide) in paragraph at lines 3670--3670
+ []\T1/zi4/m/n/9 text.high.col=c("blue","red"), col.interaction=c("red",rep("gr
+een",26),rep("brown",242)),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [88] [89]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3820--3822
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+[91]
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3853--3854
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [96]
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 4080--4081
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+
+Overfull \hbox (4.03786pt too wide) in paragraph at lines 4096--4097
+[]\T1/ptm/m/n/10 Function re-turns an ob-ject of class ``bi-par-tite'' to en-su
+re proper work-ing of func-tion \T1/zi4/m/n/10 plot.bipartite\T1/ptm/m/n/10 . 
+[97] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [98]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [99] [100]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [101]
+Underfull \hbox (badness 10000) in paragraph at lines 4329--4333
+
+[102] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [103]
+Overfull \hbox (0.93637pt too wide) in paragraph at lines 4437--4438
+\T1/ptm/m/n/10 prop-er-ties. Some are em-bar-rass-ingly sim-ple (such as num-be
+r of in-ter-act-ing species for each species).
+[104] [105] [106]
+Overfull \hbox (23.58801pt too wide) in paragraph at lines 4497--4499
+[]\T1/ptm/m/n/10 Shannon di-ver-sity (when us-ing `\T1/zi4/m/n/10 logbase="e"\T
+1/ptm/m/n/10 ') or per-species gen-er-al-ity/vulnerability
+
+Overfull \hbox (21.38849pt too wide) in paragraph at lines 4497--4499
+\T1/ptm/m/n/10 (when us-ing `\T1/zi4/m/n/10 logbase=2\T1/ptm/m/n/10 ') of the i
+n-ter-ac-tions of each species. See also [][]\T1/zi4/m/n/10 networklevel[][][]
+[107] [108] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[109] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [110]
+[111] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [112]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [113]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [114]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [115] [116]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [119]
+Overfull \hbox (9.74776pt too wide) in paragraph at lines 5118--5119
+[]\T1/ptm/m/n/10 Bernd Gru-ber <bernd.gruber@canberra.edu.au> & Carsten F. Dor-
+mann <carsten.dormann@biom.uni-
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [120]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [121] [122]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.13792pt too wide) in paragraph at lines 5314--5315
+[]
+
+Overfull \hbox (5.38867pt too wide) in paragraph at lines 5316--5317
+[][][]\T1/zi4/m/n/10 robustness[][][] \T1/ptm/m/n/10 some-times in-ter-preted
+[123]
+Overfull \hbox (2.58801pt too wide) in paragraph at lines 5318--5319
+[]\T1/ptm/m/n/10 Failed to work for net-works with empty columns
+
+Overfull \hbox (9.68695pt too wide) in paragraph at lines 5331--5332
+[]\T1/ptm/m/n/10 This pa-per com-pares spe-cial-i-sa-tion in-dices, based
+
+Overfull \hbox (10.48772pt too wide) in paragraph at lines 5349--5350
+[]\T1/ptm/m/n/10 Some in-ter-ac-tions were lost when there were more rows than 
+columns.
+[124]
+Overfull \hbox (9.37816pt too wide) in paragraph at lines 5359--5360
+[]\T1/ptm/m/n/10 Gustavo Car-vallo has
+
+Overfull \hbox (2.41682pt too wide) in paragraph at lines 5361--5362
+[]\T1/ptm/m/n/10 bezerra2009 is a``full'' flower-visitation net-work of oil-col
+lecting bees in Brazil.
+
+Overfull \hbox (3.40817pt too wide) in paragraph at lines 5363--5364
+[]\T1/ptm/m/n/10 Betweenness and friends can-not be com-puted for fully com-
+
+Overfull \hbox (1.46814pt too wide) in paragraph at lines 5367--5368
+[]\T1/ptm/m/n/10 Robustness and weighted nest-ed-ness were wrapped
+
+Overfull \hbox (1.97824pt too wide) in paragraph at lines 5377--5378
+\T1/ptm/m/n/10 pro-vid-ing the in-spi-ra-tion and the code. This op-tion is als
+o now avail-able in [][]\T1/zi4/m/n/10 networklevel[][][]\T1/ptm/m/n/10 . 
+[125]
+Overfull \hbox (0.66762pt too wide) in paragraph at lines 5407--5408
+[]\T1/ptm/m/n/10 Fits a log-nor-mal or neg-a-tive bi-no-mial dis-tri-bu-tion to
+ the marginal
+[126]
+Overfull \hbox (2.93742pt too wide) in paragraph at lines 5435--5436
+[]\T1/ptm/m/n/10 So far, ran-dom ex-tinc-tion se-quences and
+[127]
+Overfull \hbox (3.53809pt too wide) in paragraph at lines 5489--5490
+[]\T1/ptm/m/n/10 By de-fault now sup-presses er-ror re-port-ing when
+[128]
+Overfull \hbox (2.54832pt too wide) in paragraph at lines 5525--5526
+[]\T1/ptm/m/n/10 This func-tion re-places the (now dep-re-cated) func-tion \T1/
+zi4/m/n/10 nestedness.corso
+
+Overfull \hbox (18.14723pt too wide) in paragraph at lines 5527--5528
+[]\T1/ptm/m/n/10 Another quan-ti-ta-tive pol-li-na-tion net-work from the NCEAS
+ database
+
+Overfull \hbox (15.43771pt too wide) in paragraph at lines 5540--5541
+[]\T1/ptm/m/n/10 Another pol-li-na-tion net-work from the NCEAS database (see [
+][]\T1/zi4/m/n/10 inouye1988[][][]\T1/ptm/m/n/10 ). 
+[129]
+Overfull \hbox (14.96771pt too wide) in paragraph at lines 5556--5557
+[]\T1/ptm/m/n/10 New fea-ture: ar-row=``center.up'', ar-row=``center.down'', ar
+-row=``center.both'':
+
+Overfull \hbox (14.30626pt too wide) in paragraph at lines 5590--5591
+[]\T1/ptm/m/n/10 Sometimes ad-di-tional in-for-ma-tion is avail-able and specie
+s
+[130]
+Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
+[]\T1/ptm/m/n/10 Calculates dis-crep-ancy ac-cord-ing to Brualdi & Sander-son (
+1999),
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [131]
+Underfull \hbox (badness 10000) in paragraph at lines 5663--5667
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5672--5677
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5678--5682
+
+[132] [133] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[134] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [135]
+Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
+ []\T1/zi4/m/n/9 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2])
+, as.vector(allin1[,,3]))),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [136] [137]
+Overfull \hbox (21.86957pt too wide) in paragraph at lines 5947--5949
+[]\T1/ptm/m/n/10 Marcelino de la Cruz \T1/zi4/m/n/10 <marcelino.delacruz@upm.es
+>\T1/ptm/m/n/10 , Juan M. Pas-tor \T1/zi4/m/n/10 <juanmanuel.pastor@upm.es>\T1/
+ptm/m/n/10 ,
+(./Rd2.ind [138] [139]
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 98.
+
+[140] [141]) (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.image.plot} has been referenced but does not exist, replaced by a fixed on
+e
+
+pdfTeX warning (dest): name{Rfn.t.test} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.r2dtable} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hclust} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.dist} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/us
+r/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
+/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
+1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
+s/utmri8a.pfb>
+Output written on Rd2.pdf (141 pages, 503902 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2013] (kpathsea + Thai support).
+Scanning input file ./Rd2.idx....done (601 entries accepted, 0 rejected).
+Sorting entries........done (6154 comparisons).
+Generating output file ./Rd2.ind....done (505 lines written, 0 warnings).
+Output written in ./Rd2.ind.
+Transcript written in ./Rd2.ilg.
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013)
+ restricted \write18 enabled.
+entering extended mode
+
+(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a1
+486a117a/Rd2.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/bk10.clo))
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/Rd.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(./Rd2.aux) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/upquote/upquote.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./Rd2.out) (./Rd2.out)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc
+[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2]) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [3]
+Overfull \hbox (0.67839pt too wide) in paragraph at lines 48--49
+\T1/ptm/m/n/10 group (also us-ing func-tion [][]\T1/zi4/m/n/10 networklevel[][]
+[]\T1/ptm/m/n/10 ) or the in-di-vid-ual species (us-ing func-tion [][]\T1/zi4/m
+/n/10 specieslevel[][][]\T1/ptm/m/n/10 ).
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+Overfull \hbox (0.65802pt too wide) in paragraph at lines 77--78
+[]\T1/ptm/m/n/10 this func-tion is based on R-code writ-ten by Diego Vázquez (m
+any thanks
+[4]
+Overfull \hbox (0.73825pt too wide) in paragraph at lines 78--79
+[]\T1/ptm/m/n/10 ``weighted con-nectance'' was only re-turned when ``link-age d
+en-
+
+Overfull \hbox (15.5174pt too wide) in paragraph at lines 79--80
+[]\T1/ptm/m/n/10 while call-
+
+Overfull \hbox (15.52792pt too wide) in paragraph at lines 91--92
+[]\T1/ptm/m/n/10 Fixed
+
+Overfull \hbox (60.45862pt too wide) in paragraph at lines 92--93
+[]\T1/ptm/m/n/10 Should be `\T1/zi4/m/n/10 interaction push pull\T1/ptm/m/n/10 
+';
+
+Overfull \hbox (23.71724pt too wide) in paragraph at lines 101--102
+[]\T1/ptm/m/n/10 Ghost text deleted. Thanks
+
+Overfull \hbox (2.03789pt too wide) in paragraph at lines 102--103
+\T1/ptm/m/n/10 non-interacting species from the net-work were al-ways ex-cluded
+ so far; new op-tion `\T1/zi4/m/n/10 FALSE\T1/ptm/m/n/10 '
+
+Overfull \hbox (0.55759pt too wide) in paragraph at lines 103--104
+[]\T1/ptm/m/n/10 ``pollination sup-port in-dex'' re-turned ``PSI''; ``PDI'' now
+ ref-
+
+Overfull \hbox (58.03842pt too wide) in paragraph at lines 104--105
+[]\T1/ptm/m/n/10 Previously, \T1/zi4/m/n/10 index="generality"
+
+Overfull \hbox (11.51964pt too wide) in paragraph at lines 104--105
+\T1/ptm/m/n/10 or \T1/zi4/m/n/10 "vulnerability" \T1/ptm/m/n/10 was iden-ti-cal
+ to \T1/zi4/m/n/10 "effective partners" \T1/ptm/m/n/10 with op-tion \T1/zi4/m/n
+/10 weighted=TRUE\T1/ptm/m/n/10 ,
+[5]
+Overfull \hbox (21.48784pt too wide) in paragraph at lines 114--115
+[]\T1/ptm/m/n/10 Networks with only one species
+
+Overfull \hbox (7.78781pt too wide) in paragraph at lines 117--118
+[]\T1/ptm/m/n/10 This func-tion is a null model al-go-rithm like Pate-fields (\
+T1/zi4/m/n/10 r2dtable\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.60811pt too wide) in paragraph at lines 118--119
+[]\T1/ptm/m/n/10 Because some ob-ject was not deleted, mem-ory con-
+
+Overfull \hbox (0.10701pt too wide) in paragraph at lines 131--132
+[]\T1/ptm/m/n/10 for ran-
+[6]
+Overfull \hbox (9.63808pt too wide) in paragraph at lines 143--144
+\T1/ptm/m/n/10 Few user-visible changes, but com-plete re-structuring un-der th
+e hood. Op-tion `\T1/zi4/m/n/10 species number\T1/ptm/m/n/10 '
+
+Overfull \hbox (36.6884pt too wide) in paragraph at lines 149--150
+\T1/ptm/m/n/10 tri-bu-tions or ex-tinc-tion slopes are en-cour-aged to use the 
+func-tions [][]\T1/zi4/m/n/10 degreedistr[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/
+m/n/10 slope.bipartite[][][]\T1/ptm/m/n/10 ,
+[7]
+Overfull \hbox (22.77895pt too wide) in paragraph at lines 179--180
+[]\T1/ptm/m/n/10 failed to work for non-matrix data (i.e. \T1/zi4/m/n/10 data.f
+rames\T1/ptm/m/n/10 ). It now co-erces \T1/zi4/m/n/10 data.frames
+
+Overfull \hbox (24.64835pt too wide) in paragraph at lines 181--182
+\T1/ptm/m/n/10 to set only the de-fault for one func-tion ([][]\T1/zi4/m/n/10 n
+estedness[][][]\T1/ptm/m/n/10 ) to a faster set-ting (`\T1/zi4/m/n/10 null.mode
+ls=FALSE\T1/ptm/m/n/10 '),
+
+Overfull \hbox (5.77866pt too wide) in paragraph at lines 182--183
+[]\T1/ptm/m/n/10 Did not work if only one in-dex was given. 
+[8]
+Overfull \hbox (3.10707pt too wide) in paragraph at lines 224--225
+[]\T1/ptm/m/n/10 Galeano J., Pas-tor J.M. and Iriondo J.M. (2008) Weighted-Inte
+raction Nest-ed-ness Es-ti-ma-tor (WINE):
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [9] [10]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.29701pt too wide) in paragraph at lines 400--402
+[]\T1/ptm/m/n/10 This func-tion cal-cu-lates be-tween-ness scores for nodes in 
+a weighted net-work based on the distance_w-
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 414--415
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[13] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (0.15688pt too wide) in paragraph at lines 458--459
+[]\T1/ptm/m/n/10 Observation of 38 in-di-vid-ual plants from 13 oil-flower spec
+ies of the fam-ily Mal-phigh-i-aceae. Flower
+
+Overfull \hbox (4.62854pt too wide) in paragraph at lines 468--469
+[]\T1/ptm/m/n/10 Take from the NCEAS in-ter-ac-tion web database ([][]$\T1/zi4/
+m/n/10 http : / / www . nceas . ucsb . edu / interactionweb$[][]\T1/ptm/m/n/10 
+). 
+[14] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.05087pt too wide) in paragraph at lines 569--570
+\T1/zi4/m/n/10 2010 / 03 / 20 / closeness-[]centrality-[]in-[]networks-[]with-[
+]disconnected-[]components/$[][] 
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 571--572
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[16] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [19] [20]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [22] [23]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [24] [25]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [26] [27]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [31]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 1276--1277
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+[32] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.26828pt too wide) in paragraph at lines 1334--1335
+[]\T1/ptm/m/n/10 Option to anal-yse the web as bi-nary or as weighted net-work.
+ De-fault is `\T1/zi4/m/n/10 weighted=TRUE\T1/ptm/m/n/10 ',
+[33] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [34] [35]
+Overfull \hbox (19.68091pt too wide) in paragraph at lines 1431--1431
+ []\T1/zi4/m/n/9 sapply(frame2webs(testdata,type.out="list"), networklevel, ind
+ex=c("connectance", "C score"))[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+Overfull \hbox (6.53783pt too wide) in paragraph at lines 1537--1538
+[]\T1/ptm/m/n/10 Logical; when com-put-ing "func-tional com-ple-men-tar-ity" se
+nsu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (56.71895pt too wide) in paragraph at lines 1546--1547
+\T1/ptm/m/n/10 weighted-quantitative ver-sion of some of them (`\T1/zi4/m/n/10 
+mean number of links\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 mean number of shared par
+tners\T1/ptm/m/n/10 ',
+[38]
+Overfull \hbox (28.78893pt too wide) in paragraph at lines 1565--1566
+\T1/ptm/m/n/10 study has used the ``wrong'' one, i.e. the one pre-sented here a
+s `\T1/zi4/m/n/10 cluster coefficient\T1/ptm/m/n/10 '. 
+[39] [40]
+Overfull \hbox (57.8184pt too wide) in paragraph at lines 1594--1595
+[]\T1/ptm/m/n/10 For some-what larger net-works (i.e. more than 2 dozen species
+ per level), `\T1/zi4/m/n/10 weighted cluster coefficient\T1/ptm/m/n/10 '
+
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 1617--1618
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+[41] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [42]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (1.29683pt too wide) in paragraph at lines 1725--1726
+[]\T1/ptm/m/n/10 This data set re-ports a community-level study of the pol-li-n
+a-tion bi-ol-ogy of alpine plants in Kosciusko
+[43] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [48]
+Overfull \hbox (39.78088pt too wide) in paragraph at lines 2005--2005
+ []\T1/zi4/m/n/10 mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autot
+ransform="sum", trials=100)[] 
+[49]
+Overfull \hbox (15.18097pt too wide) in paragraph at lines 2049--2049
+ []\T1/zi4/m/n/9 ## to interaction frequency in an observed matrix m (which is 
+the default of \TS1/zi4/m/n/9 '\T1/zi4/m/n/9 autotransform\TS1/zi4/m/n/9 '\T1/z
+i4/m/n/9 ):[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (0.68758pt too wide) in paragraph at lines 2092--2093
+[]\T1/ptm/m/n/10 plotModuleWeb(moduleWebObject, plot-Mod-ules=TRUE, rank=FALSE,
+ weighted=TRUE, dis-play-
+
+Overfull \hbox (38.65608pt too wide) in paragraph at lines 2092--2093
+\T1/ptm/m/n/10 Al-a-bels=TRUE, dis-play-Bla-bels=TRUE, lab-size=1, plot-size=12
+, xla-bel="", yla-bel="", square.border="white",
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [51]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [52]
+Overfull \hbox (0.92615pt too wide) in paragraph at lines 2195--2196
+\T1/ptm/m/n/10 than the de-fault. BC and CC use de-faults of sna::betweenness a
+nd sna::closeness,
+[53] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [54]
+Overfull \hbox (12.05038pt too wide) in paragraph at lines 2291--2292
+\T1/ptm/m/n/10 `\T1/zi4/m/n/10 binmatnest2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NOD
+F\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NODF2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 C.sco
+re\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 checker\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 we
+ighted NODF\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 wine\T1/ptm/m/n/10 ',
+[55]
+Overfull \hbox (7.4072pt too wide) in paragraph at lines 2338--2340
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M., Iriondo and J.M. 2008. Weighted-In
+teraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[56] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.76746pt too wide) in paragraph at lines 2441--2442
+[]\T1/ptm/m/n/10 For the ge-netic al-go-rithm some pa-ram-e-ters have to be ini
+-tialised. First is \T1/zi4/m/n/10 popsize\T1/ptm/m/n/10 ,
+[58]
+Overfull \hbox (22.23009pt too wide) in paragraph at lines 2453--2455
+\T1/ptm/m/n/10 or down-load di-rectly: [][]$\T1/zi4/m/n/10 http : / / www . eez
+a . csic . es / eeza / personales / rgirones / File / BINMATNEST3 .
+[59] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2508--2508
+ []\T1/zi4/m/n/10 nestedrank(web, method = "NODF", weighted=TRUE, normalise=TRU
+E, return.matrix=FALSE)[] 
+
+Overfull \hbox (16.22826pt too wide) in paragraph at lines 2526--2527
+[]\T1/ptm/m/n/10 will use \T1/ptm/b/n/10 ve-gan\T1/ptm/m/n/10 's \T1/zi4/m/n/10
+ nestednodf\T1/ptm/m/n/10 -function to ar-range the ma-trix. With `\T1/zi4/m/n/
+10 weighted=TRUE\T1/ptm/m/n/10 ',
+[60] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [61] [62]
+Overfull \hbox (15.06876pt too wide) in paragraph at lines 2652--2653
+[]\T1/ptm/m/n/10 Specifies how species are re-moved from ma-trix: `\T1/zi4/m/n/
+10 random\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 degree\T1/ptm/m/n/10 ' or `\T1/zi4/m
+/n/10 abundance\T1/ptm/m/n/10 '
+[63]
+Overfull \hbox (7.2578pt too wide) in paragraph at lines 2664--2665
+[]\T1/ptm/m/n/10 Logical; when com-put-ing ``func-tional com-ple-men-tar-ity'' 
+sensu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (33.72823pt too wide) in paragraph at lines 2666--2667
+\T1/ptm/m/n/10 back-ward com-pat-i-ble, the old \T1/zi4/m/n/10 networklevel\T1/
+ptm/m/n/10 -function is still avail-able (\T1/zi4/m/n/10 .networklevel\T1/ptm/m
+/n/10 )
+[64]
+Overfull \hbox (1.88756pt too wide) in paragraph at lines 2686--2687
+[]\T1/ptm/m/n/10 Balance be-tween num-bers in the two lev-els: pos-i-tive val-u
+es in-di-cate more higher-
+
+Overfull \hbox (29.2208pt too wide) in paragraph at lines 2690--2691
+\T1/ptm/m/n/10 un-der [][]$\T1/zi4/m/n/10 http : / / en . wikipedia . org / w /
+ index . php ? title = Clustering _ coefficient$[][]\T1/ptm/m/n/10 .
+
+Overfull \hbox (12.20682pt too wide) in paragraph at lines 2692--2693
+[]\T1/ptm/m/n/10 A nest-ed-ness ver-sion that con-sid-ers in-ter-ac-tion fre-qu
+en-cies (and is hence weighted),
+
+Overfull \hbox (49.09854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 web asym-me-try (see above). Pos-i-tive val-ues (only pos-si-ble
+ of `\T1/zi4/m/n/10 ISAmethod = "Bluethgen"\T1/ptm/m/n/10 ')
+
+Overfull \hbox (9.64854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 in-di-cate higher de-pen-dence in the higher trophic level. See 
+func-tion [][]\T1/zi4/m/n/10 specieslevel[][][]
+[65] [66] [67] [68]
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 2786--2787
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+
+Overfull \hbox (10.56714pt too wide) in paragraph at lines 2792--2793
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M. and Iriondo, J.M. (2008) Weighted-I
+nteraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[69] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (40.10756pt too wide) in paragraph at lines 2849--2850
+\T1/ptm/m/n/10 sented as? De-faults to `\T1/zi4/m/n/10 NA\T1/ptm/m/n/10 '; only
+ cur-rently im-ple-mented al-ter-na-tive is `\T1/zi4/m/n/10 inf.replace=Inf\T1/
+ptm/m/n/10 ',
+[70] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (23.78088pt too wide) in paragraph at lines 2912--2912
+ []\T1/zi4/m/n/10 npartite(as.one.mode.web, index=c("connectance", "links per s
+pecies", "mean degree"))[] 
+[71] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (10.86772pt too wide) in paragraph at lines 2969--2970
+[]\T1/ptm/m/n/10 This pack-age pro-vides sev-eral func-tions to gen-er-ate null
+ mod-els for the ob-served data (see [][]\T1/zi4/m/n/10 nullmodel[][][]\T1/ptm/
+m/n/10 ).
+[72] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [73] [74]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.15822pt too wide) in paragraph at lines 3091--3092
+[]\T1/ptm/m/n/10 Null model type. Can be given as an in-te-ger or name: 1/"r2dt
+able", 2/"swap.web",
+
+Overfull \hbox (0.4274pt too wide) in paragraph at lines 3091--3092
+\T1/ptm/m/n/10 3/"vaznull", 4/"shuf-fle.web", 5/"mgen"; al-lows for par-tial ma
+tch of names; meth-
+[75]
+Overfull \hbox (6.18094pt too wide) in paragraph at lines 3130--3130
+ []\T1/zi4/m/n/9 null <- unlist(sapply(nulls, networklevel, index="weighted nes
+tedness")) #takes a while ...[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [78] [79]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [81] [82]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [83]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [84] [85] [86]
+Overfull \hbox (66.9672pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 bil-ity) and an al-ter-na-tive func-tion that plots fully in-de-
+pen-dent abun-dance es-ti-mates (`\T1/zi4/m/n/10 abuns.type="independent"\T1/pt
+m/m/n/10 ').
+
+Overfull \hbox (53.03935pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 To change box (species) col-ors with `\T1/zi4/m/n/10 abuns.type=
+\TS1/zi4/m/n/10 '\T1/zi4/m/n/10 independent\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ', u
+se `\T1/zi4/m/n/10 low.abun.col\T1/ptm/m/n/10 ' and `\T1/zi4/m/n/10 high.abun.c
+ol\T1/ptm/m/n/10 '.
+
+Overfull \hbox (58.85849pt too wide) in paragraph at lines 3623--3624
+[]\T1/ptm/m/n/10 If you have to-tal abun-dance mea-sure but want to plot used a
+nd un-used re-sources, use `\T1/zi4/m/n/10 abuns.type=\TS1/zi4/m/n/10 '\T1/zi4/
+m/n/10 additional\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 '
+[87]
+Overfull \hbox (4.38089pt too wide) in paragraph at lines 3670--3670
+ []\T1/zi4/m/n/9 text.high.col=c("blue","red"), col.interaction=c("red",rep("gr
+een",26),rep("brown",242)),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [88] [89]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3820--3822
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+[91]
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3853--3854
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [96]
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 4080--4081
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+
+Overfull \hbox (4.03786pt too wide) in paragraph at lines 4096--4097
+[]\T1/ptm/m/n/10 Function re-turns an ob-ject of class ``bi-par-tite'' to en-su
+re proper work-ing of func-tion \T1/zi4/m/n/10 plot.bipartite\T1/ptm/m/n/10 . 
+[97] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [98]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [99] [100]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [101]
+Underfull \hbox (badness 10000) in paragraph at lines 4329--4333
+
+[102] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [103]
+Overfull \hbox (0.93637pt too wide) in paragraph at lines 4437--4438
+\T1/ptm/m/n/10 prop-er-ties. Some are em-bar-rass-ingly sim-ple (such as num-be
+r of in-ter-act-ing species for each species).
+[104] [105] [106]
+Overfull \hbox (23.58801pt too wide) in paragraph at lines 4497--4499
+[]\T1/ptm/m/n/10 Shannon di-ver-sity (when us-ing `\T1/zi4/m/n/10 logbase="e"\T
+1/ptm/m/n/10 ') or per-species gen-er-al-ity/vulnerability
+
+Overfull \hbox (21.38849pt too wide) in paragraph at lines 4497--4499
+\T1/ptm/m/n/10 (when us-ing `\T1/zi4/m/n/10 logbase=2\T1/ptm/m/n/10 ') of the i
+n-ter-ac-tions of each species. See also [][]\T1/zi4/m/n/10 networklevel[][][]
+[107] [108] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[109] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [110]
+[111] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [112]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [113]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [114]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [115] [116]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [119]
+Overfull \hbox (9.74776pt too wide) in paragraph at lines 5118--5119
+[]\T1/ptm/m/n/10 Bernd Gru-ber <bernd.gruber@canberra.edu.au> & Carsten F. Dor-
+mann <carsten.dormann@biom.uni-
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [120]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [121] [122]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.13792pt too wide) in paragraph at lines 5314--5315
+[]
+
+Overfull \hbox (5.38867pt too wide) in paragraph at lines 5316--5317
+[][][]\T1/zi4/m/n/10 robustness[][][] \T1/ptm/m/n/10 some-times in-ter-preted
+[123]
+Overfull \hbox (2.58801pt too wide) in paragraph at lines 5318--5319
+[]\T1/ptm/m/n/10 Failed to work for net-works with empty columns
+
+Overfull \hbox (9.68695pt too wide) in paragraph at lines 5331--5332
+[]\T1/ptm/m/n/10 This pa-per com-pares spe-cial-i-sa-tion in-dices, based
+
+Overfull \hbox (10.48772pt too wide) in paragraph at lines 5349--5350
+[]\T1/ptm/m/n/10 Some in-ter-ac-tions were lost when there were more rows than 
+columns.
+[124]
+Overfull \hbox (9.37816pt too wide) in paragraph at lines 5359--5360
+[]\T1/ptm/m/n/10 Gustavo Car-vallo has
+
+Overfull \hbox (2.41682pt too wide) in paragraph at lines 5361--5362
+[]\T1/ptm/m/n/10 bezerra2009 is a``full'' flower-visitation net-work of oil-col
+lecting bees in Brazil.
+
+Overfull \hbox (3.40817pt too wide) in paragraph at lines 5363--5364
+[]\T1/ptm/m/n/10 Betweenness and friends can-not be com-puted for fully com-
+
+Overfull \hbox (1.46814pt too wide) in paragraph at lines 5367--5368
+[]\T1/ptm/m/n/10 Robustness and weighted nest-ed-ness were wrapped
+
+Overfull \hbox (1.97824pt too wide) in paragraph at lines 5377--5378
+\T1/ptm/m/n/10 pro-vid-ing the in-spi-ra-tion and the code. This op-tion is als
+o now avail-able in [][]\T1/zi4/m/n/10 networklevel[][][]\T1/ptm/m/n/10 . 
+[125]
+Overfull \hbox (0.66762pt too wide) in paragraph at lines 5407--5408
+[]\T1/ptm/m/n/10 Fits a log-nor-mal or neg-a-tive bi-no-mial dis-tri-bu-tion to
+ the marginal
+[126]
+Overfull \hbox (2.93742pt too wide) in paragraph at lines 5435--5436
+[]\T1/ptm/m/n/10 So far, ran-dom ex-tinc-tion se-quences and
+[127]
+Overfull \hbox (3.53809pt too wide) in paragraph at lines 5489--5490
+[]\T1/ptm/m/n/10 By de-fault now sup-presses er-ror re-port-ing when
+[128]
+Overfull \hbox (2.54832pt too wide) in paragraph at lines 5525--5526
+[]\T1/ptm/m/n/10 This func-tion re-places the (now dep-re-cated) func-tion \T1/
+zi4/m/n/10 nestedness.corso
+
+Overfull \hbox (18.14723pt too wide) in paragraph at lines 5527--5528
+[]\T1/ptm/m/n/10 Another quan-ti-ta-tive pol-li-na-tion net-work from the NCEAS
+ database
+
+Overfull \hbox (15.43771pt too wide) in paragraph at lines 5540--5541
+[]\T1/ptm/m/n/10 Another pol-li-na-tion net-work from the NCEAS database (see [
+][]\T1/zi4/m/n/10 inouye1988[][][]\T1/ptm/m/n/10 ). 
+[129]
+Overfull \hbox (14.96771pt too wide) in paragraph at lines 5556--5557
+[]\T1/ptm/m/n/10 New fea-ture: ar-row=``center.up'', ar-row=``center.down'', ar
+-row=``center.both'':
+
+Overfull \hbox (14.30626pt too wide) in paragraph at lines 5590--5591
+[]\T1/ptm/m/n/10 Sometimes ad-di-tional in-for-ma-tion is avail-able and specie
+s
+[130]
+Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
+[]\T1/ptm/m/n/10 Calculates dis-crep-ancy ac-cord-ing to Brualdi & Sander-son (
+1999),
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [131]
+Underfull \hbox (badness 10000) in paragraph at lines 5663--5667
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5672--5677
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5678--5682
+
+[132] [133] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[134] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [135]
+Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
+ []\T1/zi4/m/n/9 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2])
+, as.vector(allin1[,,3]))),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [136] [137]
+Overfull \hbox (21.86957pt too wide) in paragraph at lines 5947--5949
+[]\T1/ptm/m/n/10 Marcelino de la Cruz \T1/zi4/m/n/10 <marcelino.delacruz@upm.es
+>\T1/ptm/m/n/10 , Juan M. Pas-tor \T1/zi4/m/n/10 <juanmanuel.pastor@upm.es>\T1/
+ptm/m/n/10 ,
+(./Rd2.ind [138] [139]
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 98.
+
+[140] [141]) (./Rd2.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.image.plot} has been referenced but does not exist, replaced by a fixed on
+e
+
+pdfTeX warning (dest): name{Rfn.t.test} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.r2dtable} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hclust} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.dist} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/us
+r/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
+/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
+1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
+s/utmri8a.pfb>
+Output written on Rd2.pdf (141 pages, 504087 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2013] (kpathsea + Thai support).
+Scanning input file ./Rd2.idx....done (601 entries accepted, 0 rejected).
+Sorting entries........done (6146 comparisons).
+Generating output file ./Rd2.ind....done (505 lines written, 0 warnings).
+Output written in ./Rd2.ind.
+Transcript written in ./Rd2.ilg.
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013)
+ restricted \write18 enabled.
+entering extended mode
+
+(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a1
+486a117a/Rd2.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/bk10.clo))
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/Rd.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 361.
+
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(./Rd2.aux) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/upquote/upquote.sty)
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./Rd2.out) (./Rd2.out)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc
+[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2]) (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [3]
+Overfull \hbox (0.67839pt too wide) in paragraph at lines 48--49
+\T1/ptm/m/n/10 group (also us-ing func-tion [][]\T1/zi4/m/n/10 networklevel[][]
+[]\T1/ptm/m/n/10 ) or the in-di-vid-ual species (us-ing func-tion [][]\T1/zi4/m
+/n/10 specieslevel[][][]\T1/ptm/m/n/10 ).
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+Overfull \hbox (0.65802pt too wide) in paragraph at lines 77--78
+[]\T1/ptm/m/n/10 this func-tion is based on R-code writ-ten by Diego Vázquez (m
+any thanks
+[4]
+Overfull \hbox (0.73825pt too wide) in paragraph at lines 78--79
+[]\T1/ptm/m/n/10 ``weighted con-nectance'' was only re-turned when ``link-age d
+en-
+
+Overfull \hbox (15.5174pt too wide) in paragraph at lines 79--80
+[]\T1/ptm/m/n/10 while call-
+
+Overfull \hbox (15.52792pt too wide) in paragraph at lines 91--92
+[]\T1/ptm/m/n/10 Fixed
+
+Overfull \hbox (60.45862pt too wide) in paragraph at lines 92--93
+[]\T1/ptm/m/n/10 Should be `\T1/zi4/m/n/10 interaction push pull\T1/ptm/m/n/10 
+';
+
+Overfull \hbox (23.71724pt too wide) in paragraph at lines 101--102
+[]\T1/ptm/m/n/10 Ghost text deleted. Thanks
+
+Overfull \hbox (2.03789pt too wide) in paragraph at lines 102--103
+\T1/ptm/m/n/10 non-interacting species from the net-work were al-ways ex-cluded
+ so far; new op-tion `\T1/zi4/m/n/10 FALSE\T1/ptm/m/n/10 '
+
+Overfull \hbox (0.55759pt too wide) in paragraph at lines 103--104
+[]\T1/ptm/m/n/10 ``pollination sup-port in-dex'' re-turned ``PSI''; ``PDI'' now
+ ref-
+
+Overfull \hbox (58.03842pt too wide) in paragraph at lines 104--105
+[]\T1/ptm/m/n/10 Previously, \T1/zi4/m/n/10 index="generality"
+
+Overfull \hbox (11.51964pt too wide) in paragraph at lines 104--105
+\T1/ptm/m/n/10 or \T1/zi4/m/n/10 "vulnerability" \T1/ptm/m/n/10 was iden-ti-cal
+ to \T1/zi4/m/n/10 "effective partners" \T1/ptm/m/n/10 with op-tion \T1/zi4/m/n
+/10 weighted=TRUE\T1/ptm/m/n/10 ,
+[5]
+Overfull \hbox (21.48784pt too wide) in paragraph at lines 114--115
+[]\T1/ptm/m/n/10 Networks with only one species
+
+Overfull \hbox (7.78781pt too wide) in paragraph at lines 117--118
+[]\T1/ptm/m/n/10 This func-tion is a null model al-go-rithm like Pate-fields (\
+T1/zi4/m/n/10 r2dtable\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.60811pt too wide) in paragraph at lines 118--119
+[]\T1/ptm/m/n/10 Because some ob-ject was not deleted, mem-ory con-
+
+Overfull \hbox (0.10701pt too wide) in paragraph at lines 131--132
+[]\T1/ptm/m/n/10 for ran-
+[6]
+Overfull \hbox (9.63808pt too wide) in paragraph at lines 143--144
+\T1/ptm/m/n/10 Few user-visible changes, but com-plete re-structuring un-der th
+e hood. Op-tion `\T1/zi4/m/n/10 species number\T1/ptm/m/n/10 '
+
+Overfull \hbox (36.6884pt too wide) in paragraph at lines 149--150
+\T1/ptm/m/n/10 tri-bu-tions or ex-tinc-tion slopes are en-cour-aged to use the 
+func-tions [][]\T1/zi4/m/n/10 degreedistr[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/
+m/n/10 slope.bipartite[][][]\T1/ptm/m/n/10 ,
+[7]
+Overfull \hbox (22.77895pt too wide) in paragraph at lines 179--180
+[]\T1/ptm/m/n/10 failed to work for non-matrix data (i.e. \T1/zi4/m/n/10 data.f
+rames\T1/ptm/m/n/10 ). It now co-erces \T1/zi4/m/n/10 data.frames
+
+Overfull \hbox (24.64835pt too wide) in paragraph at lines 181--182
+\T1/ptm/m/n/10 to set only the de-fault for one func-tion ([][]\T1/zi4/m/n/10 n
+estedness[][][]\T1/ptm/m/n/10 ) to a faster set-ting (`\T1/zi4/m/n/10 null.mode
+ls=FALSE\T1/ptm/m/n/10 '),
+
+Overfull \hbox (5.77866pt too wide) in paragraph at lines 182--183
+[]\T1/ptm/m/n/10 Did not work if only one in-dex was given. 
+[8]
+Overfull \hbox (3.10707pt too wide) in paragraph at lines 224--225
+[]\T1/ptm/m/n/10 Galeano J., Pas-tor J.M. and Iriondo J.M. (2008) Weighted-Inte
+raction Nest-ed-ness Es-ti-ma-tor (WINE):
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [9] [10]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.29701pt too wide) in paragraph at lines 400--402
+[]\T1/ptm/m/n/10 This func-tion cal-cu-lates be-tween-ness scores for nodes in 
+a weighted net-work based on the distance_w-
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 414--415
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[13] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (0.15688pt too wide) in paragraph at lines 458--459
+[]\T1/ptm/m/n/10 Observation of 38 in-di-vid-ual plants from 13 oil-flower spec
+ies of the fam-ily Mal-phigh-i-aceae. Flower
+
+Overfull \hbox (4.62854pt too wide) in paragraph at lines 468--469
+[]\T1/ptm/m/n/10 Take from the NCEAS in-ter-ac-tion web database ([][]$\T1/zi4/
+m/n/10 http : / / www . nceas . ucsb . edu / interactionweb$[][]\T1/ptm/m/n/10 
+). 
+[14] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.05087pt too wide) in paragraph at lines 569--570
+\T1/zi4/m/n/10 2010 / 03 / 20 / closeness-[]centrality-[]in-[]networks-[]with-[
+]disconnected-[]components/$[][] 
+
+Overfull \hbox (5.14735pt too wide) in paragraph at lines 571--572
+[]\T1/ptm/m/n/10 sets the al-pha pa-ram-e-ter in the gen-er-alised mea-sures fr
+om Op-sahl, T., Ag-neessens,
+[16] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [19] [20]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [22] [23]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [24] [25]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [26] [27]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [31]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 1276--1277
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+[32] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.26828pt too wide) in paragraph at lines 1334--1335
+[]\T1/ptm/m/n/10 Option to anal-yse the web as bi-nary or as weighted net-work.
+ De-fault is `\T1/zi4/m/n/10 weighted=TRUE\T1/ptm/m/n/10 ',
+[33] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [34] [35]
+Overfull \hbox (19.68091pt too wide) in paragraph at lines 1431--1431
+ []\T1/zi4/m/n/9 sapply(frame2webs(testdata,type.out="list"), networklevel, ind
+ex=c("connectance", "C score"))[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [36] [37]
+Overfull \hbox (6.53783pt too wide) in paragraph at lines 1537--1538
+[]\T1/ptm/m/n/10 Logical; when com-put-ing "func-tional com-ple-men-tar-ity" se
+nsu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (56.71895pt too wide) in paragraph at lines 1546--1547
+\T1/ptm/m/n/10 weighted-quantitative ver-sion of some of them (`\T1/zi4/m/n/10 
+mean number of links\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 mean number of shared par
+tners\T1/ptm/m/n/10 ',
+[38]
+Overfull \hbox (28.78893pt too wide) in paragraph at lines 1565--1566
+\T1/ptm/m/n/10 study has used the ``wrong'' one, i.e. the one pre-sented here a
+s `\T1/zi4/m/n/10 cluster coefficient\T1/ptm/m/n/10 '. 
+[39] [40]
+Overfull \hbox (57.8184pt too wide) in paragraph at lines 1594--1595
+[]\T1/ptm/m/n/10 For some-what larger net-works (i.e. more than 2 dozen species
+ per level), `\T1/zi4/m/n/10 weighted cluster coefficient\T1/ptm/m/n/10 '
+
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 1617--1618
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+[41] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [42]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (1.29683pt too wide) in paragraph at lines 1725--1726
+[]\T1/ptm/m/n/10 This data set re-ports a community-level study of the pol-li-n
+a-tion bi-ol-ogy of alpine plants in Kosciusko
+[43] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [48]
+Overfull \hbox (39.78088pt too wide) in paragraph at lines 2005--2005
+ []\T1/zi4/m/n/10 mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autot
+ransform="sum", trials=100)[] 
+[49]
+Overfull \hbox (15.18097pt too wide) in paragraph at lines 2049--2049
+ []\T1/zi4/m/n/9 ## to interaction frequency in an observed matrix m (which is 
+the default of \TS1/zi4/m/n/9 '\T1/zi4/m/n/9 autotransform\TS1/zi4/m/n/9 '\T1/z
+i4/m/n/9 ):[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [50]
+Overfull \hbox (0.68758pt too wide) in paragraph at lines 2092--2093
+[]\T1/ptm/m/n/10 plotModuleWeb(moduleWebObject, plot-Mod-ules=TRUE, rank=FALSE,
+ weighted=TRUE, dis-play-
+
+Overfull \hbox (38.65608pt too wide) in paragraph at lines 2092--2093
+\T1/ptm/m/n/10 Al-a-bels=TRUE, dis-play-Bla-bels=TRUE, lab-size=1, plot-size=12
+, xla-bel="", yla-bel="", square.border="white",
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [51]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [52]
+Overfull \hbox (0.92615pt too wide) in paragraph at lines 2195--2196
+\T1/ptm/m/n/10 than the de-fault. BC and CC use de-faults of sna::betweenness a
+nd sna::closeness,
+[53] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [54]
+Overfull \hbox (12.05038pt too wide) in paragraph at lines 2291--2292
+\T1/ptm/m/n/10 `\T1/zi4/m/n/10 binmatnest2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NOD
+F\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 NODF2\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 C.sco
+re\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 checker\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 we
+ighted NODF\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 wine\T1/ptm/m/n/10 ',
+[55]
+Overfull \hbox (7.4072pt too wide) in paragraph at lines 2338--2340
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M., Iriondo and J.M. 2008. Weighted-In
+teraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[56] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.76746pt too wide) in paragraph at lines 2441--2442
+[]\T1/ptm/m/n/10 For the ge-netic al-go-rithm some pa-ram-e-ters have to be ini
+-tialised. First is \T1/zi4/m/n/10 popsize\T1/ptm/m/n/10 ,
+[58]
+Overfull \hbox (22.23009pt too wide) in paragraph at lines 2453--2455
+\T1/ptm/m/n/10 or down-load di-rectly: [][]$\T1/zi4/m/n/10 http : / / www . eez
+a . csic . es / eeza / personales / rgirones / File / BINMATNEST3 .
+[59] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (18.78088pt too wide) in paragraph at lines 2508--2508
+ []\T1/zi4/m/n/10 nestedrank(web, method = "NODF", weighted=TRUE, normalise=TRU
+E, return.matrix=FALSE)[] 
+
+Overfull \hbox (16.22826pt too wide) in paragraph at lines 2526--2527
+[]\T1/ptm/m/n/10 will use \T1/ptm/b/n/10 ve-gan\T1/ptm/m/n/10 's \T1/zi4/m/n/10
+ nestednodf\T1/ptm/m/n/10 -function to ar-range the ma-trix. With `\T1/zi4/m/n/
+10 weighted=TRUE\T1/ptm/m/n/10 ',
+[60] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [61] [62]
+Overfull \hbox (15.06876pt too wide) in paragraph at lines 2652--2653
+[]\T1/ptm/m/n/10 Specifies how species are re-moved from ma-trix: `\T1/zi4/m/n/
+10 random\T1/ptm/m/n/10 ', `\T1/zi4/m/n/10 degree\T1/ptm/m/n/10 ' or `\T1/zi4/m
+/n/10 abundance\T1/ptm/m/n/10 '
+[63]
+Overfull \hbox (7.2578pt too wide) in paragraph at lines 2664--2665
+[]\T1/ptm/m/n/10 Logical; when com-put-ing ``func-tional com-ple-men-tar-ity'' 
+sensu func-tion [][]\T1/zi4/m/n/10 fc[][][]\T1/ptm/m/n/10 , should
+
+Overfull \hbox (33.72823pt too wide) in paragraph at lines 2666--2667
+\T1/ptm/m/n/10 back-ward com-pat-i-ble, the old \T1/zi4/m/n/10 networklevel\T1/
+ptm/m/n/10 -function is still avail-able (\T1/zi4/m/n/10 .networklevel\T1/ptm/m
+/n/10 )
+[64]
+Overfull \hbox (1.88756pt too wide) in paragraph at lines 2686--2687
+[]\T1/ptm/m/n/10 Balance be-tween num-bers in the two lev-els: pos-i-tive val-u
+es in-di-cate more higher-
+
+Overfull \hbox (29.2208pt too wide) in paragraph at lines 2690--2691
+\T1/ptm/m/n/10 un-der [][]$\T1/zi4/m/n/10 http : / / en . wikipedia . org / w /
+ index . php ? title = Clustering _ coefficient$[][]\T1/ptm/m/n/10 .
+
+Overfull \hbox (12.20682pt too wide) in paragraph at lines 2692--2693
+[]\T1/ptm/m/n/10 A nest-ed-ness ver-sion that con-sid-ers in-ter-ac-tion fre-qu
+en-cies (and is hence weighted),
+
+Overfull \hbox (49.09854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 web asym-me-try (see above). Pos-i-tive val-ues (only pos-si-ble
+ of `\T1/zi4/m/n/10 ISAmethod = "Bluethgen"\T1/ptm/m/n/10 ')
+
+Overfull \hbox (9.64854pt too wide) in paragraph at lines 2694--2695
+\T1/ptm/m/n/10 in-di-cate higher de-pen-dence in the higher trophic level. See 
+func-tion [][]\T1/zi4/m/n/10 specieslevel[][][]
+[65] [66] [67] [68]
+Overfull \hbox (16.32732pt too wide) in paragraph at lines 2786--2787
+\T1/ptm/m/n/10 restora-tion of plant-pollinator net-works. \T1/ptm/m/it/10 Ecol
+-ogy Let-ters \T1/ptm/b/n/10 15\T1/ptm/m/n/10 , 319--328. http://dx.doi.org/10.
+1111/j.1461-
+
+Overfull \hbox (10.56714pt too wide) in paragraph at lines 2792--2793
+[]\T1/ptm/m/n/10 Galeano, J., Pas-tor, J.M. and Iriondo, J.M. (2008) Weighted-I
+nteraction Nest-ed-ness Es-ti-ma-tor (WINE):
+[69] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (40.10756pt too wide) in paragraph at lines 2849--2850
+\T1/ptm/m/n/10 sented as? De-faults to `\T1/zi4/m/n/10 NA\T1/ptm/m/n/10 '; only
+ cur-rently im-ple-mented al-ter-na-tive is `\T1/zi4/m/n/10 inf.replace=Inf\T1/
+ptm/m/n/10 ',
+[70] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (23.78088pt too wide) in paragraph at lines 2912--2912
+ []\T1/zi4/m/n/10 npartite(as.one.mode.web, index=c("connectance", "links per s
+pecies", "mean degree"))[] 
+[71] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (10.86772pt too wide) in paragraph at lines 2969--2970
+[]\T1/ptm/m/n/10 This pack-age pro-vides sev-eral func-tions to gen-er-ate null
+ mod-els for the ob-served data (see [][]\T1/zi4/m/n/10 nullmodel[][][]\T1/ptm/
+m/n/10 ).
+[72] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [73] [74]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (4.15822pt too wide) in paragraph at lines 3091--3092
+[]\T1/ptm/m/n/10 Null model type. Can be given as an in-te-ger or name: 1/"r2dt
+able", 2/"swap.web",
+
+Overfull \hbox (0.4274pt too wide) in paragraph at lines 3091--3092
+\T1/ptm/m/n/10 3/"vaznull", 4/"shuf-fle.web", 5/"mgen"; al-lows for par-tial ma
+tch of names; meth-
+[75]
+Overfull \hbox (6.18094pt too wide) in paragraph at lines 3130--3130
+ []\T1/zi4/m/n/9 null <- unlist(sapply(nulls, networklevel, index="weighted nes
+tedness")) #takes a while ...[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [78] [79]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [81] [82]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [83]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [84] [85] [86]
+Overfull \hbox (66.9672pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 bil-ity) and an al-ter-na-tive func-tion that plots fully in-de-
+pen-dent abun-dance es-ti-mates (`\T1/zi4/m/n/10 abuns.type="independent"\T1/pt
+m/m/n/10 ').
+
+Overfull \hbox (53.03935pt too wide) in paragraph at lines 3621--3622
+\T1/ptm/m/n/10 To change box (species) col-ors with `\T1/zi4/m/n/10 abuns.type=
+\TS1/zi4/m/n/10 '\T1/zi4/m/n/10 independent\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ', u
+se `\T1/zi4/m/n/10 low.abun.col\T1/ptm/m/n/10 ' and `\T1/zi4/m/n/10 high.abun.c
+ol\T1/ptm/m/n/10 '.
+
+Overfull \hbox (58.85849pt too wide) in paragraph at lines 3623--3624
+[]\T1/ptm/m/n/10 If you have to-tal abun-dance mea-sure but want to plot used a
+nd un-used re-sources, use `\T1/zi4/m/n/10 abuns.type=\TS1/zi4/m/n/10 '\T1/zi4/
+m/n/10 additional\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 '
+[87]
+Overfull \hbox (4.38089pt too wide) in paragraph at lines 3670--3670
+ []\T1/zi4/m/n/9 text.high.col=c("blue","red"), col.interaction=c("red",rep("gr
+een",26),rep("brown",242)),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [88] [89]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3820--3822
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+[91]
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3853--3854
+\T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
+to-weighted-one-mode-networks/ 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [96]
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 4080--4081
+[]\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
+ecies are to be deleted. 
+
+Overfull \hbox (4.03786pt too wide) in paragraph at lines 4096--4097
+[]\T1/ptm/m/n/10 Function re-turns an ob-ject of class ``bi-par-tite'' to en-su
+re proper work-ing of func-tion \T1/zi4/m/n/10 plot.bipartite\T1/ptm/m/n/10 . 
+[97] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [98]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [99] [100]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [101]
+Underfull \hbox (badness 10000) in paragraph at lines 4329--4333
+
+[102] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [103]
+Overfull \hbox (0.93637pt too wide) in paragraph at lines 4437--4438
+\T1/ptm/m/n/10 prop-er-ties. Some are em-bar-rass-ingly sim-ple (such as num-be
+r of in-ter-act-ing species for each species).
+[104] [105] [106]
+Overfull \hbox (23.58801pt too wide) in paragraph at lines 4497--4499
+[]\T1/ptm/m/n/10 Shannon di-ver-sity (when us-ing `\T1/zi4/m/n/10 logbase="e"\T
+1/ptm/m/n/10 ') or per-species gen-er-al-ity/vulnerability
+
+Overfull \hbox (21.38849pt too wide) in paragraph at lines 4497--4499
+\T1/ptm/m/n/10 (when us-ing `\T1/zi4/m/n/10 logbase=2\T1/ptm/m/n/10 ') of the i
+n-ter-ac-tions of each species. See also [][]\T1/zi4/m/n/10 networklevel[][][]
+[107] [108] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[109] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [110]
+[111] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [112]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [113]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [114]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [115] [116]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [119]
+Overfull \hbox (9.74776pt too wide) in paragraph at lines 5118--5119
+[]\T1/ptm/m/n/10 Bernd Gru-ber <bernd.gruber@canberra.edu.au> & Carsten F. Dor-
+mann <carsten.dormann@biom.uni-
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [120]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [121] [122]
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (5.13792pt too wide) in paragraph at lines 5314--5315
+[]
+
+Overfull \hbox (5.38867pt too wide) in paragraph at lines 5316--5317
+[][][]\T1/zi4/m/n/10 robustness[][][] \T1/ptm/m/n/10 some-times in-ter-preted
+[123]
+Overfull \hbox (2.58801pt too wide) in paragraph at lines 5318--5319
+[]\T1/ptm/m/n/10 Failed to work for net-works with empty columns
+
+Overfull \hbox (9.68695pt too wide) in paragraph at lines 5331--5332
+[]\T1/ptm/m/n/10 This pa-per com-pares spe-cial-i-sa-tion in-dices, based
+
+Overfull \hbox (10.48772pt too wide) in paragraph at lines 5349--5350
+[]\T1/ptm/m/n/10 Some in-ter-ac-tions were lost when there were more rows than 
+columns.
+[124]
+Overfull \hbox (9.37816pt too wide) in paragraph at lines 5359--5360
+[]\T1/ptm/m/n/10 Gustavo Car-vallo has
+
+Overfull \hbox (2.41682pt too wide) in paragraph at lines 5361--5362
+[]\T1/ptm/m/n/10 bezerra2009 is a``full'' flower-visitation net-work of oil-col
+lecting bees in Brazil.
+
+Overfull \hbox (3.40817pt too wide) in paragraph at lines 5363--5364
+[]\T1/ptm/m/n/10 Betweenness and friends can-not be com-puted for fully com-
+
+Overfull \hbox (1.46814pt too wide) in paragraph at lines 5367--5368
+[]\T1/ptm/m/n/10 Robustness and weighted nest-ed-ness were wrapped
+
+Overfull \hbox (1.97824pt too wide) in paragraph at lines 5377--5378
+\T1/ptm/m/n/10 pro-vid-ing the in-spi-ra-tion and the code. This op-tion is als
+o now avail-able in [][]\T1/zi4/m/n/10 networklevel[][][]\T1/ptm/m/n/10 . 
+[125]
+Overfull \hbox (0.66762pt too wide) in paragraph at lines 5407--5408
+[]\T1/ptm/m/n/10 Fits a log-nor-mal or neg-a-tive bi-no-mial dis-tri-bu-tion to
+ the marginal
+[126]
+Overfull \hbox (2.93742pt too wide) in paragraph at lines 5435--5436
+[]\T1/ptm/m/n/10 So far, ran-dom ex-tinc-tion se-quences and
+[127]
+Overfull \hbox (3.53809pt too wide) in paragraph at lines 5489--5490
+[]\T1/ptm/m/n/10 By de-fault now sup-presses er-ror re-port-ing when
+[128]
+Overfull \hbox (2.54832pt too wide) in paragraph at lines 5525--5526
+[]\T1/ptm/m/n/10 This func-tion re-places the (now dep-re-cated) func-tion \T1/
+zi4/m/n/10 nestedness.corso
+
+Overfull \hbox (18.14723pt too wide) in paragraph at lines 5527--5528
+[]\T1/ptm/m/n/10 Another quan-ti-ta-tive pol-li-na-tion net-work from the NCEAS
+ database
+
+Overfull \hbox (15.43771pt too wide) in paragraph at lines 5540--5541
+[]\T1/ptm/m/n/10 Another pol-li-na-tion net-work from the NCEAS database (see [
+][]\T1/zi4/m/n/10 inouye1988[][][]\T1/ptm/m/n/10 ). 
+[129]
+Overfull \hbox (14.96771pt too wide) in paragraph at lines 5556--5557
+[]\T1/ptm/m/n/10 New fea-ture: ar-row=``center.up'', ar-row=``center.down'', ar
+-row=``center.both'':
+
+Overfull \hbox (14.30626pt too wide) in paragraph at lines 5590--5591
+[]\T1/ptm/m/n/10 Sometimes ad-di-tional in-for-ma-tion is avail-able and specie
+s
+[130]
+Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
+[]\T1/ptm/m/n/10 Calculates dis-crep-ancy ac-cord-ing to Brualdi & Sander-son (
+1999),
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [131]
+Underfull \hbox (badness 10000) in paragraph at lines 5663--5667
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5672--5677
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5678--5682
+
+[132] [133] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def)
+[134] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [135]
+Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
+ []\T1/zi4/m/n/9 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2])
+, as.vector(allin1[,,3]))),[] 
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def) [136] [137]
+Overfull \hbox (21.86957pt too wide) in paragraph at lines 5947--5949
+[]\T1/ptm/m/n/10 Marcelino de la Cruz \T1/zi4/m/n/10 <marcelino.delacruz@upm.es
+>\T1/ptm/m/n/10 , Juan M. Pas-tor \T1/zi4/m/n/10 <juanmanuel.pastor@upm.es>\T1/
+ptm/m/n/10 ,
+(./Rd2.ind [138] [139]
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 98.
+
+[140] [141]) (./Rd2.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.image.plot} has been referenced but does not exist, replaced by a fixed on
+e
+
+pdfTeX warning (dest): name{Rfn.t.test} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.r2dtable} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hclust} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.dist} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/us
+r/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
+/2013/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
+1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
+s/utmri8a.pfb>
+Output written on Rd2.pdf (141 pages, 504087 bytes).
+Transcript written on Rd2.log.
+Saving output to 'bipartite-manual.pdf' ...
+Done
+You may want to clean up by 'rm -rf /var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T//RtmpS21Id7/Rd2pdfb3a1486a117a'

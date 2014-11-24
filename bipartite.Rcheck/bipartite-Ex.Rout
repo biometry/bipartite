@@ -1,0 +1,3463 @@
+
+R version 3.0.3 (2014-03-06) -- "Warm Puppy"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "bipartite"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('bipartite')
+Loading required package: vegan
+Loading required package: permute
+Loading required package: lattice
+This is vegan 2.2-0
+Loading required package: sna
+sna: Tools for Social Network Analysis
+Version 2.3-2 created on 2014-01-13.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+
+ This is bipartite 2.05
+ For latest changes see versionlog in  ?"bipartite-package".
+ For citation see: citation("bipartite").
+ Have a nice time plotting and analysing two-mode networks.
+
+
+Attaching package: ‘bipartite’
+
+The following object is masked from ‘package:vegan’:
+
+    nullmodel
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("C.score")
+> ### * C.score
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: C.score
+> ### Title: Calculates the (normalised) mean number of checkerboard
+> ###   combinations (C-score) in a matrix
+> ### Aliases: C.score
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> m <- matrix(c(1,0,0, 1,1,0, 1,1,0, 0,1,1, 0,0,1), 5,3,TRUE)
+> C.score(m)
+[1] 0.5277778
+> C.score(m, normalise=FALSE)
+[1] 3
+> C.score(m, normalise=FALSE, FUN=print)
+  1 2
+2 1  
+3 6 2
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("H2fun")
+> ### * H2fun
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: H2fun
+> ### Title: Specialisation of a bipartite web.
+> ### Aliases: H2fun
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> H2fun(Safariland)
+       H2     H2min     H2max  H2uncorr 
+0.8537307 1.4510000 2.3520000 1.5820000 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ND")
+> ### * ND
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ND
+> ### Title: Normalised degree, betweenness and closeness centrality
+> ### Aliases: ND BC CC
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## example:
+> data(olesen2002flores)
+> (ndi <- ND(olesen2002flores))
+$lower
+      Azorina:vidalii    Crithmum:maritimum Solidago:sempervivens 
+           0.66666667            0.33333333            0.16666667 
+        Beta:vulgaris         Daucus:carota       Silene:vulgaris 
+           0.08333333            0.25000000            0.16666667 
+Chamomilla:suaveolens    Lotus:corniculatus      Freesia:refracta 
+           0.25000000            0.25000000            0.16666667 
+       Reseda:luteola 
+           0.16666667 
+
+$higher
+        Halictus.sp.     Sepsis.thoracica      Agrotis.ipsilon 
+                 0.6                  0.4                  0.1 
+    Bombus.ruderatus        Colias.crocea      Musca.domestica 
+                 0.3                  0.3                  0.4 
+      Apis.mellifera     Lucilia.sericata         Lasius.niger 
+                 0.3                  0.2                  0.1 
+Anothomyia.pluvialis Calliphora.vemitoria      Eristalix.tenax 
+                 0.1                  0.1                  0.1 
+
+> (cci <- CC(olesen2002flores))
+$lower
+ [1] 0.12676056 0.09859155 0.09859155 0.08450704 0.10563380 0.11267606
+ [7] 0.10563380 0.08450704 0.07746479 0.10563380
+
+$higher
+ [1] 0.10227273 0.09740260 0.05681818 0.08766234 0.08766234 0.10227273
+ [7] 0.08766234 0.07305195 0.08766234 0.06331169 0.08766234 0.06655844
+
+> (bci <- BC(olesen2002flores))
+$lower
+ [1] 0.66666667 0.03508772 0.00000000 0.00000000 0.02631579 0.11403509
+ [7] 0.02631579 0.02631579 0.00000000 0.10526316
+
+$higher
+ [1] 0.50555556 0.16111111 0.00000000 0.00000000 0.00000000 0.31111111
+ [7] 0.00000000 0.02222222 0.00000000 0.00000000 0.00000000 0.00000000
+
+> 
+> cor.test(bci[[1]], ndi[[1]], method="spear") # 0.532
+Warning in cor.test.default(bci[[1]], ndi[[1]], method = "spear") :
+  Cannot compute exact p-value with ties
+
+	Spearman's rank correlation rho
+
+data:  bci[[1]] and ndi[[1]]
+S = 77.1262, p-value = 0.113
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.5325686 
+
+> cor.test(cci[[1]], ndi[[1]], method="spear") # 0.403
+Warning in cor.test.default(cci[[1]], ndi[[1]], method = "spear") :
+  Cannot compute exact p-value with ties
+
+	Spearman's rank correlation rho
+
+data:  cci[[1]] and ndi[[1]]
+S = 98.4456, p-value = 0.2477
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.4033601 
+
+> 
+> cor.test(bci[[2]], ndi[[2]], method="spear") # 0.738
+Warning in cor.test.default(bci[[2]], ndi[[2]], method = "spear") :
+  Cannot compute exact p-value with ties
+
+	Spearman's rank correlation rho
+
+data:  bci[[2]] and ndi[[2]]
+S = 69.2698, p-value = 0.004298
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.7577977 
+
+> cor.test(cci[[2]], ndi[[2]], method="spear") # 0.827
+Warning in cor.test.default(cci[[2]], ndi[[2]], method = "spear") :
+  Cannot compute exact p-value with ties
+
+	Spearman's rank correlation rho
+
+data:  cci[[2]] and ndi[[2]]
+S = 49.4722, p-value = 0.0009052
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.8270201 
+
+> ## Not run: 
+> ##D ## PLANTS:
+> ##D bc <- bci[[1]]
+> ##D cc <- cci[[1]]
+> ##D nd <- ndi[[1]]
+> ##D # CC:
+> ##D summary(nls(cc ~ a*nd+b, start=list(a=1,b=1))) # lower RSE
+> ##D summary(nls(cc ~ c*nd^d, start=list(c=0.072,d=0.2))) 
+> ##D # BC:
+> ##D summary(nls(bc ~ a*nd+b, start=list(a=1,b=1)))
+> ##D summary(nls(bc ~ c*nd^d, start=list(c=2,d=2))) # lower RSE
+> ##D 
+> ##D ## ANIMALS:
+> ##D bc <- bci[[2]]
+> ##D cc <- cci[[2]]
+> ##D nd <- ndi[[2]]
+> ##D # CC:
+> ##D summary(nls(cc ~ a*nd+b, start=list(a=1,b=1)))  
+> ##D summary(nls(cc ~ c*nd^d, start=list(c=0.2,d=2))) # lower RSE 
+> ##D # BC:
+> ##D summary(nls(bc ~ a*nd+b, start=list(a=1,b=1)))
+> ##D summary(nls(bc ~ c*nd^d, start=list(c=0.2,d=2))) # lower RSE
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("PAC")
+> ### * PAC
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PAC
+> ### Title: Potential for Apparent Competition
+> ### Aliases: PAC
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> PAC(Safariland)
+                         Aristotelia chilensis Alstroemeria aurea
+Aristotelia chilensis              0.989649171        0.001962025
+Alstroemeria aurea                 0.007451923        0.735998144
+Schinus patagonicus                0.062500000        0.000000000
+Berberis darwinii                  0.000000000        0.673243015
+Rosa eglanteria                    0.379310345        0.228571429
+Cynanchum diemii                   0.000000000        0.000000000
+Ribes magellanicum                 0.000000000        0.085714286
+Mutisia decurrens                  0.000000000        0.888888889
+Calceolaria crenatiflora           0.000000000        0.035714286
+                         Schinus patagonicus Berberis darwinii Rosa eglanteria
+Aristotelia chilensis            0.001186709         0.0000000     0.007202095
+Alstroemeria aurea               0.000000000         0.2330457     0.016483516
+Schinus patagonicus              0.937500000         0.0000000     0.000000000
+Berberis darwinii                0.000000000         0.3069157     0.019841270
+Rosa eglanteria                  0.000000000         0.0952381     0.220689655
+Cynanchum diemii                 0.000000000         0.0000000     0.000000000
+Ribes magellanicum               0.000000000         0.0000000     0.171428571
+Mutisia decurrens                0.000000000         0.0000000     0.000000000
+Calceolaria crenatiflora         0.000000000         0.0000000     0.071428571
+                         Cynanchum diemii Ribes magellanicum Mutisia decurrens
+Aristotelia chilensis                   0         0.00000000       0.000000000
+Alstroemeria aurea                      0         0.00206044       0.004273504
+Schinus patagonicus                     0         0.00000000       0.000000000
+Berberis darwinii                       0         0.00000000       0.000000000
+Rosa eglanteria                         0         0.05714286       0.000000000
+Cynanchum diemii                        1         0.00000000       0.000000000
+Ribes magellanicum                      0         0.65714286       0.000000000
+Mutisia decurrens                       0         0.00000000       0.111111111
+Calceolaria crenatiflora                0         0.10714286       0.000000000
+                         Calceolaria crenatiflora
+Aristotelia chilensis                0.0000000000
+Alstroemeria aurea                   0.0006868132
+Schinus patagonicus                  0.0000000000
+Berberis darwinii                    0.0000000000
+Rosa eglanteria                      0.0190476190
+Cynanchum diemii                     0.0000000000
+Ribes magellanicum                   0.0857142857
+Mutisia decurrens                    0.0000000000
+Calceolaria crenatiflora             0.7857142857
+> 
+> 
+> 
+> cleanEx()
+> nameEx("PDI")
+> ### * PDI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PDI
+> ### Title: Paired Differences Index
+> ### Aliases: PDI
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> PDI(Safariland) # for pollinators
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+              1.0000000               0.9456169               0.9931818 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+              1.0000000               0.7750000               1.0000000 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+              0.8333333               1.0000000               0.9843750 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+              0.9687500               1.0000000               1.0000000 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+              1.0000000               0.9062500               0.9916667 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+              1.0000000               1.0000000               1.0000000 
+             Torymidae2               Phthiria1     Svastrides melanura 
+              1.0000000               1.0000000               1.0000000 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+              1.0000000               1.0000000               0.9583333 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+              1.0000000               1.0000000               1.0000000 
+> PDI(t(Safariland), log=TRUE) # for plants
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+               0.9504062                0.8369274                1.0000000 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+               0.9836678                0.9190740                0.9333695 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+               0.9695200                1.0000000                0.9807692 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Safariland")
+> ### * Safariland
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Safariland
+> ### Title: A pollination web from Argentina
+> ### Aliases: Safariland
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> plotweb(Safariland)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("V.ratio")
+> ### * V.ratio
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: V.ratio
+> ### Title: Calculates the variance-ratio as suggested by Schluter (1984)
+> ### Aliases: V.ratio
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> V.ratio(Safariland)
+[1] 0.5806452
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.one.mode")
+> ### * as.one.mode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.one.mode
+> ### Title: Conversion of a network matrix
+> ### Aliases: as.one.mode
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> image(Safariland)
+> image(as.one.mode(Safariland))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.tnet")
+> ### * as.tnet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.tnet
+> ### Title: Ensures that networks conform to the tnet stardards
+> ### Aliases: as.tnet
+> 
+> ### ** Examples
+> 
+> ## Load sample data
+> sample <- rbind(
++ c(1,2,4),
++ c(1,3,2),
++ c(2,1,4),
++ c(2,3,4),
++ c(2,4,1),
++ c(2,5,2),
++ c(3,1,2),
++ c(3,2,4),
++ c(4,2,1),
++ c(5,2,2),
++ c(5,6,1),
++ c(6,5,1))
+> 
+> ## Run the programme
+> as.tnet(sample)
+Warning in as.tnet(sample) :
+  Data assumed to be weighted one-mode tnet (if this is not correct, specify type)
+   i j w
+1  1 2 4
+2  1 3 2
+3  2 1 4
+4  2 3 4
+5  2 4 1
+6  2 5 2
+7  3 1 2
+8  3 2 4
+9  4 2 1
+10 5 2 2
+11 5 6 1
+12 6 5 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("barrett1987")
+> ### * barrett1987
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: barrett1987
+> ### Title: Individuals caught in a pollination web in boreal Canada.
+> ### Aliases: barrett1987
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(barrett1987)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("betweenness_w")
+> ### * betweenness_w
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: betweenness_w
+> ### Title: Betweenness centrality in a weighted network
+> ### Aliases: betweenness_w
+> 
+> ### ** Examples
+> 
+> ## Load sample data
+> sampledata <- rbind(
++ c(1,2,1),
++ c(1,3,5),
++ c(2,1,1),
++ c(2,4,6),
++ c(3,1,5),
++ c(3,4,10),
++ c(4,2,6),
++ c(4,3,10))
+> 
+> ## Run the programme
+> betweenness_w(sampledata)
+     node betweenness
+[1,]    1           0
+[2,]    2           0
+[3,]    3           2
+[4,]    4           2
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bezerra2009")
+> ### * bezerra2009
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bezerra2009
+> ### Title: Individuals observed in a flower-visitation network of
+> ###   oil-collecting bees in a Brazilian steppe.
+> ### Aliases: bezerra2009
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(bezerra2009)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bipartite-package")
+> ### * bipartite-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bipartite-package
+> ### Title: Analysis of bipartite ecological webs
+> ### Aliases: bipartite-package bipartite
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D plotweb(Safariland)
+> ##D visweb(Safariland)
+> ##D networklevel(Safariland)
+> ##D specieslevel(Safariland)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("closeness_w")
+> ### * closeness_w
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: closeness_w
+> ### Title: Closeness centrality in a weighted network
+> ### Aliases: closeness_w
+> 
+> ### ** Examples
+> 
+> ## Load sample data
+> sampledata <- rbind(
++ c(1,2,4),
++ c(1,3,2),
++ c(2,1,4),
++ c(2,3,4),
++ c(2,4,1),
++ c(2,5,2),
++ c(3,1,2),
++ c(3,2,4),
++ c(4,2,1),
++ c(5,2,2),
++ c(5,6,1),
++ c(6,5,1))
+> 
+> ## Run the programme
+> closeness_w(sampledata)
+     node  closeness n.closeness
+[1,]    1 0.09523810  0.01904762
+[2,]    2 0.12244898  0.02448980
+[3,]    3 0.09523810  0.01904762
+[4,]    4 0.05714286  0.01142857
+[5,]    5 0.09523810  0.01904762
+[6,]    6 0.05042017  0.01008403
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compart")
+> ### * compart
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compart
+> ### Title: Detects compartments
+> ### Aliases: compart
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> # make a nicely comparted web:
+> web <- matrix(0, 10,10)
+> web[1,1:3] <- 1 
+> web[2,4:5] <- 1 
+> web[3:7, 6:8] <- 1
+> web[8:10, 9:10] <- 1
+> web <- web[-c(4:5),] #oh, and make it asymmetric!
+> web <- web[,c(1:5, 9,10, 6:8)] #oh, and make it non-diagonal
+> compart(web)
+$cweb
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+[1,]   -1   -1   -1    0    0    0    0    0    0     0
+[2,]    0    0    0   -2   -2    0    0    0    0     0
+[3,]    0    0    0    0    0    0    0   -4   -4    -4
+[4,]    0    0    0    0    0    0    0   -4   -4    -4
+[5,]    0    0    0    0    0    0    0   -4   -4    -4
+[6,]    0    0    0    0    0   -3   -3    0    0     0
+[7,]    0    0    0    0    0   -3   -3    0    0     0
+[8,]    0    0    0    0    0   -3   -3    0    0     0
+
+$n.compart
+[1] 4
+
+> 
+> # or, standard, use Safariland as example:
+> data(Safariland)
+> compart(Safariland)
+$cweb
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis                     -1                0
+Alstroemeria aurea                         0               -1
+Schinus patagonicus                        0                0
+Berberis darwinii                          0               -1
+Rosa eglanteria                            0                0
+Cynanchum diemii                           0                0
+Ribes magellanicum                         0                0
+Mutisia decurrens                          0                0
+Calceolaria crenatiflora                   0                0
+                         Ruizantheda mutabilis Trichophthalma amoena
+Aristotelia chilensis                       -1                     0
+Alstroemeria aurea                           0                     0
+Schinus patagonicus                          0                     0
+Berberis darwinii                            0                     0
+Rosa eglanteria                             -1                     0
+Cynanchum diemii                             0                     0
+Ribes magellanicum                           0                    -1
+Mutisia decurrens                            0                     0
+Calceolaria crenatiflora                     0                     0
+                         Syrphus octomaculatus Manuelia gayi
+Aristotelia chilensis                        0             0
+Alstroemeria aurea                          -1            -1
+Schinus patagonicus                          0             0
+Berberis darwinii                           -1             0
+Rosa eglanteria                             -1             0
+Cynanchum diemii                             0             0
+Ribes magellanicum                           0             0
+Mutisia decurrens                            0             0
+Calceolaria crenatiflora                     0             0
+                         Allograpta.Toxomerus Trichophthalma jaffueli Phthiria
+Aristotelia chilensis                       0                       0        0
+Alstroemeria aurea                         -1                      -1       -1
+Schinus patagonicus                         0                       0        0
+Berberis darwinii                           0                       0        0
+Rosa eglanteria                            -1                       0        0
+Cynanchum diemii                            0                       0        0
+Ribes magellanicum                         -1                       0        0
+Mutisia decurrens                           0                       0       -1
+Calceolaria crenatiflora                   -1                       0        0
+                         Platycheirus1 Sapromyza.Minettia Formicidae3
+Aristotelia chilensis               -1                  0           0
+Alstroemeria aurea                  -1                 -1           0
+Schinus patagonicus                  0                  0           0
+Berberis darwinii                    0                  0           0
+Rosa eglanteria                      0                  0           0
+Cynanchum diemii                     0                  0          -2
+Ribes magellanicum                   0                  0           0
+Mutisia decurrens                    0                  0           0
+Calceolaria crenatiflora             0                  0           0
+                         Nitidulidae Staphilinidae Ichneumonidae4 Braconidae3
+Aristotelia chilensis              0             0             -1           0
+Alstroemeria aurea                 0            -1              0           0
+Schinus patagonicus                0             0             -1           0
+Berberis darwinii                  0             0              0           0
+Rosa eglanteria                    0            -1              0           0
+Cynanchum diemii                  -2             0              0          -2
+Ribes magellanicum                 0             0              0           0
+Mutisia decurrens                  0             0              0           0
+Calceolaria crenatiflora           0             0              0           0
+                         Chalepogenus caeruleus Vespula germanica Torymidae2
+Aristotelia chilensis                         0                 0          0
+Alstroemeria aurea                            0                -1          0
+Schinus patagonicus                           0                 0          0
+Berberis darwinii                             0                 0          0
+Rosa eglanteria                               0                 0          0
+Cynanchum diemii                              0                 0         -2
+Ribes magellanicum                            0                 0          0
+Mutisia decurrens                             0                 0          0
+Calceolaria crenatiflora                     -1                 0          0
+                         Phthiria1 Svastrides melanura Sphecidae Thomisidae
+Aristotelia chilensis            0                   0         0          0
+Alstroemeria aurea              -1                  -1        -1         -1
+Schinus patagonicus              0                   0         0          0
+Berberis darwinii                0                   0         0          0
+Rosa eglanteria                  0                   0         0          0
+Cynanchum diemii                 0                   0         0          0
+Ribes magellanicum               0                   0         0          0
+Mutisia decurrens                0                   0         0          0
+Calceolaria crenatiflora         0                   0         0          0
+                         Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis                       -1              0
+Alstroemeria aurea                          -1             -1
+Schinus patagonicus                          0              0
+Berberis darwinii                            0              0
+Rosa eglanteria                              0              0
+Cynanchum diemii                             0              0
+Ribes magellanicum                           0              0
+Mutisia decurrens                            0              0
+Calceolaria crenatiflora                     0              0
+                         Ruizantheda proxima Braconidae2
+Aristotelia chilensis                      0          -1
+Alstroemeria aurea                        -1           0
+Schinus patagonicus                        0           0
+Berberis darwinii                          0           0
+Rosa eglanteria                            0           0
+Cynanchum diemii                           0           0
+Ribes magellanicum                         0           0
+Mutisia decurrens                          0           0
+Calceolaria crenatiflora                   0           0
+
+$n.compart
+[1] 2
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("computeModules")
+> ### * computeModules
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: computeModules
+> ### Title: Function "computeModules"
+> ### Aliases: computeModules cM readModuleData deleteModuleData
+> ### Keywords: Methods and Generic Functions Clustering
+> 
+> ### ** Examples
+> 
+> 	## Not run: 
+> ##D 		data(small1976)
+> ##D 		(res <- computeModules(small1976)) # takes several minutes!
+> ##D 		plotModuleWeb(res)
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("czvalues")
+> ### * czvalues
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: czvalues
+> ### Title: Computes c and z for network modules
+> ### Aliases: czvalues
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(memmott1999)
+> ##D set.seed(2)
+> ##D mod <- computeModules(memmott1999, steps=1E4)
+> ##D cz <- czvalues(mod)
+> ##D plot(cz[[1]], cz[[2]], pch=16, xlab="c", ylab="z", cex=0.8, xlim=c(0,1), las=1)
+> ##D abline(v=0.62) # threshold of Olesen et al. 2007
+> ##D abline(h=2.5)   # dito
+> ##D text(cz[[1]], cz[[2]], names(cz[[1]]), pos=4, cex=0.7)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("degreedistr")
+> ### * degreedistr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: degreedistr
+> ### Title: Fits functions to cumulative degree distributions of both
+> ###   trophic levels of a network.
+> ### Aliases: degreedistr
+> ### Keywords: htest
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> degreedistr(Safariland)
+Warning in degreedistr(Safariland) :
+  Too few data levels of degrees (< 5) for higher trophic level! Fitting makes no sense! The truncated fit is the first to fail because it has one parameter more.
+$`lower level dd fits`
+                       Estimate Std. Error    Pr(>|t|)        R2       AIC
+exponential                  NA         NA          NA        NA        NA
+power law            0.67381221  0.1146697 0.009832786 0.9755018 -5.699066
+truncated power law -0.04561796  0.3727120 0.913776229 0.9941361 -8.424240
+
+$`higher level dd fits`
+                      Estimate Std. Error    Pr(>|t|)        R2        AIC
+exponential          1.1483938 0.05994161 0.002713343 0.9992035 -15.885762
+power law            1.8800729 0.25455697 0.017843259 0.9939637  -7.567168
+truncated power law -0.9360725 0.84887005 0.468922974 0.9996820 -17.249726
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dfun")
+> ### * dfun
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dfun
+> ### Title: Calculates standardised specialisation index d' (d prime) for
+> ###   each species in the lower trophic level of a bipartite network.
+> ### Aliases: dfun
+> ### Keywords: htest
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> dfun(Safariland) # gives d-values for the lower trophic level
+$dprime
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+               0.9613968                0.8043229                0.9846607 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+               0.5619798                0.5590405                1.0000000 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+               0.9036839                0.6625752                0.9106928 
+
+$d
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+               0.3441507                1.3637157                4.2573842 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+               1.5712152                2.4666257                4.0342406 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+               4.9121563                4.8327483                5.1572010 
+
+$dmin
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+            0.0007342673             0.0125286253             0.1145134022 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+            0.0545923199             0.1145134022             0.1149410690 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+            0.1423045962             0.5182275821             0.1964412529 
+
+$dmax
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+                0.357940                 1.692435                 4.321923 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+                2.753307                 4.321923                 4.034241 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+                5.420535                 7.029973                 5.643679 
+
+> # now using independent abundance estimates for higher trophic level:
+> dfun(Safariland, abuns=runif(ncol(Safariland)))
+$dprime
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+               0.4882305                0.3327047                0.3937685 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+               0.4892213                0.2856879                0.3800804 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+               0.1608563                0.1057621                0.1825210 
+
+$d
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+                3.383597                 2.306755                 2.878539 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+                3.395834                 2.156200                 2.728640 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+                2.016618                 3.080411                 2.317725 
+
+$dmin
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+             0.000131548              0.001571014              0.246850403 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+             0.010645414              0.246850403              0.152617794 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+             1.074730058              2.625095133              1.287885689 
+
+$dmax
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+                6.930191                 6.930191                 6.930191 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+                6.930191                 6.930191                 6.930191 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+                6.930191                 6.930191                 6.930191 
+
+> 
+> dfun(t(Safariland)) #gives d-values for the higher trophic level
+$dprime
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+              0.6905693               0.8581794               0.1554289 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+              0.8474066               0.3859789               0.3202602 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+              0.6482363               0.2647268               0.3916793 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+              0.0000000               0.2000132               0.8115396 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+              0.5510016               0.4092484               0.9007713 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+              0.6165417               0.9500994               0.2834746 
+             Torymidae2               Phthiria1     Svastrides melanura 
+              0.8322740               0.2000132               0.3083018 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+              0.2000132               0.2000132               0.1209998 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+              0.2834746               0.2834746               0.0000000 
+
+$d
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+              0.3579400               1.4005324               0.3594127 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+              5.4205350               1.7292252               1.6924348 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+              3.3289034               1.6924348               1.9366625 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+              0.1244365               1.6924348               4.0342406 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+              4.0342406               2.1364501               3.8403821 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+              4.0342406               5.6436786               1.6924348 
+             Torymidae2               Phthiria1     Svastrides melanura 
+              4.0342406               1.6924348               1.6924348 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+              1.6924348               1.6924348               0.7964760 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+              1.6924348               1.6924348               0.3579400 
+
+$dmin
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+           0.0002194042            0.0010336771            0.0066269790 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+           0.3320402186            0.0560640095            0.0944657107 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+           0.0944657107            0.1662574199            0.0719606927 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+           0.1244365159            0.3579399662            0.0885507380 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+           0.3579399662            0.0944657107            0.0549492495 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+           0.3320402186            0.1662574199            0.1292285381 
+             Torymidae2               Phthiria1     Svastrides melanura 
+           0.0719606927            0.3579399662            0.1120203531 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+           0.3579399662            0.3579399662            0.1292285381 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+           0.1292285381            0.1292285381            0.3579399662 
+
+$dmax
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+              0.5182276               1.6318102               2.2763827 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+              6.3368257               4.3909156               5.0840628 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+              5.0840628               5.9313606               4.8327483 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+              5.4205350               7.0299729               4.9505314 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+              7.0299729               5.0840628               4.2573842 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+              6.3368257               5.9313606               5.6436786 
+             Torymidae2               Phthiria1     Svastrides melanura 
+              4.8327483               7.0299729               5.2382134 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+              7.0299729               7.0299729               5.6436786 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+              5.6436786               5.6436786               7.0299729 
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("discrepancy")
+> ### * discrepancy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: discrepancy
+> ### Title: Calculates discrepancy of a matrix
+> ### Aliases: discrepancy
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D #nulls <- replicate(100, discrepancy(commsimulator(Safariland, 
+> ##D 		method="quasiswap")))
+> ##D nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 100)
+> ##D null.res <- apply(nulls, 3, discrepancy)
+> ##D hist(null.res)
+> ##D obs <- discrepancy(Safariland)
+> ##D abline(v=obs, lwd=3, col="grey")
+> ##D c("p value"=min(sum(null.res>obs), sum(null.res<obs))/length(null.res))
+> ##D # calculate Brualdi & Sanderson's Na-value (i.e. the z-score):
+> ##D c("N_a"=(unname(obs)-mean(null.res))/sd(null.res))
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("elberling1999")
+> ### * elberling1999
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: elberling1999
+> ### Title: No. of visits in a pollination web of arctic-alpine Sweden
+> ### Aliases: elberling1999
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(barrett1987)
+> ## maybe str(barrett1987) ; plot(barrett1987) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("empty")
+> ### * empty
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: empty
+> ### Title: Deletes empty rows and columns from a matrix.
+> ### Aliases: empty
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> web <- Safariland
+> web[,5] <- 0
+> empty(web, count=TRUE)
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis                    673                0
+Alstroemeria aurea                         0              154
+Schinus patagonicus                        0                0
+Berberis darwinii                          0               67
+Rosa eglanteria                            0                0
+Cynanchum diemii                           0                0
+Ribes magellanicum                         0                0
+Mutisia decurrens                          0                0
+Calceolaria crenatiflora                   0                0
+                         Ruizantheda mutabilis Trichophthalma amoena
+Aristotelia chilensis                      110                     0
+Alstroemeria aurea                           0                     0
+Schinus patagonicus                          0                     0
+Berberis darwinii                            0                     0
+Rosa eglanteria                              6                     0
+Cynanchum diemii                             0                     0
+Ribes magellanicum                           0                     2
+Mutisia decurrens                            0                     0
+Calceolaria crenatiflora                     0                     0
+                         Manuelia gayi Allograpta.Toxomerus
+Aristotelia chilensis                0                    0
+Alstroemeria aurea                   7                    1
+Schinus patagonicus                  0                    0
+Berberis darwinii                    0                    0
+Rosa eglanteria                      0                    2
+Cynanchum diemii                     0                    0
+Ribes magellanicum                   0                    3
+Mutisia decurrens                    0                    0
+Calceolaria crenatiflora             0                    1
+                         Trichophthalma jaffueli Phthiria Platycheirus1
+Aristotelia chilensis                          0        0             4
+Alstroemeria aurea                             3        8             1
+Schinus patagonicus                            0        0             0
+Berberis darwinii                              0        0             0
+Rosa eglanteria                                0        0             0
+Cynanchum diemii                               0        0             0
+Ribes magellanicum                             0        0             0
+Mutisia decurrens                              0        1             0
+Calceolaria crenatiflora                       0        0             0
+                         Sapromyza.Minettia Formicidae3 Nitidulidae
+Aristotelia chilensis                     0           0           0
+Alstroemeria aurea                        1           0           0
+Schinus patagonicus                       0           0           0
+Berberis darwinii                         0           0           0
+Rosa eglanteria                           0           0           0
+Cynanchum diemii                          0           8           1
+Ribes magellanicum                        0           0           0
+Mutisia decurrens                         0           0           0
+Calceolaria crenatiflora                  0           0           0
+                         Staphilinidae Ichneumonidae4 Braconidae3
+Aristotelia chilensis                0              1           0
+Alstroemeria aurea                   4              0           0
+Schinus patagonicus                  0             15           0
+Berberis darwinii                    0              0           0
+Rosa eglanteria                      3              0           0
+Cynanchum diemii                     0              0           2
+Ribes magellanicum                   0              0           0
+Mutisia decurrens                    0              0           0
+Calceolaria crenatiflora             0              0           0
+                         Chalepogenus caeruleus Vespula germanica Torymidae2
+Aristotelia chilensis                         0                 0          0
+Alstroemeria aurea                            0                 4          0
+Schinus patagonicus                           0                 0          0
+Berberis darwinii                             0                 0          0
+Rosa eglanteria                               0                 0          0
+Cynanchum diemii                              0                 0          9
+Ribes magellanicum                            0                 0          0
+Mutisia decurrens                             0                 0          0
+Calceolaria crenatiflora                      3                 0          0
+                         Phthiria1 Svastrides melanura Sphecidae Thomisidae
+Aristotelia chilensis            0                   0         0          0
+Alstroemeria aurea               1                   6         1          1
+Schinus patagonicus              0                   0         0          0
+Berberis darwinii                0                   0         0          0
+Rosa eglanteria                  0                   0         0          0
+Cynanchum diemii                 0                   0         0          0
+Ribes magellanicum               0                   0         0          0
+Mutisia decurrens                0                   0         0          0
+Calceolaria crenatiflora         0                   0         0          0
+                         Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis                        1              0
+Alstroemeria aurea                           3              4
+Schinus patagonicus                          0              0
+Berberis darwinii                            0              0
+Rosa eglanteria                              0              0
+Cynanchum diemii                             0              0
+Ribes magellanicum                           0              0
+Mutisia decurrens                            0              0
+Calceolaria crenatiflora                     0              0
+                         Ruizantheda proxima Braconidae2
+Aristotelia chilensis                      0           1
+Alstroemeria aurea                         4           0
+Schinus patagonicus                        0           0
+Berberis darwinii                          0           0
+Rosa eglanteria                            0           0
+Cynanchum diemii                           0           0
+Ribes magellanicum                         0           0
+Mutisia decurrens                          0           0
+Calceolaria crenatiflora                   0           0
+attr(,"empty")
+   empty rows empty columns 
+            0             1 
+> attr(empty(web), "empty")
+NULL
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("endpoint")
+> ### * endpoint
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: endpoint
+> ### Title: Computes end-point degrees for a bipartite network
+> ### Aliases: endpoint
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> # reproduces the example of Gitarranz et al. (2011):
+> data(memmott1999)
+> ends <- endpoint(memmott1999)
+> weights.mean <- tapply(memmott1999, ends, mean)
+> ends.weights <- tapply(ends, ends, mean)
+> plot(weights.mean, ends.weights, log="xy", pch=16)
+Warning in xy.coords(x, y, xlabel, ylabel, log) :
+  1 x value <= 0 omitted from logarithmic plot
+Warning in xy.coords(x, y, xlabel, ylabel, log) :
+  1 y value <= 0 omitted from logarithmic plot
+> 
+> 
+> 
+> cleanEx()
+> nameEx("extinction")
+> ### * extinction
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extinction
+> ### Title: Simulates extinction of a species from a bipartite network
+> ### Aliases: extinction
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 	data(Safariland)
+> ##D 	(w <- extinction(Safariland, participant="lower", method="abun"))
+> ##D 	empty(w, count=TRUE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fc")
+> ### * fc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fc
+> ### Title: Calculates the functional complementarity for the rows of a web
+> ### Aliases: fd fc
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> fc(Safariland)    
+[1] 1627.119
+> fc(t(Safariland), dist="canberra", method="complete")
+[1] 136.3638
+> 
+> 
+> 
+> cleanEx()
+> nameEx("frame2webs")
+> ### * frame2webs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: frame2webs
+> ### Title: Converts a table of observations into a network matrix
+> ### Aliases: frame2webs
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 
++ lower = c("plant1","plant2","plant1","plant2","plant3","plant4"), 
++ webID = c("meadow","meadow","meadow","meadow","bog","bog"), freq=c(5,1,1,1,3,7))
+> frame2webs(testdata,type.out="array")
+, , webID = bog
+
+        higher
+lower    bee1 bee2 bee3
+  plant1    0    0    0
+  plant2    0    0    0
+  plant3    3    0    0
+  plant4    0    0    7
+
+, , webID = meadow
+
+        higher
+lower    bee1 bee2 bee3
+  plant1    6    0    0
+  plant2    1    1    0
+  plant3    0    0    0
+  plant4    0    0    0
+
+> sapply(frame2webs(testdata,type.out="list"), networklevel, index=c("connectance", "C score"))
+            bog meadow
+connectance 0.5   0.75
+C.score.HL  1.0   0.00
+C.score.LL  1.0   0.00
+> 
+> 
+> 
+> cleanEx()
+> nameEx("genweb")
+> ### * genweb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: genweb
+> ### Title: Generate a random bipartite web
+> ### Aliases: genweb
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> genweb()
+Warning in sample.int(length(x), size, replace, prob) :
+  Walker's alias method used: results are different from R < 2.2.0
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+ [1,]    0    0    0    0    0    0    0    1    0     0     0     0     1
+ [2,]    0    0    0    1    0    0    0    0    1     0     1     0     2
+ [3,]    2    1    1    4    2    2    5    0    2     3    22     1    23
+ [4,]    0    0    0    0    0    0    0    0    0     0     0     0     0
+ [5,]    0    0    0    0    0    0    0    0    0     0     0     0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0     0     0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0     0     0     0
+ [8,]    0    0    0    1    0    0    0    0    0     0     0     0     0
+ [9,]    0    0    0    0    0    0    0    0    0     1     3     0     1
+[10,]    0    0    0    0    0    0    0    0    0     0     2     0     0
+      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0     3     0     0     0     2     0     0     0     1     0     0
+ [2,]     0     0     0     0     1     0     0     0     0     0     1     0
+ [3,]     1     8     5     7    25    11     8     0     4     4    25    14
+ [4,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [5,]     0     0     0     0     0     0     2     1     0     0     0     0
+ [6,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [7,]     0     0     0     0     0     0     0     0     0     0     0     1
+ [8,]     0     0     0     0     0     0     0     0     0     0     1     1
+ [9,]     0     0     0     0     2     0     0     0     1     0     0     2
+[10,]     0     0     0     0     0     0     1     0     0     0     0     0
+      [,26] [,27] [,28] [,29] [,30]
+ [1,]     0     1     1     5     0
+ [2,]     0     1     4     5     1
+ [3,]    10    26    29   256     8
+ [4,]     0     0     0     3     0
+ [5,]     0     0     0     8     0
+ [6,]     0     1     0     2     0
+ [7,]     0     1     0     2     0
+ [8,]     1     0     0     4     0
+ [9,]     0     1     3    12     0
+[10,]     0     0     0     0     0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("grouplevel")
+> ### * grouplevel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: grouplevel
+> ### Title: Analysis of bipartite webs at the level of each of the two
+> ###   levels (groups) of the network
+> ### Aliases: grouplevel one.grouplevel
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D grouplevel(Safariland)
+> ##D grouplevel(Safariland, level="lower", weighted=FALSE) #excludes degree distribution fits
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("inouye1988")
+> ### * inouye1988
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inouye1988
+> ### Title: A pollination network from the Snowy Mountains of New South
+> ###   Wales, Australia
+> ### Aliases: inouye1988
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(inouye1988)
+> plotweb(inouye1988)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("junker2013")
+> ### * junker2013
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: junker2013
+> ### Title: Flower visitation network
+> ### Aliases: junker2013
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(junker2013)
+> ## Not run: plotweb(junker2013)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("kato1990")
+> ### * kato1990
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: kato1990
+> ### Title: No. of individuals caught in a pollination web of a Japanese
+> ###   beech forest
+> ### Aliases: kato1990
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(kato1990)
+> ## maybe str(kato1990) ; plot(kato1990) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("kevan1970")
+> ### * kevan1970
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: kevan1970
+> ### Title: A pollination network from Northern Ellesmere Island, Canada
+> ### Aliases: kevan1970
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(kevan1970)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("linklevel")
+> ### * linklevel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: linklevel
+> ### Title: Indices of a bipartite network at the link level
+> ### Aliases: linklevel
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> linklevel(Safariland)
+$`HL dependence`
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis                      1        0.0000000
+Alstroemeria aurea                         0        0.6968326
+Schinus patagonicus                        0        0.0000000
+Berberis darwinii                          0        0.3031674
+Rosa eglanteria                            0        0.0000000
+Cynanchum diemii                           0        0.0000000
+Ribes magellanicum                         0        0.0000000
+Mutisia decurrens                          0        0.0000000
+Calceolaria crenatiflora                   0        0.0000000
+                         Ruizantheda mutabilis Trichophthalma amoena
+Aristotelia chilensis               0.94827586                     0
+Alstroemeria aurea                  0.00000000                     0
+Schinus patagonicus                 0.00000000                     0
+Berberis darwinii                   0.00000000                     0
+Rosa eglanteria                     0.05172414                     0
+Cynanchum diemii                    0.00000000                     0
+Ribes magellanicum                  0.00000000                     1
+Mutisia decurrens                   0.00000000                     0
+Calceolaria crenatiflora            0.00000000                     0
+                         Syrphus octomaculatus Manuelia gayi
+Aristotelia chilensis                0.0000000             0
+Alstroemeria aurea                   0.3571429             1
+Schinus patagonicus                  0.0000000             0
+Berberis darwinii                    0.3571429             0
+Rosa eglanteria                      0.2857143             0
+Cynanchum diemii                     0.0000000             0
+Ribes magellanicum                   0.0000000             0
+Mutisia decurrens                    0.0000000             0
+Calceolaria crenatiflora             0.0000000             0
+                         Allograpta.Toxomerus Trichophthalma jaffueli  Phthiria
+Aristotelia chilensis               0.0000000                       0 0.0000000
+Alstroemeria aurea                  0.1428571                       1 0.8888889
+Schinus patagonicus                 0.0000000                       0 0.0000000
+Berberis darwinii                   0.0000000                       0 0.0000000
+Rosa eglanteria                     0.2857143                       0 0.0000000
+Cynanchum diemii                    0.0000000                       0 0.0000000
+Ribes magellanicum                  0.4285714                       0 0.0000000
+Mutisia decurrens                   0.0000000                       0 0.1111111
+Calceolaria crenatiflora            0.1428571                       0 0.0000000
+                         Platycheirus1 Sapromyza.Minettia Formicidae3
+Aristotelia chilensis              0.8                  0           0
+Alstroemeria aurea                 0.2                  1           0
+Schinus patagonicus                0.0                  0           0
+Berberis darwinii                  0.0                  0           0
+Rosa eglanteria                    0.0                  0           0
+Cynanchum diemii                   0.0                  0           1
+Ribes magellanicum                 0.0                  0           0
+Mutisia decurrens                  0.0                  0           0
+Calceolaria crenatiflora           0.0                  0           0
+                         Nitidulidae Staphilinidae Ichneumonidae4 Braconidae3
+Aristotelia chilensis              0     0.0000000         0.0625           0
+Alstroemeria aurea                 0     0.5714286         0.0000           0
+Schinus patagonicus                0     0.0000000         0.9375           0
+Berberis darwinii                  0     0.0000000         0.0000           0
+Rosa eglanteria                    0     0.4285714         0.0000           0
+Cynanchum diemii                   1     0.0000000         0.0000           1
+Ribes magellanicum                 0     0.0000000         0.0000           0
+Mutisia decurrens                  0     0.0000000         0.0000           0
+Calceolaria crenatiflora           0     0.0000000         0.0000           0
+                         Chalepogenus caeruleus Vespula germanica Torymidae2
+Aristotelia chilensis                         0                 0          0
+Alstroemeria aurea                            0                 1          0
+Schinus patagonicus                           0                 0          0
+Berberis darwinii                             0                 0          0
+Rosa eglanteria                               0                 0          0
+Cynanchum diemii                              0                 0          1
+Ribes magellanicum                            0                 0          0
+Mutisia decurrens                             0                 0          0
+Calceolaria crenatiflora                      1                 0          0
+                         Phthiria1 Svastrides melanura Sphecidae Thomisidae
+Aristotelia chilensis            0                   0         0          0
+Alstroemeria aurea               1                   1         1          1
+Schinus patagonicus              0                   0         0          0
+Berberis darwinii                0                   0         0          0
+Rosa eglanteria                  0                   0         0          0
+Cynanchum diemii                 0                   0         0          0
+Ribes magellanicum               0                   0         0          0
+Mutisia decurrens                0                   0         0          0
+Calceolaria crenatiflora         0                   0         0          0
+                         Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis                     0.25              0
+Alstroemeria aurea                        0.75              1
+Schinus patagonicus                       0.00              0
+Berberis darwinii                         0.00              0
+Rosa eglanteria                           0.00              0
+Cynanchum diemii                          0.00              0
+Ribes magellanicum                        0.00              0
+Mutisia decurrens                         0.00              0
+Calceolaria crenatiflora                  0.00              0
+                         Ruizantheda proxima Braconidae2
+Aristotelia chilensis                      0           1
+Alstroemeria aurea                         1           0
+Schinus patagonicus                        0           0
+Berberis darwinii                          0           0
+Rosa eglanteria                            0           0
+Cynanchum diemii                           0           0
+Ribes magellanicum                         0           0
+Mutisia decurrens                          0           0
+Calceolaria crenatiflora                   0           0
+
+$`LL dependence`
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis              0.8518987        0.0000000
+Alstroemeria aurea                 0.0000000        0.7403846
+Schinus patagonicus                0.0000000        0.0000000
+Berberis darwinii                  0.0000000        0.9305556
+Rosa eglanteria                    0.0000000        0.0000000
+Cynanchum diemii                   0.0000000        0.0000000
+Ribes magellanicum                 0.0000000        0.0000000
+Mutisia decurrens                  0.0000000        0.0000000
+Calceolaria crenatiflora           0.0000000        0.0000000
+                         Ruizantheda mutabilis Trichophthalma amoena
+Aristotelia chilensis                0.1392405                   0.0
+Alstroemeria aurea                   0.0000000                   0.0
+Schinus patagonicus                  0.0000000                   0.0
+Berberis darwinii                    0.0000000                   0.0
+Rosa eglanteria                      0.4000000                   0.0
+Cynanchum diemii                     0.0000000                   0.0
+Ribes magellanicum                   0.0000000                   0.4
+Mutisia decurrens                    0.0000000                   0.0
+Calceolaria crenatiflora             0.0000000                   0.0
+                         Syrphus octomaculatus Manuelia gayi
+Aristotelia chilensis               0.00000000    0.00000000
+Alstroemeria aurea                  0.02403846    0.03365385
+Schinus patagonicus                 0.00000000    0.00000000
+Berberis darwinii                   0.06944444    0.00000000
+Rosa eglanteria                     0.26666667    0.00000000
+Cynanchum diemii                    0.00000000    0.00000000
+Ribes magellanicum                  0.00000000    0.00000000
+Mutisia decurrens                   0.00000000    0.00000000
+Calceolaria crenatiflora            0.00000000    0.00000000
+                         Allograpta.Toxomerus Trichophthalma jaffueli
+Aristotelia chilensis             0.000000000              0.00000000
+Alstroemeria aurea                0.004807692              0.01442308
+Schinus patagonicus               0.000000000              0.00000000
+Berberis darwinii                 0.000000000              0.00000000
+Rosa eglanteria                   0.133333333              0.00000000
+Cynanchum diemii                  0.000000000              0.00000000
+Ribes magellanicum                0.600000000              0.00000000
+Mutisia decurrens                 0.000000000              0.00000000
+Calceolaria crenatiflora          0.250000000              0.00000000
+                           Phthiria Platycheirus1 Sapromyza.Minettia
+Aristotelia chilensis    0.00000000   0.005063291        0.000000000
+Alstroemeria aurea       0.03846154   0.004807692        0.004807692
+Schinus patagonicus      0.00000000   0.000000000        0.000000000
+Berberis darwinii        0.00000000   0.000000000        0.000000000
+Rosa eglanteria          0.00000000   0.000000000        0.000000000
+Cynanchum diemii         0.00000000   0.000000000        0.000000000
+Ribes magellanicum       0.00000000   0.000000000        0.000000000
+Mutisia decurrens        1.00000000   0.000000000        0.000000000
+Calceolaria crenatiflora 0.00000000   0.000000000        0.000000000
+                         Formicidae3 Nitidulidae Staphilinidae Ichneumonidae4
+Aristotelia chilensis            0.0        0.00    0.00000000    0.001265823
+Alstroemeria aurea               0.0        0.00    0.01923077    0.000000000
+Schinus patagonicus              0.0        0.00    0.00000000    1.000000000
+Berberis darwinii                0.0        0.00    0.00000000    0.000000000
+Rosa eglanteria                  0.0        0.00    0.20000000    0.000000000
+Cynanchum diemii                 0.4        0.05    0.00000000    0.000000000
+Ribes magellanicum               0.0        0.00    0.00000000    0.000000000
+Mutisia decurrens                0.0        0.00    0.00000000    0.000000000
+Calceolaria crenatiflora         0.0        0.00    0.00000000    0.000000000
+                         Braconidae3 Chalepogenus caeruleus Vespula germanica
+Aristotelia chilensis            0.0                   0.00        0.00000000
+Alstroemeria aurea               0.0                   0.00        0.01923077
+Schinus patagonicus              0.0                   0.00        0.00000000
+Berberis darwinii                0.0                   0.00        0.00000000
+Rosa eglanteria                  0.0                   0.00        0.00000000
+Cynanchum diemii                 0.1                   0.00        0.00000000
+Ribes magellanicum               0.0                   0.00        0.00000000
+Mutisia decurrens                0.0                   0.00        0.00000000
+Calceolaria crenatiflora         0.0                   0.75        0.00000000
+                         Torymidae2   Phthiria1 Svastrides melanura   Sphecidae
+Aristotelia chilensis          0.00 0.000000000          0.00000000 0.000000000
+Alstroemeria aurea             0.00 0.004807692          0.02884615 0.004807692
+Schinus patagonicus            0.00 0.000000000          0.00000000 0.000000000
+Berberis darwinii              0.00 0.000000000          0.00000000 0.000000000
+Rosa eglanteria                0.00 0.000000000          0.00000000 0.000000000
+Cynanchum diemii               0.45 0.000000000          0.00000000 0.000000000
+Ribes magellanicum             0.00 0.000000000          0.00000000 0.000000000
+Mutisia decurrens              0.00 0.000000000          0.00000000 0.000000000
+Calceolaria crenatiflora       0.00 0.000000000          0.00000000 0.000000000
+                          Thomisidae Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis    0.000000000           0.001265823     0.00000000
+Alstroemeria aurea       0.004807692           0.014423077     0.01923077
+Schinus patagonicus      0.000000000           0.000000000     0.00000000
+Berberis darwinii        0.000000000           0.000000000     0.00000000
+Rosa eglanteria          0.000000000           0.000000000     0.00000000
+Cynanchum diemii         0.000000000           0.000000000     0.00000000
+Ribes magellanicum       0.000000000           0.000000000     0.00000000
+Mutisia decurrens        0.000000000           0.000000000     0.00000000
+Calceolaria crenatiflora 0.000000000           0.000000000     0.00000000
+                         Ruizantheda proxima Braconidae2
+Aristotelia chilensis             0.00000000 0.001265823
+Alstroemeria aurea                0.01923077 0.000000000
+Schinus patagonicus               0.00000000 0.000000000
+Berberis darwinii                 0.00000000 0.000000000
+Rosa eglanteria                   0.00000000 0.000000000
+Cynanchum diemii                  0.00000000 0.000000000
+Ribes magellanicum                0.00000000 0.000000000
+Mutisia decurrens                 0.00000000 0.000000000
+Calceolaria crenatiflora          0.00000000 0.000000000
+
+$endpoint
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis                      6                0
+Alstroemeria aurea                         0               34
+Schinus patagonicus                        0                0
+Berberis darwinii                          0                4
+Rosa eglanteria                            0                0
+Cynanchum diemii                           0                0
+Ribes magellanicum                         0                0
+Mutisia decurrens                          0                0
+Calceolaria crenatiflora                   0                0
+                         Ruizantheda mutabilis Trichophthalma amoena
+Aristotelia chilensis                       12                     0
+Alstroemeria aurea                           0                     0
+Schinus patagonicus                          0                     0
+Berberis darwinii                            0                     0
+Rosa eglanteria                              8                     0
+Cynanchum diemii                             0                     0
+Ribes magellanicum                           0                     2
+Mutisia decurrens                            0                     0
+Calceolaria crenatiflora                     0                     0
+                         Syrphus octomaculatus Manuelia gayi
+Aristotelia chilensis                        0             0
+Alstroemeria aurea                          51            17
+Schinus patagonicus                          0             0
+Berberis darwinii                            6             0
+Rosa eglanteria                             12             0
+Cynanchum diemii                             0             0
+Ribes magellanicum                           0             0
+Mutisia decurrens                            0             0
+Calceolaria crenatiflora                     0             0
+                         Allograpta.Toxomerus Trichophthalma jaffueli Phthiria
+Aristotelia chilensis                       0                       0        0
+Alstroemeria aurea                         68                      17       34
+Schinus patagonicus                         0                       0        0
+Berberis darwinii                           0                       0        0
+Rosa eglanteria                            16                       0        0
+Cynanchum diemii                            0                       0        0
+Ribes magellanicum                          8                       0        0
+Mutisia decurrens                           0                       0        2
+Calceolaria crenatiflora                    8                       0        0
+                         Platycheirus1 Sapromyza.Minettia Formicidae3
+Aristotelia chilensis               12                  0           0
+Alstroemeria aurea                  34                 17           0
+Schinus patagonicus                  0                  0           0
+Berberis darwinii                    0                  0           0
+Rosa eglanteria                      0                  0           0
+Cynanchum diemii                     0                  0           4
+Ribes magellanicum                   0                  0           0
+Mutisia decurrens                    0                  0           0
+Calceolaria crenatiflora             0                  0           0
+                         Nitidulidae Staphilinidae Ichneumonidae4 Braconidae3
+Aristotelia chilensis              0             0             12           0
+Alstroemeria aurea                 0            34              0           0
+Schinus patagonicus                0             0              2           0
+Berberis darwinii                  0             0              0           0
+Rosa eglanteria                    0             8              0           0
+Cynanchum diemii                   4             0              0           4
+Ribes magellanicum                 0             0              0           0
+Mutisia decurrens                  0             0              0           0
+Calceolaria crenatiflora           0             0              0           0
+                         Chalepogenus caeruleus Vespula germanica Torymidae2
+Aristotelia chilensis                         0                 0          0
+Alstroemeria aurea                            0                17          0
+Schinus patagonicus                           0                 0          0
+Berberis darwinii                             0                 0          0
+Rosa eglanteria                               0                 0          0
+Cynanchum diemii                              0                 0          4
+Ribes magellanicum                            0                 0          0
+Mutisia decurrens                             0                 0          0
+Calceolaria crenatiflora                      2                 0          0
+                         Phthiria1 Svastrides melanura Sphecidae Thomisidae
+Aristotelia chilensis            0                   0         0          0
+Alstroemeria aurea              17                  17        17         17
+Schinus patagonicus              0                   0         0          0
+Berberis darwinii                0                   0         0          0
+Rosa eglanteria                  0                   0         0          0
+Cynanchum diemii                 0                   0         0          0
+Ribes magellanicum               0                   0         0          0
+Mutisia decurrens                0                   0         0          0
+Calceolaria crenatiflora         0                   0         0          0
+                         Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis                       12              0
+Alstroemeria aurea                          34             17
+Schinus patagonicus                          0              0
+Berberis darwinii                            0              0
+Rosa eglanteria                              0              0
+Cynanchum diemii                             0              0
+Ribes magellanicum                           0              0
+Mutisia decurrens                            0              0
+Calceolaria crenatiflora                     0              0
+                         Ruizantheda proxima Braconidae2
+Aristotelia chilensis                      0           6
+Alstroemeria aurea                        17           0
+Schinus patagonicus                        0           0
+Berberis darwinii                          0           0
+Rosa eglanteria                            0           0
+Cynanchum diemii                           0           0
+Ribes magellanicum                         0           0
+Mutisia decurrens                          0           0
+Calceolaria crenatiflora                   0           0
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("listModuleInformation")
+> ### * listModuleInformation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: listModuleInformation
+> ### Title: Function "listModuleInformation"
+> ### Aliases: listModuleInformation
+> ### Keywords: Methods and Generic Functions Clustering
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(small1976)
+> ##D 
+> ##D moduleWebObject = computeModules(small1976);
+> ##D moduleList = listModuleInformation(moduleWebObject);
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("memmott1999")
+> ### * memmott1999
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: memmott1999
+> ### Title: Flower visitation network from a meadow near Bristol, UK
+> ### Aliases: memmott1999
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(memmott1999)
+> ## maybe str(memmott1999) ; plot(memmott1999) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mgen")
+> ### * mgen
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mgen
+> ### Title: Generate simulated network according to a given probability
+> ###   matrix
+> ### Aliases: mgen
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ## Generate simulated matrix from homogeneous probability matrix
+> ##D probmat <- matrix(1/100, 10, 10)
+> ##D mgen(web=probmat, n=100)
+> ##D 
+> ##D ## Generate binary matrix with probability proportional to degree
+> ##D ## of an observed binary matrix m
+> ##D obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)
+> ##D rs <- rowSums(obs.mat)
+> ##D cs <- colSums(obs.mat)
+> ##D web <- rs ##D 
+> ##D web <- web/sum(web)
+> ##D n = sum(obs.mat)
+> ##D mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums
+> ##D mgen(web, n, keep.species=TRUE, rep.cell=FALSE) # Not allowing zero marginal sums
+> ##D 
+> ##D ## Generate quantitative matrix with probability proportional
+> ##D ## to interaction frequency in an observed matrix m (which is the default of 'autotransform'):
+> ##D mgen(mosquin1967, keep.species=FALSE, rep.cell=TRUE) # Allowing zero marginal sums
+> ##D mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE) # Not allowing zero marginal sums
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("moduleWeb-class")
+> ### * moduleWeb-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleWeb-class
+> ### Title: Class "moduleWeb"
+> ### Aliases: moduleWeb-class
+> ### Keywords: classes modules moduleWeb modularity
+> 
+> ### ** Examples
+> 
+> showClass("moduleWeb")
+Class "moduleWeb" [package "bipartite"]
+
+Slots:
+                                                                              
+Name:  originalWeb   moduleWeb      orderA      orderB     modules  likelihood
+Class:      matrix      matrix      vector      vector      matrix     numeric
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mosquin1967")
+> ### * mosquin1967
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mosquin1967
+> ### Title: Flower visitation network from Melville Island, Northwest
+> ###   Territories, Canada
+> ### Aliases: mosquin1967
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(mosquin1967)
+> ## maybe str(mosquin1967) ; plot(mosquin1967) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("motten1982")
+> ### * motten1982
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: motten1982
+> ### Title: A spring flower visitation network from North Carolina, USA
+> ### Aliases: motten1982
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(motten1982)
+> ## maybe str(motten1982) ; plot(motten1982) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nested")
+> ### * nested
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nested
+> ### Title: Calculates any of several measures of nestedness
+> ### Aliases: nested
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D nested(Safariland, "ALL")
+> ##D nested(Safariland, "ALL", rescale=TRUE)
+> ##D # illustration that non-normalised C.score and checker are the same:
+> ##D nested(Safariland, c("C.score", "checker"), normalise=FALSE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nestedcontribution")
+> ### * nestedcontribution
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nestedcontribution
+> ### Title: Calculates the per-species contribution to nestedness (z-score
+> ###   relative to null model)
+> ### Aliases: nestedcontribution
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+>   data(Safariland)
+>   ## Not run: 
+> ##D     nestedcontribution(Safariland)
+> ##D   
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nestedness")
+> ### * nestedness
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nestedness
+> ### Title: Calculates nestedness temperature of presence/absence matrices
+> ### Aliases: nestedness
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 	## Not run: 
+> ##D 	data(vazarr)
+> ##D 	nestedness(vazarr) # null models are calculated
+> ##D 	# no null models, much faster for bigger matrices:
+> ##D 	nestedness(vazarr, null.models=FALSE) 
+> ##D 	nestedness(vazarr, n.nulls=300, n.gen=300)
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nestedrank")
+> ### * nestedrank
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nestedrank
+> ### Title: Calculates the rank of a species in a matrix sorted for maximum
+> ###   nestedness
+> ### Aliases: nestedrank
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ranks <- sapply(c("nodf", "binmatnest", "wine", "sort"), function(x) 
+> ##D   nestedrank(Safariland, method=x)[[2]])
+> ##D cor(ranks) # high correlation between sort and other indicate that only abundance matters
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("networklevel")
+> ### * networklevel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: networklevel
+> ### Title: Analysis of bipartite webs at the level of the entire network
+> ### Aliases: networklevel .networklevel
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D networklevel(Safariland)
+> ##D networklevel(Safariland, index="ALLBUTDD") #excludes degree distribution fits
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nodespec")
+> ### * nodespec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nodespec
+> ### Title: Calculates the node-based specialisation index
+> ### Aliases: nodespec
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> nodespec(Safariland, inf.replace=Inf)
+$lower
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+                   1.875                    1.500                    2.625 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+                   2.125                    1.625                    4.000 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+                   2.000                    2.250                    2.000 
+
+$higher
+    Policana albopilosa        Bombus dahlbomii   Ruizantheda mutabilis 
+               2.192308                1.692308                2.000000 
+  Trichophthalma amoena   Syrphus octomaculatus           Manuelia gayi 
+               2.384615                1.653846                1.692308 
+   Allograpta.Toxomerus Trichophthalma jaffueli                Phthiria 
+               1.576923                1.692308                1.692308 
+          Platycheirus1      Sapromyza.Minettia             Formicidae3 
+               1.538462                1.692308                3.653846 
+            Nitidulidae           Staphilinidae          Ichneumonidae4 
+               3.653846                1.653846                2.192308 
+            Braconidae3  Chalepogenus caeruleus       Vespula germanica 
+               3.653846                2.384615                1.692308 
+             Torymidae2               Phthiria1     Svastrides melanura 
+               3.653846                1.692308                1.692308 
+              Sphecidae              Thomisidae   Corynura prothysteres 
+               1.692308                1.692308                1.538462 
+         Ichneumonidae2     Ruizantheda proxima             Braconidae2 
+               1.692308                1.692308                2.192308 
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("npartite")
+> ### * npartite
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: npartite
+> ### Title: Computes indices for a masked-one-mode network
+> ### Aliases: npartite
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> image(aomw <- as.one.mode(Safariland, fill=NA))
+> npartite(aomw)
+$connectance
+[1] 0.1604938
+
+$`links per species`
+[1] 1.083333
+
+> networklevel(Safariland, index=c("connectance", "links per species"))
+      connectance links per species 
+        0.1604938         1.0833333 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("null.distr")
+> ### * null.distr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: null.distr
+> ### Title: Null model based on fitted marginal distribution
+> ### Aliases: null.distr
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D null.distr(N=2, Safariland)
+> ##D null.distr(N=2, Safariland, distr="negbin")
+> ##D 
+> ##D round(networklevel(Safariland, "info"), 3)
+> ##D sapply(null.distr(N=5, Safariland), function(x) networklevel(x, index="info"))
+> ##D # highly connected
+> ##D sapply(null.distr(N=5, Safariland, distr="negbin"), function(x) networklevel(x, 
+> ##D 	index="info")[3])
+> ##D # similarly highly connected
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("null.t.test")
+> ### * null.t.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: null.t.test
+> ### Title: Compares observed pattern to random webs.
+> ### Aliases: null.t.test
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(mosquin1967)
+> null.t.test(mosquin1967, index=c("generality", "vulnerability",
++     "cluster coefficient", "H2", "ISA", "SA"), nrep=2, N=10)
+                                      obs   null mean    lower CI   upper CI
+cluster coefficient             0.1363636  0.25000000  0.23286245  0.2671376
+interaction strength asymmetry  0.1607192  0.06387341  0.05636561  0.0713812
+specialisation asymmetry       -0.1761567 -0.16478875 -0.19261345 -0.1369641
+H2                              0.4975192  0.14873939  0.13878766  0.1586911
+cluster.coefficient.HL          0.3398915  0.49721845  0.47755470  0.5168822
+cluster.coefficient.LL          0.3254561  0.54112769  0.53107418  0.5511812
+generality.HL                   2.6773063  4.18140325  4.12184390  4.2409626
+vulnerability.LL                4.1143452  7.12824481  6.99359081  7.2628988
+                                         t            P
+cluster coefficient             15.0000000 1.128102e-07
+interaction strength asymmetry -29.1804051 3.179564e-10
+specialisation asymmetry         0.9242175 3.794859e-01
+H2                             -79.2821042 4.090272e-14
+cluster.coefficient.HL          18.0992146 2.186606e-08
+cluster.coefficient.LL          48.5285969 3.358260e-12
+generality.HL                   57.1279543 7.768550e-13
+vulnerability.LL                50.6328420 2.294847e-12
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nullmodel")
+> ### * nullmodel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nullmodel
+> ### Title: Generates null models for network analysis
+> ### Aliases: nullmodel
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 	data(Safariland)
+> ##D 	nullmodel(Safariland, N=2, method=1)
+> ##D 	nullmodel(Safariland>0, N=2, method=4)
+> ##D 	# analysis example:
+> ##D 	obs <- unlist(networklevel(Safariland, index="weighted nestedness"))
+> ##D 	nulls <- nullmodel(Safariland, N=100, method=1)
+> ##D 	null <- unlist(sapply(nulls, networklevel, index="weighted nestedness")) #takes a while ...
+> ##D 	
+> ##D 	plot(density(null), xlim=c(min(obs, min(null)), max(obs, max(null))), 
+> ##D 		main="comparison of observed with null model Patefield")
+> ##D 	abline(v=obs, col="red", lwd=2)    
+> ##D 	
+> ##D 	praw <- sum(null>obs) / length(null)
+> ##D 	ifelse(praw > 0.5, 1-praw, praw)    # P-value
+> ##D 	
+> ##D 	# comparison of null model 4 and 5 for binary:
+> ##D 	nulls4 <- nullmodel(Safariland>0, N=100, method=4)
+> ##D 	nulls5 <- nullmodel(Safariland>0, N=100, method=5)
+> ##D 	null4 <- unlist(sapply(nulls4, networklevel, index="weighted nestedness"))
+> ##D 	null5 <- unlist(sapply(nulls5, networklevel, index="weighted nestedness"))
+> ##D 	
+> ##D 	
+> ##D 	plot(density(null4), xlim=range(c(null4, null5)), lwd=2, 
+> ##D 		main="comparison of null models")
+> ##D 	lines(density(null5), col="red", lwd=2)
+> ##D 	legend("topright", c("shuffle", "mgen"), col=c("black", "red"), lwd=c(2,2), 
+> ##D 		bty="n", cex=1.5)
+> ##D 	abline(v=networklevel(Safariland>0, index="weighted nestedness"))
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("olesen2002aigrettes")
+> ### * olesen2002aigrettes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: olesen2002aigrettes
+> ### Title: A flower visitation network from the Azores
+> ### Aliases: olesen2002aigrettes
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(olesen2002aigrettes)
+> ## maybe str(olesen2002aigrettes) ; plot(olesen2002aigrettes) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("olesen2002flores")
+> ### * olesen2002flores
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: olesen2002flores
+> ### Title: Another flower visitation network from the Azores
+> ### Aliases: olesen2002flores
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(olesen2002flores)
+> ## maybe str(olesen2002flores) ; plot(olesen2002flores) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ollerton2003")
+> ### * ollerton2003
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ollerton2003
+> ### Title: ollerton2003
+> ### Aliases: ollerton2003
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(ollerton2003)
+> plotweb(ollerton2003)
+> ## maybe str(ollerton2003) ; plot(ollerton2003) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotModuleWeb")
+> ### * plotModuleWeb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotModuleWeb
+> ### Title: Function "plotModuleWeb"
+> ### Aliases: plotModuleWeb prepareWebForPlottingModules addEmptyRowToMatrix
+> ###   addEmptyColToMatrix getModuleCoordinates isCorrectModuleWebObject
+> ###   drawModules
+> ### Keywords: Methods and Generic Functions Clustering
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(small1976)
+> ##D 
+> ##D moduleWebObject = computeModules(small1976);
+> ##D plotModuleWeb(moduleWebObject);
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotPAC")
+> ### * plotPAC
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotPAC
+> ### Title: Function to draw a circular plot to visualise potential apparent
+> ###   competition (PAC)
+> ### Aliases: plotPAC
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(kevan1970)
+> ##D plotPAC(kevan1970)
+> ##D 
+> ##D data(Safariland)
+> ##D plotPAC(Safariland, plot.scale=1, fill.col="red", arrow.col="orange", 
+> ##D 	circles=TRUE, radius=1)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotweb")
+> ### * plotweb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotweb
+> ### Title: Visualize a bipartite interaction matrix (e.g. a foodweb)
+> ### Aliases: plotweb
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> plotweb(Safariland)
+> 
+> # shorter labels
+> plotweb(Safariland, high.lablength=3, low.lablength=0, arrow="down")
+> 
+> # centered triangles for displaying interacions
+> plotweb(Safariland, text.rot=90, arrow="down.center", col.interaction="wheat2",
++ 	y.lim=c(-1,2.5))
+> 
+> #orginal sequence, up arrows and different box width
+> plotweb(Safariland, method="normal", arrow="up", y.width.low=0.3, low.lablength=4)
+> # interactions as lines
+> plotweb(Safariland, arrow="both", y.width.low=0.05, text.rot=90, col.high="blue", 
++ 	col.low="green")
+> 
+> # add an abundance vector for lower trophic species 
+> low.abun = round(runif(dim(Safariland)[1],1,40)) #create
+> names(low.abun) <- rownames(Safariland)
+> plotweb(Safariland, text.rot=90, low.abun=low.abun, col.interaction="purple", 
++ 	y.width.low=0.05, y.width.high=0.05)
+> 
+> plotweb(Safariland, text.rot=90, low.abun=low.abun, col.interaction ="red", 
++ 	bor.col.interaction="red", arrow="down")
+> 
+> # now vectors for all colours can be given, to mark certain species or 
+> # interactions. Colour vectors are recycled if not of appropriate length
+> plotweb(Safariland,col.high=c("orange","green"))
+> plotweb(Safariland,col.low=c("orange","green"),col.high=c("white","grey","purple"),
++ 	text.high.col=c("blue","red"), col.interaction=c("red",rep("green",26),rep("brown",242)),
++ 	bor.col.interaction=c(rep("green",26),rep("brown",242)),method="normal", 
++ 	text.rot=90, low.lablength=10, high.lablength=5)
+> 
+> 
+> #example one (tritrophic)
+> plotweb(Safariland,y.width.low=0.1, y.width.high=0.05,method="normal", 
++ 	y.lim=c(0,3), arrow="up", adj.high=c(0.5,1.5), col.high="orange",
++ 	high.lablength=3,high.lab.dis=0)
+> 
+> plotweb(t(Safariland), y.width.low=0.05, y.width.high=0.1, method="normal",
++ 	add=TRUE,low.y=1.5,high.y=2.5, col.low="green", text.low.col="red", 
++ 	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1),low.plot=FALSE)
+> 
+> #example two (4 trophic with abundance)
+> low.abun = round(runif(dim(Safariland)[1],1,40)) #create
+> names(low.abun) <- rownames(Safariland)
+> plotweb(Safariland, text.rot=90, high.abun=low.abun, col.interaction="purple", 
++ 	y.lim=c(0,4.5), high.lablength=0, arrow="up", method="normal", 
++ 	y.width.high=0.05)
+> 
+> plotweb(t(Safariland), y.width.low=0.05, y.width.high=0.1, method="normal", 
++ 	add=TRUE, low.y=1.7,high.y=2.7, col.low="green", text.low.col="black", 
++ 	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4, 
++ 	high.lablength=0)
+> 
+> plotweb(Safariland,y.width.low=0.05, y.width.high=0.1, method="normal", 
++ 	add=TRUE, low.y=2.95, high.y=3.95, col.low="green", text.low.col="black", 
++ 	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4)
+> 
+> # now some examples with the abuns.type-option:
+> plotweb(Safariland, abuns.type='independent',arrow="down.center")
+> plotweb(Safariland, abuns.type='additional',arrow="down.center")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("printoutModuleInformation")
+> ### * printoutModuleInformation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: printoutModuleInformation
+> ### Title: Function printoutModuleInformation
+> ### Aliases: printoutModuleInformation
+> ### Keywords: Methods and Generic Functions Clustering
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(small1976)
+> ##D moduleWebObject = computeModules(small1976)
+> ##D printoutModuleInformation(moduleWebObject)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("projecting_tm")
+> ### * projecting_tm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: projecting_tm
+> ### Title: Projecting binary and weighted two-mode networks onto weighted
+> ###   one-mode networks.
+> ### Aliases: projecting_tm
+> 
+> ### ** Examples
+> 
+> #please download and investigate tnet for examples!
+> 
+> 
+> 
+> cleanEx()
+> nameEx("r2dexternal")
+> ### * r2dexternal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: r2dexternal
+> ### Title: Generates null models for network analysis by considering
+> ###   external abundances
+> ### Aliases: r2dexternal
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 	abun.lower <- c(15,5,2,7,4,8,6,0.01,6)
+> ##D 	 set.seed(2)
+> ##D 	(abun.higher <- rpois(27, lambda=4))
+> ##D 	abun.higher[1] <- 0.001
+> ##D 	sum(ext.polls)
+> ##D 	## note: external abundances do not sum up; this is intentional!!
+> ##D 	r2dexternal(2, Safariland, abun.higher=abun.higher, abun.lower=abun.lower)
+> ##D 	r2dexternal(2, Safariland, abun.higher=abun.higher)
+> ##D 
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("robustness")
+> ### * robustness
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: robustness
+> ### Title: Robustness to species extinctions
+> ### Aliases: robustness
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D ex <- second.extinct(Safariland, participant="lower", method="random", nrep=100, 
+> ##D 	details=FALSE)
+> ##D robustness(ex)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("schemske1978")
+> ### * schemske1978
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: schemske1978
+> ### Title: A flower visitation network from Urbana, IL, USA
+> ### Aliases: schemske1978
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(schemske1978)
+> ## maybe str(schemske1978) ; plot(schemske1978) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("second.extinct")
+> ### * second.extinct
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: second.extinct
+> ### Title: Secondary extinctions in bipartite networks
+> ### Aliases: second.extinct
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D (ex <- second.extinct(Safariland, participant="lower", method="random", nrep=50, 
+> ##D 	details=TRUE))
+> ##D (ex <- second.extinct(Safariland, participant="lower", method="random", nrep=50, 
+> ##D 	details=FALSE))
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("shuffle.web")
+> ### * shuffle.web
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: shuffle.web
+> ### Title: Shuffle web entries
+> ### Aliases: shuffle.web
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> data(Safariland)
+> 
+> shuffle.web(Safariland, N=2)
+[[1]]
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+ [1,]    3    0    0    0    0    0    0    0    0     0     0     0     0
+ [2,]    0    4    0    0    0    0    0    0    0     1     0     7     0
+ [3,]    0    0    4    0    1    0    0    0    0     0     0     0     0
+ [4,]    0    0    0    1    2    0    0    1    0     0     6     0   110
+ [5,]    0    0    0    0    3    0    0    0    1     0     0     0     0
+ [6,]    0  673    0    0    0    2    0    0    0     0     0     0     0
+ [7,]    0    5    0    0    0    0    1    0    0     0     0     0     0
+ [8,]    0    0   67    0    0    0    0    8    0     1     0     0     0
+ [9,]    0    0    0    0    0    0    0    0    5     0     0     0     0
+      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0     0     0     0     0     0     0     0     3     0     0     0
+ [2,]     9     0     0     1     0     0     0     0   154     0     0     0
+ [3,]     0     0     0     0     0     0     0     0     0     3     0     0
+ [4,]     0     0     0     0     0     0     0     0     0     0     0     4
+ [5,]     0     1     0     0     0     4     0     1     0     0     6     0
+ [6,]     0     0     0     0     0     0     1     0     0     0     0     0
+ [7,]     0     0     0    15     0     1     0     0     0     0     0     0
+ [8,]     0     0     0     0     0     0     2     0     0     0     0     0
+ [9,]     0     0     3     0     4     0     0     0     0     0     0     0
+      [,26] [,27]
+ [1,]     0     0
+ [2,]     0     0
+ [3,]     0     0
+ [4,]     0     0
+ [5,]     0     8
+ [6,]     0     0
+ [7,]     0     0
+ [8,]     0     0
+ [9,]     4     0
+
+[[2]]
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+ [1,]    7    0    0    0    0    1    0    0    0     0     0     0     0
+ [2,]    0    1    0    4    0    0    0    0    0     0     0     0     0
+ [3,]    0    4    8    0    0    0    0    0    0     0     0     0     0
+ [4,]    0    0    0  154    0    0    0    0    0     0   673     4     0
+ [5,]    0    0    0    0    1    0    0    0    2     0     4     0     0
+ [6,]    0    0    0    0    1    5    0    0    0     3     0     0     1
+ [7,]    0    0    0    0    0    0    1    0    0     0     0     0     0
+ [8,]    0    0    0    0    0    0    0    5    3     0     0     0     0
+ [9,]    0    0   67    0    0    0    0    0    1     1     0     0     0
+      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0     0     0     0     0     0     0     0     0     0     0   110
+ [2,]     0     0     0    15     0     0     0     0     0     0     0     0
+ [3,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [4,]     0     0     4     0     2     0     0     0     0     0     0     0
+ [5,]     0     0     0     6     0     0     0     0     0     0     0     0
+ [6,]     0     0     0     0     0     0     0     0     0     0     6     0
+ [7,]     0     3     0     0     0     0     0     4     0     0     0     0
+ [8,]     1     0     0     0     0     0     8     0     0     0     0     0
+ [9,]     0     0     0     1     0     1     0     0     3     2     0     1
+      [,26] [,27]
+ [1,]     0     0
+ [2,]     0     0
+ [3,]     0     3
+ [4,]     9     0
+ [5,]     0     0
+ [6,]     0     0
+ [7,]     0     0
+ [8,]     0     0
+ [9,]     0     0
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("slope.bipartite")
+> ### * slope.bipartite
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: slope.bipartite
+> ### Title: Slope of extinction simulation
+> ### Aliases: slope.bipartite
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data(Safariland)
+> ##D ex <- second.extinct(Safariland, participant="lower", method="random", nrep=100,
+> ##D details=FALSE)
+> ##D slope.bipartite(ex)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("small1976")
+> ### * small1976
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: small1976
+> ### Title: A flower visitation network from a peat bog in Ottawa, Canada
+> ### Aliases: small1976
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(small1976)
+> ## maybe str(small1976) ; plot(small1976) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sortweb")
+> ### * sortweb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sortweb
+> ### Title: Function to sort bipartite webs
+> ### Aliases: sortweb
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> web <- Safariland
+> 
+> sortweb(Safariland, sort.order="dec") 
+                         Policana albopilosa Bombus dahlbomii
+Aristotelia chilensis                    673                0
+Alstroemeria aurea                         0              154
+Berberis darwinii                          0               67
+Cynanchum diemii                           0                0
+Schinus patagonicus                        0                0
+Rosa eglanteria                            0                0
+Ribes magellanicum                         0                0
+Calceolaria crenatiflora                   0                0
+Mutisia decurrens                          0                0
+                         Ruizantheda mutabilis Ichneumonidae4
+Aristotelia chilensis                      110              1
+Alstroemeria aurea                           0              0
+Berberis darwinii                            0              0
+Cynanchum diemii                             0              0
+Schinus patagonicus                          0             15
+Rosa eglanteria                              6              0
+Ribes magellanicum                           0              0
+Calceolaria crenatiflora                     0              0
+Mutisia decurrens                            0              0
+                         Syrphus octomaculatus Phthiria Torymidae2 Formicidae3
+Aristotelia chilensis                        0        0          0           0
+Alstroemeria aurea                           5        8          0           0
+Berberis darwinii                            5        0          0           0
+Cynanchum diemii                             0        0          9           8
+Schinus patagonicus                          0        0          0           0
+Rosa eglanteria                              4        0          0           0
+Ribes magellanicum                           0        0          0           0
+Calceolaria crenatiflora                     0        0          0           0
+Mutisia decurrens                            0        1          0           0
+                         Manuelia gayi Allograpta.Toxomerus Staphilinidae
+Aristotelia chilensis                0                    0             0
+Alstroemeria aurea                   7                    1             4
+Berberis darwinii                    0                    0             0
+Cynanchum diemii                     0                    0             0
+Schinus patagonicus                  0                    0             0
+Rosa eglanteria                      0                    2             3
+Ribes magellanicum                   0                    3             0
+Calceolaria crenatiflora             0                    1             0
+Mutisia decurrens                    0                    0             0
+                         Svastrides melanura Platycheirus1 Vespula germanica
+Aristotelia chilensis                      0             4                 0
+Alstroemeria aurea                         6             1                 4
+Berberis darwinii                          0             0                 0
+Cynanchum diemii                           0             0                 0
+Schinus patagonicus                        0             0                 0
+Rosa eglanteria                            0             0                 0
+Ribes magellanicum                         0             0                 0
+Calceolaria crenatiflora                   0             0                 0
+Mutisia decurrens                          0             0                 0
+                         Corynura prothysteres Ichneumonidae2
+Aristotelia chilensis                        1              0
+Alstroemeria aurea                           3              4
+Berberis darwinii                            0              0
+Cynanchum diemii                             0              0
+Schinus patagonicus                          0              0
+Rosa eglanteria                              0              0
+Ribes magellanicum                           0              0
+Calceolaria crenatiflora                     0              0
+Mutisia decurrens                            0              0
+                         Ruizantheda proxima Trichophthalma jaffueli
+Aristotelia chilensis                      0                       0
+Alstroemeria aurea                         4                       3
+Berberis darwinii                          0                       0
+Cynanchum diemii                           0                       0
+Schinus patagonicus                        0                       0
+Rosa eglanteria                            0                       0
+Ribes magellanicum                         0                       0
+Calceolaria crenatiflora                   0                       0
+Mutisia decurrens                          0                       0
+                         Chalepogenus caeruleus Trichophthalma amoena
+Aristotelia chilensis                         0                     0
+Alstroemeria aurea                            0                     0
+Berberis darwinii                             0                     0
+Cynanchum diemii                              0                     0
+Schinus patagonicus                           0                     0
+Rosa eglanteria                               0                     0
+Ribes magellanicum                            0                     2
+Calceolaria crenatiflora                      3                     0
+Mutisia decurrens                             0                     0
+                         Braconidae3 Sapromyza.Minettia Nitidulidae Phthiria1
+Aristotelia chilensis              0                  0           0         0
+Alstroemeria aurea                 0                  1           0         1
+Berberis darwinii                  0                  0           0         0
+Cynanchum diemii                   2                  0           1         0
+Schinus patagonicus                0                  0           0         0
+Rosa eglanteria                    0                  0           0         0
+Ribes magellanicum                 0                  0           0         0
+Calceolaria crenatiflora           0                  0           0         0
+Mutisia decurrens                  0                  0           0         0
+                         Sphecidae Thomisidae Braconidae2
+Aristotelia chilensis            0          0           1
+Alstroemeria aurea               1          1           0
+Berberis darwinii                0          0           0
+Cynanchum diemii                 0          0           0
+Schinus patagonicus              0          0           0
+Rosa eglanteria                  0          0           0
+Ribes magellanicum               0          0           0
+Calceolaria crenatiflora         0          0           0
+Mutisia decurrens                0          0           0
+> #rarest species first:
+> plotweb(sortweb(Safariland, sort.order="inc"), method="normal")   
+> visweb(sortweb(Safariland,sort.order="inc"), type="diagonal", 
++ 	square="compartment", text="none", frame=TRUE)
+> 
+> # sorted by a given (here random) sequence
+> sequence <- list(seq.higher=sample(colnames(Safariland)), 
++ 	seq.lower=sample(rownames(Safariland)))
+> web.ordered <- sortweb(web, sort.order="seq", sequence=sequence)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("specieslevel")
+> ### * specieslevel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: specieslevel
+> ### Title: Calculate various indices for network properties at the species
+> ###   level
+> ### Aliases: specieslevel
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> ## Not run: 
+> ##D specieslevel(Safariland)
+> ## End(Not run)
+> specieslevel(Safariland, index="ALLBUTD")[[2]]
+                         degree normalised.degree species.strength
+Aristotelia chilensis         6        0.22222222        4.0607759
+Alstroemeria aurea           17        0.62962963       13.6071500
+Schinus patagonicus           1        0.03703704        0.9375000
+Berberis darwinii             2        0.07407407        0.6603103
+Rosa eglanteria               4        0.14814815        1.0517241
+Cynanchum diemii              4        0.14814815        4.0000000
+Ribes magellanicum            2        0.07407407        1.4285714
+Mutisia decurrens             1        0.03703704        0.1111111
+Calceolaria crenatiflora      2        0.07407407        1.1428571
+                         interaction.push.pull nestedrank       PDI
+Aristotelia chilensis               0.51012931      0.125 0.9933135
+Alstroemeria aurea                  0.74159706      0.000 0.9865135
+Schinus patagonicus                -0.06250000      0.875 1.0000000
+Berberis darwinii                  -0.16984486      0.500 0.9971297
+Rosa eglanteria                     0.01293103      0.375 0.9423077
+Cynanchum diemii                    0.75000000      0.250 0.9529915
+Ribes magellanicum                  0.21428571      0.625 0.9743590
+Mutisia decurrens                  -0.88888889      1.000 1.0000000
+Calceolaria crenatiflora            0.07142857      0.750 0.9871795
+                         species.specificity.index resource.range PSI
+Aristotelia chilensis                    0.8575243      0.8076923   1
+Alstroemeria aurea                       0.7328574      0.3846154   1
+Schinus patagonicus                      1.0000000      1.0000000   1
+Berberis darwinii                        0.9304758      0.9615385   1
+Rosa eglanteria                          0.5114083      0.8846154   1
+Cynanchum diemii                         0.5924201      0.8846154   1
+Ribes magellanicum                       0.7081938      0.9615385   1
+Mutisia decurrens                        1.0000000      1.0000000   1
+Calceolaria crenatiflora                 0.7813942      0.9615385   1
+                         node.specialisation.index.NSI betweenness
+Aristotelia chilensis                         1.571429         0.3
+Alstroemeria aurea                            1.142857         0.5
+Schinus patagonicus                           2.428571         0.0
+Berberis darwinii                             1.857143         0.0
+Rosa eglanteria                               1.285714         0.2
+Cynanchum diemii                                   NaN         0.0
+Ribes magellanicum                            1.714286         0.0
+Mutisia decurrens                             2.000000         0.0
+Calceolaria crenatiflora                      1.714286         0.0
+                         weighted.betweenness  closeness weighted.closeness
+Aristotelia chilensis               0.2222222 0.12931034        0.022311369
+Alstroemeria aurea                  0.4074074 0.16810345        0.019174528
+Schinus patagonicus                 0.0000000 0.08620690        0.028303507
+Berberis darwinii                   0.0000000 0.11206897        0.018597603
+Rosa eglanteria                     0.3703704 0.15517241        0.020088268
+Cynanchum diemii                    0.0000000 0.00000000                 NA
+Ribes magellanicum                  0.0000000 0.12500000        0.014799036
+Mutisia decurrens                   0.0000000 0.09913793        0.005731637
+Calceolaria crenatiflora            0.0000000 0.12500000        0.006640118
+                         Fisher.alpha partner.diversity effective.partners
+Aristotelia chilensis    8.826098e-01         0.4631689           1.589102
+Alstroemeria aurea       4.379926e+00         1.2340874           3.435242
+Schinus patagonicus      2.411918e-01         0.0000000           1.000000
+Berberis darwinii        3.812192e-01         0.2521995           1.286853
+Rosa eglanteria          1.784783e+00         1.3095258           3.704417
+Cynanchum diemii         1.503506e+00         1.1058899           3.021912
+Ribes magellanicum       1.235493e+00         0.6730117           1.960132
+Mutisia decurrens        1.677721e+09         0.0000000           1.000000
+Calceolaria crenatiflora 1.591816e+00         0.5623351           1.754765
+                         proportional.similarity proportional.generality
+Aristotelia chilensis                0.706071469               0.3896704
+Alstroemeria aurea                   0.263214772               0.8423705
+Schinus patagonicus                  0.014159292               0.2452143
+Berberis darwinii                    0.207964602               0.3155547
+Rosa eglanteria                      0.127433628               0.9083760
+Cynanchum diemii                     0.017699115               0.7410161
+Ribes magellanicum                   0.007964602               0.4806523
+Mutisia decurrens                    0.007964602               0.2452143
+Calceolaria crenatiflora             0.008849558               0.4302935
+                                 d
+Aristotelia chilensis    0.9613968
+Alstroemeria aurea       0.8043229
+Schinus patagonicus      0.9846607
+Berberis darwinii        0.5619798
+Rosa eglanteria          0.5590405
+Cynanchum diemii         1.0000000
+Ribes magellanicum       0.9036839
+Mutisia decurrens        0.6625752
+Calceolaria crenatiflora 0.9106928
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strength")
+> ### * strength
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strength
+> ### Title: Computes species strength according to either of two definitions
+> ### Aliases: strength
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> s1 <- strength(Safariland, type="Barrat")
+> s2 <- strength(Safariland, type="Bascompte")
+> plot(s1, s2, log="x")
+> cor.test(s1, s2, type="ken")
+
+	Pearson's product-moment correlation
+
+data:  s1 and s2
+t = 2.429, df = 25, p-value = 0.02266
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.06829817 0.70064004
+sample estimates:
+      cor 
+0.4369709 
+
+> # for lower level:
+> strength(t(Safariland))
+   Aristotelia chilensis       Alstroemeria aurea      Schinus patagonicus 
+               4.0607759               13.6071500                0.9375000 
+       Berberis darwinii          Rosa eglanteria         Cynanchum diemii 
+               0.6603103                1.0517241                4.0000000 
+      Ribes magellanicum        Mutisia decurrens Calceolaria crenatiflora 
+               1.4285714                0.1111111                1.1428571 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("swap.web")
+> ### * swap.web
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: swap.web
+> ### Title: Creates null model for bipartite networks
+> ### Aliases: swap.web
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> swap.web(Safariland, N=2)
+[[1]]
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+ [1,]  486  203   29    0   14    0    7    3    0     0     1     0     1
+ [2,]  127    0   66    0    0    7    0    0    0     0     0     0     0
+ [3,]    6    0    0    0    0    0    0    0    9     0     0     0     0
+ [4,]   45    0   21    2    0    0    0    0    0     0     0     0     0
+ [5,]    0   14    0    0    0    0    0    0    0     0     0     0     0
+ [6,]    0    4    0    0    0    0    0    0    0     5     0     8     0
+ [7,]    4    0    0    0    0    0    0    0    0     0     0     0     0
+ [8,]    1    0    0    0    0    0    0    0    0     0     0     0     0
+ [9,]    4    0    0    0    0    0    0    0    0     0     0     0     0
+      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     7    12     2     0     0     9     0     6     1     0     0     4
+ [2,]     0     0     0     3     4     0     0     0     0     1     0     0
+ [3,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [4,]     0     0     0     0     0     0     0     0     0     0     4     0
+ [5,]     0     1     0     0     0     0     0     0     0     0     0     0
+ [6,]     0     3     0     0     0     0     0     0     0     0     0     0
+ [7,]     0     0     0     0     0     0     1     0     0     0     0     0
+ [8,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [9,]     0     0     0     0     0     0     0     0     0     0     0     0
+      [,26] [,27]
+ [1,]     4     1
+ [2,]     0     0
+ [3,]     0     0
+ [4,]     0     0
+ [5,]     0     0
+ [6,]     0     0
+ [7,]     0     0
+ [8,]     0     0
+ [9,]     0     0
+
+[[2]]
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+ [1,]  517  138   66    2   14    7    0    3    9     0     1     0     0
+ [2,]  138    0   42    0    0    0    0    0    0     5     0     8     0
+ [3,]    0    0    8    0    0    0    7    0    0     0     0     0     0
+ [4,]    0   62    0    0    0    0    0    0    0     0     0     0     1
+ [5,]   11    4    0    0    0    0    0    0    0     0     0     0     0
+ [6,]    0   17    0    0    0    0    0    0    0     0     0     0     0
+ [7,]    2    0    0    0    0    0    0    0    0     0     0     0     0
+ [8,]    1    0    0    0    0    0    0    0    0     0     0     0     0
+ [9,]    4    0    0    0    0    0    0    0    0     0     0     0     0
+      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0    10     0     0     0     9     0     0     0     1     4     4
+ [2,]     7     0     2     0     4     0     1     0     1     0     0     0
+ [3,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [4,]     0     0     0     3     0     0     0     6     0     0     0     0
+ [5,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [6,]     0     3     0     0     0     0     0     0     0     0     0     0
+ [7,]     0     3     0     0     0     0     0     0     0     0     0     0
+ [8,]     0     0     0     0     0     0     0     0     0     0     0     0
+ [9,]     0     0     0     0     0     0     0     0     0     0     0     0
+      [,26] [,27]
+ [1,]     4     1
+ [2,]     0     0
+ [3,]     0     0
+ [4,]     0     0
+ [5,]     0     0
+ [6,]     0     0
+ [7,]     0     0
+ [8,]     0     0
+ [9,]     0     0
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("symmetrise_w")
+> ### * symmetrise_w
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: symmetrise_w
+> ### Title: Symmetrise_w
+> ### Aliases: symmetrise_w
+> 
+> ### ** Examples
+> 
+> ## Load sample data
+> sample <- rbind(
++ c(1,2,2),
++ c(1,3,2),
++ c(2,1,4),
++ c(2,3,4),
++ c(2,4,1),
++ c(2,5,2),
++ c(3,1,2),
++ c(3,2,4),
++ c(5,2,2),
++ c(5,6,1))
+> 
+> ## Run the programme
+> symmetrise_w(sample, method="MAX")
+      i j w
+ [1,] 1 2 4
+ [2,] 1 3 2
+ [3,] 2 1 4
+ [4,] 2 3 4
+ [5,] 2 4 1
+ [6,] 2 5 2
+ [7,] 3 1 2
+ [8,] 3 2 4
+ [9,] 4 2 1
+[10,] 5 2 2
+[11,] 5 6 1
+[12,] 6 5 1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tnet_igraph")
+> ### * tnet_igraph
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tnet_igraph
+> ### Title: Exports a tnet network to an igraph object
+> ### Aliases: tnet_igraph
+> 
+> ### ** Examples
+> 
+> ## Load sample data
+> sample <- rbind(
++ c(1,2,4),
++ c(1,3,2),
++ c(2,1,4),
++ c(2,3,4),
++ c(2,4,1),
++ c(2,5,2),
++ c(3,1,2),
++ c(3,2,4),
++ c(4,2,1),
++ c(5,2,2),
++ c(5,6,1),
++ c(6,5,1))
+> 
+> ## Run the programme
+> tnet_igraph(sample, type="weighted one-mode tnet")
+[[1]]
+[1] 6
+
+[[2]]
+[1] FALSE
+
+[[3]]
+[1] 1 2 2 3 4 5
+
+[[4]]
+[1] 0 0 1 1 1 4
+
+[[5]]
+[1] 0 1 2 3 4 5
+
+[[6]]
+[1] 0 1 2 3 4 5
+
+[[7]]
+[1] 0 0 1 3 4 5 6
+
+[[8]]
+[1] 0 2 5 5 5 6 6
+
+[[9]]
+[[9]][[1]]
+[1] 1 0 1
+
+[[9]][[2]]
+named list()
+
+[[9]][[3]]
+list()
+
+[[9]][[4]]
+[[9]][[4]]$weight
+[1] 4 2 4 1 2 1
+
+
+
+attr(,"class")
+[1] "igraph"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("togetherness")
+> ### * togetherness
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: togetherness
+> ### Title: Calculates the number of identical co-presences and co-absences
+> ###   for species-on-islands
+> ### Aliases: togetherness
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> (m <- matrix(c(0,1,0,0,1,1,0,1,1,0), ncol=2, byrow=TRUE))
+     [,1] [,2]
+[1,]    0    1
+[2,]    0    0
+[3,]    1    1
+[4,]    0    1
+[5,]    1    0
+> togetherness(m)
+[1] 0.1666667
+> # or, with two togethernesses:
+> (n <- matrix(c(0,1,1,0,1,1,0,0,1,1,0,1,0,1), ncol=2, byrow=TRUE))
+     [,1] [,2]
+[1,]    0    1
+[2,]    1    0
+[3,]    1    1
+[4,]    0    0
+[5,]    1    1
+[6,]    0    1
+[7,]    0    1
+> togetherness(n, normalise=FALSE)
+[1] 2
+> 
+> data(Safariland)
+> togetherness(m)
+[1] 0.1666667
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazarr")
+> ### * vazarr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazarr
+> ### Title: A pollination network.
+> ### Aliases: vazarr
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazarr)
+> ## maybe str(vazarr) ; plot(vazarr) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazcer")
+> ### * vazcer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazcer
+> ### Title: A pollination network.
+> ### Aliases: vazcer
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazcer)
+> ## maybe str(vazcer) ; plot(vazcer) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazllao")
+> ### * vazllao
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazllao
+> ### Title: A pollination network.
+> ### Aliases: vazllao
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazllao)
+> ## maybe str(vazllao) ; plot(vazllao) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazmasc")
+> ### * vazmasc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazmasc
+> ### Title: A pollination network.
+> ### Aliases: vazmasc
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazmasc)
+> ## maybe str(vazmasc) ; plot(vazmasc) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazmasnc")
+> ### * vazmasnc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazmasnc
+> ### Title: A pollination network.
+> ### Aliases: vazmasnc
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazmasnc)
+> ## maybe str(vazmasnc) ; plot(vazmasnc) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vaznull")
+> ### * vaznull
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vaznull
+> ### Title: Null model with constrained connectance and moderately
+> ###   constrained marginal totals
+> ### Aliases: vaznull
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 	## Not run: 
+> ##D 		data(Safariland)
+> ##D 		networklevel(Safariland, index="info")
+> ##D 		networklevel(vaznull(1, Safariland)[[1]], index="info")
+> ##D 		system.time(vaznull(10, Safariland))
+> ##D 		system.time(swap.web(10, Safariland))
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazquec")
+> ### * vazquec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazquec
+> ### Title: A pollination network.
+> ### Aliases: vazquec
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazquec)
+> ## maybe str(vazquec) ; plot(vazquec) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazquenc")
+> ### * vazquenc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazquenc
+> ### Title: A pollination network.
+> ### Aliases: vazquenc
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(vazquenc)
+> ## maybe str(vazquenc) ; plot(vazquenc) ...
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vazquez.example")
+> ### * vazquez.example
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vazquez.example
+> ### Title: Examples for some analyses
+> ### Aliases: vazquez.example confint intasymm intereven mlik netstats
+> ###   plotmat quant2bin sortmatr sortmatrext
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 	data(Safariland)
+> ##D 	
+> ##D 	# confint:
+> ##D 	N100 <- sapply(swap.web(100, Safariland), networklevel, index="nestedness")
+> ##D 	quantile(unlist(N100), c(0.025, 0.975))
+> ##D 	# intasymm: extract values for the asymmetry of interactions and the 
+> ##D 	# dependency matrix for pollinators:
+> ##D 	specieslevel(Safariland)$"higher trophic level"$"interaction push/pull"
+> ##D 	specieslevel(Safariland)$"higher trophic level"$"dependence"
+> ##D 	# for plants:
+> ##D 	specieslevel(Safariland)$"lower trophic level"$"interaction push/pull"
+> ##D 	specieslevel(Safariland)$"lower trophic level"$"dependence"
+> ##D 	
+> ##D 	#intereven
+> ##D 	networklevel(Safariland, index="interaction evenness", intereven="sum")[2]
+> ##D 	# or, as we recommend (see help on networklevel):
+> ##D 	networklevel(Safariland, index="interaction evenness", intereven="prod")[2]
+> ##D 		
+> ##D 	# mlik:
+> ##D 	# calculates the log-likelihood of observing a network, given a probability  
+> ##D 	# matrix of the same size (pweb):
+> ##D 	dmultinom(Safariland>0, prob=pweb, log=TRUE)
+> ##D 	# AIC (the number of parameters is given by how many constraints are put onto the 
+> ##D 	# null model; here, we constrain 9 rows and 27 columns, i.e. sum(dim(binweb))):
+> ##D 	-2*dmultinom(Safariland>0, prob=pweb, log=TRUE) + 2*(sum(dim(binweb)))
+> ##D 	
+> ##D 	# netstats:
+> ##D 	networklevel(Safariland, 
+> ##D 	  index=c("connectance", "interaction evenness", "nestedness", "ISA"))
+> ##D 	mean(specieslevel(Safariland)$"higher trophic level"$"interaction push/pull")
+> ##D 	mean(specieslevel(Safariland)$"lower trophic level"$"interaction push/pull")
+> ##D 	
+> ##D 	#plotmat:
+> ##D 	visweb(t(unname(Safariland)), circles=TRUE, boxes=FALSE)
+> ##D 	
+> ##D 	#sortmatr/sortmatrext:
+> ##D 	sortweb(Safariland, sort.order="inc") #rares species first
+> ##D 	plotweb(sortweb(Safariland, sort.order="dec"), method="normal")
+> ##D 	plotweb(sortweb(web=Safariland, sort.order="seq", 
+> ##D 	  sequence=list(seq.higher=sample(colnames(Safariland)), 
+> ##D 	  seq.lower=sample(rownames(Safariland)))), 
+> ##D 	  method="normal")
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("visweb")
+> ### * visweb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: visweb
+> ### Title: Plotting function to visualize a bipartite food web
+> ### Aliases: visweb
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> data(Safariland)
+> visweb(Safariland)
+> visweb(Safariland, type="diagonal", square="compartment", text="none", 
++ 	frame=TRUE)
+> visweb(Safariland, type="nested", text="compartment")
+> visweb(Safariland, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, 
++ 	text="no")
+> visweb(Safariland,square="b",box.col="green",box.border="red")
+> 
+> #define your colors here,length has to be the numbers of different entries
+> cols <-0:(length(table(Safariland))-1) 
+> visweb(Safariland, square="defined", def.col=cols) 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("web2edges")
+> ### * web2edges
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: web2edges
+> ### Title: Conversion of a network matrix into a (weighted) edge list
+> ### Aliases: web2edges
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland)
+> web2edges(Safariland, return=TRUE)
+                         row col edge.weights
+Aristotelia chilensis      1  10          673
+Alstroemeria aurea         2  11          154
+Berberis darwinii          4  11           67
+Aristotelia chilensis      1  12          110
+Rosa eglanteria            5  12            6
+Ribes magellanicum         7  13            2
+Alstroemeria aurea         2  14            5
+Berberis darwinii          4  14            5
+Rosa eglanteria            5  14            4
+Alstroemeria aurea         2  15            7
+Alstroemeria aurea         2  16            1
+Rosa eglanteria            5  16            2
+Ribes magellanicum         7  16            3
+Calceolaria crenatiflora   9  16            1
+Alstroemeria aurea         2  17            3
+Alstroemeria aurea         2  18            8
+Mutisia decurrens          8  18            1
+Aristotelia chilensis      1  19            4
+Alstroemeria aurea         2  19            1
+Alstroemeria aurea         2  20            1
+Cynanchum diemii           6  21            8
+Cynanchum diemii           6  22            1
+Alstroemeria aurea         2  23            4
+Rosa eglanteria            5  23            3
+Aristotelia chilensis      1  24            1
+Schinus patagonicus        3  24           15
+Cynanchum diemii           6  25            2
+Calceolaria crenatiflora   9  26            3
+Alstroemeria aurea         2  27            4
+Cynanchum diemii           6  28            9
+Alstroemeria aurea         2  29            1
+Alstroemeria aurea         2  30            6
+Alstroemeria aurea         2  31            1
+Alstroemeria aurea         2  32            1
+Aristotelia chilensis      1  33            1
+Alstroemeria aurea         2  33            3
+Alstroemeria aurea         2  34            4
+Alstroemeria aurea         2  35            4
+Aristotelia chilensis      1  36            1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("webs2array")
+> ### * webs2array
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: webs2array
+> ### Title: Puts two or more webs into one array of webs
+> ### Aliases: webs2array
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland, vazquenc, vazquec)
+> allin1 <- webs2array(Safariland, vazquenc, vazquec)
+> 
+> # now we can compute distance between two webs:
+> vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2]), as.vector(allin1[,,3]))), 
++   method="jacc")
+          1         2
+2 0.8511543          
+3 0.9994189 1.0000000
+> 
+> 
+> 
+> cleanEx()
+> nameEx("wine")
+> ### * wine
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wine
+> ### Title: Weighted-Interaction Nestedness Estimator
+> ### Aliases: wine plot.wine
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> data(Safariland, package="bipartite")
+> safariland.w <- wine(Safariland, 10)
+> plot.wine(safariland.w)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  7.804 0.808 8.672 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
