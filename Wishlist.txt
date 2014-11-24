@@ -1,5 +1,4 @@
 * check these functionalities: http://www.r-bloggers.com/the-ecology-of-data-matrices-a-metaphor-for-simultaneous-clustering/
-* check mgen against octave code by Diego!
 * plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
@@ -33,7 +32,7 @@ NEW:
 Ara˙jo MS, Guimar„es PR, Svanb‰ck R, Pinheiro A, Guimar„es P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993
 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 
-
+* add networks of Kaiser-Bunbury (rates!) and of Bartomeus from NCEAS
 * include all quantitative host-parasitoid webs
 
 
