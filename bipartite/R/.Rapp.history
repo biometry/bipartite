@@ -1,1155 +1,170 @@
-mean(ds)
-(5+6+9+9+8+2)*2 / 6
-10000/(4*12.6^2)*(0.54^2 + 0.27^2 + 0.34^2 + 0.33^2)
-10000/(4*(12.6/sqrt(cos(18/360*2*pi))^2)*(0.54^2 + 0.27^2 + 0.34^2 + 0.33^2)
-10000/(4*(12.6/sqrt(cos(18/360*2*pi)))^2)*(0.54^2 + 0.27^2 + 0.34^2 + 0.33^2)
-12.6/sqrt(cos(18/360*2*pi)))
-12.6/sqrt(cos(18/360*2*pi))
 require(bipartite)
-mod <- computeModules(Safariland)
-str(mod)
-plotModuleWeb(mod)
-mod@modules
-nrow(object@modules)-1
-nrow(mod@modules)-1
-?specieslevel
-?grouplevel
-grouplevle
-grouplevel
-one.grouplevel
-getAnywhere("one.grouplevel")
-?":::"
-bipartite::one.grouplevel
-bipartite:::one.grouplevel
-?grouplevel
-require(gbm)
-?resid
-require(MuMIn)
-getAnywhere("model.avg")
-getAnywhere("model.avg.default")
-getAnywhere("par.avg")
-memory.limit()
-?memory.size
-require(bipartite)
-?networklevel
-sessionInfo()
-require(mvmulti)
-require(mvtnorm)
-Sigma[c(1,3,4), 2] <- Sigma[2, c(1,3,4)] <- 0.7
-Sigma <- matrix(0, 8, 8)
-Sigma
-eigen(Sigma)
-??definite
-dats <- rmvtnorm(10, mean=rep(0, 8), sigma=Sigma)
-dats <- rmvnorm(10, mean=rep(0, 8), sigma=Sigma)
-dats
-pairs(dats)
-cor(dats)
-Sigma
-Sigma <- matrix(0, 8, 8)#
+vaznull <- function(N, web){#
+  web <- as.matrix(empty(web)) #
+  vaznull.fast <- function(web){#
+   rs.p <- rowSums(web)/sum(web)#
+   cs.p <- colSums(web)/sum(web)#
+   P <- P1 <- tcrossprod(rs.p, cs.p)#
+   int.remain <- sum(web)#
+   while (int.remain > 0){#
+     finalmat <- matrix(0, nrow(web), ncol(web))#
+     n.int.finalmat <- 0#
+     while (n.int.finalmat < sum(dim(web))){#
+       sel <- sample(1:length(web), 1,  prob=P, replace=TRUE)#
+       selc <- floor((sel-1)/(dim(web)[1])) + 1#
+       selr <- ((sel-1) %% dim(web)[1]) + 1#
+       if ( sum(finalmat[,selc]) == 0 | sum(finalmat[selr,]) == 0 ){#
+         finalmat[sel] <- 1#
+         P[sel] <- 0#
+       }#
+       n.int.finalmat <- sum(rowSums(finalmat) > 0) + sum(colSums(finalmat) > 0) #
+     }#
+     conn.remain <- sum(web > 0) - sum(finalmat > 0)#
+     if (conn.remain > 0) {#
+       add <- sample(which(finalmat == 0), conn.remain, prob=P1[finalmat == 0])#
+       finalmat[add] <- 1#
+     }#
+     if (sum(finalmat > 0)/prod(dim(finalmat)) > sum(web > 0)/prod(dim(web)) | any(rowSums(finalmat) > rowSums(web))  |  any(colSums(finalmat) > colSums(web))) next #
+     int.remain <- int.remain.initial <- sum(web) - sum(finalmat)#
+     i = 1#
+     while (int.remain > 0 & i < (int.remain.initial +1)){#
+       row.options <- which(rowSums(finalmat) < rowSums(web))#
+       col.options <- which(colSums(finalmat) < colSums(web))#
+       putting.options <- which(finalmat >= 0, arr.ind=TRUE)#
+       real.options <- which(putting.options[,1] %in% row.options & putting.options[,2] %in% col.options)#
+       add <- sample(real.options, length(real.options))        #
+       finalmat2 <- finalmat#
+       finalmat2[putting.options[add[1], 1], putting.options[add[1], 2]] <- finalmat2[putting.options[add[1], 1], putting.options[add[1], 2]] + 1#
+	   if (all(rowSums(finalmat2) <= rowSums(web)) & all(colSums(finalmat2) <= colSums(web)) & sum(finalmat > 0)/prod(dim(finalmat)) > sum(web > 0)/prod(dim(web))){#
+	  	  finalmat <- finalmat2#
+	  	  int.remain <- sum(web) - sum(finalmat)#
+	  	  print("a successful filling")#
+	   } else {print("an unsuccessful filling"); break} #
+    if (sum(finalmat > 0)/prod(dim(finalmat)) == sum(web > 0)/prod(dim(web)) & all(rowSums(finalmat) == rowSums(web))  &  all(colSums(finalmat) == colSums(web))) print("done!") else print("added a point");#
+    }#
+   }#
+	finalmat#
+  }#
+  replicate(N, vaznull.fast(web), simplify=FALSE)#
 #
-Sigma[1:4, 1:4] <- 0.7*2#
-diag(Sigma) <- 1 #
-#
-dats <- rmvnorm(10, mean=rep(0, 8), sigma=Sigma)
-require(bipartite)
-?plotweb
-?plotPAC
-plotweb(kevan1970)
-plotweb(Safariland)
-plotPAC(kevan1970)
-plotPAC(Safariland, plot.scale=1, fill.col="red", arrow.col="orange", #
-	circles=TRUE, radius=1)
-ploweb(ollerton2003)
-plotweb(ollerton2003)
-?plotweb
-low.abun = round(runif(dim(Safariland)[1],1,40)) #
-names(low.abun) <- rownames(Safariland)#
-plotweb(Safariland, text.rot=90, high.abun=low.abun, col.interaction="purple", #
-	y.lim=c(0,4.5), high.lablength=0, arrow="up", method="normal", #
-	y.width.high=0.05)#
-#
-plotweb(t(Safariland), y.width.low=0.05, y.width.high=0.1, method="normal", #
-	add=TRUE, low.y=1.7,high.y=2.7, col.low="green", text.low.col="black", #
-	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4, #
-	high.lablength=0)#
-#
-plotweb(Safariland,y.width.low=0.05, y.width.high=0.1, method="normal", #
-	add=TRUE, low.y=2.95, high.y=3.95, col.low="green", text.low.col="black", #
-	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4)
-?visweb
-visweb(Safariland,square="b",box.col="green",box.border="red")
-visweb(Safariland, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, #
-	text="no")
-visweb(kevan1970, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, #
-	text="no")
-visweb(Safariland, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, #
-	text="no")
-visweb(ollerton2003, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=3, #
-	text="no")
-visweb(ollerton2003, circles=TRUE,  boxes=FALSE,  labsize=1, circle.max=5, #
-	text="no")
-visweb(ollerton2003, circles=TRUE,  boxes=FALSE,  labsize=2, circle.max=3, #
-	text="no")
-visweb(ollerton2003, circles=TRUE,  boxes=FALSE,  labsize=2, circle.max=5, #
-	text="no")
-visweb(ollerton2003>0)
-require(bipartite)
-degreedistr
-degreedistr(Safariland, plot.it=T)
-degreedistr(Safariland, plot.it=T, col="blue")
-degreedistr(memmott1999, plot.it=T, col="blue")
-degreedistr(memmott1999, plot.it=T, pch=15)
-bla <- degreedistr(memmott1999, plot.it=T, pch=15)
-bla
-bla <- degreedistr(memmott1999, plot.it=F)
-bla
-str(bla)
-?degree.distr
-?degreedistr
-bla <- degreedistr(memmott1999, plot.it=F, pure.call=T)
-bla
-bla <- degreedistr(memmott1999, plot.it=F, pure.call=F)
-bla
-degreedistr
-web <- memmott1999
-web <- empty(web)#
-    web <- (web > 0) * 1#
-    k <- sum(web)#
-    S <- sum(dim(web))#
-    ddlower <- rowSums(web)#
-    ddhigher <- colSums(web)#
-    if (level == "both") {#
-        lower <- TRUE#
-        higher <- TRUE#
-    }#
-    else {#
-        lower <- FALSE#
-        higher <- FALSE#
-        if (level == "lower") #
-            lower <- TRUE#
-        else higher <- TRUE#
-    }#
-    Plo <- sapply(sort(unique(ddlower)), function(x) sum(ddlower >= #
-        x))#
-    Plower <- cbind.data.frame(k = sort(unique(ddlower)), P = Plo/max(Plo))#
-    if (lower & nrow(Plower) < 5) #
-        warning("Too few data points (< 5) for lower trophic level! Fitting makes no sense! The truncated fit is the first to fail because it has one parameter more.")#
-    Phi <- sapply(sort(unique(ddhigher)), function(x) sum(ddhigher >= #
-        x))#
-    Phigher <- cbind.data.frame(k = sort(unique(ddhigher)), P = Phi/max(Phi))
-level="both"
-web <- empty(web)#
-    web <- (web > 0) * 1#
-    k <- sum(web)#
-    S <- sum(dim(web))#
-    ddlower <- rowSums(web)#
-    ddhigher <- colSums(web)#
-    if (level == "both") {#
-        lower <- TRUE#
-        higher <- TRUE#
-    }#
-    else {#
-        lower <- FALSE#
-        higher <- FALSE#
-        if (level == "lower") #
-            lower <- TRUE#
-        else higher <- TRUE#
-    }#
-    Plo <- sapply(sort(unique(ddlower)), function(x) sum(ddlower >= #
-        x))#
-    Plower <- cbind.data.frame(k = sort(unique(ddlower)), P = Plo/max(Plo))#
-    if (lower & nrow(Plower) < 5) #
-        warning("Too few data points (< 5) for lower trophic level! Fitting makes no sense! The truncated fit is the first to fail because it has one parameter more.")#
-    Phi <- sapply(sort(unique(ddhigher)), function(x) sum(ddhigher >= #
-        x))#
-    Phigher <- cbind.data.frame(k = sort(unique(ddhigher)), P = Phi/max(Phi))
-web <- empty(web)#
-    web <- (web > 0) * 1#
-    k <- sum(web)#
-    S <- sum(dim(web))#
-    ddlower <- rowSums(web)#
-    ddhigher <- colSums(web)#
-    if (level == "both") {#
-        lower <- TRUE#
-        higher <- TRUE#
-    }   else {#
-        lower <- FALSE#
-        higher <- FALSE#
-        if (level == "lower") #
-            lower <- TRUE#
-        else higher <- TRUE#
-    }#
-    Plo <- sapply(sort(unique(ddlower)), function(x) sum(ddlower >= #
-        x))#
-    Plower <- cbind.data.frame(k = sort(unique(ddlower)), P = Plo/max(Plo))#
-    if (lower & nrow(Plower) < 5) #
-        warning("Too few data points (< 5) for lower trophic level! Fitting makes no sense! The truncated fit is the first to fail because it has one parameter more.")#
-    Phi <- sapply(sort(unique(ddhigher)), function(x) sum(ddhigher >= #
-        x))#
-    Phigher <- cbind.data.frame(k = sort(unique(ddhigher)), P = Phi/max(Phi))
-Phigher
-Plower
-require(vegan)
-plot(1:10, 1:10, type="n", axes=F)
-plot(1:10, 1:10, type="n", axes=F, xlab="", ylab="Fläche")
-curve(0.1*x^0.7, add=T)
-curve(0.01*x^0.7, add=T)
-curve(0.001*x^0.7, add=T)
-curve(0.0001*x^0.7, add=T)
-curve(0.00001*x^0.7, add=T)
-plot(1:10, 1:10, type="n", axes=F, ylab="", xlab="Fläche")
-curve(0.01*x^0.7, add=T)
-curve(0.01*x^0.07, add=T)
-curve(0.01*x^0.7, add=F)
-curve(0.1*x^0.7, add=F)
-curve(x^0.7, add=F)
-curve(x^0.4, add=F)
-curve(x^0.3, add=F)
-curve(x^0.2, add=F)
-curve(x^0.4, add=F)
-curve(0.2+x, add=T)
-curve(x^0.4, add=F, lwd=3, col="grey")
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F)
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2)
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2, n=200)
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2, n=500)
-par(mar=c(5,5,1,1))
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2, n=500)
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2, n=500, xlab="")
-curve(x^0.4, add=F, lwd=3, col="grey", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="")
-curve(0.2+x, add=T)
-curve(0.2+x, add=T, lwd=3, col="blue")
-curve(0.2+x, add=T, lwd=3, col="brown")
-curve(x^0.4, add=F, lwd=3, col="green", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="")
-curve(0.2+x, add=T, lwd=3, col="brown")
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="")
-curve(0.2+x, add=T, lwd=3, col="brown")
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2)
-curve(0.2+x, add=T, lwd=3, col="brown")
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2, ylim=c(0,1.5))
-curve(0.2+x, add=T, lwd=3, col="brown")
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2, ylim=c(0,1.3))
-curve(0.2+x, add=T, lwd=3, col="brown")
-axis(2)
-par(mar=c(5,5,1,1))#
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2, ylim=c(0,1.3))#
-curve(0.2+x, add=T, lwd=3, col="brown")
-box()
-mtext("Artenzahl", side=2, line=2, cex=2, col="darkgreen")
-mtext("Artenzahl", side=2, line=2, cex=2, col="darkgreen", at=0.3)
-mtext("Agrarproduktion", side=2, line=2, cex=2, col="brown", at=0.6)
-mtext("Agrarproduktion", side=2, line=2, cex=2, col="brown", at=0.8)
-mtext("Agrarproduktion", side=2, line=2, cex=2, col="brown", at=0.9)
-par(mar=c(5,5,1,1))#
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2, ylim=c(0,1.3))#
-curve(0.2+x, add=T, lwd=3, col="brown")#
-box()#
-mtext("Artenzahl", side=2, line=2, cex=2, col="darkgreen", at=0.3)#
-mtext("Agrarproduktion", side=2, line=2, cex=2, col="brown", at=0.9)
-lines(c(0.7, 0.7), c(0,0.7))
-lines(c(0.7, 0.7), c(0,0.9))
-lines(c(0.7, 0.7), c(0,0.8))
-lines(c(0.6, 0.6), c(0,0.8))
-lines(c(0.64, 0.64), c(0,0.8))
-lines(c(0.64, 0.64), c(0,0.83))
-lines(c(0.638, 0.638), c(0,0.83))
-lines(c(0.636, 0.636), c(0,0.83))
-lines(c(0.632, 0.632), c(0,0.83))
-lines(c(0.632, 0.632), c(0,0.83), lwd=2, lty=2, col="grey")
-lines(c(0.632, 0.632), c(-2,0.83), lwd=2, lty=2, col="grey")
-par(mar=c(5,5,1,1))#
-curve(x^0.4, add=F, lwd=3, col="darkgreen", axes=F, xlab="Fläche", cex.lab=2, n=500, ylab="", lty=2, ylim=c(0,1.3))#
-curve(0.2+x, add=T, lwd=3, col="brown")#
-box()#
-mtext("Artenzahl", side=2, line=2, cex=2, col="darkgreen", at=0.3)#
-mtext("Agrarproduktion", side=2, line=2, cex=2, col="brown", at=0.9)#
-lines(c(0.632, 0.632), c(-2,0.83), lwd=2, lty=2, col="grey")
-require(bipartite)
-getwd()
-source("specieslevel.r")#
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="closeness", level="higher")
-web <- matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T)
-web <- t(web)
-CO <- compart(web)
-if (CO$n.compart >= sum(web>0)){#
-        out <- rep(NA, NCOL(web))#
-        return(out)#
-      }
-el <- web2edges(web, return=TRUE)
-suppressWarnings(proj <- projecting_tm(el, method=method) )
-method="sum"
-suppressWarnings(proj <- projecting_tm(el, method=method) )
-proj
-if (any(dim(proj) < 2)){#
-          warning("Web contains too few nodes to compute closeness or betweenness!")#
-          return(rep(NA, NROW(web))) #
-      }
-b <- betweenness_w(proj)[,2]#
-        if (length(b) != NROW(web)){#
-          b <- c(b, rep(NA, (NROW(web) - length(b))))#
-        }#
-        if (!is.null(rownames(web))) names(b) <- rownames(web)#
-        if (sum(b, na.rm=TRUE) == 0) out <- b else out <- b/sum(b, na.rm=TRUE)
-out
-which.is.where <- apply(CO[[1]], 1, function(x) sort(unique(x))[1] )			#
-        group <- names(sort(table(which.is.where), decreasing=TRUE))[1]#
-        keep <- which(CO[[1]] == group, arr.ind=TRUE)#
-        subweb <- web[unique(keep[,1]), unique(keep[,2]), drop=FALSE]#
-        el2 <- web2edges(subweb, return=TRUE)
-if (any(dim(el2)) < 2) return(rep(NA, NROW(web))) # closeness cannot be computed with only one link!
-(any(dim(el2)) < 2)
-proj2 <- projecting_tm(el2, method=method)
-cc <- closeness_w(proj2, directed=TRUE, gconly=TRUE)[,2]
-cc.full <- rep(NA, NROW(web))
-if (!is.null(rownames(web))){#
-          names(cc.full) <- rownames(web)#
-          cc.full[match(rownames(subweb), names(cc.full)) ] <- cc#
-          out <- cc.full#
-        } else {#
-          cc.full[1:length(cc)] <- cc#
-          out <- cc.full#
-        }
-out
-`specieslevel` #
-specieslevel <-#
-function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high.abun=NULL, PDI.normalise=TRUE, PSI.beta=c(1,0), nested.method="NODF", nested.normalised=TRUE, nested.weighted=TRUE) {#
-    if (!is.numeric(logbase)) stop("logbase must be numeric, e.g. 2 or exp(1) or 10!")#
-#
-    web <- as.matrix(empty(web)) #
-#
-    allindex <- c("degree", "normalised degree", "species strength", "nestedrank", "interaction push pull", "PDI", "resource range", "species specificity", "PSI", "NSI", "betweenness", "closeness", "Fisher alpha", "partner diversity", "effective partners", "d", "dependence", "proportional generality", "proportional similarity")#
-    if ("ALL" %in% index) index <- allindex#
-    if ("ALLBUTD" %in% index) index <- allindex[-which(allindex=="dependence")]#
-    if (length(index) == 1 & !all(index %in% allindex)){                        #
-    	index <- switch(index,#
-        	"ALL" = allindex,#
-        	"ALLBUTD" = allindex[-which(allindex=="dependence")],#
-         	stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #
-          )#
-    }#
-    if (length(which(!(index %in% allindex))) > 0) warning(paste0("Index '", index[which(!(index %in% allindex))], "' not recognised and hence not computed!"))#
-    higher.out <- list()#
-    lower.out <- list()#
-    if (level == "both") {for.higher <- TRUE; for.lower <- TRUE}#
-    if (level == "higher") {for.higher <- TRUE; for.lower <- FALSE}#
-    if (level == "lower") {for.higher <- FALSE; for.lower <- TRUE}#
-    if (!(level %in% c("both", "higher", "lower"))) stop("Please choose a valid level: 'both', 'higher' or 'lower'.")    #
-    BCC_weighted <- function(web, method="sum", level="higher", index="betweenness"){#
-      if (level == "higher") web <- t(web) #
-      CO <- compart(web)#
-      if (CO$n.compart >= sum(web>0)){#
-        out <- rep(NA, NCOL(web))#
-        return(out)#
-      }#
-      el <- web2edges(web, return=TRUE)#
-      suppressWarnings(proj <- projecting_tm(el, method=method) )#
-      if (any(dim(proj) < 2)){#
-          warning("Web contains too few nodes to compute closeness or betweenness!")#
-          return(rep(NA, NROW(web))) #
-      } #
-      if (index == "betweenness") {#
-        b <- betweenness_w(proj)[,2]#
-        if (length(b) != NROW(web)){#
-          b <- c(b, rep(NA, (NROW(web) - length(b))))#
-        }#
-        if (!is.null(rownames(web))) names(b) <- rownames(web)#
-        if (sum(b, na.rm=TRUE) == 0) out <- b else out <- b/sum(b, na.rm=TRUE)#
-      }#
-      if (index == "closeness") {#
-        which.is.where <- apply(CO[[1]], 1, function(x) sort(unique(x))[1] )			#
-        group <- names(sort(table(which.is.where), decreasing=TRUE))[1]#
-        keep <- which(CO[[1]] == group, arr.ind=TRUE)#
-        subweb <- web[unique(keep[,1]), unique(keep[,2]), drop=FALSE]#
-        el2 <- web2edges(subweb, return=TRUE)#
-        proj2 <- projecting_tm(el2, method=method)#
-        cc <- closeness_w(proj2, directed=TRUE, gconly=TRUE)[,2]#
-        cc.full <- rep(NA, NROW(web))#
-        if (!is.null(rownames(web))){#
-          names(cc.full) <- rownames(web)#
-          cc.full[match(rownames(subweb), names(cc.full)) ] <- cc#
-          out <- cc.full#
-        } else {#
-          cc.full[1:length(cc)] <- cc#
-          out <- cc.full#
-        }#
-      }#
-      out#
-    }#
-    CoV <- function(web){#
-		numerator <- sqrt(colSums((web - matrix(colMeans(web), nrow=NROW(web), ncol=NCOL(web), byrow=TRUE))^2))#
-		R <- NROW(web)#
-		denominator <- colSums(web) * sqrt((R-1)/R) #
-		numerator/denominator#
-   	}#
-#
-    PropSimilarity <- function(species_use, abuns){#
-        p_i <- species_use / sum(species_use)#
-        q_i <- abuns / sum(abuns)#
-        sum(pmin(p_i, q_i))  #
-    }#
-#
-   PSI <- function(web, beta=c(1,0)){#
-      Wi. <- matrix(rep(colSums(web), NROW(web)), nrow=NROW(web), byrow=TRUE)#
-      W.j <- matrix(rep(rowSums(web), NCOL(web)), ncol=NCOL(web), byrow=FALSE)#
-      PSImat <- (web/W.j)^beta * web/Wi.#
-      (PSI <- colSums(PSImat))#
-    }#
-   shannon <- function(x, base=exp(1)) {#
-   		Pvec <- x/sum(x)#
-   		-sum(Pvec*log(Pvec, base=base), na.rm=TRUE)#
-   	} #
-    if ("normalised degree" %in% index){#
-      nds <- ND(web)#
-    }#
-    if ("nestedrank" %in% index){#
-    	nested.ranks <- nestedrank(web, method=nested.method, normalise=nested.normalised, weighted=nested.weighted)#
-    }#
-    if (any(c("species strength", "dependence", "interaction push pull") %in% index)){#
-      depL <- web/matrix(rowSums(web), nrow=NROW(web), ncol=NCOL(web), byrow=FALSE)#
-      depH <- web/matrix(colSums(web), nrow=NROW(web), ncol=NCOL(web), byrow=TRUE)#
-      Dij <- depH-depL  #
-    }#
-    if ("NSI" %in% index){#
-      NS <- nodespec(web)#
-    }#
-    if ("betweenness" %in% index){#
-      bcs <- BC(web)#
-    }#
-    if ("closeness" %in% index){#
-      ccs <- CC(web)#
-    }#
-    if (any(c("partner diversity", "effective partners", "proportional generality") %in% index)){#
-      preytot.mat <- matrix(rep(colSums(web), NROW(web)), NROW(web), byrow=TRUE)#
-      preyprop.mat <- web/preytot.mat  #
-      predtot.mat <- matrix(rep(rowSums(web), NCOL(web)), NROW(web), byrow=FALSE)#
-      predprop.mat <- web/predtot.mat  #
-      H_Nk <- apply(preyprop.mat, 2, shannon, base=logbase)#
-      H_Pk <- apply(predprop.mat, 1, shannon, base=logbase)#
-      n_Nk <- ifelse(colSums(web) != 0, logbase^H_Nk, 0)#
-      n_Pk <- ifelse(rowSums(web) != 0, logbase^H_Pk, 0)#
-    }#
-    if (for.higher){ #
-    if ("degree" %in% index){#
-      sdH <- colSums(web>0)#
-      higher.out$"degree" <- unlist(sdH)#
-    }#
-    if ("normalised degree" %in% index){#
-      higher.out$"normalised degree" <- nds[[2]]#
-    }#
-    if ("nestedrank" %in% index){#
-    	higher.out$"nestedrank" <- nested.ranks[["higher level"]]#
-    }#
-    if (any(c("species strength", "dependence", "interaction") %in% index)){#
-      if ("species strength" %in% index){ #
-        SH <- colSums(depL) #
-        higher.out$"species strength" <- SH#
-      } #
-      if ("interaction push pull" %in% index) {#
-        Aihigh <- colSums(-Dij)/colSums(web>0)#
-        higher.out$"interaction push pull" <- Aihigh#
-      } #
-    } #
-    if (any(c("PDI", "pollination support index") %in% index)){#
-      higher.out$"PDI" <- PDI(web, normalise=PDI.normalise, log=FALSE)#
-    }#
-    if ("resource range" %in% index){#
-    	higher.out$"resource range" <- PDI(web>0)	#
-    }#
-    if ("species specificity" %in% index){#
-    	higher.out$"species specificity index" <- CoV(web)#
-    }#
-    if (any(c("PSI", "pollination service index") %in% index)){    #
-      if (for.lower & for.higher & length(PSI.beta) < 2) stop("You need to provide 2 values (in a vector) for PSI.beta.")#
-      higher.out$"PSI" <- PSI(web, beta=PSI.beta[1])#
-    }#
-    if ("NSI" %in% index){#
-      higher.out$"node specialisation index NSI" <- NS$higher#
-    }#
-    if ("betweenness" %in% index){#
-      higher.out$"betweenness" <- bcs[[2]]#
-      higher.out$"weighted betweeness" <- BCC_weighted(web, level="higher")#
-    }#
-    if ("closeness" %in% index){#
-      higher.out$"closeness" <- ccs[[2]]#
-      higher.out$"weighted closeness" <- BCC_weighted(web, level="higher", index="closeness")#
-    }#
-    if ("Fisher alpha" %in% index){#
-      ff.high <- try(suppressWarnings(fisher.alpha(web, MARGIN=2)), silent=TRUE)#
-      higher.out$"Fisher alpha" <- if (!inherits(ff.high, "try-error")) ff.high else rep(NA, times=NCOL(web))#
-    }#
-    if ("partner diversity" %in% index){#
-      higher.out$"partner diversity" <- H_Nk#
-    }#
-    if ("effective partners" %in% index){#
-      higher.out$"effective partners" <- n_Nk#
-    }#
-    if ("proportional similarity" %in% index){#
-      mylow.abun <- if (is.null(low.abun)) mylow.abun <- rowSums(web) else mylow.abun <- low.abun#
-      psH <- apply(web, 2, PropSimilarity, abuns=mylow.abun) #
-      higher.out$"proportional similarity" <- psH#
-    }#
-    if ("proportional generality" %in% index){#
-      mylow.abun <- if (is.null(low.abun)) mylow.abun <- rowSums(web) else mylow.abun <- low.abun#
-      pgenH <- n_Nk / logbase^(shannon(mylow.abun, base=logbase))      #
-      higher.out$"proportional generality" <- pgenH#
-    }#
-    if ("d" %in% index){#
-      dsH <- dfun(t(web), abuns=low.abun)[[1]]#
-      higher.out$d <- dsH#
-    }#
-    } #
-    if (for.lower){#
-    if ("degree" %in% index){#
-      sdL <- rowSums(web>0)#
-      lower.out$"degree" <- sdL#
-    }#
-    if ("normalised degree" %in% index){#
-      lower.out$"normalised degree" <- nds[[1]]#
-    }#
-    if ("nestedrank" %in% index){#
-    	lower.out$"nestedrank" <- nested.ranks[["lower level"]]#
-    }#
-    if (any(c("species strength", "dependence", "interaction") %in% index)){#
-      if ("dependence" %in% index){#
-        lower.out$"dependence" <- depL#
-      }#
-      if ("species strength" %in% index){#
-        SL <- rowSums(depH) #
-        lower.out$"species strength" <- SL#
-      } #
-      if ("interaction push pull" %in% index) {#
-        Ailow <- rowSums(Dij)/rowSums(web>0)#
-        lower.out$"interaction push/pull" <- Ailow#
-      }#
-    } #
-    if (any(c("PDI", "paired differences index") %in% index)){#
-      lower.out$"PDI" <- PDI(t(web), normalise=PDI.normalise, log=FALSE)#
-    }#
-    if ("resource range" %in% index){#
-    	lower.out$"resource range" <- PDI(t(web)>0)	#
-    }#
-    if (any(c("PSI", "pollinator support index") %in% index)){    #
-      if (for.lower & for.higher & length(PSI.beta) < 2) stop("You need to provide 2 values (in a vector) for PSI.beta.")#
-      if (length(PSI.beta) == 1) PSI.beta.lower <- PSI.beta[1] else PSI.beta.lower <- PSI.beta[2]#
-      lower.out$"PSI"   <- PSI(t(web), beta=PSI.beta.lower)#
-    }#
-    if ("NSI" %in% index){#
-      lower.out$"node specialisation index NSI" <- NS$lower#
-    }#
-    if ("species specificity" %in% index){#
-    	lower.out$"species specificity index" <- CoV(t(web))#
-    }#
-    if ("betweenness" %in% index){  #
-      lower.out$"betweenness" <- bcs[[1]]#
-      lower.out$"weighted betweeness" <- BCC_weighted(web, level="lower") #
-    }#
-    if ("closeness" %in% index){#
-      lower.out$"closeness" <- ccs[[1]]#
-      lower.out$"weighted closeness" <- BCC_weighted(web, level="lower", index="closeness") #
-    }#
-    if ("Fisher alpha" %in% index){#
-      ff.low <- try(suppressWarnings(fisher.alpha(web, MARGIN=1)), silent=TRUE)#
-      lower.out$"Fisher alpha" <- if (!inherits(ff.low, "try-error")) ff.low else rep(NA, times=NROW(web))#
-    }#
-    if ("partner diversity" %in% index){#
-      lower.out$"partner diversity" <- H_Pk#
-    }#
-    if ("effective partners" %in% index){#
-      lower.out$"effective partners" <- n_Pk#
-    }#
-    if ("proportional similarity" %in% index){#
-      myhigh.abun <- if (is.null(high.abun)) myhigh.abun <- colSums(web) else myhigh.abun <- high.abun#
-      psL <- apply(web, 1, PropSimilarity,abuns=myhigh.abun) #
-      lower.out$"proportional similarity" <- psL#
-    }#
-    if ("proportional generality" %in% index){#
-      myhigh.abun <- if (is.null(high.abun)) myhigh.abun <- colSums(web) else myhigh.abun <- high.abun#
-      pgenL <- n_Pk / logbase^(shannon(myhigh.abun, base=logbase))  #
-      lower.out$"proportional generality" <- pgenL#
-    }#
-    if ("d" %in% index){#
-      dsL <- dfun(web, abuns=high.abun)[[1]]#
-      lower.out$d <- dsL#
-    }#
-    } #
-    if (!("dependence" %in% index)) {#
-        higher.out <- as.data.frame(higher.out)#
-        lower.out <- as.data.frame(lower.out)#
-    }#
-    if (level == "lower") out <- lower.out#
-    if (level == "higher") out <- higher.out#
-    if (level == "both") out <- list("higher level"=higher.out, "lower level"=lower.out)  #
-    out#
 }
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="closeness", level="higher")#
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="closeness", level="lower")#
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="betweenness", level="lower")#
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="betweenness", level="higher")
-cc <- closeness_w(proj2, directed=TRUE, gconly=TRUE)[,2]
-cc
-cc.full <- rep(NA, NROW(web))
-cc.full[match(rownames(subweb), names(cc.full)) ] <- cc
-cc.full
-cc.full[1:length(cc)] <- cc
-cc.full
-level="lower"
-index="closeness"
-web <- matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T)
-if (level == "higher") web <- t(web) #
-      CO <- compart(web)#
-      if (CO$n.compart >= sum(web>0)){#
-        out <- rep(NA, NCOL(web))#
-        return(out)#
+vaznull(1, Safariland)
+vaznull
+rm(vaznull)
+vaznull
+mgen <- function(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum", trials=100){#
+  if (sum(web) != 1) { #
+  	message(paste("This is not a probability matrix! I will proceed after transforming the entries according to option 'autotransform':", autotransform, "!"))#
+  	if (autotransform == "sum") {#
+  		m <- web/sum(web)#
+  	} else {#
+  		m <- (rowSums(web)/sum(web)) %*% t(colSums(web)/sum(web))#
+  	}#
+  } else m <- web#
+  if (rep.cell == FALSE & n > (nrow(m)*ncol(m))){#
+    message("Argument n should be smaller than the number of cells in matrix!")#
+  }#
+  else{#
+    mac <- matrix(cumsum(m),nrow(m),ncol(m)) #
+    mint <- matrix(0,nrow(m),ncol(m)) #
+    if (keep.species){#
+      for (i in 1:nrow(m)){#
+        c1 <- sample(ncol(m), replace=TRUE, prob=colSums(m))#
+        c1 <- c1[1]#
+        mint[i, c1] <- 1#
       }#
-      el <- web2edges(web, return=TRUE)#
-      suppressWarnings(proj <- projecting_tm(el, method=method) )#
-      if (any(dim(proj) < 2)){#
-          warning("Web contains too few nodes to compute closeness or betweenness!")#
-          return(rep(NA, NROW(web))) #
-      }
-sl
-el
-proj
-dim(proj)
-(CO$n.compart >= sum(web>0))
-(any(dim(proj) < 2))
-rep(NA, NROW(web))
-(index == "betweenness")
-(index == "closeness")
-which.is.where <- apply(CO[[1]], 1, function(x) sort(unique(x))[1] )
-group <- names(sort(table(which.is.where), decreasing=TRUE))[1]
-keep <- which(CO[[1]] == group, arr.ind=TRUE)
-subweb <- web[unique(keep[,1]), unique(keep[,2]), drop=FALSE]
-el2 <- web2edges(subweb, return=TRUE)
-proj2 <- projecting_tm(el2, method=method)
-cc <- closeness_w(proj2, directed=TRUE, gconly=TRUE)[,2]
-cc.full <- rep(NA, NROW(web))
-if (!is.null(rownames(web))){#
-          names(cc.full) <- rownames(web)#
-          cc.full[match(rownames(subweb), names(cc.full)) ] <- cc#
-          out <- cc.full#
-        } else {#
-          cc.full[1:length(cc)] <- cc#
-          out <- cc.full#
-        }
-out
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="closeness", level="higher")
-specieslevel(matrix(c(0,0,5,0,0,5,0,0,5,0,0,5),nrow=3,byrow=T),index="closeness", level="lower")
-ls()
-BCC_weighted <- function(web, method="sum", level="higher", index="betweenness"){#
-      if (level == "higher") web <- t(web) #
-      CO <- compart(web)#
-      if (CO$n.compart >= sum(web>0)){#
-        out <- rep(NA, NCOL(web))#
-        return(out)#
-      }#
-      el <- web2edges(web, return=TRUE)#
-      suppressWarnings(proj <- projecting_tm(el, method=method) )#
-      if (any(dim(proj) < 2)){#
-          warning("Web contains too few nodes to compute closeness or betweenness!")#
-          return(rep(NA, NROW(web))) #
-      } #
-      if (index == "betweenness") {#
-        b <- betweenness_w(proj)[,2]#
-        if (length(b) != NROW(web)){#
-          b <- c(b, rep(NA, (NROW(web) - length(b))))#
-        }#
-        if (!is.null(rownames(web))) names(b) <- rownames(web)#
-        if (sum(b, na.rm=TRUE) == 0) out <- b else out <- b/sum(b, na.rm=TRUE)#
-      }#
-      if (index == "closeness") {#
-        which.is.where <- apply(CO[[1]], 1, function(x) sort(unique(x))[1] )			#
-        group <- names(sort(table(which.is.where), decreasing=TRUE))[1]#
-        keep <- which(CO[[1]] == group, arr.ind=TRUE)#
-        subweb <- web[unique(keep[,1]), unique(keep[,2]), drop=FALSE]#
-        el2 <- web2edges(subweb, return=TRUE)#
-        proj2 <- projecting_tm(el2, method=method)#
-        cc <- closeness_w(proj2, directed=TRUE, gconly=TRUE)[,2]#
-        cc.full <- rep(NA, NROW(web))#
-        if (!is.null(rownames(web))){#
-          names(cc.full) <- rownames(web)#
-          cc.full[match(rownames(subweb), names(cc.full)) ] <- cc#
-          out <- cc.full#
-        } else {#
-          cc.full[1:length(cc)] <- cc#
-          out <- cc.full#
+      for (i in 1:ncol(m)){#
+        if(sum(mint[,i]) == 0){#
+          r1 <- sample(nrow(m), replace=TRUE, prob=rowSums(m))#
+          r1 <- r1[1] #
+          mint[r1, i] <- 1#
         }#
       }#
-      out#
-    }
-BCC_weighted(web)
-BCC_weighted(web, level="lower")
-BCC_weighted(web, level="higher")
-BCC_weighted(web, level="lower", index="closeness")
-BCC_weighted(web, level="higher", index="closeness")
-BCC_weighted(web, level="higher")
-BCC_weighted(web, level="lower")
-BCC_weighted(web, level="lower", index="closeness")
-higher.out
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
-`networklevel` <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="prod", H2_integer=TRUE, fdweighted=TRUE, fddist="euclidean", legacy=FALSE){#
-    if(empty.web) {web <- empty(web)}#
-    web.e <- empty(web) #
-    if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")#
-    allindex <- c( #
-        "number of species", "connectance", "web asymmetry", #
-        "links per species", "number of compartments", "compartment diversity",#
-        "cluster coefficient", "degree distribution", "mean number of shared partners",#
-        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", #
-        "weighted nestedness",#
-        "ISA", "SA", "extinction slope", "robustness", "niche overlap",   #
-        "weighted cluster coefficient", "weighted NODF", "partner diversity", "generality", "vulnerability", "linkage density", "Fisher alpha",  "interaction evenness", "Alatalo interaction evenness", "effective partners", "Shannon diversity", "functional diversity", "H2" )#
-    index <- unique(index)#
-    wrong.name <- which(is.na(pmatch(index, c(allindex, "ALL", "ALLBUTDD", "info","quantitative", "binary", "topology", "networklevel"))))#
-    if (length(wrong.name) > 0) stop("You selected an index that is not available: ", paste(index[wrong.name], collapse=", "))#
-    if (length(index)==1 & !all(index %in% allindex)){#
-        index <- switch(index,#
-                        "ALL" = allindex,#
-                        "ALLBUTDD" = allindex[-which(allindex=="degree distribution")],#
-                        "info" = c("number of species", "connectance", "web asymmetry", "links per species", "number of compartments"),#
-                        "quantitative" = c("weighted cluster coefficient", "weighted nestedness", "weighted NODF", "functional diversity", "partner diversity", "effective partners", "H2", "diversity","linkage density", "niche overlap"), #
-                        "binary" = c("connectance", "links per species", "nestedness", "mean number of partners","cluster coefficient",  "C-score", "Fisher alpha"),#
-                        "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness"),#
-                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "nestedness", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),#
-                        stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #
-        )#
     }#
-    if (legacy == FALSE){#
-        out <- list()#
-        if ("connectance" %in% index){#
-            suppressWarnings(out$connectance <- sum(web>0)/prod(dim(web)))#
-        }#
-        if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     #
-        if ("links per species" %in% index){#
-            L <- sum(web>0)/sum(dim(web))#
-            out$"links per species"=L#
-        }#
-        if (any(c("number of compartments", "compartment diversity") %in% index)){#
-            CD <- function(co){#
-                if (co$n.compart>1){#
-                    no <- NA#
-                    for (i in 1:co$n.compart){#
-                        comp <- which(abs(co$cweb)==i, arr.ind=TRUE) #
-                        no[i] <- length(unique(comp[,1])) + length(unique(comp[,2])) #
-                    }#
-                    no <- no/sum(dim(web)) #
-                    CD <- exp(-sum(no*log(no)))#
-                }  else {CD <- NA} #
-                CD#
-            }#
-            comps <- try(compart(web.e), silent=TRUE)#
-            if (class(comps)=="try-error") {#
-                ncompart <- compdiv <- NA#
-            } else  {#
-                ncompart <- comps$n.compart#
-                compdiv <- CD(comps)#
-            }#
-            if ("number of compartments" %in% index) out$"number of compartments" <- as.integer(ncompart)#
-            if ("compartment diversity" %in% index) out$"compartment diversity" <- compdiv#
-        }#
-        if ("cluster coefficient" %in% index){#
-            cluster.coef <- function(web, full=FALSE, FUN=mean){#
-                web <- as.matrix(web)#
-                Ci.high <- colSums((web>0))/nrow(web)#
-                Ci.low <- rowSums((web>0))/ncol(web)#
-                CC <- FUN(Ci.high)#
-                if (full) out <- list("cluster coefficient"=CC, "CC values higher"=Ci.high,#
-                                      "CC values lower"=Ci.low) else out <- c("cluster coefficient"=CC)#
-                out#
-            }#
-            out$"cluster coefficient"=as.numeric(cluster.coef(web, FUN=CCfun, full=FALSE))#
-        }#
-        if ("nestedness" %in% index){#
-            nest <- try(nestedtemp(web)$statistic, silent=TRUE)#
-            out$nestedness <- ifelse(class(nest)=="try-error", NA, nest)#
-        }#
-        if ("weighted nestedness" %in% index){#
-            wine.res <- try(wine(web.e, nreps=nrep)$wine, silent=TRUE)#
-            out$"weighted nestedness" <- if (!inherits(wine.res, "try-error")) {wine.res} else {NA}#
-        }#
-        if ("weighted NODF" %in% index){#
-			NODF <- try(unname(nestednodf(web, order=TRUE, weighted=TRUE)$statistic[3]), silent=TRUE)#
-            out$"weighted NODF" <- if (inherits(NODF, "try-error")) NA else NODF#
-        }#
-        if (any(c("ISA", "interaction strength asymmetry", "dependence asymmetry") %in% index)){#
-            depL <- web.e/matrix(rowSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=FALSE)#
-            depH <- web.e/matrix(colSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=TRUE)#
-            if (ISAmethod=="Bascompte" & "ISA" %in% index) {#
-                out$"dependence asymmetry"=mean(abs(depL-depH)/pmax(depL, depH), na.rm=TRUE)#
-            }#
-            if (ISAmethod=="Bluethgen" & "ISA" %in% index) {#
-                web2 <- web#
-                web2[, which(colSums(web)==1)] <- 0#
-                web2[which(rowSums(web)==1), ] <- 0#
-                rowsummat <- matrix(rowSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=FALSE)#
-                colsummat <- matrix(colSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=TRUE)#
-                depL <- web2/rowsummat#
-                depH <- web2/colsummat#
-                depL[depL<=0] <- NA#
-                depH[depH<=0] <- NA#
-                depLprime <- (depL - 1/rowsummat)/(1 - 1/rowsummat) #
-                depHprime <- (depH - 1/colsummat)/(1 - 1/colsummat)#
-                out$"interaction strength asymmetry"=mean(as.matrix(depHprime-depLprime), na.rm=TRUE) #
-            }#
-        }#
-        if ("SA" %in% index){#
-            di <- dfun(web)$dprime  #
-            dj <- dfun(t(web))$dprime #
-            if (SAmethod=="log"){#
-                lgmeani <- mean(log(di[di>0])); lgmeanj <- mean(log(dj[dj>0]))#
-                SA <- (lgmeanj-lgmeani)/sum(lgmeani, lgmeanj)  #
-            }#
-            if (SAmethod=="Bluethgen"){#
-                wmeani <- sum(di*rowSums(web.e))/sum(web.e)#
-                wmeanj <- sum(dj*colSums(web.e))/sum(web.e)#
-                SA <- (wmeanj-wmeani)/sum(wmeani, wmeanj) #
-            }#
-            out$"specialisation asymmetry" <- SA #
-        }#
-        if ("linkage density" %in% index){#
-            preytot.mat <- matrix(rep(colSums(web), NROW(web)), NROW(web), byrow=TRUE)#
-            preyprop.mat <- web/preytot.mat  #
-            predtot.mat <- matrix(rep(rowSums(web), NCOL(web)), NROW(web), byrow=FALSE)#
-            predprop.mat <- web/predtot.mat  #
-            if (logbase==2 | logbase=="2"){#
-                H_Nk <- apply(preyprop.mat, 2, function(x) -sum(x*log2(x), na.rm=TRUE))#
-                H_Pk <- apply(predprop.mat, 1, function(x) -sum(x*log2(x), na.rm=TRUE))#
-                n_Nk <- ifelse(colSums(web)!=0, 2^H_Nk, 0)#
-                n_Pk <- ifelse(rowSums(web)!=0, 2^H_Pk, 0)#
-            }#
-            if (logbase=="e"){ #
-                H_Nk <- apply(preyprop.mat, 2, function(x) -sum(x*log(x), na.rm=TRUE))#
-                H_Pk <- apply(predprop.mat, 1, function(x) -sum(x*log(x), na.rm=TRUE))#
-                n_Nk <- ifelse(colSums(web)!= 0, exp(H_Nk), 0)#
-                n_Pk <- ifelse(rowSums(web)!= 0, exp(H_Pk), 0)#
-            }#
-            V <- sum(rowSums(web)/sum(web)*n_Pk)#
-            G <- sum(colSums(web)/sum(web)*n_Nk)#
-            LD_q <- 0.5*(V+G)#
-            out$"linkage density"=LD_q#
-        }#
-        if ("Fisher alpha" %in% index) {#
-            fish <- try(fisherfit(web)$estimate, silent=TRUE) #
-            if (inherits(fish, "try-error")) {#
-                out$"Fisher alpha" <- NA#
-            } else {#
-                out$"Fisher alpha" <- fish#
-            }#
-        }#
-        if (any(c("interaction evenness", "Alatalo interaction evenness", "Shannon diversity") %in% index)){#
-            p_i.mat <- web/sum(web)#
-            SH <- -sum(p_i.mat*log(p_i.mat), na.rm=TRUE)#
-            if ("Shannon diversity" %in% index) out$"Shannon diversity" <- SH#
-            IE <- ifelse(intereven=="prod", SH/log(prod(dim(web))), SH/log(sum(web>0)))#
-            if ("interaction evenness" %in% index) out$"interaction evenness" <- IE#
-            if ("Alatalo interaction evenness" %in% index){#
-            evenness <- function(web){#
-                pk <- web/sum(web)#
-                (Alatalo <- (1/sum(pk^2) -1) / (exp(-sum(pk * log(pk), na.rm=TRUE)) -1))#
-            }#
-            E <- evenness(web)#
-            out$"Alatalo interaction evenness" <- E#
-            }#
-        }      #
-        if ("H2" %in% index){#
-            is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol #
-            if (any(is.wholenumber(web)==FALSE)) H2_integer <- FALSE #
-            H2 <- as.numeric(H2fun(web, H2_integer=H2_integer)[1]) #
-            out$"H2"= ifelse(H2<0, 0, H2)#
-        }#
-        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "nestedness", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density"), index)#
-        exclude.index <- netw.index[!is.na(netw.index)]#
-        gindex <- if (length(exclude.index)==0) index else index[-exclude.index] #
-        if (length(gindex) > 0) outg <- grouplevel(web, index=gindex, level=level, weighted=weighted, extinctmethod=extinctmethod, nrep=nrep, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fdweighted=fdweighted, fddist=fddist)#
-        if (exists("outg")){#
-            if (is.list(outg)){#
-                SEQ <- seq(1, 2*length(outg[[1]]), by=2)#
-                sorted.outg <- c(outg[[1]], outg[[2]])#
-                outg <- sorted.outg[order(c(SEQ, SEQ+1))]#
-            } #
-            out <- c(unlist(out), outg) #
-        } else {out <- unlist(out)} #
-    } #
-    if (legacy == TRUE){ #
-        out <- .networklevel(web, index=index, ISAmethod=ISAmethod, SAmethod=SAmethod, extinctmethod=extinctmethod, nrep=nrep, plot.it.extinction=FALSE, plot.it.dd=FALSE, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fdweighted=fdweighted, fddist=fddist)#
-    } #
-    return(out)#
-}#
-.networklevel <- function(web, index="ALLBUTDD", ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, plot.it.extinction=FALSE, plot.it.dd=FALSE, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="sum", H2_integer=TRUE, fdweighted=TRUE, fddist="euclidean"){#
-    if(empty.web) {web <- empty(web)}#
-    web.e <- empty(web) #
-    if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")#
-    allindex <- c( #
-        "number of species", "connectance", "web asymmetry", #
-        "links per species", "number of compartments", "compartment diversity",#
-        "cluster coefficient", "degree distribution", "mean number of shared partners",#
-        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", #
-        "weighted nestedness",#
-        "ISA", "SA", "extinction slope", "robustness", "niche overlap",   #
-        "weighted cluster coefficient", "weighted NODF", "generality", "vulnerability", "linkage density", "Fisher alpha",  "interaction evenness", "Alatalo interaction evenness", "diversity", "effective partners", "functional diversity", "H2" )#
-    if (length(index)==1 & !all(index %in% allindex)){                        #
-        index <- switch(index,#
-                        "ALL" = allindex,#
-                        "ALLBUTDD" = allindex[-which(allindex=="degree distribution")],#
-                        "info" = c("number of species", "connectance", "web asymmetry", "links per species", "number of compartments"),#
-                        "quantitative" = c("weighted cluster coefficient", "weighted nestedness", "weighted NODF", "functional diversity", "H2", "diversity", "effective partners", "mean interaction diversity", "linkage density"),#
-                        "binary" = c("connectance", "links per species", "nestedness", "cluster coefficient",  "C-score"),#
-                        "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness"),#
-                        stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #
-        )#
+    while.counter <- 0#
+    while (sum(mint) < n){#
+      rand <- runif(1, 0, 1)#
+      ri <- min(which(mac >= rand))#
+      if (rep.cell == TRUE) mint[ri] <- mint[ri] + 1#
+      if (rep.cell == FALSE) mint[ri] <- 1#
+      while.counter <- while.counter + 1#
+      if (while.counter >= trials*n) stop("Cannot allocate the requested interactions in a reasonable amount of time! \n Either increase 'trials' or decrease 'n'.")#
     }#
-    out <- list()#
-if (plot.it.extinction) {m=2; n=1; par(mfrow=c(m,n), mar=c(5,5,4,1))} else m=1#
-if (plot.it.dd) {n=2; par(mfrow=c(m,n), mar=c(5,5,4,1))} else n=1#
-if ("number of species" %in% index) {#
-    out$"number of lower trophic species" <- as.integer(NROW(web))#
-    out$"number of higher trophic species" <- as.integer(NCOL(web))#
-}#
-#
-if ("connectance" %in% index){#
-    out$connectance <- sum(web>0)/prod(dim(web))#
-}#
-#
-if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     #
-if ("links per species" %in% index){#
-    L <- sum(web>0)/sum(dim(web))#
-    out$"links per species"=L#
-}#
-#
-if (any(c("number of compartments", "compartment diversity") %in% index)){#
-    CD <- function(co){#
-        if (co$n.compart>1){#
-            no <- NA#
-            for (i in 1:co$n.compart){#
-                comp <- which(abs(co$cweb)==i, arr.ind=TRUE) #
-                no[i] <- length(unique(comp[,1])) + length(unique(comp[,2])) #
-            }#
-            no <- no/sum(dim(web)) #
-            CD <- exp(-sum(no*log(no)))#
-        }  else {CD <- NA} #
-        CD#
-    }#
-    comps <- try(compart(web.e), silent=TRUE)#
-    if (class(comps)=="try-error") {#
-        ncompart <- compdiv <- NA#
-    } else  {#
-        ncompart <- comps$n.compart#
-        compdiv <- CD(comps)#
-    }#
-    if ("number of compartments" %in% index) out$"number of compartments" <- as.integer(ncompart)#
-    if ("compartment diversity" %in% index) out$"compartment diversity" <- compdiv#
-}#
-#
-if ("cluster coefficient" %in% index){#
-    cluster.coef <- function(web, full=FALSE, FUN=mean){#
-        web <- as.matrix(web)#
-        Ci.high <- colSums((web>0))/nrow(web)#
-        Ci.low <- rowSums((web>0))/ncol(web)#
-        CC <- FUN(Ci.high)#
-        if (full) out <- list("cluster coefficient"=CC, "CC values higher"=Ci.high,#
-                              "CC values lower"=Ci.low) else out <- c("cluster coefficient"=CC)#
-        out#
-    }#
-    out$"cluster coefficient"=as.numeric(cluster.coef(web, FUN=CCfun, full=FALSE))#
-}#
-#
-if ("weighted cluster coefficient" %in% index){  #
-    edgelist <- web2edges(web, return=TRUE)#
-    wcc <- try(unname(clustering_tm(edgelist)["am"]), silent=TRUE) #
-    out$"weighted cluster coefficient" <- if (inherits(wcc, "try-error")) "NA" else wcc#
-}#
-if ("degree distribution" %in% index){#
-    dd <- suppressWarnings(try(degreedistr(web, plot.it=plot.it.dd, pure.call=FALSE), silent=TRUE))#
-    if (class(dd)=="try-error"){#
-        dd <- list()#
-        dd$"dd fits LTL" <- NA#
-        dd$"dd fits HTL" <- NA#
-    }#
-    out$"degree distribution LTL" <- dd$"dd fits LTL"#
-    out$"degree distribution HTL" <- dd$"dd fits HTL"#
-}#
-if ("mean number of shared partners" %in% index) {#
-    out$"mean number of shared HTL species" <- #
-        mean(designdist(t(web)>0, method="J", terms="minimum"))#
-    out$"mean number of shared LTL species" <- #
-        mean(designdist(web>0, method="J", terms="minimum"))#
-} #
-#
-if ("togetherness" %in% index){#
-    out$togetherness <- togetherness(web, normalise=normalise, na.rm=TRUE)#
-}#
-#
-if ("C score" %in% index){#
-    out$"C score" <- C.score(web, normalise=normalise, na.rm=TRUE)#
-}#
-if ("V ratio" %in% index){#
-    out$"V ratio" <- V.ratio(web)#
-}#
-#
-if ("discrepancy" %in% index){#
-    out$discrepancy <- as.integer(unname(discrepancy(web)))#
-}#
-#
-if ("nestedness" %in% index){#
-    nest <- try(nestedtemp(web)$statistic, silent=TRUE)#
-    out$nestedness <- ifelse(class(nest)=="try-error", NA, nest)#
-}#
-#
-if ("weighted nestedness" %in% index){#
-    wine.res <- try(wine(web.e, nreps=nrep)$wine, silent=TRUE)#
-    out$"weighted nestedness" <- if (!inherits(wine.res, "try-error")) {wine.res} else {NA}#
-}#
-#
-if ("weighted NODF" %in% index){#
-    out$"weighted NODF" <- unname(nestednodf(web, order=TRUE, weighted=TRUE)$statistic[3])#
-}#
-if ("ISA" %in% index){#
-    depL <- web.e/matrix(rowSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=FALSE)#
-    depH <- web.e/matrix(colSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=TRUE)#
-    if (ISAmethod=="Bascompte" & "ISA" %in% index) {#
-        out$"dependence asymmetry"=mean(abs(depL-depH)/pmax(depL, depH), na.rm=TRUE)#
-    }#
-    if (ISAmethod=="Bluethgen" & "ISA" %in% index) {#
-        web2 <- web#
-        web2[, which(colSums(web)==1)] <- 0#
-        web2[which(rowSums(web)==1), ] <- 0#
-        rowsummat <- matrix(rowSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=FALSE)#
-        colsummat <- matrix(colSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=TRUE)#
-        depL <- web2/rowsummat#
-        depH <- web2/colsummat#
-        depL[depL<=0] <- NA#
-        depH[depH<=0] <- NA#
-        depLprime <- (depL - 1/rowsummat)/(1 - 1/rowsummat) #
-        depHprime <- (depH - 1/colsummat)/(1 - 1/colsummat)#
-        out$"interaction strength asymmetry"=mean(as.matrix(depHprime-depLprime), na.rm=TRUE) #
-    }#
-}#
-if ("SA" %in% index){#
-    di <- dfun(web)$dprime  #
-    dj <- dfun(t(web))$dprime #
-    if (SAmethod=="log"){#
-        lgmeani <- mean(log(di[di>0])); lgmeanj <- mean(log(dj[dj>0]))#
-        SA <- (lgmeanj-lgmeani)/sum(lgmeani, lgmeanj)  #
-    }#
-    if (SAmethod=="Bluethgen"){#
-        wmeani <- sum(di*rowSums(web.e))/sum(web.e)#
-        wmeanj <- sum(dj*colSums(web.e))/sum(web.e)#
-        SA <- (wmeanj-wmeani)/sum(wmeani, wmeanj) #
-    }#
-    out$"specialisation asymmetry" <- SA #
-}#
-if (any(c("extinction slope", "robustness") %in% index)){#
-    extL <- try(second.extinct(web=web, method=extinctmethod, nrep=nrep, participant="lower"), silent=TRUE)       #
-    extH <- try(second.extinct(web=web, method=extinctmethod, nrep=nrep, participant="higher"), silent=TRUE)#
-    if ("extinction slope" %in% index){#
-        slopeL <- try(slope.bipartite(extL, col="green", pch=16, type="b", plot.it=plot.it.extinction), silent=TRUE)#
-        out$"extinction slope LTL"=suppressWarnings(as.numeric(slopeL))            #
-        slopeH <- try(slope.bipartite(extH, col="green", pch=16, type="b", plot.it=plot.it.extinction), silent=TRUE)#
-        out$"extinction slope HTL"=suppressWarnings(as.numeric(slopeH))#
-    }#
-    if ("robustness" %in% index) {#
-        if (inherits(extL, "try-error")){#
-            robustL <- robustH <- NA#
-        } else {#
-            robustL <- try(robustness(extL), silent=TRUE)#
-            robustH <- try(robustness(extH), silent=TRUE)#
-            rL <- if (inherits(robustL, "try-error")) NA else robustL		  #
-            rH <- if (inherits(robustH, "try-error")) NA else robustH		  #
-        }#
-        out$"robustness higher exterminated" = as.numeric(rH)#
-        out$"robustness lower exterminated" = as.numeric(rL)#
-    }#
-}#
-if ("niche overlap" %in% index) {#
-    NOhigher <- mean(1-vegdist(t(web.e), method=dist))#
-    NOlower <- mean(1-vegdist(web.e, method=dist))#
-    out$"niche overlap LTL" <- NOlower#
-    out$"niche overlap HTL" <- NOhigher#
-}#
-#
-if (any(c("links per species", "linkage density", "vulnerability", "generality", "Fisher alpha", "mean interaction diversity") %in% index)){#
-    preytot.mat <- matrix(rep(colSums(web), NROW(web)), NROW(web), byrow=TRUE)#
-    preyprop.mat <- web/preytot.mat  #
-    predtot.mat <- matrix(rep(rowSums(web), NCOL(web)), NROW(web), byrow=FALSE)#
-    predprop.mat <- web/predtot.mat  #
-    if (logbase==2 | logbase=="2"){#
-        H_Nk <- apply(preyprop.mat, 2, function(x) -sum(x*log2(x), na.rm=TRUE))#
-        H_Pk <- apply(predprop.mat, 1, function(x) -sum(x*log2(x), na.rm=TRUE))#
-        n_Nk <- ifelse(colSums(web)!=0, 2^H_Nk, 0)#
-        n_Pk <- ifelse(rowSums(web)!=0, 2^H_Pk, 0)#
-    }#
-    if (logbase=="e"){ #
-        H_Nk <- apply(preyprop.mat, 2, function(x) -sum(x*log(x), na.rm=TRUE))#
-        H_Pk <- apply(predprop.mat, 1, function(x) -sum(x*log(x), na.rm=TRUE))#
-        n_Nk <- ifelse(colSums(web)!= 0, exp(H_Nk), 0)#
-        n_Pk <- ifelse(rowSums(web)!= 0, exp(H_Pk), 0)#
-    }#
-    V <- sum(rowSums(web)/sum(web)*n_Pk)#
-    G <- sum(colSums(web)/sum(web)*n_Nk)#
-    LD_q <- 0.5*(V+G)#
-    if ("vulnerability" %in% index) out$"vulnerability" <- V#
-    if ("generality" %in% index) out$"generality"=G#
-    if ("linkage density" %in% index) out$"linkage density"=LD_q#
-    if ("Fisher alpha" %in% index) {#
-        fish <- try(fisherfit(web)$estimate, silent=TRUE) #
-        if (inherits(fish, "try-error")) {#
-            out$"Fisher alpha" <- NA#
-        } else {#
-            out$"Fisher alpha" <- fish#
-        }#
-    }#
-}#
-#
-if (any(c("interaction evenness", "Alatalo interaction evenness", "Shannon diversity") %in% index)){#
-    p_i.mat <- web/sum(web)#
-    SH <- -sum(p_i.mat*log(p_i.mat), na.rm=TRUE)#
-    IE <- ifelse(intereven=="prod", SH/log(prod(dim(web))), SH/log(sum(web>0)))#
-    if ("interaction evenness" %in% index) out$"interaction evenness" <- IE#
-    if ("Alatalo interaction evenness" %in% index){#
-        evenness <- function(web){#
-            pk <- web/sum(web)#
-            (Alatalo <- (1/sum(pk^2) -1) / (exp(-sum(pk * log(pk), na.rm=TRUE)) -1))#
-        }#
-        E <- evenness(web)#
-        out$"Alatalo interaction evenness" <- E#
-    }    #
-    if ("Shannon diversity" %in% index) out$"Shannon diversity" <- SH    #
-}#
-if (any(c("fd", "functional diversity") %in% index)){#
-    out$"Functional diversity LTL" <- fd(t(web), dist=fddist, method="average", weighted=fdweighted)		#
-    out$"Functional diversity HTL" <- fd(web, dist=fddist, method="average", weighted=fdweighted)#
-}#
-if ("H2" %in% index){#
-    is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol #
-    if (any(is.wholenumber(web)==FALSE)) H2_integer <- FALSE #
-    H2 <- as.numeric(H2fun(web, H2_integer=H2_integer)[1]) #
-    out$"H2"= ifelse(H2<0, 0, H2)#
-}#
-if (!("degree distribution" %in% index)) out <- unlist(out)#
-return(out)#
+    mint#
+  }#
 }
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "horst"))
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "evenness"))
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "alatalo evenness"))
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "Alatalo evenness"))
-?networklevel
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "Alatalo interaction evenness"))
-networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2", "Alatalo interaction evenness", "horste"))
+mgen(web=Safariland)
 require(bipartite)
-fd(Safariland)
-fd(t(Safariland))
-require(bipartite)
-web <- matrix(0,nrow=2,ncol=4) ; web[1,3:4] <- 5; web[2,1:2] <- 5#
-networklevel(web)
-specieslevel(web)
-web
-slope.bipartite(second.extinct(web))
-slope.bipartite(second.extinct(t(web)))
-traceback()
-?nls
-networklevel(Safariland, index="functional diversity")
-networklevel(Safariland, index="functional complementarity")
-networklevel(Safariland, index="functional diversity")
-traceback()
+mgen(web=Safariland)
+mgen(web=Safariland/sum(Safariland), n=200, rep.cell=F)
+probmat <- matrix(1/100,10,10)#
+mgen(web=probmat, n=100)#
+obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0),5,5)#
+rs <- rowSums(obs.mat)#
+cs <- colSums(obs.mat)#
+web <- rs %*% t(cs)#
+web <- web/sum(web)#
+n = sum(obs.mat)#
+mgen(web, n, keep.species=FALSE, rep.cell=FALSE) #
+mgen(web, n, keep.species=TRUE, rep.cell=FALSE)
+mgen(mosquin1967, keep.species=FALSE, rep.cell=TRUE)
+mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE)
+mgen <- function(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum", trials=100){#
+  if (sum(web) != 1) { #
+  	message(paste("This is not a probability matrix! I will proceed after transforming the entries according to option 'autotransform':", autotransform, "!"))#
+  	if (autotransform == "sum") {#
+  		m <- web/sum(web)#
+  	} else {#
+  		m <- (rowSums(web)/sum(web)) %*% t(colSums(web)/sum(web))#
+  	}#
+  } else m <- web#
+  if (rep.cell == FALSE & n > (nrow(m)*ncol(m))){#
+    message("Argument n should be smaller than the number of cells in matrix!")#
+  }#
+  else{#
+    mac <- matrix(cumsum(m),nrow(m),ncol(m)) #
+    mint <- matrix(0,nrow(m),ncol(m)) #
+    if (keep.species){#
+      for (i in 1:nrow(m)){#
+        c1 <- sample(ncol(m), replace=TRUE, prob=colSums(m))#
+        c1 <- c1[1]#
+        mint[i, c1] <- 1#
+      }#
+      for (i in 1:ncol(m)){#
+        if(sum(mint[,i]) == 0){#
+          r1 <- sample(nrow(m), replace=TRUE, prob=rowSums(m))#
+          r1 <- r1[1] #
+          mint[r1, i] <- 1#
+        }#
+      }#
+    }#
+    while.counter <- 0#
+    while (sum(mint) < n){#
+      rand <- runif(1, 0, 1)#
+      ri <- min(which(mac >= rand))#
+      if (rep.cell == TRUE) mint[ri] <- mint[ri] + 1#
+      if (rep.cell == FALSE) mint[ri] <- 1#
+      while.counter <- while.counter + 1#
+      if (while.counter >= trials*n) stop("Cannot allocate the requested interactions in a reasonable amount of time! \n Either increase 'trials' or decrease 'n'.")#
+    }#
+    mint#
+  }#
+}
+mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE)
+mgen(mosquin1967, keep.species=TRUE, rep.cell=F)
+obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)#
+rs <- rowSums(obs.mat)#
+cs <- colSums(obs.mat)#
+web <- rs %*% t(cs)#
+web <- web/sum(web)#
+n = sum(obs.mat)#
+mgen(web, n, keep.species=FALSE, rep.cell=FALSE) #
+mgen(web, n, keep.species=TRUE, rep.cell=FALSE)
+obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)#
+rs <- rowSums(obs.mat)#
+cs <- colSums(obs.mat)#
+web <- rs %*% t(cs)#
+web <- web/sum(web)#
+n = sum(obs.mat)#
+mgen(web, n, keep.species=FALSE, rep.cell=FALSE) #
+mgen(web, n, keep.species=TRUE, rep.cell=FALSE)

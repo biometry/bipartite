@@ -1,6 +1,6 @@
 # Export all names
 #exportPattern(".")
-export(as.one.mode, as.tnet, BC, betweenness_w, CC, C.score, closeness_w, compart, computeModules, clustering_tm, czvalues, degreedistr, dfun, discrepancy, empty, endpoint, extinction, fc, frame2webs, genweb, grouplevel, H2fun, linklevel, listModuleInformation, ND, nested, nestedness, nestedrank, networklevel, nodespec, npartite, null.distr, null.t.test, nullmodel, PAC, PDI, plotModuleWeb, plotPAC, plotweb, plotweb2, plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, robustness, second.extinct, shuffle.web, slope.bipartite, sortweb, specieslevel, strength, swap.web, symmetrise_w, togetherness, tnet_igraph, V.ratio, vaznull, versionlog, visweb, web2edges, webs2array, wine)
+export(as.one.mode, as.tnet, BC, betweenness_w, CC, C.score, closeness_w, compart, computeModules, clustering_tm, czvalues, degreedistr, dfun, discrepancy, empty, endpoint, extinction, fc, frame2webs, genweb, grouplevel, H2fun, linklevel, listModuleInformation, mgen, ND, nested, nestedness, nestedrank, networklevel, nodespec, npartite, null.distr, null.t.test, nullmodel, PAC, PDI, plotModuleWeb, plotPAC, plotweb, plotweb2, plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, robustness, second.extinct, shuffle.web, slope.bipartite, sortweb, specieslevel, strength, swap.web, symmetrise_w, togetherness, tnet_igraph, V.ratio, vaznull, versionlog, visweb, web2edges, webs2array, wine)
 
 # Import all packages listed as Imports or Depends
 importFrom(igraph, graph.edgelist, set.edge.attribute, V) #for tnet functions

@@ -5,7 +5,7 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
     # web   a binary or quantitative network
     # N     number of null model replicates wanted
     # method  number or name of the null model type: 1/"r2dtable", 2/swap.web, 3/vaznull, 4/shuffle.web, 5/mgen; partial match of names; methods 1 to 4 work for quantitative webs, 4 and 5 for binary.
-    # ...   arguments to be passed on to null model function (see e.g. ?swap.web)
+    # ...   arguments to be passed on to null model function (see e.g. swap.web and mgen)
     #
     # shuffle.web can be used for binary and quantitative webs: for binary, it uses the function commsimulator with method "quasiswap", for quantitative, it uses the function shuffle.web.
     #
@@ -54,9 +54,9 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
     }
 
     if (m == 5){ #mgen
-       if (any(web > 1)) warning("Discarding quantitative information! Using only the binary version of the web!")
-       binweb <- web > 0
-       pweb <- outer(rowSums(binweb)/sum(binweb), colSums(binweb)/sum(binweb), FUN="*")
+       #if (any(web > 1)) warning("Discarding quantitative information! Using only the binary version of the web!")
+       #binweb <- web > 0
+       #pweb <- outer(rowSums(binweb)/sum(binweb), colSums(binweb)/sum(binweb), FUN="*")
        mgen.web <- function(binweb, pweb){
           rbinweb <- matrix(0, nrow=nrow(binweb), ncol=ncol(binweb))
           rbinweb[sample(1:prod(dim(binweb)), size=sum(binweb), prob=pweb)] <- 1
@@ -64,7 +64,7 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
           #if (dim(out) < dim(web)) warning("Some null models are rank-deficient! See ?mgen for details.")
           out
        }
-       out <- replicate(n=N, unname(mgen.web(binweb, pweb)), simplify=FALSE)    
+       out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)    
     }
     
     if (!(m %in% 1:5)) stop("Please choose a valid method.")

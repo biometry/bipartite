@@ -94,6 +94,20 @@ str(linklevel(memmott1999, index=c("dependence", "endpoint")))
 if (!exists("comp1")) comp1 <- computeModules(vazquenc)
 listModuleInformation(comp1)
 
+# mgen
+obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)
+rs <- rowSums(obs.mat)
+cs <- colSums(obs.mat)
+web <- rs %*% t(cs)
+web <- web/sum(web)
+n = sum(obs.mat)
+mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums
+mgen(web, n, keep.species=TRUE, rep.cell=FALSE) # Not allowing zero marginal sums
+
+mgen(mosquin1967, keep.species=FALSE, rep.cell=TRUE) # Allowing zero marginal sums
+mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE) # Not allowing zero marginal sums
+
+
 # ND, BC, CC
 ND(vazquenc)
 BC(vazquenc)

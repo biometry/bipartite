@@ -4,7 +4,7 @@
 
 \title{Generates null models for network analysis}
 \description{
-A function for convenient generation of null models for quantitative and binary networks
+A wrapper function for convenient generation of null models for quantitative and binary networks
 }
 \usage{
 nullmodel(web, N=1000, method="r2d", ...)
