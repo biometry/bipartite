@@ -5,6 +5,9 @@
 * checking for file ‘bipartite/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘bipartite’ version ‘2.05’
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>’
+Version contains leading zeroes (2.05)
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -35,6 +38,7 @@
 * checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
+* checking Rd line widths ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
@@ -52,3 +56,4 @@
 * checking installed files from ‘inst/doc’ ... OK
 * checking examples ... OK
 * checking PDF version of manual ... OK
+NOTE: There was 1 note.

@@ -36,7 +36,7 @@ See help pages for details and examples.
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.04\cr
-Date: \tab 2014-03-25\cr
+Date: \tab 2014-11-25\cr
 License: \tab GPL \cr
 }
 }

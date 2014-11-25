@@ -1,13 +1,13 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.14)  24 NOV 2014 21:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.14)  25 NOV 2014 08:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a
-1486a117a/Rd2.tex
+**/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/Rtmp8IsfL2/Rd2pdfb70
+d272e156c/Rd2.tex
 
-(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/RtmpS21Id7/Rd2pdfb3a1
-486a117a/Rd2.tex
+(/private/var/folders/wm/pdzsv7312kbf9mcrbl443x4w0000gp/T/Rtmp8IsfL2/Rd2pdfb70d
+272e156c/Rd2.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 
@@ -1228,7 +1228,7 @@ tch of names; meth-
  []
 
 [75]
-Overfull \hbox (6.18094pt too wide) in paragraph at lines 3130--3130
+Overfull \hbox (6.18094pt too wide) in paragraph at lines 3132--3132
  []\T1/zi4/m/n/9 null <- unlist(sapply(nulls, networklevel, index="weighted nes
 tedness")) #takes a while ...[] 
  []
@@ -1257,14 +1257,14 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [84] [85] [86]
-Overfull \hbox (66.9672pt too wide) in paragraph at lines 3621--3622
+Overfull \hbox (66.9672pt too wide) in paragraph at lines 3623--3624
 \T1/ptm/m/n/10 bil-ity) and an al-ter-na-tive func-tion that plots fully in-de-
 pen-dent abun-dance es-ti-mates (`\T1/zi4/m/n/10 abuns.type="independent"\T1/pt
 m/m/n/10 ').
  []
 
 
-Overfull \hbox (53.03935pt too wide) in paragraph at lines 3621--3622
+Overfull \hbox (53.03935pt too wide) in paragraph at lines 3623--3624
 \T1/ptm/m/n/10 To change box (species) col-ors with `\T1/zi4/m/n/10 abuns.type=
 \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 independent\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ', u
 se `\T1/zi4/m/n/10 low.abun.col\T1/ptm/m/n/10 ' and `\T1/zi4/m/n/10 high.abun.c
@@ -1272,14 +1272,14 @@ ol\T1/ptm/m/n/10 '.
  []
 
 
-Overfull \hbox (58.85849pt too wide) in paragraph at lines 3623--3624
+Overfull \hbox (58.85849pt too wide) in paragraph at lines 3625--3626
 []\T1/ptm/m/n/10 If you have to-tal abun-dance mea-sure but want to plot used a
 nd un-used re-sources, use `\T1/zi4/m/n/10 abuns.type=\TS1/zi4/m/n/10 '\T1/zi4/
 m/n/10 additional\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 '
  []
 
 [87]
-Overfull \hbox (4.38089pt too wide) in paragraph at lines 3670--3670
+Overfull \hbox (4.38089pt too wide) in paragraph at lines 3672--3672
  []\T1/zi4/m/n/9 text.high.col=c("blue","red"), col.interaction=c("red",rep("gr
 een",26),rep("brown",242)),[] 
  []
@@ -1293,13 +1293,13 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-Overfull \hbox (12.48665pt too wide) in paragraph at lines 3820--3822
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3822--3824
 \T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
 to-weighted-one-mode-networks/ 
  []
 
 [91]
-Overfull \hbox (12.48665pt too wide) in paragraph at lines 3853--3854
+Overfull \hbox (12.48665pt too wide) in paragraph at lines 3855--3856
 \T1/ptm/m/n/10 http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-on
 to-weighted-one-mode-networks/ 
  []
@@ -1319,13 +1319,13 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [96]
-Overfull \hbox (5.46786pt too wide) in paragraph at lines 4080--4081
+Overfull \hbox (5.46786pt too wide) in paragraph at lines 4082--4083
 []\T1/ptm/m/n/10 Optional vec-tor giv-ing the se-quence in which lower-level sp
 ecies are to be deleted. 
  []
 
 
-Overfull \hbox (4.03786pt too wide) in paragraph at lines 4096--4097
+Overfull \hbox (4.03786pt too wide) in paragraph at lines 4098--4099
 []\T1/ptm/m/n/10 Function re-turns an ob-ject of class ``bi-par-tite'' to en-su
 re proper work-ing of func-tion \T1/zi4/m/n/10 plot.bipartite\T1/ptm/m/n/10 . 
  []
@@ -1342,26 +1342,26 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [101]
-Underfull \hbox (badness 10000) in paragraph at lines 4329--4333
+Underfull \hbox (badness 10000) in paragraph at lines 4331--4335
 
  []
 
 [102] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [103]
-Overfull \hbox (0.93637pt too wide) in paragraph at lines 4437--4438
+Overfull \hbox (0.93637pt too wide) in paragraph at lines 4439--4440
 \T1/ptm/m/n/10 prop-er-ties. Some are em-bar-rass-ingly sim-ple (such as num-be
 r of in-ter-act-ing species for each species).
  []
 
 [104] [105] [106]
-Overfull \hbox (23.58801pt too wide) in paragraph at lines 4497--4499
+Overfull \hbox (23.58801pt too wide) in paragraph at lines 4499--4501
 []\T1/ptm/m/n/10 Shannon di-ver-sity (when us-ing `\T1/zi4/m/n/10 logbase="e"\T
 1/ptm/m/n/10 ') or per-species gen-er-al-ity/vulnerability
  []
 
 
-Overfull \hbox (21.38849pt too wide) in paragraph at lines 4497--4499
+Overfull \hbox (21.38849pt too wide) in paragraph at lines 4499--4501
 \T1/ptm/m/n/10 (when us-ing `\T1/zi4/m/n/10 logbase=2\T1/ptm/m/n/10 ') of the i
 n-ter-ac-tions of each species. See also [][]\T1/zi4/m/n/10 networklevel[][][]
  []
@@ -1402,7 +1402,7 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [119]
-Overfull \hbox (9.74776pt too wide) in paragraph at lines 5118--5119
+Overfull \hbox (9.74776pt too wide) in paragraph at lines 5120--5121
 []\T1/ptm/m/n/10 Bernd Gru-ber <bernd.gruber@canberra.edu.au> & Carsten F. Dor-
 mann <carsten.dormann@biom.uni-
  []
@@ -1419,106 +1419,106 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-Overfull \hbox (5.13792pt too wide) in paragraph at lines 5314--5315
+Overfull \hbox (5.13792pt too wide) in paragraph at lines 5316--5317
 []
  []
 
 
-Overfull \hbox (5.38867pt too wide) in paragraph at lines 5316--5317
+Overfull \hbox (5.38867pt too wide) in paragraph at lines 5318--5319
 [][][]\T1/zi4/m/n/10 robustness[][][] \T1/ptm/m/n/10 some-times in-ter-preted
  []
 
 [123]
-Overfull \hbox (2.58801pt too wide) in paragraph at lines 5318--5319
+Overfull \hbox (2.58801pt too wide) in paragraph at lines 5320--5321
 []\T1/ptm/m/n/10 Failed to work for net-works with empty columns
  []
 
 
-Overfull \hbox (9.68695pt too wide) in paragraph at lines 5331--5332
+Overfull \hbox (9.68695pt too wide) in paragraph at lines 5333--5334
 []\T1/ptm/m/n/10 This pa-per com-pares spe-cial-i-sa-tion in-dices, based
  []
 
 
-Overfull \hbox (10.48772pt too wide) in paragraph at lines 5349--5350
+Overfull \hbox (10.48772pt too wide) in paragraph at lines 5351--5352
 []\T1/ptm/m/n/10 Some in-ter-ac-tions were lost when there were more rows than 
 columns.
  []
 
 [124]
-Overfull \hbox (9.37816pt too wide) in paragraph at lines 5359--5360
+Overfull \hbox (9.37816pt too wide) in paragraph at lines 5361--5362
 []\T1/ptm/m/n/10 Gustavo Car-vallo has
  []
 
 
-Overfull \hbox (2.41682pt too wide) in paragraph at lines 5361--5362
+Overfull \hbox (2.41682pt too wide) in paragraph at lines 5363--5364
 []\T1/ptm/m/n/10 bezerra2009 is a``full'' flower-visitation net-work of oil-col
 lecting bees in Brazil.
  []
 
 
-Overfull \hbox (3.40817pt too wide) in paragraph at lines 5363--5364
+Overfull \hbox (3.40817pt too wide) in paragraph at lines 5365--5366
 []\T1/ptm/m/n/10 Betweenness and friends can-not be com-puted for fully com-
  []
 
 
-Overfull \hbox (1.46814pt too wide) in paragraph at lines 5367--5368
+Overfull \hbox (1.46814pt too wide) in paragraph at lines 5369--5370
 []\T1/ptm/m/n/10 Robustness and weighted nest-ed-ness were wrapped
  []
 
 
-Overfull \hbox (1.97824pt too wide) in paragraph at lines 5377--5378
+Overfull \hbox (1.97824pt too wide) in paragraph at lines 5379--5380
 \T1/ptm/m/n/10 pro-vid-ing the in-spi-ra-tion and the code. This op-tion is als
 o now avail-able in [][]\T1/zi4/m/n/10 networklevel[][][]\T1/ptm/m/n/10 . 
  []
 
 [125]
-Overfull \hbox (0.66762pt too wide) in paragraph at lines 5407--5408
+Overfull \hbox (0.66762pt too wide) in paragraph at lines 5409--5410
 []\T1/ptm/m/n/10 Fits a log-nor-mal or neg-a-tive bi-no-mial dis-tri-bu-tion to
  the marginal
  []
 
 [126]
-Overfull \hbox (2.93742pt too wide) in paragraph at lines 5435--5436
+Overfull \hbox (2.93742pt too wide) in paragraph at lines 5437--5438
 []\T1/ptm/m/n/10 So far, ran-dom ex-tinc-tion se-quences and
  []
 
 [127]
-Overfull \hbox (3.53809pt too wide) in paragraph at lines 5489--5490
+Overfull \hbox (3.53809pt too wide) in paragraph at lines 5491--5492
 []\T1/ptm/m/n/10 By de-fault now sup-presses er-ror re-port-ing when
  []
 
 [128]
-Overfull \hbox (2.54832pt too wide) in paragraph at lines 5525--5526
+Overfull \hbox (2.54832pt too wide) in paragraph at lines 5527--5528
 []\T1/ptm/m/n/10 This func-tion re-places the (now dep-re-cated) func-tion \T1/
 zi4/m/n/10 nestedness.corso
  []
 
 
-Overfull \hbox (18.14723pt too wide) in paragraph at lines 5527--5528
+Overfull \hbox (18.14723pt too wide) in paragraph at lines 5529--5530
 []\T1/ptm/m/n/10 Another quan-ti-ta-tive pol-li-na-tion net-work from the NCEAS
  database
  []
 
 
-Overfull \hbox (15.43771pt too wide) in paragraph at lines 5540--5541
+Overfull \hbox (15.43771pt too wide) in paragraph at lines 5542--5543
 []\T1/ptm/m/n/10 Another pol-li-na-tion net-work from the NCEAS database (see [
 ][]\T1/zi4/m/n/10 inouye1988[][][]\T1/ptm/m/n/10 ). 
  []
 
 [129]
-Overfull \hbox (14.96771pt too wide) in paragraph at lines 5556--5557
+Overfull \hbox (14.96771pt too wide) in paragraph at lines 5558--5559
 []\T1/ptm/m/n/10 New fea-ture: ar-row=``center.up'', ar-row=``center.down'', ar
 -row=``center.both'':
  []
 
 
-Overfull \hbox (14.30626pt too wide) in paragraph at lines 5590--5591
+Overfull \hbox (14.30626pt too wide) in paragraph at lines 5592--5593
 []\T1/ptm/m/n/10 Sometimes ad-di-tional in-for-ma-tion is avail-able and specie
 s
  []
 
 [130]
-Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
+Overfull \hbox (2.93796pt too wide) in paragraph at lines 5605--5606
 []\T1/ptm/m/n/10 Calculates dis-crep-ancy ac-cord-ing to Brualdi & Sander-son (
 1999),
  []
@@ -1526,17 +1526,17 @@ Overfull \hbox (2.93796pt too wide) in paragraph at lines 5603--5604
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [131]
-Underfull \hbox (badness 10000) in paragraph at lines 5663--5667
+Underfull \hbox (badness 10000) in paragraph at lines 5665--5669
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5672--5677
+Underfull \hbox (badness 10000) in paragraph at lines 5674--5679
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5678--5682
+Underfull \hbox (badness 10000) in paragraph at lines 5680--5684
 
  []
 
@@ -1546,7 +1546,7 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 [134] (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [135]
-Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
+Overfull \hbox (3.4809pt too wide) in paragraph at lines 5855--5855
  []\T1/zi4/m/n/9 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2])
 , as.vector(allin1[,,3]))),[] 
  []
@@ -1554,7 +1554,7 @@ Overfull \hbox (3.4809pt too wide) in paragraph at lines 5853--5853
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [136] [137]
-Overfull \hbox (21.86957pt too wide) in paragraph at lines 5947--5949
+Overfull \hbox (21.86957pt too wide) in paragraph at lines 5949--5951
 []\T1/ptm/m/n/10 Marcelino de la Cruz \T1/zi4/m/n/10 <marcelino.delacruz@upm.es
 >\T1/ptm/m/n/10 , Juan M. Pas-tor \T1/zi4/m/n/10 <juanmanuel.pastor@upm.es>\T1/
 ptm/m/n/10 ,
@@ -1571,11 +1571,11 @@ LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 98.
 
 [140] [141])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5982.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5982.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5984.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 5984.
  (./Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5982.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5982.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5984.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5984.
 
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
 (rerunfilecheck)             Checksum: EB1B3B232997E4775325A7989215EEFD;4719.
@@ -1583,7 +1583,7 @@ Package rerunfilecheck Info: File `Rd2.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5982.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5984.
  ) 
 Here is how much of TeX's memory you used:
  7653 strings out of 493308
@@ -1621,7 +1621,7 @@ exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
 1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on Rd2.pdf (141 pages, 504087 bytes).
+Output written on Rd2.pdf (141 pages, 504333 bytes).
 PDF statistics:
  3046 PDF objects out of 3580 (max. 8388607)
  2864 compressed objects within 29 object streams

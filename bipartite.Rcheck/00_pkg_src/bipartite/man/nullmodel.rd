@@ -18,7 +18,9 @@ nullmodel(web, N=1000, method="r2d", ...)
 }
 
 \details{
-  This is only a wrapper function to facilitate and standardise the generation of null models.
+ ADVICE: Look at the same-named function in \pkg{vegan}, as well as the long list of potential null models described in \code{commsim} in that package. It offers a richer and more standardised implementation of null models than this (earlier) function.
+ 
+ This is only a wrapper function to facilitate and standardise the generation of null models.
   
 These null models assume that integers represent frequencies that are 'individually' counted, not decimal numbers. Multiplication by 1000 (say) and rounding does NOT necessarily make your value frequencies satisfy this assumption. Null models for 'continuously quantitative' webs still have to be developed!
 

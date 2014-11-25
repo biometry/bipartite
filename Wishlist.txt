@@ -1,4 +1,3 @@
-* re-write nullmodels, using the new nullmodels function of vegan, possibly only re-write the help page and link vegan::nullmodels directly.
 * check these functionalities: http://www.r-bloggers.com/the-ecology-of-data-matrices-a-metaphor-for-simultaneous-clustering/
 * plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
