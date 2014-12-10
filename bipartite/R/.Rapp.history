@@ -160,11 +160,277 @@ web <- web/sum(web)#
 n = sum(obs.mat)#
 mgen(web, n, keep.species=FALSE, rep.cell=FALSE) #
 mgen(web, n, keep.species=TRUE, rep.cell=FALSE)
-obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)#
-rs <- rowSums(obs.mat)#
-cs <- colSums(obs.mat)#
-web <- rs %*% t(cs)#
-web <- web/sum(web)#
-n = sum(obs.mat)#
-mgen(web, n, keep.species=FALSE, rep.cell=FALSE) #
-mgen(web, n, keep.species=TRUE, rep.cell=FALSE)
+nullmodel(motten1982, 2, "mgen")
+require(bipartite)
+nullmodel(motten1982, 2, "mgen")
+nullmodel <- function(web, N=1000, method="r2d", ...){#
+    methods <- c("r2dtable", "swap.web", "vaznull", "shuffle.web", "mgen")#
+    if (is.numeric(method)){#
+        m <- method #
+    } else {#
+        m <- pmatch(method, methods)#
+    }#
+    if (is.na(m)) stop("Abbreviated name does not uniquely identify method.")#
+    if (m == 1){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+           rs <- rowSums(web)#
+           cs <- colSums(web)#
+           out <- r2dtable(N, r=rs, c=cs)#
+#
+    }#
+    if (m == 2){#
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+		out <- swap.web(N, web, ...)     #
+#
+    }#
+    if (m == 3){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+			out <- vaznull(N, web)#
+#
+    }#
+    if (m == 4){ #
+        if (any(web > 1)) out <- shuffle.web(web, N, ...)#
+        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) #
+    }#
+    if (m == 5){ #
+       out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)    #
+    }#
+    if (!(m %in% 1:5)) stop("Please choose a valid method.")#
+    return(out)#
+}
+nullmodel(motten1982, 2, "mgen")
+mgen(motten1982)
+unname(mgen(motten1982))
+nullmodel <- function(web, N=1000, method="r2d", ...){#
+    methods <- c("r2dtable", "swap.web", "vaznull", "shuffle.web", "mgen")#
+    if (is.numeric(method)){#
+        m <- method #
+    } else {#
+        m <- pmatch(method, methods)#
+    }#
+    if (is.na(m)) stop("Abbreviated name does not uniquely identify method.")#
+    if (m == 1){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+           rs <- rowSums(web)#
+           cs <- colSums(web)#
+           out <- r2dtable(N, r=rs, c=cs)#
+#
+    }#
+    if (m == 2){#
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+		out <- swap.web(N, web, ...)     #
+#
+    }#
+    if (m == 3){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+			out <- vaznull(N, web)#
+#
+    }#
+    if (m == 4){ #
+        if (any(web > 1)) out <- shuffle.web(web, N, ...)#
+        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) #
+    }#
+    if (m == 5){ #
+       out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)    #
+    }#
+    if (!(m %in% 1:5)) stop("Please choose a valid method.")#
+    return(out)#
+}
+nullmodel(motten1982, 2, 5)
+nullmodel
+web=Safariland
+method="mgen"
+methods <- c("r2dtable", "swap.web", "vaznull", "shuffle.web", "mgen")
+if (is.numeric(method)){#
+        m <- method #
+    } else {#
+        m <- pmatch(method, methods)#
+    }
+m
+if (is.na(m)) stop("Abbreviated name does not uniquely identify method.")
+if (m == 1){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+           rs <- rowSums(web)#
+           cs <- colSums(web)#
+           out <- r2dtable(N, r=rs, c=cs)#
+#
+    }#
+    if (m == 2){#
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+		out <- swap.web(N, web, ...)     #
+#
+    }#
+    if (m == 3){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+			out <- vaznull(N, web)#
+#
+    }#
+    if (m == 4){ #
+        if (any(web > 1)) out <- shuffle.web(web, N, ...)#
+        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) #
+    }
+(m == 5)
+N=2
+out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)
+out
+out <- replicate(n=N, unname(mgen(web, autotransform="equiprobable", ...)), simplify=FALSE)
+out
+web
+mgen(Safariland)
+out <- replicate(n=N, unname(mgen(web)), simplify=FALSE)
+out
+out <- replicate(n=N, unname(mgen(web, autotransform="equiprobable"))), simplify=FALSE)
+out <- replicate(n=N, unname(mgen(web, autotransform="equiprobable")), simplify=FALSE)
+out
+out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)
+out
+mgen
+out <- replicate(n=N, unname(mgen(web)), simplify=FALSE)
+out
+nullmodel <- function(web, N=1000, method="r2d", ...){#
+    methods <- c("r2dtable", "swap.web", "vaznull", "shuffle.web", "mgen")#
+    if (is.numeric(method)){#
+        m <- method #
+    } else {#
+        m <- pmatch(method, methods)#
+    }#
+    if (is.na(m)) stop("Abbreviated name does not uniquely identify method.")#
+    if (m == 1){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+           rs <- rowSums(web)#
+           cs <- colSums(web)#
+           out <- r2dtable(N, r=rs, c=cs)#
+#
+    }#
+    if (m == 2){#
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+		out <- swap.web(N, web, ...)     #
+#
+    }#
+    if (m == 3){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+			out <- vaznull(N, web)#
+#
+    }#
+    if (m == 4){ #
+        if (any(web > 1)) out <- shuffle.web(web, N, ...)#
+        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) #
+    }#
+    if (m == 5){ #
+       out <- replicate(n=N, unname(mgen(web, ...)), simplify=FALSE)    #
+    }#
+    if (!(m %in% 1:5)) stop("Please choose a valid method.")#
+    return(out)#
+}
+nullmodel(Safariland, N=2, method="mgen")
+nullmodel(Safariland, N=2, method="mgen", autotransform="sum")
+nullmodel(Safariland, N=2, method="mgen", autotransform="equiprobable")
+nullmodel <- function(web, N=1000, method="r2d", ...){#
+    methods <- c("r2dtable", "swap.web", "vaznull", "shuffle.web", "mgen")#
+    if (is.numeric(method)){#
+        m <- method #
+    } else {#
+        m <- pmatch(method, methods)#
+    }#
+    if (is.na(m)) stop("Abbreviated name does not uniquely identify method.")#
+    if (m == 1){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+           rs <- rowSums(web)#
+           cs <- colSums(web)#
+           out <- r2dtable(N, r=rs, c=cs)#
+#
+    }#
+    if (m == 2){#
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+		out <- swap.web(N, web, ...)     #
+#
+    }#
+    if (m == 3){ #
+        if (all(web < 2))#
+            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")#
+			out <- vaznull(N, web)#
+#
+    }#
+    if (m == 4){ #
+        if (any(web > 1)) out <- shuffle.web(web, N, ...)#
+        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) #
+    }#
+    if (m == 5){ #
+       out <- replicate(n=N, unname(mgen(web, autotransform="equiprobable")), simplify=FALSE)    #
+    }#
+    if (!(m %in% 1:5)) stop("Please choose a valid method.")#
+    return(out)#
+}
+nullmodel(Safariland, N=2, method="mgen", autotransform="equiprobable")
+nullmodel(Safariland, N=2, method="mgen")
+nullmodel(Safariland>0, N=2, method=4)
+nullmodel(Safariland>0, N=2, method=5)
+m <- matrix(c(1,0, 1,0, 1,0, 0,1, 0,1, 0,1, 0,1), 7,2,TRUE)
+C.score(t(m), normalize=FALSE)
+C.score(t(m), normalize=TRUE)
+C.score(t(m), normalize=FALSE)
+C.score(t(m), normalize=TRUE)
+C.score(m, normalize=TRUE)
+m
+C.score(m, normalize=FALSE)
+?C.score
+C.score(m, normalise=FALSE)
+C.score(t(m), normalise=FALSE)
+C.score(t(m), normalise=TRUE)
+C.score(m, normalise=TRUE)
+t(m)
+m
+C.score(m, normalise=TRUE)
+C.score(t(m), normalise=FALSE)#
+C.score(m, normalise=FALSE)
+t(m)
+C.score
+C.score(m)
+C.score(m, normalise=F)
+m
+t(m)
+?C.score
+web <- m
+D <- designdist(t(web), method="(A-J)*(B-J)", terms="minimum")
+D
+designdist((web), method="(A-J)*(B-J)", terms="minimum")
+designdist(t(web), method="(A-J)*(B-J)", terms="minimum")
+designdist(t(m), method="(A-J)*(B-J)", terms="minimum")
+C.score(t(m), normalise=FALSE)
+C.score(t(m), normalise=FALSE, fun=“length”)
+C.score(t(m), normalise=FALSE, fun=length)
+C.score(t(m), normalise=FALSE, FUN=length)
+C.score(t(m), normalise=FALSE, FUN=sum)
+nestedchecker(m)
+nestedchecker(t(m))
+C.score(m, normalise=T)
+C.score(m, normalise=F)
+C.score(t(m), normalise=F)
+mgen(Safariland)
+C.score(mgen(Safariland))
+C.score(mgen(Safariland, autotransform="equiprobable"))
+?mgen
+mgen
+mgen(Safariland, autotransform="equiprobable")
+C.score(mgen(Safariland, autotransform="equiprobable"))
+nested(mgen(Safariland, autotransform="equiprobable"), "ALL")
+nested(nullmodel(Safariland, 1, 5)[[1]], "ALL")
+nested(nullmodel(Safariland, 1, 1)[[1]], "ALL")
+nested(nullmodel(Safariland, 1, 2)[[1]], "ALL")
+nested(nullmodel(Safariland, 1, 3)[[1]], "ALL")
+nested(nullmodel(Safariland, 1, 4)[[1]], "ALL")
+nested(nullmodel(Safariland, 1, 5)[[1]], "ALL")
