@@ -35,8 +35,8 @@ See help pages for details and examples.
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.04\cr
-Date: \tab 2014-11-25\cr
+Version: \tab 2.06\cr
+Date: \tab 2015-01-25\cr
 License: \tab GPL \cr
 }
 }
@@ -45,6 +45,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.06 (release date: XX-YYY-2015)
+   \describe{ % begin describe 2.06
+   \item{Bug fix in \code{\link{C.score}},}{ which did not compute the maximum number of possible checkerboards correctly, and hence let the normalised C-score to be incorrect. Now it uses a brute-force approach, which works fine but takes its time.}	
+   } % end describe 2.06
+   
   \item 2.05 (release date: 24-Nov-2014)
    \describe{ % begin describe 2.05
    \item{New function \code{\link{nestedcontribution}}}{which computes the contribution of each species to the overall nestedness, based on Bascompte et al. 2003 and as used by Saavedra et al. 2011. Many thanks to Daniel Stouffer for contributing this function!}	

@@ -20,11 +20,15 @@ visweb(as.one.mode(vazquenc, fill=NA), NA.col="green") #slow!
 
 # C.score
 C.score(Safariland, FUN=sd, normalise=T) # check that "any" functions works!
-m <- matrix(c(1,0, 1,0, 1,0, 0,1, 0,1, 0,1, 0,1), 7,2,TRUE)
+C.score(t(Safariland))
+m <- matrix(c(1,0, 0,1, 1,0, 0,1, 1,0, 0,1, 1,0), 7,2,TRUE)
 C.score(t(m), normalise=FALSE)
 C.score(m, normalise=FALSE)
-C.score(t(m), normalise=TRUE)
-C.score(m, normalise=TRUE)
+C.score(t(m), normalise=TRUE) # should be 0.57, since half of the species have non-checkerboard distribution
+C.score(m, normalise=TRUE) # should be 1!
+n <- matrix(c(1,0,0, 0,1,0, 0,0,1), 3,3)
+C.score(t(n), normalise=T)
+system.time(C.score(memmott1999)) # 3.6s
 
 # compart
 compart(Safariland) # a comparted network

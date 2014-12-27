@@ -37,11 +37,12 @@ Stone, L. and Roberts, A. (1990) The checkerboard score and species distribution
 \author{ Carsten F. Dormann }
 
 \note{ 
-The normalisation uses the following logic: let A and B be the number of occurrences of each of the two species, respectively. Then J is the number of sites where both occur and P the total number of sites.
-The maximum value for C in each comparison is A*B, when they are exactly complementary and hence J=0. 
-However, if (A+B)>length of vector(P), then there will be some co-occurrences and 
-hence J>0=(A+B-P). The general maximum then becomes (A-A-B+P)(B-A-B+P)=(P-B)(P-A). 
-For (A+B)<P, maximum is AB.
+The normalisation, since Jan. 2015, is by brute force: the 1s and 0s are distributed for each pairwise comparison for maximum checkerboardness. (The previously used approach was incorrect!) As a consequence, large matrices will take some time to compute.
+%The normalisation uses the following logic: let A and B be the number of occurrences of each of the two species, respectively. Then J is the number of sites where both occur and P the total number of sites.
+%The maximum value for C in each comparison is A*B, when they are exactly complementary and hence J=0. 
+%However, if (A+B)>length of vector(P), then there will be some co-occurrences and 
+%hence J>0=(A+B-P). The general maximum then becomes (A-A-B+P)(B-A-B+P)=(P-B)(P-A). 
+%For (A+B)<P, maximum is AB.
 
 The minimum is set to 0.
 
