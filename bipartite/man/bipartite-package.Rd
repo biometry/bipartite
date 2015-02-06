@@ -48,6 +48,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \item 2.06 (release date: XX-YYY-2015)
    \describe{ % begin describe 2.06
    \item{Bug fix in \code{\link{C.score}},}{ which did not compute the maximum number of possible checkerboards correctly, and hence let the normalised C-score to be incorrect. Now it uses a brute-force approach, which works fine but takes its time.}	
+   \item{Function \code{\link{nestedcontribution}}}{was not exported (i.e. not listed in the namespace file). Fixed. Thanks to Wesley Dátillo for reporting.}
    } % end describe 2.06
    
   \item 2.05 (release date: 24-Nov-2014)
