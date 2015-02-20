@@ -93,7 +93,7 @@ Our choice of defaults (c(1,0)) will yield species strength for plants, and PSI 
 For both the \dQuote{higher trophic level} and the \dQuote{lower trophic level} a list with the following components:
 
 %  \item{number of species}{Sic.}
-  \item{species degree}{Sum of interactions per species.}
+  \item{species degree}{Sum of links per species.}
   \item{normalised degree}{As degree, but scaled by the number of possible partners; see \code{\link{ND}}.}
  % \item{dependence}{Web entry divided by column totals (for higher trophic level) or row totals (for lower trophic level). Expresses the proportion of interactions with each species, and sums to 1 for each.}
   \item{species strength}{Sum of dependencies of each species (used, e.g., in Bascompte et al. 2006). It aims at quantifying a species' relevance across all its partners. The alternative version of Barrat et al. (2004; also used by Poisot et al. 2012) as the sum of interactions of a species seems too trivial a measure, reflecting abundance rather than anything else. Do not take this to be the much-discussed \dQuote{interaction strength} in food web papers, which focusses on pairwise interactions (reviewed in Berlow et al. 2004)!}
