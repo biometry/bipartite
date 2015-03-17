@@ -52,7 +52,7 @@ visweb <- function (web, type = "nested", prednames = TRUE, preynames = TRUE,
     #mm.pred <- max(m.predsize, m.preysize)
   
     #pin = c(wx, wy),
-    par( omi = c(0, 0, 0, 0), mai = c(m.predsize*0.4 * labsize *                 clratio+0.2, m.preysize*0.4 * labsize * clratio+0.2, 0, 0))
+    par(mai = c(m.predsize*0.4 * labsize * clratio+0.2, m.preysize*0.4 * labsize * clratio+0.2, 0, 0))
       
     plot(1, type = "n", axes = FALSE, xlim = c(0, n.pred), ylim = c(0, 
         n.prey), asp = 1, xlab = xlabel, ylab = ylabel)
