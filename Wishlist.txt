@@ -1,7 +1,4 @@
-* put the new modularity algorithms into bipartite, in particular a visualisation (https://github.com/sjbeckett/weighted-modularity-LPAwbPLUS/tree/master/code/R)
-* improve runtime of C.score (with normalise=T): try to approximate (or even solve) the possible number of checkers given the number of 1/0s and number of cells; currently very slow for large matrices
-* check these functionalities: http://www.r-bloggers.com/the-ecology-of-data-matrices-a-metaphor-for-simultaneous-clustering/
-* plotweb: add a new option ‚Äúnames‚Äù, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
+* plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
@@ -12,9 +9,8 @@
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
 * get rid of the dynload in function cm: find the bug in the C-code (possibly to do with the fopen/fclose?)
-* see Email Jochen 1.2.2013: Dol√©dec for multivariate stuff
+* see Email Jochen 1.2.2013: Dolédec for multivariate stuff
 
-*JOCHEN new: specieslevel breaks when web has just one species pair (1x1 matrix) //found for: nodespec, nestedrank; should capture this with try and return NA for undefined indices; also for cases with a single resource (1x2matrix HL)
 
 IMPROVE: 
 * togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
@@ -31,10 +27,10 @@ NEW:
 * check the C4b of Gilarranz: is it the same as Opsahl's?
 * quantitative modularity (Marcio Araujo et al. 2008 Ecology: Dieta1): currently only a windows-exe is available!
 * WINE-artiger von Marco
-AraÀôjo MS, Guimar‚Äûes PR, Svanb‚Ä∞ck R, Pinheiro A, Guimar‚Äûes P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993
+Ara˙jo MS, Guimar„es PR, Svanb‰ck R, Pinheiro A, Guimar„es P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993
 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 
-* add networks of Kaiser-Bunbury (rates!) and of Bartomeus from NCEAS
+
 * include all quantitative host-parasitoid webs
 
 
