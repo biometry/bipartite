@@ -118,8 +118,8 @@ private:
 	ipair*	edgelist;		// list of internal edges represented
 	int	nrOfFixedEdges;		// amount of fixed edges
 	int**	indexLUT;		// table of indices of internal edges in edgelist
-	int	nrOfLegalRandomEdges;	//
-	int*	legalRandomEdges;	//
+//	int	nrOfLegalRandomEdges;	//
+//	int*	legalRandomEdges;	//
 	int	q;			// number of internal edges
 	int	count;			// (for adding edges) edgelist index of new edge to add
 	MTRand	mtr;			// Mersenne Twister random number generator instance
@@ -1128,6 +1128,7 @@ bool dendro::buildDendrogram() {
 	// For simplicity, we make the first internal vertex in the array the root.
 	
 	bool flag_debug	= false;
+    (void) flag_debug; // otherwise the non-use of flag_debug throws a warning
 	n_a		= g->getNumAVertices();		// number of vertices in Partition A
 	n_b		= g->getNumBVertices();		// number of vertices in Partition B
 	n		= g->getNumVertices();		// total number of vertices in graph
@@ -1613,6 +1614,7 @@ bool dendro::monteCarloMove(double& delta, bool& ftaken, const double T, const d
 	// that we can determine with what probability we execute the move.
 	
 	bool		flag_debug = true;
+    (void) flag_debug; // otherwise the non-use of flag_debug throws a warning
 	elementd	*temp;
 	ipair		*tempPair;
 	edgeCountTriple*	ect;
@@ -2220,6 +2222,8 @@ void dendro::refreshModularity() {							// recalculates the modularity of the d
 	double ew, ew_expect;
 	double dM = 0;
 	edgeCountTriple* ect;
+    
+    (void) flag_debug; // otherwise the non-use of flag_debug throws a warning
 
 	for (int i=0; i<(n-1); i++) {
 		nL_nR		= internal[i].L->n_a*internal[i].R->n_b + internal[i].L->n_b*internal[i].R->n_a;
@@ -2279,7 +2283,8 @@ void dendro::recordGraphStructure(const string out_file) {
 	string thisName;
 	bool flag_debug = true;
 	//if(flag_debug) { cout << ">> dendro: writing random graph to file" << endl; }
-	
+	(void) flag_debug; // otherwise the non-use of flag_debug throws a warning
+    
 	//fopen(&file, out_file.c_str(), "w"); //fopen_s
 	file = fopen(out_file.c_str(), "w"); 
 	for (int i=0; i<n; i++) {

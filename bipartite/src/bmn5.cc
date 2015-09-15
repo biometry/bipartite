@@ -1567,7 +1567,8 @@ void calcIdiosyncTemp(double **d, int **mat, int indr[], int indc[], int nr, int
 	int i1,j1;
 	double unex;
 	double tIdiosync;
-	FILE *out;
+	FILE *out=0;
+    
 if (bmo==1) {
 	//out = fopen(OUTFILE.c_str(),"a");
 	//	Idiosyncratic temperature for rows:

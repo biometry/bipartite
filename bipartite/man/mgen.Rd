@@ -31,7 +31,6 @@ Vázquez, D. P.; Chacoff, N. P. & Cagnolo, L. 2009. Evaluating multiple determin
 }
 
 \examples{
-\dontrun{
 ## Generate simulated matrix from homogeneous probability matrix
 probmat <- matrix(1/100, 10, 10)
 mgen(web=probmat, n=100)
@@ -41,7 +40,7 @@ mgen(web=probmat, n=100)
 obs.mat <- matrix(c(1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,1,0,0,0,0), 5, 5)
 rs <- rowSums(obs.mat)
 cs <- colSums(obs.mat)
-web <- rs %*% t(cs)
+web <- rs \%*\% t(cs)
 web <- web/sum(web)
 n = sum(obs.mat)
 mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums
@@ -51,5 +50,4 @@ mgen(web, n, keep.species=TRUE, rep.cell=FALSE) # Not allowing zero marginal sum
 ## to interaction frequency in an observed matrix m (which is the default of 'autotransform'):
 mgen(mosquin1967, keep.species=FALSE, rep.cell=TRUE) # Allowing zero marginal sums
 mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE) # Not allowing zero marginal sums
-}
 }
