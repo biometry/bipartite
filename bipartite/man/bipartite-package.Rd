@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
    \item{Function \code{\link{nestedcontribution}}}{was not exported (i.e. not listed in the namespace file). Fixed. Thanks to Wesley Dátillo for reporting.}
    \item{Help page of \code{\link{specieslevel}}}{now correctly described a species' degree as sum of its links. Thanks to Bernhard Hoiß for the correction!}
    \item{C++-warnings addressed:}{outcommented some unused variables in dendro.h and removed some fprintf-warnings in bmn5.cc}
+   \item{Little bug fix in \code{\link{vaznull}}:}{Threw an error when matrix was without 0s. Thanks to Thais Zanata for reporting.}
    } % end describe 2.06
    
   \item 2.05 (release date: 24-Nov-2014)

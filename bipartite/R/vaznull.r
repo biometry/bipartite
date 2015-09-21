@@ -21,7 +21,7 @@ vaznull <- function(N, web){
   finalmat <- matrix(0, nrow(web), ncol(web))
   # finalmat <- newmat
   # go through this loop until all dimensions are attained
-  n.int.finalmat <-0
+  n.int.finalmat <- 0
   while (n.int.finalmat < sum(dim(web))){
     # randomly select a cell, according to probability matrix P:
     sel <- sample(1:length(web), 1,  prob=P, replace=TRUE)
@@ -40,15 +40,19 @@ vaznull <- function(N, web){
     # Step 2. IV: fill up to full connectance:
     conn.remain <- sum(web>0) - sum(finalmat>0)
     if (conn.remain > 0) {
-    	add <- sample(which(finalmat==0), conn.remain, prob=P1[finalmat==0])
-    	finalmat[add] <- 1
+    		if (length(which(finalmat==0))){
+    			add <- which(finalmat==0) # if there is only one possible cell, don't draw it randomly ...
+    		} else {
+    			add <- sample(which(finalmat==0), conn.remain, prob=P1[finalmat==0])
+    		}
+	    	finalmat[add] <- 1
     }
   
     # 3. step: now fill the filled cells with the remaining interactions:
     int.remain <- sum(web) - sum(finalmat)
     if (int.remain > 0){
 	  add <- sample(which(finalmat>0), int.remain, prob=P1[finalmat>0], replace=TRUE)
-      finalmat[as.numeric(names(table(add)))] <- finalmat[as.numeric(names(table(add)))] +table(add)
+      finalmat[as.numeric(names(table(add)))] <- finalmat[as.numeric(names(table(add)))] + table(add)
     }
 	finalmat
   }

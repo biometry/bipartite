@@ -260,6 +260,11 @@ specieslevel(vazquec, index="interaction push pull") # from Natacha Chacoff's er
 
 # togetherness
 
+# vaznull
+set.seed(1)
+m <- matrix(rpois(4, 2), 2, 2)
+vaznull(2, m) # Error when m is full (i.e. no 0); works fine with a single 0 already (set seed to 4)  
+
 # V.ratio
 
 # visweb
