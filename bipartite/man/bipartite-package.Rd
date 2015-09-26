@@ -36,7 +36,7 @@ See help pages for details and examples.
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.06\cr
-Date: \tab 2015-01-25\cr
+Date: \tab 2015-09-25\cr
 License: \tab GPL \cr
 }
 }
@@ -45,7 +45,7 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.06 (release date: XX-YYY-2015)
+  \item 2.06 (release date: 29-SEP-2015)
    \describe{ % begin describe 2.06
    \item{Bug fix in \code{\link{C.score}},}{ which did not compute the maximum number of possible checkerboards correctly, and hence let the normalised C-score to be incorrect. Now it uses a brute-force approach, which works fine but takes its time.}	
    \item{Function \code{\link{nestedcontribution}}}{was not exported (i.e. not listed in the namespace file). Fixed. Thanks to Wesley Dátillo for reporting.}

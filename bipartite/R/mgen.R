@@ -1,6 +1,6 @@
 mgen <- function(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum", trials=100){
 	# function to generate a quantitative network based on a probability matrix
-	# by Diego Vázquez (brushed up for a more bipartite-consistent use of names by CFD) 
+	# by Diego Vazquez (brushed up for a more bipartite-consistent use of names by CFD) 
 	# web 	a matrix with observation probabilities, emerging from some null model considerations external to this function; if an original network is used, this will be automatically converted to a probability matrix by dividing it by the number of interactions (CFD); ORIGINAL: a probability matrix
 	# n     number of interactions to allocate into the new matrix
 	# autotransform:    determines how a non-probability web is converted into probabilities; 

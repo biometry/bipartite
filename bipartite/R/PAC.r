@@ -11,7 +11,7 @@ PAC <- function(web){
   #
   # result is a m x m matrix, where m is the number of lower trophic level species; the diagonal is the intraspecific PAC; the upper triangle is the effect of j on i (d_ij), the lower triangle that of i on j (d_ji).
   # Reference: 
-  # Müller, C. B., Adriaanse, I. C. T., Belshaw, R. and Godfray, H. C. J. 1999 The structure of an aphid-parasitoid community. \emph{Journal of Animal Ecology} \bold{68}, 346--370.
+  # Mueller, C. B., Adriaanse, I. C. T., Belshaw, R. and Godfray, H. C. J. 1999 The structure of an aphid-parasitoid community. \emph{Journal of Animal Ecology} \bold{68}, 346--370.
   # Morris, R. J., Lewis, O. T. and Godfray, H. C. J. 2005. Apparent competition and insect community structure: towards a spatial perspective. \emph{Annales Zoologica Fennici} \bold{42}, 449--462.
 
     m <- nrow(web)

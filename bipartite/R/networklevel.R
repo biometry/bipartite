@@ -55,7 +55,7 @@
             suppressWarnings(out$connectance <- sum(web>0)/prod(dim(web)))
         }
         #--------------------
-        if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     # web asymmetry (Blüthgen et al. 2007, Fig. S2)
+        if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     # web asymmetry (Bluethgen et al. 2007, Fig. S2)
         #--------------------
         if ("links per species" %in% index){
             L <- sum(web>0)/sum(dim(web))
@@ -134,7 +134,7 @@
         }
         #------------------
         if (any(c("ISA", "interaction strength asymmetry", "dependence asymmetry") %in% index)){
-            # Dependence asymmetry (Bascompte et al. 2006; Blüthgen et al. 2007, Fig. S2)
+            # Dependence asymmetry (Bascompte et al. 2006; Bluethgen et al. 2007, Fig. S2)
             depL <- web.e/matrix(rowSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=FALSE)
             depH <- web.e/matrix(colSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=TRUE)
             
@@ -147,7 +147,7 @@
             }
             if (ISAmethod=="Bluethgen" & "ISA" %in% index) {
                 web2 <- web
-                # delete cells for species encountered only once (Blüthgen, pers. comm.):
+                # delete cells for species encountered only once (Bluethgen, pers. comm.):
                 web2[, which(colSums(web)==1)] <- 0
                 web2[which(rowSums(web)==1), ] <- 0
                 rowsummat <- matrix(rowSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=FALSE)
@@ -167,9 +167,9 @@
         }
         #------------------
         if ("SA" %in% index){
-            # Specialisation asymmetry (Blüthgen et al. 2007, Fig. S2)
+            # Specialisation asymmetry (Bluethgen et al. 2007, Fig. S2)
             # 2 options for calculating the "mean" SA:
-            # either as Blüthgen et al: average weighted by number of interactions in the 
+            # either as Bluethgen et al: average weighted by number of interactions in the 
             # cell or as mean of logarithms (since the dependencies follow a lognormal
             # distribution)
             di <- dfun(web)$dprime  # plants
@@ -254,7 +254,7 @@
             if ("Alatalo interaction evenness" %in% index){
             evenness <- function(web){
                 # calculates evenness of the numbers of individual of different species in
-                # a community, NOT according to formula in M√ºller et al. (1999, 
+                # a community, NOT according to formula in Mueller et al. (1999, 
                 # J. Anim. Ecol), but according to the original formula in Alatalo 
                 # (1981, Oikos) 
                 # can be extended at some point to more indices ...
@@ -266,7 +266,7 @@
             }
         }      
         #---------------
-        # Blüthgen's H2'
+        # Bluethgen's H2'
         if ("H2" %in% index){
             is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol # from the help of is.integer!
             if (any(is.wholenumber(web)==FALSE)) H2_integer <- FALSE # turns H2_integer off if values are not integers
@@ -359,7 +359,7 @@ if ("connectance" %in% index){
     out$connectance <- sum(web>0)/prod(dim(web))
 }
 #--------------------
-if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     # web asymmetry (Bl√ºthgen et al. 2007, Fig. S2)
+if ("web asymmetry" %in% index) out$"web asymmetry" <- (NCOL(web)-NROW(web))/sum(dim(web))     # web asymmetry (Bluethgen et al. 2007, Fig. S2)
 ###---###---###---###---###---###---###---###---###---###---###---###---###
 #--------------------
 if ("links per species" %in% index){
@@ -485,7 +485,7 @@ if ("weighted NODF" %in% index){
 
 ###---###---###---###---###---###---###---###---###---###---###---###---###
 if ("ISA" %in% index){#(any(c("ISA", "interaction strength asymmetry", "dependence asymmetry")) %in% index){
-    # Dependence asymmetry (Bascompte et al. 2006; Blüthgen et al. 2007, Fig. S2)
+    # Dependence asymmetry (Bascompte et al. 2006; Bluethgen et al. 2007, Fig. S2)
     depL <- web.e/matrix(rowSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=FALSE)
     depH <- web.e/matrix(colSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=TRUE)
     
@@ -498,7 +498,7 @@ if ("ISA" %in% index){#(any(c("ISA", "interaction strength asymmetry", "dependen
     }
     if (ISAmethod=="Bluethgen" & "ISA" %in% index) {
         web2 <- web
-        # delete cells for species encountered only once (Blüthgen, pers. comm.):
+        # delete cells for species encountered only once (Bluethgen, pers. comm.):
         web2[, which(colSums(web)==1)] <- 0
         web2[which(rowSums(web)==1), ] <- 0
         rowsummat <- matrix(rowSums(web2), nrow=NROW(web2), ncol=NCOL(web2), byrow=FALSE)
@@ -518,9 +518,9 @@ if ("ISA" %in% index){#(any(c("ISA", "interaction strength asymmetry", "dependen
 }
 
 #---------------------------------------------------------
-# Specialisation asymmetry (Bl¸thgen et al. 2007, Fig. S2)
+# Specialisation asymmetry (Bluethgen et al. 2007, Fig. S2)
 # 2 options for calculating the "mean" SA:
-# either as Bl¸thgen et al: average weighted by number of interactions in the 
+# either as Bluethgen et al: average weighted by number of interactions in the 
 # cell or as mean of logarithms (since the dependencies follow a lognormal
 # distribution)
 if ("SA" %in% index){#(any(c("SA", "specialisation asymmetry")) %in% index){
@@ -645,7 +645,7 @@ if (any(c("interaction evenness", "Alatalo interaction evenness", "Shannon diver
     if ("Alatalo interaction evenness" %in% index){
         evenness <- function(web){
             # calculates evenness of the numbers of individual of different species in
-            # a community, NOT according to formula in M√ºller et al. (1999, 
+            # a community, NOT according to formula in Mueller et al. (1999, 
             # J. Anim. Ecol), but according to the original formula in Alatalo 
             # (1981, Oikos) 
             # can be extended at some point to more indices ...
@@ -669,7 +669,7 @@ if (any(c("fc", "functional complementarity") %in% index)){
 }
 
 #---------------
-# Blüthgen's H2'
+# Bluethgen's H2'
 if ("H2" %in% index){
     is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol # from the help of is.integer!
     if (any(is.wholenumber(web)==FALSE)) H2_integer <- FALSE # turns H2_integer off if values are not integers

@@ -214,7 +214,7 @@ function(web,  web2, method = "cca", empty = FALSE, labsize = 1, ybig = 1,
 
 ####idee
 
-#erstmal das netz umbauen, da leere Felder auch geplottet werden müssen (komplett unparasitiert!!!!!)
+#erstmal das netz umbauen, da leere Felder auch geplottet werden muessen (komplett unparasitiert!!!!!)
 
 
 

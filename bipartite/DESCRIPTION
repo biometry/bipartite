@@ -2,12 +2,12 @@ Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
 Version: 2.06
-Date: 2015-01-25
+Date: 2015-09-25
 Author: Carsten F. Dormann, Jochen Fruend and Bernd Gruber, with additional code from Mariano Devoto, Jose Iriondo, Rouven Strauss and Diego Vazquez, also based on C-code developed by Nils Bluethgen, Aaron Clauset/Rouven Strauss and Miguel Rodriguez-Girones
 Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
 Depends: vegan, sna
 Imports: fields, igraph, MASS, methods, permute
 LazyData: TRUE
-Description: Bipartite provides functions to visualise webs and calculate a series of indices commonly used to describe pattern in ecological webs. It focuses on webs consisting of only two trophic levels, e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the webs topology. 
+Description: This package provides functions to visualise webs and calculate a series of indices commonly used to describe pattern in ecological webs. It focuses on webs consisting of only two trophic levels, e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the webs topology. 
 License: GPL
 Packaged: 2014-05-24 12:00:12 UTC; carsten

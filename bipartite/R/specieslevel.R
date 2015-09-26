@@ -3,7 +3,7 @@ specieslevel <-
 function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high.abun=NULL, PDI.normalise=TRUE, PSI.beta=c(1,0), nested.method="NODF", nested.normalised=TRUE, nested.weighted=TRUE, empty.web=TRUE) {
     # function to calculate bipartite web indices at the species level
     #
-    # Carsten Dormann, Jochen Fründ & Denis Lippok, April/May 2007 - 2013
+    # Carsten Dormann, Jochen Fruend & Denis Lippok, April/May 2007 - 2013
 
 
     # m <- matrix(c(4,7,0,0,9,1,2,0,5), 3, byrow=TRUE)
@@ -121,7 +121,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
    	}
 
     PropSimilarity <- function(species_use, abuns){
-    	# by Jochen Fründ
+    	# by Jochen Fruend
         p_i <- species_use / sum(species_use)
         q_i <- abuns / sum(abuns)
         sum(pmin(p_i, q_i))  
@@ -138,7 +138,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       #       value of 2 would assume no memory of plant species in the pollinator;
       #  	a value of 1 implies infinitely storing pollen from source to sink plant
       #
-      # developed by Dormann, Blüthgen & Gruber, 3 May 2007
+      # developed by Dormann, Bluethgen & Gruber, 3 May 2007
       #
       # example:
       # m <- matrix(c(4,4,0,4,1,7), nrow=3, byrow=TRUE)
@@ -216,7 +216,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       higher.out$"normalised degree" <- nds[[2]]
     }
        
-    # dependence values, following the lead by Bascompte et al. 2006 (Science) and modifications suggested by Blüthgen et al. 2007 (Current Biology)
+    # dependence values, following the lead by Bascompte et al. 2006 (Science) and modifications suggested by Bluethgen et al. 2007 (Current Biology)
     if (any(c("species strength", "interaction push pull") %in% index)){ #"dependence", 
       #if ("dependence" %in% index){ # moved to linklevel!
       #  higher.out$"dependence" <- depH
@@ -296,14 +296,14 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
     }
     
     # proportional generality
-    # by Jochen Fründ March 2013
+    # by Jochen Fruend March 2013
     if ("proportional generality" %in% index){
       mylow.abun <- if (is.null(low.abun)) mylow.abun <- rowSums(web) else mylow.abun <- low.abun
       pgenH <- n_Nk / logbase^(shannon(mylow.abun, base=logbase))      # uses the same abuns as dprime!
       higher.out$"proportional generality" <- pgenH
     }
 
-    # proportional similarity (Jochen Fründ 2013)
+    # proportional similarity (Jochen Fruend 2013)
     if ("proportional similarity" %in% index){
    	  # Feinsinger P, Spears EE, Poole RW: A simple measure of niche breadth. Ecology 1981, 61:27-32.
       mylow.abun <- if (is.null(low.abun)) mylow.abun <- rowSums(web) else mylow.abun <- low.abun
@@ -336,7 +336,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       lower.out$"normalised degree" <- nds[[1]]
     }
     
-    # dependence values, following the lead by Bascompte et al. 2006 (Science) and modifications suggested by Blüthgen et al. 2007 (Current Biology)
+    # dependence values, following the lead by Bascompte et al. 2006 (Science) and modifications suggested by Bluethgen et al. 2007 (Current Biology)
     if (any(c("species strength", "dependence", "interaction push pull") %in% index)){
       if ("dependence" %in% index){
         lower.out$"dependence" <- depL
@@ -425,7 +425,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
     # Feinsinger P, Spears EE, Poole RW: A simple measure of niche breadth. Ecology 1981, 61:27-32.
     
     # proportional generality
-    # by Jochen Fründ March 2013
+    # by Jochen Fruend March 2013
     if ("proportional generality" %in% index){
       myhigh.abun <- if (is.null(high.abun)) myhigh.abun <- colSums(web) else myhigh.abun <- high.abun
       pgenL <- n_Pk / logbase^(shannon(myhigh.abun, base=logbase))  # uses the same abuns as dprime!

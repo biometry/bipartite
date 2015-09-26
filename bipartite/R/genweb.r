@@ -7,7 +7,7 @@ function(N1=10, N2=30, dens=2) {
     N = N1 ; if (i==2) N = N2
     M = mm/N                     # mean number of interactions per species on level i on "real" scale, i.e. untransformed
     sigma = 1.5                  # standard deviation on log-scale, i.e. the "normal distribution scale"; this value is the median of the NCEAS-webs (both for rows and columns!)
-    mu = log(M) - 0.5 *sigma^2   # mean on the log-scale ; thanks to Thomas Hovestadt, who insisted on this formula  # E(X) = exp(µ + 1/2 s^2) 
+    mu = log(M) - 0.5 *sigma^2   # mean on the log-scale ; thanks to Thomas Hovestadt, who insisted on this formula  # E(X) = exp(mu + 1/2 s^2) 
     ms = 1                           # ms = marginal sums ; 1 is only that ms is "known"
     if (mm==N) {ms=rep(1,N)} else {
       while (sum(ms) != mm){         # das dauert dann auch gerne mal ein paar Minuten!

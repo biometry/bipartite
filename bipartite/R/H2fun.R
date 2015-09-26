@@ -6,8 +6,6 @@ function(web, H2_integer=TRUE){
     #
     # returns the normalised H2' and its subcomponents H2max, H2min and H2uncorrected
     #
-    # by Jochen Fr¸nd, Uni W¸rzburg (some streamlining by Carsten Dormann, UFZ Leipzig); April 2007
-    # This function is based on the paper by Bl¸thgen, Menzel & Bl¸thgen 2006 (BMC Ecology).
     # for web implementation see also: http://itb1.biologie.hu-berlin.de/~nils/stat/
     #
     # Example:
@@ -19,9 +17,9 @@ function(web, H2_integer=TRUE){
     if (H2_integer & any((web %% 1) != 0)) stop("web does not contain integers! maybe you should set H2_integer to FALSE")
     
 
-    tot <- sum(web)       #s‰mtliche Interaktionen im Netz
-    rs <- rowSums(web)    #Interaktion der Pflanze mit s‰mtlichen Best‰ubern
-    cs <- colSums(web)    #s‰mtliche Interaktionen des jeweiligen Best‰bers
+    tot <- sum(web)       #saemtliche Interaktionen im Netz
+    rs <- rowSums(web)    #Interaktion der Pflanze mit saemtlichen Bestaeubern
+    cs <- colSums(web)    #saemtliche Interaktionen des jeweiligen Bestaebers
 
    #--------------- H2 uncorrected------------
     H2uncorr = -sum(web/tot*log(web/tot), na.rm=TRUE)
@@ -76,7 +74,7 @@ function(web, H2_integer=TRUE){
       		difexp <- exexpec - newmx #newmx=newweb!
       		greatestdif <- difexp==min(difexp)
       		if (length(which(greatestdif))>1) {
-          		largestvalue = newmx==max(newmx[greatestdif])  # evtl den grˆﬂten ausw‰hlen
+          		largestvalue = newmx==max(newmx[greatestdif])  # evtl den groessten auswaehlen
           		first <- greatestdif & largestvalue
       		} else {first=greatestdif}   # "first" is a boolean matrix
       		newmx[first][1] <-  newmx[first][1] - 1                                    # remove one interaction from one cell (with largest difference to expected values; "too large")

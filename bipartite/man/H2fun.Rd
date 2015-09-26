@@ -24,7 +24,7 @@ H2fun(web, H2_integer=TRUE)
   
 For non-integer values, H2 max can be readily computed and is thus more reliable and much faster.
  
-For internet implementation see also: \url{http://nils.mib.man.ac.uk/~nils/stat/}
+For internet implementation see also: \url{http://www.sys-bio.net/resources}.
 }
 
 \value{

@@ -5,7 +5,7 @@ czvalues <- function(moduleWebObject, weighted=FALSE, level="higher"){
 	# level		"higher" or "lower" trophic level to compute c and z values for; defaults to "higher"
 	#
 	#	z = (k.is - ks.bar) / SD.ks  # within-module degree
-	#  c = 1 - sum( (k.it/k.i)^2)    # among-module connectivity = participation coefficient P in Guimerà & Amaral
+	#  c = 1 - sum( (k.it/k.i)^2)    # among-module connectivity = participation coefficient P in Guimera & Amaral
 	#
 	# author: C.F. Dormann 19 Mar 2012
 	#

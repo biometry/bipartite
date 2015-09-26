@@ -12,6 +12,6 @@
 }
 
 .onAttach <- function(lib, pkg)  {	
-    packageStartupMessage(" This is bipartite ",
+     packageStartupMessage(" This is bipartite ",
                           utils::packageDescription("bipartite", field="Version"), "\n For latest changes see versionlog in  ?\"bipartite-package\".\n For citation see: citation(\"bipartite\").\n Have a nice time plotting and analysing two-mode networks.\n")
 }

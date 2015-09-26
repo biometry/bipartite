@@ -6,7 +6,7 @@ nestedness <-function(m, null.models=TRUE,
 {
 
 # calculates matrix temperature using the binmatnest programm from Miguel Rodriguez-Girones
-# Rodríguez-Gironès & Santamaría (2006). A new algorithm to calculate the nestedness
+# Rodriguez-Girones & Santamaria (2006). A new algorithm to calculate the nestedness
 # temperature of presence-absence matrices. Journal of Biogeography 33:924-935.
 #
 # make sure matrix is a valid one as error proofing in the C++ function does not fully work

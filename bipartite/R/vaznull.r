@@ -4,7 +4,7 @@ vaznull <- function(N, web){
   # b) connectance is the same as in the original network.
   # vaznull differs from swap.web both in the algorithm used as well as in the
   # null model it outputs.
-  # vaznull is our implementation of the algorithm propose by Diego V·zquez, hence its name.
+  # vaznull is our implementation of the algorithm propose by Diego Vazquez, hence its name.
   # While vaznull is slower than swap.web, we regard it as better.
   #
   # implementor: Bernd Gruber <bernd.gruber@ufz.de> & Carsten Dormann
