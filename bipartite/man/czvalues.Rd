@@ -27,6 +27,8 @@ SD.ks = standard deviation of k.is of all species in module s;
 k.it = number of links of species i to module t; 
 k.i = degree of species i
 
+Note that for any species alone (in its level) in a module the z-value will be NaN, since then SD.ks is 0. This is a limitation of the way the z-value is defined (in multiples of degree/strength standard deviations).
+
 Olesen et al. (2006) give critical c and z values of 0.62 and 2.6, respectively. Species exceeding these values are deemed connectors or hubs of a network. The justification of these thresholds remains unclear to me. They may also not apply for the quantitative version.
 }
 
