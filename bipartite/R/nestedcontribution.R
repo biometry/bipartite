@@ -24,7 +24,7 @@ nestedcontribution <- function(web, nsimul = 99){
 
 		# compute the nestedness contribution of each row
 		for(i in rownames(web)){
-			print(i)
+			message(i)
 			# determine the probability of each interaction according to Bascompte et al. 2003
 			probs <- (rowSums(web)[i] / ncol(web) + colSums(web) / nrow(web)) / 2.
 
@@ -39,7 +39,7 @@ nestedcontribution <- function(web, nsimul = 99){
 
 		# compute the nestedness contribution of each column
 		for(i in colnames(web)){
-			print(i)
+			message(i)
 			# determine the probability of each interaction according to Bascompte et al. 2003
 			probs <- (rowSums(web) / ncol(web) + colSums(web)[i] / nrow(web)) / 2.
 
