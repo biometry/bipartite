@@ -7,11 +7,16 @@ networklevel, nodespec, npartite, null.distr, null.t.test, nullmodel, PAC, PDI, 
 plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, robustness, second.extinct, shuffle.web, 
 slope.bipartite, sortweb, specieslevel, strength, swap.web, symmetrise_w, togetherness, tnet_igraph, V.ratio, 
 vaznull, versionlog, visweb, web2edges, webs2array, wine)
+S3method(plot, wine)
 
 # Import all packages listed as Imports or Depends
 importFrom(igraph, graph.edgelist, set.edge.attribute, V) #for tnet functions
 importFrom(MASS, fitdistr)
+import(graphics)
+import(grDevices)
 import(methods)
+import(stats)
+import(utils)
 importFrom(vegan, cca, commsimulator, designdist, fisher.alpha, fisherfit, nestedchecker, nesteddisc, nestednodf, nestedtemp, treeheight, vegdist)
 importFrom(permute, allPerms) # for use in vegan::nesteddisc
 importFrom(sna, betweenness, closeness, geodist, gplot)
