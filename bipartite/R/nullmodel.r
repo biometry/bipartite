@@ -40,12 +40,10 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
     }
     
     if (m == 3){ #vaznull
-        if (all(web < 2))#{
-            warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")
-#            m <- 5
-#        } else { 
-			out <- vaznull(N, web)
-#		 }
+        if (all(web < 2)) {
+        	warning("This seems to be a binary web. Only methods shuffle.web and mgen should be used!\n  I proceeded nonetheless. Read the note in the help file!")
+        }
+		out <- vaznull(N, web)
     }
     
     if (m == 4){ #shuffle.web

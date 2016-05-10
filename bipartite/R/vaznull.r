@@ -36,22 +36,22 @@ vaznull <- function(N, web){
      }
     #if yes update finalmat, if not try again
     n.int.finalmat <- sum(rowSums(finalmat)>0)+sum(colSums(finalmat)>0)
-    }
-    # Step 2. IV: fill up to full connectance:
-    conn.remain <- sum(web>0) - sum(finalmat>0)
-    if (conn.remain > 0) {
-    		if (length(which(finalmat==0))==1){
+  }
+  # Step 2. IV: fill up to full connectance:
+  conn.remain <- sum(web>0) - sum(finalmat>0)
+  if (conn.remain > 0) {
+  	if (length(which(finalmat==0))==1){
     			add <- which(finalmat==0) # if there is only one possible cell, don't draw it randomly ...
-    		} else {
+    } else {
     			add <- sample(which(finalmat==0), conn.remain, prob=P1[finalmat==0])
-    		}
-	    	finalmat[add] <- 1
     }
+	finalmat[add] <- 1
+  }
   
     # 3. step: now fill the filled cells with the remaining interactions:
     int.remain <- sum(web) - sum(finalmat)
     if (int.remain > 0){
-	  add <- sample(which(finalmat>0), int.remain, prob=P1[finalmat>0], replace=TRUE)
+	  add <- sample(which(finalmat>0), int.remain, prob=P1[which(finalmat>0)], replace=TRUE)
       finalmat[as.numeric(names(table(add)))] <- finalmat[as.numeric(names(table(add)))] + table(add)
     }
 	finalmat
