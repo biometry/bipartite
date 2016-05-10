@@ -40,7 +40,7 @@ vaznull <- function(N, web){
     # Step 2. IV: fill up to full connectance:
     conn.remain <- sum(web>0) - sum(finalmat>0)
     if (conn.remain > 0) {
-    		if (length(which(finalmat==0))){
+    		if (length(which(finalmat==0))==1){
     			add <- which(finalmat==0) # if there is only one possible cell, don't draw it randomly ...
     		} else {
     			add <- sample(which(finalmat==0), conn.remain, prob=P1[finalmat==0])
