@@ -25,10 +25,12 @@ Calculates the potential for apparent competition (Holt 1977), following the for
 \note{
 The idea is that in host-parasitoid networks one host also affects other hosts by the number of parasitoid that hatch from it and are thus added to the pool of parasitoids. An abundant, large host can (involuntarily) contribute many parasitoids to the pool, thus also increasing the parasitoid burden of other hosts. This looks like competition between the two hosts, while in fact it is mediated through the other trophic level. 
 
-Whether this concept can be usefully applied to mutualist networks (such as flower visitation networks, aka pollination webs) is still under debate. The example below has thus to be seen as a technical, not a biological example.
+Whether this concept can be usefully applied to mutualist networks (such as flower visitation networks, aka pollination webs) is still under-investigated. The study of Carvalheiro et al. (2014) provide an example for constructive use in mutualistic networks.
 }
 
 \references{ 
+Carvalheiro, L.G., Biesmeijer, J.C., Benadi, G., Fründ, J., Stang, M., Bartomeus, I., Kaiser-Bunbury, C.N., Baude, M., Gomes, S.I.F., Merckx, V., Baldock, K.C.R., Bennett, A.T.D., Boada, R., Bommarco, R., Cartar, R., Chacoff, N., Dänhardt, J., Dicks, L. V., Dormann, C.F., Ekroos, J., Henson, K.S.E., Holzschuh, A., Junker, R.R., Lopezaraiza-Mikel, M., Memmott, J., Montero-Castaño, A., Nelson, I.L., Petanidou, T., Power, E.F., Rundlöf, M., Smith, H.G., Stout, J.C., Temitope, K., Tscharntke, T., Tscheulin, T., Vilà, M. & Kunin, W.E.  2014 The potential for indirect effects between co-flowering plants via shared pollinators depends on resource abundance, accessibility and relatedness. \emph{Ecology Letters} \bold{17}, 1389–1399.
+
 Holt, R. D. 1977 Predation, apparent competition and the structure of prey communities. \emph{Theoretical Population Biology} \bold{12}, 197--229.
 
 Morris, R. J., Lewis, O. T. and Godfray, H. C. J. 2004 Experimental evidence for apparent competition in a tropical forest food web. \emph{Nature} \bold{428}, 310--313.
