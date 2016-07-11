@@ -1,4 +1,3 @@
-
 nodespec <- function(web, inf.replace=NA){
   # an index to describe the functional specialisation of pollinators
   # proposed by Dalgaard et al. 2008 in Oikos

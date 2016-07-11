@@ -297,8 +297,8 @@ for (int j=1; j<=ncols;j++)
 	}
 	fill /= (1.0*nrows*ncols);
 
-	pRow = vector(1,nrows);
-	pCol = vector(1,ncols);
+    pRow = ::vector(1,nrows);
+    pCol = ::vector(1,ncols);
 	for (i=1;i<=nrows;i++)
 	{
 		pRow[i] = 0;
@@ -329,7 +329,7 @@ for (int j=1; j<=ncols;j++)
 if (*nullmodels==1) {  //should nullmodels be calculated??
 
 	tempMat = imatrix(1,nrows,1,ncols);
-	nullTemp = vector(1,NBRS);
+    nullTemp = ::vector(1,NBRS);
 	//	First null model:
 	p1 = 0.0;
 	for (nr=1;nr<=NBRS;nr++)
@@ -706,7 +706,7 @@ double matrixTemperature(bool &success,int sp, int **dataMat, int *c_ord, int *r
 
 	if (nbCols>2 && nbRows>2)
 	{
-		border = vector(1,nbCols);
+        border = ::vector(1,nbCols);
 		calcZ(phi,z);
 //    out = fopen(OUTFILE.c_str(),"a");      // ******************
 //	fprintf(out,"phi bmn5 %10.5f \n",phi); // ******************
@@ -1120,8 +1120,8 @@ double packMatrix(int sp, int **dataMat, int **intMat, double **d, int *c_ord, i
 	bestc = ivector(1,nc);
 	players = ivector(1,TOURSIZE);
 	sorted = ivector(1,TOURSIZE);
-	tPlayers = vector(1,TOURSIZE);
-	temp = vector(1,POPSIZE);
+    tPlayers = ::vector(1,TOURSIZE);
+    temp = ::vector(1,POPSIZE);
 	pRows = imatrix(1,POPSIZE,1,nr);
 	pCols = imatrix(1,POPSIZE,1,nc);
 
@@ -1387,7 +1387,7 @@ void prePackcols(int **mat, int indr[], int indc[], int nr, int nc, double x)
 	int i,j;
 	double *w;
 
-	w = vector(1,nc);
+    w = ::vector(1,nc);
 
 	//	We calculate an index for each column (plant)
 	for (j=1;j<=nc;j++)
@@ -1412,7 +1412,7 @@ void prePackrows(int **mat, int indr[], int indc[], int nr, int nc, double x)
 	int i,j;
 	double *w;
 
-	w = vector(1,nr);
+    w = ::vector(1,nr);
 
 	//	We calculate an index for each column (plant)
 	for (i=1;i<=nr;i++)
@@ -1467,8 +1467,8 @@ void prePackNTCcols(int **mat, int indr[], int indc[], int nr, int nc)
 	ndum = ivector(1,nc);
 	ns = ivector(1,nc);
 	nt = ivector(1,nc);
-	s = vector(1,nc);
-	t = vector(1,nc);
+    s = ::vector(1,nc);
+    t = ::vector(1,nc);
 
 	//	We calculate an index for each column (plant)
 	for (j=1;j<=nc;j++)
@@ -1507,8 +1507,8 @@ void prePackNTCrows(int **mat, int indr[], int indc[], int nr, int nc)
 	ndum = ivector(1,nr);
 	ns = ivector(1,nr);
 	nt = ivector(1,nr);
-	s = vector(1,nr);
-	t = vector(1,nr);
+    s = ::vector(1,nr);
+    t = ::vector(1,nr);
 
 	//	We calculate an index for each column (plant)
 	for (i=1;i<=nr;i++)

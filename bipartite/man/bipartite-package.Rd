@@ -35,8 +35,8 @@ See help pages for details and examples.
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.07\cr
-Date: \tab 2016-05-10\cr
+Version: \tab 2.08\cr
+Date: \tab 2016-07-11\cr
 License: \tab GPL \cr
 }
 }
@@ -45,6 +45,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2-08 (release date: 11-Jul-2016)	
+	\describe{
+		\item{Small patch in C++-code of binmatnest}{ for compatibility with clang. Thanks to Brian Ripley for fixing one of these C++-things that I never will understand! (In this case, the original code (by Miguel Rodríguez-Gironés) defined a pointer to "vector", which caused ambiguities in which "vector" should be used during compilation: the such defined pointer, or the std::vector.)}
+		\item{Smaller typographic}{ and referencing corrections/additions (e.g. in plotPAC).} 
+	}
   \item 2.07 (release date: 10-May-2016)
    \describe{ % begin describe
    \item{Bug fixed in \code{\link{vaznull}},}{ filled the matrix with 1s instead of 0s (although it was a `sophisticated' logical mistake I made, not a simple typo). Thanks to Sandra Bibiana Corea for reporting!}
