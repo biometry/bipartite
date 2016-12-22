@@ -14,6 +14,7 @@
 
 
 IMPROVE: 
+* clean up this file and assign priorities ;-)
 * togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
 * C score: allow for weighting: compute only the 0110-patterns and return this value. Then compute (weighted) averages in group level.
 * external extinction sequence across trophic levels for second.extinct
@@ -64,7 +65,7 @@ JOCHENF:
 * revise plotweb
 * npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
-* if everybody's stupid index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
+* if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
 
 
 
