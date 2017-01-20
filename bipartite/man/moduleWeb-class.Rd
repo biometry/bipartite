@@ -19,7 +19,8 @@ Objects from the class should only be created by using the function computeModul
     \item{\code{moduleWeb}:}{Object of class \code{"matrix"} representing the original bipartite graph but reordered such that plotting modules is possible.}
     \item{\code{orderA}:}{Object of class \code{"vector"} representing the permutation of the rows of the original graph.}
     \item{\code{orderB}:}{Object of class \code{"vector"} representing the permutation of the columns of the original graph.}
-    \item{\code{modules}:}{Object of class \code{"matrix"} containing for each module the information about its depth and involved nodes.}
+    \item{\code{modules}:}{Object of class \code{"matrix"} containing for each module the information about its depth and involved nodes. The first row is just a consecutive number, so of no information; the first two columns can also be ignored. This matrix shows ALL network players (in the sequence of the original matrix, starting with rows), so first rows, then columns. There are as many rows as modules. Each row writes a number if a species is in that module, or a 0 if it isn't. 
+For the modules of Safariland (\code{mod <- computeModules(Safariland); mod@modules[-1, -c(1,2) ]}), the third module are species 3 and 24, i.e. \emph{Schinus patagonicus} (third row) and Ichneumonidae4 (24 - 9 column).}
   }
 }
 \section{Methods}{
