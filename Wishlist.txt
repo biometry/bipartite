@@ -1,4 +1,3 @@
-* add node overlap/segretation (Strona & Veech 2015 MEE)
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * add Beckett's (2015) modularity algorithm
 * add more networks from NCEAS and ask Jochen for other published networks
@@ -78,3 +77,6 @@ So \..* refers to any file/directory starting with a ".".
 To exclude specifically .hg, I guess it would be \..hg or so.
 
 It also doesn't seem to work ...
+
+# done:
+* add node overlap/segretation (Strona & Veech 2015 MEE)

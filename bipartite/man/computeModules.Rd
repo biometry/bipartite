@@ -6,16 +6,20 @@
 \alias{cM}
 \alias{readModuleData}
 \alias{deleteModuleData}
+\alias{metaComputeModules}
 
 \title{Function "computeModules"}
 
 \description{
 This function takes a bipartite weighted graph and computes modules by applying M. E. J. Newman's modularity measure in a bipartite weighted version to it. During the computation files are written onto the hard drive disk. These files are by default deleted after the computation terminates. Details of the modularity algorithm can be found in Dormann \& Strauß (2013).
+\code{metaComputeModules} re-runs the algorithm several times, returning the most modular result, to stabilise modularity computation.
 }
 
 \usage{
 computeModules(web, deep = FALSE, deleteOriginalFiles = TRUE, 
 	steps = 1000000, tolerance = 1e-10, experimental = FALSE)
+	
+metaComputeModules(moduleObject, N=5, ...)
 }
 
 \arguments{
@@ -33,6 +37,9 @@ If \code{deleteOriginalFiles} is set to TRUE (default), the files mentioned abov
 }
  \item{tolerance}{How small should the difference between MCMC-swap results be? At some point computer precision fluctuations make the algorithm fail to converge, which is why we choose a (very low) defaults of 1E-10.}
  \item{experimental}{Logical; using an undescribed and untested version for which no detail is available? (We suggest: not yet.)}
+ \item{moduleObject}{Output from running \code{computeModules}.}
+ \item{N}{Number of replicate runs; defaults to 5.}
+ \item{...}{Arguments passed on to \code{computeModules}, which is called internally.}
 }
 
 \value{
@@ -40,7 +47,7 @@ An object of class "moduleWeb" containing information about the computed modules
 }
 
 \references{ 
-Dormann, C. F., and R. Strauß. 2013. Detecting modules in quantitative bipartite networks: the QuaBiMo algorithm. \bold{arXiv [q-bio.QM]} 1304.3218.
+Dormann, C. F., and R. Strauß. 2014. Detecting modules in quantitative bipartite networks: the QuanBiMo algorithm. \emph{Methods in Ecology & Evolution} \bold{5} 90--98 (or \bold{arXiv [q-bio.QM]} 1304.3218.)
 
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 }
