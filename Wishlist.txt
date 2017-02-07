@@ -1,3 +1,6 @@
+* add node overlap/segretation (Strona & Veech 2015 MEE)
+* add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
+* add Beckett's (2015) modularity algorithm
 * add more networks from NCEAS and ask Jochen for other published networks
 * plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
@@ -6,7 +9,7 @@
 * add option "weighted" to links per species in networklevel (copy-paste from grouplevel!)
 * web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
 * as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
-* check Poisot's python package and his package on network matri comparisons
+* check Poisot's python package and his package on network matrix comparisons
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
 * get rid of the dynload in function cm: find the bug in the C-code (possibly to do with the fopen/fclose?)
