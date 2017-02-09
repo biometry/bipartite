@@ -1,4 +1,4 @@
-\encoding{UTF-8}
+l\encoding{UTF-8}
 
 \name{computeModules}
 
@@ -65,6 +65,9 @@ See also class "moduleWeb", function "listModuleInformation", function "printout
 		data(small1976)
 		(res <- computeModules(small1976)) # takes several minutes!
 		plotModuleWeb(res)
+		
+		res2 <- metaComputeModules(small1976)
+		res2
 	}
 }
 \keyword{Methods and Generic Functions}
