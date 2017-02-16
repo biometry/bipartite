@@ -32,6 +32,8 @@ Finally, bipartite comes with 23 quantitative pollination network data sets take
 
 See help pages for details and examples.
 
+For an overview of other computing resources, data, books, journals etc. check out this page: \url{https://github.com/briatte/awesome-network-analysis}.
+
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
