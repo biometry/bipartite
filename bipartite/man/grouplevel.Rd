@@ -39,7 +39,7 @@ nrep=100, fcdist="euclidean", fcweighted=TRUE)
     \item \option{ALLBUTDD} (default) calculates all indices except degree distribution fits. This latter has the advantage that the output can be simplified to a vector; 
     }
     }
-  \item{level}{For which of the two groups (\dQuote{levels}) should these indices be computed? Options are \option{lower}, \option{higher} and \option{both} (default). Although \code{groupwise} can be employed on its own, it typically will be called through \code{\link{networklevel}}.}
+  \item{level}{For which of the two groups (\dQuote{levels}) should these indices be computed? Options are \option{lower}, \option{higher} and \option{both} (default). For index \option{robustness}, the indicated level is the one that will be exterminated in simulations (see \link{\code{second.extinct}}). Although \code{groupwise} can be employed on its own, it typically will be called through \code{\link{networklevel}}.}
 %! JFedit here
 \item{weighted}{logical; for those indices which are simply averaged across species to yield the group-level index (e.g. \option{niche overlap}), should this averaging take into account the number of observations for a species? Defaults to \code{TRUE}. The logic behind this default is that we have more faith in an index value when it is based on many, rather than few, observations. Bersier et al. (2002) proposed this weighting and it is also commonly used to compute vulnerability and generality (e.g. in Tylianakis et al. 2006).}
   % In fact, vulnerability/generality are only weighted mean number of effective partners for the lower/higher level, respectively. Thus, with default settings, the same value will be returned twice for these two indices.
