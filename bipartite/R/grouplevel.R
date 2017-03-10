@@ -1,4 +1,4 @@
-grouplevel <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, empty.web=FALSE, dist="horn", CCfun=mean, logbase="e", normalise=TRUE,  extinctmethod="r", nrep=100, fcdist="euclidean", fcweighted=TRUE){
+grouplevel <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, empty.web=TRUE, dist="horn", CCfun=mean, logbase="e", normalise=TRUE,  extinctmethod="r", nrep=100, fcdist="euclidean", fcweighted=TRUE){
     if (level == "both")   for.higher <- for.lower <- TRUE
     if (level == "higher") {for.higher <- TRUE; for.lower=FALSE}
     if (level == "lower")  {for.lower  <- TRUE; for.higher=FALSE}
@@ -31,7 +31,7 @@ grouplevel <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, empty
 
 
 
-one.grouplevel <- function(web, index="ALLBUTDD", level="higher", weighted=TRUE, empty.web=FALSE, dist="horn", CCfun=mean, logbase="e", normalise=TRUE, extinctmethod="r", nrep=100, fcdist="euclidean", fcweighted=TRUE){
+one.grouplevel <- function(web, index="ALLBUTDD", level="higher", weighted=TRUE, empty.web=TRUE, dist="horn", CCfun=mean, logbase="e", normalise=TRUE, extinctmethod="r", nrep=100, fcdist="euclidean", fcweighted=TRUE){
   ### computes indices for one group level (i.e. higher/lower trophic level)
   
   web <- as.matrix(web)   
@@ -179,19 +179,20 @@ one.grouplevel <- function(web, index="ALLBUTDD", level="higher", weighted=TRUE,
     }
     out$"degree distribution" <- dd[[2]] # HTL
   }
+
   # secondary extinction slope (not symmetric)
   if (any(c("extinction slope", "robustness") %in% index)){
-    extL <- try(second.extinct(web=web, method=extinctmethod, nrep=nrep, participant="lower"), silent=TRUE)       
+  	ext <- try(second.extinct(web=web, method=extinctmethod, nrep=nrep, participant="higher"), silent=TRUE)       
     if ("extinction slope" %in% index){
-      slopeH <- try(slope.bipartite(extL, col="green", pch=16, type="b", plot.it=FALSE), silent=TRUE)
+      slopeH <- try(slope.bipartite(ext, col="green", pch=16, type="b", plot.it=FALSE), silent=TRUE)
       out$"extinction slope"=suppressWarnings(as.numeric(slopeH))            
     }
     
     if ("robustness" %in% index) {
-      if (inherits(extL, "try-error")){
+      if (inherits(ext, "try-error")){
         robustH <- NA
       } else {
-        robustH <- try(robustness(extL), silent=TRUE)                
+        robustH <- try(robustness(ext), silent=TRUE)                
       }
       rH <- if (inherits(robustH, "try-error")) NA else robustH          
       out$"robustness" = as.numeric(rH)

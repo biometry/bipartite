@@ -8,7 +8,7 @@
 	Calculates a variety of indices and values for each group of a bipartite network (\code{one.grouplevel} is the actual function to do the computations and is not intended to be called by the user)
 }
 \usage{
-grouplevel(web, index="ALLBUTDD", level="both", weighted=TRUE, empty.web=FALSE, 
+grouplevel(web, index="ALLBUTDD", level="both", weighted=TRUE, empty.web=TRUE, 
 dist="horn", CCfun=mean, logbase="e", normalise=TRUE,  extinctmethod="r", 
 nrep=100, fcdist="euclidean", fcweighted=TRUE)
 }

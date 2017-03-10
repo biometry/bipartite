@@ -52,6 +52,8 @@ Memmott, J., Waser, N. M. and Price, M. V. (2004) Tolerance of pollination netwo
 
 \note{
 Note: The length of an extinction sequence is obviously given by the number of species in the selected trophic level. When setting \option{participant="both"}, lengths will differ for each replicate run, since it is unpredictable in which sequence species go extinct, and hence how many secondary extinctions will pre-empt further primary extinctions.
+
+Note 2: Because external abundances can be fed to this function, the web is not emptied of all-empty rows or columns. Thus the results will be different to calls to \code{\link{networklevel}} or \code{\link{grouplevel}}, which by default empty the web!
 }
 
 \seealso{ \code{\link{networklevel}} calls \code{second.extinct}; \code{\link{extinction}}

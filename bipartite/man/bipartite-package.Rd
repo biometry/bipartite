@@ -47,6 +47,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.08 (release date: XX-YYY-2017)	
+  \describe{
+  	\item{\code{\link{networklevel}} and \code{\link{grouplevel}} inconsistently}{returned different values for secondary extinction, because the former by default purged empty columns/rows, while the latter didn't. It does now. Thanks to Gianalberto Losapio for bringing this to my attention.}
+  }
+	
   \item 2.07 (release date: 08-Nov-2016)
    \describe{ % begin describe
    \item{Bug fixed in \code{\link{vaznull}},}{ filled the matrix with 1s instead of 0s (although it was a `sophisticated' logical mistake I made, not a simple typo). Thanks to Sandra Bibiana Corea for reporting! }
