@@ -1,8 +1,8 @@
 # Export all names
 #exportPattern(".")
 export(as.one.mode, as.tnet, BC, betweenness_w, CC, C.score, closeness_w, compart, computeModules, 
-clustering_tm, czvalues, degreedistr, dfun, discrepancy, empty, endpoint, extinction, fc, frame2webs, genweb, 
-grouplevel, H2fun, linklevel, listModuleInformation, metaComputeModules, mgen, ND, nested, nestedcontribution, nestedness, nestedrank, 
+clustering_tm, cM, convert2moduleWeb, czvalues, degreedistr, dfun, DIRT_LPA_wb_plus, discrepancy, empty, endpoint, extinction, fc, frame2webs, genweb, 
+grouplevel, H2fun, linklevel, listModuleInformation, LPA_wb_plus, metaComputeModules, mgen, ND, nested, nestedcontribution, nestedness, nestedrank, 
 networklevel, nodespec, NOS, npartite, null.distr, null.t.test, nullmodel, PAC, PDI, plotModuleWeb, plotPAC, plotweb, plotweb2, 
 plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, robustness, second.extinct, shuffle.web, 
 slope.bipartite, sortweb, specieslevel, strength, swap.web, symmetrise_w, togetherness, tnet_igraph, V.ratio, 

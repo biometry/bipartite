@@ -37,11 +37,17 @@ compart(bezerra2009) # an uncomparted network
 # computeModules
 ## a lot to test here! let's start with the problem of calling computeModules twice in a row:
 comp1 <- computeModules(vazquenc)
-comp2 <- computeModules(vazquenc)
+comp2 <- computeModules(vazquenc, forceLPA=TRUE)
+comp3 <- computeModules(vazquenc, method="DormannStrauss")
+comp3 <- computeModules(vazquenc, method="DormannStrauss")
+plotModuleWeb(comp1)
+plotModuleWeb(comp2)
+plotModuleWeb(comp3)
 # to be continued ...
 
 # czvalues
 czvalues(comp1)
+czvalues(comp3)
 
 # degreedistr
 degreedistr(web=memmott1999)
@@ -54,6 +60,11 @@ degreedistr(web=memmott1999, pure.call=T, level="higher", las=1)
 set.seed(2)
 dfun(vazquenc, abuns=runif(24, 1,9)) # checks whether external abundances are accepted
 dfun(t(vazquenc), abuns=runif(7, 1,9)) # checks whether external abundances are accepted
+
+# DIRT_LPA_wb_plus
+res <- DIRT_LPA_wb_plus(Safariland, mini=3, reps=20)
+mod <- convert2moduleWeb(Safariland, res)
+plotModuleWeb(mod)
 
 # discrepancy
 discrepancy(vazquenc)

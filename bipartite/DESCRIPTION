@@ -2,7 +2,7 @@ Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
 Version: 2.08
-Date: 2017-02-08
+Date: 2017-03-28
 Author: Carsten F. Dormann, Jochen Fruend and Bernd Gruber, with additional code from Mariano Devoto, Jose Iriondo, Rouven Strauss and Diego Vazquez, also based on C-code developed by Nils Bluethgen, Aaron Clauset/Rouven Strauss and Miguel Rodriguez-Girones
 Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
 Depends: vegan, sna

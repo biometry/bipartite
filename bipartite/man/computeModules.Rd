@@ -1,4 +1,4 @@
-l\encoding{UTF-8}
+\encoding{UTF-8}
 
 \name{computeModules}
 
@@ -11,23 +11,24 @@ l\encoding{UTF-8}
 \title{Function "computeModules"}
 
 \description{
-This function takes a bipartite weighted graph and computes modules by applying M. E. J. Newman's modularity measure in a bipartite weighted version to it. During the computation files are written onto the hard drive disk. These files are by default deleted after the computation terminates. Details of the modularity algorithm can be found in Dormann \& Strauß (2013).
+This function takes a bipartite weighted graph and computes modules by applying Newman's modularity measure in a bipartite weighted version to it. 
 \code{metaComputeModules} re-runs the algorithm several times, returning the most modular result, to stabilise modularity computation.
 }
 
 \usage{
-computeModules(web, deep = FALSE, deleteOriginalFiles = TRUE, 
-	steps = 1000000, tolerance = 1e-10, experimental = FALSE)
+computeModules(web, method="Beckett", deep = FALSE, deleteOriginalFiles = TRUE, 
+	steps = 1000000, tolerance = 1e-10, experimental = FALSE, forceLPA=FALSE)
 	
-metaComputeModules(moduleObject, N=5, ...)
+metaComputeModules(moduleObject, N=5, method="DormannStrauss", ...)
 }
 
 \arguments{
   \item{web}{
 \code{web} is the matrix representing the weighted bipartite graph (as an example, see e.g. web "small1976" in this package).
 }
+ \item{method}{Choice between the algorithm(s) provided by Stephen Beckett (2016) or Dormann & Strauss (2016). Defaults to the much faster and in the majority of cases better algorithm of Beckett. (Note the optional argument \option{forceLPA} to use his slightly inferior but even faster pure LPA algorithm.)}
   \item{deep}{
-If \code{deep} is set to FALSE (default), a flat clustering is computed, otherwise submodules are identified recursively within modules.
+If \code{deep} is set to FALSE (default), a flat clustering is computed, otherwise submodules are identified recursively within modules. Works only with \option{method="DormannnStrauss"}.
 }
   \item{deleteOriginalFiles}{
 If \code{deleteOriginalFiles} is set to TRUE (default), the files mentioned above in the description are deleted from the hard drive disk, otherwise not.
@@ -38,12 +39,13 @@ If \code{deleteOriginalFiles} is set to TRUE (default), the files mentioned abov
  \item{tolerance}{How small should the difference between MCMC-swap results be? At some point computer precision fluctuations make the algorithm fail to converge, which is why we choose a (very low) defaults of 1E-10.}
  \item{experimental}{Logical; using an undescribed and untested version for which no detail is available? (We suggest: not yet.)}
  \item{moduleObject}{Output from running \code{computeModules}.}
+ \item{forceLPA}{Logical; should the even faster pure LPA-algorithm of Beckett be used? DIRT-LPA, the default, is less likely to get trapped in a local minimum, but is slightly slower. Defaults to FALSE.}
  \item{N}{Number of replicate runs; defaults to 5.}
  \item{...}{Arguments passed on to \code{computeModules}, which is called internally.}
 }
 
 \value{
-An object of class "moduleWeb" containing information about the computed modules. For details, please refer to the corresponding documentation file.
+An object of class "moduleWeb" containing information about the computed modules. For details, please refer to the corresponding documentation file. 
 }
 
 \references{ 
@@ -52,21 +54,25 @@ Dormann, C. F., and R. Strauß. 2014. Detecting modules in quantitative bipartit
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 }
 
-\author{Rouven Strauss, with fixes by Carsten Dormann and Tobias Hegemann}
+\author{Rouven Strauss, with fixes by Carsten Dormann and Tobias Hegemann; modified to accomodate Beckett's algorithm by Carsten Dormann}
 
-\note{For perfectly compartmentalised networks the algorithm may throw an error message. Please add a little bit of noise (e.g. uniform between 0 and 1 or so) or a small constant (1E-5 or so) and it will work again. }
+\note{For perfectly compartmentalised networks the algorithm may throw an error message. Please add a little bit of noise (e.g. uniform between 0 and 1 or so) or a small constant (1E-5 or so) and it will work again. 
+
+When using the method \option{DormannStrauss}, files are written onto the hard drive during the computation. These files are by default deleted after the computation terminates, unless it breaks. Details of the modularity algorithm can be found in Dormann \& Strauß (2013).
+}
 
 \seealso{
-See also class "moduleWeb", function "listModuleInformation", function "printoutModuleInformation".
+See also class "moduleWeb", function "listModuleInformation", function "printoutModuleInformation", \code{\link{DIRT_LPA_wb_plus}}.
 }
 
 \examples{
 	\dontrun{
 		data(small1976)
-		(res <- computeModules(small1976)) # takes several minutes!
+		(res <- computeModules(small1976)) 
 		plotModuleWeb(res)
 		
-		res2 <- metaComputeModules(small1976)
+		# slow:
+		res2 <- metaComputeModules(small1976) # makes no sense for "Beckett"
 		res2
 	}
 }
