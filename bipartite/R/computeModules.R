@@ -9,6 +9,9 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
   # the fast and nice algorithm of Beckett:
   if (method=="Beckett"){
     # always uses DIRTLPA unless forced to use the faster LPA, which gets stuck in local optima more often (see Beckett 2016)
+    web <- as.matrix(empty(web))
+    if (any(attr(web, "empty")) > 0) warning("Some empty columns or rows were deleted.")
+
     mod <- if (forceLPA) LPA_wb_plus(web) else  DIRT_LPA_wb_plus(web)
     # convert into moduleWeb-object:
     result <- convert2moduleWeb(web,  mod)

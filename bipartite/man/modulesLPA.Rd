@@ -29,9 +29,9 @@ convert2moduleWeb(MATRIX, MODINFO)
   \item{MATRIX}{
 \code{MATRIX} is the matrix representing the weighted bipartite graph (as an example, see e.g. web "small1976" in this package).
 }
- \item{mini}{Minimal number of modules the algorithm should start with; defaults to 4.}
- \item{reps}{Number of trials to run for each setting of \option{mini}; defaults to 10.}
- \item{initialmoduleguess}{Optional vector with labels for the modules of the longer web dimension. Defaults to \code{NA} and is not fully clear to me (CFD).}
+ \item{mini}{Minimal number of modules the algorithm should start with; defaults to 4. See explanation of \option{initialmoduleguess} to understand why not starting with one module per species interaction makes sense.}
+ \item{reps}{Number of trials to run for each setting of \option{mini}; defaults to 10 but my benefit from higher values.}
+ \item{initialmoduleguess}{Optional vector with labels for the modules of the longer web dimension. The \option{initialmoduleguess} argument in \code{LPA_wb_plus} is used as an initial guess of the number of modules the network contains. The code then randomly assigns this many labels across the nodes of one of the types. The classical algorithm (i.e. \code{LPA_wb_plus}) would use an initialmoduleguess of the maximum number of modules a network can contain (i.e. assigning a different label to each node initially). \code{DIRT_LPA_wb_plus} exploits this. By initially assigning fewer than the maximum number of modules in the first instance nodes that may not have been placed together by the classical algorithm are placed together - creating different start points from which to attempt to maximise modularity.Defaults to \code{NA}, i.e. as many modules as there are species in the smaller group.}
  \item{MODINFO}{Object returned by \code{modulesLPA}.}
 }
 
@@ -56,7 +56,7 @@ Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 \examples{
 	\dontrun{
 		(res <- DIRT_LPA_wb_plus(small1976))
-		mod <- convert2ModuleWeb(small1976, res)
+		mod <- convert2moduleWeb(small1976, res)
 		plotModuleWeb(mod)
 	}
 }
