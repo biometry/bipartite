@@ -1,3 +1,8 @@
+## Package has dynamic library
+
+useDynLib("bipartite", .registration = TRUE)
+
+
 # Export all names
 #exportPattern(".")
 export(as.one.mode, as.tnet, BC, betweenness_w, CC, C.score, closeness_w, compart, computeModules, 
@@ -21,4 +26,3 @@ importFrom(vegan, cca, commsimulator, designdist, fisher.alpha, fisherfit, neste
 importFrom(permute, allPerms) # for use in vegan::nesteddisc
 importFrom(sna, betweenness, closeness, geodist, gplot)
 importFrom(fields, image.plot)
-
