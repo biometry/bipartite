@@ -1,7 +1,6 @@
 * parallelise computeModuleMeta
 * in second.extinct, allow for nrep of abundance-based sequences (that makes sense when there are ties in the marginal totals)!
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
-* add Beckett's (2015) modularity algorithm
 * add more networks from NCEAS and ask Jochen for other published networks
 * plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
