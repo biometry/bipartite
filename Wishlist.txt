@@ -12,7 +12,6 @@
 * check Poisot's python package and his package on network matrix comparisons
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
-* get rid of the dynload in function cm: find the bug in the C-code (possibly to do with the fopen/fclose?)
 * see Email Jochen 1.2.2013: DolŽdec for multivariate stuff
 
 
@@ -37,7 +36,6 @@ Araújo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick D
 
 
 * include all quantitative host-parasitoid webs
-
 
 * in second.extinct, use plot.it="higher"/"lower" to plot only one of the trophic levels (wish of Georg Anderson).
 
@@ -81,3 +79,4 @@ It also doesn't seem to work ...
 
 # done:
 * add node overlap/segretation (Strona & Veech 2015 MEE)
+* added Beckett's modularity algorithm (as default in computeModules)
