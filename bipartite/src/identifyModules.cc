@@ -1,15 +1,3 @@
-// something is wrong in this file; on second call (from R) it returns the following error:
-/*
-!! ERROR: Malformed input file.
-Error in file(file, "rt") : cannot open the connection
-In addition: Warning message:
-In file(file, "rt") :
-cannot open file 'web-1-1.ordA': No such file or directory
-*/
-// The error message is prompted if readInputFile's fopen doesn't work. But why?
-// I think that some pipe is not closed at the end of a successful call to identifyModules
-
-
 // ****************************************************************************************************
 // *** COPYRIGHT NOTICE *******************************************************************************
 // identifyModules - detects modules in the graph (based on fitHRG of Aaron Clauset)
@@ -82,6 +70,8 @@ cannot open file 'web-1-1.ordA': No such file or directory
 // ****************************************************************************************************
 
 #include <R.h>
+//#include <Rinternals.h>
+#include <R_ext/Rdynload.h>
 
 #include <stdio.h>
 #include <fstream>

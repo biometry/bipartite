@@ -20,8 +20,13 @@ static const R_CMethodDef cMethods[ ] = {
 /* {INTSXP, INTSXP, INTSXP, REALSXP, INTSXP, INTSXP, INTSXP,  INTSXP,  INTSXP,  INTSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, INTSXP, INTSXP} */
 /* {INTSXP, STRSXP}*/
 
-void R_init_bipartite(DllInfo *dll)
+void R_init_bipartite(DllInfo *info)
 {
-    R_registerRoutines(dll, cMethods, NULL, NULL, NULL);
-    R_useDynamicSymbols(dll, FALSE);
+    R_registerRoutines(info, cMethods, NULL, NULL, NULL);
+    R_useDynamicSymbols(info, FALSE);
+}
+
+void R_unload_bipartite(DllInfo *info)
+{
+  /* resease resources */
 }

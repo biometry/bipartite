@@ -1,4 +1,7 @@
 #include <R.h>
+// #include <Rinternals.h>
+#include <R_ext/Rdynload.h>
+
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
