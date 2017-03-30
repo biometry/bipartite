@@ -58,7 +58,7 @@ Liu X. & Murata T. 2010. An Efficient Algorithm for Optimizing Bipartite Modular
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 }
 
-\author{Rouven Strauss, with fixes by Carsten Dormann and Tobias Hegemann; modified to accomodate Beckett's algorithm by Carsten Dormann}
+\author{Rouven Strauss, with fixes by Carsten Dormann and Tobias Hegemann; modified to accommodate Beckett's algorithm by Carsten Dormann}
 
 \note{For perfectly compartmentalised networks the algorithm may throw an error message. Please add a little bit of noise (e.g. uniform between 0 and 1 or so) or a small constant (1E-5 or so) and it will work again. 
 

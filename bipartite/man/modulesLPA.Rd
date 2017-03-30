@@ -47,7 +47,7 @@ Liu X. & Murata T. 2010. An Efficient Algorithm for Optimizing Bipartite Modular
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 }
 
-\author{Stephen J Beckett (https://github.com/sjbeckett/weighted-modularity-LPAwbPLUS), lifted by Carsten F. Dormann for bipartite}
+\author{Stephen J Beckett (https://github.com/sjbeckett/weighted-modularity-LPAwbPLUS), lifted, with consent by the author, by Carsten F. Dormann to bipartite}
 
 \seealso{
 \code{\link{computeModules}}; see also class "moduleWeb", function "listModuleInformation", function "printoutModuleInformation"
