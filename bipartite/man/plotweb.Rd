@@ -31,7 +31,7 @@ plotweb(web,
   \item{y.width.low}{ width of lower boxes, default is 0.1 }
   \item{y.width.high}{ width of upper boxes, default is 0.1 }
   \item{low.spacing}{ distance between lower boxes, default is NULL, so automatically spaced that length of upper and lower boxes is the same. Be aware if set to any value that x.lim may has to be adjusted to ensure that the network is not plotted outside the plotting region}
-  \item{high.spacing}{ distance between upper and lower boxes, default is is NULL, so automatically spaced that length of upper and lower boxes is the same. Be aware if set to any value that x.lim may has to be adjusted to ensure that the network is not plotted outside the plotting region}
+  \item{high.spacing}{ distance between upper boxes, default is is NULL, so automatically spaced that length of upper and lower boxes is the same. Be aware if set to any value that x.lim may has to be adjusted to ensure that the network is not plotted outside the plotting region}
 
   \item{arrow}{ display type of connection between upper and lower boxes, options are \option{up}, \option{down}, \option{both}, \option{up.center}, \option{down.center}, \option{both.center} and \option{no}, default is \option{no}, which is a polygonal connection between boxes. }
   \item{col.interaction}{color of interaction, default is grey80. }

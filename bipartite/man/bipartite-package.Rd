@@ -47,6 +47,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.09 (release date: XX-YYY-2017)	
+  \describe{
+    \item{Fixed imprecise explanation in \code{\link{plotweb}}'s}{\option{low/high.spacing}, which now correctly describes its effect on the horizontal space within a level. (Thanks to Jeff Ollerton for reporting.)}
+  }
+
   \item 2.08 (release date: 30-Mar-2017)	
   \describe{
     \item{New modularity algorithm called by \code{\link{computeModules}}.}{Although the excellent algorithm \code{\link{DIRT_LPA_wb_plus}} by Stephen Beckett has been around for a year, I never managed to find the time to put it into bipartite. By now, Stephen has even written a wrapper code so that the output is fully compatible with existing code for plotting (\code{\link{plotModuleWeb}}) there was really no argument left to postpone it. Stephen's DIRT_LPA_wb_plus will be the new default, replacing 'QuanBiMo', which remains available under \option{method='DormannStrauss'}. While DIRT could be called recursively, thereby making modules-within-modules computable, this is not packaged yet. So currently the much slower DormannStrauss-option is the only way to get recursive modules. Many thanks to Stephen for making this code available!}

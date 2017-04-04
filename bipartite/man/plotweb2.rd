@@ -27,7 +27,7 @@ plotweb2(web, web2, method = "cca", empty = FALSE, labsize = 1, ybig = 1,
   \item{labsize}{ factor for size of labels, default is 1 }
   \item{ybig}{ vertical distance between upper and lower boxes, default is 1}
   \item{y_width}{ width of upper and lower boxes, default is 0.1 }
-  \item{spacing}{ horizonatal distance between upper and lower boxes, default is 0.05}
+  \item{spacing}{ horizonatal distance between boxes within a level, default is 0.05}
   \item{arrow}{ display type of connection between upper and lower boxes, options are \option{up}, \option{down}, \option{both} and \option{no}, default is \option{no}, which is a polygonal connection between boxes. }
   \item{col.interaction}{color of interaction, default is grey80. }
   \item{col.pred}{color of upper boxes, default is grey10.}
@@ -42,7 +42,7 @@ plotweb2(web, web2, method = "cca", empty = FALSE, labsize = 1, ybig = 1,
 
   \item{method2}{ Default method is \option{cca}, which leads to as few crossings of interactions as possible. The other option is \option{normal}, which leaves order as given by the matrix.}
   \item{empty2}{logical; should empty columns or empty rows be omitted from plotting; defaults to true}
-  \item{spacing2}{ horizonatal distance between upper and lower boxes, default is 0.05}
+  \item{spacing2}{ horizontal distance between boxes within one level, default is 0.05}
   \item{arrow2}{ display type of connection between upper and lower boxes, options are \option{up}, \option{down}, \option{both} and \option{no}, default is \option{no}, which is a polygonal connection between boxes. }
   \item{col.interaction2}{color of interaction, default is grey80. }
   \item{col.pred2}{color of upper boxes, default is grey10.}
