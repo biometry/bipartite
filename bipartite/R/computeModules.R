@@ -6,6 +6,14 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
     warning("The method you've selected does not exist. Will use 'Beckett' instead!")
     method <- "Beckett"
   }
+  # check if, for binary data, any species is present everywhere ("empty" takes care of the "nowhere"):
+  if (length(table(unlist(web))) == 2  & ( any(colSums(web) == nrow(web)) | any(rowSums(web) == ncol(web)))){
+    warning("Your data set contains one (or more) species present everywhere. These will be ignored, as they contain no information for the modularity algorithm.")
+    nonWeb <- (!web) * 1
+    web <- (! empty(nonWeb)) * 1
+  }
+  
+  
   # the fast and nice algorithm of Beckett:
   if (method=="Beckett"){
     # always uses DIRTLPA unless forced to use the faster LPA, which gets stuck in local optima more often (see Beckett 2016)
@@ -43,7 +51,7 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
       
       # Make sure the modularity is non-negative
       if (result[[5]] >= 0) {
-        new("moduleWeb", originalWeb=web, moduleWeb=as.matrix(result[[1]]), orderA=result[[2]], orderB=result[[3]], modules=result[[4]], likelihood=result[[5]]);
+        out <- new("moduleWeb", originalWeb=web, moduleWeb=as.matrix(result[[1]]), orderA=result[[2]], orderB=result[[3]], modules=result[[4]], likelihood=result[[5]]);
       }
       else {
         if(deep) {
@@ -55,14 +63,15 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
         NULL;
       }
     }
+    return(out)
   } # end if DormannStrauss
 
   
 }
 
   
-  # This function actually prepares the recursive computation of the modules and returns an object of class "moduleWeb"
-  cM = function(web, depth, nrOfModule, ytop, xleft, ybottom, xright, prev_orderA, prev_orderB, modules, deepCompute, delete, steps, tolerance, experimental) {
+# This function actually prepares the recursive computation of the modules and returns an object of class "moduleWeb"
+cM = function(web, depth, nrOfModule, ytop, xleft, ybottom, xright, prev_orderA, prev_orderB, modules, deepCompute, delete, steps, tolerance, experimental) {
     
     result = list();
     

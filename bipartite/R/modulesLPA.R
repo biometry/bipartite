@@ -23,10 +23,11 @@ LPA_wb_plus <- function(MATRIX, initialmoduleguess=NA) {
   #initiliase labels
   bluelabels = rep(NA,dim(MATRIX)[2])
   
-  if (is.na(initialmoduleguess))
+  if (is.na(initialmoduleguess)){
     redlabels = 1:dim(MATRIX)[1]
-  else
+  }  else {
     redlabels = sample(1:(initialmoduleguess+1),dim(MATRIX)[1],replace=TRUE)
+  }
   
   #Run Phase 1: Locally update lables to maximise Qb
   outlist = StageOne_LPAwbdash(row_marginals,col_marginals,MATRIX,BMatrix,Matsum,redlabels,bluelabels)
@@ -206,27 +207,24 @@ StageOne_LPAwbdash <- function(row_marginals,col_marginals,MATRIX,BMatrix,Matsum
   
   #Fill up these containers according to current labels
   #Red
-  for(aa in 1:REDLABELLENGTH) {
-    if(is.na(TotalRedDegrees[redlabels[aa]])) {
+  for (aa in 1:REDLABELLENGTH) {
+    if (is.na(TotalRedDegrees[redlabels[aa]])) {
       TotalRedDegrees[redlabels[aa]] = row_marginals[aa]
-    }
-    else {
+    }  else {
       TotalRedDegrees[redlabels[aa]] = TotalRedDegrees[redlabels[aa]] + row_marginals[aa]
     }
   }
   
   #Blue
-  if(sum(is.na(bluelabels)) != BLUELABELLENGTH) { #occurs first time through as blue nodes unlabelled
-    for(bb in 1:BLUELABELLENGTH) {
-      if(is.na(TotalBlueDegrees[bluelabels[bb]])) {
+  if (sum(is.na(bluelabels)) != BLUELABELLENGTH) { #occurs first time through as blue nodes unlabelled
+    for (bb in 1:BLUELABELLENGTH) {
+      if (any(is.na(TotalBlueDegrees[bluelabels[bb]]))) {
         TotalBlueDegrees[bluelabels[bb]] = col_marginals[bb]
-      }
-      else {
+      } else {
         TotalBlueDegrees[bluelabels[bb]] = TotalBlueDegrees[bluelabels[bb]] + col_marginals[bb]
       }
     }
-  }
-  else {
+  } else {
     TotalBlueDegrees = rep(0,max(BLUELABELLENGTH,REDLABELLENGTH))
   }
   
