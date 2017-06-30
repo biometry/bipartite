@@ -37,8 +37,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.08\cr
-Date: \tab 2017-03-30\cr
+Version: \tab 2.09\cr
+Date: \tab 2017-06-30\cr
 License: \tab GPL \cr
 }
 }
@@ -47,8 +47,9 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.09 (release date: XX-YYY-2017)	
+  \item 2.09 (release date: 30-Jun-2017)	
   \describe{
+    \item{Fixed type of object returned by \code{\link{computeModules}},}{when using \option{method="DormannStrauss"}, which I had broken after changing the default. Many thanks to Abdul Shakoor for reporting. Also added an error catcher to exclude, from binary webs, species that interact with every other species (i.e. are all 1; all-0 were already excluded).}
     \item{Fixed imprecise explanation in \code{\link{plotweb}}'s}{\option{low/high.spacing}, which now correctly describes its effect on the horizontal space within a level. (Thanks to Jeff Ollerton for reporting.)}
   }
 

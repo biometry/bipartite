@@ -44,6 +44,9 @@ plotModuleWeb(comp1)
 plotModuleWeb(comp2)
 plotModuleWeb(comp3)
 # to be continued ...
+web <- matrix(c(0,1), 3, 3)
+web[1,] <- 1
+computeModules(web) # test ability to remove all-1s
 
 # czvalues
 czvalues(comp1)
