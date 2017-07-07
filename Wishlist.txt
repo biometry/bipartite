@@ -1,4 +1,7 @@
+* clean up the functions, don't list any internal function in the help pages (I don't know how: remove alias? they are already not exported ...)
+* add a null model construction function from abundance data! (I thought I did that already ...)
 * parallelise computeModuleMeta
+* explore plotting options outside bipartite (igraph, tidygraph)
 * in second.extinct, allow for nrep of abundance-based sequences (that makes sense when there are ties in the marginal totals)!
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * add more networks from NCEAS and ask Jochen for other published networks
@@ -13,7 +16,7 @@
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
 * see Email Jochen 1.2.2013: Dolédec for multivariate stuff
-
+* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); not yet implemented in R, it seems!
 
 IMPROVE: 
 * clean up this file and assign priorities ;-)
@@ -51,7 +54,7 @@ This means:
 - revise to be more inviting to other disciplines (social scientists)
 
 
-* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); not yet implemented in R, it seems!
+
 
 
 JOCHENF:
