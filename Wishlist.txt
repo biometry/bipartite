@@ -1,10 +1,6 @@
-* clean up the functions, don't list any internal function in the help pages (I don't know how: remove alias? they are already not exported ...)
-* add a null model construction function from abundance data! (I thought I did that already ...)
-* parallelise computeModuleMeta
 * explore plotting options outside bipartite (igraph, tidygraph)
 * in second.extinct, allow for nrep of abundance-based sequences (that makes sense when there are ties in the marginal totals)!
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
-* add more networks from NCEAS and ask Jochen for other published networks
 * plotweb: add a new option ÒnamesÓ, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
@@ -16,9 +12,10 @@
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
 * see Email Jochen 1.2.2013: DolŽdec for multivariate stuff
-* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); not yet implemented in R, it seems!
 
-IMPROVE: 
+IMPROVE/low priority: 
+* parallelise computeModuleMeta
+* add more networks from NCEAS and ask Jochen for other published networks
 * clean up this file and assign priorities ;-)
 * togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
 * C score: allow for weighting: compute only the 0110-patterns and return this value. Then compute (weighted) averages in group level.
@@ -83,3 +80,6 @@ It also doesn't seem to work ...
 # done:
 * add node overlap/segretation (Strona & Veech 2015 MEE)
 * added Beckett's modularity algorithm (as default in computeModules)
+* add a null model construction function from abundance data! --> r2dexternal
+* clean up the functions, don't list any internal function in the help pages (I don't know how: remove alias? they are already not exported ...)
+* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE

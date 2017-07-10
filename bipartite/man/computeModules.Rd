@@ -3,9 +3,9 @@
 \name{computeModules}
 
 \alias{computeModules}
-\alias{cM}
+%\alias{cM}
 \alias{readModuleData}
-\alias{deleteModuleData}
+%\alias{deleteModuleData}
 \alias{metaComputeModules}
 
 \title{Function "computeModules"}

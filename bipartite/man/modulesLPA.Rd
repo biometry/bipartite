@@ -5,14 +5,14 @@
 \alias{LPA_wb_plus}
 \alias{convert2moduleWeb}
 \alias{DIRT_LPA_wb_plus}
-\alias{BarbersMatrix}
-\alias{WEIGHTEDMODULARITY}
-\alias{WEIGHTEDMODULARITY2}
-\alias{TRACE}
-\alias{DIVISION}
-\alias{StageOne_LPAwbdash}
-\alias{StageTwo_LPAwbdash}
-\alias{LOCALMAXIMISATION}
+%\alias{BarbersMatrix}
+%\alias{WEIGHTEDMODULARITY}
+%\alias{WEIGHTEDMODULARITY2}
+%\alias{TRACE}
+%\alias{DIVISION}
+%\alias{StageOne_LPAwbdash}
+%\alias{StageTwo_LPAwbdash}
+%\alias{LOCALMAXIMISATION}
 
 \title{Functions "LPA_wb_plus" and "DIRT_LPA_wb_plus"}
 
