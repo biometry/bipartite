@@ -8,8 +8,8 @@
 ## compile and install bipartite before running this! Do not run on R-functions directly (see bottom!)
 # command line, in the respective folder:
 # R CMD build bipartite
-# R CMD install bipartite_2.03.tar.gz
-require(bipartite)
+# R CMD install bipartite_2.10.tar.gz
+library(bipartite)
 
 # lazy load data does not require data to be loaded via "data(.)"!
 #  as.one.mode
@@ -164,6 +164,7 @@ networklevel(vazquenc, index=c("H2", "cluster coefficient"))
 networklevel(vazquenc, legacy=TRUE)
 # check that double calls to an index do work:
 networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
+networklevel(Safariland, index="NODF")
 
 # nodespec
 nodespec(Safariland)

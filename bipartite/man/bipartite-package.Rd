@@ -47,6 +47,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.10 (release date: XX-YYY-2017)
+  \describe{
+    \item{Added NODF}{to the indices available in \code{\link{networklevel}}.}
+    \item{Added network of Olito & Fox (2015)}{as \code{olito2015}; data from dryad (URL given in help page).}
+  }
   \item 2.09 (release date: 30-Jun-2017)	
   \describe{
     \item{Fixed type of object returned by \code{\link{computeModules}},}{when using \option{method="DormannStrauss"}, which I had broken after changing the default. Many thanks to Abdul Shakoor for reporting. Also added an error catcher to exclude, from binary webs, species that interact with every other species (i.e. are all 1; all-0 were already excluded).}

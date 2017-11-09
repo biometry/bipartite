@@ -4,9 +4,7 @@ Error in validObject(.Object) :
 Calls: computeModules -> new -> initialize -> initialize -> validObject
 Execution halted
 
-* add NODF to networklevel
 * explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
-* add network of Olito & Fox (2015) http://doi.org/10.5061/dryad.7st32
 * in second.extinct, allow for nrep of abundance-based sequences (that makes sense when there are ties in the marginal totals)!
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * plotweb: add a new option ÒnamesÓ, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
@@ -92,3 +90,7 @@ It also doesn't seem to work ...
 * add a null model construction function from abundance data! --> r2dexternal
 * clean up the functions, don't list any internal function in the help pages (I don't know how: remove alias? they are already not exported ...)
 * include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
+
+Done:
+* add NODF to networklevel 9 Nov 2017 CFD
+* add network of Olito & Fox (2015) http://doi.org/10.5061/dryad.7st32; 9 Nov 2017 CFD

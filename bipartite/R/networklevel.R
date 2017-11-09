@@ -13,8 +13,7 @@
         #binary based and related:
         "links per species", "number of compartments", "compartment diversity",
         "cluster coefficient", "degree distribution", "mean number of shared partners",
-        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", 
-        "weighted nestedness",
+        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", "NODF", "weighted nestedness",
         #miscelleneous:
         "ISA", "SA", "extinction slope", "robustness", "niche overlap",   
         #quantitative series:
@@ -37,9 +36,9 @@
                         # logic: the "quantitative series"
                         "binary" = c("connectance", "links per species", "nestedness", "mean number of partners","cluster coefficient",  "C-score", "Fisher alpha"),
                         # logic: metrics for binary networks
-                        "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness"),
+                        "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness", "NODF"),
                         # logic: more abstract, topological metrics for binary networks
-                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "nestedness", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),
+                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "nestedness", "NODF", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),
                         # only the truly networky indices
                         stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #default for all non-matches
         )
@@ -123,14 +122,19 @@
             #old: nestedness(web, null.models=FALSE)$temperature
         }
         #-------------------
+        if ("NODF" %in% index){
+          NODF <- try(unname(nestednodf(web, order=TRUE, weighted=FALSE)$statistic[3]), silent=TRUE)
+          out$"NODF" <- if (inherits(NODF, "try-error")) NA else NODF
+        }
+        #-------------------
         if ("weighted nestedness" %in% index){
             wine.res <- try(wine(web.e, nreps=nrep)$wine, silent=TRUE)
             out$"weighted nestedness" <- if (!inherits(wine.res, "try-error")) {wine.res} else {NA}
         }
         #-------------------
         if ("weighted NODF" %in% index){
-			NODF <- try(unname(nestednodf(web, order=TRUE, weighted=TRUE)$statistic[3]), silent=TRUE)
-            out$"weighted NODF" <- if (inherits(NODF, "try-error")) NA else NODF
+			      wNODF <- try(unname(nestednodf(web, order=TRUE, weighted=TRUE)$statistic[3]), silent=TRUE)
+            out$"weighted NODF" <- if (inherits(wNODF, "try-error")) NA else wNODF
         }
         #------------------
         if (any(c("ISA", "interaction strength asymmetry", "dependence asymmetry") %in% index)){
@@ -276,7 +280,7 @@
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):
 #! JFedit: weighted connectance added here
-        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "nestedness", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance"), index)
+        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance"), index)
         exclude.index <- netw.index[!is.na(netw.index)]
         gindex <- if (length(exclude.index)==0) index else index[-exclude.index] # exclude NAs from this vector
         if (length(gindex) > 0) outg <- grouplevel(web, index=gindex, level=level, weighted=weighted, extinctmethod=extinctmethod, nrep=nrep, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fcweighted=fcweighted, fcdist=fcdist)
