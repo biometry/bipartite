@@ -30,6 +30,19 @@ n <- matrix(c(1,0,0, 0,1,0, 0,0,1), 3,3)
 C.score(t(n), normalise=T)
 system.time(C.score(memmott1999)) # 3.6s
 
+# CC (closeness centrality)
+CC(Safariland)
+CC(Safariland, rescale=F)
+CC(Safariland, weighted=F) # weighed=F same as T!
+CC(Safariland, rescale=F, weighted=F) # weighed=F same as T!
+wf <- as.one.mode(Safariland, project="lower", weighted=F)
+wt <- as.one.mode(Safariland, project="lower", weighted=T)
+closeness(wf, cmode="suminvundir")
+closeness(wt, cmode="suminvundir") # makes no difference!
+specieslevel(Safariland, index="closeness", rescale=T) # same as CC(. , rescale=F)
+
+
+
 # compart
 compart(Safariland) # a comparted network
 compart(bezerra2009) # an uncomparted network
@@ -47,6 +60,9 @@ plotModuleWeb(comp3)
 web <- matrix(c(0,1), 3, 3)
 web[1,] <- 1
 computeModules(web) # test ability to remove all-1s
+# check it works with fully connecte network (error fixed in 2.09):
+web <- matrix(runif(150, 0.1, 10), 30, 50)
+computeModules(web)
 
 # czvalues
 czvalues(comp1)

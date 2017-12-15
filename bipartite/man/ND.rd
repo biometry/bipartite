@@ -14,7 +14,7 @@
 \usage{
 ND(web, normalised=TRUE)
 BC(web, rescale=TRUE, cmode="undirected", weighted=TRUE, ...)
-CC(web, cmode="suminvundir", rescale=TRUE, weighted=TRUE, ...)
+CC(web, cmode="suminvundir", rescale=TRUE, ...)
 }
 
 \arguments{
@@ -28,7 +28,7 @@ CC(web, cmode="suminvundir", rescale=TRUE, weighted=TRUE, ...)
 }
 
 \details{
-  These functions are convenience functions to enable easy reproduction of the type of analyses by Martín González et al. (2010). BC and CC are wrappers calling two functions from \pkg{sna}, which uses one-mode, rather than bipartite data. 
+ These functions are convenience functions to enable easy reproduction of the type of analyses by Martín González et al. (2010). BC and CC are wrappers calling two functions from \pkg{sna}, which uses one-mode, rather than bipartite data. 
   
  One-mode projections of two-mode networks are carried out by assigning a link to two species that share a interaction with a member of the other set (plant in case of pollinators, or pollinators in case of plants). There are different ways to do this (see \code{\link{as.one.mode}}), and many authors do not communicate well, which approach they have taken.
  

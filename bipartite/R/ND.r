@@ -16,17 +16,20 @@ ND <- function(web, normalised=TRUE){
     list("lower"=low, "higher"=high)
 }
 
-CC <- function(web, cmode="suminvundir", rescale=TRUE, weighted=TRUE, ...){
+CC <- function(web, cmode="suminvundir", rescale=TRUE, ...){ #, weighted=TRUE
     # closeness centrality as used in Gonzales et al. (2009)
     # by Carsten F. Dormann, 14 Dec 2010
     # ... options passed on to closeness in package sna
     # uses a version to calculate centrality that allows for disconnected graphs
-    wh <- as.one.mode(web, project="higher", weighted=weighted)
+    # note that weighted=T/F has no effect, and was hence removed (in version 2.10)
+    wh <- as.one.mode(web, project="higher")#, weighted=weighted)
     cch <- closeness(wh, cmode=cmode, rescale=rescale, ...)
+    if (rescale) cch <- cch/sum(cch, na.rm=TRUE)
 
-    wl <- as.one.mode(web, project="lower", weighted=weighted)
+    wl <- as.one.mode(web, project="lower")#, weighted=weighted)
     ccl <- closeness(wl, cmode=cmode, rescale=rescale, ...)
-
+    if (rescale) ccl <- ccl/sum(ccl, na.rm=TRUE)
+    
     list("lower"=ccl, "higher"=cch)
 }
 
