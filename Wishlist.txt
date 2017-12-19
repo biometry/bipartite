@@ -1,9 +1,3 @@
-* FIX ERROR: computeModules(netw, method="DormannStrauss", deep=T):
-Error in validObject(.Object) : 
-  invalid class “moduleWeb” object: invalid object for slot "modules" in class "moduleWeb": got class "numeric", should be or extend class "matrix"
-Calls: computeModules -> new -> initialize -> initialize -> validObject
-Execution halted
-
 * explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
 * in second.extinct, allow for nrep of abundance-based sequences (that makes sense when there are ties in the marginal totals)!
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
@@ -94,3 +88,8 @@ It also doesn't seem to work ...
 Done:
 * add NODF to networklevel 9 Nov 2017 CFD
 * add network of Olito & Fox (2015) http://doi.org/10.5061/dryad.7st32; 9 Nov 2017 CFD
+* FIX ERROR: computeModules(netw, method="DormannStrauss", deep=T):
+Error in validObject(.Object) : 
+  invalid class “moduleWeb” object: invalid object for slot "modules" in class "moduleWeb": got class "numeric", should be or extend class "matrix"
+Calls: computeModules -> new -> initialize -> initialize -> validObject
+Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10

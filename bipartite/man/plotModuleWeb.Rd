@@ -10,7 +10,7 @@
 \alias{isCorrectModuleWebObject}
 \alias{drawModules}
 
-\title{Function "plotModuleWeb"}
+\title{plotModuleWeb}
 
 \description{
 This function takes an object of class "moduleWeb" and plots the modules found by function \code{computeModules(...)} onto the graph.

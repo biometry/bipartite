@@ -6,7 +6,7 @@
 
 \alias{printoutModuleInformation}
 
-\title{Function printoutModuleInformation}
+\title{printoutModuleInformation}
 
 \description{
 This takes an object of the class "moduleWeb" and prints out the information about the modules stored in this object.

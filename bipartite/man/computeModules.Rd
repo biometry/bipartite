@@ -8,7 +8,7 @@
 %\alias{deleteModuleData}
 \alias{metaComputeModules}
 
-\title{Function "computeModules"}
+\title{computeModules}
 
 \description{
 This function takes a bipartite weighted graph and computes modules by applying Newman's modularity measure in a bipartite weighted version to it. 
@@ -76,7 +76,7 @@ See also class "moduleWeb", \code{plotModuleWeb}, \code{listModuleInformation}, 
 		plotModuleWeb(res)
 		
 		# slow:
-		res2 <- metaComputeModules(small1976, method="DormannStrauss") # makes no sense for "Beckett"
+		res2 <- metaComputeModules(small1976, method="DormannStrauss")
 		res2
 	}
 }

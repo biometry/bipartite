@@ -38,7 +38,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.10\cr
-Date: \tab 2017-06-30\cr
+Date: \tab 2017-12-20\cr
 License: \tab GPL \cr
 }
 }
@@ -47,7 +47,7 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.10 (release date: XX-YYY-2017)
+  \item 2.10 (release date: 20-Dec-2017)
   \describe{
   	\item{Removed option \option{weighted}}{from \code{\link{CC}}, which had no effect on the way \code{sna::closeness} computes the value. Thanks to Thais Zanata for making me aware of this!}
   	\item{Fixed bug in option \option{rescaled}}{of \code{\link{CC}}, which did not properly rescale values so that they sum to 1. Thanks to Thais Zanata for making me aware of this!}

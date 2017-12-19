@@ -2,7 +2,7 @@
 
 \alias{listModuleInformation}
 
-\title{Function "listModuleInformation"}
+\title{listModuleInformation}
 
 \description{
 This function takes an object of class "moduleWeb" and returns information about the names of the nodes of which the computed modules exist.
