@@ -37,8 +37,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.10\cr
-Date: \tab 2017-12-20\cr
+Version: \tab 2.11\cr
+Date: \tab 2018-1-1\cr
 License: \tab GPL \cr
 }
 }
@@ -47,6 +47,10 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.11 (relase date: XX-YYY-2018)
+  \describe{
+    \item{Deprecation of the command \code{register} in C++17}{required attention in the \code{MersenneTwister.h}-code used in \code{computeModules}. Thanks to Brian Ripley, for the R Core Team, for notifying all maintainers using this command in advance of future CRAN-submission problems!}
+  }
   \item 2.10 (release date: 20-Dec-2017)
   \describe{
   	\item{Removed option \option{weighted}}{from \code{\link{CC}}, which had no effect on the way \code{sna::closeness} computes the value. Thanks to Thais Zanata for making me aware of this!}

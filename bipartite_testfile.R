@@ -55,7 +55,7 @@ comp3 <- computeModules(vazquenc, method="DormannStrauss")
 comp3 <- computeModules(vazquenc, method="DormannStrauss")
 plotModuleWeb(comp1)
 plotModuleWeb(comp2)
-plotModuleWeb(comp3)
+plotModuleWeb(comp3, weighted=F)
 # to be continued ...
 web <- matrix(c(0,1), 3, 3)
 web[1,] <- 1
