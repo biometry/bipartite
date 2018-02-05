@@ -1,4 +1,4 @@
-\encoding{UTF-8}
+﻿\encoding{UTF-8}
 
 \name{computeModules}
 
@@ -24,7 +24,7 @@ metaComputeModules(moduleObject, N=5, method="DormannStrauss", ...)
 
 \arguments{
   \item{web}{
-\code{web} is the matrix representing the weighted bipartite graph (as an example, see e.g. web "small1976" in this package).
+\code{web} is the matrix representing the weighted bipartite graph (as an example, see e.g. web "small1976" in this package). This matrix can be binary (i.e. consist only of 0s and 1s), in which case the output will be Newman's (2006) modularity.
 }
  \item{method}{Choice between the algorithm(s) provided by Stephen Beckett (2016) or Dormann & Strauss (2016) (\option{method="DormannStrauss"}). Defaults to the much faster and in the majority of cases better algorithm of Beckett. (Note the optional argument \option{forceLPA} to use his slightly inferior but even faster pure LPA algorithm.)}
   \item{deep}{
@@ -56,6 +56,9 @@ Dormann, C. F., and R. Strauß. 2014. Detecting modules in quantitative bipartit
 Liu X. & Murata T. 2010. An Efficient Algorithm for Optimizing Bipartite Modularity in Bipartite Networks. \emph{Journal of Advanced Computational Intelligence and Intelligent Informatics (JACIII)} \bold{14} 408--415.
 
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
+
+Newman, M.E.J. 2006. Modularity and community structure in networks. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \bold{103}, 8577–-8582.
+
 }
 
 \author{Rouven Strauss, with fixes by Carsten Dormann and Tobias Hegemann; modified to accommodate Beckett's algorithm by Carsten Dormann}
