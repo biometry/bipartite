@@ -17,7 +17,7 @@ nested(web, method = "binmatnest2", rescale=FALSE, normalised=TRUE)
 
 \arguments{
   \item{web}{A matrix with elements of a set (e.g., plants) as rows, elements of a second set (e.g., pollinators) as columns and number of interactions as entries.}
-  \item{method}{One or more of the following: \option{discrepancy}, \option{discrepancy2}, \option{binmatnest}, \option{binmatnest2}, \option{NODF}, \option{NODF2}, \option{C.score}, \option{checker}, \option{weighted NODF}, \option{wine}, \option{ALL}. See details for details on each method.}
+  \item{method}{One or more of the following: \option{discrepancy}, \option{discrepancy2}, \option{binmatnest}, \option{binmatnest2}, \option{NODF}, \option{NODF2}, \option{C score}, \option{checker}, \option{weighted NODF}, \option{wine}, \option{ALL}. See details for details on each method.}
 %  \item{\dots}{Arguments passed on to other nestedness functions, specifically nestedness and wine. Options need to be specified (i.e. no positional parsing).}
   \item{rescale}{Should all measures be rescaled so that higher values mean higher nestedness? Defaults to FALSE, i.e. the standard interpretation of each measure is maintained.}
   \item{normalised}{Logical, defaulting to TRUE. Should C-scores be normalised to a value between 0 and 1? See \code{\link{C.score}} for details.}

@@ -49,6 +49,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.11 (relase date: XX-YYY-2018)
   \describe{
+    \item{Bug fix in \code{\link{nested}}}{, which didn't correctly pass through the \option{normalised}-argument for index "C score". Also the naming of "C score" (rather than previously "C.score") was changed for consistency with \code{\link{networklevel}}. Many thanks to Carlos Zamora-Manzur for reporting!}
     \item{Deprecation of the command \code{register} in C++17}{required attention in the \code{MersenneTwister.h}-code used in \code{computeModules}. Thanks to Brian Ripley, for the R Core Team, for notifying all maintainers using this command in advance of future CRAN-submission problems!}
   }
   \item 2.10 (release date: 20-Dec-2017)

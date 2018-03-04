@@ -1,8 +1,8 @@
 nested <- function(web, method="binmatnest2", rescale=FALSE, normalised=TRUE){
   # a wrapper function to call any of the currently implemented measures of nestedness
  
-  if (! any(method %in% c("binmatnest", "discrepancy", "binmatnest2", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C.score", "checker", "ALL"))) stop("Typo? Unknown method!")
-  if ("ALL" %in% method) index <- c("binmatnest", "discrepancy", "binmatnest2", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C.score", "checker") else index <- method
+  if (! any(method %in% c("binmatnest", "discrepancy", "binmatnest2", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C score", "checker", "ALL"))) stop("Typo? Unknown method!")
+  if ("ALL" %in% method) index <- c("binmatnest", "discrepancy", "binmatnest2", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C score", "checker") else index <- method
 
   out <- NULL
 	if ("binmatnest2" %in% index){ 
@@ -23,7 +23,7 @@ nested <- function(web, method="binmatnest2", rescale=FALSE, normalised=TRUE){
 
   if ("discrepancy" %in% index) out <- c(out, "discrepancy"=unname(discrepancy(web)))
      
-  if ("C.score" %in% index) out <- c(out, "C.score"=C.score(web, normalised=normalised))
+  if ("C score" %in% index) out <- c(out, "C score"=C.score(web, normalise=normalised))
   
   if ("checker" %in% index) out <- c(out, "checker"=nestedchecker(web)$C.score) 
   # identical to C.score(., FALSE)
