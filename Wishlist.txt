@@ -8,14 +8,16 @@ large
 
 * recursive modules with Beckett
 
-* NULLMODEL-LIKE: use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
+* NULLMODEL-LIKE:
+* use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
+* add makeweb function(s) from Fründ et al 2016 Oikos
 
 * add vignette already existing as "BEN"; make new ideas/indices citable through vignette (e.g. external sequence of second extinct etc)
 * turn testfile into proper testthat routine
 
-* NPARTITE/METAWEB (through time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
+* Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 
 
 small
