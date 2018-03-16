@@ -13,6 +13,7 @@
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * compare betweenness in sna and igraph and tnet and Pajek
 * see Email Jochen 1.2.2013: DolŽdec for multivariate stuff
+* add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 
 IMPROVE/low priority: 
 * parallelise computeModuleMeta
@@ -35,6 +36,7 @@ NEW:
 Araújo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993
 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 
+* add option to plot names in PAC!
 
 * include all quantitative host-parasitoid webs
 
@@ -64,10 +66,12 @@ JOCHENF:
 - future:
 * enable networklevel / grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel
 * functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
-* revise plotweb
+* revise plotweb (incl. device settings, vertical option, 
 * npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
+* improve metaweb functionality
+* plotweb and visweb: improvements, e.g. for better margin control, layout, etc; vertical layout; 
 
 
 
