@@ -1,0 +1,154 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Starting with bipartite}
+%\VignetteEncoding{UTF-8}
+
+\documentclass[a4paper, 11pt]{article}
+%\usepackage[sc]{mathpazo}
+%\usepackage{authblk} % authors & affiliations
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+  \geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
+  \setcounter{secnumdepth}{3}
+  \setcounter{tocdepth}{3}
+%\setlength{\parskip}{\bigskipamount}
+%\setlength{\parindent}{0pt}
+\usepackage{makeidx}
+  \makeindex
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=true,pdfborder={0 0 1},backref=true,colorlinks=false]
+ {hyperref}
+%\hypersetup{ pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+
+%\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\newcommand{\package}[1]{\textbf{#1}}
+\newcommand{\proglang}[1]{\textsl{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\ind}[1]{#1\index{#1}}           			   % \ind{bla} instead of bla\index{bla}
+\newcommand{\indE}[1]{\emph{#1}\index{#1@\emph{#1}}}       % dito for emphasised words (e.g. English)
+\newcommand{\indR}[1]{\texttt{#1}\index{#1@\texttt{#1}}}   % dito for typewriter
+
+
+\renewcommand{\vec}[1]{\mathbf{#1}}                   % replaces the arrow over vectors by bold-print
+
+
+%\makeatother
+\frenchspacing % avoid long spaces after a "."
+
+\begin{document}
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold')
+render_listings()
+@
+
+\title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
+
+\author{Carsten F. Dormann\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany
+\and Jochen Fründ\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany}
+
+%\thanks{\href{mailto:carsten.dormann@biom.uni-freiburg.de}{carsten.dormann@biom.uni-freiburg.de}}
+
+\maketitle
+
+\begin{abstract}
+\noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions.
+\end{abstract}
+
+\tableofcontents
+
+
+\section{Introduction}
+\subsection{Introduction for ecologists}
+Many interactions between species are between distinct groups, such as pollinators and flowers, or herbivores and plants, or parasitoids and their hosts, or predators and their prey. When no information on interactions \emph{within} groups is known, we have the case of a \emph{bipartite} (a.k.a. ``two-mode'') network. In constrast, if every species could interact with every other, and we have (necessarily incomplete) information on these interactions, we have the case of a ``unipartite'' or ``one-mode'' network (think: food web). 
+
+\subsection{Introduction for non-ecologists}
+In mathematics, there is a field called ``graph theory'', which describes/analyses/formalises ``graphs'' and the operations among them. A graph consists of \emph{nodes} and \emph{edges} (which are the links between nodes). A node can be something like an airport with edges being the flights between them; a power grid of power plants and energy consumers, with the power lines being the edges; a list of industry ``leaders'' and the edges representing financial ties between them; or, e.g. in ecology, a list of species, with edges representing trophic relationships, i.e. who eats whom.
+
+When the nodes are grouped into two distinct sets, with no (known or quantified) interactions \emph{within} a set, then we call it a bipartite network (``two parts'', a.k.a. ``two-mode'' network). In our examples these could be airports of different continents (and no intracontinental flights are in our data base); power plants and energy consumers; industry executives and companies (where an executive can sit in the board of different companies); or pollinators and plants.
+
+\subsection{Introduction continued for both, ecologists and non-ecologists}
+This vignette tries to illustrate and explain a package that deals almost exclusively with \emph{bipartite} networks!
+
+The typical tasks we want to carry out are
+\begin{enumerate}
+\item visualise the network;
+\item compute network indices to summarise its structure;
+\item statistically test for differences between networks;
+\item statistically test for differences between observed and random networks.
+\end{enumerate}
+\package{bipartite} aims to facilitate this steps. This vignette aims to facilitate the use of \package{bipartite}. We shall try to predominantly use the technical terms (``node'' and ``edges''), but our examples will be from the ecological realm, where nodes are (typcially) species, and edges are typically called ``links'', which in fact are observed (or assumed) ecological interactions (such as pollination, predation, dispersal). Apologies for mixing these two!
+
+Also, as ecologists we are not ``graph theoreticians'' or mathematicians. Often, in the ecological literature, mathematical terms are used to elevate the status of the author, at no benefit to the analysis or to the reader. We are hesitant to use pretend-mathematics, at the risk of sounding daft to a person familiar with graph theory.
+
+
+
+
+\section{What other network packages are out there in the \proglang{R}-universe?}
+Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
+
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages handling bipartite networks (in alphabetical order):
+\begin{description}
+\item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
+\item[\package{biGraph}] discontinued and archived;
+\item[\package{econullnetr}]
+\item[\package{igraph}]
+\item[\package{HiveR}] for fancy ``hive'' plots;
+\item[\package{latentnet}] 
+\item[\package{sna}]
+\item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
+\item[\package{tnet}]
+\item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
+\end{description}
+
+
+\section{Preparing data for analysis}%------------------------------------------------
+Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can make an array of previously separate webs, padding non-overlapping species with zeros.}
+
+
+Of course, we don't mind if this documented would be cited, e.g. as \citet{bipartiteVignette}. Alternatively, you can always cite our work on this subject, inevitably also using (some functionality of) \package{bipartite} \citep{Dormann2008, Dormann2009, Dormann2011, Dormann2014, Dormann2017, Dormann2017a}!
+
+
+
+
+
+
+
+
+<<chunk-hook, echo=2, tidy=TRUE, tidy.opts=list(width.cutoff=30)>>=
+<<setup>>
+@
+
+\begin{figure*}
+<<boring-plots, fig.width=5, fig.height=5, out.width='.45\\linewidth'>>=
+x=rnorm(100)
+par(mar=c(4,4,.1,.1))
+boxplot(x)
+hist(x,main='')
+@
+
+\caption{Two plots spanning over two columns.}
+\end{figure*}
+
+The Rnw source of this document is at \url{https://github.com/biometry/bipartite/bipartite/vignettes/Intro2bipartite.Rnw}.
+
+%\backmatter % only if document type is book!
+%\begin{fullwidth}
+\bibliographystyle{mee} %all show doi, url, isbn; haven't found out yet how to switch that off
+\bibliography{bipartite}
+%\end{fullwidth}
+
+\printindex
+
+
+
+\end{document}
