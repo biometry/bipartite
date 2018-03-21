@@ -2,7 +2,22 @@
 %\VignetteIndexEntry{Starting with bipartite}
 %\VignetteEncoding{UTF-8}
 
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\usepackage{Sweavel}
+
+
 %\usepackage[sc]{mathpazo}
 %\usepackage{authblk} % authors & affiliations
 \usepackage[utf8]{inputenc}
@@ -59,11 +74,7 @@
 \frenchspacing % avoid long spaces after a "."
 
 \begin{document}
-<<setup, include=FALSE, cache=FALSE>>=
-library(knitr)
-opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE)
-render_listings()
-@
+
 
 \title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
 
@@ -134,19 +145,86 @@ Most functions in \package{bipartite} require the same type of input structure: 
 Other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) of what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
 
 Now, before any further talk, start by loading the package:
-<<>>=
+\begin{Schunk}
+\begin{Sinput}
 library(bipartite)
-@
+\end{Sinput}
+\begin{Soutput}
+Loading required package: vegan
+\end{Soutput}
+\begin{Soutput}
+Loading required package: permute
+\end{Soutput}
+\begin{Soutput}
+Loading required package: lattice
+\end{Soutput}
+\begin{Soutput}
+This is vegan 2.4-4
+\end{Soutput}
+\begin{Soutput}
+Loading required package: sna
+\end{Soutput}
+\begin{Soutput}
+Loading required package: statnet.common
+\end{Soutput}
+\begin{Soutput}
+
+Attaching package: 'statnet.common'
+\end{Soutput}
+\begin{Soutput}
+The following object is masked from 'package:base':
+
+    order
+\end{Soutput}
+\begin{Soutput}
+Loading required package: network
+\end{Soutput}
+\begin{Soutput}
+network: Classes for Relational Data
+Version 1.13.0 created on 2015-08-31.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
+ For citation information, type citation("network").
+ Type help("network-package") to get started.
+\end{Soutput}
+\begin{Soutput}
+sna: Tools for Social Network Analysis
+Version 2.4 created on 2016-07-23.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+\end{Soutput}
+\begin{Soutput}
+ This is bipartite 2.12
+ For latest changes see versionlog in  ?"bipartite-package".
+ For citation see: citation("bipartite").
+ Have a nice time plotting and analysing two-mode networks.
+\end{Soutput}
+\begin{Soutput}
+
+Attaching package: 'bipartite'
+\end{Soutput}
+\begin{Soutput}
+The following object is masked from 'package:vegan':
+
+    nullmodel
+\end{Soutput}
+\end{Schunk}
 
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
 
 A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982} Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
 
-<<eval=F>>=
+\begin{Schunk}
+\begin{Sinput}
 plotweb(motten1982)
 visweb(motten1982)
-@
+\end{Sinput}
+\end{Schunk}
 %
 \begin{figure}
 \centering
@@ -160,9 +238,11 @@ visweb(motten1982)
 
 
 The function \indR{plotPAC} visualises  (Fig.~\ref{fig:AplotPAC}) a very special idea: the potential for apparent competition \citep{Morris2005}. The idea is that every parasitoid emerging from a host can attack another species. Thus, the more individuals emerge from a host, the larger is the potential for these to reduce the competition between hosts, as long as they choose their prey equiprobable. Pretty as it may be, its current value is highest for host-parasitoid networks, so the plot employing a pollination network is for illustration only.
-<<eval=F>>=
+\begin{Schunk}
+\begin{Sinput}
 plotPAC(PAC(motten1982), outby=0.9)
-@
+\end{Sinput}
+\end{Schunk}
 
 \begin{wrapfigure}{o}{0.3\textwidth}
 	\includegraphics[width=0.3\textwidth]{figures/motten1982_PACplot}
@@ -171,10 +251,12 @@ plotPAC(PAC(motten1982), outby=0.9)
 \end{wrapfigure}
 %
 We can also visualise communities within the network by computing its modularity and then plotting the result, using the functions \texttt{computeModules} and \texttt{plotModuleWeb}, respectively (Fig.~\ref{fig:Amoduleplot}).
-<<eval=F>>=
+\begin{Schunk}
+\begin{Sinput}
 mod <- computeModules(motten1982)
 plotModuleWeb(mod)
-@
+\end{Sinput}
+\end{Schunk}
 \begin{figure}[h]
 \centering
 	\includegraphics[width=0.7\textwidth]{figures/motten1982_moduleplot}
@@ -183,7 +265,8 @@ plotModuleWeb(mod)
 \end{figure}
 %
 To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
-<<eval=F>>=
+\begin{Schunk}
+\begin{Sinput}
 par(mfrow=c(1,2))
 gplot(as.one.mode(motten1982, project="higher"), 
  label=colnames(motten1982), gmode="graph", 
@@ -191,7 +274,8 @@ label.cex=0.5, vertex.cex=2)
 gplot(as.one.mode(motten1982, project="lower"), 
 	label=rownames(motten1982), gmode="graph", 
 	label.cex=0.75, vertex.cex=2, vertex.col="green")
-@
+\end{Sinput}
+\end{Schunk}
 \begin{wrapfigure}{o}{1\textwidth}
 \centering
 	\includegraphics[width=0.45\textwidth]{figures/motten1982_higher_gplot}
@@ -243,9 +327,17 @@ This set of indices is computed for the entire network. They are called using th
 \end{enumerate}
 
 \noindent Similarly to the previous sets of indices, several options are available to fine-tune those in \texttt{networklevel}:
-<<>>=
+\begin{Schunk}
+\begin{Sinput}
 networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), SAmethod="log")
-@
+\end{Sinput}
+\begin{Soutput}
+                 weighted NODF interaction strength asymmetry 
+                  5.717160e+01                   8.842823e-05 
+                  Fisher alpha 
+                  8.793400e+00 
+\end{Soutput}
+\end{Schunk}
 
 
 
@@ -274,10 +366,18 @@ Indices that can be computed for each group separately are collected in the func
 \end{enumerate}
 
 \noindent As in the case of species-level indices, some allow for normalisation (between 0 and 1), others for different basis to the logarithm or similar tuning. A typical call to \texttt{grouplevel} will thus comprise the list of desired indices\footnote{Or alternatively the argument \texttt{index="ALL"}.} and their options, as well as the level(s) for which the computation shall be carried out:
-<<>>=
+\begin{Schunk}
+\begin{Sinput}
 grouplevel(bezerra2009, level="both", index=c("mean number of links", "weighted 
      cluster coefficient", "effective partners", "niche overlap"), dist="bray")
-@
+\end{Sinput}
+\begin{Soutput}
+mean.number.of.links.HL mean.number.of.links.LL        niche.overlap.HL 
+              9.9502551               7.0975057               0.2824538 
+       niche.overlap.LL           generality.HL        vulnerability.LL 
+              0.4795595               8.0590841               5.6963672 
+\end{Soutput}
+\end{Schunk}
 The LL and HL behind each index indicate that it was computed for the lower and higher level, respectively. A relatively comprehensive comparison of network-level indices \citep{Dormann2009}, including some at the group level, has shown substantial redundancy among these indices, and few of them have a sound theoretical basis.
 
 
@@ -294,9 +394,26 @@ At the moment, only few indices have been investigated at the level of the indiv
 \item endpoint degree \citep[i.e. product of degrees of species linked by this cell][]{Barrat2004}.
 \end{enumerate}
 It is employed by simply applying it to the network under consideration and selecting the index desired:
-<<>>=
+\begin{Schunk}
+\begin{Sinput}
 str(linklevel(bezerra2009, index=c("dependence", "endpoint")))
-@
+\end{Sinput}
+\begin{Soutput}
+List of 3
+ $ HL dependence: num [1:13, 1:13] 0.193 0.131 0.056 0.108 0.105 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:13] "Diplopterys.pubipetala" "Byrsonima.gardnerana" "Banisteriopsis.muricata" "Heteropterys.sp1" ...
+  .. ..$ : chr [1:13] "Centris.aenea" "Centris.fuscata" "Centris.caxiensis" "Centris.tarsata" ...
+ $ LL dependence: num [1:13, 1:13] 0.2415 0.2238 0.0997 0.2474 0.2632 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:13] "Diplopterys.pubipetala" "Byrsonima.gardnerana" "Banisteriopsis.muricata" "Heteropterys.sp1" ...
+  .. ..$ : chr [1:13] "Centris.aenea" "Centris.fuscata" "Centris.caxiensis" "Centris.tarsata" ...
+ $ endpoint     : num [1:13, 1:13] 117 78 156 104 91 65 52 26 52 52 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:13] "Diplopterys.pubipetala" "Byrsonima.gardnerana" "Banisteriopsis.muricata" "Heteropterys.sp1" ...
+  .. ..$ : chr [1:13] "Centris.aenea" "Centris.fuscata" "Centris.caxiensis" "Centris.tarsata" ...
+\end{Soutput}
+\end{Schunk}
 This function is so rudimentary, and its output so disproportionally voluminous, that it is not worth going into further details here and use \texttt{str} to only show the structure of the output.
 
 
@@ -326,10 +443,28 @@ The (growing) list of indices computable for each species in the network compris
 \end{enumerate}
 
 \noindent Some of them allow for normalisation (between 0 and 1), others for different basis to the logarithm or similar tuning. A typical call to \texttt{specieslevel} will thus comprise the list of desired indices\footnote{Or alternatively the argument \texttt{index="ALL"}.} and their options, as well as the level(s) for which the computation shall be carried out:
-<<>>=
+\begin{Schunk}
+\begin{Sinput}
 specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI", 
       "effective partners"), PDI.normalise=F)
-@
+\end{Sinput}
+\begin{Soutput}
+                           normalised.degree       PDI effective.partners
+Diplopterys.pubipetala             0.6923077 1010.0000           7.437631
+Byrsonima.gardnerana               0.4615385 1939.6667           3.819660
+Banisteriopsis.muricata            0.9230769  657.0000           9.191488
+Heteropterys.sp1                   0.6153846  570.3333           6.278285
+Heteropterys.sp2                   0.5384615  567.3333           5.865968
+Dicella.bracteosa                  0.3846154  429.0000           4.582040
+Carolus.chasei                     0.3076923  513.6667           3.751208
+Stigmaphyllon.paralias             0.1538462  774.0000           1.944388
+Banisteriopsis.stellaris           0.3076923  245.6667           3.787887
+Banisteriopsis.schizoptera         0.3076923  189.0000           3.822392
+Stigmaphyllon.auriculatum          0.3076923  204.3333           3.687447
+Stigmaphyllon.ciliatum             0.2307692  238.0000           2.937197
+Janusia.anisandra                  0.2307692  220.3333           2.813322
+\end{Soutput}
+\end{Schunk}
 A relatively comprehensive comparison of species-level indices of specialisation \citep{Dormann2011} has shown substantial redundancy among these indices, and few of them have a sound theoretical basis \cite{Poisot2012a}.
 
 
