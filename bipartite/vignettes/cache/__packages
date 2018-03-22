@@ -1,0 +1,13 @@
+base
+knitr
+permute
+lattice
+vegan
+statnet.common
+network
+sna
+bipartite
+survival
+Formula
+ggplot2
+Hmisc

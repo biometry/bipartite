@@ -21,6 +21,7 @@
 %\usepackage[sc]{mathpazo}
 %\usepackage{authblk} % authors & affiliations
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath} % e.g. for \text{} in math
 \usepackage{geometry}
   \geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
   \setcounter{secnumdepth}{3}
@@ -52,6 +53,10 @@
 \newlength\mylensubsection
 \setlength\mylensubsection{\dimexpr\oddsidemargin+1cm+\hoffset\relax}
 \titleformat{\subsection}{\normalfont\large\itshape}{\llap{\hspace*{-\mylensubsection}\textcolor{YellowGreen}{\textbf{\Large{ \thesubsection}}}\hfill}}{0em}{} %
+
+\newlength\mylensubsubsection
+\setlength\mylensubsubsection{\dimexpr\oddsidemargin+1cm+\hoffset\relax}
+\titleformat{\subsubsection}{\normalfont\large\itshape}{\llap{\hspace*{-\mylensubsubsection}\textcolor{YellowGreen}{\textbf{\Large{ \thesubsubsection}}}\hfill}}{0em}{} %
 
 
 \renewcommand{\textfraction}{0.05}
@@ -149,69 +154,6 @@ Now, before any further talk, start by loading the package:
 \begin{Sinput}
 library(bipartite)
 \end{Sinput}
-\begin{Soutput}
-Loading required package: vegan
-\end{Soutput}
-\begin{Soutput}
-Loading required package: permute
-\end{Soutput}
-\begin{Soutput}
-Loading required package: lattice
-\end{Soutput}
-\begin{Soutput}
-This is vegan 2.4-4
-\end{Soutput}
-\begin{Soutput}
-Loading required package: sna
-\end{Soutput}
-\begin{Soutput}
-Loading required package: statnet.common
-\end{Soutput}
-\begin{Soutput}
-
-Attaching package: 'statnet.common'
-\end{Soutput}
-\begin{Soutput}
-The following object is masked from 'package:base':
-
-    order
-\end{Soutput}
-\begin{Soutput}
-Loading required package: network
-\end{Soutput}
-\begin{Soutput}
-network: Classes for Relational Data
-Version 1.13.0 created on 2015-08-31.
-copyright (c) 2005, Carter T. Butts, University of California-Irvine
-                    Mark S. Handcock, University of California -- Los Angeles
-                    David R. Hunter, Penn State University
-                    Martina Morris, University of Washington
-                    Skye Bender-deMoll, University of Washington
- For citation information, type citation("network").
- Type help("network-package") to get started.
-\end{Soutput}
-\begin{Soutput}
-sna: Tools for Social Network Analysis
-Version 2.4 created on 2016-07-23.
-copyright (c) 2005, Carter T. Butts, University of California-Irvine
- For citation information, type citation("sna").
- Type help(package="sna") to get started.
-\end{Soutput}
-\begin{Soutput}
- This is bipartite 2.12
- For latest changes see versionlog in  ?"bipartite-package".
- For citation see: citation("bipartite").
- Have a nice time plotting and analysing two-mode networks.
-\end{Soutput}
-\begin{Soutput}
-
-Attaching package: 'bipartite'
-\end{Soutput}
-\begin{Soutput}
-The following object is masked from 'package:vegan':
-
-    nullmodel
-\end{Soutput}
 \end{Schunk}
 
 
@@ -495,6 +437,319 @@ species level & degree & species strength, effective number of partners \\\hline
 
 
 In a nutshell: Quantitative indices make use of more information in the data. They are generally more advisable, although most of them also are strongly affected by sampling issues.
+
+
+
+\subsubsection{Index redundancy: do different indices tell the same thing?}
+%Redundancy and similarity of indices -> PCA/nMDS; clustering
+
+To visualise the similarity and possible redundancy of the different indices, they are computed for the networks in \package{bipartite} and summarised through a principal component analysis (see Fig.~\ref{fig:PCAnetworklevel}).
+\begin{Schunk}
+\begin{Sinput}
+web.names <- data(package="bipartite")$results[,3]
+data(list=web.names) #loads all webs
+# the next step takes around 10 minutes:
+netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), index="ALLBUTDD")))
+\end{Sinput}
+\end{Schunk}
+% save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
+
+\begin{Schunk}
+\begin{Sinput}
+PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
+\end{Sinput}
+\begin{Soutput}
+Error in prcomp(netw.indic.webs[, -5], scale. = T): object 'netw.indic.webs' not found
+\end{Soutput}
+\begin{Sinput}
+biplot(PCA.out, xpd=T, las=1)
+\end{Sinput}
+\begin{Soutput}
+Error in biplot(PCA.out, xpd = T, las = 1): object 'PCA.out' not found
+\end{Soutput}
+\begin{Sinput}
+summary(PCA.out)
+\end{Sinput}
+\begin{Soutput}
+Error in summary(PCA.out): object 'PCA.out' not found
+\end{Soutput}
+\end{Schunk}
+
+Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the first two axes:
+\begin{Schunk}
+\begin{Sinput}
+round(PCA.out$rotation[, 1:6], 3)
+\end{Sinput}
+\begin{Soutput}
+Error in eval(expr, envir, enclos): object 'PCA.out' not found
+\end{Soutput}
+\end{Schunk}
+As we can see, there are quite a few indices on the first axis with a loading of around 0.2 (links per species, weighted NODF, H2, mean number of partners shared; weighted cluster coefficient, niche overlap, togetherness, C-score (all lower level); extinction slope, robustness, partner diversity (all higher level)). 
+
+Also the PCA biplot is not very helpful, since the many indices pointing ``southwards'' are unreadably overlapping.
+%
+\begin{figure}
+%\vspace*{1cm} 
+\centering
+\includegraphics[width=0.8\textwidth]{figures/PCAnetworklevel}
+\caption{Principal component analysis biplot of indices at the network level, based on 22 quantitative pollination networks. Notice that network ``kato1990'' is by far the largest in the set, defining on its own the second principal component. Indices pointing ``southwards'' may thus simply be more sensitive to network size and related properties (such as density of interactions).}
+\label{fig:PCAnetworklevel}
+\end{figure}
+
+
+Alternatively, we might want to depict the correlation between different indices by means of a cluster analysis (Fig.~\ref{fig:clusternetworklevel}).
+%par(mar=c(0,5,0,0))
+\begin{Schunk}
+\begin{Sinput}
+library(Hmisc)
+plot(varclus(netw.indic.webs), cex=0.8)
+abline(h=0.5, lty=2, col="grey")
+\end{Sinput}
+\end{Schunk}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/clusternetworklevel}
+\caption{Cluster analysis of indices at the network level, based on 22 quantitative pollination networks. Grey dotted line indicates the level below which clustering could be considered relevant ($|r| > 0.7$).}
+\label{fig:clusternetworklevel}
+\end{figure}
+%
+It picks out a slightly different structure, with the PC1 being distributed over more than one cluster (towards the left, with extinction.slope.HL but also towards the centre, with weighted NODF). In either case it becomes clear that many indices are of limited originality. However, there are some branches ending above the dashed line, indicating that they add a new element to the description of the network. Some are trivial, such as the number of species in the lower level, others less so (specialisation asymmetry, extinction slope LL, niche overlap HL, (weighted) nestedness). 
+
+It should become clear that there is no need to compute all indices a software can offer, and that some clusters seem to measure the same latent property, even it is unclear what that property is. Curiously, higher and lower level indices are always intermixed. There seems to be always an effect onto the other level, so that some indices pick up a signal in one level, but others the same signal in the other.\footnote{That should be the case for extinction slopes and robustness, which measures the response of one level to extinctions in the other. But is difficult to see why the cluster coefficient for the higher level should be correlated with togetherness in the lower. \emph{Post hoc}, it is always possible to find a reason, but \emph{a priori} this is not expected.}
+
+The 22 pollination networks, on which both PCA and cluster are based, are most certainly not representative of bipartite networks in general. The simulations of \citet{Dormann2009} for a wider range of sizes and linkage densities show a qualitatively similar picture, though: indices are overlapping into clusters.\footnote{We could similarly say that there is a substantial redundancy in network indices, evident from the analysis where we condense 92\% of variation in 40 odd indices onto six axes.}
+
+
+
+\subsubsection{Variations on on the same theme: which index of a group of similar ones should I choose?}
+%nestedness; graph-theoretical indices (closeness, betweenness, node specialisation);
+
+%Close with: indices differently affected by uninformative (first-order) properties of the network: network dimensions, connectance, sampling intensity, ... -> null models needed for identifying the signal-to-noise ratio of different indices. -> next section
+
+Different indices were developed for different aims. Some are very reasonable, logically sound, thoughtful and even productive (in the sense of ``shown to be doing what they are supposed to do''), others aren't. Each index should be understood when being used, based on the literature introducing it and any later study refining, comparing or criticising/appraising it. There is no easy way to decide the question ``Which is the right index for me?''
+
+That said, there are a few guiding considerations that seem plausible to me:
+\begin{enumerate}
+\item Quantitative indices use more information than binary ones; preferably use the former.
+\item Indices developed for bipartite networks are likely to be closer, theoretically, to the structure of the data than one-mode indices working on projections of bipartite networks.
+\item Indices that came out positively in comparisons have proven their worth more than fresh-off-the-press indices.
+\item If two or more indices seem barely distinguishable, do \textbf{not} choose the one easiest to interpret! This would be a logical fault, since their similarity indicates clearly that they are affected by ``something'' and we don't know what that something is, yet. But interpreting an effect as the being caused by what is most convenient to interpret is most certainly wrong \citep{Shermer2012}.\footnote{Of the many, many biases that can creep into scientific explorations, this is one. We could call it the ``parsimony bias'' as a special case of the ``selection bias'' \citep{Shermer2012}.}
+\end{enumerate}
+%
+The last point in particular seems rather little helpful. Imagine the two index values ``functional diversity'' for the higher and lower trophic level, which are near-identical in Fig.~\ref{fig:clusternetworklevel}. This indicates that the \emph{network}, rather than each level, contains the information which these two indices describe. In this particular case, we may want to consider using neither index, or using any of them but interpreting it \emph{as if it represented \emph{both} level}.
+
+Thus, in a nutshell, there is no easy answer and there is no way around knowing the index and the literature around it and its friends.
+
+
+
+
+
+\section{Null models} %-------------------------------------------------------------------------
+  \label{sec:nullmodels}
+
+\subsection{Why null models?}
+When a network is structured according to some measure (e.g. nestedness), what does that mean? It could mean that ecological processes leading to nestedness are at play. Or it could mean that a sampling effect makes nestedness an inevitable consequence. Or, finally, it could be a mixture of both. Furthering our understanding of nature is not aided by the reporting of spurious relationships resulting from sampling effects, hence a formal description of what the network would look like without the ecological process would be a useful comparison. That is what a null model aims to provide \citep{Gotelli1996}. 
+
+In ecology, \ind{null model}s are common only in some fields, particularly in biogeography \citep{Gotelli1996,Hausdorf2007}, but also in network analyse \citep{Dormann2009,Joppa2009,Bluthgen2008,Vazquez2006,Vazquez2003a,Vazquez2009}. With respect to particular bipartite indices, some studies rejected the current nestedness paradigm using abundance-based null models, for observed \citep{Kallimanis2009,Moore2007,Santamaria2007}, as well as for simulated networks \citep{Krishna2008}.
+
+Null models extend much beyond ecology and were probably first used in physics. \citet{Latapy2008} use them to investigate degree distributions in non-ecological bipartite networks. Using another network example, the module detection algorithm proposed by \citet{Newman2004} also uses a null model to define a ``group'' (or module or community) within a network: there are more links within than between groups. The null model then is a random network with as many links between as within groups \citep{Guimera2005}. In its quantitative version, the null model is constructed from equiprobable interactions by differently abundant participants \citep{Barber2004}. The specific null model used above is underlying most current implementations of contingency table tests such as $\chi^2$ or Fisher's signed rank test \citep{Patefield1981}.
+
+In conclusion, null models are established approaches in physics as well as ecology to correct for statistical artefacts and to establish an expectation in the absence of the hypothesised structuring mechanism.
+
+\subsection{Justifying conservative null models}
+The interactions observed in a network are the result of a dynamic interaction between species at two levels. If we use null models to represent the outcome of these interactions (the abundances of the participants), we seem to be over-correcting. How can we possibly find a pattern, if we use this pattern as a null model? Is an abundance-based null model not a circular argument? Here I argue when it is not, and if \ind{circularity} would sneak in, why it would still be better to over-correct. I shall focus on pollination networks, and every network analyst has to decide in how far this reasoning can be applied to his/her system.
+
+Plant persistence in a site depends to some extend on them being pollinated, and pollinator population dynamics is affected by the amount of nectar and pollen they collect from the flowers they visit. However, plant growth and population dynamics are also affected by nutrient and light availability, save sites for seed germination, herbivory and fungal pathogens, mycorrhisation and environmental disturbances; and similar constraints exist for pollinators. It is thus difficult, if not impossible, to say how much of the observed abundance of a species (plant or pollinator) is caused by the specific plant-pollinator interaction and hence the structure of the network. To the extent that abundances are determined by the pollination interaction we may indeed introduce collinearity. To date, there are no data to estimate the proportion of population growth controlled by mutualistic interactions of either plants or pollinators. We can only guess based on observations such as strong nest-site limitation in solitary bees \citep{SteffanDewenter2008}, relatively high parasitism rates of pollinators \citep{Klein2002}, strong nutrient limitations of plant population dynamics \citep{Ghazoul2005} and grazing pressure \citep{Crawley1987, deMazancourt2000} that they are probably not dominating population dynamics. On the other hand, clear (but rare) examples of co-evolution indicate that such a strong mutual dependence may indeed occur \citep{Waser1996,Waser2006}.
+
+Secondly, the observed interactions are not necessarily reflecting abundance of flowers or pollinators, but rather their attractiveness (e.g. due to scent, colouration or nectar production) and activity (e.g. daily period of foraging, phenology through the season, temperature- dependence of foraging activity), respectively. Hence by using observed sums of observed interactions, one does not correct for abundance, but for attractiveness and activity, respectively.
+
+Third, the null model uses marginal totals, i.e. summed across all links of a species. If a pollinator was specialised on a single plant species, the null model would scatter these interactions across all and hence correctly identify a miss-match between observed and null model. If, on the other hand, a pollinator was generalised, then the scattering of interactions across all plant species would also yield a similar picture and generalisation would correctly be inferred.
+
+Finally, even if the null model used would introduce some amount of circularity and thus ``over-correction'', we have to balance this against ``over-detection''. Finding specialisation in an uncorrected approach will incur high levels of type I error (i.e. detecting a pattern that is actually not there). A null model insures against this type of error. We can thus be sure that a pattern that ``survives'' the null model test is no statistical artefact. Since it has been shown repeatedly that sampling intensity and ``natural'' differences in abundance will cause such artefacts \citep{Dormann2009,Bluthgen2010,Joppa2009,Bluthgen2008}, they must be addressed. Ignoring them will lead to misinterpretation and over-reporting of spurious network structure. After correction for expectation based on abundances, we can start understanding ecology \citep{Vazquez2007}.
+
+In conclusion, circularity is unlikely to substantially impair null models for pollination networks. The risk of reporting non-existent network structure and further speculation of network stability due to this spurious network structure is a problem that requires a correction, even if circularity was present.
+
+
+
+\subsection{Using null models to test for significant tests in data}\label{sec:A:nullmodels}
+Once you have settled on a null model, there are fundamentally two different approaches to use such null models in statistical significance testing: corrected indices and null modelling the entire analysis. Let us look at them in turn, starting with the seemingly easier option.
+
+\paragraph{Corrected indices and $z$-scores}\index{z-score@$z$-score}
+Imagine we computed the index $I$ for a network. We now want to know whether this value is anything special, given the abundances of the species.\footnote{Thereby we justify the use of the Patefield algorithm as null model. But the approach is independent of which null model we use.} So we build, say, 1000 null models\footnote{E.g. using \texttt{nulls <- nullmodel(web=Safariland, N=1000, method='r2d')}} 
+and compute our index $I$ for each of them. We can visualise the distribution of null-model $I$-values relative to our observed index value \citep{Dormann2009}.
+\begin{Schunk}
+\begin{Sinput}
+data(Safariland)
+Iobs <- C.score(Safariland)
+nulls <- nullmodel(web=Safariland, N=1000, method='r2d')
+Inulls <- sapply(nulls, C.score)
+plot(density(Inulls), xlim=c(0, 1), lwd=2)
+abline(v=Iobs, col="red", lwd=2)
+\end{Sinput}
+\end{Schunk}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/NODFnull}
+\caption{Observed and null-modelled NODF-nestedness for the network vazquenc. Note that values of 100 indicate perfect nestedness. Thus, null models are much more nested than the observed network. (That is typically the case (Dormann et al. 2009), although typically no null models are computed for comparison.)}
+\label{fig:NODFnull}
+\end{figure}
+%
+That is fine for a single network, but no option if we want to analyse dozens or hundreds of networks. We thus have to summarise this figure in a value. The simplest, most obvious but generally not best solution would be to subtract the null model mean from the observed, so that $I_\text{corrected} = \Delta I= I_\text{observed} - \bar{I}_\text{nulls}$. The reason why this $\Delta I$ is not ideal is that the null model distribution is likely to vary from network to network. Thus, a difference of, say, 20 may be a lot for pointy distributed null models such as the one in Fig.~\ref{fig:NODFnull}, but only little for null model values spreading over the entire $x$-axis.
+
+The better, and more established approach, would be to compute $z$-scores (= \ind{standard score}s or \ind{normal score}s) for each network, which express the difference in terms of standard deviations of the null distribution: 
+\[z_I= \frac{I_\text{observed} - \bar{I}_\text{nulls}}{\sigma_{I_\text{nulls}}}.\] We can now analyse the $z$-scores instead of the original $I_\text{obs}$-values.
+
+$z$-scores have one major disadvantage when it comes to several of the network indices presented earlier: the standard deviation becomes an unsuitable measure of spread as the values approach an upper or lower bound. Imagine our network index $I$ is bound between 0 and 1 (as many are). If the null models have values above, say, 0.9, the upper bound is so close that the distribution will be skewed and the standard deviation biased too low. This may lead to inflated $z$-scores. So whenever you observe values close to either bound, beware of distorted $z$-scores.
+% show this in an example!
+
+
+\paragraph{Null-model the entire analysis}
+%(with a distribution of model estimates to compute p-values)
+The alternative approach is to carry out the intended analysis on the observed index values $I$ and then, in a second step, repeat it with one realisation of a null model per network. Next, repeat this second step several thousand times (for good measure) and store the statistics you are interested in (say $F$-values in an ANOVA or slopes in a regression). Instead of using the $p$-values from the analysis of the observed values, compare observed and null-modelled statistics and count the proportion of values exceeding the observed and use those as $p$-value. To anyone with any experience in \ind{resampling analysis} or bootstrapping this is standard procedure \citep{Efron1993,Manly1997}.
+% provide an example: e.g. Diego's analysis of with/out cattle on some index
+
+As an example, we can use a question addressed in \citet{Vazquez2003}, where the authors investigate whether cattle grazing affects the network structure of pollination networks in four replicated sites in Argentina. As response we can choose any network index, for example linkage density. %or weighted NODF? or ISA? or effective number of species
+
+\begin{Schunk}
+\begin{Sinput}
+weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc", 
+                       "vazmasnc", "vazquec", "vazquenc"), get)
+# Write a function to compute the desired statistic, e.g. the difference 
+# between grazed and ungrazed:
+meandiff <- function(webs){
+   obs <- sapply(webs, networklevel, index="linkage density")  
+   mean(obs[1:4] - obs[5:8])
+}
+(observed <- meandiff(weblist))
+\end{Sinput}
+\begin{Soutput}
+[1] -0.2481145
+\end{Soutput}
+\end{Schunk}
+Now generate a null model and repeat:\index{nullmodel@\texttt{nullmodel}}
+\begin{Schunk}
+\begin{Sinput}
+nulllist <- lapply(weblist, nullmodel, N=1, method="r2d")
+meandiff(weblist)
+\end{Sinput}
+\begin{Soutput}
+[1] -0.2481145
+\end{Soutput}
+\end{Schunk}
+Repeat this procedure, say, 5000 times:\footnote{For didactic purposes, we use an inelegant but easy to understand \texttt{for}-loop here. In productive mode we would instead use \texttt{sapply} or \texttt{replicate}, which would make the code more compact, but in this case not faster.}\index{for-loop@\texttt{for}-loop}
+\begin{Schunk}
+\begin{Sinput}
+res <- 1:5000
+for (i in 1:5000){ # takes a few minutes !!
+   nulllist <- sapply(weblist, nullmodel, N=1, method="r2d")
+   res[i] <- meandiff(nulllist)  
+}
+\end{Sinput}
+\end{Schunk}
+Finally, we can depict the results in a histogram (Fig.~\ref{fig:cattlenull}), with observed as vertical line, and compute the $p$-value based on the 5000 null models:
+%
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/cattle_nullmodelled}
+\caption{Distribution of mean differences in linkage density of pollination networks in grazed and ungrazed meadows, correcting for differences in species numbers and observation intensity through the use of null models ($N=5000$). Observed difference is shown as vertical line. The observed difference is significantly ($P<0.001$) different from null model expectations.}
+\label{fig:cattlenull}
+\end{figure}
+%
+\begin{Schunk}
+\begin{Sinput}
+hist(res, xlim=c(-0.3, 0.3))
+abline(v=observed, col="red", lwd=2)
+# compute p-value as proportion smaller or than observed
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+sum(res < observed)/length(res) * 2 # *2 for two-tailed test
+\end{Sinput}
+\begin{Soutput}
+[1] 0
+\end{Soutput}
+\end{Schunk}
+The idea here is to compute a statistic of interest, in this case the mean difference between some network index for the two treatments, and then use the null model to compute expectations. In the above example, we would apparently expect no difference (which is intuitive); additionally we also get an idea of how much variability we can expect (the distribution of the null model-based mean differences in linkage density). Thus, in this example, the difference in linkage density of pollination networks from grazed \emph{vs} ungrazed pastures is highly significant ($p<0.001$).
+
+
+\section{Modularity}
+Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail here in][]{Dormann2013} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has been vastly improved by \citep{Beckett2016}, which is also now the default algorithm used in \package{bipartite}.
+
+An alternative to finding and delimiting such modules is to group species by ordination \citep{Borgatti1997,Lewinsohn2006}. Correspondence analysis (CA) of the adjacency matrix is a simple and fast way to organise species. In fact, the \package{bipartite}'s functions \texttt{plotweb} and \texttt{visweb} both use CA to decide on the species sequence, thereby grouping species of one group interacting similarly with species in the other group near each other. 
+Typically, however, correspondence analysis will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called compartments and will be visible as clearly separated groups of species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are much more black-and-white than modules and often only occur in ecological networks because sampling was rather incomplete.}
+\begin{figure}
+	\hfill
+	\includegraphics[width=0.32\textwidth, trim=1cm 4cm 0.5cm 1cm, clip=TRUE]{figures/random_small_high_nonoise}
+	\hfill
+	\includegraphics[width=0.32\textwidth, trim=1cm 4cm 0.5cm 1cm, clip=TRUE]{figures/CA_small_high_nonoise}
+	\hfill
+	\includegraphics[width=0.32\textwidth, trim=1cm 4cm 0.5cm 1cm, clip=TRUE]{figures/sorted_small_high_nonoise}
+	\hfill
+	\caption{A simulated 3-compartment network in random sequence (left), as sorted by a correspondence analysis (centre) and by the modularity algorithm with default settings (right).}
+\label{fig:randomCAsorted}
+\end{figure}
+
+QuaBiMo can be invoked recursively (we are working on doing the same for Beckett), searching for modules within modules (Fig.~\ref{fig:memmottmodules}, bottom). While such nested modules become ever smaller and are thus ever faster to detect, there are plenty of them and hence nesting will typically dramatically prolong computing time during the search for patterns \citep{Memmott1999}.
+\begin{figure}
+	%\includegraphics[width=\textwidth]{figures/memmott1999_modules_1E10}
+	\includegraphics[width=0.8\textwidth]{figures/memmott1999_nested_modules}
+	\caption{Interaction matrix featuring nested modules for the data of Memmott (1999). %\emph{Top}: Modules identified by QuaBiMo (with \texttt{steps=1e10}, running for several hours; $Q=0.30$). 
+	Darker squares indicate more observed interactions. Coloured boxes delineate the seven modules. (Note that results may vary between runs.) In the central module yellow Asteraceae feature heavily, while a possible ecological cause pattern for the other modules is less apparent. %\emph{Bottom}: Nested modules based on a recursive call of QuaBiMo. Module arrangement is slightly different from top, since the algorithm is stochastic.
+	}
+\label{fig:memmottmodules}
+\end{figure}
+
+\begin{wrapfigure}{o}{0.3\textwidth}
+	\vspace*{-.5cm}
+	%\centering
+	\includegraphics[width=0.3\textwidth]{figures/poll_mod_QvsH2}
+	\caption{Modularity ($Q$) is highly correlated with specialisation $H_2'$ across $22$ pollination networks. Names refer to network data sets in \package{bipartite}.}
+\label{fig:QvsH2}
+\end{wrapfigure}
+%
+Modularity $Q$ is likely to be correlated with other network metric, as specialisation of module members is the prime reason for the existence of modules. Across the $22$ quantitative pollination networks of the NCEAS ``interaction webs'' data base,%\footnote{\url{http://www.nceas.ucsb.edu/interactionweb}}
+ $Q$ was evidently highly positively correlated with complementary specialisation $H_2'$ (Fig.~\ref{fig:QvsH2}).
+Ecologically, the correlation with specialisation makes good sense. Modules only exist because some species do not interact with some others, i.e. because they are specialised. An overall low degree of specialisation is equivalent to random interactions, which will yield no modules. % (unless as an artefact of low sampling intensity, which can be addressed using null models).
+
+Furthermore, the absolute value of $Q$  is, like all network indices \citep{Dormann2009}, dependent on network size (i.e. the number of species) as well as the number of links and the total number of interactions observed \citep{Thebault2013}. We would thus recommend a null model comparison \citep{Vazquez2003a,Bluthgen2008,Dormann2009} to correct the observed value of $Q$ by null model expectation (e.g.~by standardising them to $z$-scores:
+$z_{Q} = \frac{Q_{\text{observed}} - \overline{Q}_{\text{null}}}{\sigma_{Q_{\text{null}}}}$).
+%
+Modularity $Q$ is in itself not an index of an ecological feature. It is merely a measure of how well links and interactions can be separated into different modules. Large networks, with many species and links, allow for more combinations of species-in-modules, leading to higher values of $Q$, as \citet{Allesina2009a} pointed out for any grouping algorithm. %When some previous studies have not shown network size to be correlated with modularity, then that may indicate more the inadequacy of some algorithms than a deficit in those that do find a correlation.
+
+
+\subsection{Using modularity to identifying species with important roles in the network}
+\citet{Guimera2005} and \citet{Olesen2007} propose to compute standardised connection and participation values, called $c$ and $z$, for each species to describe their role in networks, where $c$ refers to the between-modules connectivity \citep[called ``participation coefficient'' $P$][]{Guimera2005} and $z$ refers to within-module degrees. Originally, both are computed based on the number of links, but a weighted version based on species strength is implemented, too. \citet{Guimera2005} suggest critical values (only for the binary approach) of $c$ and $z$ of $0.625$ and $2.5$, respectively. Species exceeding both of these values are called ``hubs'' because they link different modules, combining high between- with high within-module connectivity. 
+
+In the case of the pollination network of Fig.~\ref{fig:memmottmodules}, $c$-values range between $0$ and $0.78$ (with $23$ of $79$ pollinators and $13$ of $25$ plant species exceeding the threshold of $0.625$); $z$-values range between $-1.21$ and $5.00$ (with two pollinators but no plant species exceeding the value of $2.5$: Fig.~\ref{fig:czvalues}). Put together, only the syrphid \emph{Syritta pipiens} (and hawkbit \emph{Leontodon hispidus} almost) exceeded both thresholds and would thus be called a ``hub species''. As can be seen in Fig.~\ref{fig:memmottmodules}, this syrphid is relatively rare but clearly not randomly distributed over the six modules, thus linking three highest-level modules. In contrast, \emph{Leontodon hispidus} is a common plant species, visited by many different pollinators, and it actually links almost all modules. 
+
+%
+\begin{figure}
+\hfill
+\includegraphics[width=0.48\textwidth]{figures/czvalues_memmott_pollinators}
+\hfill
+\includegraphics[width=0.48\textwidth]{figures/czvalues_memmott_plants}
+\hfill
+\caption{Connection ($c$) and participation ($z$) values for pollinators (left) and plants (right) in the network of Memmott (1999). Dashed black lines indicate critical values according to Olesen et al. (2007), those in grey $95$\% quantiles from $100$ null models (see text).}
+\label{fig:czvalues}
+\end{figure}
+%
+To objectively define this threshold one could run null models of the original network and employ $95$\% quantiles as critical $c$- and $z$-values. For the pollinators in the network of Fig.~\ref{fig:memmottmodules} these would be $0.67$ ($\pm 0.039$) and $1.45$ ($\pm 0.220$), respectively, based on $100$ null models (for plants: $c_\text{critical} = 0.72 \pm 0.036$ and $z_\text{critical} = 1.78 \pm 0.297$; Fig.~\ref{fig:czvalues} left). While for plant species this has little effect  (except for moving \emph{Leontodon hispidus} across the threshold), three more pollinators would become hub species (the common hoverfly \emph{Episyrphus balteatus}, the tachinid fly \emph{Eriothrix rufomaculata} and undetermined fly ``Diptera spec.22'').
+
+
+
+
+\section*{Conclusions}%----------------------------------------------
+The analysis of bipartite networks has seen a recent explosion of applications in ecology. The \proglang{R}-package \package{bipartite} aims at providing a user-friendly set of function to aid the visualisation and analysis of such networks. This vignette hopefully illustrated some of the  challenges and solutions to such analyses. The main take-home-message it aims to convey is that there are considerable interpretational strings attached, and that the analysis of bipartite networks is not as straightforward as one might have initially hoped.
+
+\medskip
+\noindent Feedback, improvements, corrections and additions are welcomed!
+
+
+
+
+
 
 
 \bigskip
