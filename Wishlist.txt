@@ -6,7 +6,7 @@ large
 	** Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
 	** revise plotweb (incl. device settings, vertical option, margin control)
 
-* recursive modules with Beckett
+* recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
 
 * NULLMODEL-LIKE:
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
@@ -64,7 +64,8 @@ This means:
 NICE TO HAVE
 * check the C4b of Gilarranz: is it the same as Opsahl's?
 * compare betweenness in sna and igraph and tnet and Pajek
-* add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!)
+* add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!)
+
 
 LARGELY IRRELEVANT
 large
