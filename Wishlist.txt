@@ -4,7 +4,7 @@ large
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
 	** plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 	** Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
-	** revise plotweb (incl. device settings, vertical option, margin control)
+	** revise plotweb (incl. device settings, vertical option, margin control; easy and explained coloring per sp etc)
 
 * recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
 
