@@ -21,6 +21,7 @@ large
 
 
 small
+* FIX VEGAN DEPENDENCY!! commsimulator goes out of business, see email by Oksanen 25.4.2018!
 (improve existing functionality)
 * test specieslevel with empty.web=FALSE; decide where web.e must be used
 * better treatment of allowed index synonyms in species/group/networklevel (currently they are "not recognised" if they don't come with a allindex-namevariant)
