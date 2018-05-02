@@ -17,7 +17,7 @@ discrepancy(mat)
 }
 
 \details{
- Discrepancy is a way to measure the nestedness of a matrix. In a comparative study, Ulrich & Gotelli (2007) showed discrepancy to outperform all other measures and hence recommend its use (together with a fixed-columns, fixed-rows null model, such as implemented in \code{commsimulator} in \pkg{vegan}, see example).
+ Discrepancy is a way to measure the nestedness of a matrix. In a comparative study, Ulrich & Gotelli (2007) showed discrepancy to outperform all other measures and hence recommend its use (together with a fixed-columns, fixed-rows null model, such as implemented in \code{simulate.nullmodel} in \pkg{vegan}, see example).
 
  This function follows the logic laid out by Brualdi & Sanderson (1999), although, admittedly, I find their mathematical description highly confusing. Another implementation is given by the function \code{nesteddisc} in \pkg{vegan}. The reason to write a new function is simple: I wasn't aware of \code{nesteddisc}! (I was sitting on a train and I wanted to use this measure later on, so I put it into a function consulting only the orignal paper. When looking for the swap algorithm to create null models, which I somehow knew to exist in \pkg{vegan}, I stumbled across \code{nesteddisc}. If you are interested in the swap algorithm and come across this help page, let me re-direct you to \code{oecosimu} in \pkg{vegan}.)
  

@@ -48,7 +48,10 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
     
     if (m == 4){ #shuffle.web
         if (any(web > 1)) out <- shuffle.web(web, N, ...)
-        if (all(web < 2)) out <- replicate(n=N, expr=unname(commsimulator(web, method="quasiswap", ...)), simplify=FALSE) 
+        if (all(web < 2)) {
+            out <- unname(simulate(vegan::nullmodel(web, method="quasiswap"), nsim=N, ...)) 
+            out <- lapply(seq_len(N), function(i) out[,,i])
+        }
     }
 
     if (m == 5){ #mgen
