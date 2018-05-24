@@ -9,6 +9,8 @@ large
 * recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
 
 * NULLMODEL-LIKE:
+* in nullmodel, the check for binary networks is flawed for numbers < 1; use length(unique(web)<3) instead
+* also, check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
