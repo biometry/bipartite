@@ -66,6 +66,7 @@ This means:
 
 NICE TO HAVE
 * check the C4b of Gilarranz: is it the same as Opsahl's?
+* make Rcpp-version of computeModule's LPA
 * compare betweenness in sna and igraph and tnet and Pajek
 * add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!)
 
