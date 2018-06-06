@@ -8,7 +8,7 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
   }
   # check if, for binary data, any species is present everywhere ("empty" takes care of the "nowhere"):
   if (length(table(unlist(web))) == 2  & ( any(colSums(web) == nrow(web)) | any(rowSums(web) == ncol(web)))){
-    warning("Your data set contains one (or more) species present everywhere. These will be ignored, as they contain no information for the modularity algorithm.")
+    warning("Your binary data set contains one (or more) species present everywhere. These will be ignored, as they contain no information for the modularity algorithm.")
     nonWeb <- (!web) * 1
     web <- (! empty(nonWeb)) * 1
   }
@@ -20,9 +20,16 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
     web <- as.matrix(empty(web))
     if (any(attr(web, "empty")) > 0) warning("Some empty columns or rows were deleted.")
 
-    mod <- if (forceLPA) LPA_wb_plus(web) else  DIRT_LPA_wb_plus(web)
-    # convert into moduleWeb-object:
-    result <- convert2moduleWeb(web,  mod)
+    if (deep){
+      result <- cMBeckett(web, depth=1, nrOfModule=1, ytop=1, xleft=1, ybottom=dim(web)[1], 
+                   xright=dim(web)[2], prev_orderA=c(1:dim(web)[1]), prev_orderB=c(1:dim(web)[2]), 
+                   modules=matrix(c(0, 1, c(1:sum(dim(web)))), 1), 
+                   deepCompute=deep, delete=deleteOriginalFiles, steps=steps, tolerance=tolerance, experimental=experimental)
+    } else{
+      mod <- if (forceLPA) LPA_wb_plus(web) else  DIRT_LPA_wb_plus(web)
+      # convert into moduleWeb-object:
+      result <- convert2moduleWeb(web,  mod)
+    }
     return(result)
   }
   

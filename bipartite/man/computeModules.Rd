@@ -1,4 +1,4 @@
-﻿\encoding{UTF-8}
+\encoding{UTF-8}
 
 \name{computeModules}
 
@@ -19,7 +19,7 @@ This function takes a bipartite weighted graph and computes modules by applying 
 computeModules(web, method="Beckett", deep = FALSE, deleteOriginalFiles = TRUE, 
 	steps = 1000000, tolerance = 1e-10, experimental = FALSE, forceLPA=FALSE)
 	
-metaComputeModules(moduleObject, N=5, method="DormannStrauss", ...)
+metaComputeModules(moduleObject, N=5, method="Beckett", ...)
 }
 
 \arguments{
@@ -65,7 +65,7 @@ Newman, M.E.J. 2006. Modularity and community structure in networks. \emph{Proce
 
 \note{For perfectly compartmentalised networks the algorithm may throw an error message. Please add a little bit of noise (e.g. uniform between 0 and 1 or so) or a small constant (1E-5 or so) and it will work again. 
 
-When using the method \option{DormannStrauss}, files are written onto the hard drive during the computation. These files are by default deleted after the computation terminates, unless it breaks. Details of the modularity algorithm can be found in Dormann \& Strauß (2013).
+When using the method \option{DormannStrauss}, files are written onto the hard drive during the computation. These files are by default deleted after the computation terminates, unless it breaks. Details of the modularity algorithm can be found in Dormann & Strauß (2013).
 }
 
 \seealso{

@@ -28,7 +28,7 @@ The third step is to \bold{compare results to null models}. Many interaction mat
 
 Finally, bipartite comes with 23 quantitative pollination network data sets taken from the NCEAS interaction webs data base (use \code{data(package="bipartite")} to show their names) and it has a few miscellaneous functions looking at some special features of bipartite networks (such as modularity: \code{\link{computeModules}} or apparent competition: \code{\link{PAC}}).
 
-\bold{Speed}: The code of bipartite is almost exclusively written in R. You can increase the speed a bit (by 30 to 50 \%, depending on the functions you use) by compiling functions on-the-fly. To do so, you need to load the \pkg{compiler} package and type: \code{enableJIT(3)}. The first time you call a function, it will be compiled to bytecode (just-in-time: jit), which takes a few seconds, but the second call will be substantially faster than without compilation. In the few tests we have run, this improvement was NOT substantial (i.e. a few tens of percent), indicating, I guess, that our R code wasn't too bad. See \pkg{compiler}-help files or \url{http://www.r-statistics.com/2012/04/speed-up-your-r-code-using-a-just-in-time-jit-compiler/} for details.
+%\bold{Speed}: The code of bipartite is almost exclusively written in R. You can increase the speed a bit (by 30 to 50 \%, depending on the functions you use) by compiling functions on-the-fly. To do so, you need to load the \pkg{compiler} package and type: \code{enableJIT(3)}. The first time you call a function, it will be compiled to bytecode (just-in-time: jit), which takes a few seconds, but the second call will be substantially faster than without compilation. In the few tests we have run, this improvement was NOT substantial (i.e. a few tens of percent), indicating, I guess, that our R code wasn't too bad. See \pkg{compiler}-help files or \url{http://www.r-statistics.com/2012/04/speed-up-your-r-code-using-a-just-in-time-jit-compiler/} for details.
 
 See help pages for details and examples.
 
@@ -49,6 +49,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.11 (relase date: XX-YYY-2018)
   \describe{
+    \item{Change of defaults in \code{\link{metaComputeModules}}}{, from \option{DormannStrauss} to \option{Beckett}. Beckett's algorithm is far less variable in its performance, thus I assumed that one would not actually need \code{\link{metaComputeModules}} for it at all. However, also \option{Beckett} is not foolproof and benefits from a few re-runs with different starting configurations. Now defaults are consistent with \code{\link{computeModules}}. Thanks to Laura Burkle for raising the issue.}
     \item{Bug fix in \code{\link{nested}}}{, which didn't correctly pass through the \option{normalised}-argument for index "C score". Also the naming of "C score" (rather than previously "C.score") was changed for consistency with \code{\link{networklevel}}. Many thanks to Carlos Zamora-Manzur for reporting!}
     \item{Deprecation of the command \code{register} in C++17}{required attention in the \code{MersenneTwister.h}-code used in \code{computeModules}. Thanks to Brian Ripley, for the R Core Team, for notifying all maintainers using this command in advance of future CRAN-submission problems!}
   }
