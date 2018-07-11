@@ -184,7 +184,7 @@ inline MTRand::uint32 MTRand::randInt()
 	if( left == 0 ) reload();
 	--left;
 		
-	uint32 s1; // register deprecated in C++11 // CFD 1.1.2018
+	uint32 s1;
 	s1 = *pNext++;
 	s1 ^= (s1 >> 11);
 	s1 ^= (s1 <<  7) & 0x9d2c5680UL;
@@ -229,9 +229,9 @@ inline void MTRand::seed( uint32 *const bigSeed, const uint32 seedLength )
 	// in each element are discarded.
 	// Just call seed() if you want to get array from /dev/urandom
 	initialize(19650218UL);
-	int i = 1; // register deprecated in C++11 // CFD 1.1.2018
-	uint32 j = 0; // register deprecated in C++11 // CFD 1.1.2018
-	int k = ( N > seedLength ? N : seedLength ); // register deprecated in C++11 // CFD 1.1.2018
+	int i = 1;
+	uint32 j = 0;
+	int k = ( N > seedLength ? N : seedLength );
 	for( ; k; --k )
 	{
 		state[i] =
@@ -266,9 +266,9 @@ inline void MTRand::seed()
 	if( urandom )
 	{
 		uint32 bigSeed[N];
-		uint32 *s = bigSeed; // register deprecated in C++11 // CFD 1.1.2018
-		int i = N; // register deprecated in C++11 // CFD 1.1.2018
-		bool success = true; // register deprecated in C++11 // CFD 1.1.2018
+		uint32 *s = bigSeed;
+		int i = N;
+		bool success = true;
 		while( success && i-- )
 			success = fread( s++, sizeof(uint32), 1, urandom );
 		fclose(urandom);
@@ -286,9 +286,9 @@ inline void MTRand::initialize( const uint32 seed )
 	// See Knuth TAOCP Vol 2, 3rd Ed, p.106 for multiplier.
 	// In previous versions, most significant bits (MSBs) of the seed affect
 	// only MSBs of the state array.  Modified 9 Jan 2002 by Makoto Matsumoto.
-	uint32 *s = state; // register deprecated in C++11 // CFD 1.1.2018
-	uint32 *r = state; // register deprecated in C++11 // CFD 1.1.2018
-	int i = 1; // register deprecated in C++11 // CFD 1.1.2018
+	uint32 *s = state;
+	uint32 *r = state;
+	int i = 1;
 	*s++ = seed & 0xffffffffUL;
 	for( ; i < N; ++i )
 	{
@@ -302,8 +302,8 @@ inline void MTRand::reload()
 {
 	// Generate N new values in state
 	// Made clearer and faster by Matthew Bellew (matthew.bellew@home.com)
-	uint32 *p = state; // register deprecated in C++11 // CFD 1.1.2018
-	int i; // register deprecated in C++11 // CFD 1.1.2018
+	uint32 *p = state;
+	int i;
 	for( i = N - M; i--; ++p )
 		*p = twist( p[M], p[0], p[1] );
 	for( i = M; --i; ++p )
@@ -342,9 +342,9 @@ inline MTRand::uint32 MTRand::hash( time_t t, clock_t c )
 
 inline void MTRand::save( uint32* saveArray ) const
 {
-	uint32 *sa = saveArray; // register deprecated in C++11 // CFD 1.1.2018
-    const uint32 *s = state; // register deprecated in C++11 // CFD 1.1.2018
-	int i = N; // register deprecated in C++11 // CFD 1.1.2018
+	uint32 *sa = saveArray;
+    const uint32 *s = state;
+	int i = N;
 	for( ; i--; *sa++ = *s++ ) {}
 	*sa = left;
 }
@@ -352,9 +352,9 @@ inline void MTRand::save( uint32* saveArray ) const
 
 inline void MTRand::load( uint32 *const loadArray )
 {
-	uint32 *s = state; // register deprecated in C++11 // CFD 1.1.2018
-	uint32 *la = loadArray; // register deprecated in C++11 // CFD 1.1.2018
-	int i = N; // register deprecated in C++11 // CFD 1.1.2018
+	uint32 *s = state;
+	uint32 *la = loadArray;
+	int i = N;
 	for( ; i--; *s++ = *la++ ) {}
 	left = *la;
 	pNext = &state[N-left];
@@ -363,8 +363,8 @@ inline void MTRand::load( uint32 *const loadArray )
 
 inline std::ostream& operator<<( std::ostream& os, const MTRand& mtrand )
 {
-	const MTRand::uint32 *s = mtrand.state; // register deprecated in C++11 // CFD 1.1.2018
-	int i = mtrand.N; // register deprecated in C++11 // CFD 1.1.2018
+	const MTRand::uint32 *s = mtrand.state;
+	int i = mtrand.N;
 	for( ; i--; os << *s++ << "\t" ) {}
 	return os << mtrand.left;
 }
@@ -372,8 +372,8 @@ inline std::ostream& operator<<( std::ostream& os, const MTRand& mtrand )
 
 inline std::istream& operator>>( std::istream& is, MTRand& mtrand )
 {
-	MTRand::uint32 *s = mtrand.state; // register deprecated in C++11 // CFD 1.1.2018
-	int i = mtrand.N; // register deprecated in C++11 // CFD 1.1.2018
+	MTRand::uint32 *s = mtrand.state;
+	int i = mtrand.N; 
 	for( ; i--; is >> *s++ ) {}
 	is >> mtrand.left;
 	mtrand.pNext = &mtrand.state[mtrand.N-mtrand.left];
