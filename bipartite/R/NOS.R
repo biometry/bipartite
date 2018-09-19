@@ -85,7 +85,7 @@ NOS <- function(web, keep.Nij=FALSE, keep.diag=FALSE){
 			else if (S_ij > P_ij){ 
 			  N_ij_out[i,j] <- (S_ij - P_ij)/(min(d_i,d_j) - P_ij)
 			}
-			else if (S_ij < P_ij){
+			else{
 			  if ((d_i + d_j - n) < 0){
 			    N_ij_out[i,j] <- (S_ij - P_ij)/P_ij
 			  }
