@@ -43,20 +43,22 @@ NOS <- function(web, keep.Nij=FALSE, keep.diag=FALSE){
 				p_ij[k] <- (choose(n, k) *  choose(n - k, d_j - k) * choose(n - d_j, d_i - k)) / (choose(n, d_j) * choose(n, d_i)) * k
 			}
 			P_ij <- sum(p_ij)
-			# compute omega_ij
-			# compute omega_ij (see Strona & Veech, eqns 3-5)
-			if (S_ij == P_ij) omega_ij <- 1
-			if (S_ij > P_ij) omega_ij <- (min(d_i, d_j) - P_ij) / min(d_i, d_j)
-			if (S_ij < P_ij){
-				if ((d_i + d_j - n) < 0){ 
-					omega_ij <- P_ij / min(d_i, d_j)
-				} else {
-					omega_ij <- (P_ij - (d_i + d_j - n))/ min(d_i, d_j)
-				}
+			#Compute N_ij from (Strona & Veech, Eq. 6).  
+			#Instead of computing Omega_ij, simplify Eq. 6 and compute N_ij directly, to avoid division by 0 when min(d_i,d_j)==0
+			if (S_ij == P_ij){
+			  N_ij_in[i,j] <- 0
 			}
-			# finally, compute N_ij:
-	
-			N_ij_in[i, j] <- (S_ij - P_ij) / min(d_i, d_j) * 1/ omega_ij		
+			else if (S_ij > P_ij){ 
+			  N_ij_in[i,j] <- (S_ij - P_ij)/(min(d_i,d_j) - P_ij)
+			}
+			else{
+			  if ((d_i + d_j - n) < 0){
+			    N_ij_in[i,j] <- (S_ij - P_ij)/P_ij
+			  }
+			  else{
+			    N_ij_in[i,j] <- (S_ij - P_ij)/(P_ij - (d_i + d_j - n))
+			  }
+			}
 		}
 	}
 	#if (keep.Nij) out$"N_ij_in" <- N_ij_in
@@ -77,22 +79,21 @@ NOS <- function(web, keep.Nij=FALSE, keep.diag=FALSE){
 				p_ij[k] <- (choose(n, k) *  choose(n - k, d_j - k) * choose(n - d_j, d_i - k)) / (choose(n, d_j) * choose(n, d_i)) * k
 			}
 			P_ij <- sum(p_ij)
-			# compute omega_ij
-			# compute omega_ij (see Strona & Veech, eqns 3-5)
-			if (S_ij == P_ij) omega_ij <- 1
-			if (S_ij > P_ij) omega_ij <- (min(d_i, d_j) - P_ij) / min(d_i, d_j)
-			if (S_ij < P_ij){
-				if ((d_i + d_j - n) < 0){ 
-					omega_ij <- P_ij / min(d_i, d_j)
-				} else {
-					omega_ij <- (P_ij - (d_i + d_j - n))/ min(d_i, d_j)
-				}
+			if (S_ij == P_ij){
+			  N_ij_out[i,j] <- 0
 			}
-			# finally, compute N_ij:
-	
-			N_ij_out[i, j] <- (S_ij - P_ij) / min(d_i, d_j) * 1/ omega_ij		
-			
-			rm(S_ij, P_ij, d_i, d_j, omega_ij, n)
+			else if (S_ij > P_ij){ 
+			  N_ij_out[i,j] <- (S_ij - P_ij)/(min(d_i,d_j) - P_ij)
+			}
+			else{
+			  if ((d_i + d_j - n) < 0){
+			    N_ij_out[i,j] <- (S_ij - P_ij)/P_ij
+			  }
+			  else{
+			    N_ij_out[i,j] <- (S_ij - P_ij)/(P_ij - (d_i + d_j - n))
+			  }
+			}
+			rm(S_ij,P_ij,d_i,d_j,n)
 		}
 	}
 	#N_ij_out
