@@ -19,16 +19,17 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
     # always uses DIRTLPA unless forced to use the faster LPA, which gets stuck in local optima more often (see Beckett 2016)
     web <- as.matrix(empty(web))
     if (any(attr(web, "empty")) > 0) warning("Some empty columns or rows were deleted.")
-
+    
     if (deep){
-      result <- cMBeckett(web, depth=1, nrOfModule=1, ytop=1, xleft=1, ybottom=dim(web)[1], 
-                   xright=dim(web)[2], prev_orderA=c(1:dim(web)[1]), prev_orderB=c(1:dim(web)[2]), 
-                   modules=matrix(c(0, 1, c(1:sum(dim(web)))), 1), 
-                   deepCompute=deep, delete=deleteOriginalFiles, steps=steps, tolerance=tolerance, experimental=experimental)
+      stop("Beckett cannot currently be used recursively. \n With 'deep=T' please use method of 'DormannStrauss'.")
+      #   result <- cMBeckett(web, depth=1, nrOfModule=1, ytop=1, xleft=1, ybottom=dim(web)[1], 
+      #                xright=dim(web)[2], prev_orderA=c(1:dim(web)[1]), prev_orderB=c(1:dim(web)[2]), 
+      #                modules=matrix(c(0, 1, c(1:sum(dim(web)))), 1), 
+      #                deepCompute=deep, delete=deleteOriginalFiles, steps=steps, tolerance=tolerance, experimental=experimental)
     } else{
-      mod <- if (forceLPA) LPA_wb_plus(web) else  DIRT_LPA_wb_plus(web)
-      # convert into moduleWeb-object:
-      result <- convert2moduleWeb(web,  mod)
+     mod <- if (forceLPA) LPA_wb_plus(web) else  DIRT_LPA_wb_plus(web)
+     # convert into moduleWeb-object:
+     result <- convert2moduleWeb(web,  mod)
     }
     return(result)
   }

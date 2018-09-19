@@ -38,7 +38,7 @@ Strona, G., and Veech, J.A. (2015) A new measure of ecological network structure
 \emph{Methods in Ecology & Evolution} \bold{15}, 319--328
 }
 
-\author{Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}}
+\author{Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}, with additional code provided by ``tchen98'' (on github).}
 
 \seealso{\code{\link{grouplevel}}, which eventually shall use this function.}
 

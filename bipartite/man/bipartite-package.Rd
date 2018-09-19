@@ -37,7 +37,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.12\cr
+Version: \tab 2.11\cr
 Date: \tab 2018-3-17\cr
 License: \tab GPL \cr
 }
@@ -47,7 +47,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.11 (relase date: XX-YYY-2018)
+  \item 2.12 (release date: XX-YYY-2018)
+  \describe{
+    \item{Function \code{\link{NOS}}}{yields NA when one or more nodes are 0. The original equation allows an alternative way to compute NOS, which has been implemented by tchen98: many thanks!}
+  }
+
+  \item 2.11 (relase date: 12-Jul-2018)
   \describe{
     \item{Change of defaults in \code{\link{metaComputeModules}}}{, from \option{DormannStrauss} to \option{Beckett}. Beckett's algorithm is far less variable in its performance, thus I assumed that one would not actually need \code{\link{metaComputeModules}} for it at all. However, also \option{Beckett} is not foolproof and benefits from a few re-runs with different starting configurations. Now defaults are consistent with \code{\link{computeModules}}. Thanks to Laura Burkle for raising the issue.}
     \item{Bug fix in \code{\link{nested}}}{, which didn't correctly pass through the \option{normalised}-argument for index "C score". Also the naming of "C score" (rather than previously "C.score") was changed for consistency with \code{\link{networklevel}}. Many thanks to Carlos Zamora-Manzur for reporting!}
