@@ -11,7 +11,7 @@ C.score <- function(web, normalise=TRUE, FUN=mean, ...){
     # lead to NAs, use the ellipses to pass on na.rm to mean or similar functions. )
     # Carsten F. Dormann, Dec. 2007
     
-    web <- web>0 # this whole concept works only on binary data!
+    web <- (web>0)*1 # this whole concept works only on binary data! (the "*1" converts output to numeric)
     D <- designdist(t(web), method="(A-J)*(B-J)", terms="binary")
     out <- FUN(D, ...)
     # The minimum value for Ds is 0, for the special case were all species use the
