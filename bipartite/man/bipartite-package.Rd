@@ -37,8 +37,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.11\cr
-Date: \tab 2018-3-17\cr
+Version: \tab 2.12\cr
+Date: \tab 2018-11-12\cr
 License: \tab GPL \cr
 }
 }
@@ -49,6 +49,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.12 (release date: XX-YYY-2018)
   \describe{
+    \item{New function \code{\link{nest.smdm}}}{by Rafael Pinheiro, which computes the nestedness measure NODF (as present in \pkg{vegan}) more flexibly, by allowing the matrix to be sorted not only by number of filled cells (think: binary networks), but also by absolute marginal totals. NODF does not work for completely filled matrices, but this version (called NODA) does. Also, \code{\link{nest.smdm}} compute nesting within modules, if module identities are provided (e.g. by \code{\link{computeModules}} and the new little helper function \code{\link{module2constraints}}). All these metrics are computed for binary or weighted networks.}
     \item{Function \code{\link{NOS}}}{yields NA when one or more nodes are 0. The original equation allows an alternative way to compute NOS, which has been implemented by tchen98: many thanks!}
   }
 
