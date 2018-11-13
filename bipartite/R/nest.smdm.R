@@ -1,68 +1,68 @@
-nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T){
+nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", sort=TRUE){
   ### Checking inputs ####
   if (!is.null(constraints)&length(unique(constraints))==1){
     warning("Only one module. Nestedness calculated only for the entire matrix")
-    constraints=NULL}
-  if(is.element(NA,constraints)|is.element(NaN,constraints)){
+    constraints = NULL
+  }
+  if(is.element(NA, constraints) | is.element(NaN, constraints)){
     warning("NA or NaN in constraints. Nestedness calculated only for the entire matrix")
-    constraints=NULL
+    constraints = NULL
   }
   if (!is.null(constraints)&length(constraints)!=nrow(x)+ncol(x)){
     stop("constraints vector is not of the same length that network vertices")
   }
-  if (weighted==F&any(x!=0&x!=1)){
-    x[x>0]=1
+  if (weighted == FALSE & any(x != 0 & x != 1)){
+    x[x>0] = 1
     warning ("binary metric applied")
   }
-  if (decreasing!="fill"&decreasing!="abund"){
+  if (decreasing!="fill" & decreasing!="abund"){
     stop("decreasing should be fill or abund")
   }
-  if (!is.null(constraints)){constraints=as.character(constraints)}
+  if (!is.null(constraints)){constraints = as.character(constraints)}
   if(is.null(dimnames(x))){
-    xnames=list(paste("R",1:nrow(x),""),paste("C",1:ncol(x),""))
-    dimnames(x)<-xnames
+    xnames=list(paste("R", 1:nrow(x), ""), paste("C", 1:ncol(x), ""))
+    dimnames(x) <- xnames
   }
   ### Unweighted NODF Function ####
-  unweightednodf=function (x,constraints){
+  unweightednodf = function (x, constraints){
     # Sorting matrix order by row and collumn sums
-    if (sort==T){tab0=x[sort(rowSums(x), index=T, decreasing=TRUE)$ix,
-                        sort(colSums(x), index=T, decreasing=TRUE)$ix]}
+    if (sort==TRUE){tab0=x[sort(rowSums(x), index=TRUE, decreasing=TRUE)$ix,
+                        sort(colSums(x), index=TRUE, decreasing=TRUE)$ix]}
     else {tab0=x}
     
     # N for rows
-    MTrow= rowSums(tab0)
-    Nrow= matrix(rep(NA,times=nrow(tab0)^2),nrow(tab0),nrow(tab0))
-    dimnames(Nrow)=list(rownames(tab0),rownames(tab0))
+    MTrow = rowSums(tab0)
+    Nrow = matrix(rep(NA, times=nrow(tab0)^2), nrow(tab0), nrow(tab0))
+    dimnames(Nrow)=list(rownames(tab0), rownames(tab0))
     
     for (jrow in 2:nrow(tab0)){
       for (irow in 1:(jrow-1)){
-        if (MTrow[jrow]>=MTrow[irow]){Nrow[jrow,irow]=0} 
-        else {
+        if (MTrow[jrow]>=MTrow[irow]){Nrow[jrow, irow] = 0
+        } else {
           S=0
           for(i in 1:ncol(tab0)){
-            if (tab0[jrow,i]==1&tab0[jrow,i]==tab0[irow,i]) {
-              S=S+1
+            if (tab0[jrow, i]==1&tab0[jrow, i]==tab0[irow, i]) {
+              S = S+1
             }
           }
-          Nrow[jrow,irow]=S*100/MTrow[jrow]
+          Nrow[jrow, irow] = S*100/MTrow[jrow]
         }
       }
-      
     }      
-    Nrow=Nrow[rownames(x), rownames(x)]
+    Nrow = Nrow[rownames(x), rownames(x)]
     
     # NODF for rows
-    NODFrow= mean(Nrow,na.rm = T)
+    NODFrow = mean(Nrow, na.rm = TRUE)
     
     # N for collumns
     
-    MTcol= colSums(tab0)
-    Ncol= matrix(rep(NA,times=ncol(tab0)^2),ncol(tab0),ncol(tab0))
-    dimnames(Ncol)=list(colnames(tab0),colnames(tab0))
+    MTcol = colSums(tab0)
+    Ncol = matrix(rep(NA, times=ncol(tab0)^2), ncol(tab0), ncol(tab0))
+    dimnames(Ncol) = list(colnames(tab0), colnames(tab0))
     
     for (jcol in 2:ncol(tab0)){
       for (icol in 1:(jcol-1)){
-        if (MTcol[jcol]>=MTcol[icol]){Ncol[jcol,icol]=0} 
+        if (MTcol[jcol] >= MTcol[icol]){Ncol[jcol, icol]=0} 
         else {
           S=0
           for(i in 1:nrow(tab0)){
@@ -78,10 +78,10 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # NODF for rows
-    NODFcol= mean(Ncol,na.rm = T)
+    NODFcol= mean(Ncol,na.rm = TRUE)
     
     # NODF for the entire matrix
-    NODFmatrix= mean(c(Ncol,Nrow),na.rm=T)
+    NODFmatrix= mean(c(Ncol,Nrow),na.rm=TRUE)
     
     #### NODF SM/DM ###
     if (!is.null(constraints)){
@@ -162,10 +162,10 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
       return(list(NODFrow=NODFrow,NODFcol=NODFcol, NODFmatrix=NODFmatrix))}
   }
   ### Weighted NODF function ####
-  weightednodf=function (x,constraints){
+  weightednodf=function (x, constraints){
     # Sorting matrix order by row and collumn sums
-    if(sort==T){tab0=x[sort(rowSums(x!=0), index=T, decreasing=TRUE)$ix,
-                       sort(colSums(x!=0), index=T, decreasing=TRUE)$ix]}
+    if(sort==TRUE){tab0=x[sort(rowSums(x!=0), index=TRUE, decreasing=TRUE)$ix,
+                       sort(colSums(x!=0), index=TRUE, decreasing=TRUE)$ix]}
     else{tab0=x}
     
     # N for rows
@@ -192,7 +192,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     Nrow=Nrow[rownames(x), rownames(x)]
     
     # WNODF for rows
-    NODFrow= mean(Nrow,na.rm = T)
+    NODFrow= mean(Nrow,na.rm = TRUE)
     
     # N for collumns
     
@@ -219,10 +219,10 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # WNODF for rows
-    NODFcol= mean(Ncol,na.rm = T)
+    NODFcol= mean(Ncol,na.rm = TRUE)
     
     # WNODF for the entire matrix
-    NODFmatrix= mean(c(Ncol,Nrow),na.rm=T)
+    NODFmatrix= mean(c(Ncol,Nrow),na.rm=TRUE)
     
     #### WNODF SM/DM ###
     if (!is.null(constraints)){
@@ -301,8 +301,8 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
   ### Weighted NODA funcion ####
   weightednoda=function (x,constraints){
     # Sorting matrix order by row and collumn sums
-    if(sort==T){tab0=x[sort(rowSums(x), index=T, decreasing=TRUE)$ix,
-                       sort(colSums(x), index=T, decreasing=TRUE)$ix]}
+    if(sort==TRUE){tab0=x[sort(rowSums(x), index=TRUE, decreasing=TRUE)$ix,
+                       sort(colSums(x), index=TRUE, decreasing=TRUE)$ix]}
     else{tab0=x}
     
     # N for rows
@@ -329,7 +329,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     Nrow=Nrow[rownames(x), rownames(x)]
     
     # WNODA for rows
-    NODArow= mean(Nrow,na.rm = T)
+    NODArow= mean(Nrow,na.rm = TRUE)
     
     # N for collumns
     
@@ -356,10 +356,10 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # NODA for rows
-    NODAcol= mean(Ncol,na.rm = T)
+    NODAcol= mean(Ncol,na.rm = TRUE)
     
     # NODA for the entire matrix
-    NODAmatrix= mean(c(Ncol,Nrow),na.rm=T)
+    NODAmatrix= mean(c(Ncol,Nrow),na.rm=TRUE)
     
     #### WNODA SM/DM ###
     if (!is.null(constraints)){
@@ -448,7 +448,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=F, decreasing="fill", sort=T
     if (weighted==F){
       return(unweightednodf(x,constraints))
     }
-    if (weighted==T){
+    if (weighted==TRUE){
       return(weightednodf(x,constraints))
     }
   }

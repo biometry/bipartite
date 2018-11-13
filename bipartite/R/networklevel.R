@@ -227,6 +227,7 @@
             #------------------
             if ("linkage density" %in% index) out$"linkage density" <- LD_q
             if ("weighted connectance" %in% index) out$"weighted connectance" <- LD_q/sum(dim(web))
+            #if ("weighted connectance" %in% index) out$"weighted connectance2" <- LD_q/mean(dim(web))
             #LD_qs <- LD_q/(NROW(web)+NCOL(web)) # "weighted food web connectance", according to Jason's appendix
             #------------------
             # #We found no reference to this metric and saw little use for it. It is very similar to vulnerability/generality and can easily be computed from the output of \code{\link{specieslevel}} as \code{mean(specieslevel(web, index="diversity"))}        

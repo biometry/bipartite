@@ -153,6 +153,16 @@ BC(vazquenc)
 BC(vazquenc, rescale=FALSE, weighted=FALSE)
 CC(vazquenc)
 
+# nest.smdm
+nest.smdm(Safariland, weighted=T, decreasing="abund", sort=F)
+# identify modules using computeModules:
+mod <- computeModules(Safariland)
+const <- module2constraints(mod)
+nest.smdm(Safariland, constraint=const)
+nest.smdm(Safariland, constraint=const, weighted=T)
+
+
+
 # nested
 nested(vazquenc, method="ALL")
 
