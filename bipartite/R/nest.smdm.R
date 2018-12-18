@@ -19,10 +19,17 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     stop("decreasing should be fill or abund")
   }
   if (!is.null(constraints)){constraints = as.character(constraints)}
-  if(is.null(dimnames(x))){
-    xnames=list(paste("R", 1:nrow(x), ""), paste("C", 1:ncol(x), ""))
-    dimnames(x) <- xnames
+  
+  # check and potentially create dimnames:
+  if (is.null(rownames(x))){
+    xrnames <- paste("R", 1:nrow(x), "")
+    rownames(x) <- xrnames
   }
+  if (is.null(colnames(x))){
+    xcnames <- paste("C", 1:ncol(x), "")
+    colnames(x) <- xcnames
+  }
+  
   ### Unweighted NODF Function ####
   unweightednodf = function (x, constraints){
     # Sorting matrix order by row and collumn sums
@@ -161,6 +168,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     else {
       return(list(NODFrow=NODFrow,NODFcol=NODFcol, NODFmatrix=NODFmatrix))}
   }
+  
   ### Weighted NODF function ####
   weightednodf=function (x, constraints){
     # Sorting matrix order by row and collumn sums
@@ -298,12 +306,14 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     else {
       return(list(WNODFrow=NODFrow,WNODFcol=NODFcol, WNODFmatrix=NODFmatrix))}
   }
+  
   ### Weighted NODA funcion ####
   weightednoda=function (x,constraints){
     # Sorting matrix order by row and collumn sums
-    if(sort==TRUE){tab0=x[sort(rowSums(x), index=TRUE, decreasing=TRUE)$ix,
-                       sort(colSums(x), index=TRUE, decreasing=TRUE)$ix]}
-    else{tab0=x}
+    if (sort == TRUE){
+      tab0=x[sort(rowSums(x), index=TRUE, decreasing=TRUE)$ix,
+                       sort(colSums(x), index=TRUE, decreasing=TRUE)$ix]
+    } else { tab0 <- x }
     
     # N for rows
     MTrow= rowSums(tab0)
@@ -461,4 +471,3 @@ module2constraints <- function(mod){
   # This vector contains a number for each module, in the position of the species that belong to this module; i.e. it starts with 4, 3, 1, ... indicating that the first species belongs to module 4, the second to module 3, the third to module 1, and so forth.
     apply(mod@modules[-1, -c(1,2)], 2, function(x) which(x > 0))
 }
-
