@@ -154,6 +154,9 @@ BC(vazquenc, rescale=FALSE, weighted=FALSE)
 CC(vazquenc)
 
 # nest.smdm
+nest.smdm(Safariland)
+nest.smdm(Safariland, weighted=TRUE)
+nest.smdm(Safariland, weighted=TRUE, decreasing="abund")
 nest.smdm(Safariland, weighted=T, decreasing="abund", sort=F)
 # identify modules using computeModules:
 mod <- computeModules(Safariland)
