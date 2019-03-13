@@ -2,22 +2,7 @@
 %\VignetteIndexEntry{Starting with bipartite}
 %\VignetteEncoding{UTF-8}
 
-\documentclass[a4paper, 11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\usepackage{Sweavel}
-
-
+\documentclass[a4paper, 11pt]{article}
 %\usepackage[sc]{mathpazo}
 %\usepackage{authblk} % authors & affiliations
 \usepackage[utf8]{inputenc}
@@ -34,7 +19,7 @@
 \usepackage{url}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
- breaklinks=true,pdfborder={0 0 1},backref=true,colorlinks=false, hidelinks]
+ breaklinks=true,pdfborder={0 0 1},backref=page,colorlinks=false, hidelinks]
  {hyperref}
 %\hypersetup{ pdfstartview={XYZ null null 1}}
 \usepackage{breakurl}
@@ -78,8 +63,8 @@
 %\makeatother
 \frenchspacing % avoid long spaces after a "."
 
+\usepackage{Sweave}
 \begin{document}
-
 
 \title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
 
@@ -89,6 +74,12 @@
 %\thanks{\href{mailto:carsten.dormann@biom.uni-freiburg.de}{carsten.dormann@biom.uni-freiburg.de}}
 
 \maketitle
+
+
+\input{Intro2bipartite-concordance} 
+% moved this and the following code to after "maketitle" because otherwise it caused errors in LaTeX
+
+
 
 \begin{abstract}
 \noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions.
@@ -116,7 +107,7 @@ The typical tasks we want to carry out are
 \item statistically test for differences between networks;
 \item statistically test for differences between observed and random networks.
 \end{enumerate}
-\package{bipartite} aims to facilitate this steps. This vignette aims to facilitate the use of \package{bipartite}. We shall try to predominantly use the technical terms (``node'' and ``edges''), but our examples will be from the ecological realm, where nodes are (typcially) species, and edges are typically called ``links'', which in fact are observed (or assumed) ecological interactions (such as pollination, predation, dispersal). Apologies for mixing these two!
+\package{bipartite} aims to facilitate this steps. This vignette aims to facilitate the use of \package{bipartite}. We shall try to predominantly use the technical terms (``node'' and ``edges''), but our examples will be from the ecological realm, where nodes are (typcially) species, and edges are typically called ``links'', which in fact are observed (or assumed) ecological interactions (such as pollination, predation, dispersal). Apologies for shifting between these two for easier access!
 
 Also, as ecologists we are not ``graph theoreticians'' or mathematicians. Often, in the ecological literature, mathematical terms are used to elevate the status of the author, at no benefit to the analysis or to the reader. We are hesitant to use pretend-mathematics, at the risk of sounding daft to a person familiar with graph theory.
 
@@ -129,50 +120,62 @@ Of course, we don't mind if this documented would be cited, e.g. as \citet{bipar
 \section{What other network packages are out there in the \proglang{R}-universe?}
 Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
 
-There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages handling bipartite networks (in alphabetical order):
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages we are aware of for handling bipartite networks (in alphabetical order):
 \begin{description}
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
+\item[\package{bmotif}] for counting ``motifs'' in bipartite networks; 
 \item[\package{econullnetr}]
 \item[\package{igraph}]
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{latentnet}] 
 \item[\package{sna}]
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
-\item[\package{tnet}]
+\item[\package{tnet}], some functions of which were lifted to \package{bipartite} (thanks to Tore for allowing that!);
+\item[\package{vegan}] for various analyses of a community matrix, including null models and nestedness computations;
 \item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
 \end{description}
 
 
 \section{Preparing data for analysis}%------------------------------------------------
-Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can make an array of previously separate webs, padding non-overlapping species with zeros.}
+Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}
 
-Other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) of what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
+Most other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
 
-Now, before any further talk, start by loading the package:
+Now, before any further talk, let's start by loading the package:
 \begin{Schunk}
 \begin{Sinput}
-library(bipartite)
+> library(bipartite)
 \end{Sinput}
 \end{Schunk}
 
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
 
-A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982} Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
+A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982}. Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
 
 \begin{Schunk}
 \begin{Sinput}
-plotweb(motten1982)
-visweb(motten1982)
+> par(xpd=T)
+> plotweb(motten1982)
+> visweb(motten1982)
 \end{Sinput}
 \end{Schunk}
+%pdf(file="figures/motten1982_plotweb.pdf", width=8, height=6)
+%par(xpd=T)
+%plotweb(motten1982)
+%dev.off()
+%
+%pdf(file="figures/motten1982_visweb.pdf", width=7, height=3)
+%par(xpd=T)
+%visweb(motten1982)
+%dev.off()
 %
 \begin{figure}
 \centering
-	\includegraphics[width=0.8\textwidth]{figures/motten1982_plotweb}
+	\includegraphics[width=0.7\textwidth]{figures/motten1982_plotweb}
 	\smallskip
-	\includegraphics[width=0.8\textwidth]{figures/motten1982_visweb}
+	\includegraphics[width=0.7\textwidth]{figures/motten1982_visweb}
 	\caption{A bipartite graph of Motten's (1982) pollination network (\emph{top}) and a visualisation of the adjacency matrix (\emph{bottom}). The darker a cell is represented, the more interactions have been observed. By default, \texttt{plotweb} minimises overlap of lines and \texttt{visweb} sorts by marginal totals.}
 	\label{fig:Amotten}
 \end{figure}
@@ -182,11 +185,15 @@ visweb(motten1982)
 The function \indR{plotPAC} visualises  (Fig.~\ref{fig:AplotPAC}) a very special idea: the potential for apparent competition \citep{Morris2005}. The idea is that every parasitoid emerging from a host can attack another species. Thus, the more individuals emerge from a host, the larger is the potential for these to reduce the competition between hosts, as long as they choose their prey equiprobable. Pretty as it may be, its current value is highest for host-parasitoid networks, so the plot employing a pollination network is for illustration only.
 \begin{Schunk}
 \begin{Sinput}
-plotPAC(PAC(motten1982), outby=0.9)
+> plotPAC(PAC(motten1982), outby=0.9)
 \end{Sinput}
 \end{Schunk}
+%pdf(file="figures/motten1982_PACplot.pdf", width=3, height=3)
+%plotPAC(PAC(motten1982), outby=0.9)
+%dev.off()
 
 \begin{wrapfigure}{o}{0.3\textwidth}
+  \vspace{-2cm}
 	\includegraphics[width=0.3\textwidth]{figures/motten1982_PACplot}
 	\caption{A PAC-plot of Motten's \citeyear{Motten1982} pollination network. Lines connect plants potentially visited next by a pollinator. Line width is proportional to probability, which is very similar in this example. See help of \emph{plotPAC} for details on plotting and meaning.}
 	\label{fig:AplotPAC}
@@ -195,11 +202,14 @@ plotPAC(PAC(motten1982), outby=0.9)
 We can also visualise communities within the network by computing its modularity and then plotting the result, using the functions \texttt{computeModules} and \texttt{plotModuleWeb}, respectively (Fig.~\ref{fig:Amoduleplot}).
 \begin{Schunk}
 \begin{Sinput}
-mod <- computeModules(motten1982)
-plotModuleWeb(mod)
+> mod <- computeModules(motten1982)
+> plotModuleWeb(mod)
 \end{Sinput}
 \end{Schunk}
-\begin{figure}[h]
+%pdf(file="figures/motten1982_moduleplot.pdf", width=12, height=7)
+%plotModuleWeb(mod)
+%dev.off()
+\begin{figure}%[h]
 \centering
 	\includegraphics[width=0.7\textwidth]{figures/motten1982_moduleplot}
 	\caption{The adjacency matrix of Motten's (1982) pollination network, organised into modules.}
@@ -209,21 +219,30 @@ plotModuleWeb(mod)
 To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
 \begin{Schunk}
 \begin{Sinput}
-par(mfrow=c(1,2))
-gplot(as.one.mode(motten1982, project="higher"), 
- label=colnames(motten1982), gmode="graph", 
-label.cex=0.5, vertex.cex=2)
-gplot(as.one.mode(motten1982, project="lower"), 
-	label=rownames(motten1982), gmode="graph", 
-	label.cex=0.75, vertex.cex=2, vertex.col="green")
+> par(mfrow=c(1,2), xpd=T)
+> gplot(as.one.mode(motten1982, project="higher"), 
++  label=colnames(motten1982), gmode="graph", 
++ label.cex=0.6, vertex.cex=2)
+> gplot(as.one.mode(motten1982, project="lower"), 
++ 	label=rownames(motten1982), gmode="graph", 
++ 	label.cex=0.6, vertex.cex=2, vertex.col="green")
 \end{Sinput}
 \end{Schunk}
+%pdf(file="figures/motten1982_gplot.pdf", width=14, height=7)
+%par(mfrow=c(1,2), xpd=T)
+%gplot(as.one.mode(motten1982, project="higher"), 
+% label=colnames(motten1982), gmode="graph", 
+%label.cex=0.6, vertex.cex=2)
+%
+%gplot(as.one.mode(motten1982, project="lower"), 
+%	label=rownames(motten1982), gmode="graph", 
+%	label.cex=0.6, vertex.cex=2, vertex.col="green")
+%dev.off()
+%
 \begin{wrapfigure}{o}{1\textwidth}
 \centering
-	\includegraphics[width=0.45\textwidth]{figures/motten1982_higher_gplot}
-	\hfill
-	\includegraphics[width=0.45\textwidth]{figures/motten1982_lower_gplot}
-	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point symmetrically variable, hence every plot will look somewhat different.}
+	\includegraphics[width=0.9\textwidth]{figures/motten1982_gplot}
+	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point-symmetrically variable, hence every plot will look somewhat different.}
 	\label{fig:Amottengplot}
 \end{wrapfigure}
 
@@ -233,7 +252,7 @@ gplot(as.one.mode(motten1982, project="lower"),
 \section{Computing indices} %--------------------------------------------------------------------
 Network indices are primarily that: metrics to quantify an aspect of the network. Each may have a justification, a purpose, but the information in a matrix is only finite. As a consequence, network indices are highly correlated. There is thus no point in computing all indices in the book; rather should we consider very carefully what we want to test with the data and select one (or a few) indices to do so.
 
-The \package{bipartite}-package offers itself to data dredging: with one function one can compute dozens of indices, certainly some of them will be significantly correlated with whatever we want to test. While analyses are commonly carried out in this way, this is obviously statistically inappropriate. Two issues are important here. One is that of multiple testing, and there are dozens of publications covering this issue. The other is an attempt to formalise one's expectation. Null models are a way to do so, in particular one's expectation of what a pattern is like in the absence of a process. This technical details of this topic are covered further below (section \ref{sec:A:nullmodels}). 
+The \package{bipartite}-package offers itself to data dredging: with one function one can compute dozens of indices, certainly some of them will be significantly correlated with whatever we want to test. While analyses are commonly carried out in this way, this is obviously statistically inappropriate. Two issues are important here. One is that of multiple testing, and there are dozens of publications covering this issue. The other is an attempt to formalise one's expectation. Null models are one way to do so, in particular one's expectation of what a pattern is like in the \emph{absence} of a process. This technical details of this topic are covered further below (section \ref{sec:A:nullmodels}). 
 
 Indices (currently) come at the following hierarchical levels:
 \begin{enumerate}
@@ -271,7 +290,7 @@ This set of indices is computed for the entire network. They are called using th
 \noindent Similarly to the previous sets of indices, several options are available to fine-tune those in \texttt{networklevel}:
 \begin{Schunk}
 \begin{Sinput}
-networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), SAmethod="log")
+> networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), SAmethod="log")
 \end{Sinput}
 \begin{Soutput}
                  weighted NODF interaction strength asymmetry 
@@ -310,8 +329,8 @@ Indices that can be computed for each group separately are collected in the func
 \noindent As in the case of species-level indices, some allow for normalisation (between 0 and 1), others for different basis to the logarithm or similar tuning. A typical call to \texttt{grouplevel} will thus comprise the list of desired indices\footnote{Or alternatively the argument \texttt{index="ALL"}.} and their options, as well as the level(s) for which the computation shall be carried out:
 \begin{Schunk}
 \begin{Sinput}
-grouplevel(bezerra2009, level="both", index=c("mean number of links", "weighted 
-     cluster coefficient", "effective partners", "niche overlap"), dist="bray")
+> grouplevel(bezerra2009, level="both", index=c("mean number of links", "weighted 
++      cluster coefficient", "effective partners", "niche overlap"), dist="bray")
 \end{Sinput}
 \begin{Soutput}
 mean.number.of.links.HL mean.number.of.links.LL        niche.overlap.HL 
@@ -338,7 +357,7 @@ At the moment, only few indices have been investigated at the level of the indiv
 It is employed by simply applying it to the network under consideration and selecting the index desired:
 \begin{Schunk}
 \begin{Sinput}
-str(linklevel(bezerra2009, index=c("dependence", "endpoint")))
+> str(linklevel(bezerra2009, index=c("dependence", "endpoint")))
 \end{Sinput}
 \begin{Soutput}
 List of 3
@@ -387,8 +406,8 @@ The (growing) list of indices computable for each species in the network compris
 \noindent Some of them allow for normalisation (between 0 and 1), others for different basis to the logarithm or similar tuning. A typical call to \texttt{specieslevel} will thus comprise the list of desired indices\footnote{Or alternatively the argument \texttt{index="ALL"}.} and their options, as well as the level(s) for which the computation shall be carried out:
 \begin{Schunk}
 \begin{Sinput}
-specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI", 
-      "effective partners"), PDI.normalise=F)
+> specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI", 
++       "effective partners"), PDI.normalise=F)
 \end{Sinput}
 \begin{Soutput}
                            normalised.degree       PDI effective.partners
@@ -446,42 +465,92 @@ In a nutshell: Quantitative indices make use of more information in the data. Th
 To visualise the similarity and possible redundancy of the different indices, they are computed for the networks in \package{bipartite} and summarised through a principal component analysis (see Fig.~\ref{fig:PCAnetworklevel}).
 \begin{Schunk}
 \begin{Sinput}
-web.names <- data(package="bipartite")$results[,3]
-data(list=web.names) #loads all webs
-# the next step takes around 10 minutes:
-netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), index="ALLBUTDD")))
+> web.names <- data(package="bipartite")$results[,3]
+> data(list=web.names) #loads all webs
+> # the next step takes around 10 minutes:
+> netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), index="ALLBUTDD")))
 \end{Sinput}
 \end{Schunk}
 % save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
-
 \begin{Schunk}
 \begin{Sinput}
-PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
+> PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
+> biplot(PCA.out, xpd=T, las=1)
+> summary(PCA.out)
 \end{Sinput}
 \begin{Soutput}
-Error in prcomp(netw.indic.webs[, -5], scale. = T): object 'netw.indic.webs' not found
-\end{Soutput}
-\begin{Sinput}
-biplot(PCA.out, xpd=T, las=1)
-\end{Sinput}
-\begin{Soutput}
-Error in biplot(PCA.out, xpd = T, las = 1): object 'PCA.out' not found
-\end{Soutput}
-\begin{Sinput}
-summary(PCA.out)
-\end{Sinput}
-\begin{Soutput}
-Error in summary(PCA.out): object 'PCA.out' not found
+Importance of components:
+                          PC1    PC2     PC3     PC4     PC5     PC6    PC7
+Standard deviation     4.2780 3.6461 2.09732 1.84163 1.32612 1.09350 1.0375
+Proportion of Variance 0.3979 0.2890 0.09562 0.07373 0.03823 0.02599 0.0234
+Cumulative Proportion  0.3979 0.6869 0.78248 0.85621 0.89444 0.92044 0.9438
+                           PC8     PC9    PC10    PC11    PC12    PC13    PC14
+Standard deviation     0.81058 0.64158 0.62560 0.56960 0.49217 0.43179 0.36230
+Proportion of Variance 0.01428 0.00895 0.00851 0.00705 0.00527 0.00405 0.00285
+Cumulative Proportion  0.95812 0.96707 0.97558 0.98263 0.98789 0.99195 0.99480
+                          PC15    PC16   PC17    PC18    PC19    PC20      PC21
+Standard deviation     0.26591 0.25249 0.2254 0.18080 0.11401 0.09049 7.038e-16
+Proportion of Variance 0.00154 0.00139 0.0011 0.00071 0.00028 0.00018 0.000e+00
+Cumulative Proportion  0.99634 0.99772 0.9988 0.99954 0.99982 1.00000 1.000e+00
 \end{Soutput}
 \end{Schunk}
+%pdf(file="figures/PCAnetworklevel.pdf", width=7, height=7)
+%biplot(PCA.out, xpd=T, las=1)
+%dev.off()
 
 Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the first two axes:
 \begin{Schunk}
 \begin{Sinput}
-round(PCA.out$rotation[, 1:6], 3)
+> round(PCA.out$rotation[, 1:6], 3)
 \end{Sinput}
 \begin{Soutput}
-Error in eval(expr, envir, enclos): object 'PCA.out' not found
+                                        PC1    PC2    PC3    PC4    PC5    PC6
+connectance                           0.177  0.147 -0.044  0.025  0.231 -0.046
+web asymmetry                        -0.137 -0.098 -0.298  0.063 -0.123 -0.046
+links per species                     0.189 -0.087 -0.020  0.183 -0.171 -0.131
+number of compartments               -0.147  0.005  0.167 -0.051 -0.008 -0.252
+cluster coefficient                   0.169  0.128  0.005  0.119  0.261 -0.114
+nestedness                           -0.020  0.196 -0.004  0.305  0.264  0.034
+weighted nestedness                   0.066 -0.108 -0.170 -0.399 -0.148  0.139
+weighted NODF                         0.193  0.068 -0.138 -0.182  0.024  0.038
+interaction strength asymmetry       -0.172  0.080 -0.178 -0.028  0.049 -0.252
+specialisation asymmetry              0.021  0.109  0.337 -0.096 -0.138  0.077
+linkage density                       0.049 -0.258 -0.058 -0.038  0.108  0.058
+Fisher alpha                         -0.041 -0.246  0.045 -0.053  0.234 -0.028
+Shannon diversity                     0.073 -0.251  0.011  0.082  0.048  0.021
+interaction evenness                  0.179 -0.078  0.012  0.102  0.246  0.111
+Alatalo interaction evenness          0.076  0.159  0.143 -0.045  0.443  0.078
+H2                                   -0.191  0.089  0.091  0.037 -0.054 -0.226
+number.of.species.HL                 -0.048 -0.249  0.026 -0.062  0.199 -0.027
+number.of.species.LL                 -0.020 -0.256  0.121 -0.038  0.057 -0.048
+mean.number.of.partners.shared.in.HL  0.191 -0.032 -0.177  0.189 -0.113 -0.077
+mean.number.of.partners.shared.in.LL  0.218  0.042 -0.049 -0.042  0.076 -0.227
+cluster.coefficient.HL                0.189  0.093 -0.001 -0.036  0.011  0.259
+cluster.coefficient.LL                0.155  0.085 -0.285 -0.009  0.072  0.075
+weighted.cluster.coefficient.HL       0.150 -0.122 -0.189  0.162 -0.181 -0.086
+weighted.cluster.coefficient.LL       0.212 -0.040  0.035  0.145 -0.134 -0.064
+niche.overlap.HL                      0.045  0.142 -0.287 -0.272  0.014  0.028
+niche.overlap.LL                      0.202  0.035  0.062 -0.195 -0.007  0.159
+togetherness.HL                       0.023  0.181 -0.283 -0.032  0.159  0.061
+togetherness.LL                       0.216  0.052  0.087 -0.041  0.137 -0.066
+C.score.HL                           -0.162 -0.123  0.217  0.147 -0.042  0.045
+C.score.LL                           -0.216 -0.020  0.038  0.026  0.087 -0.142
+V.ratio.HL                            0.177 -0.121  0.121 -0.101 -0.222 -0.087
+V.ratio.LL                           -0.048 -0.238 -0.151 -0.113  0.005  0.024
+discrepancy.HL                       -0.041 -0.251  0.059 -0.042  0.183 -0.036
+discrepancy.LL                       -0.039 -0.252  0.062 -0.037  0.175 -0.032
+extinction.slope.HL                   0.216 -0.006  0.063  0.131  0.025 -0.093
+extinction.slope.LL                   0.120 -0.061  0.035  0.326  0.079 -0.167
+robustness.HL                         0.214 -0.020  0.059  0.148 -0.046  0.029
+robustness.LL                         0.150 -0.084 -0.114  0.254 -0.220 -0.068
+functional.diversity.HL               0.162  0.003  0.027 -0.257  0.031 -0.471
+functional.diversity.LL               0.163 -0.003  0.029 -0.259  0.036 -0.465
+partner.diversity.HL                  0.198 -0.078  0.183 -0.028 -0.063  0.158
+partner.diversity.LL                  0.061 -0.222 -0.212  0.082  0.064  0.043
+effective.partners.HL                 0.187 -0.079  0.206 -0.101 -0.049  0.090
+effective.partners.LL                -0.003 -0.256 -0.125 -0.011  0.132  0.036
+generality.HL                         0.187 -0.079  0.206 -0.101 -0.049  0.090
+vulnerability.LL                     -0.003 -0.256 -0.125 -0.011  0.132  0.036
 \end{Soutput}
 \end{Schunk}
 As we can see, there are quite a few indices on the first axis with a loading of around 0.2 (links per species, weighted NODF, H2, mean number of partners shared; weighted cluster coefficient, niche overlap, togetherness, C-score (all lower level); extinction slope, robustness, partner diversity (all higher level)). 
@@ -501,11 +570,16 @@ Alternatively, we might want to depict the correlation between different indices
 %par(mar=c(0,5,0,0))
 \begin{Schunk}
 \begin{Sinput}
-library(Hmisc)
-plot(varclus(netw.indic.webs), cex=0.8)
-abline(h=0.5, lty=2, col="grey")
+> library(Hmisc)
+> plot(varclus(netw.indic.webs), cex=0.8)
+> abline(h=0.5, lty=2, col="grey")
 \end{Sinput}
 \end{Schunk}
+%pdf(file="figures/clusternetworklevel.pdf", width=10, height=7)
+%par(mar=c(4,5,1,1))
+%plot(varclus(netw.indic.webs), cex=0.8)
+%abline(h=0.5, lty=2, col="grey")
+%dev.off()
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{figures/clusternetworklevel}
@@ -579,12 +653,12 @@ Imagine we computed the index $I$ for a network. We now want to know whether thi
 and compute our index $I$ for each of them. We can visualise the distribution of null-model $I$-values relative to our observed index value \citep{Dormann2009}.
 \begin{Schunk}
 \begin{Sinput}
-data(Safariland)
-Iobs <- C.score(Safariland)
-nulls <- nullmodel(web=Safariland, N=1000, method='r2d')
-Inulls <- sapply(nulls, C.score)
-plot(density(Inulls), xlim=c(0, 1), lwd=2)
-abline(v=Iobs, col="red", lwd=2)
+> data(Safariland)
+> Iobs <- C.score(Safariland)
+> nulls <- nullmodel(web=Safariland, N=1000, method='r2d')
+> Inulls <- sapply(nulls, C.score)
+> plot(density(Inulls), xlim=c(0, 1), lwd=2)
+> abline(v=Iobs, col="red", lwd=2)
 \end{Sinput}
 \end{Schunk}
 
@@ -613,15 +687,15 @@ As an example, we can use a question addressed in \citet{Vazquez2003}, where the
 
 \begin{Schunk}
 \begin{Sinput}
-weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc", 
-                       "vazmasnc", "vazquec", "vazquenc"), get)
-# Write a function to compute the desired statistic, e.g. the difference 
-# between grazed and ungrazed:
-meandiff <- function(webs){
-   obs <- sapply(webs, networklevel, index="linkage density")  
-   mean(obs[1:4] - obs[5:8])
-}
-(observed <- meandiff(weblist))
+> weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc", 
++                        "vazmasnc", "vazquec", "vazquenc"), get)
+> # Write a function to compute the desired statistic, e.g. the difference 
+> # between grazed and ungrazed:
+> meandiff <- function(webs){
++    obs <- sapply(webs, networklevel, index="linkage density")  
++    mean(obs[1:4] - obs[5:8])
++ }
+> (observed <- meandiff(weblist))
 \end{Sinput}
 \begin{Soutput}
 [1] -0.2481145
@@ -630,8 +704,8 @@ meandiff <- function(webs){
 Now generate a null model and repeat:\index{nullmodel@\texttt{nullmodel}}
 \begin{Schunk}
 \begin{Sinput}
-nulllist <- lapply(weblist, nullmodel, N=1, method="r2d")
-meandiff(weblist)
+> nulllist <- lapply(weblist, nullmodel, N=1, method="r2d")
+> meandiff(weblist)
 \end{Sinput}
 \begin{Soutput}
 [1] -0.2481145
@@ -640,11 +714,11 @@ meandiff(weblist)
 Repeat this procedure, say, 5000 times:\footnote{For didactic purposes, we use an inelegant but easy to understand \texttt{for}-loop here. In productive mode we would instead use \texttt{sapply} or \texttt{replicate}, which would make the code more compact, but in this case not faster.}\index{for-loop@\texttt{for}-loop}
 \begin{Schunk}
 \begin{Sinput}
-res <- 1:5000
-for (i in 1:5000){ # takes a few minutes !!
-   nulllist <- sapply(weblist, nullmodel, N=1, method="r2d")
-   res[i] <- meandiff(nulllist)  
-}
+> res <- 1:5000
+> for (i in 1:5000){ # takes a few minutes !!
++    nulllist <- sapply(weblist, nullmodel, N=1, method="r2d")
++    res[i] <- meandiff(nulllist)  
++ }
 \end{Sinput}
 \end{Schunk}
 Finally, we can depict the results in a histogram (Fig.~\ref{fig:cattlenull}), with observed as vertical line, and compute the $p$-value based on the 5000 null models:
@@ -658,14 +732,14 @@ Finally, we can depict the results in a histogram (Fig.~\ref{fig:cattlenull}), w
 %
 \begin{Schunk}
 \begin{Sinput}
-hist(res, xlim=c(-0.3, 0.3))
-abline(v=observed, col="red", lwd=2)
-# compute p-value as proportion smaller or than observed
+> hist(res, xlim=c(-0.3, 0.3))
+> abline(v=observed, col="red", lwd=2)
+> # compute p-value as proportion smaller or than observed
 \end{Sinput}
 \end{Schunk}
 \begin{Schunk}
 \begin{Sinput}
-sum(res < observed)/length(res) * 2 # *2 for two-tailed test
+> sum(res < observed)/length(res) * 2 # *2 for two-tailed test
 \end{Sinput}
 \begin{Soutput}
 [1] 0

@@ -1,67 +1,67 @@
 \begin{theindex}
 
   \item adjacency matrix, \hyperpage{3}
-  \item \texttt  {Alatalo interaction evenness}, \hyperpage{7}
+  \item \texttt  {Alatalo interaction evenness}, \hyperpage{8}
   \item \texttt  {as.one.mode}, \hyperpage{3}
 
   \indexspace
 
-  \item \texttt  {betweenness}, \hyperpage{9}
+  \item \texttt  {betweenness}, \hyperpage{11}
 
   \indexspace
 
-  \item C score, \hyperpage{8}
-  \item circularity, \hyperpage{14}
-  \item \texttt  {closeness}, \hyperpage{10}
-  \item connectance, \hyperpage{6}
+  \item C score, \hyperpage{9}
+  \item circularity, \hyperpage{17}
+  \item \texttt  {closeness}, \hyperpage{11}
+  \item connectance, \hyperpage{7}
 
   \indexspace
 
-  \item discrepancy, \hyperpage{8}
+  \item discrepancy, \hyperpage{9}
 
   \indexspace
 
-  \item Fisher's alpha, \hyperpage{10}
-  \item \texttt{for}-loop, \hyperpage{17}
+  \item Fisher's alpha, \hyperpage{11}
+  \item \texttt{for}-loop, \hyperpage{19}
   \item \texttt  {frame2webs}, \hyperpage{3}
-  \item functional diversity, \hyperpage{8}
+  \item functional diversity, \hyperpage{9}
 
   \indexspace
 
-  \item generality, \hyperpage{8}
-  \item \texttt  {grouplevel}, \hyperpage{7}
+  \item generality, \hyperpage{9}
+  \item \texttt  {grouplevel}, \hyperpage{8}
 
   \indexspace
 
-  \item \texttt  {nestedrank}, \hyperpage{9}
-  \item \texttt  {networklevel}, \hyperpage{6}
-  \item node specialisation index, \hyperpage{9}
-  \item normal score, \hyperpage{16}
-  \item null model, \hyperpage{14}
-  \item \texttt{nullmodel}, \hyperpage{17}
+  \item \texttt  {nestedrank}, \hyperpage{10}
+  \item \texttt  {networklevel}, \hyperpage{7}
+  \item node specialisation index, \hyperpage{11}
+  \item normal score, \hyperpage{18}
+  \item null model, \hyperpage{16}
+  \item \texttt{nullmodel}, \hyperpage{19}
 
   \indexspace
 
-  \item Paired Differences Index, \hyperpage{9}
+  \item Paired Differences Index, \hyperpage{10}
   \item \texttt  {plotPAC}, \hyperpage{4}
   \item \texttt  {plotweb}, \hyperpage{4}
-  \item pollination service index, \hyperpage{9}
+  \item pollination service index, \hyperpage{10}
 
   \indexspace
 
-  \item resampling analysis, \hyperpage{16}
-  \item \texttt  {resource range}, \hyperpage{9}
+  \item resampling analysis, \hyperpage{19}
+  \item \texttt  {resource range}, \hyperpage{10}
 
   \indexspace
 
   \item \texttt  {sortweb}, \hyperpage{3}
-  \item standard score, \hyperpage{16}
+  \item standard score, \hyperpage{18}
 
   \indexspace
 
-  \item V ratio, \hyperpage{8}
+  \item V ratio, \hyperpage{9}
   \item \texttt  {visweb}, \hyperpage{4}
-  \item vulnerability, \hyperpage{8}
+  \item vulnerability, \hyperpage{9}
 
   \indexspace
 
@@ -69,6 +69,6 @@
 
   \indexspace
 
-  \item $z$-score, \hyperpage{15}
+  \item $z$-score, \hyperpage{17}
 
 \end{theindex}

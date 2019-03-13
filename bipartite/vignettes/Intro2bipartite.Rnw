@@ -19,7 +19,7 @@
 \usepackage{url}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
- breaklinks=true,pdfborder={0 0 1},backref=true,colorlinks=false, hidelinks]
+ breaklinks=true,pdfborder={0 0 1},backref=page,colorlinks=false, hidelinks]
  {hyperref}
 %\hypersetup{ pdfstartview={XYZ null null 1}}
 \usepackage{breakurl}
@@ -64,11 +64,6 @@
 \frenchspacing % avoid long spaces after a "."
 
 \begin{document}
-<<setup, include=FALSE, cache=FALSE>>=
-library(knitr)
-opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE)
-render_listings()
-@
 
 \title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
 
@@ -78,6 +73,17 @@ render_listings()
 %\thanks{\href{mailto:carsten.dormann@biom.uni-freiburg.de}{carsten.dormann@biom.uni-freiburg.de}}
 
 \maketitle
+
+
+\SweaveOpts{concordance=TRUE} 
+% moved this and the following code to after "maketitle" because otherwise it caused errors in LaTeX
+<<setup, include=FALSE, cache=FALSE, echo=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE)
+render_listings()
+@
+
+
 
 \begin{abstract}
 \noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions.
@@ -105,7 +111,7 @@ The typical tasks we want to carry out are
 \item statistically test for differences between networks;
 \item statistically test for differences between observed and random networks.
 \end{enumerate}
-\package{bipartite} aims to facilitate this steps. This vignette aims to facilitate the use of \package{bipartite}. We shall try to predominantly use the technical terms (``node'' and ``edges''), but our examples will be from the ecological realm, where nodes are (typcially) species, and edges are typically called ``links'', which in fact are observed (or assumed) ecological interactions (such as pollination, predation, dispersal). Apologies for mixing these two!
+\package{bipartite} aims to facilitate this steps. This vignette aims to facilitate the use of \package{bipartite}. We shall try to predominantly use the technical terms (``node'' and ``edges''), but our examples will be from the ecological realm, where nodes are (typcially) species, and edges are typically called ``links'', which in fact are observed (or assumed) ecological interactions (such as pollination, predation, dispersal). Apologies for shifting between these two for easier access!
 
 Also, as ecologists we are not ``graph theoreticians'' or mathematicians. Often, in the ecological literature, mathematical terms are used to elevate the status of the author, at no benefit to the analysis or to the reader. We are hesitant to use pretend-mathematics, at the risk of sounding daft to a person familiar with graph theory.
 
@@ -118,27 +124,29 @@ Of course, we don't mind if this documented would be cited, e.g. as \citet{bipar
 \section{What other network packages are out there in the \proglang{R}-universe?}
 Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
 
-There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages handling bipartite networks (in alphabetical order):
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages we are aware of for handling bipartite networks (in alphabetical order):
 \begin{description}
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
+\item[\package{bmotif}] for counting ``motifs'' in bipartite networks; 
 \item[\package{econullnetr}]
 \item[\package{igraph}]
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{latentnet}] 
 \item[\package{sna}]
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
-\item[\package{tnet}]
+\item[\package{tnet}], some functions of which were lifted to \package{bipartite} (thanks to Tore for allowing that!);
+\item[\package{vegan}] for various analyses of a community matrix, including null models and nestedness computations;
 \item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
 \end{description}
 
 
 \section{Preparing data for analysis}%------------------------------------------------
-Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can make an array of previously separate webs, padding non-overlapping species with zeros.}
+Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}
 
-Other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) of what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
+Most other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
 
-Now, before any further talk, start by loading the package:
+Now, before any further talk, let's start by loading the package:
 <<message=F>>=
 library(bipartite)
 @
@@ -146,18 +154,28 @@ library(bipartite)
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
 
-A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982} Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
+A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982}. Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
 
 <<eval=F>>=
+par(xpd=T)
 plotweb(motten1982)
 visweb(motten1982)
 @
+%pdf(file="figures/motten1982_plotweb.pdf", width=8, height=6)
+%par(xpd=T)
+%plotweb(motten1982)
+%dev.off()
+%
+%pdf(file="figures/motten1982_visweb.pdf", width=7, height=3)
+%par(xpd=T)
+%visweb(motten1982)
+%dev.off()
 %
 \begin{figure}
 \centering
-	\includegraphics[width=0.8\textwidth]{figures/motten1982_plotweb}
+	\includegraphics[width=0.7\textwidth]{figures/motten1982_plotweb}
 	\smallskip
-	\includegraphics[width=0.8\textwidth]{figures/motten1982_visweb}
+	\includegraphics[width=0.7\textwidth]{figures/motten1982_visweb}
 	\caption{A bipartite graph of Motten's (1982) pollination network (\emph{top}) and a visualisation of the adjacency matrix (\emph{bottom}). The darker a cell is represented, the more interactions have been observed. By default, \texttt{plotweb} minimises overlap of lines and \texttt{visweb} sorts by marginal totals.}
 	\label{fig:Amotten}
 \end{figure}
@@ -168,8 +186,12 @@ The function \indR{plotPAC} visualises  (Fig.~\ref{fig:AplotPAC}) a very special
 <<eval=F>>=
 plotPAC(PAC(motten1982), outby=0.9)
 @
+%pdf(file="figures/motten1982_PACplot.pdf", width=3, height=3)
+%plotPAC(PAC(motten1982), outby=0.9)
+%dev.off()
 
 \begin{wrapfigure}{o}{0.3\textwidth}
+  \vspace{-2cm}
 	\includegraphics[width=0.3\textwidth]{figures/motten1982_PACplot}
 	\caption{A PAC-plot of Motten's \citeyear{Motten1982} pollination network. Lines connect plants potentially visited next by a pollinator. Line width is proportional to probability, which is very similar in this example. See help of \emph{plotPAC} for details on plotting and meaning.}
 	\label{fig:AplotPAC}
@@ -180,7 +202,10 @@ We can also visualise communities within the network by computing its modularity
 mod <- computeModules(motten1982)
 plotModuleWeb(mod)
 @
-\begin{figure}[h]
+%pdf(file="figures/motten1982_moduleplot.pdf", width=12, height=7)
+%plotModuleWeb(mod)
+%dev.off()
+\begin{figure}%[h]
 \centering
 	\includegraphics[width=0.7\textwidth]{figures/motten1982_moduleplot}
 	\caption{The adjacency matrix of Motten's (1982) pollination network, organised into modules.}
@@ -189,20 +214,29 @@ plotModuleWeb(mod)
 %
 To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
 <<eval=F>>=
-par(mfrow=c(1,2))
+par(mfrow=c(1,2), xpd=T)
 gplot(as.one.mode(motten1982, project="higher"), 
  label=colnames(motten1982), gmode="graph", 
-label.cex=0.5, vertex.cex=2)
+label.cex=0.6, vertex.cex=2)
 gplot(as.one.mode(motten1982, project="lower"), 
 	label=rownames(motten1982), gmode="graph", 
-	label.cex=0.75, vertex.cex=2, vertex.col="green")
+	label.cex=0.6, vertex.cex=2, vertex.col="green")
 @
+%pdf(file="figures/motten1982_gplot.pdf", width=14, height=7)
+%par(mfrow=c(1,2), xpd=T)
+%gplot(as.one.mode(motten1982, project="higher"), 
+% label=colnames(motten1982), gmode="graph", 
+%label.cex=0.6, vertex.cex=2)
+%
+%gplot(as.one.mode(motten1982, project="lower"), 
+%	label=rownames(motten1982), gmode="graph", 
+%	label.cex=0.6, vertex.cex=2, vertex.col="green")
+%dev.off()
+%
 \begin{wrapfigure}{o}{1\textwidth}
 \centering
-	\includegraphics[width=0.45\textwidth]{figures/motten1982_higher_gplot}
-	\hfill
-	\includegraphics[width=0.45\textwidth]{figures/motten1982_lower_gplot}
-	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point symmetrically variable, hence every plot will look somewhat different.}
+	\includegraphics[width=0.9\textwidth]{figures/motten1982_gplot}
+	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point-symmetrically variable, hence every plot will look somewhat different.}
 	\label{fig:Amottengplot}
 \end{wrapfigure}
 
@@ -212,7 +246,7 @@ gplot(as.one.mode(motten1982, project="lower"),
 \section{Computing indices} %--------------------------------------------------------------------
 Network indices are primarily that: metrics to quantify an aspect of the network. Each may have a justification, a purpose, but the information in a matrix is only finite. As a consequence, network indices are highly correlated. There is thus no point in computing all indices in the book; rather should we consider very carefully what we want to test with the data and select one (or a few) indices to do so.
 
-The \package{bipartite}-package offers itself to data dredging: with one function one can compute dozens of indices, certainly some of them will be significantly correlated with whatever we want to test. While analyses are commonly carried out in this way, this is obviously statistically inappropriate. Two issues are important here. One is that of multiple testing, and there are dozens of publications covering this issue. The other is an attempt to formalise one's expectation. Null models are a way to do so, in particular one's expectation of what a pattern is like in the absence of a process. This technical details of this topic are covered further below (section \ref{sec:A:nullmodels}). 
+The \package{bipartite}-package offers itself to data dredging: with one function one can compute dozens of indices, certainly some of them will be significantly correlated with whatever we want to test. While analyses are commonly carried out in this way, this is obviously statistically inappropriate. Two issues are important here. One is that of multiple testing, and there are dozens of publications covering this issue. The other is an attempt to formalise one's expectation. Null models are one way to do so, in particular one's expectation of what a pattern is like in the \emph{absence} of a process. This technical details of this topic are covered further below (section \ref{sec:A:nullmodels}). 
 
 Indices (currently) come at the following hierarchical levels:
 \begin{enumerate}
@@ -376,7 +410,8 @@ To visualise the similarity and possible redundancy of the different indices, th
 web.names <- data(package="bipartite")$results[,3]
 data(list=web.names) #loads all webs
 # the next step takes around 10 minutes:
-netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), index="ALLBUTDD")))
+netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), 
+              index="ALLBUTDD")))
 @
 % save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
 <<echo=F>>=
@@ -387,6 +422,9 @@ PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
 biplot(PCA.out, xpd=T, las=1)
 summary(PCA.out)
 @
+%pdf(file="figures/PCAnetworklevel.pdf", width=7, height=7)
+%biplot(PCA.out, xpd=T, las=1)
+%dev.off()
 
 Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the first two axes:
 <<>>=
@@ -412,6 +450,11 @@ library(Hmisc)
 plot(varclus(netw.indic.webs), cex=0.8)
 abline(h=0.5, lty=2, col="grey")
 @
+%pdf(file="figures/clusternetworklevel.pdf", width=10, height=7)
+%par(mar=c(4,5,1,1))
+%plot(varclus(netw.indic.webs), cex=0.8)
+%abline(h=0.5, lty=2, col="grey")
+%dev.off()
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{figures/clusternetworklevel}
@@ -485,26 +528,32 @@ Imagine we computed the index $I$ for a network. We now want to know whether thi
 and compute our index $I$ for each of them. We can visualise the distribution of null-model $I$-values relative to our observed index value \citep{Dormann2009}.
 <<eval=F>>=
 data(Safariland)
-Iobs <- C.score(Safariland)
-nulls <- nullmodel(web=Safariland, N=1000, method='r2d')
-Inulls <- sapply(nulls, C.score)
-plot(density(Inulls), xlim=c(0, 1), lwd=2)
+Iobs <- nestednodf(Safariland)$statistic[3]
+nulls <- nullmodel(web=Safariland, N=1000, method='r2d') # takes a while!
+Inulls <- sapply(nulls, function(x) nestednodf(x)$statistic[3])
+plot(density(Inulls), xlim=c(0, 100), lwd=2, main="NODF")
 abline(v=Iobs, col="red", lwd=2)
 @
+%pdf(file="figures/NODFnull.pdf", width=5, height=5)
+%par(mar=c(4,4,1,1))
+%plot(density(Inulls), xlim=c(0, 100), lwd=2, main="NODF")
+%abline(v=Iobs, col="red", lwd=2)
+%dev.off()
 
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures/NODFnull}
-\caption{Observed and null-modelled NODF-nestedness for the network vazquenc. Note that values of 100 indicate perfect nestedness. Thus, null models are much more nested than the observed network. (That is typically the case (Dormann et al. 2009), although typically no null models are computed for comparison.)}
+\caption{Observed and null-modelled nestedness (computed as NODF) for the network `Safariland''. Note that values of 100 indicate perfect nestedness. 
+Thus, null models are much \emph{less} nested than the observed network. (That is typically the case (Dormann et al. 2009), although often no null models are computed for comparison, making interpretation challenging.)}
 \label{fig:NODFnull}
 \end{figure}
 %
-That is fine for a single network, but no option if we want to analyse dozens or hundreds of networks. We thus have to summarise this figure in a value. The simplest, most obvious but generally not best solution would be to subtract the null model mean from the observed, so that $I_\text{corrected} = \Delta I= I_\text{observed} - \bar{I}_\text{nulls}$. The reason why this $\Delta I$ is not ideal is that the null model distribution is likely to vary from network to network. Thus, a difference of, say, 20 may be a lot for pointy distributed null models such as the one in Fig.~\ref{fig:NODFnull}, but only little for null model values spreading over the entire $x$-axis.
+All that is fine for a single network, but no option if we want to analyse dozens or hundreds of networks. We thus have to summarise this figure in a value. The simplest, most obvious but generally not best solution would be to subtract the null model mean from the observed, so that $I_\text{corrected} = \Delta I= I_\text{observed} - \bar{I}_\text{nulls}$. The reason why this $\Delta I$ is not ideal is that the null model distribution is likely to vary from network to network. Thus, a difference of, say, 20 may be a lot for pointy distributed null models such as the one in Fig.~\ref{fig:NODFnull}, but only little for null model values spreading over the entire $x$-axis.
 
 The better, and more established approach, would be to compute $z$-scores (= \ind{standard score}s or \ind{normal score}s) for each network, which express the difference in terms of standard deviations of the null distribution: 
 \[z_I= \frac{I_\text{observed} - \bar{I}_\text{nulls}}{\sigma_{I_\text{nulls}}}.\] We can now analyse the $z$-scores instead of the original $I_\text{obs}$-values.
 
-$z$-scores have one major disadvantage when it comes to several of the network indices presented earlier: the standard deviation becomes an unsuitable measure of spread as the values approach an upper or lower bound. Imagine our network index $I$ is bound between 0 and 1 (as many are). If the null models have values above, say, 0.9, the upper bound is so close that the distribution will be skewed and the standard deviation biased too low. This may lead to inflated $z$-scores. So whenever you observe values close to either bound, beware of distorted $z$-scores.
+$z$-scores have one major disadvantage for several of the network indices presented earlier: the standard deviation becomes an unsuitable measure of spread as the values approach an upper or lower bound. Imagine our network index $I$ is bound between 0 and 1 (as many are). If the null models have values above, say, 0.9, the upper bound is so close that the distribution will be skewed and the standard deviation biased too low. This may lead to inflated $z$-scores. So whenever you observe values close to either bound, beware of distorted $z$-scores.
 % show this in an example!
 
 
@@ -513,7 +562,7 @@ $z$-scores have one major disadvantage when it comes to several of the network i
 The alternative approach is to carry out the intended analysis on the observed index values $I$ and then, in a second step, repeat it with one realisation of a null model per network. Next, repeat this second step several thousand times (for good measure) and store the statistics you are interested in (say $F$-values in an ANOVA or slopes in a regression). Instead of using the $p$-values from the analysis of the observed values, compare observed and null-modelled statistics and count the proportion of values exceeding the observed and use those as $p$-value. To anyone with any experience in \ind{resampling analysis} or bootstrapping this is standard procedure \citep{Efron1993,Manly1997}.
 % provide an example: e.g. Diego's analysis of with/out cattle on some index
 
-As an example, we can use a question addressed in \citet{Vazquez2003}, where the authors investigate whether cattle grazing affects the network structure of pollination networks in four replicated sites in Argentina. As response we can choose any network index, for example linkage density. %or weighted NODF? or ISA? or effective number of species
+As an example, we can use a question addressed in \citet{Vazquez2003}, where the authors investigate whether cattle grazing affects the network structure of pollination networks in four replicated sites in Argentina. As response we haphazardly choose linkage density. %or weighted NODF? or ISA? or effective number of species
 
 <<>>=
 weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc", 
@@ -549,20 +598,25 @@ Finally, we can depict the results in a histogram (Fig.~\ref{fig:cattlenull}), w
 \end{figure}
 %
 <<eval=F>>=
-hist(res, xlim=c(-0.3, 0.3))
+hist(res, xlim=c(-0.3, 0.3), border="white", col="grey")
 abline(v=observed, col="red", lwd=2)
 # compute p-value as proportion smaller or than observed
-<<>>=
 sum(res < observed)/length(res) * 2 # *2 for two-tailed test
 @
+%pdf(file="figures/cattle_nullmodelled.pdf")
+%par(mar=c(4,4,1,1))
+%hist(res, xlim=c(-0.3, 0.3), border="white", col="grey")
+%abline(v=observed, col="red", lwd=2)
+%dev.off()
+%
 The idea here is to compute a statistic of interest, in this case the mean difference between some network index for the two treatments, and then use the null model to compute expectations. In the above example, we would apparently expect no difference (which is intuitive); additionally we also get an idea of how much variability we can expect (the distribution of the null model-based mean differences in linkage density). Thus, in this example, the difference in linkage density of pollination networks from grazed \emph{vs} ungrazed pastures is highly significant ($p<0.001$).
 
 
 \section{Modularity}
-Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail here in][]{Dormann2013} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has been vastly improved by \citep{Beckett2016}, which is also now the default algorithm used in \package{bipartite}.
+Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail here in][]{Dormann2013} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citep{Beckett2016}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
 
-An alternative to finding and delimiting such modules is to group species by ordination \citep{Borgatti1997,Lewinsohn2006}. Correspondence analysis (CA) of the adjacency matrix is a simple and fast way to organise species. In fact, the \package{bipartite}'s functions \texttt{plotweb} and \texttt{visweb} both use CA to decide on the species sequence, thereby grouping species of one group interacting similarly with species in the other group near each other. 
-Typically, however, correspondence analysis will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called compartments and will be visible as clearly separated groups of species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are much more black-and-white than modules and often only occur in ecological networks because sampling was rather incomplete.}
+An alternative to finding and delimiting such modules is to group species by ordination \citep{Borgatti1997,Lewinsohn2006}. Correspondence analysis (CA) of the adjacency matrix is a simple and fast way to organise species. In fact, \package{bipartite}'s functions \texttt{plotweb} and \texttt{visweb} both use CA to decide on the species sequence, thereby grouping species of one group interacting similarly with species in the other group near each other. 
+Typically, however, correspondence analysis will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called ``compartments'' and will be visible as clearly separated blocks of interacting species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are too much black-and-white compared to modules and often only occur in ecological networks because sampling was rather incomplete or very different habitats were sampled.}
 \begin{figure}
 	\hfill
 	\includegraphics[width=0.32\textwidth, trim=1cm 4cm 0.5cm 1cm, clip=TRUE]{figures/random_small_high_nonoise}
