@@ -128,6 +128,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \begin{description}
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
+\item[\package{bipartiteD3}] visualisation of bipartite networks;\footnote{And no, this is not a typo, it is ``D3'', which apparently is a JavaScript library for ``data-driven documentation''}
 \item[\package{bmotif}] for counting ``motifs'' in bipartite networks; 
 \item[\package{econullnetr}]
 \item[\package{igraph}]
@@ -180,7 +181,7 @@ visweb(motten1982)
 	\label{fig:Amotten}
 \end{figure}
 
-
+If these options are still not sufficient, and you want more customisation, such as side-by-side plotting of several networks, please check out the \package{bipartiteD3}, which provides the power of the ``D3'' library of JavaScript.\footnote{The package explicitly links to ``our'' bipartite, although I think it is largely independent of it, and actually very nice!} Note that D3 makes \emph{interactive} figures, so on mouse-over the figures change. While not a feature useful for publication in the current standard, it adds 21st century appeal to such graphs.
 
 The function \indR{plotPAC} visualises  (Fig.~\ref{fig:AplotPAC}) a very special idea: the potential for apparent competition \citep{Morris2005}. The idea is that every parasitoid emerging from a host can attack another species. Thus, the more individuals emerge from a host, the larger is the potential for these to reduce the competition between hosts, as long as they choose their prey equiprobable. Pretty as it may be, its current value is highest for host-parasitoid networks, so the plot employing a pollination network is for illustration only.
 <<eval=F>>=
