@@ -1,4 +1,7 @@
 ﻿# ignore
+.bbl
+.btx
+.toc
 .Rapp.history
 .Rhistory
 ecolnet/

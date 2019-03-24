@@ -14,30 +14,30 @@ Analysis of bipartite ecological webs
 Bipartite provides functions to visualise webs and calculate a series of indices commonly used to describe pattern in (ecological) networks, a.k.a. webs. It focusses on webs consisting of only two levels, e.g. pollinator-visitation or predator-prey webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the webs topology.}
 
 \details{
-%We only had three types of bipartite webs in mind when writing this package: seed-disperser, plant-pollinator and host-parasitoid systems. In how far it makes sense to use these functionalities for other systems (or indeed for these systems) lies in the hands of the user. Please refer to the literature cited for details on the theory behind the indices.
-%
-Input for most analyses is an interaction matrix of m species from one group (\dQuote{higher}) with n species from another group (\dQuote{lower}), i.e. a n x m matrix, where higher level species are in columns, lower level species in rows. Column and row names can be provided. This is fundamentally different from \dQuote{one-mode} webs, which are organised as k x k matrix, i.e. one group of species only, in which each species can interact with each other. Such a format is incompatible with the functions we provide here. (Note, however, that functions \code{\link{as.one.mode}} and \code{\link{web2edges}} are convenience functions to morph bipartite networks into one-mode webs. Furthermore, some indices build on one-mode networks and are called from bipartite.)
+Note: We only had three types of bipartite webs in mind when starting this package: seed-disperser, plant-pollinator and host-parasitoid systems. In how far it makes sense to use these functionalities for other systems (or indeed even for these systems) lies in the hands of the user. Please refer to the literature cited for details on the theory behind the indices.
+
+Input for most analyses is an interaction matrix of m nodes (= species) from one group (\dQuote{higher}) with n nodes (= species) from another group (\dQuote{lower}), i.e. a n x m matrix, where higher level nodes are in columns, lower level nodes in rows. Column and row names can be provided. This is fundamentally different from \dQuote{one-mode} networks, which are organised as k x k matrix, i.e. one group of nodes only, in which each node can link (= interact) with each other. Such a format is incompatible with the functions we provide here. (Note, however, that functions \code{\link{as.one.mode}} and \code{\link{web2edges}} are convenience functions to morph bipartite networks into one-mode webs. Furthermore, some indices build on one-mode networks and \emph{are} called from bipartite.)
 
 Before you start with the network, you have to get the data into the right shape. The function \code{\link{frame2webs}} aims to facilitate this process. Arranging a web, e.g. by size, is supported by \code{\link{sortweb}}.
 
 The typical first step is to \bold{visualise} the network. Two functions are on offer here: one (\code{\link{visweb}}) simply plots the matrix in colours depicting the strength of an interaction and options for re-arranging columns and rows (e.g. to identify compartments or nesting). The other function (\code{\link{plotweb}}) plots the actual web with participants (as two rows of rectangles) connected by lines (proportional to interaction strength). Both can be customised by many options.
 
-The second step is to \bold{calculate indices} describing network topography. There are \bold{three} different levels this can be achieved at: the entire web (using function \code{\link{networklevel}}), at the level of each group (also using function \code{\link{networklevel}}) or the individual species (using function \code{\link{specieslevel}}). Most other functions in the package are helpers, although some can be called on their own and return the respective result (\code{\link{dfun}}, \code{\link{H2fun}} and \code{\link{second.extinct}} with \code{\link{slope.bipartite}}).
+The second step is to \bold{calculate indices} describing network topography. There are \bold{three} different levels this can be achieved at: the entire web (using function \code{\link{networklevel}}), at the level of each group (also using function \code{\link{networklevel}}) or the individual node (= species; thus somewhat inconsistently called \code{\link{specieslevel}}). Most other functions in the package are helpers, although some can be called on their own and return the respective result (\code{\link{dfun}}, \code{\link{H2fun}} and \code{\link{second.extinct}} with \code{\link{slope.bipartite}}).
 
 The third step is to \bold{compare results to null models}. Many interaction matrices are very incomplete snapshots of the true underlying network (e.g. a one-week sampling of a pollination network on a patch of 4 x 4 meters). As a consequence, many species were rarely observed, many are singletons (only one recording). To make analyses comparable across networks with different sampling intensity and number of species per group, we need a common yardstick. We suggest that users should use a null model, i.e. an algorithm that randomises entries while constraining some web properties (such as dimensions, marginal totals or connectance). The function \code{\link{nullmodel}} provides a few such null models, but this is a wide field of research and we make no recommendations (actually, we do: see Dormann et al. 2009 and Dormann 2011, both shipping in the doc-folder of this package). You can also simulate networks using \code{\link{genweb}} or \code{\link{null.distr}}.
 
-Finally, bipartite comes with 23 quantitative pollination network data sets taken from the NCEAS interaction webs data base (use \code{data(package="bipartite")} to show their names) and it has a few miscellaneous functions looking at some special features of bipartite networks (such as modularity: \code{\link{computeModules}} or apparent competition: \code{\link{PAC}}).
+Finally, bipartite comes with 23 quantitative pollination network data sets taken from the NCEAS interaction webs data base (use \code{data(package="bipartite")} to show their names) and it has a few miscellaneous functions looking at some special features of bipartite networks (such as modularity: \code{\link{computeModules}} or potential for apparent competition: \code{\link{PAC}}).
 
 %\bold{Speed}: The code of bipartite is almost exclusively written in R. You can increase the speed a bit (by 30 to 50 \%, depending on the functions you use) by compiling functions on-the-fly. To do so, you need to load the \pkg{compiler} package and type: \code{enableJIT(3)}. The first time you call a function, it will be compiled to bytecode (just-in-time: jit), which takes a few seconds, but the second call will be substantially faster than without compilation. In the few tests we have run, this improvement was NOT substantial (i.e. a few tens of percent), indicating, I guess, that our R code wasn't too bad. See \pkg{compiler}-help files or \url{http://www.r-statistics.com/2012/04/speed-up-your-r-code-using-a-just-in-time-jit-compiler/} for details.
 
-See help pages for details and examples.
+See help pages and vignette for details and examples.
 
 For an overview of other computing resources, data, books, journals etc. check out this page: \url{https://github.com/briatte/awesome-network-analysis}.
 
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.12\cr
+Version: \tab 2.13\cr
 Date: \tab 2018-11-12\cr
 License: \tab GPL \cr
 }
@@ -47,6 +47,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.13 (release date: XX-YYY-2019)
+  \describe{
+    \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}
+    \item{Added a lengthy vignette,}{illustrating the use of the package.}
+  }
+  
   \item 2.12 (release date: 11-Mar-2019)
   \describe{
     \item{New function \code{\link{nest.smdm}}}{by Rafael Pinheiro, which computes the nestedness measure NODF (as present in \pkg{vegan}) more flexibly, by allowing the matrix to be sorted not only by number of filled cells (think: binary networks), but also by absolute marginal totals. NODF does not work for completely filled matrices, but this version (called NODA) does. Also, \code{\link{nest.smdm}} compute nesting within modules, if module identities are provided (e.g. by \code{\link{computeModules}} and the new little helper function \code{\link{module2constraints}}). All these metrics are computed for binary or weighted networks.}

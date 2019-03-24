@@ -9,11 +9,11 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
     # m <- matrix(c(4,7,0,0,9,1,2,0,5), 3, byrow=TRUE)
     if (!is.numeric(logbase)) stop("logbase must be numeric, e.g. 2 or exp(1) or 10!")
 
-#! JFedit: we need an option empty.web just as in networklevel
   # must still be checked for case empty.web=FALSE (web.e not yet used anywhere)
-    if(empty.web) {web <- empty(web)}   # delete unobserved species
-    if(empty.web==FALSE) warning("empty.web=FALSE not yet supported in specieslevel")
-    web.e <- empty(web) # emptied web for some indices 
+    web <- empty(web) 
+    #if (empty.web) {web <- empty(web)}   # delete unobserved species
+    if (empty.web == FALSE) warning("empty.web=FALSE not yet supported in specieslevel: \nempty columns and rows will always be removed!", call.=FALSE)
+    # web.e <- empty(web) # emptied web for some indices 
 
     allindex <- c("degree", "normalised degree", "species strength", "nestedrank", "interaction push pull", "PDI", "resource range", "species specificity", "PSI", "NSI", "betweenness", "closeness", "Fisher alpha", "partner diversity", "effective partners", "d", "dependence", "proportional generality", "proportional similarity")
   #JFedit:
@@ -35,7 +35,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
     }
     
     # catch cases where an invalid index is demanded:
-    if (length(which(!(index %in% allindex))) > 0) warning(paste0("Index '", index[which(!(index %in% allindex))], "' not recognised and hence not computed!"))
+    if (length(which(!(index %in% allindex))) > 0) warning(paste0("Index '", index[which(!(index %in% allindex))], "' not recognised and hence not computed!"), call.=FALSE)
     
     higher.out <- list()
     lower.out <- list()
@@ -71,7 +71,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       # el <- symmetrise_w(el) # needed for undirected webs
       suppressWarnings(proj <- projecting_tm(el, method=method) )
       if (any(dim(proj) < 2)){
-          warning("Web contains too few nodes to compute closeness or betweenness!")
+          warning("Web contains too few nodes to compute closeness or betweenness!", call.=FALSE)
           return(rep(NA, NROW(web))) # closeness/betweenness cannot be computed with only one link!
       } 
       
