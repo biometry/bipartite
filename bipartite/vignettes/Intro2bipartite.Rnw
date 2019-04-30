@@ -31,15 +31,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 % % % % % % %  section numbering onto margins % % % %
 \newlength\mylensection
-\setlength\mylensection{\dimexpr\oddsidemargin+1cm+\hoffset\relax}
+\setlength\mylensection{\dimexpr\oddsidemargin+1.2cm+\hoffset\relax}
 \titleformat{\section}{\normalfont\Large\itshape}{\llap{\hspace*{-\mylensection}\textcolor{YellowGreen}{\textbf{\LARGE{ \thesection}}}\hfill}}{0em}{} %
 
 \newlength\mylensubsection
-\setlength\mylensubsection{\dimexpr\oddsidemargin+1cm+\hoffset\relax}
+\setlength\mylensubsection{\dimexpr\oddsidemargin+1.2cm+\hoffset\relax}
 \titleformat{\subsection}{\normalfont\large\itshape}{\llap{\hspace*{-\mylensubsection}\textcolor{YellowGreen}{\textbf{\Large{ \thesubsection}}}\hfill}}{0em}{} %
 
 \newlength\mylensubsubsection
-\setlength\mylensubsubsection{\dimexpr\oddsidemargin+1cm+\hoffset\relax}
+\setlength\mylensubsubsection{\dimexpr\oddsidemargin+1.2cm+\hoffset\relax}
 \titleformat{\subsubsection}{\normalfont\large\itshape}{\llap{\hspace*{-\mylensubsubsection}\textcolor{YellowGreen}{\textbf{\Large{ \thesubsubsection}}}\hfill}}{0em}{} %
 
 
@@ -113,7 +113,7 @@ The typical tasks we want to carry out are
 
 Also, as ecologists we are not ``graph theoreticians'' or mathematicians. Often, in the ecological literature, mathematical terms are used to elevate the status of the author, at no benefit to the analysis or to the reader. We are hesitant to use pretend-mathematics, at the risk of sounding daft to a person familiar with graph theory.
 
-Of course, we don't mind if this documented would be cited, e.g. as \citet{bipartiteVignette}. Alternatively, you can always cite our work on this subject, inevitably also using (some functionality of) \package{bipartite} \citep{Dormann2008, Dormann2009, Dormann2011, Dormann2014, Dormann2017, Dormann2017a}!
+Of course, we don't mind if this documented would be cited, e.g. as \citet{bipartiteVignette}. Alternatively, you can always cite our work on this subject, inevitably also using (some functionality of) \package{bipartite} \citep{Dormann2008h, Dormann2009, Dormann2011, Dormann2014, Dormann2017AREES, Dormann2017networks}!
 
 
 
@@ -262,7 +262,7 @@ Indices (currently) come at the following hierarchical levels:
 This set of indices is computed for the entire network. They are called using the function \indR{networklevel}, which additionally (and conveniently) makes available all indices from the group level, too. Those restricted to the network-level are:
 \begin{enumerate}
 \item \texttt{\ind{connectance}}, also called `standardised number of species combinations' in biogeographic analyses \citep{Gotelli1996, Dunne2002};
-\item \texttt{web asymmetry}, the balance of the number of species in the two levels \citep{Bluethgen2007}; 
+\item \texttt{web asymmetry}, the balance of the number of species in the two levels \citep{Bluthgen2007}; 
 \item \texttt{links per species};
 \item \texttt{number of compartments};
 \item \texttt{compartment diversity} \citep{Tylianakis2007};
@@ -270,14 +270,14 @@ This set of indices is computed for the entire network. They are called using th
 \item \texttt{nestedness}, with the returned value indicating the `temperature' of the matrix, which is low ($0$) for a perfectly nested matrix \citep{RodriguezGirones2006};
 \item \texttt{weighted nestedness}, or more specifically `weighted interaction nestedness estimator' (WINE), with $1$ indicating perfected nestedness (thus exactly opposite to the previous index) \citep{Galeano2009a};
 \item \texttt{weighted NODF}, as an alternative measure of quantitative nestedness, automatically correcting for matrix filling and also indicating nestedness by values towards $1$ \citep{AlmeidaNeto2011}; 
-\item \texttt{interaction strength asymmetry} \citep{Bluethgen2007} \citep[or alternatively \texttt{ISA} or \texttt{dependence asymmetry}][]{Bascompte2003}, which quantify whether specialised species interacts with generalised ones in the other level (or vice versa);
+\item \texttt{interaction strength asymmetry} \citep{Bluthgen2007} \citep[or alternatively \texttt{ISA} or \texttt{dependence asymmetry}][]{Bascompte2003}, which quantify whether specialised species interacts with generalised ones in the other level (or vice versa);
 \item \texttt{specialisation asymmetry} (or alternatively \texttt{SA}), following the same idea as the previous, but this being based on species specialisation in $d'$;
 \item \texttt{linkage density}, marginal totals-weighted diversity of interactions per species \citep{Bersier2002};
 \item \texttt{Fisher alpha}, diversity index based on fitting a Fisher-series \citep{Fisher1943};
 \item \texttt{interaction evenness}  quantifies how balanced the distribution of interactions is across species, based on Shannon's diversity \citep{Tylianakis2007};
 \item \indR{Alatalo interaction evenness}, as an alternative measure of interaction evenness, attempting to overcome some of the shortcomings of the previous, Shannon's, version \citep{Alatalo1981,Muller1999};
 \item \texttt{Shannon diversity};
-\item \texttt{H2}, network-wide specialisation index $H_2'$ \citep{Bluethgen2006}.
+\item \texttt{H2}, network-wide specialisation index $H_2'$ \citep{Bluthgen2006}.
 \end{enumerate}
 
 \noindent Similarly to the previous sets of indices, several options are available to fine-tune those in \texttt{networklevel}:
@@ -355,7 +355,7 @@ The (growing) list of indices computable for each species in the network compris
 \item \texttt{effective partners} for the effective number of interacting partners \citep{Bersier2002},
 \item \texttt{proportional generality} for a quantitative version of normalised degree,\footnote{devised by Jochen Fründ}
 \item \texttt{proportional similarity} as specialisation measured as similarity between use and availability \citep{Feinsinger1981},
-\item \texttt{d} for Blüthgen's discrimination/selectivity index $d'$ \citep{Bluethgen2006}.
+\item \texttt{d} for Blüthgen's discrimination/selectivity index $d'$ \citep{Bluthgen2006}.
 \end{enumerate}
 
 \noindent Some of them allow for normalisation (between 0 and 1), others for different basis to the logarithm or similar tuning. A typical call to \texttt{specieslevel} will thus comprise the list of desired indices\footnote{Or alternatively the argument \texttt{index="ALL"}.} and their options, as well as the level(s) for which the computation shall be carried out:
@@ -372,7 +372,7 @@ Different indices were invented (``developed'') for different purposes. However,
 
 Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
 
-Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluethgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
+Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluthgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
 
 This, if two indices are available to quantify the same idea, one binary and one quantitative, one should generally choose the quantitative one. Rather than species degree, we should use species strength or linkage density. Table \ref{tab:binaryquantitative} depicts some such binary-quantitative index pairs.
 %
@@ -493,7 +493,7 @@ Thus, in a nutshell, there is no easy answer and there is no way around knowing 
 \subsection{Why null models?}
 When a network is structured according to some measure (e.g. nestedness), what does that mean? It could mean that ecological processes leading to nestedness are at play. Or it could mean that a sampling effect makes nestedness an inevitable consequence. Or, finally, it could be a mixture of both. Furthering our understanding of nature is not aided by the reporting of spurious relationships resulting from sampling effects, hence a formal description of what the network would look like without the ecological process would be a useful comparison. That is what a null model aims to provide \citep{Gotelli1996}. 
 
-In ecology, \ind{null model}s are common only in some fields, particularly in biogeography \citep{Gotelli1996,Hausdorf2007}, but also in network analyses \citep{Dormann2009,Joppa2009,Bluethgen2008,Vazquez2006,Vazquez2003a,Vazquez2009}. With respect to particular bipartite indices, some studies rejected the current nestedness paradigm using abundance-based null models, for observed \citep{Kallimanis2009,Moore2007,Santamaria2007}, as well as for simulated networks \citep{Krishna2008}.
+In ecology, \ind{null model}s are common only in some fields, particularly in biogeography \citep{Gotelli1996,Hausdorf2007}, but also in network analyses \citep{Dormann2009,Joppa2009,Bluthgen2008,Vazquez2006,Vazquez2003a,Vazquez2009}. With respect to particular bipartite indices, some studies rejected the current nestedness paradigm using abundance-based null models, for observed \citep{Kallimanis2009,Moore2007,Santamaria2007}, as well as for simulated networks \citep{Krishna2008}.
 
 Null models extend much beyond ecology and were probably first used in physics. \citet{Latapy2008} use them to investigate degree distributions in non-ecological bipartite networks. Using another network example, the module detection algorithm proposed by \citet{Newman2004} also uses a null model to define a ``group'' (or module or community) within a network: there are more links within than between groups. The null model then is a random network with as many links between as within groups \citep{Guimera2005}. In its quantitative version, the null model is constructed from proportionally probable interactions by differently abundant participants \citep{Barber2004}. The specific null model used above is underlying most current implementations of contingency table tests such as $\chi^2$ or Fisher's signed rank test \citep{Patefield1981}.
 
@@ -508,7 +508,7 @@ Secondly, the observed interactions are not necessarily reflecting abundance of 
 
 Third, the null model uses marginal totals, i.e. summed across all links of a species. If a pollinator was specialised on a single plant species, the null model would scatter these interactions across all and hence correctly identify a miss-match between observed and null model. If, on the other hand, a pollinator was generalised, then the scattering of interactions across all plant species would also yield a similar picture and generalisation would correctly be inferred.
 
-Finally, even if the null model used would introduce some amount of circularity and thus ``over-correction'', we have to balance this against ``over-detection''. Finding specialisation in an uncorrected approach will incur high levels of type I error (i.e. detecting a pattern that is actually not there). A null model insures against this type of error. We can thus be sure that a pattern that ``survives'' the null model test is no statistical artefact. Since it has been shown repeatedly that sampling intensity and ``natural'' differences in abundance will cause such artefacts \citep{Dormann2009,Bluethgen2010,Joppa2009,Bluethgen2008}, they must be addressed. Ignoring them will lead to misinterpretation and over-reporting of spurious network structure. After correction for expectation based on abundances, we can start understanding ecology \citep{Vazquez2007}.
+Finally, even if the null model used would introduce some amount of circularity and thus ``over-correction'', we have to balance this against ``over-detection''. Finding specialisation in an uncorrected approach will incur high levels of type I error (i.e. detecting a pattern that is actually not there). A null model insures against this type of error. We can thus be sure that a pattern that ``survives'' the null model test is no statistical artefact. Since it has been shown repeatedly that sampling intensity and ``natural'' differences in abundance will cause such artefacts \citep{Dormann2009,Bluthgen2010,Joppa2009,Bluthgen2008}, they must be addressed. Ignoring them will lead to misinterpretation and over-reporting of spurious network structure. After correction for expectation based on abundances, we can start understanding ecology \citep{Vazquez2007}.
 
 In conclusion, circularity is unlikely to substantially impair null models for pollination networks. The risk of reporting non-existent network structure and further speculation of network stability due to this spurious network structure is a problem that requires a correction, even if circularity was present.
 
@@ -607,11 +607,10 @@ The idea here is to compute a statistic of interest, in this case the mean diffe
 
 
 \section{Modularity}
-Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. What causes such modules and whether they actually teach us something is discussed at length by \citet{Dormann2017a}. 
+Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. What causes such modules and whether they actually teach us something is discussed at length by \citet{Dormann2017AREES}. 
 
-The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail in][]{Dormann2014} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citep{Beckett2015}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
+The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail in][]{Dormann2014} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citep{Beckett2016}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
 
-An alternative to finding and delimiting such modules is to group species by ordination \citep{Borgatti1997,Lewinsohn2006}. Correspondence analysis (CA) of the adjacency matrix is a simple and fast way to organise species. In fact, \package{bipartite}'s functions \texttt{plotweb} and \texttt{visweb} both use CA to decide on the species sequence, thereby grouping species of one group interacting similarly with species in the other group near each other. 
 Typically, however, correspondence analysis will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called ``compartments'' and will be visible as clearly separated blocks of interacting species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are too much black-and-white compared to modules and often only occur in ecological networks because sampling was rather incomplete or very different habitats were sampled.}
 \begin{figure}
 	\hfill
@@ -648,7 +647,7 @@ Modularity $Q$ is likely to be correlated with other network metric, as speciali
  $Q$ was evidently highly positively correlated with complementary specialisation $H_2'$ (Fig.~\ref{fig:QvsH2}).
 Ecologically, the correlation with specialisation makes good sense. Modules only exist because some species do not interact with some others, i.e. because they are specialised. An overall low degree of specialisation is equivalent to random interactions, which will yield no modules. % (unless as an artefact of low sampling intensity, which can be addressed using null models).
 
-Furthermore, the absolute value of $Q$  is, like all network indices \citep{Dormann2009}, dependent on network size (i.e. the number of species) as well as the number of links and the total number of interactions observed \citep{Thebault2013}. We would thus recommend a null model comparison \citep{Vazquez2003a,Bluethgen2008,Dormann2009} to correct the observed value of $Q$ by null model expectation (e.g.~by standardising them to $z$-scores:
+Furthermore, the absolute value of $Q$ is, like all network indices \citep{Dormann2009}, dependent on network size (i.e. the number of species) as well as the number of links and the total number of interactions observed \citep{Thebault2013}. We would thus recommend a null model comparison \citep{Vazquez2003a,Bluthgen2008,Dormann2009} to correct the observed value of $Q$ by null model expectation (e.g.~by standardising them to $z$-scores:
 $z_{Q} = \frac{Q_{\text{observed}} - \overline{Q}_{\text{null}}}{\sigma_{Q_{\text{null}}}}$).
 %
 Modularity $Q$ is in itself not an index of an ecological feature. It is merely a measure of how well links and interactions can be separated into different modules. Large networks, with many species and links, allow for more combinations of species-in-modules, leading to higher values of $Q$, as \citet{Allesina2009a} pointed out for any grouping algorithm. %When some previous studies have not shown network size to be correlated with modularity, then that may indicate more the inadequacy of some algorithms than a deficit in those that do find a correlation.
@@ -673,6 +672,42 @@ In the case of the pollination network of Fig.~\ref{fig:memmottmodules}, $c$-val
 To objectively define this threshold one could run null models of the original network and employ $95$\% quantiles as critical $c$- and $z$-values. For the pollinators in the network of Fig.~\ref{fig:memmottmodules} these would be $0.67$ ($\pm 0.039$) and $1.45$ ($\pm 0.220$), respectively, based on $100$ null models (for plants: $c_\text{critical} = 0.72 \pm 0.036$ and $z_\text{critical} = 1.78 \pm 0.297$; Fig.~\ref{fig:czvalues} left). While for plant species this has little effect  (except for moving \emph{Leontodon hispidus} across the threshold), three more pollinators would become hub species (the common hoverfly \emph{Episyrphus balteatus}, the tachinid fly \emph{Eriothrix rufomaculata} and undetermined fly ``Diptera spec.22'').
 
 
+\section{Analyses beyond \package{bipartite}}%----------------------------------------------
+Of course, there are many different packages that analyse one or the other aspect of networks, and some even of bipartite networks (listed in the introduction of this vignette). Some of them we find particularly interesting or useful or innovative, and here we quickly show some of them at work.
+
+\subsection{Plotting pretty bipartites}
+The plotting functions provided by \package{bipartite} are somewhat rudimentary. We're happy with them, and they are surprisingly flexible already, but our graphical skills (and intentions) are limited. Other people have developed plotting functions/solutions, which we shall briefly (and probably incompletely) show here.\footnote{Partly based on this question on SO: \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-graph-in-r}}
+
+\subsubsection{\package{bipartiteD3}}
+
+\subsubsection{\package{igraph}}
+\url{https://kateto.net/netscix2016.html}; \url{https://rpubs.com/pjmurphy/317838}; \url{https://igraph.org/r/doc/layout_as_bipartite.html}
+
+\subsubsection{\package{ggbipart}}
+There is the package \package{ggbipart}, on github.\footnote{See also \url{https://pedroj.github.io/bipartite_plots/} for more code examples.}
+<<eval=F>>=
+library(devtools)
+install_github(rep="pedroj/bipartite_plots")
+@
+
+\subsubsection{\package{multigraph}}
+See \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-graph-in-r}
+
+
+
+\subsection{Analysing the structure of bipartite networks}
+
+\subsubsection{\package{bmotif}}
+
+\subsubsection{\package{dynsbm}}
+
+
+\subsection{Multi-layer networks}
+This somewhat cryptic term refers to networks that are defined by different types of links, for example because links change over time (dynamic links) or because they depend on other networks \citep{Pilosof2017}. The mathematical description and analysis of such multilayer networks can be rather complex \citep{Aleta2019}, and in ecology typically only relatively simple types of multilayer networks are investigated; probably the most common being multi-level networks and temporally or spatially resolved networks.
+
+While statistically and mathematically a lot of things are conceivable, few ideas actually resonate with ecologists (i.e. in the application). One idea is that networks evolve and hence change dynamically. Another is that any observed bipartite network is actually embedded in many other networks, e.g. a plant-pollinator-network may continue ``into the ground'' as plant-mycorrhiza networks, ``into the sky'' as pollinator-parasite network, and ``sideways'' as plant-herbivore network \citep{Pocock2012}. 
+
+Currently, \package{bipartite} does not support any such analysis (apart from a pathetic function \code{npartite} and \code{plotweb2} for plotting stacked bipartite networks).
 
 
 \section*{Conclusions}%----------------------------------------------
@@ -697,7 +732,7 @@ The Rnw source of this document is at \url{https://github.com/biometry/bipartite
 \def\bibfont{\small}
 
 \bibliographystyle{mee} %all show doi, url, isbn; haven't found out yet how to switch that off
-\bibliography{bipartite}
+\bibliography{bipartite} % note: run this at the terminal: bibtex Intro2bipartite, if necessary
 %\end{fullwidth}
 
 \printindex

@@ -1,0 +1,481 @@
+\begin{thebibliography}{87}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Alarcón \emph{et~al.}(2008)Alarcón, Waser \&
+  Ollerton}]{Alarcon2008}
+Alarcón, R., Waser, N.M. \& Ollerton, J. (2008) Year-to-year variation in the
+  topology of a plant-pollinator interaction network.
+\newblock \emph{Oikos}, \textbf{117}, 1796–1807.
+\newblock 10.1111/j.0030-1299.2008.16987.x.
+
+\bibitem[{Alatalo(1981)}]{Alatalo1981}
+Alatalo, R.V. (1981) Problems in the measurement of evenness in ecology.
+\newblock \emph{Oikos}, \textbf{37}, 199–204.
+
+\bibitem[{Aleta \& Moreno(2019)}]{Aleta2019}
+Aleta, A. \& Moreno, Y. (2019) Multilayer networks in a nutshell.
+\newblock \emph{Annual Review of Condensed Matter Physics}, \textbf{10},
+  45–62.
+\newblock ArXiv: 1804.03488.
+
+\bibitem[{Allesina \& Pascual(2009)}]{Allesina2009a}
+Allesina, S. \& Pascual, M. (2009) Food web models: a plea for groups.
+\newblock \emph{Ecology Letters}, \textbf{12}, 652–62.
+
+\bibitem[{Almeida-Neto \& Ulrich(2011)}]{AlmeidaNeto2011}
+Almeida-Neto, M. \& Ulrich, W. (2011) A straightforward computational approach
+  for measuring nestedness using quantitative matrices.
+\newblock \emph{Environmental Modelling and Software}, \textbf{26}, 173--178.
+
+\bibitem[{Barber \emph{et~al.}(2004)Barber, Leeds-Harrison, Lawson \&
+  Gowing}]{Barber2004}
+Barber, K.R., Leeds-Harrison, P.B., Lawson, C.S. \& Gowing, D.J.G. (2004) Soil
+  aeration status in a lowland wet grassland.
+\newblock \emph{Hydrological Processes}, \textbf{18}, 329--341.
+
+\bibitem[{Barrat \emph{et~al.}(2004)Barrat, Barth\'{e}lemy, Pastor-Satorras \&
+  Vespignani}]{Barrat2004}
+Barrat, A., Barth\'{e}lemy, M., Pastor-Satorras, R. \& Vespignani, A. (2004)
+  The architecture of complex weighted networks.
+\newblock \emph{Proceedings of the National Academy of Sciences of the USA},
+  \textbf{101}, 3747--52.
+
+\bibitem[{Bascompte \emph{et~al.}(2003)Bascompte, Jordano, Melián \&
+  Olesen}]{Bascompte2003}
+Bascompte, J., Jordano, P., Melián, C.J. \& Olesen, J.M. (2003) The nested
+  assembly of plant–animal mutualistic networks.
+\newblock \emph{Proceedings of the National Academy of Sciences of the USA},
+  \textbf{100}, 9383–9387.
+
+\bibitem[{Bascompte \emph{et~al.}(2006)Bascompte, Jordano \&
+  Olesen}]{Bascompte2006}
+Bascompte, J., Jordano, P. \& Olesen, J.M. (2006) Asymmetric coevolutionary
+  networks facilitate biodiversity maintenance.
+\newblock \emph{Science}, \textbf{312}, 431--433.
+
+\bibitem[{Beckett(2016)}]{Beckett2016}
+Beckett, S.J. (2016) Improved community detection in weighted bipartite
+  networks.
+\newblock \emph{Royal Society open science}, \textbf{3}, 140536–140536.
+
+\bibitem[{Bersier \emph{et~al.}(2002)Bersier, Banasek-Richter \&
+  Cattin}]{Bersier2002}
+Bersier, L.F., Banasek-Richter, C. \& Cattin, M.F. (2002) Quantitative
+  descriptors of food-web matrices.
+\newblock \emph{Ecology}, \textbf{83}, 2394--2407.
+
+\bibitem[{Bl\"{u}thgen(2010)}]{Bluthgen2010}
+Bl\"{u}thgen, N. (2010) Why network analysis is often disconnected from
+  community ecology: A critique and an ecologist's guide.
+\newblock \emph{Basic and Applied Ecology}, \textbf{11}, 185--195.
+
+\bibitem[{Bl\"{u}thgen \emph{et~al.}(2008)Bl\"{u}thgen, Fr\"{u}nd, V\'{a}zquez
+  \& Menzel}]{Bluthgen2008}
+Bl\"{u}thgen, N., Fr\"{u}nd, J., V\'{a}zquez, D.P. \& Menzel, F. (2008) What do
+  interaction network metrics tell us about specialization and biological
+  traits?
+\newblock \emph{Ecology}, \textbf{89}, 3387--99.
+
+\bibitem[{Bl\"{u}thgen \emph{et~al.}(2006)Bl\"{u}thgen, Menzel \&
+  Bl\"{u}thgen}]{Bluthgen2006}
+Bl\"{u}thgen, N., Menzel, F. \& Bl\"{u}thgen, N. (2006) Measuring
+  specialization in species interaction networks.
+\newblock \emph{BMC Ecology}, \textbf{6}, 9.
+
+\bibitem[{Bl\"{u}thgen \emph{et~al.}(2007)Bl\"{u}thgen, Menzel, Hovestadt,
+  Fiala \& Bl\"{u}thgen}]{Bluthgen2007}
+Bl\"{u}thgen, N., Menzel, F., Hovestadt, T., Fiala, B. \& Bl\"{u}thgen, N.
+  (2007) Specialization, constraints, and conflicting interests in mutualistic
+  networks.
+\newblock \emph{Current Biology}, \textbf{17}, 341--346.
+
+\bibitem[{Borgatti \& Everett(1997)}]{Borgatti1997}
+Borgatti, S.P. \& Everett, M.G. (1997) Network analysis of 2-mode data.
+\newblock \emph{Social Networks}, \textbf{19}, 243–269.
+
+\bibitem[{Brualdi \& Sanderson(1999)}]{Brualdi1999}
+Brualdi, R.A. \& Sanderson, J.G. (1999) Nested species subsets, gaps, and
+  discrepancy.
+\newblock \emph{Oecologia}, \textbf{119}, 256--264.
+
+\bibitem[{Burgos \emph{et~al.}(2007)Burgos, Ceva, Perazzo, Devoto, Medan,
+  Zimmermann \& Delbue}]{Burgos2007}
+Burgos, E., Ceva, H., Perazzo, R.P.J., Devoto, M., Medan, D., Zimmermann, M. \&
+  Delbue, A.M. (2007) Why nestedness in mutualistic networks?
+\newblock \emph{Journal of Theoretical Biology}, \textbf{249}, 307--313.
+
+\bibitem[{Butts(2013)}]{Butts2013}
+Butts, C.T. (2013) \emph{sna: Tools for Social Network Analysis}.
+\newblock R package version 2.2-2.
+
+\bibitem[{Crawley(1987)}]{Crawley1987}
+Crawley, M.J. (1987) \emph{Herbivory: The Dynamics of Animal Plant
+  Interactions}.
+\newblock University of California Press, San Diego, USA.
+
+\bibitem[{Dalsgaard \emph{et~al.}(2008)Dalsgaard, Martín~González, Olesen,
+  Timmermann, Andersen \& Ollerton}]{Dalsgaard2008}
+Dalsgaard, B., Martín~González, A.M., Olesen, J.M., Timmermann, A., Andersen,
+  L.H. \& Ollerton, J. (2008) Pollination networks and functional
+  specialization: a test using lesser antillean plant-hummingbird assemblages.
+\newblock \emph{Oikos}, \textbf{117}, 789–793.
+
+\bibitem[{de~Mazancourt \& Loreau(2000)}]{deMazancourt2000}
+de~Mazancourt, C. \& Loreau, M. (2000) Effect of herbivory and plant species
+  replacement on primary production.
+\newblock \emph{The American Naturalist}, \textbf{155}, 735--754.
+
+\bibitem[{Devoto \emph{et~al.}(2012)Devoto, Bailey, Craze \&
+  Memmott}]{Devoto2012}
+Devoto, M., Bailey, S., Craze, P. \& Memmott, J. (2012) Understanding and
+  planning ecological restoration of plant-pollinator networks.
+\newblock \emph{Ecology Letters}, \textbf{15}, 319–328.
+
+\bibitem[{Dormann(2011)}]{Dormann2011}
+Dormann, C.F. (2011) How to be a specialist? quantifying specialisation in
+  pollination networks.
+\newblock \emph{Network Biology}, \textbf{1}, 1--20.
+
+\bibitem[{Dormann(2019)}]{bipartiteVignette}
+Dormann, C.F. (2019) Bipartite vignette.
+\newblock \emph{github}.
+
+\bibitem[{Dormann \emph{et~al.}(2009)Dormann, Bl\"{u}thgen, Fr\"{u}nd \&
+  Gruber}]{Dormann2009}
+Dormann, C.F., Bl\"{u}thgen, N., Fr\"{u}nd, J. \& Gruber, B. (2009) Indices,
+  graphs and null models: Analyzing bipartite ecological networks.
+\newblock \emph{The Open Ecology Journal}, \textbf{2}, 7--24.
+
+\bibitem[{Dormann \& Blüthgen(2017)}]{Dormann2017networks}
+Dormann, C.F. \& Blüthgen, N. (2017) \emph{Food webs versus interaction
+  networks: principles, pitfalls and perspectives}, p. 1–11.
+\newblock Cambridge University Press.
+
+\bibitem[{Dormann \emph{et~al.}(2008)Dormann, Fr\"{u}nd \&
+  Gruber}]{Dormann2008h}
+Dormann, C.F., Fr\"{u}nd, J. \& Gruber, B. (2008) Introducing the bipartite
+  package: Analysing ecological networks.
+\newblock \emph{R News}, \textbf{8}, 8--11.
+
+\bibitem[{Dormann \emph{et~al.}(2017)Dormann, Fründ \&
+  Schaefer}]{Dormann2017AREES}
+Dormann, C.F., Fründ, J. \& Schaefer, H.M. (2017) Identifying causes of
+  patterns in ecological networks: Opportunities and limitations.
+\newblock \emph{Annual Reviews in Ecology, Evolution, and Systematics},
+  \textbf{48}, 559–84.
+
+\bibitem[{Dormann \& Strauß(2014)}]{Dormann2014}
+Dormann, C.F. \& Strauß, R. (2014) A method for detecting modules in
+  quantitative bipartite networks.
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{5}, 90–98.
+
+\bibitem[{Dunne \emph{et~al.}(2002)Dunne, Williams \& Martinez}]{Dunne2002}
+Dunne, J.A., Williams, R.J. \& Martinez, N.D. (2002) Food-web structure and
+  network theory: The role of connectance and size.
+\newblock \emph{Proceedings of the National Academy of Sciences of the USA},
+  \textbf{99}, 12917--22.
+
+\bibitem[{Efron \& Tibshirani(1993)}]{Efron1993}
+Efron, B. \& Tibshirani, R.J. (1993) \emph{An Introduction to the Bootstrap}.
+\newblock Chapman \& Hall, London.
+
+\bibitem[{Feinsinger \emph{et~al.}(1981)Feinsinger, Spears \&
+  Poole}]{Feinsinger1981}
+Feinsinger, P., Spears, E.E. \& Poole, R.W. (1981) A simple measure of niche
+  breadth.
+\newblock \emph{Ecology}, \textbf{62}, 27–32.
+
+\bibitem[{Fisher \emph{et~al.}(1943)Fisher, Corbet \& Williams}]{Fisher1943}
+Fisher, R., Corbet, A. \& Williams, C. (1943) The relation between the number
+  of species and the number of individuals in a random sample of animal
+  population. 12, 42–58.
+\newblock \emph{Journal of Animal Ecology}, \textbf{12}, 42--58.
+
+\bibitem[{Fortunato(2010)}]{Fortunato2010}
+Fortunato, S. (2010) Community detection in graphs.
+\newblock \emph{Physics Reports}, \textbf{486}, 75--174.
+
+\bibitem[{Galeano \emph{et~al.}(2009)Galeano, Pastor \& Iriondo}]{Galeano2009a}
+Galeano, J., Pastor, J.M. \& Iriondo, J.M. (2009) Weighted-interaction
+  nestedness estimator (wine): A new estimator to calculate over frequency
+  matrices.
+\newblock \emph{Environmental Modelling and Software}, \textbf{24}, 1342--1346.
+
+\bibitem[{Ghazoul(2005)}]{Ghazoul2005}
+Ghazoul, J. (2005) Buzziness as usual? questioning the global pollination
+  crisis.
+\newblock \emph{Trends in Ecology and Evolution}, \textbf{20}, 367--73.
+
+\bibitem[{Gotelli \& Graves(1996)}]{Gotelli1996}
+Gotelli, N.J. \& Graves, G.R. (1996) \emph{Null Models in Ecology}.
+\newblock Smithsonian Institution Press.
+
+\bibitem[{Guimer\`{a} \emph{et~al.}(2005)Guimer\`{a}, Mossa, Turtschi \&
+  Amaral}]{Guimera2005}
+Guimer\`{a}, R., Mossa, S., Turtschi, A. \& Amaral, L.A.N. (2005) The worldwide
+  air transportation network: Anomalous centrality, community structure, and
+  cities' global roles.
+\newblock \emph{Proceedings of the National Academy of Sciences of the United
+  States of America}, \textbf{102}, 7794--9.
+
+\bibitem[{Hausdorf \& Hennig(2007)}]{Hausdorf2007}
+Hausdorf, B. \& Hennig, C. (2007) Null model tests of clustering of species,
+  negative co-occurrence patterns and nestedness in meta-communities.
+\newblock \emph{Oikos}, \textbf{116}, 818--828.
+
+\bibitem[{Hurlbert(1978)}]{Hurlbert1978}
+Hurlbert, S.H. (1978) Measurement of niche overlap and some relatives.
+\newblock \emph{Ecology}, \textbf{59}, 67--77.
+
+\bibitem[{Joppa \emph{et~al.}(2009)Joppa, Bascompte, Montoya, Sol\'{e},
+  Sanderson \& Pimm}]{Joppa2009}
+Joppa, L.N., Bascompte, J., Montoya, J.M., Sol\'{e}, R.V., Sanderson, J. \&
+  Pimm, S.L. (2009) Reciprocal specialization in ecological networks.
+\newblock \emph{Ecology Letters}, \textbf{12}, 961--969.
+
+\bibitem[{Jordano \emph{et~al.}(2003)Jordano, Bascompte \&
+  Olesen}]{Jordano2003}
+Jordano, P., Bascompte, J. \& Olesen, J.M. (2003) Invariant properties in
+  coevolutionary networks of plant-animal interactions.
+\newblock \emph{Ecology Letters}, \textbf{6}, 69–81.
+
+\bibitem[{Jost(2006)}]{Jost2006}
+Jost, L. (2006) Entropy and diversity.
+\newblock \emph{Oikos}, \textbf{113}, 363--375.
+
+\bibitem[{Julliard \emph{et~al.}(2006)Julliard, Clavel, Devictor, Jiguet \&
+  Couvet}]{Julliard2006}
+Julliard, R., Clavel, J., Devictor, V., Jiguet, F. \& Couvet, D. (2006) Spatial
+  segregation of specialists and generalists in bird communities.
+\newblock \emph{Ecology Letters}, \textbf{9}, 1237--1244.
+
+\bibitem[{Kallimanis \emph{et~al.}(2009)Kallimanis, Petanidou, Tzanopoulos,
+  Pantis \& Sgardelis}]{Kallimanis2009}
+Kallimanis, A., Petanidou, T., Tzanopoulos, J., Pantis, J. \& Sgardelis, S.
+  (2009) Do plant–pollinator interaction networks result from stochastic
+  processes?
+\newblock \emph{Ecological Modelling}, \textbf{220}, 684--693.
+
+\bibitem[{Klein \emph{et~al.}(2002)Klein, Steffan-Dewenter \&
+  Tscharntke}]{Klein2002}
+Klein, A.M., Steffan-Dewenter, I. \& Tscharntke, T. (2002) Predator–prey
+  ratios on cocoa along a land-use gradient in indonesia.
+\newblock \emph{Biodiversity and Conservation}, \textbf{11}, 683--693.
+
+\bibitem[{Krishna \emph{et~al.}(2008)Krishna, {Guimar\~{a}es Jr}, Jordano \&
+  Bascompte}]{Krishna2008}
+Krishna, A., {Guimar\~{a}es Jr}, P.R., Jordano, P. \& Bascompte, J. (2008) A
+  neutral-niche theory of nestedness in mutualistic networks.
+\newblock \emph{Oikos}, \textbf{117}, 1609--1618.
+
+\bibitem[{Latapy \emph{et~al.}(2008)Latapy, Magnien \& Vecchio}]{Latapy2008}
+Latapy, M., Magnien, C. \& Vecchio, N.D. (2008) Basic notions for the analysis
+  of large two-mode networks.
+\newblock \emph{Social Networks}, \textbf{30}, 31–48.
+
+\bibitem[{Manly(1997)}]{Manly1997}
+Manly, B.F. (1997) \emph{Randomization, Bootstrap and Monte Carlo Methods in
+  Biology}.
+\newblock Chapman \& Hall/CRC, New York, 2nd edition.
+
+\bibitem[{Martín~Gonz\'{a}lez \emph{et~al.}(2010)Martín~Gonz\'{a}lez,
+  Dalsgaard \& Olesen}]{MartinGonzalez2010}
+Martín~Gonz\'{a}lez, A.M., Dalsgaard, B. \& Olesen, J.M. (2010) Centrality
+  measures and the importance of generalist species in pollination networks.
+\newblock \emph{Ecological Complexity}, \textbf{7}, 36--47.
+
+\bibitem[{Memmott(1999)}]{Memmott1999}
+Memmott, J. (1999) The structure of a plant-pollinator food web.
+\newblock \emph{Ecology Letters}, \textbf{2}, 276--280.
+
+\bibitem[{Memmott \emph{et~al.}(2004)Memmott, Waser \& Price}]{Memmott2004}
+Memmott, J., Waser, N.M. \& Price, M.V. (2004) Tolerance of pollination
+  networks to species extinctions.
+\newblock \emph{Proceedings of the Royal Society London B}, \textbf{271},
+  2605--11.
+
+\bibitem[{Moore \& Swihart(2007)}]{Moore2007}
+Moore, J.E. \& Swihart, R.K. (2007) Toward ecologically explicit null models of
+  nestedness.
+\newblock \emph{Oecologia}, \textbf{152}, 763--77.
+
+\bibitem[{Morris \emph{et~al.}(2005)Morris, Lewis \& Godfray}]{Morris2005}
+Morris, R.J., Lewis, O.T. \& Godfray, H.C.J. (2005) Apparent competition and
+  insect community structure: towards a spatial perspective.
+\newblock \emph{Annales Zoologici Fennici}, \textbf{42}, 449--462.
+
+\bibitem[{Motten(1982)}]{Motten1982}
+Motten, A.F. (1982) \emph{Pollination Ecology of the Spring Wildflower
+  Community in the Deciduous Forests of {P}iedmont {N}orth {C}arolina}.
+\newblock PhD thesis, Duke University.
+
+\bibitem[{M\"{u}ller \emph{et~al.}(1999)M\"{u}ller, Adriaanse, Belshaw \&
+  Godfray}]{Muller1999}
+M\"{u}ller, C.B., Adriaanse, I.C.T., Belshaw, R. \& Godfray, H.C.J. (1999) The
+  structure of an aphid–parasitoid community.
+\newblock \emph{Journal of Animal Ecology}, \textbf{68}, 346--370.
+
+\bibitem[{Newman(2003)}]{Newman2003}
+Newman, M.E.J. (2003) The structure and function of complex networks.
+\newblock \emph{SIAM Review}, \textbf{45}, 167--256.
+
+\bibitem[{Newman \& Girvan(2004)}]{Newman2004}
+Newman, M.E.J. \& Girvan, M. (2004) Finding and evaluating community structure
+  in networks.
+\newblock \emph{Physical Review E}, \textbf{69}, 1--15.
+
+\bibitem[{Olesen \emph{et~al.}(2007)Olesen, Bascompte, Dupont \&
+  Jordano}]{Olesen2007}
+Olesen, J.M., Bascompte, J., Dupont, Y.L. \& Jordano, P. (2007) The modularity
+  of pollination networks.
+\newblock \emph{Proceedings of the National Academy of Sciences of the USA},
+  \textbf{104}, 19891--19896.
+
+\bibitem[{Opsahl(2010)}]{Opsahl2010}
+Opsahl, T. (2010) Triadic closure in two-mode networks: redefining the global
+  and local cluster coefficient.
+\newblock \emph{arXiv}, p. 1006.0887v2.
+
+\bibitem[{Patefield(1981)}]{Patefield1981}
+Patefield, W.M. (1981) Algorithm as159. an efficient method of generating r x c
+  tables with given row and column totals.
+\newblock \emph{Applied Statistics}, \textbf{30}, 91--97.
+
+\bibitem[{Pielou(1972)}]{Pielou1972}
+Pielou, E.C. (1972) 2$^k$ contingency tables in ecology.
+\newblock \emph{Journal of Theoretical Biology}, \textbf{34}, 337--352.
+
+\bibitem[{Pilosof \emph{et~al.}(2017)Pilosof, Porter, Pascual \&
+  Kéfi}]{Pilosof2017}
+Pilosof, S., Porter, M.A., Pascual, M. \& Kéfi, S. (2017) The multilayer
+  nature of ecological networks.
+\newblock \emph{Nature Ecology \& Evolution}, \textbf{1}, 0101–0101.
+
+\bibitem[{Pocock \emph{et~al.}(2012)Pocock, Evans \& Memmott}]{Pocock2012}
+Pocock, M.J.O., Evans, D.M. \& Memmott, J. (2012) The robustness and
+  restoration of a network of ecological networks.
+\newblock \emph{Science}, \textbf{335}, 973–977.
+
+\bibitem[{Poisot \emph{et~al.}(2011{\natexlab{a}})Poisot, Bever, Nemri, Thrall
+  \& Hochberg}]{Poisot2011a}
+Poisot, T., Bever, J.D., Nemri, A., Thrall, P.H. \& Hochberg, M.E.
+  (2011{\natexlab{a}}) A conceptual framework for the evolution of ecological
+  specialisation.
+\newblock \emph{Ecology Letters}, \textbf{14}, 841–851.
+
+\bibitem[{Poisot \emph{et~al.}(2012)Poisot, Canard, Mouquet \&
+  Hochberg}]{Poisot2012a}
+Poisot, T., Canard, E., Mouquet, N. \& Hochberg, M.E. (2012) A comparative
+  study of ecological specialization estimators.
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{3}, 537–544.
+
+\bibitem[{Poisot \emph{et~al.}(2011{\natexlab{b}})Poisot, Lepennetier,
+  Martinez, Ramsayer \& Hochberg}]{Poisot2011}
+Poisot, T., Lepennetier, G., Martinez, E., Ramsayer, J. \& Hochberg, M.E.
+  (2011{\natexlab{b}}) Resource availability affects the structure of a natural
+  bacteria-bacteriophage community.
+\newblock \emph{Biology Letters}, \textbf{7}, 201–4.
+
+\bibitem[{Roberts \& Stone(1990)}]{Roberts1990}
+Roberts, A. \& Stone, L. (1990) Island-sharing by archipelago species.
+\newblock \emph{Oecologia}, \textbf{83}, 560–567.
+
+\bibitem[{Rodr\'{\i}guez-Giron\'{e}s \&
+  Santamar\'{\i}a(2006)}]{RodriguezGirones2006}
+Rodr\'{\i}guez-Giron\'{e}s, M.A. \& Santamar\'{\i}a, L. (2006) A new algorithm
+  to calculate the nestedness temperature of presence-absence matrices.
+\newblock \emph{Journal of Biogeography}, \textbf{33}, 924--935.
+
+\bibitem[{Santamar\'{\i}a \& Rodr\'{\i}guez-Giron\'{e}s(2007)}]{Santamaria2007}
+Santamar\'{\i}a, L. \& Rodr\'{\i}guez-Giron\'{e}s, M.A. (2007) Linkage rules
+  for plant–pollinator networks: trait complementarity or exploitation
+  barriers ?
+\newblock \emph{PLoS Biology}, \textbf{5}, e31.
+
+\bibitem[{Schluter(1984)}]{Schluter1984}
+Schluter, D. (1984) A variance test for detecting species associations, with
+  some example applications.
+\newblock \emph{Ecology}, \textbf{65}, 998–1005.
+
+\bibitem[{Schoener(1989)}]{Schoener1989}
+Schoener, T. (1989) Food webs from the small to the large.
+\newblock \emph{Ecology}, \textbf{70}, 1559--1589.
+
+\bibitem[{Shermer(2012)}]{Shermer2012}
+Shermer, M. (2012) \emph{The Believing Brain: From Ghosts and Gods to Politics
+  and Conspiracies -- How We Construct Beliefs and Reinforce Them as Truths}.
+\newblock St. Martin's Griffin, New York.
+
+\bibitem[{Steffan-Dewenter \& Schiele(2008)}]{SteffanDewenter2008}
+Steffan-Dewenter, I. \& Schiele, S. (2008) Do resources or natural enemies
+  drive bee population dynamics in fragmented habitats?
+\newblock \emph{Ecology}, \textbf{89}, 1375--1387.
+
+\bibitem[{Stone \& Roberts(1990)}]{Stone1990}
+Stone, L. \& Roberts, A. (1990) The checkerboard score and species
+  distributions.
+\newblock \emph{Oecologia}, \textbf{85}, 74–79.
+
+\bibitem[{Stone \& Roberts(1992)}]{Stone1992}
+Stone, L. \& Roberts, A. (1992) Competitive exclusion, or species aggregation?
+  an aid in deciding.
+\newblock \emph{Oecologia}, \textbf{91}, 419–424.
+
+\bibitem[{Th\'{e}bault(2013)}]{Thebault2013}
+Th\'{e}bault, E. (2013) Identifying compartments in presence-absence matrices
+  and bipartite networks: insights into modularity measures.
+\newblock \emph{Journal of Biogeography}, \textbf{40}, 759--768.
+
+\bibitem[{Tylianakis \emph{et~al.}(2007)Tylianakis, Tscharntke \&
+  Lewis}]{Tylianakis2007}
+Tylianakis, J.M., Tscharntke, T. \& Lewis, O.T. (2007) Habitat modification
+  alters the structure of tropical host-parasitoid food webs.
+\newblock \emph{Nature}, \textbf{445}, 202--5.
+
+\bibitem[{V\'{a}zquez \& Aizen(2003)}]{Vazquez2003a}
+V\'{a}zquez, D.P. \& Aizen, M.A. (2003) Null model analyses of specialization
+  in plant–pollinator interactions.
+\newblock \emph{Ecology}, \textbf{84}, 2493--2501.
+
+\bibitem[{V\'{a}zquez \& Aizen(2006)}]{Vazquez2006}
+V\'{a}zquez, D.P. \& Aizen, M.A. (2006) Community-wide patterns of
+  specialization in plant-pollinator interactions revealed by null models.
+\newblock N.M. Waser \& J.~Ollerton, eds., \emph{Plant-Pollinator Interactions:
+  From Specialization to Generalization}, pp. 200--219. University of Chicago
+  Press, Chicago.
+
+\bibitem[{V\'{a}zquez \emph{et~al.}(2009)V\'{a}zquez, Bl\"{u}thgen, Cagnolo \&
+  Chacoff}]{Vazquez2009}
+V\'{a}zquez, D.P., Bl\"{u}thgen, N., Cagnolo, L. \& Chacoff, N.P. (2009)
+  Uniting pattern and process in plant-animal mutualistic networks: a review.
+\newblock \emph{Annals of Botany}, \textbf{103}, 1445--57.
+
+\bibitem[{V\'{a}zquez \& Simberloff(2003)}]{Vazquez2003}
+V\'{a}zquez, D.P. \& Simberloff, D. (2003) Changes in interaction biodiversity
+  induced by an introduced ungulate.
+\newblock \emph{Ecology Letters}, \textbf{6}, 1077--1083.
+
+\bibitem[{Vázquez \emph{et~al.}(2007)Vázquez, Meli\'{a}n, Williams,
+  Bl\"{u}thgen, Krasnov \& Poulin}]{Vazquez2007}
+Vázquez, D.P., Meli\'{a}n, C.J., Williams, N.M., Bl\"{u}thgen, N., Krasnov,
+  B.R. \& Poulin, R. (2007) Species abundance and asymmetric interaction
+  strength in ecological networks.
+\newblock \emph{Oikos}, \textbf{116}, 1120--1127.
+
+\bibitem[{Waser \emph{et~al.}(1996)Waser, Chittka, Price, Williams \&
+  Ollerton}]{Waser1996}
+Waser, N.M., Chittka, L., Price, M.V., Williams, N.M. \& Ollerton, J. (1996)
+  Generalization in pollination systems, and why it matters.
+\newblock \emph{Ecology}, \textbf{77}, 1043--1060.
+
+\bibitem[{Waser \& Ollerton(2006)}]{Waser2006}
+Waser, N.M. \& Ollerton, J. (2006) \emph{Plant-Pollinator Interactions: From
+  Specialization to Generalization}.
+\newblock University of Chicago Press, Chicago.
+
+\bibitem[{Watts \& Strogatz(1998)}]{Watts1998}
+Watts, D.J. \& Strogatz, S.H. (1998) Collective dynamics of 'small-world'
+  networks.
+\newblock \emph{Nature}, \textbf{393}, 440--442.
+
+\end{thebibliography}
