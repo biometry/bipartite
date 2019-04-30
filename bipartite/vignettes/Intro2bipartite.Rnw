@@ -408,25 +408,32 @@ netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x),
               index="ALLBUTDD")))
 @
 % save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
-<<echo=F>>=
-load("figures/netw.indic.webs.Rdata") # loads the files stored above; avoids re-running this time-consuming analysis!
+<<load external data, echo=F, eval=T>>=
+#load("/Volumes/Macintosh HD/Users/Carsten/Data/aktuell/bipartite/bipartite/vignettes/figures/netw.indic.webs.Rdata")
+load("./figures/netw.indic.webs.Rdata") # loads the files stored above; avoids re-running this time-consuming analysis!
 @
-<<>>=
+<<cache=F, eval=F>>=
 PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
 biplot(PCA.out, xpd=T, las=1)
-summary(PCA.out)
 @
+%par(mar=c(4,4,1,4))
 %pdf(file="figures/PCAnetworklevel.pdf", width=7, height=7)
 %biplot(PCA.out, xpd=T, las=1)
 %dev.off()
-
-Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the first two axes:
 <<>>=
-round(PCA.out$rotation[, 1:6], 3)
+summary(PCA.out)
+@
+
+Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the few axes:
+<<eval=T, echo=F>>=
+PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
+@
+<<>>=
+round(PCA.out$rotation[, 1:4], 3)
 @
 As we can see, there are quite a few indices on the first axis with a loading of around 0.2 (links per species, weighted NODF, H2, mean number of partners shared; weighted cluster coefficient, niche overlap, togetherness, C-score (all lower level); extinction slope, robustness, partner diversity (all higher level)). 
 
-Also the PCA biplot is not very helpful, since the many indices pointing ``southwards'' are unreadably overlapping.
+Also the PCA biplot (Fig.~\ref{fig:PCAnetworklevel}) is not very helpful, since the many indices pointing ``southwards'' are unreadably overlapping.
 %
 \begin{figure}
 %\vspace*{1cm} 
