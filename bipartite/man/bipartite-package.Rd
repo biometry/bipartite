@@ -52,6 +52,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
     \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}
     \item{Added a lengthy vignette,}{illustrating the use of the package.}
     \item{(Small) bug fix in \link{\code{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
+    \item{New function \code{\link{vaznullexternal}},}{as wished by Matt Funaki. This is the "normal" \code{\link{vaznull}}-nullmodel, but now external abundances for either or both groups can be provided. Modelled on \code{\link{r2dexternal}}.}
   }
   
   \item 2.12 (release date: 11-Mar-2019)

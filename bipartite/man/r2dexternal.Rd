@@ -1,13 +1,16 @@
 \encoding{UTF-8}
 \name{r2dexternal}
 \alias{r2dexternal}
+\alias{vaznullexternal}
 
 \title{Generates null models for network analysis by considering external abundances}
 \description{
-An extension of r2dtable which rescales marginal totals according to independent data
+An extension of r2dtable (and vaznull, respectively) which rescales marginal totals according to independent data
 }
 \usage{
 r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
+
+vaznulldexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 }
 
 \arguments{
@@ -18,9 +21,9 @@ r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 }
 
 \details{
-  The underlying function is \code{r2dtable}, which requires a vector of row and column totals, respectively. In function \code{\link{nullmodel}}, these marginal totals are computed from the observed interaction matrix. Here, external abundances can be provided. These will be rescaled and combined with the observed marginal total to construct new row and column vectors for \code{r2dtable}.
+The underlying functions are \code{r2dtable} and \link{\code{vaznull}}, which require a vector of row and column totals or a web, respectively. In function \code{\link{nullmodel}}, these marginal totals are computed from the observed interaction matrix. Here, external abundances can be provided. These will be rescaled and combined with the observed marginal total to construct new row and column vectors for \code{r2dtable}.
  
- If neither row nor column abundances are provided this function will be identical to \code{r2dtable}. 
+If neither row nor column abundances are provided this function will be identical to \code{r2dtable} and \link{\code{vaznull}}, respectively. 
 }
 
 \value{
@@ -28,8 +31,9 @@ r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 }
 
 \note{
- Since the function contains a rounding operation, it also has to include a re-distribution of 1s to keep all species in the system. That means, if one species has been observed in the external abundances extremely rarely (compared to the others), it will be overrepresented in this null model, because otherwise it would have to be dropped altogether! If you have a better solution, please let me know.
+Since the function contains a rounding operation, it also has to include a re-distribution of 1s to keep all species in the system. That means, if one species has been observed in the external abundances extremely rarely (compared to the others), it will be overrepresented in this null model, because otherwise it would have to be dropped altogether! If you have a better solution, please let me know.
 
+Also note that \code{\link{vaznull}} itself does not return a matrix with exactly the same marginal totals as the input, so don't expect any different from \code{vaznullexternal}!
 }
 
 
@@ -49,6 +53,7 @@ r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 	r2dexternal(2, Safariland, abun.higher=abun.higher, abun.lower=abun.lower)
 	r2dexternal(2, Safariland, abun.higher=abun.higher)
 
+  vaznullexternal(2, Safariland, abun.higher=abun.higher, abun.lower=abun.lower)
 	}
 }
 
