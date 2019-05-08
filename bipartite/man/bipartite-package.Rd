@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \describe{
     \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}
     \item{Added a lengthy vignette,}{illustrating the use of the package.}
+    \item{(Small) bug fix in \link{\code{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
   }
   
   \item 2.12 (release date: 11-Mar-2019)
