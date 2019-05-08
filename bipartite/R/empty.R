@@ -9,14 +9,14 @@ function(web, count=FALSE){
 
     web[is.na(web)] <- 0
 
-    if (NCOL(web)==1 | NROW(web)==1)
+    if (NCOL(web) == 1 | NROW(web) == 1)
     {
-        if (NCOL(web)==1 & NROW(web) != 1) {nr <- sum(web>0); nc <- 1}
-        if (NROW(web)==1 & NCOL(web) != 1) {nc <- sum(web>0); nr <- 1}
-	      if (NROW(web)==1 & NCOL(web) == 1) {nr <- 1; nc <- 1}
-        out <- web[1:nr, 1:nc, drop=FALSE]
-        if (count) attr(out, "empty") <- c("empty rows"=NROW(web)-nr, "empty columns"=NCOL(web)-nc)
-        return(out)
+        if (NCOL(web) == 1 & NROW(web) != 1) {nr <- sum(web>0); nc <- 1}
+        if (NROW(web) == 1 & NCOL(web) != 1) {nc <- sum(web>0); nr <- 1}
+	    if (NROW(web) == 1 & NCOL(web) == 1) {nr <- 1; nc <- 1}
+        ##out <- web[1:nr, 1:nc, drop=FALSE]
+        ##if (count) attr(out, "empty") <- c("empty rows"=NROW(web)-nr, "empty columns"=NCOL(web)-nc)
+        ##return(out)
     }
 
     cempty <- which(colSums(web)==0)
