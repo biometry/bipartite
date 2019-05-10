@@ -44,6 +44,8 @@ small
 
 * web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
 * as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
+* as.one.mode: revise help page; should be more consistent with the different projection options, and what the default is; more clearly warn against the "inner projection" (loss of information); think about (and write about) if the default for "full" should really be a symmetric matrix (i.e. assuming interaction in both directions); at least for food webs (e.g. h-p) it would be more consistent to only fill the upper right corner
+* this means make directions argument for as.one.mode
 
 * revise startup note in bipartite-package.Rd, saying that we usually assume quantitative webs to be of interaction frequencies and examples are for plant-pollinators if not stated otherwise
 This means: 
@@ -55,6 +57,7 @@ This means:
 
 
 (add new stuff)
+* betalink (Poisot et al. 2012): add new function, incl. new modifications / extensions [JF: on the way]
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
@@ -62,7 +65,7 @@ This means:
 * add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex)
 * WINE-artiger von Marco: Araujo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 * put Strona's NOS-index into bipartite (there is an R-package)
-* check Poisot's python and matlab packages and his package on network matrix comparisons
+* check Poisot's python and matlab packages
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
 * check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure
 
