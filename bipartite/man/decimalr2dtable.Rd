@@ -45,7 +45,7 @@ Function to generate null model matrices for the cases when the matrix entries a
 
 \author{ Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de> }
 
-\seealso{ \code{\link{r2dtable}}, \code{\link{vaznull}}, \code{\link{shuffle.web}} and \code{\link{swap.web}}}
+\seealso{ \code{\link[stats:r2dtable]{r2dtable}}, \code{\link{vaznull}}, \code{\link{shuffle.web}} and \code{\link{swap.web}}}
 
 \examples{
 obs <- networklevel(Safariland, index="generality")

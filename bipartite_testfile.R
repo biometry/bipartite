@@ -3,8 +3,10 @@
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##
 
 
-run tools::compactPDF(gs_quality = "ebook") on the large PDFs in inst/ !!
-check link to external functions, use syntax of Hadley's texinfo page
+# run 
+# tools::compactPDF("/Users/Carsten/Data/aktuell/bipartite/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality = "ebook") 
+# on the large PDFs in inst/ !!
+# check link to external functions, use syntax of Hadley's texinfo page
 
 
 
