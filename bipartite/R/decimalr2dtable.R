@@ -41,7 +41,6 @@ decimalr2dtable <- function(N=10, web, steps=prod(dim(web))){
     }
     return(web)
   }
-  manyshifter <- memoise(manyshifter) # for dramatic speed increase of recursive calls! factor 30!!
   
   res <- replicate(N, manyshifter(web, steps=steps), simplify=FALSE)
   
@@ -52,7 +51,7 @@ decimalr2dtable <- function(N=10, web, steps=prod(dim(web))){
 #library(profvis)
 #profvis(decimalr2dtable(100, Safariland))
 
-# system.time(nulls <- decimalr2dtable(1000, Safariland)) 
+# system.time(nulls <- decimalr2dtable(100, Safariland)) 
 # g.dec <- sapply(nulls, networklevel, index="generality")
 # obs <- networklevel(Safariland, index="generality")
 # system.time(nullsint <- nullmodel(Safariland, N=1000))
@@ -60,3 +59,4 @@ decimalr2dtable <- function(N=10, web, steps=prod(dim(web))){
 # plot(density(g.dec[1,]), xlim=c(1, 3))
 # lines(density(g.int[1,]), col="red")
 # abline(v=obs[1], col="green")
+

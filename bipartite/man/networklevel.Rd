@@ -1,7 +1,7 @@
  \encoding{UTF-8}
 \name{networklevel}
 \alias{networklevel}
-\alias{.networklevel}
+
 
 \title{Analysis of bipartite webs at the level of the entire network}
 \description{

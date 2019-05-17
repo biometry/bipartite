@@ -36,8 +36,6 @@ Function to generate null model matrices for the cases when the matrix entries a
   The output will typically be a fully filled matrix! Computing any index sensitive to matrix filling (such as connectance, degree, nestedness) for such a matrix is non-sensical! 
   
   Also, if used as a null model, an implicit assumption is that the values in the original matrix are meaningful as marginal totals. This may often not be the case, for example if entries are rates. Thus, probably this function is of very limited usefulness in the context of network analyses!
-  
-  The function uses \pkg{memoise} for faster implementation of the recursive stepping. Dramatic performance improvement!
 }
 
 \value{

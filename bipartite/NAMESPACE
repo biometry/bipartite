@@ -16,7 +16,6 @@ importFrom(igraph, graph.edgelist, set.edge.attribute, V) #for tnet functions
 importFrom(MASS, fitdistr)
 import(graphics)
 import(grDevices)
-import(memoise)
 import(methods)
 import(stats)
 import(utils)
