@@ -3,6 +3,12 @@
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##
 
 
+run tools::compactPDF(gs_quality = "ebook") on the large PDFs in inst/ !!
+check link to external functions, use syntax of Hadley's texinfo page
+
+
+
+
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
 ## compile and install bipartite before running this! Do not run on R-functions directly (see bottom!)

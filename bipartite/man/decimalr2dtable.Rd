@@ -42,8 +42,6 @@ Function to generate null model matrices for the cases when the matrix entries a
  A list of N randomised matrices with the same dimensions as the initial web, all probably filled completely.
 }
 
-\references{
-}
 
 \author{ Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de> }
 
