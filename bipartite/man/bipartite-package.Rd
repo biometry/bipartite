@@ -53,8 +53,10 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
     \item{Added a lengthy vignette,}{illustrating the use of the package.}
     \item{(Small) bug fix in \link{\code{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
     \item{New function \code{\link{vaznullexternal}},}{as wished by Matt Funaki. This is the "normal" \code{\link{vaznull}}-nullmodel, but now external abundances for either or both groups can be provided. Modelled on \code{\link{r2dexternal}}.}
+    \item{Important bug fix and new option in \link{\code{webs2array}}:}{name indexing was wrong, so that entries were entered in wrong cells. Also, the function now also accepts a weblist as input.}
+    \item{New function \code{\link{betalinkr}}}{It allows comparison of networks and partitioning of network dissimilarity. Based on betalink package/paper by Tim Poisot, but more integrated into  the bipartite package, and importantly implements many more features and corrected partitioning approaches. To more new functions come with it: \code{\link{array2linkmx}}, \code{\link{betalinkr_multi}}.}
   }
-  
+
   \item 2.12 (release date: 11-Mar-2019)
   \describe{
     \item{New function \code{\link{nest.smdm}}}{by Rafael Pinheiro, which computes the nestedness measure NODF (as present in \pkg{vegan}) more flexibly, by allowing the matrix to be sorted not only by number of filled cells (think: binary networks), but also by absolute marginal totals. NODF does not work for completely filled matrices, but this version (called NODA) does. Also, \code{\link{nest.smdm}} compute nesting within modules, if module identities are provided (e.g. by \code{\link{computeModules}} and the new little helper function \code{\link{module2constraints}}). All these metrics are computed for binary or weighted networks.}

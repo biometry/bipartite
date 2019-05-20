@@ -22,6 +22,11 @@ large
 
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 
+* BETALINKR: 
+	** add argument “set.defaults” and change defaults. the defaults are currently set to reproduce Poisots results; should rather be the recommended settings (but then there should be an argument "set.defaults" that can be "poisot")
+	** add Nacho's 2nd partitioning!? if I include this, then it's actually easier if index is newly developed (thus only implement for partitioning="commondenom"); b_replacement = 2*min(B,C) / denom, b_rich or b_abun = abs(B-C) / denom; (nb1: for the quantitative case, Bartomeus still calls it BRich, but it should be BAbun = dissimilarity explained by abundance differences); (nb2: how does this partition differ from dissimilarity based on proportions, that also removes abundance differences?)
+
+
 
 small
 (improve existing functionality)
