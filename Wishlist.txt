@@ -10,6 +10,7 @@ large
 * for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!
 
 * NULLMODEL-LIKE:
+* add external abundances to decimalr2dtable
 * also, check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!

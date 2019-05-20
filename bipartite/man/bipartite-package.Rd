@@ -51,10 +51,11 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \describe{
     \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}
     \item{Added a lengthy vignette,}{illustrating the use of the package.}
-    \item{(Small) bug fix in \link{\code{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
+    \item{(Small) bug fix in \code{\link{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
     \item{New function \code{\link{vaznullexternal}},}{as wished by Matt Funaki. This is the "normal" \code{\link{vaznull}}-nullmodel, but now external abundances for either or both groups can be provided. Modelled on \code{\link{r2dexternal}}.}
-    \item{Important bug fix and new option in \link{\code{webs2array}}:}{name indexing was wrong, so that entries were entered in wrong cells. Also, the function now also accepts a weblist as input.}
-    \item{New function \code{\link{betalinkr}}}{It allows comparison of networks and partitioning of network dissimilarity. Based on betalink package/paper by Tim Poisot, but more integrated into  the bipartite package, and importantly implements many more features and corrected partitioning approaches. To more new functions come with it: \code{\link{array2linkmx}}, \code{\link{betalinkr_multi}}.}
+    \item{Important bug fix and new option in \code{\link{webs2array}}:}{name indexing was wrong, so that entries were entered in wrong cells. Also, the function now also accepts a weblist as input.}
+    \item{New function \code{\link{betalinkr}}}{It allows comparison of networks and partitioning of network dissimilarity. Based on betalink package/paper by Tim Poisot, but more integrated into  the bipartite package, and importantly implements many more features and corrected partitioning approaches. Two more new functions come with it: \code{\link{array2linkmx}}, \code{\link{betalinkr_multi}}.}
+    \item{New function \code{\link{decimalr2dtable}}:}{It allows to simulate matrices with the same marginal totals as the input, but for non-negative, non-integer inputs. Doing so, it "smears" out the entries over the entire matrix and will hence be meaningless for any index comparison which responds to matrix filling. An attempt to deal with webs composed of rates rather than observed interactions. Useful probably only in a very few cases, as marginal totals are unlikely to be interpretable as abundance-activity, and hence implying a very different kind of null model to \code{\link{nullmodel}}s.}
   }
 
   \item 2.12 (release date: 11-Mar-2019)

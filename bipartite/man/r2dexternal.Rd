@@ -10,7 +10,7 @@ An extension of r2dtable (and vaznull, respectively) which rescales marginal tot
 \usage{
 r2dexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 
-vaznulldexternal(N, web, abun.higher=NULL, abun.lower=NULL)
+vaznullexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 }
 
 \arguments{
@@ -21,9 +21,9 @@ vaznulldexternal(N, web, abun.higher=NULL, abun.lower=NULL)
 }
 
 \details{
-The underlying functions are \code{r2dtable} and \link{\code{vaznull}}, which require a vector of row and column totals or a web, respectively. In function \code{\link{nullmodel}}, these marginal totals are computed from the observed interaction matrix. Here, external abundances can be provided. These will be rescaled and combined with the observed marginal total to construct new row and column vectors for \code{r2dtable}.
+The underlying functions are \code{r2dtable} and \code{\link{vaznull}}, which require a vector of row and column totals or a web, respectively. In function \code{\link{nullmodel}}, these marginal totals are computed from the observed interaction matrix. Here, external abundances can be provided. These will be rescaled and combined with the observed marginal total to construct new row and column vectors for \code{r2dtable}.
  
-If neither row nor column abundances are provided this function will be identical to \code{r2dtable} and \link{\code{vaznull}}, respectively. 
+If neither row nor column abundances are provided this function will be identical to \code{r2dtable} and \code{\link{vaznull}}, respectively. 
 }
 
 \value{

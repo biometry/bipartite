@@ -8,7 +8,10 @@ Hi,
 
 this is the bipartite repository on github. Currently this package is maintained by Carsten Dormann, that's why the repository is hosted under this department.
 
-It falls onto the maintainer to submit new versions to CRAN for release. All non-CRAN-versions are in development.
+It falls onto the maintainer to submit new versions to CRAN for release. All non-CRAN-versions are in development, which you can install using the following code (only if you have the tool-chain installed, see R instructions):
+
+    library(devtools)
+    install_github("biometry/bipartite/bipartite")
 
 Since I do not use github everyday, please also send me an email if you add/change something (carsten.dormann@biom.uni-freiburg.de). Thanks!
 

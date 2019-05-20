@@ -174,7 +174,7 @@ visweb(motten1982)
 \centering
 	\includegraphics[width=0.7\textwidth]{figures/motten1982_plotweb}
 	\smallskip
-	\includegraphics[width=0.7\textwidth]{figures/motten1982_visweb}
+	\includegraphics[width=0.9\textwidth]{figures/motten1982_visweb}
 	\caption{A bipartite graph of Motten's (1982) pollination network (\emph{top}) and a visualisation of the adjacency matrix (\emph{bottom}). The darker a cell is represented, the more interactions have been observed. By default, \texttt{plotweb} minimises overlap of lines and \texttt{visweb} sorts by marginal totals.}
 	\label{fig:Amotten}
 \end{figure}
@@ -188,13 +188,14 @@ plotPAC(PAC(motten1982), outby=0.9)
 %pdf(file="figures/motten1982_PACplot.pdf", width=3, height=3)
 %plotPAC(PAC(motten1982), outby=0.9)
 %dev.off()
-
-\begin{wrapfigure}{o}{0.3\textwidth}
-  \vspace{-2cm}
-	\includegraphics[width=0.3\textwidth]{figures/motten1982_PACplot}
+%
+\begin{figure}
+  \centering
+  %\vspace{4cm}
+	\includegraphics[width=0.4\textwidth]{figures/motten1982_PACplot}
 	\caption{A PAC-plot of Motten's \citeyear{Motten1982} pollination network. Lines connect plants potentially visited next by a pollinator. Line width is proportional to probability, which is very similar in this example. See help of \emph{plotPAC} for details on plotting and meaning.}
 	\label{fig:AplotPAC}
-\end{wrapfigure}
+\end{figure}
 %
 We can also visualise communities within the network by computing its modularity and then plotting the result, using the functions \texttt{computeModules} and \texttt{plotModuleWeb}, respectively (Fig.~\ref{fig:Amoduleplot}).
 <<eval=F>>=
@@ -232,12 +233,13 @@ gplot(as.one.mode(motten1982, project="lower"),
 %	label.cex=0.6, vertex.cex=2, vertex.col="green")
 %dev.off()
 %
-\begin{wrapfigure}{o}{1\textwidth}
+%\begin{wrapfigure}{o}{1\textwidth}
+\begin{figure}
 \centering
 	\includegraphics[width=0.9\textwidth]{figures/motten1982_gplot}
 	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point-symmetrically variable, hence every plot will look somewhat different.}
 	\label{fig:Amottengplot}
-\end{wrapfigure}
+\end{figure}
 
 
 \clearpage
@@ -270,7 +272,7 @@ This set of indices is computed for the entire network. They are called using th
 \item \texttt{nestedness}, with the returned value indicating the `temperature' of the matrix, which is low ($0$) for a perfectly nested matrix \citep{RodriguezGirones2006};
 \item \texttt{weighted nestedness}, or more specifically `weighted interaction nestedness estimator' (WINE), with $1$ indicating perfected nestedness (thus exactly opposite to the previous index) \citep{Galeano2009a};
 \item \texttt{weighted NODF}, as an alternative measure of quantitative nestedness, automatically correcting for matrix filling and also indicating nestedness by values towards $1$ \citep{AlmeidaNeto2011}; 
-\item \texttt{interaction strength asymmetry} \citep{Bluthgen2007} \citep[or alternatively \texttt{ISA} or \texttt{dependence asymmetry}][]{Bascompte2003}, which quantify whether specialised species interacts with generalised ones in the other level (or vice versa);
+\item \texttt{interaction strength asymmetry} \citep{Bluthgen2007} \citep[or alternatively \texttt{ISA} or \texttt{dependence asymmetry}:][]{Bascompte2003}, which quantify whether specialised species interact with generalised ones in the other level (or vice versa);
 \item \texttt{specialisation asymmetry} (or alternatively \texttt{SA}), following the same idea as the previous, but this being based on species specialisation in $d'$;
 \item \texttt{linkage density}, marginal totals-weighted diversity of interactions per species \citep{Bersier2002};
 \item \texttt{Fisher alpha}, diversity index based on fitting a Fisher-series \citep{Fisher1943};
@@ -282,7 +284,8 @@ This set of indices is computed for the entire network. They are called using th
 
 \noindent Similarly to the previous sets of indices, several options are available to fine-tune those in \texttt{networklevel}:
 <<>>=
-networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), SAmethod="log")
+networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), 
+             SAmethod="log")
 @
 
 
@@ -363,12 +366,12 @@ The (growing) list of indices computable for each species in the network compris
 specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI", 
       "effective partners"), PDI.normalise=F)
 @
-A relatively comprehensive comparison of species-level indices of specialisation \citep{Dormann2011} has shown substantial redundancy among these indices, and only few of them have a sound theoretical basis \cite{Poisot2012a}.
+A relatively comprehensive comparison of species-level indices of specialisation, \citet{Dormann2011} has shown substantial redundancy among these indices, and only few of them have a sound theoretical basis \citep{Poisot2012a}.
 
 
 
 \subsection{Which index to choose?}%--------------------------------------------------------------
-Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low samplng intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
+Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low sampling intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
 
 Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
 
@@ -483,7 +486,7 @@ That said, there are a few guiding considerations that seem plausible to me:
 \item Quantitative indices use more information than binary ones; preferably use the former.
 \item Indices developed for bipartite networks are likely to be closer, theoretically, to the structure of the data than one-mode indices working on projections of bipartite networks.
 \item Indices that came out positively in comparisons have proven their worth more than fresh-off-the-press indices.
-\item If two or more indices seem barely distinguishable, do \textbf{not} choose the one easiest to interpret! This would be a logical fault, since their similarity indicates clearly that they are affected by ``something'' and we don't know what that something is, yet. But interpreting an effect as the being caused by what is most convenient to interpret is most certainly wrong \citep{Shermer2012}.\footnote{Of the many, many biases that can creep into scientific explorations, this is one. We could call it the ``parsimony bias'' as a special case of the ``selection bias'' \citep{Shermer2012}.}
+\item If two or more indices seem barely distinguishable, do \textbf{not} choose the one easiest to interpret! This would be a logical fault, since their similarity indicates clearly that they are affected by ``something'' and we don't know what that something is, yet. But interpreting an effect as being caused by what is ``most convenient to interpret'' is most certainly wrong \citep{Shermer2012}.\footnote{Of the many, many biases that can creep into scientific explorations, this is one. We could call it the ``parsimony bias'' as a special case of the ``selection bias'' \citep{Shermer2012}.}
 \end{enumerate}
 %
 The last point in particular seems rather little helpful. Imagine the two index values ``functional diversity'' for the higher and lower trophic level, which are near-identical in Fig.~\ref{fig:clusternetworklevel}. This indicates that the \emph{network}, rather than each level, contains the information which these two indices describe. In this particular case, we may want to consider using neither index, or using any of them but interpreting it \emph{as if it represented \emph{both} level}.
@@ -554,7 +557,7 @@ All that is fine for a single network, but no option if we want to analyse dozen
 The better, and more established approach, would be to compute $z$-scores (= \ind{standard score}s or \ind{normal score}s) for each network, which express the difference in terms of standard deviations of the null distribution: 
 \[z_I= \frac{I_\text{observed} - \bar{I}_\text{nulls}}{\sigma_{I_\text{nulls}}}.\] We can now analyse the $z$-scores instead of the original $I_\text{obs}$-values.
 
-$z$-scores have one major disadvantage for several of the network indices presented earlier: the standard deviation becomes an unsuitable measure of spread as the values approach an upper or lower bound. Imagine our network index $I$ is bound between 0 and 1 (as many are). If the null models have values above, say, 0.9, the upper bound is so close that the distribution will be skewed and the standard deviation biased too low. This may lead to inflated $z$-scores. So whenever you observe values close to either bound, beware of distorted $z$-scores.
+$Z$-scores have one major disadvantage for several of the network indices presented earlier: the standard deviation becomes an unsuitable measure of spread as the values approach an upper or lower bound. Imagine our network index $I$ is bound between 0 and 1 (as many are). If the null models have values above, say, 0.9, the upper bound is so close that the distribution will be skewed and the standard deviation biased too low. This may lead to inflated $z$-scores. So whenever you observe values close to either bound, beware of distorted $z$-scores.
 % show this in an example!
 
 
@@ -616,9 +619,9 @@ The idea here is to compute a statistic of interest, in this case the mean diffe
 \section{Modularity}
 Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. What causes such modules and whether they actually teach us something is discussed at length by \citet{Dormann2017AREES}. 
 
-The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail in][]{Dormann2014} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citep{Beckett2016}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
+The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail in][]{Dormann2014} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citet{Beckett2016}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
 
-Typically, however, correspondence analysis will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called ``compartments'' and will be visible as clearly separated blocks of interacting species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are too much black-and-white compared to modules and often only occur in ecological networks because sampling was rather incomplete or very different habitats were sampled.}
+Old-school modularity was identified using correspondence analysis, which, however, will not be able to identify modules sufficiently well, even if modules are actually compartments (i.e. perfectly separated: Fig.~\ref{fig:randomCAsorted} left, centre). The algorithm used in \package{bipartite} can do so, at least in principle (Fig.~\ref{fig:randomCAsorted} right).\footnote{As a note on terminology: If modules are perfectly separated, with no species interacting with species in another module, they are called ``compartments'' and will be visible as clearly separated blocks of interacting species. It is relatively straightforward to implement a recursive compartment detection function, but compartments are too much black-and-white compared to modules and often only occur in ecological networks because sampling was rather incomplete or very different habitats were sampled.}
 \begin{figure}
 	\hfill
 	\includegraphics[width=0.32\textwidth]{figures/random_small_high_nonoise_small} %, trim=1cm 4cm 0.5cm 1cm, clip=TRUE
@@ -641,16 +644,18 @@ QuaBiMo can be invoked recursively (we are working on doing the same for Beckett
 	}
 \label{fig:memmottmodules}
 \end{figure}
-
-\begin{wrapfigure}{o}{0.3\textwidth}
-	\vspace*{-.5cm}
-	%\centering
-	\includegraphics[width=0.3\textwidth]{figures/poll_mod_QvsH2}
+%
+%\begin{wrapfigure}{o}{0.3\textwidth}
+\begin{figure}
+	%\vspace*{-5cm}
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures/poll_mod_QvsH2}
 	\caption{Modularity ($Q$) is highly correlated with specialisation $H_2'$ across $22$ pollination networks. Names refer to network data sets in \package{bipartite}.}
 \label{fig:QvsH2}
-\end{wrapfigure}
-%
-Modularity $Q$ is likely to be correlated with other network metric, as specialisation of module members is the prime reason for the existence of modules. Across the $22$ quantitative pollination networks of the NCEAS ``interaction webs'' data base,%\footnote{\url{http://www.nceas.ucsb.edu/interactionweb}}
+%\end{wrapfigure}
+\end{figure}
+
+Modularity $Q$ is likely to be correlated with other network metric, as specialisation of module members is the prime reason for the existence of modules. Across the (then) $22$ quantitative pollination networks of the NCEAS ``interaction webs'' data base, %\footnote{\url{http://www.nceas.ucsb.edu/interactionweb}}
  $Q$ was evidently highly positively correlated with complementary specialisation $H_2'$ (Fig.~\ref{fig:QvsH2}).
 Ecologically, the correlation with specialisation makes good sense. Modules only exist because some species do not interact with some others, i.e. because they are specialised. An overall low degree of specialisation is equivalent to random interactions, which will yield no modules. % (unless as an artefact of low sampling intensity, which can be addressed using null models).
 
@@ -661,7 +666,7 @@ Modularity $Q$ is in itself not an index of an ecological feature. It is merely 
 
 
 \subsection{Using modularity to identifying species with important roles in the network}
-\citet{Guimera2005} and \citet{Olesen2007} propose to compute standardised connection and participation values, called $c$ and $z$, for each species to describe their role in networks, where $c$ refers to the between-modules connectivity \citep[called ``participation coefficient'' $P$][]{Guimera2005} and $z$ refers to within-module degrees. Originally, both are computed based on the number of links, but a weighted version based on species strength is implemented, too. \citet{Guimera2005} suggest critical values (only for the binary approach) of $c$ and $z$ of $0.625$ and $2.5$, respectively. Species exceeding both of these values are called ``hubs'' because they link different modules, combining high between- with high within-module connectivity. 
+\citet{Guimera2005} and \citet{Olesen2007} propose to compute standardised connection and participation values, called $c$ and $z$, for each species to describe their role in networks, where $c$ refers to the between-modules connectivity \citep[called ``participation coefficient'' $P$:][]{Guimera2005} and $z$ refers to within-module degrees. Originally, both are computed based on the number of links, but a weighted version based on species strength is implemented, too. \citet{Guimera2005} suggest critical values (only for the binary approach) of $c$ and $z$ of $0.625$ and $2.5$, respectively. Species exceeding both of these values are called ``hubs'' because they link different modules, combining high between- with high within-module connectivity. 
 
 In the case of the pollination network of Fig.~\ref{fig:memmottmodules}, $c$-values range between $0$ and $0.78$ (with $23$ of $79$ pollinators and $13$ of $25$ plant species exceeding the threshold of $0.625$); $z$-values range between $-1.21$ and $5.00$ (with two pollinators but no plant species exceeding the value of $2.5$: Fig.~\ref{fig:czvalues}). Put together, only the syrphid \emph{Syritta pipiens} (and hawkbit \emph{Leontodon hispidus} almost) exceeded both thresholds and would thus be called a ``hub species''. As can be seen in Fig.~\ref{fig:memmottmodules}, this syrphid is relatively rare but clearly not randomly distributed over the six modules, thus linking three highest-level modules. In contrast, \emph{Leontodon hispidus} is a common plant species, visited by many different pollinators, and it actually links almost all modules. 
 
@@ -710,9 +715,9 @@ See \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-gr
 
 
 \subsection{Multi-layer networks}
-This somewhat cryptic term refers to networks that are defined by different types of links, for example because links change over time (dynamic links) or because they depend on other networks \citep{Pilosof2017}. The mathematical description and analysis of such multilayer networks can be rather complex \citep{Aleta2019}, and in ecology typically only relatively simple types of multilayer networks are investigated; probably the most common being multi-level networks and temporally or spatially resolved networks.
+This somewhat cryptic term refers to networks that are defined by different types of links, for example because links change over time (dynamic links) or because they depend on other networks \citep{Pilosof2017}. The mathematical description and analysis of such multilayer networks can be rather complex \citep{Aleta2019}, and in ecology typically only relatively simple types of multilayer networks are investigated; probably the most common being multi-level networks are temporally or spatially resolved networks.
 
-While statistically and mathematically a lot of things are conceivable, few ideas actually resonate with ecologists (i.e. in the application). One idea is that networks evolve and hence change dynamically. Another is that any observed bipartite network is actually embedded in many other networks, e.g. a plant-pollinator-network may continue ``into the ground'' as plant-mycorrhiza networks, ``into the sky'' as pollinator-parasite network, and ``sideways'' as plant-herbivore network \citep{Pocock2012}. 
+While statistically and mathematically a lot of things are conceivable, few ideas actually resonate with ecologists (i.e. in application). One idea is that networks evolve and hence change dynamically. Another is that any observed bipartite network is actually embedded in many other networks, e.g. a plant-pollinator-network may continue ``into the ground'' as plant-mycorrhiza networks, ``into the sky'' as pollinator-parasite network, and ``sideways'' as plant-herbivore network \citep{Pocock2012}. 
 
 Currently, \package{bipartite} does not support any such analysis (apart from a pathetic function \code{npartite} and \code{plotweb2} for plotting stacked bipartite networks).
 

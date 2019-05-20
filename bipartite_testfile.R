@@ -3,6 +3,14 @@
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##
 
 
+# run 
+# tools::compactPDF("/Users/Carsten/Data/aktuell/bipartite/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality = "ebook") 
+# on the large PDFs in inst/ !!
+# check link to external functions, use syntax of Hadley's texinfo page
+
+
+
+
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
 ## compile and install bipartite before running this! Do not run on R-functions directly (see bottom!)
@@ -99,6 +107,8 @@ apply(nulls, 3, discrepancy)
 vazquenc[,3] <- 0
 empty(vazquenc, count=TRUE)
 rm(vazquenc)
+M <- matrix(c(0, 0, 1, 0, 1), nrow=1)
+empty(M) # should be matrix with 1, 1!
 
 # endpoint
 endpoint(vazquenc)
@@ -358,6 +368,18 @@ set.seed(1)
 m <- matrix(rpois(4, 2), 2, 2)
 vaznull(2, m) # Error when m is full (i.e. no 0); works fine with a single 0 already (set seed to 4)  
 
+#vaznullexternal
+abun.lower <- c(15,5,2,7,4,8,6,0.01,6)
+set.seed(2)
+(abun.higher <- rpois(27, lambda=4))
+abun.higher[1] <- 0.001
+nulls <- vaznullexternal(2, Safariland, abun.higher=abun.higher, abun.lower=abun.lower)
+cor(colSums(nulls[[1]]), abun.higher) # close to 1
+
+nulls <- vaznullexternal(2, Safariland)
+cor(colSums(nulls[[1]]), colSums(Safariland)) # very close to 1
+
+
 # V.ratio
 
 # visweb
@@ -365,6 +387,16 @@ vaznull(2, m) # Error when m is full (i.e. no 0); works fine with a single 0 alr
 # web2edges
 
 # webs2array
+data(Safariland, vazquenc, vazquec)
+allin1 <- webs2array()
+allin1 <- webs2array(Safariland)
+allin1 <- webs2array(Safariland, vazquenc, vazquec)
+str(allin1)
+## now we can compute distance between two webs:
+vegdist(t(cbind(as.vector(allin1[,,2]), as.vector(allin1[,,3]))), method="jacc")
+webinput <- substitute(list(Safariland, vazquenc, vazquec))
+as.character(webinput)
+
 
 # wine
 
