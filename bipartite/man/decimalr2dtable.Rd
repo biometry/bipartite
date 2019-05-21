@@ -7,7 +7,7 @@
 \title{ Generates matrix with same marginal totals for non-negative decimal values}
 
 \description{
-Function to generate null model matrices for the cases when the matrix entries are non-negative numbers, possibly non-integers. It maintains marginal totals (as does \code{r2dtable}), but it "smears" them out over all cells.
+Function to generate null model matrices for the cases when the matrix entries are non-negative numbers, possibly non-integers. It maintains marginal totals (as does \code{r2dtable}), but "smears" them out over all cells.
 }
 
 \usage{decimalr2dtable(N=10, web, steps=prod(dim(web)))}
@@ -30,6 +30,8 @@ Function to generate null model matrices for the cases when the matrix entries a
  The result is a decimal-numbered matrix, typically with values > 0 in each cell. 
  
  Indication: This function may be useful in some rare constellations. Imagine you sampled a plant-pollinator network and instead of counting the number of flower visits you recorded the nectar extracted by each pollinator. Then the marginal totals would indicate nectar production (plus confounding nectar attractiveness) and consumption potential for plants and pollinators, respectively. So, given that species differ in nectar production and consumption, what would you expect the network to look like? Enter \code{decimalr2dtable}.
+ 
+ If external abundances (even in funny units such as biovolume in ml) are available, this function can easily provide the respective null models. See examples.
 }
 
 \note{
@@ -50,15 +52,27 @@ Function to generate null model matrices for the cases when the matrix entries a
 \examples{
 obs <- networklevel(Safariland, index="generality")
 
-nulls <- decimalr2dtable(100, Safariland)
+nulls <- decimalr2dtable(10, Safariland)
 g.dec <- sapply(nulls, networklevel, index="generality")
-nullsint <- nullmodel(Safariland, N=100)
+nullsint <- nullmodel(Safariland, N=10)
 g.int <- sapply(nullsint, networklevel, index="generality")
 plot(density(g.dec[1,]), xlim=c(1, 3))
 lines(density(g.int[1,]), col="red")
 abline(v=obs[1], col="green")
 
 
+## If you want to use external abundances to set up your null model:
+set.seed(1)
+ext.rows <- runif(9) # imagine these are your external abundances for Safariland
+ext.cols <- runif(27)
+# standardise to sum = 1:
+ext.rows <- ext.rows/sum(ext.rows)
+ext.cols <- ext.rows/sum(ext.cols)
+web <- tcrossprod(ext.rows, ext.cols) * sum(Safariland) 
+# (to get to the same interaction density as original web)
+#
+# this can now be used as input for decimalr2dtable:
+image(decimalr2dtable(N=1, web)[[1]]) # remember: white are high values!
 }
 \keyword{ package }
 

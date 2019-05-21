@@ -6,7 +6,7 @@
 # run 
 # tools::compactPDF("/Users/Carsten/Data/aktuell/bipartite/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality = "ebook") 
 # on the large PDFs in inst/ !!
-# check link to external functions, use syntax of Hadley's texinfo page
+# check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 
 
@@ -123,6 +123,13 @@ computeModules(web)
 # czvalues
 czvalues(comp1)
 czvalues(comp3)
+
+
+# decimalr2dtable
+nulls <- decimalr2dtable(100, Safariland)
+g.dec <- sapply(nulls, networklevel, index="generality")
+plot(density(g.dec[1,]), xlim=c(1, 3))
+
 
 # degreedistr
 degreedistr(web=memmott1999)

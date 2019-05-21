@@ -32,7 +32,7 @@ A matrix with one row per web and one column per link (i.e. per combination of l
 %\references{ 
 % }
 
-\author{ Jochen Fründ}}
+\author{ Jochen Fründ}
 
 
 \examples{

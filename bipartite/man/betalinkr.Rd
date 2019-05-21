@@ -14,7 +14,8 @@ This function (\code{betalinkr}) is a new implementation of network dissimarilit
 }
 
 \usage{
-betalinkr(webarray, index="bray", binary=TRUE, partitioning="poisot", proportions=FALSE, function.dist="vegdist", distofempty="na")
+betalinkr(webarray, index="bray", binary=TRUE, partitioning="poisot", 
+  proportions=FALSE, function.dist="vegdist", distofempty="na")
 
 betalinkr_multi(webarray, ...)
 }
@@ -79,7 +80,7 @@ Koleff 2003
   
   This function should also work for one-mode networks.
 
-  Why the name of the function? short for "betalink revised"
+  Why the name of the function? Short for "betalink revised".
   
   Why the names of the output values? These are the indices of beta (for betadiversity); I am keeping the original names and guess what they stand for: S (Species), OS (Only Shared species links), WN (Whole Network links), ST (Species Turnover links).
   
@@ -95,7 +96,8 @@ Koleff 2003
 }
 
 \examples{
-# two examples that give the same results as would the \code{betalink} function in the package of the same name
+# two examples that give the same results as would the 
+# \code{betalink} function in the package of the same name
 betalinkr(weblist2array(list(Safariland=Safariland, vazarr=vazarr)))
 betalinkr(weblist2array(list(Safariland=Safariland, vazarr=vazarr)),function.dist="betadiver",index=1)
 
@@ -103,7 +105,8 @@ betalinkr(weblist2array(list(Safariland=Safariland, vazarr=vazarr)),function.dis
 testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 
   lower = c("plant1","plant2","plant1","plant2","plant3","plant4"), 
   webID = c("meadow","meadow","meadow","meadow","bog","bog"), freq=c(5,1,1,1,3,7))
-betalinkr(frame2webs(testdata, type.out="array"), distofempty="zero") # avoids NA/NaN output for the components, despite no interactions between shared species
+betalinkr(frame2webs(testdata, type.out="array"), distofempty="zero") 
+# avoids NA/NaN output for the components, despite no interactions between shared species
 
 # more than two webs:
 betalinkr_multi(webs2array(Safariland, vazquenc, vazarr), index="jaccard")
