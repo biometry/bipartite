@@ -36,6 +36,7 @@ A matrix with one row per web and one column per link (i.e. per combination of l
 
 
 \examples{
+array2linkmx(webs2array(Safariland, vazquenc))
 }
 \keyword{ package }
 

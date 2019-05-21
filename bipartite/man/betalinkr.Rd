@@ -1,7 +1,7 @@
 \encoding{UTF-8}
 \name{betalinkr}
-\alias{betalinkr, betalinkr_multi}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{betalinkr}
+\alias{betalinkr_multi}
 
 \title{
 Calculate network dissimilarity (beta diversity) and its components
@@ -45,6 +45,7 @@ betalinkr_multi(webarray, ...)
   \item{distofempty}{
     Can be \code{"zero"} or \code{"na"}. How should dissimilarity be defined when there are either no links to use for b_os (i.e. only links involving species just found in one of the 2 webs) or no links to use for b_st (i.e. only "rewiring links" present)? "zero" is appropriate when interested in the contribution of components b_os and b_st, whereas "na" is appropriate when b_os should be interpreted separately as dissimilarity of shared species subwebs
   }
+  \item{...}{Arguments passed on to \code{\link{betalinkr}}.}
   % another argument "2nd.decomposition" that further calculates B_richness and B_replacement components of each dissimilarity will come; maybe only available with partitioning="commondenom"
 }
 \details{
@@ -92,14 +93,14 @@ Koleff 2003
 \seealso{
   \code{\link{vegdist}} and \code{\link{betadiver}} for vegan package functions calculating dissimilarity / betadiversity, used here unless \code{partitioning="commondenom"}.
   
-  For reshaping web data to the array input format expected here, see \code{\link{webs2array}}, \code{\link{weblist2array}} and \code{\link{frame2webs}}.
+  For reshaping web data to the array input format expected here, see \code{\link{webs2array}} and \code{\link{frame2webs}}.
 }
 
 \examples{
 # two examples that give the same results as would the 
 # \code{betalink} function in the package of the same name
-betalinkr(weblist2array(list(Safariland=Safariland, vazarr=vazarr)))
-betalinkr(weblist2array(list(Safariland=Safariland, vazarr=vazarr)),function.dist="betadiver",index=1)
+betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)))
+betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)),function.dist="betadiver",index=1)
 
 # another example (no shared links)
 testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 
