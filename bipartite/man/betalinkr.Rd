@@ -69,9 +69,10 @@ A named vector of four dissimilarities, naming follows Poisot et al. 2012.
 \references{
 Poisot, T., E. Canard, D. Mouillot, N. Mouquet, D. Gravel, and F. Jordan. 2012. The dissimilarity of species interaction networks. \emph{Ecology Letters} \bold{15}, 1353–-1361. doi: 10.1111/ele.12002
 
-Legendre 2014
+Legendre, P. 2014. Interpreting the replacement and richness difference components of beta diversity. \emph{Global Ecology and Biogeography} \bold{23}, 1324--1334. doi: 10.1111/geb.12207
 
-Koleff 2003
+Koleff, P., Gaston, K.J., and J.J. Lennon. 2003. Measuring beta diversity for presence–absence data. \emph{Journal of Animal Ecology}
+\bold{72}, 367--382.
 }
 
 \author{Jochen Fründ}
