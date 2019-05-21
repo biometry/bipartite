@@ -1314,9 +1314,9 @@ if (bmo==1)  fprintf(out,"Row number            ");
 			}
 		}
 
-    if (bmo==1) fprintf(out,"Permutation of columns:\n");
- 		if (bmo==1) fprintf(out,"Column number         ");
-		for (j=1;j<=ncols;j++)
+if (bmo==1) fprintf(out,"Permutation of columns:\n");
+if (bmo==1) fprintf(out,"Column number         ");
+	for (j=1;j<=ncols;j++)
 		{
 			if (unused[j]==1)  if (bmo==1) fprintf(out,"%5i",unused[j]);
 		}
