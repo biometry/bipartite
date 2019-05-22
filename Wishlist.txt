@@ -10,7 +10,6 @@ large
 * for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!
 
 * NULLMODEL-LIKE:
-* add external abundances to decimalr2dtable
 * also, check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
@@ -18,7 +17,6 @@ large
 * add makeweb function(s) from Fründ et al 2016 Oikos
 * nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019)
 
-* add vignette already existing as "BEN"; make new ideas/indices citable through vignette (e.g. external sequence of second extinct etc)
 * turn testfile into proper testthat routine
 
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
@@ -31,9 +29,10 @@ large
 
 small
 (improve existing functionality)
+* retire bmn5: it is available from vegan (re-implemented) and NODF has taken over
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
 * test specieslevel with empty.web=FALSE; decide where web.e must be used: that is, for each index think whether web or web.e is more meaningful!
-* better treatment of allowed index synonyms in species/group/networklevel (currently they are "not recognised" if they don't come with a allindex-namevariant)
+* better treatment of allowed index synonyms in species/group/networklevel (currently they are "not recognised" if they don't come with an allindex-namevariant)
 * make spaces in names consistent: input(=index) should be the same as output (in list)
 * add option "weighted" to links per species in networklevel (copy-paste from grouplevel!) 
 * implement normalised version of vulnerability and generality (in Bersier 2002)
@@ -129,3 +128,5 @@ BIN (rejected feature)
 FIXED:
 * in nullmodel, the check for binary networks is flawed for numbers < 1; use length(unique(web)<3) instead    |  CFD 24.3.2019
 * FIX VEGAN DEPENDENCY!! commsimulator goes out of business, see email by Oksanen 25.4.2018!    |  CFD (can't remember when): replaced by vegan::nullmodel !!
+* add external abundances to decimalr2dtable CFD: in example on help page
+* add vignette already existing as "BEN"; make new ideas/indices citable through vignette (e.g. external sequence of second extinct etc): CFD
