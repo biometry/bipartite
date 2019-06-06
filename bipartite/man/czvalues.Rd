@@ -54,14 +54,25 @@ Olesen, J.M., Bascompte, J., Dupont, Y.L. and Jordano, P. (2007) The modularity 
 
 \examples{
 \dontrun{
-data(memmott1999)
 set.seed(2)
-mod <- computeModules(memmott1999, steps=1E4)
+mod <- computeModules(memmott1999)
 cz <- czvalues(mod)
 plot(cz[[1]], cz[[2]], pch=16, xlab="c", ylab="z", cex=0.8, xlim=c(0,1), las=1)
 abline(v=0.62) # threshold of Olesen et al. 2007
 abline(h=2.5)   # dito
 text(cz[[1]], cz[[2]], names(cz[[1]]), pos=4, cex=0.7)
+
+# example for computing a c- or z-threshold:
+mod <- computeModules(Safariland)
+czobs <- czvalues(mod)
+nulls <- nullmodel(Safariland, N=10) # this should be larger, of course
+null.mod.list <- sapply(nulls, computeModules)
+null.cz <- lapply(null.mod.list, czvalues)
+# compute 95% CI for c and z:
+null.cs <- sapply(null.cz, function(x) x$c) # c-values across all species in nulls
+quantile(null.cs, 0.95) 
+# this could now serve as thresholds for identifying particularly uncommonly high c-values
+# and analogously for z, of course
 }
 }
 
