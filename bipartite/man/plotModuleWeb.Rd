@@ -30,7 +30,7 @@ An object of class "moduleWeb".
   \item{plotModules}{
 If \code{plotModules} is true, modules are plotted onto the graph, otherwise only the graph itself is plotted.
 }
-  \item{rank}{
+  \item{rank}{logical; if true, rows will be standardised for plotting, yielding a range from light to dark blue for each row; if false, values are ranged across the entire matrix. The latter is more faithful to the data, while the former makes lower levels more comparable, irrespective of marginal totals.
 }
   \item{weighted}{
 If \code{weighted} is true, the intensity of squares representing the edges corresponds with the edge weight, otherwise all squares representing existing edges have equal intensity.
