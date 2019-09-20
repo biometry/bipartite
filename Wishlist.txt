@@ -1,4 +1,6 @@
 IMPORTANT
+* fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
+
 large
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
@@ -29,6 +31,8 @@ large
 
 small
 (improve existing functionality)
+* frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
+* warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
 * retire bmn5: it is available from vegan (re-implemented) and NODF has taken over
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
 * test specieslevel with empty.web=FALSE; decide where web.e must be used: that is, for each index think whether web or web.e is more meaningful!
