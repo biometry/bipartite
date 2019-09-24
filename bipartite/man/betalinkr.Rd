@@ -25,22 +25,22 @@ betalinkr_multi(webarray, ...)
     Input data, an array with three dimensions, third dimension has length 2 and separates the two webs to compare. First two dimensions are the species (typically first Lower and second Higher). For convenience, if webarray is a list of two webs, it will be converted to array format first using \code{webs2array} (that function can also be used to convert single web matrices to array format, but then needs to be called explicitly).
   }
   \item{index}{ 
-    The dissimilarity index, passed to "method" of either vegdist or betadiver (see there for naming). If \code{partitioning="commondenom"} (and thus no external function is used), it has to be one of "sorensen" (for Sorensen or Bray-Curtis dissimilarity index) or "jaccard" (for Jaccard or Ruzicka).  }
+    The dissimilarity index, passed to "method" of either vegdist or betadiver (see there for naming). If \code{partitioning="commondenom"} (and thus no external function is used), it has to be one of "sorensen" (for Sorensen or Bray-Curtis dissimilarity index) or "jaccard" (for Jaccard or Ruzicka); "bray" is also allowed and gives the same result as "sorensen".  }
   \item{binary}{
   Should binary data or quantitative data be used (i.e., quantitative or binary versions of dissimilarity indices). If \code{TRUE}, webs will be converted to binary.
   }
   \item{partitioning}{
-    How should the components ("ST" and "OS") be calculated? With \code{"poisot"}, the original approach will be applied, which calculates ST as WN - OS; not recommended as this underestimates the contribution of differences in species composition (but with this setting, OS will reflect the uncorrected the dissimilarity of shared species subwebs). Two alternative approaches that give fair contributions for OS and ST are implemented:
+    How should the components ("ST" and "OS") be calculated? With \code{"poisot"}, the original approach will be applied, which calculates ST as WN - OS; not recommended for partitioning as it underestimates the contribution of species composition (but with this setting, OS will reflect the uncorrected dissimilarity of shared species subwebs, which may be interesting as such). Two alternative approaches that give fair contributions for OS and ST are implemented:
     
     With \code{"adjusted"}, ST is calculated equivalently to the calculation of OS, and then OS and ST are adjusted so that they sum to WN. See details below.
     
-    With \code{"commondenom"}, an alternative partitioning approach is used, which keeps a common denominator (of the dissimilarity index) for WN, OS and ST (i.e., the denominator is based on all links of the pair of webs instead of on subsets). Thus, only the numerator of the dissimilarity index is partitioned, which ensures additivity directly by partitioning the sets of links (or link weights).
+    With \code{"commondenom"} (recommended setting), an alternative partitioning approach is used, which keeps a common denominator (of the dissimilarity index) for WN, OS and ST (i.e., the denominator is based on all links of the pair of webs instead of on subsets). Thus, only the numerator of the dissimilarity index is partitioned, which ensures additivity directly by partitioning the sets of links (or link weights).
   }
   \item{proportions}{
     Should data be standardized to proportions before calculating quantitative dissimilarity metrics? Note that this is done here directly before calculating dissimilarities, thus gives a different result than if input data are already standardized.
   }
   \item{function.dist}{
-    Which function to use for calculating dissimilarity? Either the name of \code{vegan} package function, either \code{"vegdist"} (quantitative indices available) or \code{"betadiver"} (gives compatibility to the 24 numbered indices of Koleff et al. 2003 as used by \emph{betalink} package, but only binary indices). Note that this argument is ignored if \code{partitioning="commondenom"}, which implements the dissimilarity index calculation directly.
+    Which function to use for calculating dissimilarity? The name of \code{vegan} package function, either \code{"vegdist"} (quantitative indices available) or \code{"betadiver"} (gives compatibility to the 24 numbered indices of Koleff et al. 2003 as used by \emph{betalink} package, but only binary indices). Note that this argument is ignored if \code{partitioning="commondenom"}, which implements the dissimilarity index calculation directly.
   }
   \item{distofempty}{
     Can be \code{"zero"} or \code{"na"}. How should dissimilarity be defined when there are either no links to use for b_os (i.e. only links involving species just found in one of the 2 webs) or no links to use for b_st (i.e. only "rewiring links" present)? "zero" is appropriate when interested in the contribution of components b_os and b_st, whereas "na" is appropriate when b_os should be interpreted separately as dissimilarity of shared species subwebs
@@ -49,7 +49,7 @@ betalinkr_multi(webarray, ...)
   % another argument "2nd.decomposition" that further calculates B_richness and B_replacement components of each dissimilarity will come; maybe only available with partitioning="commondenom"
 }
 \details{
-The basic idea to calculate dissimilarity (betadiversity) between networks (links instead of species) has been proposed before. Poisot et al. (2012) came up with the idea to separate between rewiring and species turnover as reasons for network dissimilarity. They proposed to calculate rewiring link dissimilarity ("beta_OS" or simply "OS") by focusing on the sub-web containing only species observed in both webs (i.e. excluding links with species unique to one of the webs). Species turnover link dissimilarity ("beta_ST" or simply "ST") is then calculated as total dissimilarity minus rewiring dissimilarity, but this assumes an additivity that is rarely given with dissimilarity indices.
+The basic idea to calculate dissimilarity (betadiversity) between networks (links instead of species) has been proposed before. Poisot et al. (2012) came up with the idea to separate between rewiring and species turnover as causes of network dissimilarity (but see Novotny 2009). They proposed to calculate rewiring link dissimilarity ("beta_OS" or simply "OS") by focusing on the sub-web containing only species observed in both webs (i.e. excluding links with species unique to one of the webs). Species turnover link dissimilarity ("beta_ST" or simply "ST") is then calculated as total dissimilarity minus rewiring dissimilarity, but this assumes an additivity that is rarely given with dissimilarity indices.
 
 However, the number of "unique links" (i.e. only observed in one of the two webs) can be well partitioned into additive components. Here, I propose two alternative approaches to partition the two abovementioned components of network dissimilarity.
 
@@ -73,6 +73,8 @@ Legendre, P. 2014. Interpreting the replacement and richness difference componen
 
 Koleff, P., Gaston, K.J., and J.J. Lennon. 2003. Measuring beta diversity for presence–absence data. \emph{Journal of Animal Ecology}
 \bold{72}, 367--382.
+
+Novotny, V. 2009. Beta diversity of plant-insect food webs in tropical forests: a conceptual framework. \emph{Insect Conservation and Diversity} \bold{2}, 5-9. doi: 10.1111/j.1752-4598.2008.00035.x
 }
 
 \author{Jochen Fründ}
