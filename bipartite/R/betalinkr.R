@@ -36,11 +36,7 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poiso
     if (binary){warning("standardizing to proportions for binary index; do you really want to do this?!?")}
     specmx.all <- decostand(specmx.all, method="total")
     linkmx <- decostand(linkmx, method="total")
-    # linkmx.sharedsp <- decostand(linkmx.sharedsp, method="total") # bugfix here: the old method caused negative values later on; as this is only a subset, it should not sum to 1 per web
-    # the correct proportions (actually, subset of proprtions) are now found filling in the proportion values from linkmx into non-empty cells
-    # linkmx.shared2 <- linkmx
-    # linkmx.shared2[linkmx.sharedsp==0] <- 0
-    # linkmx.sharedsp <- linkmx.shared2
+    # the correct proportions (actually, subset of proportions) are now found by filling in the proportion values from linkmx into non-empty cells (this way, the denominator is kept and linkmx.sharedsp can be used for partitioning the sets)
     linkmx.sharedsp[linkmx.sharedsp!=0] <- linkmx[linkmx.sharedsp!=0]
   }
 

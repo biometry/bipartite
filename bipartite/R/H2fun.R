@@ -46,8 +46,9 @@ function(web, H2_integer=TRUE){
        	newweb[bestone] <- newweb[bestone] + 1 # put an interaction into that cell
        	difexp <- exexpec - newweb
     	}
-        
-#    ## what may happen is that their are very few too-high-entries, but many too-low-entries!!
+      H2_max <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)    # first attempt of finding H2_max
+      
+#    ## what may happen is that there are very few too-high-entries, but many too-low-entries!!
 #    difweb <- newweb - exexpec #positive values indicate too-high-entries
 #    H2_max <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)
 #
@@ -97,7 +98,8 @@ function(web, H2_integer=TRUE){
   }     # end Hmaxfind
 		#  Hmax=H2(newmx)    
 	} # end else-part of initial exexpec
-    H2_max <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)   
+    H2_max.improved <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)
+    H2_max <- ifelse(H2_max >= H2_max.improved, H2_max, H2_max.improved) # JF: changed September 2019, as the improvement made things worse for certain small webs
    
     
 
@@ -119,7 +121,7 @@ function(web, H2_integer=TRUE){
 
    #--------------- H2'  ------------
    if (H2uncorr < H2_min) H2_min <- H2uncorr
-   if (H2_max < H2uncorr) H2_max <- H2uncorr
+   if (H2_max < H2uncorr) H2_max <- H2uncorr  # ideally, this should not occur
     #ranging (between 0 and 1):
     H_2prime <- (H2_max - H2uncorr) / (H2_max - H2_min)
 
@@ -133,3 +135,13 @@ function(web, H2_integer=TRUE){
 
 # This is still a bit unsatisfactory: First, we build a web which contains too many too-high-values, then we correct it. Ideally, the check for BOTH, too-high and too-low values would be done in the building of the web. That would certainly save computational time!!
 # Currently, the build-up is relatively complicated and slow because marginal totals need to be observed.
+
+
+# New test cases (bug in H2fun, H2maxfind, up to version 2.13):
+# myweb <- matrix(c(0,1,5,2), nrow=2, byrow=T) # this and similar webs don't work with H2fun!! can lead to NaN or "wrong" 0s
+# H2fun(matrix(c(0,1,5,2), nrow=2, byrow=T)) # here, the maximum is not found (only the same as the min is found) so H2=NaN
+# the web that it should find is
+# bestweb <- matrix(c(1,0,4,3),nrow=2,byrow=T)
+# H2fun(bestweb)  # yep, H2'=0, H2max is 0.974, but just because the function uses the observed web for H2max if that is better then the one found
+
+# conclusion: yes, there is a long-standing bug in H2fun! the "improvement" introduced unknown time after bipartite0.3 actually makes things worse at least sometimes (in above example web, H2max-web is found in basic H2maxfind, and then in the second step lost again!!)
