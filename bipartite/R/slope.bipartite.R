@@ -6,7 +6,7 @@ function(object, plot.it=TRUE, ...){
     # plot.it   logical: should data and fit be plotted (defaults to TRUE)
     # ...       arguments passed on to plot (not to curve!)
 
-    if (class(object)!="bipartite") stop("This function cannot be meaningfully applied to objects of this class.")
+    if (!is(object, "bipartite")) stop("This function cannot be meaningfully applied to objects of this class.")
     if (is.list(object)) stop("You seem to have computed extinction slopes for 'both' trophic levels using 'random' extermination and requesting the details of the sequences. Since this leads to a list of different-length sequences, you cannot use this function. \n\nPlease use method 'random' for each level separately OR set details to FALSE. \n\nWe apologise for the inconvenience.")
     N <- colSums(object)
 
@@ -18,7 +18,7 @@ function(object, plot.it=TRUE, ...){
 
 #    fit<- nls( y ~ 1 - b*x^a, start=list(a=2, b=1), lower=c(-1, 0.001), upper=c(500, 500), algorithm="port")
     fit <- try(nls(y ~ 1 - x^a, start=list(a=1)), silent=TRUE)
-        if (class(fit)=="try-error") fit <- nls( (y+rnorm(length(y), s=0.01)) ~ 1 - x^a, start=list(a=1))
+        if (inherits(fit, "try-error")) fit <- nls( (y+rnorm(length(y), s=0.01)) ~ 1 - x^a, start=list(a=1))
 
     if(plot.it)
     {

@@ -76,7 +76,7 @@
             }
             
             comps <- try(compart(web.e), silent=TRUE)
-            if (class(comps)=="try-error") {
+            if (inherits(comps, "try-error")) {
                 ncompart <- compdiv <- NA
             } else  {
                 ncompart <- comps$n.compart
@@ -117,7 +117,7 @@
         #-------------------
         if ("nestedness" %in% index){
             nest <- try(nestedtemp(web)$statistic, silent=TRUE)
-            out$nestedness <- ifelse(class(nest)=="try-error", NA, nest)
+            out$nestedness <- ifelse(inherits(nest, "try-error"), NA, nest)
             # a fast implementation of nestedness by Jari Oksanen
             #old: nestedness(web, null.models=FALSE)$temperature
         }
@@ -387,7 +387,7 @@ if (any(c("number of compartments", "compartment diversity") %in% index)){
     }
     
     comps <- try(compart(web.e), silent=TRUE)
-    if (class(comps)=="try-error") {
+    if (inherits(comps, "try-error")) {
         ncompart <- compdiv <- NA
     } else  {
         ncompart <- comps$n.compart
@@ -437,7 +437,7 @@ if ("weighted cluster coefficient" %in% index){
 # degree distribution fits:
 if ("degree distribution" %in% index){
     dd <- suppressWarnings(try(degreedistr(web, plot.it=plot.it.dd, pure.call=FALSE), silent=TRUE))
-    if (class(dd)=="try-error"){
+    if (inherits(dd, "try-error")){
         dd <- list()
         dd$"dd fits LTL" <- NA
         dd$"dd fits HTL" <- NA
@@ -474,7 +474,7 @@ if ("discrepancy" %in% index){
 #-------------------
 if ("nestedness" %in% index){
     nest <- try(nestedtemp(web)$statistic, silent=TRUE)
-    out$nestedness <- ifelse(class(nest)=="try-error", NA, nest)
+    out$nestedness <- ifelse(inherits(nest, "try-error"), NA, nest)
     # a fast implementation of nestedness by Jari Oksanen
     #old: nestedness(web, null.models=FALSE)$temperature
 }
