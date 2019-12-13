@@ -31,44 +31,43 @@ visweb(as.one.mode(vazquenc, fill=NA), NA.col="green") #slow!
 
 
 # betalinkr 
-# @Carsten: feel free to simplify / shorten
-# testdata of frame2webs (a case with low overlap and no shared links)
+#--case1: testdata of frame2webs (a case with low overlap and no shared links) --
 testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 
   lower = c("plant1","plant2","plant1","plant2","plant3","plant4"), 
   webID = c("meadow","meadow","meadow","meadow","bog","bog"), freq=c(5,1,1,1,3,7))
 testarray <- frame2webs(testdata, type.out="array")
-
-betalinkr(testarray) # returns NA for OS and ST
+betalinkr(testarray, distofempty="na", partitioning="poisot")  # returns NA for OS and ST
 # betalink(prepare_networks(list(testarray[,,1]))[[1]],  prepare_networks(list(testarray[,,2]))[[1]]) # betalink also returns NaN for this case (but requires package betalink)
-betalinkr(testarray, distofempty="zero") # fixed
-# Vazquez-data  
+betalinkr(testarray, partitioning="poisot") # fixed, now OS is zero
+betalinkr(testarray, partitioning="commondenom", partition.st=TRUE) # Novotny-style: plant differences rule here
+#--case2: Vazquez-data --
 testarray <- webs2array(Safariland, vazarr)  
 # various options
 # some binary examples
 betalinkr(testarray)
+betalinkr(testarray, partitioning="poisot", binary=TRUE, index="bray")
 betalinkr(testarray, index="jaccard")
-betalinkr(testarray, partitioning="adjusted", distofempty="zero")
-betalinkr(testarray, partitioning="commondenom", binary=TRUE, distofempty="zero", index="sorensen")
-betalinkr(testarray, partitioning="commondenom", binary=TRUE, distofempty="zero", index="jaccard")
+betalinkr(testarray, partitioning="poisot", binary=TRUE, index="jaccard")
 # some quantitative examples
-betalinkr(testarray, binary=F)
-betalinkr(testarray, partitioning="adjusted", binary=FALSE, distofempty="zero")
-betalinkr(testarray, partitioning="commondenom", binary=FALSE, distofempty="zero", index="sorensen")
-betalinkr(testarray, partitioning="adjusted", binary=FALSE, proportions=TRUE, distofempty="zero")
-betalinkr(testarray, partitioning="commondenom", binary=FALSE, proportions=TRUE, distofempty="zero", index="sorensen")
-betalinkr(testarray, index="horn", binary=F)
-# new (partition.st):
-betalinkr(testarray, partitioning="commondenom", binary=TRUE, distofempty="zero", index="sorensen",partition.st=TRUE)
-betalinkr(testarray, partitioning="commondenom", binary=FALSE, proportions=TRUE, distofempty="zero", index="sorensen",partition.st=TRUE)
-# two fully connected  and completely shared webs
+betalinkr(testarray, binary=FALSE, index="sorensen")
+betalinkr(testarray, binary=FALSE, partitioning="poisot")
+betalinkr(testarray, partitioning="commondenom", binary=FALSE, proportions=FALSE)
+betalinkr(testarray, partitioning="poisot", binary=FALSE, proportions=FALSE)
+betalinkr(testarray, index="horn", binary=F, partitioning="poisot")
+# partition.st:
+betalinkr(testarray, partitioning="commondenom", binary=TRUE, index="sorensen",partition.st=TRUE)
+betalinkr(testarray, partitioning="commondenom", binary=FALSE, index="sorensen",partition.st=TRUE)
+#--case3: two fully connected  and completely shared webs --
 testarray <- array(1:24, dim=c(2, 3, 2))
 betalinkr(testarray)
 # mostly shared webs
 testarray <- array(1:24, dim=c(2, 3, 4))
+  set.seed(23) # creates a special case where OS is smaller for "poisot" than for "commondenom"
   testarray[sample(1:24, 10)] <- 0 # setting some entries of above matrix to zero
   testarray <- testarray[, , sample(1:4, 2)] # selecting two sites at random (for now, just developing the function for a 2row-matrix)
-betalinkr(testarray)
-# example from paper (Figure 1 in Poisot et al. 2012)
+betalinkr(testarray, partitioning="poisot", binary=F)
+betalinkr(testarray, partitioning="commondenom", binary=F, partition.rr=T) # warning, but shows that OS_poisot < OS_commondenom can be explained by size difference of sharedsp subwebs (OS.rich) being removed by standardization to proportions (only in poisot this is done for the subweb)
+#--case4: example from Figure 1 in Poisot et al. 2012 --
 metaweb <- matrix(rep(0,25),nrow=5)
 metaweb[as.matrix(data.frame(c(2,4,5,5),c(1,2,2,3)))] <- 1  # the adj. matrix for the metaweb
 dimnames(metaweb) <- list(letters[1:5], letters[1:5])  # creating species names
@@ -76,15 +75,14 @@ web1 <- metaweb
 web1[5,2] <- 0 # one link removed from metaweb
 web2 <- web1[-1,-1] # top predator removed from web1
 web3 <- metaweb[-1,-1] # top predator removed from metaweb
-betalinkr_multi(webs2array(web1,web2,web3)) # OS>ST (web1 vs web3)
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="adjusted") # OS=ST (web1 vs web3)
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom") # also OS=ST (web1 vs web3)
-# new (partition.st):
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.st=T) 
-# new (partition.rr):
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.rr=T) 
-# both secondary partitiong in one
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.st=T, partition.rr=T) 
+betalinkr_multi(webs2array(web1,web2,web3),partitioning="poisot")       # OS>ST (web1 vs web3)
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom") # OS=ST (web1 vs web3)
+# partition.st:
+betalinkr_multi(webs2array(web1,web2,web3), partition.st=T) 
+# partition.rr:
+betalinkr_multi(webs2array(web1,web2,web3), partition.rr=T) # WN.rich=0, but OS.rich>0 (replacement leaves sharedspweb)
+# both secondary partitions in one call
+betalinkr_multi(webs2array(web1,web2,web3), partition.st=T, partition.rr=T) 
 
 
 # C.score

@@ -1,19 +1,8 @@
 # A new implementation of network dissimilarity (betalink and related) --------------------
 # see helpfile for further info and word doc for Jochen's notes, ToDo and further justification
 
-# just for developing:
-# webarray <- webs2array(web2,web3)
-
 # main FUNCTION betalinkr --------------------
-betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commondenom", proportions=!binary, function.dist="vegdist", distofempty="zero", partition.st=FALSE, partition.rr=FALSE, change.settings="no"){
-  
-  # first, later change to improved values
-  if (change.settings=="poisot"){
-    # setting all the defaults to be equivalent to Poisot's betalink (for comparisons)
-    partitioning <- "poisot"
-    function.dist <- "betadiver"
-    distofempty <- "na"
-  }
+betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commondenom", proportions=!binary, function.dist="vegdist", distofempty="zero", partition.st=FALSE, partition.rr=FALSE){
   
   if (class(webarray)=="list") {webarray <- webs2array(webarray)}
   if (dim(webarray)[[3]]!=2) warning("function is designed for a single pair of two webs; unclear output")
@@ -54,7 +43,7 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commo
   specmx.higher <- apply(webarray, c(3,2), sum)
   specmx.all <- cbind(specmx.lower, specmx.higher)  # e.g. sites X (plants, pollinators)
 
-  if (partitioning!="commondenom"){ # main work for "poisot" and "adjusted"
+  if (partitioning=="poisot"){
     if (partition.st | partition.rr){warning("further partitioning only available with method partitioning='commondenom'")}
     
     # alternative subsets of linkmx (partitioning ST and OS) --
@@ -87,11 +76,6 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commo
       } else {
         b_os.raw <- vegdist(linkmx.RewSha, method=index, binary=binary) # "OS"
       }
-      if (distofempty=="zero" & any(rowSums(linkmx.UniSha)==0)){ # set to conceptually correct value; avoids warning
-        b_st.raw <- b_zero  # only rewiring links means zero contribution of ST
-      } else {
-        b_st.raw <- vegdist(linkmx.UniSha, method=index, binary=binary) # "ST"
-      }
     } 
     if (function.dist=="betadiver"){
       if (binary==FALSE) {
@@ -104,28 +88,11 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commo
         } else {
           b_os.raw <- betadiver(linkmx.RewSha, method=index) # "OS"
         }
-        if (distofempty=="zero" & any(rowSums(linkmx.UniSha)==0)){ # set to the conceptually correct value; avoids warning
-          b_st.raw <- b_zero  # only rewiring links means zero contribution of ST
-        } else {
-          b_st.raw <- betadiver(linkmx.UniSha, method=index) # "ST"
-        }
       }
     }
     # output (and final steps of calculation)
-    if (partitioning=="poisot") {
-      b_os <- b_os.raw
-      b_st <- b_wn - b_os.raw
-    }
-    if (partitioning=="adjusted") {
-      # a new, experimental addition, also taking into account size differences
-      legacy <- TRUE
-      sizeweight.sharedsp <- sum(linkmx.sharedsp) / sum(linkmx)
-      sizeweight.os <- sizeweight.sharedsp
-      sizeweight.st <- 1 - sizeweight.sharedsp
-      if (legacy) {sizeweight.os <- 0.5; sizeweight.st <- 0.5} # just for recreating the behavior in bipartite version 2.13
-      b_os <- sizeweight.os * b_os.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # the correction I propose to apply
-      b_st <- sizeweight.st * b_st.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # equivivalently for st
-    }
+    b_os <- b_os.raw
+    b_st <- b_wn - b_os.raw
     return(c(S=b_s, OS=b_os, WN=b_wn, ST=b_st))
   }
     
