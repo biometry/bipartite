@@ -1,14 +1,20 @@
 # A new implementation of network dissimilarity (betalink and related) --------------------
 # see helpfile for further info and word doc for Jochen's notes, ToDo and further justification
 
-# main FUNCTION betalinkr --------------------
-betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poisot", proportions=FALSE, function.dist="vegdist", distofempty="na", partition.st=FALSE, partition.rr=FALSE){
-  # new arguments:
-  # partition.st : further partitioning of ST-component into ST.h = due to higher species being absent, ST.l = due to lower species absence and ST.lh = due to absence of both lower and higher species (following Novotny 2009, but different letters); only implemented for partitioning="commondenom"
-  # partition.rr: further partitioning of WN (and OS & ST) into WN.rdif = richness difference component (for binary networks, this means dissimilarity due to different number of links) and WN.repl = replacement component (binary networks: true turnover of links) (following Legendre 2014 and others); only implemented for partitioning="commondenom"
-  
-  # first, setting all the defaults to Poisot (for comparisons), later change to improved values
+# just for developing:
+# webarray <- webs2array(web2,web3)
 
+# main FUNCTION betalinkr --------------------
+betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commondenom", proportions=!binary, function.dist="vegdist", distofempty="zero", partition.st=FALSE, partition.rr=FALSE, change.settings="no"){
+  
+  # first, later change to improved values
+  if (change.settings=="poisot"){
+    # setting all the defaults to be equivalent to Poisot's betalink (for comparisons)
+    partitioning <- "poisot"
+    function.dist <- "betadiver"
+    distofempty <- "na"
+  }
+  
   if (class(webarray)=="list") {webarray <- webs2array(webarray)}
   if (dim(webarray)[[3]]!=2) warning("function is designed for a single pair of two webs; unclear output")
 
@@ -48,11 +54,11 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poiso
   specmx.higher <- apply(webarray, c(3,2), sum)
   specmx.all <- cbind(specmx.lower, specmx.higher)  # e.g. sites X (plants, pollinators)
 
-  if (partitioning!="commondenom"){
+  if (partitioning!="commondenom"){ # main work for "poisot" and "adjusted"
     if (partition.st | partition.rr){warning("further partitioning only available with method partitioning='commondenom'")}
     
     # alternative subsets of linkmx (partitioning ST and OS) --
-      # my approach here is to set the species/links to zero instead of excluding them (which will be done anyways when dissimilarity is calculated)
+      # my approach is to set the species/links to zero instead of excluding them (which will be done anyways when dissimilarity is calculated)
       # this makes it easier to match species / links (even without names)
     # shared links of shared species (only LINKS occurring in both sites)
     linkmx.sharedli <- linkmx   
@@ -74,15 +80,15 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poiso
     if (function.dist=="vegdist"){
       b_s <- vegdist(specmx.all, method=index, binary=binary) # "S"
       b_wn <- vegdist(linkmx, method=index, binary=binary) # "WN"
+      b_zero <- b_wn  # preparation for "distofempty": first get structure of distance matrix
+      b_zero[] <- 0   # preparation for "distofempty": define a zero distance matrix
       if (distofempty=="zero" & any(rowSums(linkmx.RewSha)==0)){  # set to conceptually correct value; avoids warning
-        b_os.raw <- b_wn # to get structure of distance matrix
-        b_os.raw[] <- 0
+        b_os.raw <- b_zero # no shared species means zero contribution of OS
       } else {
         b_os.raw <- vegdist(linkmx.RewSha, method=index, binary=binary) # "OS"
       }
       if (distofempty=="zero" & any(rowSums(linkmx.UniSha)==0)){ # set to conceptually correct value; avoids warning
-        b_st.raw <- b_wn # to get structure of distance matrix
-        b_st.raw[] <- 0
+        b_st.raw <- b_zero  # only rewiring links means zero contribution of ST
       } else {
         b_st.raw <- vegdist(linkmx.UniSha, method=index, binary=binary) # "ST"
       }
@@ -94,24 +100,38 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poiso
         b_s <- betadiver(specmx.all, method=index) # "S"
         b_wn <- betadiver(linkmx, method=index) # "WN"
         if (distofempty=="zero" & any(rowSums(linkmx.RewSha)==0)){  # set to the conceptually correct value; avoids warning
-          b_os.raw <- b_wn # to get structure of distance matrix
-          b_os.raw[] <- 0
+          b_os.raw <- b_zero # no shared species means zero contribution of OS
         } else {
           b_os.raw <- betadiver(linkmx.RewSha, method=index) # "OS"
         }
         if (distofempty=="zero" & any(rowSums(linkmx.UniSha)==0)){ # set to the conceptually correct value; avoids warning
-          b_st.raw <- b_wn # to get structure of distance matrix
-          b_st.raw[] <- 0
+          b_st.raw <- b_zero  # only rewiring links means zero contribution of ST
         } else {
           b_st.raw <- betadiver(linkmx.UniSha, method=index) # "ST"
         }
       }
     }
+    # output (and final steps of calculation)
+    if (partitioning=="poisot") {
+      b_os <- b_os.raw
+      b_st <- b_wn - b_os.raw
+    }
+    if (partitioning=="adjusted") {
+      # a new, experimental addition, also taking into account size differences
+      legacy <- TRUE
+      sizeweight.sharedsp <- sum(linkmx.sharedsp) / sum(linkmx)
+      sizeweight.os <- sizeweight.sharedsp
+      sizeweight.st <- 1 - sizeweight.sharedsp
+      if (legacy) {sizeweight.os <- 0.5; sizeweight.st <- 0.5} # just for recreating the behavior in bipartite version 2.13
+      b_os <- sizeweight.os * b_os.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # the correction I propose to apply
+      b_st <- sizeweight.st * b_st.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # equivivalently for st
+    }
+    return(c(S=b_s, OS=b_os, WN=b_wn, ST=b_st))
   }
     
   if (partitioning=="commondenom"){
     # here, index must be explicitly specified as one of Sorensen or Jaccard (lower case)
-      # quantitative equivalents available with binary=F; I actually use the quantitative formulae, which simplify to binary index if binary data given
+      # quantitative equivalents available with binary=F; I actually use the quantitative formulas, which simplify to binary index if given binary data 
 
     # A, B, C follows Legendre 2014; index "tot"=total differences, "rew"=rewiring differences, "uni"=unique species differences
     # I can calculate all components with linkmx and linkmx.sharedsp, and their difference
@@ -158,28 +178,23 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="poiso
       b_st.h <- (B.h + C.h) / denominator 
       b_st.lh <- (B.lh + C.lh) / denominator 
     }
-  }
-
-  # output (and final steps of calculation)
-    # move this up? I guess so
-  if (partitioning=="poisot") {
-    b_st.minus <- b_wn - b_os.raw
-    return(c(S=b_s, OS=b_os.raw, WN=b_wn, ST=b_st.minus))
-  }
-  if (partitioning=="adjusted") {
-    # a new, experimental addition, also taking into account size differences
-    legacy <- TRUE
-    sizeweight.sharedsp <- sum(linkmx.sharedsp) / sum(linkmx)
-    sizeweight.os <- sizeweight.sharedsp
-    sizeweight.st <- 1 - sizeweight.sharedsp
-    if (legacy) {sizeweight.os <- 0.5; sizeweight.st <- 0.5}
-    b_os <- sizeweight.os * b_os.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # the correction I propose to apply
-    b_st <- sizeweight.st * b_st.raw * b_wn / (sizeweight.os * b_os.raw + sizeweight.st * b_st.raw)  # equivivalently for st
-    return(c(S=b_s, OS=b_os, WN=b_wn, ST=b_st))
-  }
-  
-  if (partitioning=="commondenom") {
-    if (partition.st==FALSE){return(c(S=b_s, OS=b_os, WN=b_wn, ST=b_st))}
-    if (partition.st==TRUE){return(c(S=b_s, OS=b_os, WN=b_wn, ST=b_st, ST.l=b_st.l, ST.h=b_st.h, ST.lh=b_st.lh))}
+    if (partition.rr){
+      # partition WN and OS further into link Replacement component and link Richness difference component
+        # for binary=FALSE, link richness difference component is the dissimilarity component due to differences in network totals
+      if (proportions==TRUE){warning("partitionining into replacement and richness (abundance) difference components may be meaningless with proportions")}
+      b_wn.repl <- 2*min(B.tot, C.tot) / denominator
+      b_os.repl <- 2*min(B.rew, C.rew) / denominator
+      b_wn.rich <- abs(B.tot - C.tot) / denominator
+      b_os.rich <- abs(B.rew - C.rew) / denominator
+    }
+    # output (concetenated for secondary partitionings)
+    output <- c(S=b_s, OS=b_os, WN=b_wn, ST=b_st)
+    if (partition.st==TRUE){
+      output <- c(output, ST.l=b_st.l, ST.h=b_st.h, ST.lh=b_st.lh)
+    }
+    if (partition.rr==TRUE){
+      output <- c(output, WN.repl=b_wn.repl, OS.repl=b_os.repl, WN.rich=b_wn.rich, OS.rich=b_os.rich)
+    }
+    return(output)
   }
 }

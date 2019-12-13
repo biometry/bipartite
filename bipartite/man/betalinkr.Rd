@@ -14,12 +14,12 @@ This function (\code{betalinkr}) is a new implementation of network dissimarilit
 }
 
 \usage{
-betalinkr(webarray, index="bray", binary=TRUE, partitioning="poisot", 
-  proportions=FALSE, function.dist="vegdist", distofempty="na")
+betalinkr(webarray, index="bray", binary=TRUE, partitioning="commondenom",
+  proportions=FALSE, function.dist="vegdist", distofempty="zero", partition.st=FALSE,
+  partition.rr=FALSE, change.settings="no")
 
 betalinkr_multi(webarray, ...)
 }
-% the defaults are currently set to reproduce Poisots results; should rather change to my preferred settings (but then there should be an argument "set.defaults" that can be "poisot")
 \arguments{
   \item{webarray}{
     Input data, an array with three dimensions, third dimension has length 2 and separates the two webs to compare. First two dimensions are the species (typically first Lower and second Higher). For convenience, if webarray is a list of two webs, it will be converted to array format first using \code{webs2array} (that function can also be used to convert single web matrices to array format, but then needs to be called explicitly).
@@ -37,13 +37,26 @@ betalinkr_multi(webarray, ...)
     With \code{"commondenom"} (recommended setting), an alternative partitioning approach is used, which keeps a common denominator (of the dissimilarity index) for WN, OS and ST (i.e., the denominator is based on all links of the pair of webs instead of on subsets). Thus, only the numerator of the dissimilarity index is partitioned, which ensures additivity directly by partitioning the sets of links (or link weights).
   }
   \item{proportions}{
-    Should data be standardized to proportions before calculating quantitative dissimilarity metrics? Note that this is done here directly before calculating dissimilarities, thus gives a different result than if input data are already standardized.
+    Should data be standardized to proportions before calculating quantitative dissimilarity metrics? Note that this is done here directly before calculating dissimilarities, thus gives a different result than if input data were already standardized. Will be set to TRUE by default if \code{binary=FALSE}.
   }
   \item{function.dist}{
     Which function to use for calculating dissimilarity? The name of \code{vegan} package function, either \code{"vegdist"} (quantitative indices available) or \code{"betadiver"} (gives compatibility to the 24 numbered indices of Koleff et al. 2003 as used by \emph{betalink} package, but only binary indices). Note that this argument is ignored if \code{partitioning="commondenom"}, which implements the dissimilarity index calculation directly.
   }
   \item{distofempty}{
-    Can be \code{"zero"} or \code{"na"}. How should dissimilarity be defined when there are either no links to use for b_os (i.e. only links involving species just found in one of the 2 webs) or no links to use for b_st (i.e. only "rewiring links" present)? "zero" is appropriate when interested in the contribution of components b_os and b_st, whereas "na" is appropriate when b_os should be interpreted separately as dissimilarity of shared species subwebs
+    Can be \code{"zero"} or \code{"na"}. How should dissimilarity be defined when there are either no links to use for OS (i.e. only links involving species just found in one of the 2 webs) or no links to use for ST (i.e. only "rewiring links" present)? "zero" is appropriate when interested in the contribution of components OS and ST, whereas "na" is appropriate when b_os should be interpreted separately as dissimilarity of shared species subwebs
+  }
+  \item{partition.st}{
+    A secondary partitioning of the species turnover component, following Novotny (2009), which separates ST further into dissimilarity due to absence of resource species (lower, ST.l), absence of consumer species (higher, ST.h) or absence of both (ST.lh)
+        
+    Only works with \code{partioning="commondenom"}.
+  }
+  \item{partition.rr}{
+    A secondary partitioning of dissimilarity (WN and OS) into "true" turnover components (WN.repl, OS.repl) and a component due to richness difference (difference in network totals; WN.rich, OS.repl). This follows Legendre (2014, and references therein) and was first applied to networks by Noreika et al. (2019). The function implements "Podani family" indices according to Legendre's terminology.
+    
+    Only works with \code{partioning="commondenom"}.
+  }
+  \item{change.settings}{
+    An option to conveniently reproduce results as given by the \code{betalink} package. \emph{Warning: This may override your settings for certain arguments.}
   }
   \item{...}{Arguments passed on to \code{\link{betalinkr}}.}
   % another argument "2nd.decomposition" that further calculates B_richness and B_replacement components of each dissimilarity will come; maybe only available with partitioning="commondenom"
@@ -53,17 +66,20 @@ The basic idea to calculate dissimilarity (betadiversity) between networks (link
 
 However, the number of "unique links" (i.e. only observed in one of the two webs) can be well partitioned into additive components. Here, I propose two alternative approaches to partition the two abovementioned components of network dissimilarity.
 
-In the first approach (with \code{partitioning="adjusted"}, beta_OS is first calculated following Poisot et al., and beta_ST is then calculated equivalently, but excluding rewiring links instead of links of unique species from the comparison. In a second step, these raw values are adjusted (multiplying by WN/(OS+ST)) in order to fulfill OS+ST=WN. With this partitioning approach, many different dissimilarity indices can be used with \code{function.dist} either \code{vegdist} or \code{betadiver}, but no guarantee that they all of them can be usefully interpreted (following Legendre 2014, Jaccard-family and Sorensen-family dissimilarity indices are recommended; note that with vegdist you get Sorensen-family with "bray", and with betadiver Jaccard is 15 and Sorensen is 1, although these go under different names there as Koleff et al. 2003 uses the names Jaccard/Sorensen for the corresponding similarity metrics).
+In the first approach (with \code{partitioning="adjusted"}, beta_OS is first calculated following Poisot et al., and beta_ST is then calculated equivalently, but excluding rewiring links instead of links of unique species from the comparison. In a second step, these raw values are adjusted in order to fulfill OS+ST=WN (adjustment is done by multiplying by a correction factor). With this partitioning approach, many different dissimilarity indices can be used with \code{function.dist} either \code{vegdist} or \code{betadiver}, but no guarantee that all of them can be usefully interpreted (following Legendre 2014, Jaccard-family and Sorensen-family dissimilarity indices are recommended; note that with vegdist you get Sorensen-family with "bray", and with betadiver Jaccard is 15 and Sorensen is 1, although these go under different names there as Koleff et al. (2003) use the names Jaccard/Sorensen for the corresponding similarity metrics).
 
-The second approach (with \code{partitioning="commondenom"}) was inspired by Legendre 2014 and avoids using an existing dissimilarity function, but implements calculation of dissimilarity indices directly (thus more limited options for these). Here, the same denominator as for the total dissimilarity WN is used also for its components OS and ST, thus ensuring additivity.
+The second approach (with \code{partitioning="commondenom"}) was inspired by Legendre (2014) and avoids using an existing dissimilarity function, but implements calculation of dissimilarity indices directly (thus more limited options for these). Here, the same denominator as for the total dissimilarity WN is used also for its components OS and ST, thus ensuring additivity. This method was actually already proposed by Novotny (2009).
+
 Note that if you are interested only in dissimilarity between subwebs (not as an additive component), you should use \code{partitioning="poisot"}.
 }
 \value{
-A named vector of four dissimilarities, naming follows Poisot et al. 2012.
+A named vector of four (or more) dissimilarities (components), naming follows Poisot et al. 2012.
 \item{S}{beta_S, the dissimilarity in species composition}
 \item{OS}{beta_OS, the dissimilarity (component) explained by "rewiring" among shared species}
 \item{WN}{beta_WN, the dissimilarity between the two networks}
 \item{ST}{beta_ST, the dissimilarity (component) explained by difference in species community composition}
+\item{}{possibly more elements, same names as above, but with secondary partitioning added after ".", see \code{partition.st} and \coe{partition.rr}}
+For \code{betalinkr_multi}, output is a dataframe with one row per pair of webs compared.
 }
 
 \references{
@@ -75,6 +91,8 @@ Koleff, P., Gaston, K.J., and J.J. Lennon. 2003. Measuring beta diversity for pr
 \bold{72}, 367--382.
 
 Novotny, V. 2009. Beta diversity of plant-insect food webs in tropical forests: a conceptual framework. \emph{Insect Conservation and Diversity} \bold{2}, 5-9. doi: 10.1111/j.1752-4598.2008.00035.x
+
+Noreika, N., Bartomeus, I., Winsa, M., Bommarco, R., and  E. Öckinger. 2019. Pollinator foraging flexibility mediates rapid plant-pollinator network restoration in semi-natural grasslands.\emph{Scientific Reports}, \bold{9}, 1–11. doi:10.1038/s41598-019-51912-4
 }
 
 \author{Jochen Fründ}
@@ -86,7 +104,9 @@ Novotny, V. 2009. Beta diversity of plant-insect food webs in tropical forests: 
 
   Why the name of the function? Short for "betalink revised".
   
-  Why the names of the output values? These are the indices of beta (for betadiversity); I am keeping the original names and guess what they stand for: S (Species), OS (Only Shared species links), WN (Whole Network links), ST (Species Turnover links).
+  Why the names of the output values? These are the indices of beta (for betadiversity); I am keeping the names used by Tim Poisot and guess what they stand for: S (Species), OS (Only Shared species links), WN (Whole Network links), ST (Species Turnover links). Some authors would call all this only dissimilarity (or dissimilarity components), reserving the term betadiversity for something not standardized between 0 and 1.
+  
+  For partitioning into replacement and richness difference, note that replacement in WN can mean richness difference in OS (if shared species switch from interaction with other shared species in one network to interactions with non-shared species in another network, changing the size of shared-species subweb), so finding OS.rich > WN.rich is not a bug.
   
   Thanks to Carsten Dormann, Benjamin Schwarz, Benoit Gauzens, Nacho Bartomeus and Timothee Poisot for their contributions to this function.
 }

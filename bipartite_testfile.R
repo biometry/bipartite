@@ -39,7 +39,7 @@ testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"),
 testarray <- frame2webs(testdata, type.out="array")
 
 betalinkr(testarray) # returns NA for OS and ST
-betalink(prepare_networks(list(testarray[,,1]))[[1]],  prepare_networks(list(testarray[,,2]))[[1]]) # betalink also returns NaN for this case
+# betalink(prepare_networks(list(testarray[,,1]))[[1]],  prepare_networks(list(testarray[,,2]))[[1]]) # betalink also returns NaN for this case (but requires package betalink)
 betalinkr(testarray, distofempty="zero") # fixed
 # Vazquez-data  
 testarray <- webs2array(Safariland, vazarr)  
@@ -57,6 +57,9 @@ betalinkr(testarray, partitioning="commondenom", binary=FALSE, distofempty="zero
 betalinkr(testarray, partitioning="adjusted", binary=FALSE, proportions=TRUE, distofempty="zero")
 betalinkr(testarray, partitioning="commondenom", binary=FALSE, proportions=TRUE, distofempty="zero", index="sorensen")
 betalinkr(testarray, index="horn", binary=F)
+# new (partition.st):
+betalinkr(testarray, partitioning="commondenom", binary=TRUE, distofempty="zero", index="sorensen",partition.st=TRUE)
+betalinkr(testarray, partitioning="commondenom", binary=FALSE, proportions=TRUE, distofempty="zero", index="sorensen",partition.st=TRUE)
 # two fully connected  and completely shared webs
 testarray <- array(1:24, dim=c(2, 3, 2))
 betalinkr(testarray)
@@ -73,9 +76,15 @@ web1 <- metaweb
 web1[5,2] <- 0 # one link removed from metaweb
 web2 <- web1[-1,-1] # top predator removed from web1
 web3 <- metaweb[-1,-1] # top predator removed from metaweb
-betalinkr_multi(webs2array(web1,web2,web3)) # OS>ST
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="adjusted") # OS=ST
-betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom") # also OS=ST
+betalinkr_multi(webs2array(web1,web2,web3)) # OS>ST (web1 vs web3)
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="adjusted") # OS=ST (web1 vs web3)
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom") # also OS=ST (web1 vs web3)
+# new (partition.st):
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.st=T) 
+# new (partition.rr):
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.rr=T) 
+# both secondary partitiong in one
+betalinkr_multi(webs2array(web1,web2,web3), partitioning="commondenom", partition.st=T, partition.rr=T) 
 
 
 # C.score
