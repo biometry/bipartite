@@ -134,8 +134,8 @@ function (net, type = NULL) {
     if (sum(net[, "i"] == net[, "j"] & net[, "w"] == 1) != N) 
       stop("Problem with node joining data")
     # Check class of time column
-    if (class(net[, "t"])[1] != "POSIXct") {
-      if (class(net[, "t"]) != "character") {
+    if (is((net[, "t"])[1] ,"POSIXct")) {
+      if (is((net[, "t"]) ,"character")) {
         net[, "t"] <- as.character(net[, "t"])
       }
       net[, "t"] <- as.POSIXct(net[, "t"])

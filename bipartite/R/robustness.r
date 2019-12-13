@@ -4,7 +4,7 @@ robustness<- function (object)
     # based on output by "second.extinct" (see there)
     # by Mariano Devoto, April 2009
     
-    if (class(object) != "bipartite")
+    if (is(object, "bipartite"))
         stop("This function cannot be meaningfully applied to objects of this class.")
     N <- colSums(object)
 	# select the correct column, based on which level was subject to primary extinction:

@@ -172,7 +172,7 @@ one.grouplevel <- function(web, index="ALLBUTDD", level="higher", weighted=TRUE,
 
   # degree distribution fits:
   if ("degree distribution" %in% index){
-    if (class(dd)=="try-error"){
+    if (inherits(dd, "try-error")){
       print("Panic!")
       dd <- list()
       dd[[2]] <- NA
