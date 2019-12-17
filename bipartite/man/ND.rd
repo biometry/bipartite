@@ -39,7 +39,7 @@ BC reflects the number of shortest paths going through the focal node. CC is the
 
 Both BC and CC can be normalised so that they sum to 1 (using \option{rescale=TRUE}). This only affects the absolute values, but not the qualitative results.
 
-The interested user may want to also have a look at the networkX homepage (\url{http://networkx.lanl.gov}) for an excellent, open, Python-based tool to analyse, depict and manipulate (one-mode) networks. It is not specifically meant for bipartite networks such as this package, though.
+The interested user may want to also have a look at the networkX homepage (\url{https://networkx.github.io}) for a Python-based tool to analyse, depict and manipulate (one-mode) networks. It is not specifically meant for bipartite networks such as this package, though.
 }
 
 \value{

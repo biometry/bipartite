@@ -37,8 +37,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.13\cr
-Date: \tab 2018-11-12\cr
+Version: \tab 2.14\cr
+Date: \tab 2018-12-17\cr
 License: \tab GPL \cr
 }
 }
@@ -47,6 +47,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.14 (release date: 17-Dec-2019)
+  \describe{
+    \item{Updates}{of \code{\link{betalinkr}}-options.}
+    \item{Future R-version 4.x.x}{requires discontinuation of \code{class(x) == "y"}-like code (rather using \code{is(x, "y")} or \code{inherits(x, "y")}). Updated accordingly.}
+  }
+  
   \item 2.13 (release date: 21-May-2019)
   \describe{
     \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}

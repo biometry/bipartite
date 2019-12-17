@@ -4,7 +4,7 @@ webs2array <- function(...){
 	webinput <- substitute(list(...))
 	web.names <- as.character(webinput)[-1L]
 	webs <- eval(webinput)
-  if (class(webs[[1]])=="list"){
+  if (is(webs[[1]], "list")){
     webs <- webs[[1]]
     web.names <- names(webs)
     if (is.null(web.names)) {web.names <- paste0("web",1:length(webs))}

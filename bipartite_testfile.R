@@ -30,6 +30,9 @@ visweb(as.one.mode(Safariland, project="lower", fill=NA), NA.col="green") #NA.co
 visweb(as.one.mode(vazquenc, fill=NA), NA.col="green") #slow!
 
 
+# array2linkmx
+array2linkmx(webs2array(Safariland, vazquenc))
+
 # betalinkr 
 #--case1: testdata of frame2webs (a case with low overlap and no shared links) --
 testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 

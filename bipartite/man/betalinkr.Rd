@@ -73,7 +73,7 @@ A named vector of four (or more) dissimilarities (components), naming follows Po
 \item{OS}{beta_OS, the dissimilarity (component) explained by "rewiring" among shared species}
 \item{WN}{beta_WN, the dissimilarity between the two networks}
 \item{ST}{beta_ST, the dissimilarity (component) explained by difference in species community composition}
-\item{}{possibly more elements, same names as above, but with secondary partitioning added after ".", see \code{partition.st} and \coe{partition.rr}}
+\item{}{possibly more elements, same names as above, but with secondary partitioning added after ".", see \code{partition.st} and \code{partition.rr}}
 For \code{betalinkr_multi}, output is a dataframe with one row per pair of webs compared.
 }
 
@@ -117,11 +117,14 @@ Noreika, N., Bartomeus, I., Winsa, M., Bommarco, R., and  E. Öckinger. 2019. Po
 \examples{
 # two examples that give the same results as would the 
 # \code{betalink} function in the package of the same name
-betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)), partitioning="poisot")
-betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)),function.dist="betadiver",index=1, partitioning="poisot")
+betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)), 
+    partitioning="poisot")
+betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)), 
+    function.dist="betadiver",index=1, partitioning="poisot")
 
 # same data, with recommended partitioning method plus further partitioning
-betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)), partitioning="commondenom", partition.st=TRUE)
+betalinkr(webs2array(list(Safariland=Safariland, vazarr=vazarr)), 
+    partitioning="commondenom", partition.st=TRUE)
 
 # another example (no shared links)
 testdata <- data.frame(higher = c("bee1","bee1","bee1","bee2","bee1","bee3"), 
