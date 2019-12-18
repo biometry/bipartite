@@ -4,7 +4,7 @@
 
 
 # run 
-# R CMD build bipartite --compact-vignettes="gs+qpdf"
+# R CMD build bipartite --compact-vignettes=gs+qpdf
 # R CMD CHECK bipartite_2.13.tar.gz --as-cran
 # tools::compactPDF("/Users/Carsten/Data/aktuell/bipartite/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality = "ebook") 
 # press <- tools::compactPDF("/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality="ebook") # didn't work; resaved it from Adobe Acrobat instead
