@@ -16,10 +16,7 @@
   \makeindex
 \usepackage{natbib}
 \usepackage{url}
-\usepackage[unicode=true,pdfusetitle,
- bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
- breaklinks=true,pdfborder={0 0 1},backref=page,colorlinks=false, hidelinks]
- {hyperref}
+\usepackage[unicode=true, pdfusetitle, bookmarks=true, bookmarksnumbered=true, bookmarksopen=true, bookmarksopenlevel=2,  breaklinks=true, pdfborder={0 0 1}, backref=page, colorlinks=false, hidelinks]{hyperref}
 %\hypersetup{ pdfstartview={XYZ null null 1}}
 \usepackage{breakurl}
 \usepackage{titlesec} % for titleformat
@@ -134,7 +131,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{latentnet}] 
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
-\item[\package{tnet}], some functions of which were lifted to \package{bipartite} (thanks to Tore for allowing that!);
+\item[\package{tnet},] some functions of which were lifted to \package{bipartite} (thanks to Tore for allowing that!);
 \item[\package{vegan}] for various analyses of a community matrix, including null models and nestedness computations;
 \item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
 \end{description}

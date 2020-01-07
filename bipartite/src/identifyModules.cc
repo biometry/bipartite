@@ -154,7 +154,7 @@ bool		graphIsConnected;		// indicates whether the graph is connected
 
 // ******** Main Loop *************************************************************************************
 
-int identifyModules(int* r_argc, char* argv[]) {
+void identifyModules(int* r_argc, char* argv[]) {
 	
 	namesLUT = new rbtree();
 	reverseNamesLUT = new rbtree();
@@ -188,7 +188,7 @@ int identifyModules(int* r_argc, char* argv[]) {
 
 		if (!readInputFile()) {								// read input file
 			 Rprintf("!! ERROR: Malformed input file.\n");
-			 return 0;
+			 //return 0;
 		}
 
  		bestDendro		= d->deepCopy();					// make the dendro-graph structure holding a copy of the current dendrogram
@@ -203,7 +203,7 @@ int identifyModules(int* r_argc, char* argv[]) {
 		    Rprintf("\n#steps\tM\tbest M\ttemperature\n");
 
 		    while(converge < ioparm.maxconverge || bestM < 0) {				// while modularity did increase during the last maxconverge steps
-			    if (!(markovChainMonteCarlo())) { return 0; }			// make MCMC move
+                if (!(markovChainMonteCarlo())) {}// return 0; }			// make MCMC move
 		    }
 		}
 
@@ -228,10 +228,10 @@ int identifyModules(int* r_argc, char* argv[]) {
         reverseNamesLUT = 0;
         delete reverseNamesLUT;
 		
-		return 1;
+		//return 1;
 	}
 
-	return 0;
+	 //return 0;
 }
 
 // ******** Function Definitions **************************************************************************

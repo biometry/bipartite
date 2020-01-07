@@ -9,7 +9,7 @@ tools::package_native_routine_registration_skeleton(".")
 
 /* .C calls */
 extern void bmn5(int*, int*, int*, double*, int*, int*, int*,  int*,  int*,  int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, int*, int*);
-extern int identifyModules(int*, char*);
+extern void identifyModules(int*, char**);
 
 static const R_CMethodDef cMethods[ ] = {
     {"bmn5", (DL_FUNC) &bmn5, 21},

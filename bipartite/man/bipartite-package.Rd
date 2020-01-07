@@ -38,7 +38,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.14\cr
-Date: \tab 2018-12-17\cr
+Date: \tab 2020-01-07\cr
 License: \tab GPL \cr
 }
 }
@@ -47,10 +47,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.14 (release date: 17-Dec-2019)
+  \item 2.14 (release date: 07-Jan-2020)
   \describe{
     \item{Updates}{of \code{\link{betalinkr}}-options.}
     \item{Future R-version 4.x.x}{requires discontinuation of \code{class(x) == "y"}-like code (rather using \code{is(x, "y")} or \code{inherits(x, "y")}). Updated accordingly.}
+    \item{C++-style changes}{requiring identifyModules-Arguments to be labelled slightly differently. Impossible to check without setting up a linux chain, but still reason for CRAN not to accept.} 
   }
   
   \item 2.13 (release date: 21-May-2019)
