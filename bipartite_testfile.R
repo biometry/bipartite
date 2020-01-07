@@ -5,21 +5,14 @@
 
 # run 
 # R CMD build bipartite --compact-vignettes=gs+qpdf
-# R CMD CHECK bipartite_2.13.tar.gz --as-cran
-# tools::compactPDF("/Users/Carsten/Data/aktuell/bipartite/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality = "ebook") 
-# press <- tools::compactPDF("/bipartite/inst/doc/Dormann2011NetworkBiology.pdf", gs_quality="ebook") # didn't work; resaved it from Adobe Acrobat instead
-# on the large PDFs in inst/ !!
+## inR: rhub::check("bipartite_2.14.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
+## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
+# R CMD CHECK bipartite_2.14.tar.gz --as-cran
+# R CMD INSTALL bipartite_2.14.tar.gz
 # check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 
-
-
-
 ## run this file after every change in bipartite before submitting it to CRAN!!
-## compile and install bipartite before running this! Do not run on R-functions directly (see bottom!)
-# command line, in the respective folder:
-# R CMD build bipartite
-# R CMD install bipartite_2.10.tar.gz
 library(bipartite)
 
 # lazy load data does not require data to be loaded via "data(.)"!
@@ -98,13 +91,11 @@ C.score(t(m), normalise=TRUE) # should be 0.57, since half of the species have n
 C.score(m, normalise=TRUE) # should be 1!
 n <- matrix(c(1,0,0, 0,1,0, 0,0,1), 3,3)
 C.score(t(n), normalise=T)
-system.time(C.score(memmott1999)) # 3.6s
+system.time(C.score(memmott1999)) # 2s
 
 # CC (closeness centrality)
 CC(Safariland)
 CC(Safariland, rescale=F)
-CC(Safariland, weighted=F) # weighed=F same as T!
-CC(Safariland, rescale=F, weighted=F) # weighed=F same as T!
 wf <- as.one.mode(Safariland, project="lower", weighted=F)
 wt <- as.one.mode(Safariland, project="lower", weighted=T)
 closeness(wf, cmode="suminvundir")
@@ -120,7 +111,6 @@ compart(bezerra2009) # an uncomparted network
 ## a lot to test here! let's start with the problem of calling computeModules twice in a row:
 comp1 <- computeModules(vazquenc)
 comp2 <- computeModules(vazquenc, forceLPA=TRUE)
-comp3 <- computeModules(vazquenc, method="DormannStrauss")
 comp3 <- computeModules(vazquenc, method="DormannStrauss")
 plotModuleWeb(comp1)
 plotModuleWeb(comp2)
