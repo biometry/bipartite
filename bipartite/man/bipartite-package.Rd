@@ -47,6 +47,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+	
+  \item 2.15 (release date: dd-mmm-2020)
+  \describe{
+  	\item{Bug fix in \code{\link{robustness}}:}{in my previous updates of the discontinued \code{class}-issues I managed to omit a crucial "!" in the code. Thanks to Hanlun Liu and Felix Neff for reporting!}
+  }	
+	
   \item 2.14 (release date: 07-Jan-2020)
   \describe{
     \item{Updates}{of \code{\link{betalinkr}}-options.}
