@@ -171,7 +171,8 @@ empty(M) # should be matrix with 1, 1!
 # endpoint
 endpoint(vazquenc)
 
-# extinction: see second.extinct
+# extinction: see also second.extinct
+
 
 # fc
 fc(t(Safariland), dist="canberra", method="complete")
@@ -338,6 +339,12 @@ slope.bipartite(bs) # should return an error with an explanation
 bs <- second.extinct(Safariland, method="random", participant="both", details=F) 
 slope.bipartite(bs) # should work
 second.extinct(Safariland, participant="both", method="external", ext.row=1:9, ext.col=27:1) # should break!
+
+web <- matrix(c(3, 2, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1), ncol = 3)
+second.extinct(web, participant = "lower", method = "abundance")
+second.extinct(web, participant = "lower", method = "random")
+second.extinct(web, participant = "higher", method = "abundance")
+
 
 # slope.bipartite
 

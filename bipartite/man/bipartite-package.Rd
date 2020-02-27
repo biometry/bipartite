@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \item 2.15 (release date: dd-mmm-2020)
   \describe{
   	\item{Bug fix in \code{\link{robustness}}:}{in my previous updates of the discontinued \code{class}-issues I managed to omit a crucial "!" in the code. Thanks to Hanlun Liu and Felix Neff for reporting!}
+  	\item{Bug fix in \code{\link{extinction}}:}{for sparse networks, the function sometimes returned a vector rather than a matrix, due to incorrectly dropping a dimension. Thanks to Felix Neff for reporting and providing the solution!}
   }	
 	
   \item 2.14 (release date: 07-Jan-2020)

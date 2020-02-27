@@ -36,7 +36,7 @@ extinction <- function(web, participant="both", method="random", ext.row=NULL, e
   if (meths.match == 2)               # removal by abundance:
   {
   	# randomisation of species sequence to break ties (in function order):
-  	web <- web[sample(1:nrow(web)), sample(1:ncol(web))]
+  	web <- web[sample(1:nrow(web)), sample(1:ncol(web)), drop=FALSE]
       rseq <- order(rowSums(web))
       cseq <- order(colSums(web))
       if (partis.match==1) web[rseq[1], ] <- 0
