@@ -26,10 +26,12 @@ In bipartite (or: two-mode) networks, participants are of different types (e.g. 
 Much network theory, however, is based on one-mode networks, where all participants are listed in one vector, i.e. plants and pollinators alike, actors together with events. This function here transforms the more condensed bipartite representation into a one-mode-representation, filling the unobserved type of interactions (i.e. plants with plants and pollinators with pollinators) with 0 (unless you specify it differently in \option{fill}).
 
 The lower trophic level (e.g. plants or rows) is listed first, then the higher trophic level (e.g. pollinators or columns). Hence, pollinator 2 becomes species number r+2, where r is the number of rows of the network matrix.
+
+If \option{weighted=TRUE}, then the returned one-mode network contains the parallel minimum of the observed interactions between two species. That means, if two species A and B interact with species 1 to 5 in the other group, then the two interaction vectors for A with 1 to 5 and B with 1 to 5 are placed next to each other, and for every species 1 to 5 the minimum for each of these 5 values for the two vectors is retained (the parallel minimum). The idea is that the similarity between A and B is driven by their lowest communality in interactions. Next, the five parallel minimum values are added to yield the final weight for this link.
   
 The benefit of this conversion is access to the wonderful R-package Social Network Analysis (\pkg{sna}), with its many one-mode indices (such as \code{betweenness}, \code{closeness}, \code{centralization}, \code{degree}, \code{kpath.census} and so forth). Furthermore, \code{gplot} in that package also provides cool network depictions well worth checking out.
   
-  With respect to \pkg{bipartite}, \code{as.one.mode} is employed in the function \code{\link{nodespec}}, which itself uses the \pkg{sna}-function \code{geodist}.
+With respect to \pkg{bipartite}, \code{as.one.mode} is employed in the function \code{\link{nodespec}}, which itself uses the \pkg{sna}-function \code{geodist}.
 }
 
 \value{

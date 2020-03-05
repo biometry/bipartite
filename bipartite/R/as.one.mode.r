@@ -13,16 +13,16 @@ as.one.mode <- function(web, fill=0, project="full", weighted=TRUE){
       for (i in 1:N){
         for (j in 1:N){
           if (j >= i) next;
-          set <- web[,c(i,j)]
-          Ints <- pmin(set[,1], set[,2])
-          Links <- sum(Ints > 0, na.rm=TRUE)
-          Weight <- sum(Ints, na.rm=TRUE)
+          set <- web[,c(i,j)] # picks two columns, arranged as matrix
+          Ints <- pmin(set[,1], set[,2]) # computes parallel minimum number of interactions
+          Links <- sum(Ints > 0, na.rm=TRUE) # number of links
+          Weight <- sum(Ints, na.rm=TRUE) # sum of parallel minimum
           if (weighted) W <- Weight else W <- 1
           if (Links > 0) as.one.mode.web[i,j] <- W
         }
       }
-      as.one.mode.web <- as.one.mode.web + t(as.one.mode.web)
-      as.one.mode.web
+      as.one.mode.web <- as.one.mode.web + t(as.one.mode.web) # reflect lower onto upper triangle
+      return(as.one.mode.web)
     }
 
 	NR <- NROW(web)
