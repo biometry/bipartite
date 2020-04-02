@@ -78,6 +78,8 @@ This means:
 * add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex)
 * WINE-artiger von Marco: Araujo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 * put Strona's NOS-index into bipartite (there is an R-package)
+* Eigenvector, Katz, PageRank as well as a few similarity measures such as cosine, Pearson and Euclidean for weighted bipartite networks in the package
+* make "small world" a directly accessible index
 * check Poisot's python and matlab packages
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
 * check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure

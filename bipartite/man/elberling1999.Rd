@@ -10,7 +10,7 @@ This study took place in the subarctic alpine zone of Latnjajaure, in northern S
 
 The authors recorded their data by counting the number of visits of each flower visitor species to each plant species. Regardless of whether insects were observed to forage for nectar and pollen or to perform sun-basking, they were all classified as flower visitors and potential pollinators and the plant species visited were recorded. Data are presented as an interaction frequency matrix, in which cells with positive integers indicate the frequency of interaction between a pair of species, and cells with zeros indicate no interaction.
 
-See also \url{http://www.nceas.ucsb.edu/interactionweb/html/datasets.html}
+See also \url{https://iwdb.nceas.ucsb.edu/resources.html#plant_pollinator}
 }
 
 \usage{data(elberling1999)}

@@ -11,8 +11,8 @@ Note: This algorithm relies on the igraphs package's implementation of Dijkstra'
   \item{alpha}{ sets the alpha parameter in the generalised measures from Opsahl, T., Agneessens, F., Skvoretz, J., 2010. Node Centrality in Weighted Networks: Generalizing Degree and Shortest Paths. Social Networks. If this parameter is set to 1 (default), the Dijkstra shortest paths are used. The length of these paths rely simply on the tie weights and disregards the number of nodes on the paths. }
 }
 \value{ Returns a data.frame with two columns: the first column contains the nodes' ids, and the second column contains the nodes' betweenness scores. }
-\references{ http://toreopsahl.com/2009/02/20/betweenness-in-weighted-networks/ }
-\author{ Tore Opsahl; http://toreopsahl.com }
+\references{ https://toreopsahl.com/2009/02/20/betweenness-in-weighted-networks/ }
+\author{ Tore Opsahl; https://toreopsahl.com }
 \note{ version 1.0.0, taken, with permission, from package tnet  }
 \examples{
 ## Load sample data

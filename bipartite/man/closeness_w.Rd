@@ -12,8 +12,8 @@
   \item{alpha}{ sets the alpha parameter in the generalised measures from Opsahl, T., Agneessens, F., Skvoretz, J., 2010. Node Centrality in Weighted Networks: Generalizing Degree and Shortest Paths. Social Networks. If this parameter is set to 1 (default), the Dijkstra shortest paths are used. The identification procedure of these paths rely simply on the tie weights and disregards the number of nodes on the paths. }
 }
 \value{ Returns a data.frame with three columns: the first column contains the nodes' ids, the second column contains the closeness scores, and the third column contains the normalised closeness scores (i.e., divided by N-1). }
-\references{ http://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks/ }
-\author{ Tore Opsahl; http://toreopsahl.com }
+\references{ https://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks/ }
+\author{ Tore Opsahl; https://toreopsahl.com }
 \note{ version 1.0.0, taken, with permission, from package tnet  }
 \examples{
 ## Load sample data

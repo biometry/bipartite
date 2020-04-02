@@ -16,7 +16,7 @@
 Male and female pollinators were summed when moving this data set from NCEAS to bipartite.
 }
 \source{
-  NCEAS data base on interaction webs: \url{http://www.nceas.ucsb.edu/interactionweb/html/datasets.html}
+  NCEAS data base on interaction webs: \url{https://iwdb.nceas.ucsb.edu/resources.html#plant_pollinator}
 
 }
 \references{

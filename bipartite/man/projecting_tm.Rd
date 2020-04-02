@@ -4,7 +4,7 @@
 
 \title{ Projecting binary and weighted two-mode networks onto weighted one-mode networks. }
 \description{ This function is the implemtation of the procedure outlined on \cr
-http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
+https://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
 \usage{projecting_tm(net, method = "sum")}
 
 \arguments{
@@ -16,9 +16,9 @@ http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-
 }
 
 \value{Returns a one-mode network}
-\references{Opsahl. T., 2009. Projecting two-mode networks onto weighted one-mode networks. Available at: http://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
+\references{Opsahl. T., 2009. Projecting two-mode networks onto weighted one-mode networks. Available at: https://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
 
-\author{ Tore Opsahl; http://toreopsahl.com }
+\author{ Tore Opsahl; https://toreopsahl.com }
 
 \note{ version 1.0.0, taken, with permission, from package tnet }
 

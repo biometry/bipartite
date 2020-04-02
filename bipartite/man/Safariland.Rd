@@ -1,4 +1,4 @@
-\encoding{UTF-8}
+﻿\encoding{UTF-8}
 \name{Safariland}
 
 \alias{Safariland}
@@ -25,7 +25,7 @@ This pollination web was published by Vázquez and Simberloff (2003). See there 
 }
 
 \source{
-These data can be downloaded, together with the other datasets, on the NCEAS interactionweb website  \url{http://www.nceas.ucsb.edu/interactionweb/html/datasets.html}. See also there for further details, both on the data and their usage.
+These data can be downloaded, together with the other datasets, on the NCEAS interactionweb website  \url{https://iwdb.nceas.ucsb.edu/resources.html#plant_pollinator}. See also there for further details, both on the data and their usage.
 }
 
 \references{

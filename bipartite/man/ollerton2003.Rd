@@ -15,7 +15,7 @@ The study was conducted in the KwaZulu-Natal region of South Africa. During 3 mo
 The authors recorded their data by counting the number of individua flower visitors observed and/or caught on each plant species. The total number of individuals observed on each plant species provide a rough estimate of the level of visitation that each species received. Data are presented as an interaction frequency matrix, in which cells with positive integers indicate the frequency of interaction between a pair of species, and cells with zeros indicate no interaction. 
 }
 \source{
-NCEAS data base on interaction webs: \url{http://www.nceas.ucsb.edu/interactionweb/html/datasets.html} 
+NCEAS data base on interaction webs: \url{https://iwdb.nceas.ucsb.edu/resources.html#plant_pollinator} 
 }
 \references{
 Ollerton, J., S.D. Johnson, L. Cranmer and S. Kellie (2003) The pollination ecology of an assemblage of grassland asclepiads in South Africa. \emph{Annals of Botany} \bold{92} 807-834  

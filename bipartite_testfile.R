@@ -7,8 +7,8 @@
 # R CMD build bipartite --compact-vignettes=gs+qpdf
 ## inR: rhub::check("bipartite_2.14.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
 ## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
-# R CMD CHECK bipartite_2.14.tar.gz --as-cran
-# R CMD INSTALL bipartite_2.14.tar.gz
+# R CMD CHECK bipartite_2.15.tar.gz --as-cran
+# R CMD INSTALL bipartite_2.15.tar.gz
 # check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 
@@ -295,6 +295,12 @@ PAC(vazquenc>0)
 PDI(vazquenc, normalise=FALSE, log=TRUE)
 PDI(vazquenc>0)
 
+# plotmatrix
+S <- sortmatrix(Safariland, topology = "nested", sort_by = "weights")
+S <- sortmatrix(kato1990, topology = "nested", sort_by = "weights")
+plotmatrix(S$matrix, binary=FALSE)
+plotmatrix(S, binary=TRUE)
+
 # plotModuleWeb
 if (!exists("comp1")) comp1 <- computeModules(vazquenc)
 plotModuleWeb(comp1)
@@ -347,6 +353,10 @@ second.extinct(web, participant = "higher", method = "abundance")
 
 
 # slope.bipartite
+
+# sortmatrix
+sortmatrix(Safariland, topology="nested")
+sortmatrix (Safariland, topology = "nested", sort_by = "weights")
 
 # sortweb
 

@@ -15,7 +15,7 @@
 
 \references{Opsahl, T. 2010. Triadic closure in two-mode networks: Redefining the global and local clustering coefficients. \emph{arXiv},1006.0887  }
 
-\author{ Tore Opsahl; http://toreopsahl.com }
+\author{ Tore Opsahl; https://toreopsahl.com }
 
 \note{ version 1.0.0, taken, with permission, from package tnet  }
 
