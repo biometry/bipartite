@@ -7,7 +7,7 @@
 Plotmatrix is a function to plot binary and weighted matrices
 }
 
-\usage{plotmatrix(x, background_color="white", base_color=NULL, between_color="gray", 
+\usage{plotmatrix(x, background_color="white", base_color=NULL, between_color="black", 
   border_color="black", modules_colors=NULL, within_color = "black", border = FALSE, 
   row_partitions=NULL, col_partitions=NULL, binary=TRUE, plot_labels=FALSE, xlab=NA, 
   ylab=NA, offset = 0.4, ...)}
@@ -27,7 +27,7 @@ Plotmatrix is a function to plot binary and weighted matrices
   \item{plot_labels}{logical: shall row and column names of the matrix be plotted?}
   \item{xlab}{label for the column axis}
   \item{ylab}{label for the row axis.}
-  \item{offset}{does something useful with the margins, I think.}
+  \item{offset}{defines the size of each filled cell, compared to the border of each cell. Values higher than 0.4 may result in overlapping of cells.}
   \item{...}{arguments passed on to \code{axis} ornamenting the image plot.}
 }
 

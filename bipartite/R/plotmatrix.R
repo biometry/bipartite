@@ -1,4 +1,4 @@
-plotmatrix <- function(x, background_color="white", base_color=NULL, between_color="gray", border_color="black", modules_colors=NULL, within_color = "black", border = FALSE, row_partitions=NULL, col_partitions=NULL, binary=TRUE, plot_labels=FALSE, xlab=NA, ylab=NA, offset = 0.4, ...){
+plotmatrix <- function(x, background_color="white", base_color=NULL, between_color="black", border_color="black", modules_colors=NULL, within_color = "black", border = FALSE, row_partitions=NULL, col_partitions=NULL, binary=TRUE, plot_labels=FALSE, xlab=NA, ylab=NA, offset = 0.4, ...){
   
   if (is.list(x)){ # cfd
     # for the probably many cases where users provide the sortweb result, rather than only its matrix
@@ -13,6 +13,16 @@ plotmatrix <- function(x, background_color="white", base_color=NULL, between_col
   if (is.null(base_color)){
     base_color=background_color
   }
+  
+  if (!is.null(row_partitions)|!is.null(col_partitions)){
+    if(!identical(sort(unique(row_partitions)),sort(unique(col_partitions)))){
+      stop("different numbers of col and row partitions")
+    }
+    if(length(row_partitions)!=nrow(mat)|length(col_partitions)!=ncol(mat)){
+      stop ("partitions with inapropriate length")
+    }
+  }
+
   
   if (!is.null(row_partitions)){
     index=unique(row_partitions)
@@ -34,14 +44,7 @@ plotmatrix <- function(x, background_color="white", base_color=NULL, between_col
   if (!is.null(modules_colors) & length(unique(row_partitions)) != length(modules_colors)){
     stop("wrong number of modules colors")
   }
-  #if(!is.null(row_partitions)|!is.null(col_partitions)){
-  #if(!identical(sort(unique(row_partitions)),sort(unique(col_partitions)))){
-  #stop("different numbers of col and row partitions")
-  #}
-  #if(length(row_partitions)!=nrow(mat)|length(col_partitions)!=ncol(mat)){
-  #stop ("partitions with inapropriate length")
-  #}
-  #}
+  
   ####
   #Defining colors
   if(!is.null(modules_colors)){within_color=NULL}

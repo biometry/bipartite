@@ -5,7 +5,7 @@
 
 # run 
 # R CMD build bipartite --compact-vignettes=gs+qpdf
-## inR: rhub::check("bipartite_2.14.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
+## inR: rhub::check("bipartite_2.15.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
 ## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
 # R CMD CHECK bipartite_2.15.tar.gz --as-cran
 # R CMD INSTALL bipartite_2.15.tar.gz
