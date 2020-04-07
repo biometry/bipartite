@@ -99,7 +99,7 @@ function(web, H2_integer=TRUE){
 		#  Hmax=H2(newmx)    
 	} # end else-part of initial exexpec
     H2_max.improved <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)
-    H2_max <- ifelse(H2_max >= H2_max.improved, H2_max, H2_max.improved) # JF: changed September 2019, as the improvement made things worse for certain small webs
+    H2_max <- ifelse(H2_integer && H2_max >= H2_max.improved, H2_max, H2_max.improved) # JF: changed September 2019, as the improvement made things worse for certain small webs
    
     
 
