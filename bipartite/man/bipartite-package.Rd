@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 	\item 2.16 (release date: XX-YYY-2020)
 	\describe{
   	\item{Bug fix in \code{\link{H2_fun}}:}{threw an error when \option{H2_integer=TRUE}. Thanks to mxdub for finding and fixing this! (Sorry that I managed to click on "comment and close" before "confirm accept merge"; this is still somewhat new to me.)}
+  	\item{Bug gix in \code{\link{betalink}}:}{Now standardization to proportions also works for empty webs as division by zero is avoided. 2. specmx.higher.unique can be assessed for 1-link-webs as setting drop=FALSE keeps the dimensions of the matrix. Thanks to Benjamin Schwarz for providing these fixes! (And don't ask me why the pull request on github does not show.)}
   }	
 	
   \item 2.15 (release date: 04-Apr-2020)

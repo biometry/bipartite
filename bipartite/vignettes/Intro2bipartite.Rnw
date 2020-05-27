@@ -74,7 +74,7 @@
 % moved the following code to after "maketitle" because otherwise it caused errors in LaTeX
 <<setup, include=FALSE, cache=FALSE, echo=FALSE>>=
 library(knitr)
-opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE)
+opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE, fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, tidy=T, tidy.opts=list(width.cutoff=70))
 render_listings()
 @
 
@@ -119,14 +119,15 @@ Of course, we don't mind if this documented would be cited, e.g. as \citet{bipar
 \section{What other network packages are out there in the \proglang{R}-universe?}
 Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
 
-There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages we are aware of for handling bipartite networks (in alphabetical order):
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages (on CRAN) we are aware of for handling bipartite networks (in alphabetical order):
 \begin{description}
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
 \item[\package{bipartiteD3}] interactive visualisation of bipartite networks;\footnote{And no, this is not a typo, it is ``D3'', which apparently is a JavaScript library for ``data-driven documentation''}
 \item[\package{bmotif}] for counting ``motifs'' in bipartite networks; 
 \item[\package{econullnetr}] seems to be largely a wrapper for \package{bipartite};
-\item[\package{igraph}] provides functionalities for one-mode networks, quite a bit of plotting options, too;
+\item[\package{ggbipart}] 
+\item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{latentnet}] 
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
@@ -136,6 +137,12 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
 \end{description}
 
+Additionally, there may well be dozens of packages on github or r-forge, which remain obscure until one stumbles over them. 
+\begin{description}
+\item[\package{bipartgraph}], at \url{https://github.com/jgalgarra/bipartgraph}, offers polar and Ziggurat, building on his other package \package{kcorebip};
+\item[\package{ggbipart}], at \url{https://pedroj.github.io/bipartite_plots/}, which provides plotting functionality in \package{ggplot}-style;
+\item[\package{infomapecology}], on \url{https://github.com/Ecological-Complexity-Lab/infomap_ecology_package}, which wraps the infomap-functions and plots the resulting modular network.
+\end{description}
 
 \section{Preparing data for analysis}%------------------------------------------------
 Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}

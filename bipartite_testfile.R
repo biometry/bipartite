@@ -282,6 +282,8 @@ null.distr(2, vazquenc>0, distr="negative binomial") # tests whether it works wi
 # null.t.test
 null.t.test(vazquenc, N=30, index="connectance") # does it work with one index? 
 null.t.test(vazquenc, N=30, index=c("connectance", "linkage density")) # does it work with one index?
+null.t.test(Safariland, index=c("generality", "vulnerability", "connectance","links per species","cluster coefficient"), nrep=4, N=20)
+null.t.test(Safariland, index=c("cluster coefficient"), nrep=4, N=20)
 
 # nullmodel
 lapply(1:5, function(x) nullmodel(vazquenc, N=2, method=x))
