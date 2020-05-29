@@ -13,8 +13,8 @@ betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commo
   if (proportions){
     if (binary){warning("standardizing to proportions for binary index; do you really want to do this?!?")}
     array.of.sums <- webarray
-    array.of.sums[,,1] <- ifelse(sum(webarray[,,1])==0, 1, sum(webarray[,,1]))   # avoid division by zero for empty webs
-    array.of.sums[,,2] <- ifelse(sum(webarray[,,2])==0, 1, sum(webarray[,,2]))   # avoid division by zero for empty webs
+    array.of.sums[,,1] <- sum(webarray[,,1])
+    array.of.sums[,,2] <- sum(webarray[,,2])
     webarray <- webarray / array.of.sums
   }
 
