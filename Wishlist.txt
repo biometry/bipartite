@@ -2,6 +2,13 @@ IMPORTANT
 * fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
 --> I guess this has been fixed now?!?
 
+EDITORIAL
+* provide links in vignette OR include function in bipartite for:
+	** dynsdm (by Miele et al., CRAN)
+	** infomapecology (github, not CRAN)
+	**bmotifs (...)
+
+
 large
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
