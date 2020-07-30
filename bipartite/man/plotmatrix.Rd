@@ -33,7 +33,7 @@ Plotmatrix is a function to plot binary and weighted matrices
 
 \value{Invoked for its side effect of plotting the matrix.}
 
-\author{Rafael Pinheiro & Gabriel Felix, https://rbppinheiro.wordpress.com/, e-mail: rafael-bpp@hotmail.com}
+\author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com}, Gabriel Felix, Marco Mello, and the team of the Ecological Synthesis Lab, University of São Paulo}
 
 \note{Taken, with permission, from https://github.com/pinheirorbp/Rfunctions1 }
 

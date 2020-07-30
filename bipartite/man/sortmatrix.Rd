@@ -37,7 +37,7 @@ Lewinsohn, T.M. et al. 2006. Structure in plant-animal interaction assemblages. 
 Pinheiro, R.B.P. et al. 2019. A new model explaining the origin of different topologies in interaction networks. \emph{Ecology} \bold{100}, 1--30
 }
 
-\author{ Rafael Pinheiro & Gabriel Felix, https://rbppinheiro.wordpress.com/, email: rafael-bpp@hotmail.com}
+\author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com}, Gabriel Felix, Marco Mello, and the team of the Ecological Synthesis Lab, University of São Paulo}
 
 \note{Taken, with permission, from https://github.com/pinheirorbp/Rfunctions1 }
 

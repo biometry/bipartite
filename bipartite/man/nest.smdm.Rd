@@ -35,7 +35,7 @@
   \item{WNODA_DM_matrix}{Nestedness for nodes (rows and columns) belonging to different modules}
 }
 
-\author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com} }
+\author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com}, Gabriel Felix, Marco Mello, and the team of the Ecological Synthesis Lab, University of São Paulo }
 
 \references{
 
