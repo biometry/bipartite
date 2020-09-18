@@ -311,6 +311,7 @@ plotModuleWeb(comp1, plotModules = TRUE, rank = TRUE, weighted = TRUE, displayAl
 # plotPAC
 plotPAC(PAC(vazquenc))
 plotPAC(PAC(vazquenc), scaling = 2, plot.scale = 1.5, fill.col = rgb(0.2, 0.3, 0.4, 0.5), arrow.col = rgb(0.4, 0.3, 0.2, 0.5), outby = 0.5, text = TRUE, circles = TRUE, radius = 1.5)
+plotPAC(kevan1970, arrow.col=rainbow(30)) # test multiple colours
 
 # plotweb
 plotweb(vazquenc)

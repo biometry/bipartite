@@ -22,7 +22,7 @@ circles = FALSE, radius = 1)
   \item{scaling}{A factor scaling the size of species-circles. The default of 1 may cause overlap when there are many species or some are very large. Smaller values yield smaller circles.}
   \item{plot.scale}{Scales the whole plot to the plotting region. If you want to add labels, you may want more space around the plot and hence choose smaller values for plot.scale.}
   \item{fill.col}{Colour of the species-circles. Note that the default is using transparency, which is the fourth parameter in the \code{rgb}-function.}
-  \item{arrow.col}{Colour of the arrows (in fact polygons) connecting species. As for \option{fill.col}, the default uses transparency.}
+  \item{arrow.col}{Colour(s) of the arrows (in fact polygons) connecting species. As for \option{fill.col}, the default uses transparency. If more than one colour is provided, the links will be coloured in a somewhat complicated sequence, starting with the species with most interactions and then down. So it might require some playing around if you want to colour a specific arrow.}
   \item{outby}{A factor determining by how much the text labels should be moved out from the species-circles. Values smaller than 1 will move them inside the circle-plot.}
   \item{text}{Logical; if TRUE (default), a number will be plotted next to each species-circle. There usually is no space to put the full name next to it, so there is currently no option to do so.}
   \item{circles}{Logical; shall species labels be put into a circle (as in the original plot of Morris et al. 2005)? Defaults to FALSE.}
@@ -52,10 +52,12 @@ See also comments and notes in \code{\link{PAC}}!
 \dontrun{
 data(kevan1970)
 plotPAC(kevan1970)
+plotPAC(kevan1970, arrow.col=rainbow(30))
 
 data(Safariland)
 plotPAC(Safariland, plot.scale=1, fill.col="red", arrow.col="orange", 
 	circles=TRUE, radius=1)
+	
 }
 }
 
