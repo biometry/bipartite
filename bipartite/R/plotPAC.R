@@ -47,7 +47,7 @@ plotPAC <- function(web, scaling=1, plot.scale=1, fill.col=rgb(.2,.2,.2,.5), arr
 	D <- diag(PV)
 	points(coords, cex=sqrt(rs)*0.75*scaling*D, pch=16, col=fill.col)
 
-	if (length(arrow.col) > 1) arrow.col <- rep(arrow.col, len=NROW(web))
+	if (length(arrow.col) < NROW(web)) arrow.col <- rep(arrow.col, len=NROW(web))
 
 	# draw PAC-triangles (rectangles?):
 	for (i in (1:NROW(PV))[order(rs)]){
