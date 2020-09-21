@@ -50,8 +50,8 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 	
 	\item 2.16 (release date: XX-YYY-2020)
 	\describe{
-  	\item{Bug fix in \code{\link{H2_fun}}:}{threw an error when \option{H2_integer=TRUE}. Thanks to mxdub for finding and fixing this! (Sorry that I managed to click on "comment and close" before "confirm accept merge"; this is still somewhat new to me.)}
-  	\item{Bug gix in \code{\link{betalink}}:}{Now standardization to proportions also works for empty webs as division by zero is avoided. 2. specmx.higher.unique can be assessed for 1-link-webs as setting drop=FALSE keeps the dimensions of the matrix. Thanks to Benjamin Schwarz for providing these fixes! (And don't ask me why the pull request on github does not show.)}
+  	\item{Bug fix in \code{\link{H2_fun}}:}{threw an error when \option{H2_integer=TRUE}. Thanks to mxdub for finding and fixing this! (Sorry that I managed to click on "comment and close" before "confirm accept merge"; this github interaction is still somewhat new to me.)}
+  	\item{Bug gix in \code{\link{betalink}}:}{Now standardization to proportions also works for empty webs as division by zero is avoided. 2. \code{\link{specmx.higher.unique}} can be assessed for 1-link-webs as setting \option{drop=FALSE} keeps the dimensions of the matrix. Thanks to Benjamin Schwarz for providing these fixes! (And don't ask me why the pull request on github does not show.)}
   	\item{Added multicolour-option to \option{arrow.col} in \code{\link{plotPAC}},}{following a question by Horacio Silva. We can now colour each arrow of the plot individually, although the sequence of colours provided may require some fiddling around.}
   }	
 	
