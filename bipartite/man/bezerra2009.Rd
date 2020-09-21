@@ -7,7 +7,7 @@
 
 \description{
 
-Observation of 38 individual plants from 13 oil-flower species of the family Malphighiaceae. Flower visitors were collected. Only legitimate visitors were considered. Numbers in cells refer to the amount of visitors of each bee species collected in each flower species.
+Observation of 38 individual plants from 13 oil-flower species of the family Malphighiaceae. Flower visitors were collected. Only legitimate visitors were considered. Numbers in cells refer to the amount of visits of each bee species collected in each flower species.
 
 The species interaction matrix describes the number of bee visits to 138 individual plants in natural clumps of 13 Malpighiaceae species during the flowering peak of each species. The number of bee visits  to flowers was registered over four consecutive days, from 5.00 to 17.00 with a total of 1392 h of observations. 
 
