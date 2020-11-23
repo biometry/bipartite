@@ -1,4 +1,6 @@
 IMPORTANT
+* fix bug in PSI (always 1 for beta=0 / lower level); and why is it supposed to be equal to species strength, when strength is not between 0 and 1?
+
 * fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
 --> I guess this has been fixed now?!?
 
@@ -39,6 +41,8 @@ large changes
 
 
 small
+* clean up help files (e.g. diversity terminology is not really uptodate: "diversity" is H, but exp(H) is "effective partners")
+
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
