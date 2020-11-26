@@ -45,6 +45,7 @@ small
 
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
+* frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
 * warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
