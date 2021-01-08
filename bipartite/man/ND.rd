@@ -24,7 +24,7 @@ CC(web, cmode="suminvundir", rescale=TRUE, ...)
   \item{rescale}{If TRUE (default), centrality scores are rescaled such that they sum to 1.}
   \item{cmode}{String indicating the type of betweenness/closeness centrality being computed (directed or undirected geodesics, or a variant form - see help for \code{closeness} and \code{betweenness} in \pkg{sna} for details). The default, \option{"suminvundir"} for \code{CC} and \option{"undirected"} for \code{BC}, uses a formula that can also be applied to disconnected (=compartmented) graphs. Other cmodes may not.}
   \item{weighted}{Logical; if TRUE, bipartite projection will include edge weights, i.e. number of interactions. Defaults to TRUE.}
-  \item{...}{Options passed on to \code{betweenness} and \code{closeness}, respectively. Notice that in particular the option \option{ignore.eval=FALSE} will yield VERY different values than the default. BC and CC use defaults of sna::betweenness and sna::closeness, respectively, but that does not imply that these settings are per se the best! (Thanks to Michael Pocock for drawing my attention to this issue!)}
+  \item{...}{Options passed on to \code{betweenness} and \code{closeness}, respectively. Notice that in particular the option \option{ignore.eval=FALSE} will yield VERY different values than the default. BC and CC use defaults of \code{sna::betweenness} and \code{sna::closeness}, respectively, but that does not imply that these settings are per se the best! (Thanks to Michael Pocock for drawing my attention to this issue!)}
 }
 
 \details{
@@ -39,7 +39,7 @@ BC reflects the number of shortest paths going through the focal node. CC is the
 
 Both BC and CC can be normalised so that they sum to 1 (using \option{rescale=TRUE}). This only affects the absolute values, but not the qualitative results.
 
-The interested user may want to also have a look at the networkX homepage (\url{https://networkx.github.io}) for a Python-based tool to analyse, depict and manipulate (one-mode) networks. It is not specifically meant for bipartite networks such as this package, though.
+The interested user may want to also have a look at the networkX homepage (\url{https://networkx.org}) for a Python-based tool to analyse, depict and manipulate (one-mode) networks. It is not specifically meant for bipartite networks such as this package, though.
 }
 
 \value{

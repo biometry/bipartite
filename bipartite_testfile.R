@@ -1,3 +1,7 @@
+# man überarbeitung bis betalinkr durch nestedcontr. getestet, bei winbuilder eingereicht 8.1.2021 16:00
+# man weiterhin überarbeitet (ungetestet) bis nestedcon.
+
+
 ## bipartite test file ##
 
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##

@@ -31,7 +31,7 @@ For both the \dQuote{higher trophic level} and the \dQuote{lower trophic level},
 \note{
 This function calculates per-species nestedness contributions as described in Saavedra et al. 2011---namely it is based on the metric NODF to measure nestedness and employs a probabilistic null model to randomize interactions (that is described in Bascompte et al. 2003). The underlying methodology is amenable to other choices in both of these cases; however, this is not implemented at present.
 
-The currently implemented null model replaces the observed vector of 0/1s by a probabalistic draw of 0/1s as given by the mean of mean degree in the higher trophic level (rowSums(web)/ncol(web)) and the mean degree for the target higher trophic level species i (colSums(web)[i]/nrow(web)).
+The currently implemented null model replaces the observed vector of 0/1s by a probabalistic draw of 0/1s as given by the mean of mean degree in the higher trophic level (\code{rowSums(web)/ncol(web)}) and the mean degree for the target higher trophic level species i (\code{colSums(web)[i]/nrow(web)}).
 }
 
 \references{

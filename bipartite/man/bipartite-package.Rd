@@ -50,7 +50,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 	
   \item 2.16 (release date: 08-Jan-2021)
 	\describe{
-  	\item{Bug fix in \code{\link{H2fun}}:}{threw an error when \option{H2_integer=TRUE}. Thanks to mxdub for finding and fixing this! (Sorry that I managed to click on "comment and close" before "confirm accept merge"; this github interaction is still somewhat new to me.)}
+  	\item{Bug fix in \code{\link{H2fun}}:}{threw an error when \option{H2_integer=TRUE}. Thanks to mxdub for finding and fixing this! (Sorry that I managed to click on ``comment and close'' before ``confirm accept merg''; this github interaction is still somewhat new to me.)}
   	\item{Bug fix in \code{\link{betalinkr}}:}{Now standardization to proportions also works for empty webs as division by zero is avoided. 2. \code{specmx.higher.unique} can now be assessed even for 1-link-networks, as setting \option{drop=FALSE} keeps the dimensions of the matrix. Thanks to Benjamin Schwarz for providing these fixes! (And don't ask me why the pull request on github does not show.)}
   	\item{Added multicolour-option to \option{arrow.col} in \code{\link{plotPAC}},}{following a question by Horacio Silva. We can now colour each arrow of the plot individually, although the sequence of colours provided may require some fiddling around.}
   }	
@@ -58,7 +58,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \item 2.15 (release date: 04-Apr-2020)
   \describe{
   	\item{A pair of new functions for plotting: \code{\link{sortmatrix}} and \code{\link{plotmatrix}},}{both provided by Rafael Pinheiro and Gabriel Felix from the University of Campinas in Brazil. The functions' scope is to plot interaction networks of nested, modular and mixed topology (Pinheiro et al. 2019). As plotting is not the forte of bipartite so far, and these two functions help to add a bit of plotting facilities. Many thanks for contributing!}
-  	\item{Bug fix in \code{\link{robustness}}:}{in my previous updates of the discontinued \code{class}-issues I managed to omit a crucial "!" in the code. Thanks to Hanlun Liu and Felix Neff for reporting!}
+  	\item{Bug fix in \code{\link{robustness}}:}{in my previous updates of the discontinued \code{class}-issues I managed to omit a crucial ``!'' in the code. Thanks to Hanlun Liu and Felix Neff for reporting!}
   	\item{Bug fix in \code{\link{extinction}}:}{for sparse networks, the function sometimes returned a vector rather than a matrix, due to incorrectly dropping a dimension. Thanks to Felix Neff for reporting and providing the solution!}
     \item{Expanded help of \code{\link{as.one.mode}}:}{in particular the way the weights were computed was not documented at all, as pointed out by Lennart Dittmer. This is now rectified and also the R-code now features in-line comments as to what is happening at each step.}
   }	
@@ -75,10 +75,10 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
     \item{Several small fixes,}{e.g. check for binary networks in \code{\link{nullmodel}} failed if values < 1 were in the matrix.}
     \item{Added a lengthy vignette,}{illustrating the use of the package.}
     \item{(Small) bug fix in \code{\link{empty}}:}{something was stupidly wrong for matrices of only one row or column. Spotted by Benjamin Schwarz, thanks!}
-    \item{New function \code{\link{vaznullexternal}},}{as wished by Matt Funaki. This is the "normal" \code{\link{vaznull}}-nullmodel, but now external abundances for either or both groups can be provided. Modelled on \code{\link{r2dexternal}}.}
+    \item{New function \code{\link{vaznullexternal}},}{as wished by Matt Funaki. This is the ``normal'' \code{\link{vaznull}}-nullmodel, but now external abundances for either or both groups can be provided. Modelled on \code{\link{r2dexternal}}.}
     \item{Important bug fix and new option in \code{\link{webs2array}}:}{name indexing was wrong, so that entries were entered in wrong cells. Also, the function now also accepts a weblist as input.}
     \item{New function \code{\link{betalinkr}}:}{it allows comparison of networks and partitioning of network dissimilarity. Based on betalink package/paper by Tim Poisot, but more integrated into the bipartite package, and importantly implements many more features and corrected partitioning approaches. Two more new functions come with it: \code{\link{array2linkmx}}, \code{\link{betalinkr_multi}}.}
-    \item{New function \code{\link{decimalr2dtable}}:}{it allows to simulate matrices with the same marginal totals as the input, but for non-negative, non-integer inputs. Doing so, it "smears" out the entries over the entire matrix and will hence be meaningless for any index comparison which responds to matrix filling. An attempt to deal with webs composed of rates rather than observed interactions. Useful probably only in a very few cases, as marginal totals are unlikely to be interpretable as abundance-activity, and hence implying a very different kind of null model to \code{\link{nullmodel}}s.}
+    \item{New function \code{\link{decimalr2dtable}}:}{it allows to simulate matrices with the same marginal totals as the input, but for non-negative, non-integer inputs. Doing so, it ``smears'' out the entries over the entire matrix and will hence be meaningless for any index comparison which responds to matrix filling. An attempt to deal with webs composed of rates rather than observed interactions. Useful probably only in a very few cases, as marginal totals are unlikely to be interpretable as abundance-activity, and hence implying a very different kind of null model to \code{\link{nullmodel}}s.}
   }
 
   \item 2.12 (release date: 11-Mar-2019)

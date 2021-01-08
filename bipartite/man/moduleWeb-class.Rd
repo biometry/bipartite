@@ -7,10 +7,10 @@
 \title{Class "moduleWeb"}
 
 \description{
-This class is the output of an application of the function computeModules(...) to a graph. It consists of the matrix representing the original graph which has been passed to computeModules(...) in order to compute modules, a matrix representing the same graph but permutated according to the identified modules, two vectors indicating the permutation of row and column indices, respectively, and information about the modules themselves.
+This class is the output of an application of the function \code{computeModules} to a graph. It consists of the matrix representing the original graph which has been passed to \code{computeModules} in order to compute modules, a matrix representing the same graph but permutated according to the identified modules, two vectors indicating the permutation of row and column indices, respectively, and information about the modules themselves.
 }
 \section{Objects from the class}{
-Objects from the class should only be created by using the function computeModules(...).
+Objects from the class should only be created by using the function \code{computeModules}.
 }
 \section{Slots}{
 	 \describe{

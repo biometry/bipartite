@@ -16,8 +16,8 @@ mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum", tri
 	\item{n}{number of interactions to allocate into the new matrix}
 	\item{keep.species}{Random assignment of interactions may lead to empty columns or rows and hence reduce the dimensions of the simulated web. By default, this is prevented from happening, i.e. each row/column will receive at least one interaction. Setting keep.species to FALSE may (but need not) cause a loss of species.}
 \item{rep.cell}{whether cells can be assign interactions repeatedly; defaults to TRUE}
-\item{autotransform}{determines how a non-probability web is converted into probabilities; option 'sum' simply divides each entry by the sum of interactions in the web;  option 'equiprobable' is the product of marginal probabilities (col/rowSums divided by sum(web) (in a sense this is the basis of the r2dtable null model, just without the 'turn into integers' bit)}
-\item{trials}{allocating interactions (when rep.cell=TRUE) can be difficult or even impossible. When the number of attempts to allocate them exceeds trials * n it will be stopped and an error message will be returned. Default is 100. Setting 'trials' to a very large value may make this function run for hours and hours. Your choice!}
+\item{autotransform}{determines how a non-probability web is converted into probabilities; option \option{"sum"} simply divides each entry by the sum of interactions in the web;  option \option{"equiprobable"} is the product of marginal probabilities (col/rowSums divided by sum(web) (in a sense this is the basis of the \code{r2dtable} null model, just without the `turn into integers' bit)}
+\item{trials}{allocating interactions (when \option{rep.cell=TRUE}) can be difficult or even impossible. When the number of attempts to allocate them exceeds trials * n it will be stopped and an error message will be returned. Default is 100. Setting \option{trials} to a very large value may make this function run for hours and hours. Your choice!}
 }
 
 \details{
@@ -27,7 +27,7 @@ If \option{rep.cell=TRUE}, repeated interactions are added, thus generating a qu
 }
 
 \references{
-Vázquez, D. P.; Chacoff, N. P. & Cagnolo, L. 2009. Evaluating multiple determinants of the structure of mutualistic networks Ecology. 90: 2039-2046
+Vázquez, D. P.; Chacoff, N. P. & Cagnolo, L. 2009. Evaluating multiple determinants of the structure of mutualistic networks. \emph{Ecology} \bold{90} 2039--2046
 }
 
 \examples{

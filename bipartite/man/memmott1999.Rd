@@ -3,7 +3,7 @@
 \docType{data}
 \title{ Flower visitation network from a meadow near Bristol, UK}
 \description{
-This study was conducted in a 150 x 250 m meadow plot in the vicinity of Bristol, U.K. in July 1997. The objective was to describe the plant-flower visitor interaction web of this area, taking into account species abundances and their frequency of interaction. Twenty five plant species were studied, and 79 flower visitor species were recorded visiting them.
+This study was conducted in a 150 m x 250 m meadow plot in the vicinity of Bristol, U.K. in July 1997. The objective was to describe the plant-flower visitor interaction web of this area, taking into account species abundances and their frequency of interaction. Twenty five plant species were studied, and 79 flower visitor species were recorded visiting them.
 }
 \usage{data(memmott1999)}
 \details{

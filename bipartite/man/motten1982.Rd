@@ -13,7 +13,7 @@ The author recorded his data by counting the number of visits of each flower vis
 \references{
 Motten, A.F. (1982) Pollination Ecology of the Spring Wildflower Community in the Deciduous Forests of Piedmont North Carolina. Doctoral Dissertation thesis, Duke University, Durham, North Carolina, USA.
 
-Motten, A.F. (1986) Pollination ecology of the spring wildflower community of a temperate deciduous forest. \emph{Ecological Monographs} \bold{56}, 21--42.
+Motten, A.F. (1986) Pollination ecology of the spring wildflower community of a temperate deciduous forest. \emph{Ecological Monographs} \bold{56}, 21--42
 
 }
 \examples{

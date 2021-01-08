@@ -27,7 +27,7 @@ convert2moduleWeb(MATRIX, MODINFO)
 
 \arguments{
   \item{MATRIX}{
-\code{MATRIX} is the matrix representing the weighted bipartite graph (as an example, see e.g. web "small1976" in this package).
+\code{MATRIX} is the matrix representing the weighted bipartite graph (as an example, see e.g. web \code{\link{small1976}} in this package).
 }
  \item{mini}{Minimal number of modules the algorithm should start with; defaults to 4. See explanation of \option{initialmoduleguess} to understand why not starting with one module per species interaction makes sense.}
  \item{reps}{Number of trials to run for each setting of \option{mini}; defaults to 10 but my benefit from higher values.}
@@ -47,10 +47,10 @@ Liu X. & Murata T. 2010. An Efficient Algorithm for Optimizing Bipartite Modular
 Newman M.E.J. 2004. \emph{Physical Review E} \bold{70} 056131
 }
 
-\author{Stephen J Beckett (https://github.com/sjbeckett/weighted-modularity-LPAwbPLUS), lifted, with consent by the author, by Carsten F. Dormann to bipartite}
+\author{Stephen J Beckett (\url{https://github.com/sjbeckett/weighted-modularity-LPAwbPLUS}), lifted, with consent of the author, by Carsten F. Dormann to bipartite}
 
 \seealso{
-\code{\link{computeModules}}; see also class "moduleWeb", function "listModuleInformation", function "printoutModuleInformation"
+\code{\link{computeModules}}; see also class "moduleWeb", \code{\link{listModuleInformation}}, \code{\link{printoutModuleInformation}}
 }
 
 \examples{

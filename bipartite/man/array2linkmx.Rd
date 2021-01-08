@@ -18,9 +18,9 @@ array2linkmx(webarray)
 }
 
 \details{
-This function converts the two-dimensional adjacency matrices (i.e., bipartite webs) to one-dimensional vectors (similar to what network people call "edgelists"). These vectors become rows of a matrix (which has one row per web). This makes the data available to community ecology methods, e.g. those offered by the \code{vegan} package. Links are treated equivalently to species in a "normal" community analysis (note that it makes no difference whether one or both partner of an interaction differ, in both cases the link has a different identity). The function is used here mostly as a helper for interaction dissimilarity calculations with \code{betalinkr}.
+This function converts the two-dimensional adjacency matrices (i.e., bipartite webs) to one-dimensional vectors (similar to what network people call ``edgelists''). These vectors become rows of a matrix (which has one row per web). This makes the data available to community ecology methods, e.g. those offered by the \code{vegan} package. Links are treated equivalently to species in a ``normal'' community analysis (note that it makes no difference whether one or both partner of an interaction differ, in both cases the link has a different identity). The function is used here mostly as a helper for interaction dissimilarity calculations with \code{betalinkr}.
 
-\code{dimnames} are optional but recommended for the webarray. Names of the third dimension will become rownames in the output. Colnames (i.e. names of links) will be created from dimnames[[1]] ("lower species") and dimnames[[2]] ("higher species"), separated by "__" (double underscore).
+\code{dimnames} are optional but recommended for the webarray. Names of the third dimension will become rownames in the output. Colnames (i.e. names of links) will be created from dimnames[[1]] (``lower species'') and dimnames[[2]] (``higher species''), separated by ``__'' (double underscore).
 }
 
 \value{

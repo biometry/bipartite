@@ -8,14 +8,14 @@
 \usage{clustering_tm(net, subsample=1, seed=NULL)}
 \arguments{
   \item{net}{A binary or weighted two-mode edgelist }
-  \item{subsample}{Whether a only a subset of 4-paths should we used when calculating the measure. This is particularly useful when running out of memory analysing large networks. If it is set to 1, all the 4-paths are analysed. If it set to a value below one, this is roughly the proportion of 4-paths that will be analysed. If it is set to an interger greater than 1, this number of ties that form the first part of a 4-path that will be analysed. Note: The c++ functions are better as they analyse the full network. }
+  \item{subsample}{Whether a only a subset of 4-paths should we used when calculating the measure. This is particularly useful when running out of memory analysing large networks. If it is set to 1, all the 4-paths are analysed. If it set to a value below one, this is roughly the proportion of 4-paths that will be analysed. If it is set to an interger greater than 1, this number of ties that form the first part of a 4-path that will be analysed. Note: The C++ functions are better as they analyse the full network. }
   \item{seed}{If a subset of 4-paths is analysed, by setting this parameter, the results are reproducable.}
 }
 \value{Returns the outcome of the equation presented in the paper}
 
 \references{Opsahl, T. 2010. Triadic closure in two-mode networks: Redefining the global and local clustering coefficients. \emph{arXiv},1006.0887  }
 
-\author{ Tore Opsahl; https://toreopsahl.com }
+\author{ Tore Opsahl; \url{https://toreopsahl.com} }
 
 \note{ version 1.0.0, taken, with permission, from package tnet  }
 

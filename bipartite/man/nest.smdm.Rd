@@ -15,7 +15,7 @@
 }
 \arguments{
   \item{x}{an interaction matrix; typically with rows for lower and columns for higher level species;}
-  \item{constraints}{a vector with modules for vertices of the matrix. The vector indicates first rows modules and then columns modules, following the sequence of input matrix x. If no constraints are provided, the function calculates nestedness for the entire matrix, not taking into account possible network modules. }
+  \item{constraints}{a vector with modules for vertices of the matrix. The vector indicates first rows modules and then columns modules, following the sequence of input matrix x. If no constraints are provided, the function calculates nestedness for the entire matrix, not taking into account possible network modules.}
 \item{weighted}{Logical. Indicate whether to calculate binary or weighted version of the metrics. If set to FALSE for a weighted input matrix, the binary metric is calculated, but a warning is returned.}
 \item{decreasing}{The matrix has to be sorted before computation of (W)NODA. This can be done either by \option{"fill"}, i.e. sum of cells with non-zero values, or \option{"abund"}, i.e. sum of cell values. For a binary matrix decreasing needs to be \option{"fill"} (as no abundances are available). For weighted matrices, the argument may be \option{"fill"} (yielding WNODF) or \option{"abundance"} (yielding WNODA).}
 \item{sort}{Logical. Should columns and rows of the matrix be sorted, in order to maximize nestedness index?}

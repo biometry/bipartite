@@ -1,7 +1,7 @@
 \name{distance_w}
 \alias{distance_w}
 \title{ Distance in a weighted network }
-\description{ The shortest path length, or geodesic distance, between two nodes in a binary network is the minimum number of steps you need to make to go from one of them to the other. This distance is the quickest connection between nodes when all ties are the same. However, in a weighted network, all ties are not the same. See http://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks/ for more deatails. }
+\description{ The shortest path length, or geodesic distance, between two nodes in a binary network is the minimum number of steps you need to make to go from one of them to the other. This distance is the quickest connection between nodes when all ties are the same. However, in a weighted network, all ties are not the same. See \url{https://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks} for more deatails. }
 \usage{ distance_w(net, directed=NULL, gconly=TRUE, subsample=1, seed=NULL) }
 \arguments{
   \item{net}{A weighted edgelist}
@@ -11,8 +11,8 @@
   \item{seed}{If a subset of starting nodes is analysed, by setting this parameter, the results are reproducable.}
 }
 \value{ Returns a distance matrix. }
-\references{ http://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks/ }
-\author{ Tore Opsahl; http://toreopsahl.com }
+\references{ \url{https://toreopsahl.com/2009/01/09/average-shortest-distance-in-weighted-networks} }
+\author{ Tore Opsahl; \url{http://toreopsahl.com} }
 \note{ version 1.0.0, taken, with permission, from package tnet }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
