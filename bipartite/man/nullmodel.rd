@@ -18,11 +18,11 @@ nullmodel(web, N=1000, method="r2d", ...)
 }
 
 \details{
- ADVICE: Look at the same-named function in \pkg{vegan}, as well as the long list of potential null models described in \code{commsim} in that package. It offers a richer and more standardised implementation of null models than this (earlier) function. In particular the method "shuffle.web" is potentially confusing, as it calls \pkg{bipartite}'s \code{shuffle.web} for quantitative networks, but \pkg{vegan}'s \option{quasiswab} algorithm for binary. Since \pkg{vegan} also now offers the argument \option{greedyqswap} for quantitative networks, please have a look at \pkg{vegan}'s \code{\link{nullmodel}} function.
+ ADVICE: Look at the same-named function in \pkg{vegan}, as well as the long list of potential null models described in \code{commsim} in that package. It offers a richer and more standardised implementation of null models than this (earlier) function. In particular the method \option{shuffle.web} is potentially confusing, as it calls \pkg{bipartite}'s \code{shuffle.web} for quantitative networks, but \pkg{vegan}'s \option{quasiswab} algorithm for binary. Since \pkg{vegan} also now offers the argument \option{greedyqswap} for quantitative networks, please have a look at \pkg{vegan}'s \code{\link{nullmodel}} function.
  
 This is only a wrapper function to facilitate and standardise the generation of null models.
   
-These null models assume that integers represent frequencies that are 'individually' counted, not decimal numbers. Multiplication by 1000 (say) and rounding does NOT necessarily make your value frequencies satisfy this assumption. Null models for 'continuously quantitative' webs still have to be developed!
+These null models assume that integers represent frequencies that are ``individually'' counted, not decimal numbers. Multiplication by 1000 (say) and rounding does NOT necessarily make your value frequencies satisfy this assumption. Null models for ``continuously quantitative'' webs still have to be developed!
 
 %  \option{mgen} is used when options 1, 2 or 3 are applied to a binary network.
 A warning is returned when all entries in a quantitative network are 0 or 1 (which suggests a binary network).

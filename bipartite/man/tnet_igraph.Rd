@@ -11,8 +11,8 @@
   \item{directed}{ if a one-mode networks, this can be set to avoid testing whether the network is directed. }
 }
 \value{Returns the igraph object.}
-\references{ http://toreopsahl.com/ }
-\author{ Tore Opsahl; http://toreopsahl.com }
+\references{ \url{https://toreopsahl.com/} }
+\author{ Tore Opsahl; \url{https://toreopsahl.com} }
 \note{ version 1.0.0, taken, with permission, from package tnet  }
 \examples{
 ## Load sample data

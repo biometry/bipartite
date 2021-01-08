@@ -27,7 +27,7 @@ web2edges(web, webName=NULL, weight.column=TRUE, both.directions=FALSE,
 }
 
 \details{
-Many network programs (e.g. Pajek) require input in the form of an edge list. Here each species is a number. The edge list has two column, one with the target and one with the origin of the connection. That means an interaction between 1 and 6 would be written (in one line) as:  "1  6". In a weighted edge list, a third column represents the strength of the interaction: "1  6  4.77".
+Many network programs (e.g. Pajek) require input in the form of an edge list. Here each species is a number. The edge list has two column, one with the target and one with the origin of the connection. That means an interaction between 1 and 6 would be written (in one line) as:  \code{1  6}. In a weighted edge list, a third column represents the strength of the interaction: \code{1  6  4.77}.
 	
 All this function does is to transform the typical interaction matrix used in bipartite into an edge list. Within R this could be used e.g. in the package \pkg{tnet}; outside R by Pajek or others.
 
@@ -36,7 +36,7 @@ Similar to \code{\link{as.one.mode}} this function is there to increase intercha
 }
 
 \value{
-  A matrix ("edge list") with two (unweighted) or three (weighted) columns. 
+  A matrix (``edge list'') with two (unweighted) or three (weighted) columns. 
   
   If return=FALSE, this matrix (and possibly names and groups) are written to a text-file in the working directory.
 }

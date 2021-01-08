@@ -14,7 +14,7 @@ Given a network, this function fits a distribution to the marginal totals and th
 \arguments{
   \item{N}{Number of null model web to be generated.}
   \item{web}{A (bipartite) network matrix.}
-  \item{distr}{The name of the distribution to be fitted to the marginal totals. Currently only the lognormal (\option{"lognormal" or "log-normal"}) and the negative binomial (\option{"negative binomial" or "negbin"}) are supported. Defaults to lognormal.}
+  \item{distr}{The name of the distribution to be fitted to the marginal totals. Currently only the lognormal (\option{lognormal} or \option{log-normal}) and the negative binomial (\option{negative binomial} or \option{negbin}) are supported. Defaults to lognormal.}
 }
 
 \details{

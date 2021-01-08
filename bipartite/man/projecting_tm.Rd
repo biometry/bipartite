@@ -16,7 +16,7 @@ https://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one
 }
 
 \value{Returns a one-mode network}
-\references{Opsahl. T., 2009. Projecting two-mode networks onto weighted one-mode networks. Available at: https://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
+\references{Opsahl. T. 2009. Projecting two-mode networks onto weighted one-mode networks. Available at: https://toreopsahl.com/2009/05/01/projecting-two-mode-networks-onto-weighted-one-mode-networks/ }
 
 \author{ Tore Opsahl; https://toreopsahl.com }
 

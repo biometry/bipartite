@@ -14,8 +14,8 @@
   "DIFF" sets the weight to the absolute difference between the weight(s) of the arc(s) }
 }
 \value{Returns the undirected network }
-\references{ http://toreopsahl.com/2008/11/28/network-weighted-network/ }
-\author{ Tore Opsahl; http://toreopsahl.com }
+\references{ \url{https://toreopsahl.com/2008/11/28/network-weighted-network/} }
+\author{ Tore Opsahl; \url{http://toreopsahl.com/} }
 \note{ version 1.0.0, taken, with permission, from package tnet }
 \examples{
 ## Load sample data

@@ -12,7 +12,7 @@ The authors recorded their data by counting the number of visits of each flower 
 }
 
 \references{
-Olesen, J. M., L. I. Eskildsen, and S. Venkatasamy. 2002. Invasion of pollination networks on oceanic islands: importance of invader complexes and endemic super generalists. Diversity and Distributions 8:181-192.
+Olesen, J. M., L. I. Eskildsen, and S. Venkatasamy. 2002. Invasion of pollination networks on oceanic islands: importance of invader complexes and endemic super generalists. \emph{Diversity and Distributions} \bold{8}, 181--192
 }
 \examples{
 data(olesen2002flores)

@@ -1,4 +1,4 @@
-﻿\name{plotmatrix}
+\name{plotmatrix}
 \alias{plotmatrix}
 
 \title{ Plot a matrix organised by topology }
@@ -35,7 +35,7 @@ Plotmatrix is a function to plot binary and weighted matrices
 
 \author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com}, Gabriel Felix, Marco Mello, and the team of the Ecological Synthesis Lab, University of São Paulo}
 
-\note{Taken, with permission, from \url{https://github.com/pinheirorbp} }
+%\note{Taken, with permission, from \url{https://github.com/pinheirorbp} }
 
 \seealso{The output of \code{sortmatrix} is used by \code{\link{plotmatrix}}.}
 

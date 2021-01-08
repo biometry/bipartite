@@ -18,7 +18,7 @@ NOS(web, keep.Nij=FALSE, keep.diag=FALSE)
 }
 
 \details{
-According to the authors, NOS is "a new statistical procedure to measure both [the tendency of network nodes to share interaction partners] and the opposite one (i.e. species’ tendency against sharing interacting partners) that we call ‘node segregation’. In addition, our procedure provides also a straightforwardmeasure of modularity, that is, the tendency of a network to be compartmented into separated clusters of interacting nodes."
+According to the authors, NOS is ``a new statistical procedure to measure both [the tendency of network nodes to share interaction partners] and the opposite one (i.e. species’ tendency against sharing interacting partners) that we call `node segregation'. In addition, our procedure provides also a straightforwardmeasure of modularity, that is, the tendency of a network to be compartmented into separated clusters of interacting nodes.''
 }
 
 \value{

@@ -27,7 +27,7 @@ web[c(9, 1:8), c(27, 1:26)]}
 \value{
   Returns an ordered bipartite web.
 }
-\references{ Vázquez, P.D., Chacoff, N.,P. and  Cagnolo, L. (2009) Evaluating multiple determinants of the structure of plant-animal mutualistic networks. \emph{Ecology}in press.  }
+\references{ Vázquez, P.D., Chacoff, N.,P. and  Cagnolo, L. (2009) Evaluating multiple determinants of the structure of plant-animal mutualistic networks. \emph{Ecology} in press.  }
 
 \author{ Bernd Gruber }
 

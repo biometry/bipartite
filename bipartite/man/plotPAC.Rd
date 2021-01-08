@@ -37,7 +37,7 @@ The function is modelled after Morris et al. (2005). The whole idea and applicat
 None. The function is invoked for its side effects (i.e. printing).
 }
 \references{
-Morris, R. J., Lewis, O. T. and Godfray, H. C. J. 2005 Apparent competition and insect community structure: towards a spatial perspective. \emph{Annales Zoologica Fennici} \bold{42}, 449–462.
+Morris, R. J., Lewis, O. T. and Godfray, H. C. J. 2005. Apparent competition and insect community structure: towards a spatial perspective. \emph{Annales Zoologica Fennici} \bold{42}, 449--462.
 }
 
 \author{

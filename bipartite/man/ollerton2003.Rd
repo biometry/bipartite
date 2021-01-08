@@ -18,7 +18,7 @@ The authors recorded their data by counting the number of individua flower visit
 NCEAS data base on interaction webs: \url{https://iwdb.nceas.ucsb.edu/resources.html#plant_pollinator} 
 }
 \references{
-Ollerton, J., S.D. Johnson, L. Cranmer and S. Kellie (2003) The pollination ecology of an assemblage of grassland asclepiads in South Africa. \emph{Annals of Botany} \bold{92} 807-834  
+Ollerton, J., S.D. Johnson, L. Cranmer and S. Kellie (2003) The pollination ecology of an assemblage of grassland asclepiads in South Africa. \emph{Annals of Botany} \bold{92} 807--834  
 }
 \examples{
 data(ollerton2003)

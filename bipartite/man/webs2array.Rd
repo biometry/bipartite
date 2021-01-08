@@ -20,7 +20,7 @@ webs2array(...)
 \details{
 Some analyses may require a direct comparison of two webs, e.g. computing their similarity in number of interactions per link (e.g. Poisot et al. 2012). To be able to do that, we first need to blow the single webs up to have the same dimensions, i.e. padding all species not observed in this web with 0s. This function produces a new raw matrix based on the union of species for each trophic level and puts these for all species into one array.
 
-If the function is used on a list of webs that has no names, new names will be created in the format "web1", "web2", etc. 
+If the function is used on a list of webs that has no names, new names will be created in the format ``web1'', ``web2'', etc. 
 }
 
 \value{

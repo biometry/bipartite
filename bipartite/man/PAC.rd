@@ -29,7 +29,7 @@ Whether this concept can be usefully applied to mutualist networks (such as flow
 }
 
 \references{ 
-Carvalheiro, L.G., Biesmeijer, J.C., Benadi, G., Fründ, J., Stang, M., Bartomeus, I., Kaiser-Bunbury, C.N., Baude, M., Gomes, S.I.F., Merckx, V., Baldock, K.C.R., Bennett, A.T.D., Boada, R., Bommarco, R., Cartar, R., Chacoff, N., Dänhardt, J., Dicks, L. V., Dormann, C.F., Ekroos, J., Henson, K.S.E., Holzschuh, A., Junker, R.R., Lopezaraiza-Mikel, M., Memmott, J., Montero-Castaño, A., Nelson, I.L., Petanidou, T., Power, E.F., Rundlöf, M., Smith, H.G., Stout, J.C., Temitope, K., Tscharntke, T., Tscheulin, T., Vilà, M. & Kunin, W.E.  2014 The potential for indirect effects between co-flowering plants via shared pollinators depends on resource abundance, accessibility and relatedness. \emph{Ecology Letters} \bold{17}, 1389–1399.
+Carvalheiro, L.G., Biesmeijer, J.C., Benadi, G., Fründ, J., Stang, M., Bartomeus, I., Kaiser-Bunbury, C.N., Baude, M., Gomes, S.I.F., Merckx, V., Baldock, K.C.R., Bennett, A.T.D., Boada, R., Bommarco, R., Cartar, R., Chacoff, N., Dänhardt, J., Dicks, L. V., Dormann, C.F., Ekroos, J., Henson, K.S.E., Holzschuh, A., Junker, R.R., Lopezaraiza-Mikel, M., Memmott, J., Montero-Castaño, A., Nelson, I.L., Petanidou, T., Power, E.F., Rundlöf, M., Smith, H.G., Stout, J.C., Temitope, K., Tscharntke, T., Tscheulin, T., Vilà, M. & Kunin, W.E.  2014 The potential for indirect effects between co-flowering plants via shared pollinators depends on resource abundance, accessibility and relatedness. \emph{Ecology Letters} \bold{17}, 1389--1399.
 
 Holt, R. D. 1977 Predation, apparent competition and the structure of prey communities. \emph{Theoretical Population Biology} \bold{12}, 197--229.
 

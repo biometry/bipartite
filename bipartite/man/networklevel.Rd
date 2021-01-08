@@ -209,15 +209,15 @@ Roberts, A. and Stone, L. 1990 Island-sharing by archipelago species. \emph{Oeco
 
 Rodríguez-Girónes M.A., and Santamaría L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence matrices. \emph{Journal of Biogeography} \bold{33}, 924--935
 
-Schluter, D. (1984) A variance test for detecting species associations, with some example applications. \emph{Ecology} \bold{65}, 998-1005.
+Schluter, D. 1984. A variance test for detecting species associations, with some example applications. \emph{Ecology} \bold{65}, 998-1005.
 
-Stone, L. and Roberts, A. (1990) The checkerboard score and species distributions. \emph{Oecologia} \bold{85}, 74--79.
+Stone, L. and Roberts, A. 1990. The checkerboard score and species distributions. \emph{Oecologia} \bold{85}, 74--79.
 
-Stone, L. and Roberts, A. (1992) Competitive exclusion, or species aggregation? An aid in deciding. \emph{Oecologia} \bold{91}, 419--424
+Stone, L. and Roberts, A. 1992. Competitive exclusion, or species aggregation? An aid in deciding. \emph{Oecologia} \bold{91}, 419--424
 
-Tylianakis, J. M., Tscharntke, T. and Lewis, O.T. (2007) Habitat modification alters the structure of tropical host-parasitoid food webs. \emph{Nature} \bold{445}, 202--205
+Tylianakis, J. M., Tscharntke, T. and Lewis, O.T. 2007. Habitat modification alters the structure of tropical host-parasitoid food webs. \emph{Nature} \bold{445}, 202--205
 
-Watts, D. J. and Strogatz, S. (1998) Collective dynamics of \sQuote{small-world} networks. \emph{Nature} \bold{393}, 440--442
+Watts, D. J. and Strogatz, S. 1998. Collective dynamics of \sQuote{small-world} networks. \emph{Nature} \bold{393}, 440--442
 }
 
 \author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}}

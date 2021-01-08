@@ -9,8 +9,8 @@
 \title{printoutModuleInformation}
 
 \description{
-This takes an object of the class "moduleWeb" and prints out the information about the modules stored in this object.
-It is a formatted print-out of the information one gets as result of the function listModuleInformation(moduleWebObject).
+This takes an object of the class \code{moduleWeb} and prints out the information about the modules stored in this object.
+It is a formatted print-out of the information one gets as result of the function \code{listModuleInformation(moduleWebObject)}.
 }
 
 \usage{
@@ -18,7 +18,7 @@ printoutModuleInformation(moduleWebObject)
 }
 
 \arguments{
-  \item{moduleWebObject}{An object of class "moduleWeb".}
+  \item{moduleWebObject}{An object of class \code{moduleWeb}.}
 }
 
 \value{None. This function is called for its side effects of printing the content of its object in a more acceptable format.}

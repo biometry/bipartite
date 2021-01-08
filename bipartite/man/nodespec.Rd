@@ -26,7 +26,7 @@ nodespec(web, inf.replace = NA)
  After calculating the geodesic distances between species, i.e. the minimum number of steps from one species to another, these values are averaged for each species. 
 This mean geodesic distance is interpreted as functional specialisation (Dalgaard et al. 2008).
  
- Notice that this ``new'' index is in fact little else than the inverse of (unscaled) closeness centrality in (poor) disguise.
+ Notice that this ``new'' index is in fact little else than the inverse of (unscaled) closeness centrality in disguise.
 }
 
 \value{
