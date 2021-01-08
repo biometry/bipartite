@@ -1,4 +1,4 @@
-\encoding{UTF-8}
+﻿\encoding{UTF-8}
 
 \name{computeModules}
 
@@ -51,7 +51,7 @@ An object of class "moduleWeb" containing information about the computed modules
 \references{ 
 Beckett, S.J. 2016 Improved community detection in weighted bipartite networks. \emph{Royal Society open science} \bold{3}, 140536.
 
-Dormann, C. F., and R. Strauß. 2014. Detecting modules in quantitative bipartite networks: the QuanBiMo algorithm. \emph{Methods in Ecology & Evolution} \bold{5} 90--98 (or \bold{arXiv [q-bio.QM]} 1304.3218.)
+Dormann, C. F., and R. Strauß. 2014. Detecting modules in quantitative bipartite networks: the QuanBiMo algorithm. \emph{Methods in Ecology & Evolution} \bold{5} 90--98 (and \bold{arXiv [q-bio.QM]} 1304.3218.)
 
 Liu X. & Murata T. 2010. An Efficient Algorithm for Optimizing Bipartite Modularity in Bipartite Networks. \emph{Journal of Advanced Computational Intelligence and Intelligent Informatics (JACIII)} \bold{14} 408--415.
 

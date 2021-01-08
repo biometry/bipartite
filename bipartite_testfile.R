@@ -7,8 +7,9 @@
 # R CMD build bipartite --compact-vignettes=gs+qpdf
 ## inR: rhub::check("bipartite_2.15.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
 ## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
-# R CMD CHECK bipartite_2.15.tar.gz --as-cran
-# R CMD INSTALL bipartite_2.15.tar.gz
+## find . | egrep [^a-zA-Z0-9_\.\/\-\s]   is supposed to find non-UTF8 characters
+# R CMD CHECK bipartite_2.16.tar.gz --as-cran
+# R CMD INSTALL bipartite_2.16.tar.gz
 # check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 

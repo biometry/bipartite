@@ -1,4 +1,4 @@
-\name{sortmatrix}
+﻿\name{sortmatrix}
 \alias{sortmatrix}
 
 \title{ Organise matrix by topology }
@@ -39,7 +39,7 @@ Pinheiro, R.B.P. et al. 2019. A new model explaining the origin of different top
 
 \author{ Rafael Barros Pereira Pinheiro \email{rafael-bpp@hotmail.com}, Gabriel Felix, Marco Mello, and the team of the Ecological Synthesis Lab, University of São Paulo}
 
-\note{Taken, with permission, from https://github.com/pinheirorbp/Rfunctions1 }
+\note{Taken, with permission, from \url{https://github.com/pinheirorbp} }
 
 \seealso{The output of \code{sortmatrix} is used by \code{\link{plotmatrix}}.}
 
