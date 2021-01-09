@@ -15,7 +15,7 @@
 }
 \value{Returns the undirected network }
 \references{ \url{https://toreopsahl.com/2008/11/28/network-weighted-network/} }
-\author{ Tore Opsahl; \url{http://toreopsahl.com/} }
+\author{ Tore Opsahl; \url{https://toreopsahl.com/} }
 \note{ version 1.0.0, taken, with permission, from package tnet }
 \examples{
 ## Load sample data
