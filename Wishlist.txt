@@ -28,7 +28,7 @@ large changes
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
 * add makeweb function(s) from Fründ et al 2016 Oikos
 * nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019)
-* mgen: preserve species names!
+* mgen: preserve species names! also make check for probability matrix robust to floating point errors (if I divide by the sum before, the warning can still appear!)
 
 * turn testfile into proper testthat routine
 
@@ -38,6 +38,7 @@ large changes
 	** list input doesn't work currently, due to the evaluation syntax in webs2array when object "webarray" is given to webs2array from within a call of betalinkr
 	> betalinkr(list(webN1,webN2))
 	Error in eval(webinput) : object 'webarray' not found
+	** actually, the whole webs2array function seems impossible to call from within a function, neither with list nor normal input
 
 
 
