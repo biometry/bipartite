@@ -1,19 +1,36 @@
-# man überarbeitung bis nestedcontr. getestet, vollständig bei winbuilder eingereicht 8.1.2021 18:00 (nach wine url fehler)
+
+## workflow for building/checking/installing bipartite using devtools
+library(devtools)
+setwd("~/Data/aktuell/Networks/bipartite/bipartite")
+document() # process R-functions into .RD files, change namespace
+setwd("..")
+# !! The next step only if the vignette has changed !!
+build("bipartite", clean_doc=FALSE, args="--compact-vignettes=gs+qpdf", binary=F)   # build the .tar.gz file, keep files in doc
+# !! NOW, if I ran the previous line, I have to manually (smallpdf.com) compress the file and put it back into inst/doc, then run the next line !! 
+# build("bipartite", clean_doc=FALSE, args="--no-build-vignettes", binary=F)   # build the .tar.gz file, keep files in doc, does NOT recompile/replace the vignette (thus keeping the compacted one)
+# install("bipartite") # install on the computer
+# check_built("tapnet") # is included in:
+# devtools::check("bipartite")
+
+# This now is the command line version; in particular the R CMD CHECK is better here than in the devtools version (which throws an error related to roxygen)
+# run 
+# R CMD build bipartite --no-build-vignettes
+## R CMD build bipartite --compact-vignettes=gs+qpdf
+## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", gs_quality = "ebook") #also did not yield any compression
+##
+## inR: rhub::check("bipartite_2.15.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
+## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
+## 
+## find . | egrep [^a-zA-Z0-9_\.\/\-\s]   is supposed to find non-UTF8 characters
+R CMD CHECK bipartite_2.16.tar.gz --as-cran
+# R CMD INSTALL bipartite_2.16.tar.gz
+# check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
+
 
 
 ## bipartite test file ##
 
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##
-
-
-# run 
-# R CMD build bipartite --compact-vignettes=gs+qpdf
-## inR: rhub::check("bipartite_2.15.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
-## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
-## find . | egrep [^a-zA-Z0-9_\.\/\-\s]   is supposed to find non-UTF8 characters
-# R CMD CHECK bipartite_2.16.tar.gz --as-cran
-# R CMD INSTALL bipartite_2.16.tar.gz
-# check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
