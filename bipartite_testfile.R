@@ -1,30 +1,32 @@
-
-## workflow for building/checking/installing bipartite using devtools
-library(devtools)
-setwd("~/Data/aktuell/Networks/bipartite/bipartite")
-document() # process R-functions into .RD files, change namespace
-setwd("..")
-# !! The next step only if the vignette has changed !!
-build("bipartite", clean_doc=FALSE, args="--compact-vignettes=gs+qpdf", binary=F)   # build the .tar.gz file, keep files in doc
-# !! NOW, if I ran the previous line, I have to manually (smallpdf.com) compress the file and put it back into inst/doc, then run the next line !! 
-# build("bipartite", clean_doc=FALSE, args="--no-build-vignettes", binary=F)   # build the .tar.gz file, keep files in doc, does NOT recompile/replace the vignette (thus keeping the compacted one)
-# install("bipartite") # install on the computer
-# check_built("tapnet") # is included in:
-# devtools::check("bipartite")
-
 # This now is the command line version; in particular the R CMD CHECK is better here than in the devtools version (which throws an error related to roxygen)
-# run 
-# R CMD build bipartite --no-build-vignettes
-## R CMD build bipartite --compact-vignettes=gs+qpdf
-## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", gs_quality = "ebook") #also did not yield any compression
+
+# workflow: 
+# 1. build package normally (trying to compact the vignette)
+R CMD build bipartite --compact-vignettes=gs+qpdf
+# 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com 
+...
+# 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the built!
+...
+# 4. copy-paste the "built" folder of the .tar.gz of step 1 into the development folder; it contains the data and vignette reference .rdb and .rds needed for a working package!
+...
+# 5. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
+R CMD build bipartite --no-build-vignettes --resave-data
+# 6. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
+R CMD check bipartite_2.16.tar.gz --as-cran
+R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to vignette in RStudio 
+# if you get this error: Error in fetch(key) : lazy-load database '/Users/Carsten/Library/R/4.0/library/bipartite/help/bipartite.rdb' is corrupt
+# re-start R (RStudio); this is just a point of the install not updating the central help pages (https://stackoverflow.com/questions/30424608/error-in-fetchkey-lazy-load-database).
+
+
+## Comments on the workflow above:
+## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do.
+## ad 2.: You can try 
+## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", qpdf=Sys.which(Sys.getenv("R_QPDF", "qpdf")), gs_quality = "ebook") ## but for me this did not yield any compression;
+## ad 5.: There are other check options, e.g. rhub::check("bipartite_2.16.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run; rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
 ##
-## inR: rhub::check("bipartite_2.15.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run
-## rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
-## 
-## find . | egrep [^a-zA-Z0-9_\.\/\-\s]   is supposed to find non-UTF8 characters
-R CMD CHECK bipartite_2.16.tar.gz --as-cran
-# R CMD INSTALL bipartite_2.16.tar.gz
-# check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
+## Misc:
+## * find non-UTF8 characters: find . | egrep [^a-zA-Z0-9_\.\/\-\s]
+## * check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 
 
 
@@ -112,7 +114,7 @@ C.score(t(m), normalise=TRUE) # should be 0.57, since half of the species have n
 C.score(m, normalise=TRUE) # should be 1!
 n <- matrix(c(1,0,0, 0,1,0, 0,0,1), 3,3)
 C.score(t(n), normalise=T)
-system.time(C.score(memmott1999)) # 2s
+system.time(C.score(memmott1999)) # 3s
 
 # CC (closeness centrality)
 CC(Safariland)
@@ -121,7 +123,7 @@ wf <- as.one.mode(Safariland, project="lower", weighted=F)
 wt <- as.one.mode(Safariland, project="lower", weighted=T)
 closeness(wf, cmode="suminvundir")
 closeness(wt, cmode="suminvundir") # makes no difference!
-specieslevel(Safariland, index="closeness", rescale=T) # same as CC(. , rescale=F)
+specieslevel(Safariland, index="closeness") # same as CC(. , rescale=T); no option for rescale=F 
 
 
 # compart

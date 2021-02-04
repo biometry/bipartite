@@ -38,7 +38,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.16\cr
-Date: \tab 2021-01-08\cr
+Date: \tab 2021-02-08\cr
 License: \tab GPL \cr
 }
 }
