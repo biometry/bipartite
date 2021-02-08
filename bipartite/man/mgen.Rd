@@ -45,7 +45,7 @@ cs <- colSums(obs.mat)
 web <- rs \%*\% t(cs)
 web <- web/sum(web)
 n = sum(obs.mat)
-mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums
+mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums (but there will be none here)
 mgen(web, n, keep.species=TRUE, rep.cell=FALSE) # Not allowing zero marginal sums
 
 ## Generate quantitative matrix with probability proportional

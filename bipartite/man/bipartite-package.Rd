@@ -49,7 +49,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
 	\item 2.17 (not yet released)
 	\describe{
-	  \item{Major rehaul of \code{\link{mgen}}: 1. the biggest change is that \option{keep.species=TRUE} now respects the probabilities of the input web (before it had used marginal totals) already for the first interaction of each species, and tries to minimize the number of interactions assigned in this first part of the function. 2. the main part of the function has been changed, not using a while-loop anymore and thus dropping the argument \option{trials}. 3. handling of \option{autotransfrom} has been slightly changed, avoiding unnecessary warnings. 4. the output web now keeps dimnames of input web.}
+  	\item{Major rehaul of \code{\link{mgen}}:}{1. the biggest change is that \option{keep.species=TRUE} now respects the probabilities of the input web (before it had used marginal totals) already for the first interaction of each species, and tries to minimize the number of interactions assigned in this first part of the function. 2. the main part of the function has been changed, not using a while-loop anymore and thus dropping the argument \option{trials}. 3. handling of \option{autotransfrom} has been slightly changed, avoiding unnecessary warnings. 4. the output web now keeps dimnames of input web.}
 	}
 	
   \item 2.16 (release date: 08-Jan-2021)
