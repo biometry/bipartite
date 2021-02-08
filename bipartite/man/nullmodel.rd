@@ -22,7 +22,7 @@ nullmodel(web, N=1000, method="r2d", ...)
  
 This is only a wrapper function to facilitate and standardise the generation of null models.
   
-These null models assume that integers represent frequencies that are ``individually'' counted, not decimal numbers. Multiplication by 1000 (say) and rounding does NOT necessarily make your value frequencies satisfy this assumption. Null models for ``continuously quantitative'' webs still have to be developed!
+These null models assume that interaction weights are integers that represent frequencies that are ``individually'' counted, not decimal numbers. Multiplication by 1000 (say) and rounding does NOT necessarily make your value frequencies satisfy this assumption. Null models for ``continuously quantitative'' webs still have to be developed!
 
 %  \option{mgen} is used when options 1, 2 or 3 are applied to a binary network.
 A warning is returned when all entries in a quantitative network are 0 or 1 (which suggests a binary network).

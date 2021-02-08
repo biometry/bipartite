@@ -9,21 +9,23 @@
 Generic network simulating algorithm based on a probability matrix and a desired number of interactions.
 }
 \usage{
-mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum", trials=100)
+mgen(web, n=sum(web), keep.species=TRUE, rep.cell=TRUE, autotransform="sum_warn")
 }
 \arguments{
-	\item{web}{a matrix with observation probabilities, emerging from some null model considerations external to this function; if an original network is used, this will be automatically converted to a probability matrix by dividing it by the number of interactions (CFD); ORIGINAL: a probability matrix}
-	\item{n}{number of interactions to allocate into the new matrix}
-	\item{keep.species}{Random assignment of interactions may lead to empty columns or rows and hence reduce the dimensions of the simulated web. By default, this is prevented from happening, i.e. each row/column will receive at least one interaction. Setting keep.species to FALSE may (but need not) cause a loss of species.}
-\item{rep.cell}{whether cells can be assign interactions repeatedly; defaults to TRUE}
-\item{autotransform}{determines how a non-probability web is converted into probabilities; option \option{"sum"} simply divides each entry by the sum of interactions in the web;  option \option{"equiprobable"} is the product of marginal probabilities (col/rowSums divided by sum(web) (in a sense this is the basis of the \code{r2dtable} null model, just without the `turn into integers' bit)}
-\item{trials}{allocating interactions (when \option{rep.cell=TRUE}) can be difficult or even impossible. When the number of attempts to allocate them exceeds trials * n it will be stopped and an error message will be returned. Default is 100. Setting \option{trials} to a very large value may make this function run for hours and hours. Your choice!}
+	\item{web}{a matrix with observation (interaction) probabilities, emerging from some considerations (model) external to this function; if an original network is used, it will be converted to a probability matrix by dividing it by its sum.}
+	\item{n}{number of interactions to allocate into the new matrix. Note that in rare cases, the number of interactions assigned may be larger than n due to \option{keep.species=TRUE}.}
+	\item{keep.species}{Ensure each species has at least one interaction? Random assignment of interactions may lead to empty columns or rows and hence reduce the dimensions of the simulated web. By default, this is prevented from happening, i.e. each row/column will receive at least one interaction. Setting \option{keep.species} to FALSE may (but need not) cause a loss of species.}
+\item{rep.cell}{Whether cells can be assigned interactions repeatedly; defaults to TRUE (quantitative webs); use FALSE for binary webs}
+\item{autotransform}{determines how a non-probability web is converted into probabilities; option \option{"sum"} simply divides each entry by the sum of interactions in the web (i.e. probabilities will be proportional to web entries); option \option{"sum_warn"} (the default) does the same, but with a warning;  option \option{"equiprobable"} is an odd name for making probabilities proportional to the product of marginal totals}
 }
 
 \details{
-This is a generic function to build null models for mutualistic networks, used by Vázquez et al. (2009). It is general in the sense that it allows any type of probability matrix to be used for constructing the simulated matrices. It does not, however, constrain rown and column totals, nor does it constrain connectance.
+This is a generic function to simulate mutualistic networks, based on the original function with the same name used by Vázquez et al. (2009). This function can be used for different purposes, as it allows any type of probability matrix to be used for constructing the simulated matrices. However, this probability matrix must be derived from some other model, either fully synthetic or based on empirical data (if an observed network is given, it will sample from observed interactions, but this is not the typical use case). This function can thus be used for implementing various types of null models, but also highly structured or specialised webs.
 
-If \option{rep.cell=TRUE}, repeated interactions are added, thus generating a quantitative matrix with cell values as positive integers. If \option{rep.cell=FALSE}, no repeated assignment of interactions is allowed, thus generating a binary matrix of zeros and ones. Note that when \option{rep.cell=FALSE} the number of interactions to be assigned must be equal or lower than the number of cells in the matrix.
+The use of an externally generated probability matrix is a key difference to \code{genweb} and functions (methods) in \code{nullmodel}. Nevertheless, \option{autotransfrom="equiprobable"} turns \code{mgen} into a null model function, with interaction probabilities according to marginal totals (row and column sums). This null model does not fix row and column totals (otherwise it is similar to the \code{r2dtable} null model) nor connectance (in difference to \code{vaznull}); also, if \option{keep.species=FALSE}, species may be lost (i.e. have no interactions) by chance.
+
+If \option{rep.cell=TRUE}, repeated interactions are added, thus generating a quantitative matrix with cell values as positive integers. In this case, connectance is not fixed or constrained.
+If \option{rep.cell=FALSE}, no repeated assignment of interactions is allowed, thus generating a binary matrix of zeros and ones. Note that when \option{rep.cell=FALSE} the number of interactions to be assigned must be equal or lower than the number of (nonzero) cells in the matrix. If also \option{keep.species=TRUE}, connectance is fixed (\code{n / prod(dim(web))}).
 }
 
 \references{
@@ -47,7 +49,7 @@ mgen(web, n, keep.species=FALSE, rep.cell=FALSE) # Allowing zero marginal sums
 mgen(web, n, keep.species=TRUE, rep.cell=FALSE) # Not allowing zero marginal sums
 
 ## Generate quantitative matrix with probability proportional
-## to interaction frequency in an observed matrix m (which is the default of 'autotransform'):
+## to interaction frequency in an observed matrix m:
 mgen(mosquin1967, keep.species=FALSE, rep.cell=TRUE) # Allowing zero marginal sums
 mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE) # Not allowing zero marginal sums
 }

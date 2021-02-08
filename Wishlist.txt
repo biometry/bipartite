@@ -44,6 +44,7 @@ large changes
 
 small
 * clean up help files (e.g. diversity terminology is not really uptodate: "diversity" is H, but exp(H) is "effective partners")
+* clean help file for nullmodel, related to mgen (e.g. the example with binary web is nonsensical, unless rep.cell=F; and it should be stated that method "equiprobable" is used); also, how does nullmodel know what is binary and what is quantitative?
 
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
