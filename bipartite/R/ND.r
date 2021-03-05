@@ -23,11 +23,11 @@ CC <- function(web, cmode="suminvundir", rescale=TRUE, ...){ #, weighted=TRUE
     # uses a version to calculate centrality that allows for disconnected graphs
     # note that weighted=T/F has no effect, and was hence removed (in version 2.10)
     wh <- as.one.mode(web, project="higher")#, weighted=weighted)
-    cch <- closeness(wh, cmode=cmode, rescale=rescale, ...)
+    cch <- sna::closeness(wh, cmode=cmode, rescale=rescale, ...)
     if (rescale) cch <- cch/sum(cch, na.rm=TRUE)
 
     wl <- as.one.mode(web, project="lower")#, weighted=weighted)
-    ccl <- closeness(wl, cmode=cmode, rescale=rescale, ...)
+    ccl <- sna::closeness(wl, cmode=cmode, rescale=rescale, ...)
     if (rescale) ccl <- ccl/sum(ccl, na.rm=TRUE)
     
     list("lower"=ccl, "higher"=cch)
@@ -38,13 +38,21 @@ BC <- function(web, rescale=TRUE, cmode="undirected", weighted=TRUE, ...){
     # by Carsten F. Dormann, 14 Dec 2010
     # ... options passed on to closeness in package sna; particularly: rescale=TRUE!
     wh <- as.one.mode(web, project="higher", weighted=weighted)
-    bch <- betweenness(wh, rescale=FALSE, cmode=cmode, ...)
+    bch <- sna::betweenness(wh, rescale=FALSE, cmode=cmode, ...)
     if (rescale & sum(bch != 0)) bch <- bch/sum(bch, na.rm=TRUE)
 
     wl <- as.one.mode(web, project="lower", weighted=weighted)
-    bcl <- betweenness(wl, rescale=FALSE, cmode=cmode, ...)
+    bcl <- sna::betweenness(wl, rescale=FALSE, cmode=cmode, ...)
     if (rescale & sum(bcl != 0)) bcl <- bcl/sum(bcl, na.rm=TRUE)
-
+    
+    # shorter, as betweenness can directly use the web: 
+    #bw <- sna::betweenness(web, cmode=cmode, weighted=weighted, ...)
+    #bch <- bw[1:NCOL(web)]
+    #bcl <- bw[(NCOL(web)+1):length(bw)]
+    #if (rescale & sum(bcl != 0)) bcl <- bcl/sum(bcl, na.rm=TRUE)
+    #if (rescale & sum(bcl != 0)) bcl <- bcl/sum(bcl, na.rm=TRUE)
+    # not yet tested!! CFD 04 Mar 2021
+    
     list("lower"=bcl, "higher"=bch)
 }
 

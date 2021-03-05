@@ -4,6 +4,8 @@ IMPORTANT
 * fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
 --> I guess this has been fixed now?!?
 
+* sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).
+
 EDITORIAL
 * provide links in vignette OR include function in bipartite for:
 	** dynsdm (by Miele et al., CRAN)
@@ -41,7 +43,6 @@ large changes
 	** actually, the whole webs2array function seems impossible to call from within a function, neither with list nor normal input
 
 
-
 small
 * clean up help files (e.g. diversity terminology is not really uptodate: "diversity" is H, but exp(H) is "effective partners")
 * clean help file for nullmodel, related to mgen (e.g. the example with binary web is nonsensical, unless rep.cell=F; and it should be stated that method "equiprobable" is used); also, how does nullmodel know what is binary and what is quantitative?
@@ -49,6 +50,7 @@ small
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
+* alias "edgelist2webs" with frame2webs, as more people think of this input as an edgelist!
 * warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb

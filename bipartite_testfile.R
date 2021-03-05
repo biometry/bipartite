@@ -12,7 +12,7 @@ R CMD build bipartite --compact-vignettes=gs+qpdf
 # 5. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
 R CMD build bipartite --no-build-vignettes --resave-data
 # 6. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
-R CMD check bipartite_2.16.tar.gz --as-cran
+R CMD check bipartite_2.17.tar.gz --as-cran
 R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to vignette in RStudio 
 # if you get this error: Error in fetch(key) : lazy-load database '/Users/Carsten/Library/R/4.0/library/bipartite/help/bipartite.rdb' is corrupt
 # re-start R (RStudio); this is just a point of the install not updating the central help pages (https://stackoverflow.com/questions/30424608/error-in-fetchkey-lazy-load-database).
@@ -37,6 +37,9 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
 library(bipartite)
+
+source("bipartite/R/specieslevel.R")
+source("bipartite/R/ND.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
 #  as.one.mode
@@ -255,7 +258,6 @@ mod <- computeModules(Safariland)
 const <- module2constraints(mod)
 nest.smdm(Safariland, constraint=const)
 nest.smdm(Safariland, constraint=const, weighted=T)
-
 
 
 # nested
