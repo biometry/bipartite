@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 	\describe{
   	\item{Major rehaul of \code{\link{mgen}}:}{1. the biggest change is that \option{keep.species=TRUE} now respects the probabilities of the input web (before it had used marginal totals) already for the first interaction of each species, and tries to minimize the number of interactions assigned in this first part of the function. 2. the main part of the function has been changed, not using a while-loop anymore and thus dropping the argument \option{trials}. 3. handling of \option{autotransfrom} has been slightly changed, avoiding unnecessary warnings. 4. the output web now keeps dimnames of input web.}
   	\item{Slight changes to \code{\link{specieslevel}},}{where the weighted betweenness values could be wrongly placed if the web contained compartments without indirect links. Thanks to Marco Mello for drawing our attention to this!}
+  	\item{\code{\link{computeModules}} used to remove}{all-1 rows and columns in a binary network, as they contain no information on modules. However, this affects the modularity value. Now the function always keeps the full network. Note that all-0-values are still removed. Thanks to Elvira D'Bastiani for reporting this problem!}
 	}
 	
   \item 2.16 (release date: 08-Jan-2021)

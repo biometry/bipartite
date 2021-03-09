@@ -7,11 +7,15 @@ computeModules = function(web, method="Beckett", deep=FALSE, deleteOriginalFiles
     method <- "Beckett"
   }
   # check if, for binary data, any species is present everywhere ("empty" takes care of the "nowhere"):
-  if (length(table(unlist(web))) == 2  & ( any(colSums(web) == nrow(web)) | any(rowSums(web) == ncol(web)))){
-    warning("Your binary data set contains one (or more) species present everywhere. These will be ignored, as they contain no information for the modularity algorithm.")
-    nonWeb <- (!web) * 1
-    web <- (! empty(nonWeb)) * 1
-  }
+#  if (empty.web & length(table(unlist(web))) == 2  & ( any(colSums(web) == nrow(web)) | any(rowSums(web) == ncol(web)))){
+#    warning("Your binary data set contains one (or more) species present everywhere. These will be ignored, as they contain no information for the modularity algorithm.")
+    # remove all-full or all-empty columns and rows:
+    #rm.cols <- which(colSums(web) == nrow(web))
+    #rm.rows <- which(rowSums(web) == ncol(web))
+    #web <- web[-rm.rows, -rm.cols]
+#    nonWeb <- (!web) * 1
+#    web <- (! empty(nonWeb)) * 1
+#  }
   
   
   # the fast and nice algorithm of Beckett:

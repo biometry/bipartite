@@ -149,6 +149,21 @@ computeModules(web) # test ability to remove all-1s
 web <- matrix(runif(150, 0.1, 10), 30, 50)
 computeModules(web)
 
+a<-matrix(c(1,1,1,1,1,1,
+            1,1,1,1,1,1,
+            1,1,1,1,1,1,
+            0,1,0,0,0,0,
+            0,1,0,0,0,0,
+            0,1,0,0,0,0,
+            0,1,0,0,0,0,
+            0,1,0,0,0,0,
+            1,1,1,1,1,1,
+            1,1,0,0,0,0,
+            1,1,0,0,0,0), ncol=11, nrow =6)
+computeModules(a)
+computeModules(a, empty.web=T) # should cause an error!
+slot(computeModules(a), "likelihood")
+
 # czvalues
 czvalues(comp1)
 czvalues(comp3)
