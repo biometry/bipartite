@@ -38,8 +38,7 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 ## run this file after every change in bipartite before submitting it to CRAN!!
 library(bipartite)
 
-source("bipartite/R/specieslevel.R")
-source("bipartite/R/ND.R")
+source("bipartite/R/vaznull.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
 #  as.one.mode
@@ -437,6 +436,10 @@ specieslevel(vazquec, index="interaction push pull") # from Natacha Chacoff's er
 set.seed(1)
 m <- matrix(rpois(4, 2), 2, 2)
 vaznull(2, m) # Error when m is full (i.e. no 0); works fine with a single 0 already (set seed to 4)  
+rowSums(vaznull(1, Safariland)[[1]])
+unname(rowSums(Safariland))
+# often rather large discrepancies in the number of interactions!
+
 
 #vaznullexternal
 abun.lower <- c(15,5,2,7,4,8,6,0.01,6)
