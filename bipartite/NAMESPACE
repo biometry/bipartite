@@ -6,7 +6,7 @@ export(array2linkmx, as.one.mode, as.tnet, BC, betalinkr, betalinkr_multi, betwe
 clustering_tm, convert2moduleWeb, czvalues, decimalr2dtable, degreedistr, dfun, DIRT_LPA_wb_plus, discrepancy, empty, endpoint, extinction, fc, frame2webs, genweb, 
 grouplevel, H2fun, linklevel, listModuleInformation, LPA_wb_plus, metaComputeModules, mgen, module2constraints, ND, nest.smdm, nested, nestedcontribution, nestedness, nestedrank, 
 networklevel, nodespec, NOS, npartite, null.distr, null.t.test, nullmodel, PAC, PDI, plotmatrix, plotModuleWeb, plotPAC, plotweb, plotweb2, 
-plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, robustness, second.extinct, shuffle.web, 
+plot.wine, printoutModuleInformation, projecting_tm, r2dexternal, restrictednull, robustness, second.extinct, shuffle.web, 
 slope.bipartite, sortmatrix, sortweb, specieslevel, strength, swap.web, symmetrise_w, togetherness, tnet_igraph, V.ratio, 
 vaznull, vaznullexternal, versionlog, visweb, web2edges, webs2array, wine)
 S3method(plot, wine)

@@ -99,7 +99,7 @@ This means:
 * make "small world" a directly accessible index
 * check Poisot's python and matlab packages
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
-* check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure
+* check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure; see also Runghen et al. 2021
 
 
 NICE TO HAVE

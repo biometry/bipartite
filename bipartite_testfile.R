@@ -38,7 +38,8 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 ## run this file after every change in bipartite before submitting it to CRAN!!
 library(bipartite)
 
-source("bipartite/R/vaznull.R")
+source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
+source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
 #  as.one.mode
@@ -378,6 +379,17 @@ plotweb(Safariland, abuns.type='independent',arrow="no",low.abun=myabuns.low*0.2
 # printoutModuleInformation
 if (!exists("comp1")) comp1 <- computeModules(vazquenc)
 printoutModuleInformation(comp1)
+
+
+# restrictednull
+  Mod <- computeModules(Safariland)
+  Part <- module2constraints(Mod)
+  row.Part <- Part[1:nrow(Safariland)]
+  col.Part <- Part[(nrow(Safariland)+1):(nrow(Safariland)+ncol(Safariland))]
+nulls <- restrictednull(web = Safariland, R.partitions = row.Part, C.partitions = col.Part)
+nulls <- restrictednull(web = Safariland, Prior.Pij = "equiprobable", R.partitions = row.Part, C.partitions = col.Part)
+nulls <- restrictednull(web = Safariland, conditional.level="matrix") # this should essential be vaznull, I think
+nulls <- restrictednull(web = Safariland, Prior.Pij="degreeprob.byarea", conditional.level="areas", R.partitions = row.Part, C.partitions = col.Part)
 
 # robustness
 
