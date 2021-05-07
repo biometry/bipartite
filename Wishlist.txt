@@ -10,7 +10,7 @@ EDITORIAL
 * provide links in vignette OR include function in bipartite for:
 	** dynsdm (by Miele et al., CRAN)
 	** infomapecology (github, not CRAN)
-	**bmotifs (...)
+	** bmotifs (...)
 
 
 large changes
@@ -19,17 +19,19 @@ large changes
 	** plotweb: add a new option ÒnamesÓ, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 	** Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
 	** revise plotweb (incl. device settings, vertical option, margin control; easy and explained coloring per sp etc)
+	** allow for multiple networks next to each other (i.e. mfrow=c(1,2)) ) 
+	** customised alignment of webs (see Benjamin, 3rd chapter)
 
 * recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
-* for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!
+* for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!, possibly with interactive warning for large networks
 
 * NULLMODEL-LIKE:
 * also, check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
-* add makeweb function(s) from Fründ et al 2016 Oikos
-* nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019)
+* add makeweb function(s) from FrŸnd et al 2016 Oikos
+* nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019) --> "reconsider your question" reply into help file
 * mgen: preserve species names! also make check for probability matrix robust to floating point errors (if I divide by the sum before, the warning can still appear!)
 
 * turn testfile into proper testthat routine
@@ -87,7 +89,6 @@ This means:
 
 
 (add new stuff)
-* betalink (Poisot et al. 2012): add new function, incl. new modifications / extensions [JF: on the way]
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
@@ -157,3 +158,4 @@ FIXED:
 * FIX VEGAN DEPENDENCY!! commsimulator goes out of business, see email by Oksanen 25.4.2018!    |  CFD (can't remember when): replaced by vegan::nullmodel !!
 * add external abundances to decimalr2dtable CFD: in example on help page
 * add vignette already existing as "BEN"; make new ideas/indices citable through vignette (e.g. external sequence of second extinct etc): CFD
+* betalink (Poisot et al. 2012): add new function, incl. new modifications / extensions [JF: on the way]
