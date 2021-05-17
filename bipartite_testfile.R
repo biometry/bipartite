@@ -37,6 +37,7 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
 library(bipartite)
+library(testthat)
 
 source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
 source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
@@ -163,6 +164,7 @@ a<-matrix(c(1,1,1,1,1,1,
 computeModules(a)
 computeModules(a, empty.web=T) # should cause an error!
 slot(computeModules(a), "likelihood")
+
 
 # czvalues
 czvalues(comp1)
@@ -303,6 +305,7 @@ networklevel(vazquenc, legacy=TRUE)
 # check that double calls to an index do work:
 networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
 networklevel(Safariland, index="NODF")
+networklevel(Safariland, index="modularity")
 
 # nodespec
 nodespec(Safariland)
@@ -473,10 +476,18 @@ cor(colSums(nulls[[1]]), colSums(Safariland)) # very close to 1
 
 # webs2array
 data(Safariland, vazquenc, vazquec)
-allin1 <- webs2array()
-allin1 <- webs2array(Safariland)
-allin1 <- webs2array(Safariland, vazquenc, vazquec)
+allin1 <- webs2array()  # returns uninformative error
+allin1 <- webs2array(Safariland) # returns informative error
+allin1 <- webs2array(Safariland, vazquenc, vazquec) # just works
 str(allin1)
+
+otto <- list(Safariland, vazarr)
+str(webs2array(otto, vazquec))
+testfun <- function(x) webs2array(x)
+str(testfun(otto)) # caused an error in the pre-2.18 version, which used only the ellipsis (...), not x.
+
+
+
 ## now we can compute distance between two webs:
 vegdist(t(cbind(as.vector(allin1[,,2]), as.vector(allin1[,,3]))), method="jacc")
 webinput <- substitute(list(Safariland, vazquenc, vazquec))

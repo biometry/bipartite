@@ -133,7 +133,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
         sum(pmin(p_i, q_i))  
     }
 
-   PSI <- function(web, beta=c(1,0)){
+   PSI <- function(web, beta=1){
       # calculates the average contribution per visit for each pollinator species
       # (which in itself depends on the specialisation and abundance of the bees,
       # as well as the abundance of the plant species)
@@ -142,7 +142,7 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       # beta  a parameter accounting for the fact that two repeated landings are
       #       needed to transfer pollen: one for the source, one for the sink; a
       #       value of 2 would assume no memory of plant species in the pollinator;
-      #  	a value of 1 implies infinitely storing pollen from source to sink plant
+      #  	    a value of 1 implies infinitely storing pollen from source to sink plant
       #
       # developed by Dormann, Bluethgen & Gruber, 3 May 2007
       #
@@ -153,8 +153,10 @@ function(web, index="ALLBUTD", level="both", logbase=exp(1), low.abun=NULL, high
       Wi. <- matrix(rep(colSums(web), NROW(web)), nrow=NROW(web), byrow=TRUE)
       W.j <- matrix(rep(rowSums(web), NCOL(web)), ncol=NCOL(web), byrow=FALSE)
       
-      PSImat <- (web/W.j)^beta * web/Wi.
-      (PSI <- colSums(PSImat))
+      # PSImat <- (web/W.j)^beta * web/Wi. # old and wrong
+      PSImat <- (web/Wi.)^beta * web/W.j # new and, well, right?
+      PSI <- colSums(PSImat)
+      return(PSI)
     }
    
    shannon <- function(x, base=exp(1)) {# shannon's diversity index

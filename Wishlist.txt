@@ -1,8 +1,5 @@
 IMPORTANT
-* fix bug in PSI (always 1 for beta=0 / lower level); and why is it supposed to be equal to species strength, when strength is not between 0 and 1?
 
-* fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
---> I guess this has been fixed now?!?
 
 * sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).
 
@@ -37,12 +34,6 @@ large changes
 * turn testfile into proper testthat routine
 
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
-
-* BETALINKR / webs2array: 
-	** list input doesn't work currently, due to the evaluation syntax in webs2array when object "webarray" is given to webs2array from within a call of betalinkr
-	> betalinkr(list(webN1,webN2))
-	Error in eval(webinput) : object 'webarray' not found
-	** actually, the whole webs2array function seems impossible to call from within a function, neither with list nor normal input
 
 
 small
@@ -163,3 +154,11 @@ FIXED:
 * add external abundances to decimalr2dtable CFD: in example on help page
 * add vignette already existing as "BEN"; make new ideas/indices citable through vignette (e.g. external sequence of second extinct etc): CFD
 * betalink (Poisot et al. 2012): add new function, incl. new modifications / extensions [JF: on the way]
+* BETALINKR / webs2array: 
+	** list input doesn't work currently, due to the evaluation syntax in webs2array when object "webarray" is given to webs2array from within a call of betalinkr
+	> betalinkr(list(webN1,webN2))
+	Error in eval(webinput) : object 'webarray' not found
+	** actually, the whole webs2array function seems impossible to call from within a function, neither with list nor normal input | CFD & JF, 17.5.2021
+* fix bug in PSI (always 1 for beta=0 / lower level); and why is it supposed to be equal to species strength, when strength is not between 0 and 1? |  CFD and JF, 17.5.2021
+* fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
+--> I guess this has been fixed now?!?  | JF some time ago (2020 or so)

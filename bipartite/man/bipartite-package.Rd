@@ -54,6 +54,9 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   	\item{Slight changes to \code{\link{specieslevel}},}{where the weighted betweenness values could be wrongly placed if the web contained compartments without indirect links. Thanks to Marco Mello for drawing our attention to this!}
   	\item{\code{\link{computeModules}} used to remove}{all-1 rows and columns in a binary network, as they contain no information on modules. However, this affects the modularity value. Now the function always keeps the full network. Note that all-0-values are still removed. Thanks to Elvira D'Bastiani for reporting this problem!}
   	\item{Substantial speed boost to \code{\link{vaznull}},}{thanks to an improvement suggested by Rafael Pinheiro!}
+  	\item{Bug fix in \code{\link{webs2array}},}{which caused problems when called within another function.}
+  	\item{Added index modularity (= Newman's Q) to \code{\link{networklevel}}.}{No options are available, hence this value is the likelihood of the default setting of \code{\link{computeModules}}.}
+  	\item{Bug fix in index PSI in \code{\link{specieslevel}},}{where the beta-exponent was on the wrong matrix, and hence it did not yield species strength for beta=0.}
 	}
 	
   \item 2.16 (release date: 08-Jan-2021)

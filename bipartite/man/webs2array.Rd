@@ -9,12 +9,13 @@ Function to put several webs into an array, blowing the dimensions up to the uni
 }
 
 \usage{
-webs2array(...)
+webs2array(x, ...)
 }
 
 
 \arguments{
-  \item{...}{matrices containing webs (see example), separated by comma. Alternatively, a list of webs can be given as single argument.}
+  \item{x}{either a matrix containing a web, or a list of webs.}
+  \item{...}{further optional matrices provided, if x is not a list (see example). Note that this input will be ignored if x is a list!}
 }
 
 \details{
@@ -42,13 +43,20 @@ Poisot, T., E. Canard, D. Mouillot, N. Mouquet, D. Gravel, and F. Jordan. 2012. 
 \examples{
 data(Safariland, vazquenc, vazquec)
 allin1 <- webs2array(Safariland, vazquenc, vazquec)
+str(allin1)
+
+# alternatively: provide a (named) list as input to web2array:
+example <- list(Safariland, vazquenc, vazquec)
+str(webs2array(example)) # no names!
+
+# named list as input:
+example2 <- list("Saf"=Safariland, "Vquenc"=vazquenc, "Vquec"=vazquec)
+str(webs2array(example2)) # with names provided
 
 # now we can compute distance between two webs:
 vegdist(t(cbind(as.vector(allin1[,,1]), as.vector(allin1[,,2]), as.vector(allin1[,,3]))), 
   method="jacc")
   
-# alternative input option: weblist
-allin1 <- webs2array(list(Safari=Safariland, Llao=vazllao))
 }
 \keyword{ package }
 

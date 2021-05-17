@@ -4,6 +4,10 @@
     ## legacy      se to TRUE allows to run networklevel in its old form
 #! JFedit: fddist and fdweighted replace throughout by fcdist and fcweighted
   
+  ## !!!!! when adding a new index, make sure to also add it to the "exclude from grouplevel"-list !!!!!##
+  
+  
+  
     if(empty.web) {web <- empty(web)}
     web.e <- empty(web) # emptied web for some indices 
     if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")
@@ -17,7 +21,7 @@
         #miscelleneous:
         "ISA", "SA", "extinction slope", "robustness", "niche overlap",   
         #quantitative series:
-        "weighted cluster coefficient", "weighted NODF", "partner diversity", "generality", "vulnerability", "linkage density", "weighted connectance", "Fisher alpha",  "interaction evenness", "Alatalo interaction evenness", "Shannon diversity", "functional complementarity", "H2" )
+        "weighted cluster coefficient", "modularity","weighted NODF", "partner diversity", "generality", "vulnerability", "linkage density", "weighted connectance", "Fisher alpha",  "interaction evenness", "Alatalo interaction evenness", "Shannon diversity", "functional complementarity", "H2" )
     # GONE: "mean interaction diversity", "effective partners", 
     
     index <- unique(index) # enforces that each index name is used only once
@@ -32,13 +36,13 @@
                         "ALLBUTDD" = allindex[-which(allindex=="degree distribution")],
                         "info" = c("number of species", "connectance", "web asymmetry", "links per species", "number of compartments"),
                         # logic: only rough information on the network's general structure
-                        "quantitative" = c("weighted cluster coefficient", "weighted nestedness", "weighted NODF", "functional complementarity", "partner diversity", "effective partners", "H2", "diversity","linkage density", "weighted connectance", "niche overlap"), #"mean interaction diversity", 
+                        "quantitative" = c("weighted cluster coefficient", "modularity", "weighted nestedness", "weighted NODF", "functional complementarity", "partner diversity", "effective partners", "H2", "diversity","linkage density", "weighted connectance", "niche overlap"), #"mean interaction diversity", 
                         # logic: the "quantitative series"
                         "binary" = c("connectance", "links per species", "nestedness", "mean number of partners","cluster coefficient",  "C-score", "Fisher alpha"),
                         # logic: metrics for binary networks
                         "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness", "NODF"),
                         # logic: more abstract, topological metrics for binary networks
-                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "nestedness", "NODF", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),
+                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "modularity", "nestedness", "NODF", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),
                         # only the truly networky indices
                         stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #default for all non-matches
         )
@@ -114,6 +118,12 @@
             }
             out$"cluster coefficient"=as.numeric(cluster.coef(web, FUN=CCfun, full=FALSE))
         }
+        #-------------------
+        if ("modularity" %in% index){
+          Q <- try(computeModules(web)@likelihood)
+          out$"modularity Q" <- ifelse(inherits(Q, "try-error"), NA, Q)
+        }
+        
         #-------------------
         if ("nestedness" %in% index){
             nest <- try(nestedtemp(web)$statistic, silent=TRUE)
@@ -280,8 +290,7 @@
         }
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):
-#! JFedit: weighted connectance added here
-        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance"), index)
+        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "modularity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance"), index)
         exclude.index <- netw.index[!is.na(netw.index)]
         gindex <- if (length(exclude.index)==0) index else index[-exclude.index] # exclude NAs from this vector
         if (length(gindex) > 0) outg <- grouplevel(web, index=gindex, level=level, weighted=weighted, extinctmethod=extinctmethod, nrep=nrep, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fcweighted=fcweighted, fcdist=fcdist)
@@ -321,7 +330,7 @@
         "number of species", "connectance", "web asymmetry", 
         #binary based and related:
         "links per species", "number of compartments", "compartment diversity",
-        "cluster coefficient", "degree distribution", "mean number of shared partners",
+        "cluster coefficient", "degree distribution", "mean number of shared partners", "modularity", 
         "togetherness", "C score", "V ratio", "discrepancy", "nestedness", 
         "weighted nestedness",
         #miscelleneous:
