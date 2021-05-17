@@ -57,6 +57,8 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   	\item{Bug fix in \code{\link{webs2array}},}{which caused problems when called within another function.}
   	\item{Added index modularity (= Newman's Q) to \code{\link{networklevel}}.}{No options are available, hence this value is the likelihood of the default setting of \code{\link{computeModules}}.}
   	\item{Bug fix in index PSI in \code{\link{specieslevel}},}{where the beta-exponent was on the wrong matrix, and hence it did not yield species strength for beta=0.}
+  	\item{Retired binmatnest as called by \code{nestedness}.}{Binmatnest was one of the first nice nestedness algorithms, implemented in C++. It has been kept merely for historical reasons, as \pkg{vegan}'s \code{\link[vegan]{nestedtemp}} is more reliable. We finally decided to kick binmatnest out, leaving only the legacy help page. (Also makes package maintenance a bit easier: one C++ function less to think about.)}
+  	\item{Added text-option to \code{\link{plotPAC}}.}{Species names have a tendency to always be in the way, and too long. Therefore the original function only plotted numbers. Now we added the option to plot (and scale and move) labels for each species. Not nice, but practical.}
 	}
 	
   \item 2.16 (release date: 08-Jan-2021)

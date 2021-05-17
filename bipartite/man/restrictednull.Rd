@@ -88,15 +88,16 @@ Pinheiro, R. B. P., G. M. F. Felix, C. F. Dormann, and M. A. R. Mello. 2019. A n
 \examples{
 Mod <- computeModules(Safariland)
 
-#Recover the partitions
+# Recover the partitions
 Part <- module2constraints(Mod)
 row.Part <- Part[1:nrow(Safariland)]
 col.Part <- Part[(nrow(Safariland)+1):(nrow(Safariland)+ncol(Safariland))]
 
-#Generate randomized networks with the null model of your choice, considering the interaction probabilities calculated before. 
+# Generate randomized networks with the null model of your choice, 
+# considering the interaction probabilities calculated before. 
 nulls <- restrictednull(web = Safariland, R.partitions = row.Part, C.partitions = col.Part)
 
-#Calculate the same nestedness metric for all randomized networks
+# Calculate the same nestedness metric for all randomized networks
 null <- sapply(nulls, nest.smdm, constraints = Part, weighted = TRUE, decreasing = "abund")
 (WNODA.null <- unlist(null[1,])) # WNODArow
 (WNODAsm.null <- unlist(null[2,])) # WNODAcol

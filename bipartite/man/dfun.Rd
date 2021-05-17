@@ -14,7 +14,7 @@ dfun(web, abuns=NULL)
 
 \arguments{
   \item{web}{ Web is a matrix representing the interactions observed between higher level species (columns) and lower level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{abuns}{A vector of abundances for the HIGHER level, usually from additional information. If none is given (default) marginal sums are used. Note that if a web with rows or columns without any interaction is provided, these will not be purged when an independent abundances vector is given. As a consequence, these species will have a d' of NA (see note below).}
+  \item{abuns}{A vector of abundances for the \bold{higher} level, usually from independent information. If none is given (default) marginal sums are used. Note that if a web with rows or columns without any interaction is provided, these will not be purged when an independent abundances vector is given. As a consequence, these species will have a d' of NA (see note below).}
 }
 
 \details{
@@ -26,11 +26,11 @@ The way this function is implemented, it calculates expected values for each cel
 
 Simple rounding of expected values would lead to empty columns or rows, i.e. the dmin-web would be of lower dimension than the original web.
 
-dfun returns the d' values for the lower trophic level. Use \code{fun(t(web))} to get the d'-values for the higher trophic level (as does \code{specieslevel}). If you want to provide external abundances, you must provide those of the OTHER trophic level! (This help file is written as if you were interested in the lower trophic level.)
+\code{dfun} returns the d' values for the lower trophic level. Use \code{dfun(t(web))} to get the d'-values for the higher trophic level (as does \code{specieslevel}). If you want to provide external abundances, you must provide those of the \bold{other} trophic level! (This help file is written as if you were interested in the lower trophic level.)
 
-d' is one of several species-level network indices. It's generalisation to the entire interaction web is called H2'.
+d' is one of several species-level network indices. It's generalisation to the entire interaction web is called H2' (see \code{\link{H2fun}}).
 
-The \code{abundances} vector allows to incorporate independent estimates of the abundances of the HIGHER trophic level. In a pollination web, pollinator abundances may be very different from those estimated by the interaction matrix column sums. This has also, obviously, large consequences for the specialisation: A plant being pollinated by a bee that is common on this plant, but very rare in general, will show a low specialisation unless bee abundances are corrected for. Data given in the abundance vector are here used in replacement for the row sums, both in the d-function itself, as well as in the calculation of the minimum ds.
+The \code{abundances} vector allows to incorporate independent estimates of the abundances of the \bold{higher} trophic level. In a pollination web, pollinator abundances may be very different from those estimated by the interaction matrix column sums. This has also, obviously, large consequences for the specialisation: A plant being pollinated by a bee that is common on this plant, but very rare in general, will show a low specialisation unless bee abundances are corrected for. Data given in the abundance vector are here used in replacement for the row sums, both in the d-function itself, as well as in the calculation of the minimum ds.
 
 In contrast to \code{\link{H2fun}}, finding the minimum value of d violates marginal totals. The idea is that we look at each species in turn. Then, we estimate how its observed number of interactions can be distributed, given the marginal totals (i.e. if 5 interactions were observed, they cannot be put into a link that only has 3 interactions across all species). So, for each species the number of interactions never exceeds the total across all species, but if we would put the web together from this sequential scan, it may well do so. In our view, this is irrelevant, because we are interested in the potential of each species separately to be perfectly specialised (given the marginal totals), not for the entire web. We leave this to \code{\link{H2fun}}.
 }

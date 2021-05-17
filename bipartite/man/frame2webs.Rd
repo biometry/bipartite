@@ -2,11 +2,12 @@
 \name{frame2webs}
 
 \alias{frame2webs}
+\alias{edgelist2webs}
 
 \title{Converts a table of observations into a network matrix}
 
 \description{
-Convenience function to convert a table of observations (typically compiled in a spreadsheet programm) into a network matrix for further use in bipartite.
+Convenience function to convert a table of observations (i.e. an "edge list", typically compiled in a spreadsheet programm) into a network matrix for further use in bipartite.
 }
 
 \usage{

@@ -1,14 +1,7 @@
 IMPORTANT
-
-
 * sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).
 
 EDITORIAL
-* provide links in vignette OR include function in bipartite for:
-	** dynsdm (by Miele et al., CRAN)
-	** infomapecology (github, not CRAN)
-	** bmotifs (...)
-
 
 large changes
 * PLOTWEB: plotweb/visweb revision!
@@ -43,22 +36,19 @@ small
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
-* alias "edgelist2webs" with frame2webs, as more people think of this input as an edgelist!
 * warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
-* retire bmn5: it is available from vegan (re-implemented) and NODF has taken over
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
 * test specieslevel with empty.web=FALSE; decide where web.e must be used: that is, for each index think whether web or web.e is more meaningful!
 * better treatment of allowed index synonyms in species/group/networklevel (currently they are "not recognised" if they don't come with an allindex-namevariant)
-* make spaces in names consistent: input(=index) should be the same as output (in list)
+* specieslevel/grouplevel/networklevel: make spaces in names consistent: input(=index) should be the same as output (in list)
 * add option "weighted" to links per species in networklevel (copy-paste from grouplevel!) 
 * implement normalised version of vulnerability and generality (in Bersier 2002)
 * togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
 * C score: allow for weighting: compute only the 0110-patterns and return this value. Then compute (weighted) averages in group level.
 * external extinction sequence across trophic levels for second.extinct
 * two-level czvalues (e.g. weighted mean of the two trophic levels; see help file) into species level, from there into networklevel
-* add option to plot names in PAC!
 * in second.extinct, use plot.it="higher"/"lower" to plot only one of the trophic levels (wish of Georg Anderson).
 * include robustnessLD50 (Dunne et al. 2002, MacFadyen et al. 2009) and revise help for robustness accordingly
 * search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
@@ -100,7 +90,6 @@ NICE TO HAVE
 * compare betweenness in sna and igraph and tnet and Pajek
 * add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!) @Carsten: we should talk about the network data availability / database topic
 * future outlook: rethink patefield (and modularity and H2') regarding non-integer weights as well as non-independent (overdispersed) counts
-* make modularity available from networklevel
 
 
 
@@ -118,8 +107,6 @@ small
 
 
 
-
-
 IRRELEVANT SIDENOTE:
 In the .Rbuildignore file the syntax is a bit strange:
 \..* means (in Perl): starts with . (has to be escaped, hence \.) and is followed by characters ("."), and as many as you want ("*" is a wildcard).
@@ -129,11 +116,17 @@ To exclude specifically .hg, I guess it would be \..hg or so.
 It also doesn't seem to work ...
 
 # done:
+
+BIN (rejected feature)
+* optionally redirect computeModule output to a file (using "sink" in the function before and after the C-call?); this will allow monitoring of larger for loops without wading through the likelihoods of the function
+* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
+
+
+FIXED/ADDED/DONE:
 * add node overlap/segretation (Strona & Veech 2015 MEE)
 * added Beckett's modularity algorithm (as default in computeModules)
 * add a null model construction function from abundance data! --> r2dexternal
 * clean up the functions, don't list any internal function in the help pages (I don't know how: remove alias? they are already not exported ...)
-* include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
 * add NODF to networklevel 9 Nov 2017 CFD
 * add network of Olito & Fox (2015) http://doi.org/10.5061/dryad.7st32; 9 Nov 2017 CFD
 * FIX ERROR: computeModules(netw, method="DormannStrauss", deep=T):
@@ -141,14 +134,6 @@ Error in validObject(.Object) :
   invalid class “moduleWeb” object: invalid object for slot "modules" in class "moduleWeb": got class "numeric", should be or extend class "matrix"
 Calls: computeModules -> new -> initialize -> initialize -> validObject
 Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
-
-
-BIN (rejected feature)
-* optionally redirect computeModule output to a file (using "sink" in the function before and after the C-call?); this will allow monitoring of larger for loops without wading through the likelihoods of the function
-
-
-
-FIXED:
 * in nullmodel, the check for binary networks is flawed for numbers < 1; use length(unique(web)<3) instead    |  CFD 24.3.2019
 * FIX VEGAN DEPENDENCY!! commsimulator goes out of business, see email by Oksanen 25.4.2018!    |  CFD (can't remember when): replaced by vegan::nullmodel !!
 * add external abundances to decimalr2dtable CFD: in example on help page
@@ -162,3 +147,11 @@ FIXED:
 * fix bug in PSI (always 1 for beta=0 / lower level); and why is it supposed to be equal to species strength, when strength is not between 0 and 1? |  CFD and JF, 17.5.2021
 * fix bug in H2fun (maximum may not be found sometimes, introducing downward bias or NaN)
 --> I guess this has been fixed now?!?  | JF some time ago (2020 or so)
+* provide links in vignette OR include function in bipartite for:
+	** dynsdm (by Miele et al., CRAN)
+	** infomapecology (github, not CRAN)
+	** bmotifs (...)  |  CFD 17.5.2021
+* alias "edgelist2webs" with frame2webs, as more people think of this input as an edgelist! | CFD 17.5.2021
+* retire bmn5: it is available from vegan (re-implemented) and NODF has taken over  |  CFD 17.5.2021
+* add option to plot names in PAC!  |  CFD 17.5.2021
+* make modularity available from networklevel   |  CFD 17.5.2021

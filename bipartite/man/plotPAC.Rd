@@ -14,8 +14,8 @@ Visualises the Potential for Apparent Competition as a circular graph with speci
 
 \usage{
 plotPAC(web, scaling = 1, plot.scale = 1, fill.col = rgb(0.2, 0.2, 0.2, 0.5), 
-arrow.col = rgb(0.5, 0.5, 0.5, 0.5), outby = 1, text = TRUE, 
-circles = FALSE, radius = 1)
+arrow.col = rgb(0.5, 0.5, 0.5, 0.5), outby = 1, label=TRUE, text = TRUE, 
+circles = FALSE, radius = 1, text.cex=1)
 }
 \arguments{
   \item{web}{A community matrix with lower trophic level in rows and higher trophic level in columns.}
@@ -24,9 +24,11 @@ circles = FALSE, radius = 1)
   \item{fill.col}{Colour of the species-circles. Note that the default is using transparency, which is the fourth parameter in the \code{rgb}-function.}
   \item{arrow.col}{Colour(s) of the arrows (in fact polygons) connecting species. As for \option{fill.col}, the default uses transparency. If more than one colour is provided, the links will be coloured in a somewhat complicated sequence, starting with the species with most interactions and then down. So it might require some playing around if you want to colour a specific arrow.}
   \item{outby}{A factor determining by how much the text labels should be moved out from the species-circles. Values smaller than 1 will move them inside the circle-plot.}
-  \item{text}{Logical; if TRUE (default), a number will be plotted next to each species-circle. There usually is no space to put the full name next to it, so there is currently no option to do so.}
+  \item{label}{Logical; if TRUE (default), a number will be plotted next to each species-circle.}
+  \item{text}{Logical; if TRUE (default), the name (as provided by the row names of the input matrix) will be plotted.}
   \item{circles}{Logical; shall species labels be put into a circle (as in the original plot of Morris et al. 2005)? Defaults to FALSE.}
   \item{radius}{A factor modifying the size of the label-circles.}
+  \item{text.cex}{A multiplier to scale the point labels by; defaults to 1.}
 }
 
 \details{

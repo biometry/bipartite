@@ -7,7 +7,7 @@
 \alias{module2constraints}
 \title{ Computes nestedness of a matrix as WNODA (and NODF and WNODF) }
 \description{
-  Calculates network nestedness, also within and between modules, i.e. separate nestednesses for nodes belonging to the same module and between nodes belonging to different modules. Three nestedness metrics are implemented in the function: NODF, WNODF and WNODA.
+Calculates network nestedness, also within and between modules, i.e. separate nestednesses for nodes belonging to the same module and between nodes belonging to different modules. Three nestedness metrics are implemented in the function: NODF, WNODF and WNODA.
 }
 \usage{
   nest.smdm(x, constraints=NULL, weighted=FALSE, decreasing="fill", sort=TRUE)

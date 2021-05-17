@@ -280,9 +280,9 @@ nest.smdm(Safariland, constraint=const, weighted=T)
 # nested
 nested(vazquenc, method="ALL")
 
-# nestedness
-nestedness(Safariland, n.nulls=20)[c(4, 9:20)]
-nestedness(Safariland, null.models=FALSE)$temperature
+# nestedness # DEPRECATED!!
+#nestedness(Safariland, n.nulls=20)[c(4, 9:20)]
+#nestedness(Safariland, null.models=FALSE)$temperature
 
 # nestedrank
 nestedrank(Safariland, normalise=F)
@@ -353,8 +353,9 @@ plotModuleWeb(comp1, plotModules = TRUE, rank = TRUE, weighted = TRUE, displayAl
 
 # plotPAC
 plotPAC(PAC(vazquenc))
-plotPAC(PAC(vazquenc), scaling = 2, plot.scale = 1.5, fill.col = rgb(0.2, 0.3, 0.4, 0.5), arrow.col = rgb(0.4, 0.3, 0.2, 0.5), outby = 0.5, text = TRUE, circles = TRUE, radius = 1.5)
-plotPAC(kevan1970, arrow.col=rainbow(30)) # test multiple colours
+plotPAC(PAC(vazquenc), scaling = 2, plot.scale = 1.5, fill.col = rgb(0.2, 0.3, 0.4, 0.5), arrow.col = rgb(0.4, 0.3, 0.2, 0.5), outby = 0.5, label = F, text=TRUE, circles = T, radius = 1.5)
+plotPAC(kevan1970, arrow.col=rainbow(30), text=F) # test multiple colours
+plotPAC(kevan1970, arrow.col=rainbow(30), text=F, outby=.9) # test multiple colours
 
 # plotweb
 plotweb(vazquenc)

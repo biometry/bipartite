@@ -2,12 +2,12 @@
 %\VignetteEncoding{UTF-8}
 
 \documentclass[a4paper, 11pt]{article}
-%\usepackage[sc]{mathpazo}
+\usepackage[sc]{mathpazo}
 %\usepackage{authblk} % authors & affiliations
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath} % e.g. for \text{} in math
 \usepackage{geometry}
-  \geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
+  \geometry{verbose,tmargin=1.45cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
   \setcounter{secnumdepth}{3}
   \setcounter{tocdepth}{3}
 %\setlength{\parskip}{\bigskipamount}
@@ -43,7 +43,7 @@
 \renewcommand{\textfraction}{0.05}
 \renewcommand{\topfraction}{0.8}
 \renewcommand{\bottomfraction}{0.8}
-\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\floatpagefraction}{0.85}
 
 \newcommand{\package}[1]{\textbf{#1}}
 \newcommand{\proglang}[1]{\textsl{#1}}
@@ -124,24 +124,25 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
 \item[\package{bipartiteD3}] interactive visualisation of bipartite networks;\footnote{And no, this is not a typo, it is ``D3'', which apparently is a JavaScript library for ``data-driven documentation''}
-\item[\package{bmotif}] for counting ``motifs'' in bipartite networks; 
+\item[\package{bmotif}] for counting ``motifs'' in bipartite networks;
+\item[\package{dynsbm}] implements a modularity-like search through multiple time slices of a (dynamic) network \citep[``dynamic stochastic block model''][]{Miele2017};
 \item[\package{econullnetr}] seems to be largely a wrapper for \package{bipartite};
-\item[\package{ggbipart}] 
-\item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
+\item[\package{econetwork}] implements the core-periphery measures of \citet{MartinGonzalez2020} and allows computation of distances between networks following \citet{Ohlmann2019};
 \item[\package{HiveR}] for fancy ``hive'' plots;
-\item[\package{latentnet}] 
+\item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
+% \item[\package{latentnet}] ; % has nothing to do with our kind of networks;
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
-\item[\package{tnet},] some functions of which were lifted to \package{bipartite} (thanks to Tore for allowing that!);
+\item[\package{tnet},] which aims at re-thinking one-mode indices in a mathematically consistent way for bipartite networks; some functions of \package{tnet} were lifted to \package{bipartite} (thanks to Tore for allowing that!);
 \item[\package{vegan}] for various analyses of a community matrix, including null models and nestedness computations;
-\item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite};
+\item[\package{WGCNA}] designed for gene assays, has a small set of indices and options overlapping with those of \package{bipartite}.
 \end{description}
 
 Additionally, there may well be dozens of packages on github or r-forge, which remain obscure until one stumbles over them. 
 \begin{description}
-\item[\package{bipartgraph}], at \url{https://github.com/jgalgarra/bipartgraph}, offers polar and Ziggurat, building on his other package \package{kcorebip};
-\item[\package{ggbipart}], at \url{https://pedroj.github.io/bipartite_plots/}, which provides plotting functionality in \package{ggplot}-style;
-\item[\package{infomapecology}], on \url{https://github.com/Ecological-Complexity-Lab/infomap_ecology_package}, which wraps the infomap-functions and plots the resulting modular network.
+\item[\package{bipartgraph},] at \url{https://github.com/jgalgarra/bipartgraph}, offers polar and Ziggurat, building on his other package \package{kcorebip};
+\item[\package{ggbipart},] at \url{https://pedroj.github.io/bipartite_plots/}, allows plotting bipartite networks in the spirit of \package{ggplot2}; so far (2021), there is no obvious benefit over the functions that come with \package{bipartite};
+\item[\package{infomapecology}] implements the ``Map Equation'', which identifies modules \citep[so far only on github: \url{https://github.com/Ecological-Complexity-Lab/infomap_ecology_package}]{Farage2021}.
 \end{description}
 
 \section{Preparing data for analysis}%------------------------------------------------
@@ -196,7 +197,7 @@ plotPAC(PAC(motten1982), outby=0.9)
 \begin{figure}
   \centering
   %\vspace{4cm}
-	\includegraphics[width=0.4\textwidth]{figures/motten1982_PACplot}
+	\includegraphics[width=0.3\textwidth]{figures/motten1982_PACplot}
 	\caption{A PAC-plot of Motten's \citeyear{Motten1982} pollination network. Lines connect plants potentially visited next by a pollinator. Line width is proportional to probability, which is very similar in this example. See help of \emph{plotPAC} for details on plotting and meaning.}
 	\label{fig:AplotPAC}
 \end{figure}
@@ -712,10 +713,13 @@ See \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-gr
 
 
 \subsection{Analysing the structure of bipartite networks}
+[to be continued ...]
 
 \subsubsection{\package{bmotif}}
 
 \subsubsection{\package{dynsbm}}
+
+\subsubsection{\package{infomapecology}}
 
 
 \subsection{Multi-layer networks}

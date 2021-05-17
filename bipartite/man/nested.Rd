@@ -12,12 +12,12 @@ Wrapper function calling one, several or all currently implemented nestedness me
 }
 
 \usage{
-nested(web, method = "binmatnest2", rescale=FALSE, normalised=TRUE)
+nested(web, method = "binmatnest", rescale=FALSE, normalised=TRUE)
 }
 
 \arguments{
   \item{web}{A matrix with elements of a set (e.g. plants) as rows, elements of a second set (e.g. pollinators) as columns and number of interactions as entries.}
-  \item{method}{One or more of the following: \option{discrepancy}, \option{discrepancy2}, \option{binmatnest}, \option{binmatnest2}, \option{NODF}, \option{NODF2}, \option{C score}, \option{checker}, \option{weighted NODF}, \option{wine}, \option{ALL}. See details for details on each method.}
+  \item{method}{One or more of the following: \option{discrepancy}, \option{discrepancy2}, \option{binmatnest}, \option{NODF}, \option{NODF2}, \option{C score}, \option{checker}, \option{weighted NODF}, \option{wine}, \option{ALL}. See details for details on each method.}
 %  \item{\dots}{Arguments passed on to other nestedness functions, specifically nestedness and wine. Options need to be specified (i.e. no positional parsing).}
   \item{rescale}{Should all measures be rescaled so that higher values mean higher nestedness? Defaults to FALSE, i.e. the standard interpretation of each measure is maintained.}
   \item{normalised}{Logical, defaulting to TRUE. Should C-scores be normalised to a value between 0 and 1? See \code{\link{C.score}} for details.}
@@ -26,12 +26,13 @@ nested(web, method = "binmatnest2", rescale=FALSE, normalised=TRUE)
 \details{
   There are five different measures currently available:
   \describe{
-    \item{1}{binmatnest calculates nestedness temperature following the function \code{\link{nestedness}} (0 = cold = highly nested; 100 = hot = not nested at all). It uses the original program of Miguel Rodriguez-Girones, only called from R; binmatnest2, in contrast, is the implementation in \code{nestedtemp} of the same algorithm by Jari Oksanen. Because binmatnest sometimes (and to us unexplicably) invert the matrix, we prefer the binmatnest2 option.}
-    \item{2}{Discrepancy calculates the number of non-nested 0s and 1s. While \code{discrepancy} calls the function with the same name, discrepancy2 calls \code{nesteddisc}, which handles ties differently. Most of the time, these two should deliver very, very similar results. Higher values indicate lower nestedness.}
-    \item{3}{NODF is the nestedness measure proposed by Almeida-Neto et al., correcting for matrix fill and matrix dimensions. Values of 0 indicate non-nestedness, those of 100 perfect nesting. NODF2 sorts the matrix before calculating the measure. NODF is, I understand, closer to the version presented in the paper, while NODF2 seems to make more sense for comparisons across different networks (because it is independent of the initial presentation of the matrix). Both call \code{nestednodf} in \pkg{vegan}. (Yes,  I initially programmed NODF myself, only to find that it was there already. Luckily, there was a perfect agreement between my (depricated) version and nestednodf.) A weighted version is also now available (see point 6 below), following the paper of Almeida-Neto and Ulrich (2010).}
-    \item{4}{\code{\link{C.score}} calculates the number of checkerboard pattern in the matrix. As default, it normalises this value between min and max, so that values of 0 indicate no checkerboards (i.e. nesting), while a value of 1 indicates a perfect checkerboard. checker is the non-normalised version, based on \code{nestedchecker}.}
+    \item{1}{binmatnest calculates nestedness temperature following the function \code{\link[vegan]{nestedtemp}} (0 = cold = highly nested; 100 = hot = not nested at all).   (Note that we replaced \option{binmatnest}, which calls the retired \code{nestedness}, which used the original C++-program of Miguel Rodriguez-Girones, by what used to be \code{binmatnest2}. Because binmatnest sometimes (and to us unexplicably) invert the matrix, we prefer the \pkg{vegan}'s binmatnest2, now binmatnest, option. That is the implementation by Jari Oksanen in \code{\link[vegan]{nestedtemp}} of the same algorithm.)}
+    \item{2}{Discrepancy calculates the number of non-nested 0s and 1s. While \code{discrepancy} calls the function with the same name, discrepancy2 calls \code{\link[vegan]{nesteddisc}}, which handles ties differently. Most of the time, these two should deliver very, very similar results. Higher values indicate lower nestedness.}
+    \item{3}{NODF is the nestedness measure proposed by Almeida-Neto et al., correcting for matrix fill and matrix dimensions. Values of 0 indicate non-nestedness, those of 100 perfect nesting. NODF2 sorts the matrix before calculating the measure. NODF is, I understand, closer to the version presented in the paper, while NODF2 seems to make more sense for comparisons across different networks (because it is independent of the initial presentation of the matrix). Both call \code{\link[vegan]{nestednodf}} in \pkg{vegan}. (Yes,  I initially programmed NODF myself, only to find that it was there already. Luckily, there was a perfect agreement between my (depricated) version and nestednodf.) A weighted version is also now available (see point 6 below), following the paper of Almeida-Neto and Ulrich (2010).}
+    \item{4}{\code{\link{C.score}} calculates the number of checkerboard pattern in the matrix. As default, it normalises this value between min and max, so that values of 0 indicate no checkerboards (i.e. nesting), while a value of 1 indicates a perfect checkerboard. checker is the non-normalised version, based on \code{\link[vegan]{nestedchecker}}.}
     \item{5}{wine is one of two nestedness measure using the information on the weight of a link. See \code{\link{wine}} for details.}
     \item{6}{weighted NODF is a version of 3, but now incorporating information on the weights of the link; it is the second quantitative nestedness measure, (chronologically) after wine. It uses the sorted matrix to compute NODF. If you want NODF of the unsorted, you have to directly use \code{nestednodf} in \pkg{vegan}.}
+    \item{7}{weighted NODA, or WNODA, does try to give a good nestedness measure \emph{without} correcting for column/row expectations, as that should be left to the null model; see Félix et al. for details. }
   }
 
 }
@@ -56,11 +57,11 @@ Blüthgen, N., J. Fründ, D. P. Vazquez, and F. Menzel. 2008. What do interactio
 
 Brualdi, R.A. and Sanderson, J.G. 1999. Nested species subsets, gaps, and discrepancy. \emph{Oecologia}  \bold{119}, 256--264.
      
-Galeano, J., Pastor, J.M., Iriondo and J.M. 2008. Weighted-Interaction  Nestedness Estimator (WINE): A new  estimator to calculate over
-     frequency matrices. \emph{arXiv} 0808.3397v2 [physics.bio-ph]
+Felix, G.M., Pinheiro, R.B.P., Poulin, R., Krasnov, B.R. & Mello, M.A.R. (2017). The compound topology of a continent-wide interaction network explained by an integrative hypothesis of specialization. \emph{bioRxiv}
+
+Galeano, J., Pastor, J.M., Iriondo and J.M. 2008. Weighted-Interaction  Nestedness Estimator (WINE): A new  estimator to calculate over frequency matrices. \emph{arXiv} 0808.3397v2 [physics.bio-ph]
      
-Rodríguez-Gironés, M.A.  and Santamaría, L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence
-     matrices. \emph{J. Biogeogr.}  \bold{33}, 924--935.
+Rodríguez-Gironés, M.A.  and Santamaría, L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence matrices. \emph{J. Biogeogr.}  \bold{33}, 924--935.
 
 Stone, L. and Roberts, A. 1990. The checkerboard score and species distributions. \emph{Oecologia} \bold{85}, 74--79.
 

@@ -1,4 +1,4 @@
-plotPAC <- function(web, scaling=1, plot.scale=1, fill.col=rgb(.2,.2,.2,.5), arrow.col=rgb(.5,.5,.5,.5), outby=1, text=TRUE, circles=FALSE, radius=1){
+plotPAC <- function(web, scaling=1, plot.scale=1, fill.col=rgb(.2,.2,.2,.5), arrow.col=rgb(.5,.5,.5,.5), outby=1, label=TRUE, text=TRUE, circles=FALSE, radius=1, text.cex=1){
 	# function to draw a circular PAC-plot, as in Morris et al. 2005
 	# PAC is the "Potential for Apparent Competition and is computed using the function with the same name in bipartite
 	# by default, this function yields a plot for the lower trophic level
@@ -49,7 +49,7 @@ plotPAC <- function(web, scaling=1, plot.scale=1, fill.col=rgb(.2,.2,.2,.5), arr
 
 	if (length(arrow.col) < NROW(web)) arrow.col <- rep(arrow.col, len=NROW(web))
 
-	# draw PAC-triangles (rectangles?):
+	# draw PAC-triangles (polygons!):
 	for (i in (1:NROW(PV))[order(rs)]){
 		for (j in (1:NROW(PV))[order(rs)]){
 			if (i <= j) next # dAB and dBA are drawn simultaneously
@@ -71,7 +71,13 @@ plotPAC <- function(web, scaling=1, plot.scale=1, fill.col=rgb(.2,.2,.2,.5), arr
 		}
 	}
 	
-	if (text) text(coords*1.25*outby, as.character(1:NROW(web)))
+	if (label){
+	  if (text) {
+	    text(coords*1.25*outby, rownames(web), cex=text.cex)
+	  } else {
+	    text(coords*1.25*outby, as.character(1:NROW(web)), cex=text.cex)
+	  }
+	}
 	if (circles) symbols(coords*1.25*outby, circles=rep(0.07*radius, NROW(web)), add=TRUE, inches=FALSE)
 	
 }
