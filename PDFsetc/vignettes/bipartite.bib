@@ -1,0 +1,2467 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for Carsten Dormann at 2021-05-17 15:05:06 +0200 
+
+
+%% Saved with string encoding Unicode (UTF-8) 
+
+
+@comment{jabref-meta: databaseType:bibtex;}
+
+
+
+@article{Farage2021,
+	abstract = {Analysing how species interact in modules is a fundamental problem in network ecology. Theory shows that a modular network structure can reveal underlying dynamic ecological and evolutionary processes, influence dynamics that operate on the network and affect the stability of the ecological system. Although many ecological networks describe flows, such as biomass flows in food webs or disease transmission, most modularity analyses have ignored network flows, which can hinder our understanding of the interplay between structure and dynamics. Here we present Infomap, an established method based on network flows to the field of ecological networks. Infomap is a flexible tool that can identify modules in virtually any type of ecological network and is particularly useful for directed, weighted and multilayer networks. We illustrate how Infomap works on all these network types. We also provide a fully documented repository with additional ecological examples. Finally, to help researchers to analyse their networks with Infomap, we introduce the open-source R package infomapecology. Analysing flow-based modularity is useful across ecology and transcends to other biological and non-biological disciplines. A dynamic approach for detecting modular structure has strong potential to provide new insights into the organisation of ecological networks.},
+	author = {Farage, Carmel and Edler, Daniel and Ekl{\"o}f, Anna and Rosvall, Martin and Pilosof, Shai},
+	date-added = {2021-05-17 14:23:53 +0200},
+	date-modified = {2021-05-17 15:02:32 +0200},
+	doi = {10.1111/2041-210X.13569},
+	journal = {Methods in Ecology and Evolution},
+	pages = {778--786},
+	title = {Identifying flow modules in ecological networks using {I}nfomap},
+	volume = {12},
+	year = {2021},
+	Bdsk-Url-1 = {https://doi.org/10.1111/2041-210X.13569}}
+
+@article{Miele2017,
+	abstractnote = {In ecology, recent technological advances and long-term data studies now provide longitudinal interaction data (e.g. between individuals or species). Most often, time is the parameter along which interactions evolve but any other one-dimensional gradient (temperature, altitude, depth, humidity, etc.) can be considered. These data can be modelled through a sequence of different snapshots of an evolving ecological network, i.e. a dynamic network. Here, we present how the dynamic stochastic block model approach developed by Matias & Miele (Matias & Miele In press J. R. Stat. Soc. B (doi:10.1111/rssb.12200)) can capture the complexity and dynamics of these networks. First, we analyse a dynamic contact network of ants and we observe a clear high-level assembly with some variations in time at the individual level. Second, we explore the structure of a food web evolving during a year and we detect a stable predator--prey organization but also seasonal differences in the prey assemblage. Our approach, based on a rigorous statistical method implemented in the R package dynsbm, can pave the way for exploration of evolving ecological networks.},
+	author = {Miele, Vincent and Matias, Catherine},
+	date-added = {2021-05-17 14:15:46 +0200},
+	date-modified = {2021-05-17 14:15:46 +0200},
+	doi = {10.1098/rsos.170251},
+	journal = {Royal Society Open Science},
+	number = {6},
+	pages = {170251},
+	title = {Revealing the hidden structure of dynamic ecological networks},
+	volume = {4},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rsos.170251}}
+
+@article{Matias2017,
+	abstractnote = {Statistical node clustering in discrete time dynamic networks is an emerging field that raises many challenges. Here, we explore statistical properties and frequentist inference in a model that combines a stochastic block model for its static part with independent Markov chains for the evolution of the nodes groups through time. We model binary data as well as weighted dynamic random graphs (with discrete or continuous edges values). Our approach, motivated by the importance of controlling for label switching issues across the different time steps, focuses on detecting groups characterized by a stable within-group connectivity behaviour. We study identifiability of the model parameters and propose an inference procedure based on a variational expectation--maximization algorithm as well as a model selection criterion to select the number of groups. We carefully discuss our initialization strategy which plays an important role in the method and we compare our procedure with existing procedures on synthetic data sets. We also illustrate our approach on dynamic contact networks: one of encounters between high school students and two others on animal interactions. An implementation of the method is available as an R package called dynsbm.},
+	author = {Matias, Catherine and Miele, Vincent},
+	date-added = {2021-05-17 14:13:01 +0200},
+	date-modified = {2021-05-17 14:13:01 +0200},
+	doi = {https://doi.org/10.1111/rssb.12200},
+	issn = {1467-9868},
+	journal = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+	number = {4},
+	pages = {1119--1141},
+	title = {Statistical clustering of temporal networks through a dynamic stochastic block model},
+	volume = {79},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1111/rssb.12200}}
+
+@article{MartinGonzalez2020,
+	abstract = {The calculation of nestedness has become a routine analysis in the study of ecological networks, as it is commonly associated with community resilience, robustness and species persistence. While meaningful in species distributional patterns, for an interaction matrix to be nested, specialist species must interact with ordered subsets of subsequently more generalized species --- not just with a lower number of species. However, after reviewing 419 papers on mutualistic networks published since nestedness was introduced for the study of species interactions in 2003, we have found that only two theoretical studies considered explicitly ordered subsets. Instead, most studies interpret nestedness as a core of densely connected generalist species, surrounded by a periphery of specialist species attached to this core --- a so-called core-periphery structure. Such a topological feature is generally perceived as a core-periphery structure in network science. Here, we argue that the concept of core-periphery may be more relevant for studies on mutualistic networks than the concept of nestedness, as ecologists are usually not interested in exploring in detail the ordered subsets that characterize nestedness but instead use nestedness to describe a topology with a core of densely linked generalist species surrounded by a sparsely linked periphery of specialists. To illustrate our arguments and the quantification of core-periphery structures, we calculate core-periphery and nestedness in a large publicly available dataset of mutualistic networks. We also describe the calculation of core-periphery structures, its relationship with nestedness, and provide the code inside the R package econetwork for its calculation in mutualistic networks. We hope that our review will help ecologists to move beyond nestedness towards a more explicit representation of the structure of ecological networks},
+	author = {Mart{\'i}n Gonz{\'a}lez, Ana M. and V{\'a}zquez, Diego P. and Ramos-Jiliberto, Rodrigo and Lee, Sang Hoon and Miele, Vincent},
+	date-added = {2021-05-17 14:08:37 +0200},
+	date-modified = {2021-05-17 15:05:04 +0200},
+	doi = {10.1101/2020.04.02.021691},
+	journal = {bioRxiv},
+	pages = {2020.04.02.021691},
+	title = {Core-periphery structure in mutualistic networks: an epitaph for nestedness?},
+	year = {2020},
+	Bdsk-Url-1 = {https://doi.org/10.1101/2020.04.02.021691}}
+
+@article{Ohlmann2019,
+	abstract = {Describing how ecological interactions change over space and time and how they are shaped by environmental conditions is crucial to understand and predict ecosystem trajectories. However, it requires having an appropriate framework to measure network diversity locally, regionally and between samples (a-, c- and b-diversity). Here, we propose a unifying framework that builds on Hill numbers and accounts both for the probabilistic nature of biotic interactions and the abundances of species or groups. We emphasise the importance of analysing network diversity across different species aggregation levels (e.g. from species to trophic groups) to get a better understanding of network structure. We illustrate our framework with a simulation experiment and an empirical analysis using a global food-web database. We discuss further usages of the framework and show how it responds to recent calls on comparing ecological networks and analysing their variation across environmental gradients and time.},
+	author = {Ohlmann, Marc and Miele, Vincent and Dray, St{\'e}phane and Chalmandrier, Lo{\"\i}c and O'Connor, Louise and Thuiller, Wilfried},
+	date-added = {2021-05-17 14:05:30 +0200},
+	date-modified = {2021-05-17 14:05:30 +0200},
+	doi = {10.1111/ele.13221},
+	journal = {Ecology Letters},
+	pages = {737--747},
+	title = {Diversity indices for ecological networks: a unifying framework using Hill numbers},
+	volume = {22},
+	year = {2019},
+	Bdsk-Url-1 = {https://doi.org/10.1111/ele.13221}}
+
+@article{Cagnolo2010,
+	abstractnote = {1. Biological communities are organized in complex interaction networks such as food webs, which topology appears to be non-random. Gradients, compartments, nested subsets and even combinations of these structures have been shown in bipartite networks. However, in most studies only one pattern is tested against randomness and mechanistic hypotheses are generally lacking. 2. Here we examined the topology of regional, coexisting plant-herbivore and host-parasitoid food webs to discriminate between the mentioned network patterns. We also evaluated the role of species body size, local abundance, regional frequency and phylogeny as determinants of network topology. 3. We found both food webs to be compartmented, with interaction range boundaries imposed by host phylogeny. Species degree within compartments was mostly related to their regional frequency and local abundance. Only one compartment showed an internal nested structure in the distribution of interactions between species, but species position within this compartment was unrelated to species size or abundance. 4. These results suggest that compartmentalization may be more common than previously considered, and that network structure is a result of multiple, hierarchical, non-exclusive processes.},
+	author = {Cagnolo, Luciano and Salvo, Adriana and Valladares, Graciela},
+	doi = {10.1111/j.1365-2656.2010.01778.x},
+	journal = {Journal of Animal Ecology},
+	month = {Dec},
+	pages = {342--351},
+	title = {Network topology: patterns and mechanisms in plant-herbivore and host-parasitoid food webs},
+	year = {2010},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1365-2656.2010.01778.x}}
+
+@article{Borgatti1997,
+	author = {Borgatti, Stephen P and Everett, M G},
+	journal = {Social Networks},
+	pages = {243--269},
+	title = {Network analysis of 2-mode data},
+	volume = {19},
+	year = {1997}}
+
+@article{Ahn2010,
+	abstract = {Networks have become a key approach to understanding systems of interacting
+	objects, unifying the study of diverse phenomena including biological
+	organisms and human society. One crucial step when studying the structure
+	and dynamics of networks is to identify communities: groups of related
+	nodes that correspond to functional subunits such as protein complexes
+	or social spheres. Communities in networks often overlap such that
+	nodes simultaneously belong to several groups. Meanwhile, many networks
+	are known to possess hierarchical organization, where communities
+	are recursively grouped into a hierarchical structure. However, the
+	fact that many real networks have communities with pervasive overlap,
+	where each and every node belongs to more than one group, has the
+	consequence that a global hierarchy of nodes cannot capture the relationships
+	between overlapping groups. Here we reinvent communities as groups
+	of links rather than nodes and show that this unorthodox approach
+	successfully reconciles the antagonistic organizing principles of
+	overlapping communities and hierarchy. In contrast to the existing
+	literature, which has entirely focused on grouping nodes, link communities
+	naturally incorporate overlap while revealing hierarchical organization.
+	We find relevant link communities in many networks, including major
+	biological networks such as protein-protein interaction and metabolic
+	networks, and show that a large social network contains hierarchically
+	organized community structures spanning inner-city to regional scales
+	while maintaining pervasive overlap. Our results imply that link
+	communities are fundamental building blocks that reveal overlap and
+	hierarchical organization in networks to be two aspects of the same
+	phenomenon.},
+	author = {Ahn, Yong-Yeol and Bagrow, James P and Lehmann, Sune},
+	doi = {10.1038/nature09182},
+	file = {:Users/dormann/Data/Lit/Nature/Ahn, Bagrow, Lehmann\_2010\_Nature.pdf:pdf},
+	issn = {1476-4687},
+	journal = {Nature},
+	month = jun,
+	number = {7307},
+	pages = {761--764},
+	pmid = {20562860},
+	publisher = {Nature Publishing Group},
+	timestamp = {2013.04.19},
+	title = {Link communities reveal multiscale complexity in networks},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/20562860},
+	volume = {466},
+	year = {2010},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/20562860},
+	Bdsk-Url-2 = {https://doi.org/10.1038/nature09182}}
+
+@article{Aizen2008,
+	abstractnote = {Plant-animal mutualisms are characterized by weak or asymmetric mutual dependences between interacting species, a feature that could increase community stability. If invasive species integrate into mutualistic webs, they may alter web structure, with consequences for species persistence. However, the effect of alien mutualists on the architecture of plant-pollinator webs remains largely unexplored. We analyzed the extent of mutual dependency between interacting species, as a measure of mutualism strength, and the connectivity of 10 paired plant-pollinator webs, eight from forests of the southern Andes and two from oceanic islands, with different incidences of alien species. Highly invaded webs exhibited weaker mutualism than less-invaded webs. This potential increase in network stability was the result of a disproportionate increase in the importance and participation of alien species in the most asymmetric interactions. The integration of alien mutualists did not alter overall network connectivity, but links were transferred from generalist native species to super-generalist alien species during invasion. Therefore, connectivity among native species declined in highly invaded webs. These modifications in the structure of pollination webs, due to dominance of alien mutualists, can leave many native species subject to novel ecological and evolutionary dynamics.},
+	author = {Aizen, Marcelo Adri{\'a}n and Morales, Carolina L and Morales, Juan M},
+	doi = {10.1371/journal.pbio.0060031},
+	journal = {PLoS Biology},
+	month = {Feb},
+	number = {2},
+	pages = {e31},
+	timestamp = {2013.04.19},
+	title = {Invasive mutualists erode native pollination webs},
+	volume = {6},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1371/journal.pbio.0060031}}
+
+@article{Alarcon2010,
+	author = {Alarc{\'o}n, Ruben},
+	doi = {10.1111/j.1600-0706.2009.17694.x},
+	file = {:Users/dormann/Data/Lit/Oikos/Alarc\'{o}n\_2010\_Oikos.pdf:pdf},
+	issn = {00301299},
+	journal = {Oikos},
+	month = jan,
+	number = {1},
+	pages = {35--44},
+	timestamp = {2013.04.27},
+	title = {Congruence between visitation and pollen-transport networks in a California plant-pollinator community},
+	url = {http://blackwell-synergy.com/doi/abs/10.1111/j.1600-0706.2009.17694.x},
+	volume = {119},
+	year = {2010},
+	Bdsk-Url-1 = {http://blackwell-synergy.com/doi/abs/10.1111/j.1600-0706.2009.17694.x},
+	Bdsk-Url-2 = {https://doi.org/10.1111/j.1600-0706.2009.17694.x}}
+
+@article{Alarcon2008,
+	abstractnote = {Vigorous discussion of the degree of specialization in pollination interactions, combined with advances in the analysis of complex networks, has revitalized the study of entire plant2013pollinator communities. Noticeably rare, however, are attempts to quantify temporal variation in the structure of plant2013pollinator networks, and to determine whether the status of species as specialists or generalists is stable. Here we show that network structure varied through time in a montane meadow community from southern California, USA, in that pollinator species did not form the same links with plant species across years. Furthermore, composition of the generalized core group of species in the network varied among summers, as did the identity of those species involved in relationships that appeared to be reciprocally specialized within any one summer. These differences appear to be related to severe drought conditions experienced in the second summer of the 3 year study. In contrast to this variation, the pollinator community remained similarly highly nested in all three summers, even though species were packed into the nested matrix differently from year to year. These results suggest that plant2013pollinator networks vary in detail through time, while retaining some basic topological properties. This dynamic aspect of community-scale interactions has implications for both ecological and evolutionary inferences about pollination mutualisms.},
+	author = {Alarc{\'o}n, Ruben and Waser, Nickolas M and Ollerton, Jeff},
+	isbn = {1600-0706},
+	journal = {Oikos},
+	note = {10.1111/j.0030-1299.2008.16987.x},
+	number = {12},
+	pages = {1796--1807},
+	timestamp = {2013.04.27},
+	title = {Year-to-year variation in the topology of a plant-pollinator interaction network},
+	volume = {117},
+	year = {2008}}
+
+@article{Alatalo1981,
+	author = {Alatalo, R V},
+	journal = {Oikos},
+	pages = {199--204},
+	timestamp = {2012.12.20},
+	title = {Problems in the measurement of evenness in ecology},
+	volume = {37},
+	year = {1981}}
+
+@article{AlmeidaNeto2007,
+	author = {Almeida-Neto, M\'{a}rio and {Guimar\~{a}es Jr}, Paulo R and Lewinsohn, Thomas M},
+	doi = {10.1111/j.2007.0030-1299.15803.x},
+	file = {:Users/dormann/Data/Lit/Oikos/Almeida-Neto, Guimar\~{a}es Jr, Lewinsohn\_2007\_Oikos.pdf:pdf},
+	journal = {Oikos},
+	pages = {716--722},
+	timestamp = {2012.12.20},
+	title = {On nestedness analyses: rethinking matrix temperature and},
+	volume = {116},
+	year = {2007},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2007.0030-1299.15803.x}}
+
+@article{AlmeidaNeto2008,
+	author = {Almeida-Neto, M\'{a}rio and Guimar\~{a}es, Paulo and {Guimar\~{a}es Jr}, Paulo R and Loyola, Rafael Dias and Ulrich, Werner},
+	doi = {10.1111/j.2008.0030-1299.16644.x},
+	file = {:Users/dormann/Data/Lit/Oikos/Almeida-Neto et al.\_2008\_Oikos.pdf:pdf},
+	journal = {Oikos},
+	pages = {1227--1239},
+	timestamp = {2012.12.20},
+	title = {A consistent metric for nestedness analysis in ecological systems: reconciling concept and measurement},
+	volume = {117},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2008.0030-1299.16644.x}}
+
+@article{AlmeidaNeto2011,
+	author = {Almeida-Neto, M\'{a}rio and Ulrich, Werner},
+	doi = {10.1016/j.envsoft.2010.08.003},
+	journal = {Environmental Modelling and Software},
+	month = sep,
+	pages = {173--178},
+	title = {A straightforward computational approach for measuring nestedness using quantitative matrices},
+	volume = {26},
+	year = {2011},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.envsoft.2010.08.003}}
+
+@article{Barber2004,
+	abstract = {The maintenance or development of plant community diversity in species-rich
+	wet grasslands has been a focus of water management considerations
+	in the UK for the past 20 years. Much attention has been given to
+	the control of water levels in the ditch systems within these wet
+	grassland systems. In this paper we report measurements of aeration
+	status and water-table fluctuation made on a peat soil site at Tadham
+	Moor in Somerset, UK, where water management has focused on the maintenance
+	of wet conditions that oftenresult inflooding inwinterandwet soil
+	conditions inthe spring and summer. Measurement and modelling of
+	the water-table fluctuation indicates the possibility of variability
+	in the aeration of the root environment and anoxic conditions for
+	much of the winter period and for part of the spring and summer.
+	We have used water content and redox potential measurements to characterize
+	the aeration status of the peat soil. We find that air-filled porosity
+	is related to water-table depth in these situations. Redox potentials
+	in the spring were generally found to be low, implying a reducing
+	condition for nitrate and iron. A significant relationship (p< 0Ð01)
+	between redox potential and water-table depth exists for data measured
+	at 0Ð1m depth, but no relationship could be found for data from 0Ð4m
+	depth.},
+	author = {Barber, K. R. and Leeds-Harrison, P. B. and Lawson, C. S. and Gowing, D. J. G.},
+	doi = {10.1002/hyp.1378},
+	journal = {Hydrological Processes},
+	month = feb,
+	number = {2},
+	pages = {329--341},
+	title = {Soil aeration status in a lowland wet grassland},
+	volume = {18},
+	year = {2004},
+	Bdsk-Url-1 = {https://doi.org/10.1002/hyp.1378}}
+
+@article{Barrat2004,
+	abstract = {Networked structures arise in a wide array of different contexts such
+	as technological and transportation infrastructures, social phenomena,
+	and biological systems. These highly interconnected systems have
+	recently been the focus of a great deal of attention that has uncovered
+	and characterized their topological complexity. Along with a complex
+	topological structure, real networks display a large heterogeneity
+	in the capacity and intensity of the connections. These features,
+	however, have mainly not been considered in past studies where links
+	are usually represented as binary states, i.e., either present or
+	absent. Here, we study the scientific collaboration network and the
+	world-wide air-transportation network, which are representative examples
+	of social and large infrastructure systems, respectively. In both
+	cases it is possible to assign to each edge of the graph a weight
+	proportional to the intensity or capacity of the connections among
+	the various elements of the network. We define appropriate metrics
+	combining weighted and topological observables that enable us to
+	characterize the complex statistical properties and heterogeneity
+	of the actual strength of edges and vertices. This information allows
+	us to investigate the correlations among weighted quantities and
+	the underlying topological structure of the network. These results
+	provide a better description of the hierarchies and organizational
+	principles at the basis of the architecture of weighted networks.},
+	author = {Barrat, A and Barth\'{e}lemy, M and Pastor-Satorras, R and Vespignani, A},
+	doi = {10.1073/pnas.0400087101},
+	journal = {Proceedings of the National Academy of Sciences of the USA},
+	month = mar,
+	number = {11},
+	pages = {3747--52},
+	title = {The architecture of complex weighted networks},
+	volume = {101},
+	year = {2004},
+	Bdsk-Url-1 = {https://doi.org/10.1073/pnas.0400087101}}
+
+@article{Bascompte2003,
+	abstractnote = {Most studies of plant--animal mutualisms involve a small number of species. There is almost no information on the structural organization of species-rich mutualistic networks despite its potential importance for the maintenance of diversity. Here we analyze 52 mutualistic networks and show that they are highly nested; that is, the more specialist species interact only with proper subsets of those species interacting with the more generalists. This assembly pattern generates highly asymmetrical interactions and organizes the community cohesively around a central core of interactions. Thus, mutualistic networks are neither randomly assembled nor organized in compartments arising from tight, parallel specialization. Furthermore, nestedness increases with the complexity (number of interactions) of the network: for a given number of species, communities with more interactions are significantly more nested. Our results indicate a nonrandom pattern of community organization that may be relevant for our understanding of the organization and persistence of biodiversity.},
+	author = {Bascompte, Jordi and Jordano, Pedro and Meli{\'a}n, Carlos J and Olesen, Jens M},
+	doi = {10.1073/pnas.1633576100},
+	journal = {Proceedings of the National Academy of Sciences of the USA},
+	number = {16},
+	pages = {9383--9387},
+	timestamp = {2012.12.05},
+	title = {The nested assembly of plant--animal mutualistic networks},
+	volume = {100},
+	year = {2003},
+	Bdsk-Url-1 = {https://doi.org/10.1073/pnas.1633576100}}
+
+@article{Bascompte2006,
+	author = {Bascompte, Jordi and Jordano, Pedro and Olesen, Jens M},
+	file = {:Users/dormann/Data/Lit/Science/Bascompte, Jordano, Olesen\_2006\_Science.pdf:pdf},
+	journal = {Science},
+	number = {5772},
+	pages = {431--433},
+	timestamp = {2012.12.05},
+	title = {Asymmetric coevolutionary networks facilitate biodiversity maintenance},
+	volume = {312},
+	year = {2006}}
+
+@article{Baselga2012,
+	author = {Baselga, Andr{\'e}s},
+	doi = {10.1111/j.1466-8238.2011.00756.x},
+	journal = {Global Ecology and Biogeography},
+	month = {Mar},
+	pages = {1223--1232},
+	timestamp = {2013.04.17},
+	title = {The relationship between species replacement, dissimilarity derived from nestedness, and nestedness},
+	volume = {21},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1466-8238.2011.00756.x}}
+
+@article{Bastolla2009,
+	abstract = {The main theories of biodiversity either neglect species interactions
+	or assume that species interact randomly with each other. However,
+	recent empirical work has revealed that ecological networks are highly
+	structured, and the lack of a theory that takes into account the
+	structure of interactions precludes further assessment of the implications
+	of such network patterns for biodiversity. Here we use a combination
+	of analytical and empirical approaches to quantify the influence
+	of network architecture on the number of coexisting species. As a
+	case study we consider mutualistic networks between plants and their
+	animal pollinators or seed dispersers. These networks have been found
+	to be highly nested, with the more specialist species interacting
+	only with proper subsets of the species that interact with the more
+	generalist. We show that nestedness reduces effective interspecific
+	competition and enhances the number of coexisting species. Furthermore,
+	we show that a nested network will naturally emerge if new species
+	are more likely to enter the community where they have minimal competitive
+	load. Nested networks seem to occur in many biological and social
+	contexts, suggesting that our results are relevant in a wide range
+	of fields.},
+	author = {Bastolla, Ugo and Fortuna, Miguel a and Pascual-Garc\'{\i}a, Alberto and Ferrera, Antonio and Luque, Bartolo and Bascompte, Jordi},
+	doi = {10.1038/nature07950},
+	journal = {Nature},
+	month = apr,
+	number = {7241},
+	pages = {1018--20},
+	title = {The architecture of mutualistic networks minimizes competition and increases biodiversity},
+	volume = {458},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1038/nature07950}}
+
+@article{Benadi2012,
+	abstractnote = {Plant-pollinator networks are systems of outstanding ecological and economic importance. A particularly intriguing aspect of these systems is their high diversity. However, earlier studies have concluded that the specific mechanisms of plant-pollinator interactions are destabilizing and should lead to a loss of diversity. Here we present a mechanistic model of plant and pollinator population dynamics with the ability to represent a broad spectrum of interaction structures. Using this model, we examined the influence of pollinators on the stability of a plant community and the relationship between pollinator specialization and stability. In accordance with earlier work, our results show that plant-pollinator interactions may severely destabilize plant coexistence, regardless of the degree of pollinator specialization. However, if plant niche differentiation, a classical stabilizing mechanism, is sufficiently strong to overcome the minority disadvantage with respect to pollination, interactions with pollinators may even increase the stability of a plant community. In addition to plant niche differentiation, the relationship between specialization and stability depends on a number of parameters that affect pollinator growth rates. Our results highlight the complex effects of this particular type of mutualism on community stability and call for further investigations of the mechanisms of diversity maintenance in plant-pollinator systems.},
+	author = {Benadi, Gita and Bl{\"u}thgen, Nico and Hovestadt, Thomas and Poethke, H.-J.},
+	journal = {The American Naturalist},
+	pages = {157--268},
+	timestamp = {2013.01.20},
+	title = {Population dynamics of plant and pollinator communities: stability reconsidered},
+	volume = {179},
+	year = {2012}}
+
+@article{Berlow2004,
+	abstractnote = {1. Recent efforts to understand how the patterning of interaction strength affects both structure and dynamics in food webs have highlighted several obstacles to productive synthesis. Issues arise with respect to goals and driving questions, methods and approaches, and placing results in the context of broader ecological theory. 2. Much confusion stems from lack of clarity about whether the questions posed relate to community-level patterns or to species dynamics, and to what authors actually mean by the term ``interaction strength''. Here, we describe the various ways in which this term has been applied and discuss the implications of loose terminology and definition for the development of this field. 3. Of particular concern is the clear gap between theoretical and empirical investigations of interaction strengths and food web dynamics. The ecological community urgently needs to explore new ways to estimate biologically reasonable model coefficients from empirical data, such as foraging rates, body size, metabolic rate, biomass distribution and other species traits. 4. Combining numerical and analytical modelling approaches should allow exploration of the conditions under which different interaction strengths metrics are interchangeable with regard to relative magnitude, system responses, and species identity. 5. Finally, the prime focus on predator-prey links in much of the research to date on interaction strengths in food webs has meant that the potential significance of non-trophic interactions, such as competition, facilitation and biotic disturbance, has been largely ignored by the food web community. Such interactions may be important dynamically and should be routinely included in future food web research programmes.},
+	author = {Berlow, E L and Neutel, A M and Cohen, Joel E and de Ruiter, P C and Ebenman, B and Emmerson, M and Fox, J W and Jansen, V A A and Jones, J I and Kokkoris, G D and et al.},
+	journal = {Journal of Animal Ecology},
+	note = {ISI Document Delivery No.: 813DC 0021-8790},
+	number = {3},
+	pages = {585--598},
+	timestamp = {2012.12.17},
+	title = {Interaction strengths in food webs: issues and opportunities},
+	volume = {73},
+	year = {2004}}
+
+@article{Bersier2002,
+	author = {Bersier, Louis-F\'{e}lix and Banasek-Richter, Carolin and Cattin, Marie-France},
+	file = {:Users/dormann/Data/Lit/Ecology/Bersier, Banasek-Richter, Cattin\_2002\_Ecology.pdf:pdf},
+	journal = {Ecology},
+	keywords = {chesapeake bay,connectance,descriptors,food web,information-theory indices,mesohaline ecosystem,omnivory,quantitative,sampling effect,shannon index,trophic links,usa},
+	pages = {2394--2407},
+	title = {Quantitative descriptors of food-web matrices},
+	volume = {83},
+	year = {2002}}
+
+@article{Bluthgen2010,
+	author = {Bl\"{u}thgen, Nico},
+	journal = {Basic and Applied Ecology},
+	pages = {185--195},
+	title = {Why network analysis is often disconnected from community ecology: A critique and an ecologist's guide},
+	volume = {11},
+	year = {2010}}
+
+@article{Brualdi1999,
+	author = {Brualdi, Richard A and Sanderson, James G},
+	doi = {10.1007/s004420050784},
+	journal = {Oecologia},
+	number = {2},
+	pages = {256--264},
+	title = {Nested species subsets, gaps, and discrepancy},
+	volume = {119},
+	year = {1999},
+	Bdsk-Url-1 = {https://doi.org/10.1007/s004420050784}}
+
+@article{Burgos2007,
+	author = {Burgos, E and Ceva, H and Perazzo, R P J and Devoto, M and Medan, D and Zimmermann, M and Delbue, A Maria},
+	journal = {Journal of Theoretical Biology},
+	pages = {307--313},
+	timestamp = {2013.01.02},
+	title = {Why nestedness in mutualistic networks?},
+	volume = {249},
+	year = {2007}}
+
+@article{Cagnolo2011,
+	abstract = {1. Biological communities are organized in complex interaction networks
+	such as food webs, which topology appears to be non-random. Gradients,
+	compartments, nested subsets and even combinations of these structures
+	have been shown in bipartite networks. However, in most studies only
+	one pattern is tested against randomness and mechanistic hypotheses
+	are generally lacking. 2. Here we examined the topology of regional,
+	coexisting plant-herbivore and host-parasitoid food webs to discriminate
+	between the mentioned network patterns. We also evaluated the role
+	of species body size, local abundance, regional frequency and phylogeny
+	as determinants of network topology. 3. We found both food webs to
+	be compartmented, with interaction range boundaries imposed by host
+	phylogeny. Species degree within compartments was mostly related
+	to their regional frequency and local abundance. Only one compartment
+	showed an internal nested structure in the distribution of interactions
+	between species, but species position within this compartment was
+	unrelated to species size or abundance. 4. These results suggest
+	that compartmentalization may be more common than previously considered,
+	and that network structure is a result of multiple, hierarchical,
+	non-exclusive processes.},
+	author = {Cagnolo, Luciano and Salvo, Adriana and Valladares, Graciela},
+	doi = {10.1111/j.1365-2656.2010.01778.x},
+	issn = {1365-2656},
+	journal = {Journal of Animal Ecology},
+	month = dec,
+	pages = {342--351},
+	pmid = {21143226},
+	title = {Network topology: patterns and mechanisms in plant-herbivore and host-parasitoid food webs.},
+	year = {2011},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1365-2656.2010.01778.x}}
+
+@article{Clauset2009,
+	abstract = {Power-law distributions occur in many situations of scientific interest
+	and have significant consequences for our understanding of natural
+	and man-made phenomena. Unfortunately, the detection and characterization
+	of power laws is complicated by the large fluctuations that occur
+	in the tail of the distribution---the part of the distribution representing
+	large but rare events---and by the difficulty of identifying the range
+	over which power-law behav- ior holds. Commonly used methods for
+	analyzing power-law data, such as least-squares fitting, can produce
+	substantially inaccurate estimates of parameters for power-law dis-
+	tributions, and even in cases where such methods return accurate
+	answers they are still unsatisfactory because they give no indication
+	of whether the data obey a power law at all. Here we present a principled
+	statistical framework for discerning and quantifying power-law behavior
+	in empirical data. Our approach combines maximum-likelihood fitting
+	methods with goodness-of-fit tests based on the Kolmogorov--Smirnov
+	(KS) statistic and likelihood ratios. We evaluate the effectiveness
+	of the approach with tests on synthetic data and give critical comparisons
+	to previous approaches. We also apply the proposed methods to twenty-four
+	real-world data sets from a range of different disciplines, each
+	of which has been conjectured to follow a power-law distribution.
+	In some cases we find these conjectures to be consistent with the
+	data, while in others the power law is ruled out.},
+	author = {Clauset, Aaron and Shalizi, Cosma Rohilla and Newman, M E J},
+	file = {:Users/dormann/Data/Lit/SIAM Review/Clauset, Shalizi, Newman\_2009\_SIAM Review.pdf:pdf},
+	journal = {SIAM Review},
+	keywords = {070710111,10,1137,62-07,62f99,62p99,65c05,ams subject classifications,doi,heavy-tailed distributions,likelihood ratio test,maximum likelihood,model selection,pareto,power-law distributions,zipf},
+	number = {4},
+	pages = {661--703},
+	timestamp = {2013.01.02},
+	title = {Power-law distributions in empirical data},
+	volume = {51},
+	year = {2009}}
+
+@book{Crawley1987,
+	address = {San Diego, USA},
+	author = {Crawley, Michael J},
+	pages = {420},
+	publisher = {University of California Press},
+	timestamp = {2013.02.25},
+	title = {Herbivory: The Dynamics of Animal Plant Interactions},
+	year = {1987}}
+
+@book{Darwin1862,
+	author = {Darwin, Charles R},
+	place = {London},
+	publisher = {John Murray},
+	timestamp = {2013.04.27},
+	title = {On the Various Contrivances by which British and Foreign Orchids are Fertilised by Insects, and on the Good Effects of Intercrossing},
+	year = {1862}}
+
+@article{Devoto2012,
+	author = {Devoto, Mariano and Bailey, Sallie and Craze, Paul and Memmott, Jane},
+	doi = {10.1111/j.1461-0248.2012.01740.x},
+	journal = {Ecology Letters},
+	month = {Jan},
+	pages = {319--328},
+	timestamp = {2013.01.02},
+	title = {Understanding and planning ecological restoration of plant-pollinator networks},
+	volume = {15},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1461-0248.2012.01740.x}}
+
+@incollection{Diamond1975,
+	author = {Diamond, J M},
+	booktitle = {Ecology and Evolution of Communities},
+	editor = {Cody, M and Diamond, J MEditors},
+	pages = {342--444},
+	place = {Harvard, MA},
+	publisher = {Belknap Press},
+	timestamp = {2013.01.03},
+	title = {Assembly of species communities},
+	year = {1975}}
+
+@article{Dormann2011,
+	author = {Dormann, C. F.},
+	journal = {Network Biology},
+	pages = {1-20},
+	title = {How to be a specialist? Quantifying specialisation in pollination networks},
+	volume = {1},
+	year = {2011}}
+
+@article{Dormann2009,
+	abstract = {Many analyses of ecological networks in recent years have introduced
+	new indices to describe network properties. As a consequence, tens
+	of indices are available to address similar questions, differing
+	in specific detail, sensitivity in detecting the property in question,
+	and robustness with respect to network size and sampling intensity.
+	Furthermore, some indices merely reflect the number of species participating
+	in a network, but not their interrelationship, requiring a null model
+	approach. Here we introduce a new, free software calculating a large
+	spectrum of network indices, visualizing bipartite networks and generating
+	null models. We use this tool to explore the sensitivity of 26 network
+	indices to network dimensions, sampling intensity and singleton observations.
+	Based on observed data, we investigate the interrelationship of these
+	indices, and show that they are highly correlated, and heavily influenced
+	by network dimensions and connectance. Finally, we re-evaluate five
+	common hypotheses about network properties, comparing 19 pollination
+	networks with three differently complex null models: 1. The number
+	of links per species (``degree'') follow (truncated) power law distributions.
+	2. Generalist pollinators interact with specialist plants, and vice
+	versa (dependence asymmetry). 3. Ecological networks are nested.
+	4. Pollinators display complementarity, owing to specialization within
+	the network. 5. Plant-pollinator networks are more robust to extinction
+	than random networks. Our results indicate that while some hypotheses
+	hold up against our null models, others are to a large extent understandable
+	on the basis of network size, rather than ecological interrelationships.
+	In particular, null model pattern of dependence asymmetry and robustness
+	to extinction are opposite to what current network paradigms suggest.
+	Our analysis, and the tools we provide, enables ecologists to readily
+	contrast their findings with null model expectations for many different
+	questions, thus separating statistical inevitability from ecological
+	process.},
+	author = {Dormann, Carsten F and Bl\"{u}thgen, Nico and Fr\"{u}nd, Jochen and Gruber, Bernd},
+	doi = {10.2174/1874213000902010007},
+	journal = {The Open Ecology Journal},
+	number = {1},
+	pages = {7--24},
+	title = {Indices, graphs and null models: Analyzing bipartite ecological networks},
+	volume = {2},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.2174/1874213000902010007}}
+
+@article{Dormann2008h,
+	author = {Dormann, Carsten F and Fr\"{u}nd, Jochen and Gruber, Bernd},
+	file = {:Users/dormann/Data/Lit/R News/Dormann, Fr\"{u}nd, Gruber\_2008\_R News.pdf:pdf},
+	journal = {R News},
+	number = {2},
+	pages = {8--11},
+	title = {Introducing the bipartite package: Analysing ecological networks},
+	volume = {8},
+	year = {2008}}
+
+@article{Dunne2002,
+	abstract = {Networks from a wide range of physical, biological, and social systems
+	have been recently described as "small-world" and "scale-free." However,
+	studies disagree whether ecological networks called food webs possess
+	the characteristic path lengths, clustering coefficients, and degree
+	distributions required for membership in these classes of networks.
+	Our analysis suggests that the disagreements are based on selective
+	use of relatively few food webs, as well as analytical decisions
+	that obscure important variability in the data. We analyze a broad
+	range of 16 high-quality food webs, with 25-172 nodes, from a variety
+	of aquatic and terrestrial ecosystems. Food webs generally have much
+	higher complexity, measured as connectance (the fraction of all possible
+	links that are realized in a network), and much smaller size than
+	other networks studied, which have important implications for network
+	topology. Our results resolve prior conflicts by demonstrating that
+	although some food webs have small-world and scale-free structure,
+	most do not if they exceed a relatively low level of connectance.
+	Although food-web degree distributions do not display a universal
+	functional form, observed distributions are systematically related
+	to network connectance and size. Also, although food webs often lack
+	small-world structure because of low clustering, we identify a continuum
+	of real-world networks including food webs whose ratios of observed
+	to random clustering coefficients increase as a power-law function
+	of network size over 7 orders of magnitude. Although food webs are
+	generally not small-world, scale-free networks, food-web topology
+	is consistent with patterns found within those classes of networks.},
+	author = {Dunne, Jennifer A and Williams, Richard J and Martinez, Neo D},
+	doi = {10.1073/pnas.192407699},
+	journal = {Proceedings of the National Academy of Sciences of the USA},
+	month = oct,
+	number = {20},
+	pages = {12917--22},
+	title = {Food-web structure and network theory: The role of connectance and size},
+	volume = {99},
+	year = {2002},
+	Bdsk-Url-1 = {https://doi.org/10.1073/pnas.192407699}}
+
+@book{Efron1993,
+	address = {London},
+	author = {Efron, B. and Tibshirani, Robert J},
+	publisher = {Chapman \& Hall},
+	title = {An Introduction to the Bootstrap},
+	year = {1993}}
+
+@article{Gagic2011,
+	abstractnote = {Decline in landscape complexity owing to agricultural intensification may affect biodiversity, food web complexity and associated ecological processes such as biological control, but such relationships are poorly understood. Here, we analysed food webs of cereal aphids, their primary parasitoids and hyperparasitoids in 18 agricultural landscapes differing in structural complexity (42-93% arable land). Despite little variation in the richness of each trophic group, we found considerable changes in trophic link properties across the landscape complexity gradient. Unexpectedly, aphid-parasitoid food webs exhibited a lower complexity (lower linkage density, interaction diversity and generality) in structurally complex landscapes, which was related to the dominance of one aphid species in complex landscapes. Nevertheless, primary parasitism, as well as hyperparasitism, was higher in complex landscapes, with primary parasitism reaching levels for potentially successful biological control. In conclusion, landscape complexity appeared to foster higher parasitism rates, but simpler food webs, thereby casting doubt on the general importance of food web complexity for ecosystem functioning.},
+	author = {Gagic, Vesna and Tscharntke, Teja and Dormann, Carsten F and Gruber, Bernd and Wilstermann, Anne and Thies, Carsten},
+	doi = {10.1098/rspb.2010.2645},
+	journal = {Proceedings of the Royal Society of London B},
+	month = {Oct},
+	number = {1720},
+	pages = {2946--2953},
+	timestamp = {2013.02.25},
+	title = {Food web structure and biocontrol in a four-trophic level system across a landscape complexity gradient},
+	volume = {278},
+	year = {2011},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rspb.2010.2645}}
+
+@article{Galeano2009a,
+	author = {Galeano, Javier and Pastor, Juan M. and Iriondo, Jose M.},
+	doi = {10.1016/j.envsoft.2009.05.014},
+	journal = {Environmental Modelling and Software},
+	month = nov,
+	number = {11},
+	pages = {1342--1346},
+	title = {Weighted-Interaction Nestedness Estimator (WINE): A new estimator to calculate over frequency matrices},
+	volume = {24},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.envsoft.2009.05.014}}
+
+@article{Ghazoul2005,
+	abstract = {Concerns have been raised that invertebrate pollinators of crops and
+	wild plants are in decline as a result of modern agricultural practices,
+	habitat degradation, and introduced pests and diseases. This has
+	led to demands for a response by land managers, conservationists
+	and political decision makers to the impending 'global pollinator
+	crisis'. In questioning this crisis, it becomes apparent that perceptions
+	of a pollinator crisis are driven mainly by reported declines of
+	crop-pollinating honeybees in North America, and bumblebees and butterflies
+	in Europe, whereas native pollinator communities elsewhere show mixed
+	responses to environmental change. Additionally, few staple food
+	crops depend on pollinator services, and most crops that do are grown
+	at small scales in diversified agro-ecosystems that are likely to
+	support healthy pollinator communities, or in highly managed systems
+	that are largely independent of wild pollinators. Consequently, justifying
+	conservation action on the basis of deteriorating pollinator services
+	might be misplaced. Nevertheless, existing initiatives to monitor
+	pollinators are well founded, given the uncertainty about the dynamics
+	of pollinator populations.},
+	author = {Ghazoul, Jaboury},
+	doi = {10.1016/j.tree.2005.04.026},
+	journal = {Trends in Ecology and Evolution},
+	month = jul,
+	number = {7},
+	pages = {367--73},
+	title = {Buzziness as usual? Questioning the global pollination crisis},
+	volume = {20},
+	year = {2005},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.tree.2005.04.026}}
+
+@article{Gilarranz2012,
+	author = {Gilarranz, Luis J. and Pastor, Juan M. and Galeano, Javier},
+	doi = {10.1111/j.1600-0706.2011.19592.x},
+	journal = {Oikos},
+	month = {Dec},
+	pages = {1154--1162},
+	timestamp = {2012.12.17},
+	title = {The architecture of weighted mutualistic networks},
+	volume = {121},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1600-0706.2011.19592.x}}
+
+@book{Gotelli1996,
+	author = {Gotelli, Nicholas J and Graves, G. R},
+	place = {Washington D.C.},
+	publisher = {Smithsonian Institution Press},
+	timestamp = {2013.01.03},
+	title = {Null Models in Ecology},
+	year = {1996}}
+
+@article{Guimera2005,
+	abstract = {We analyze the global structure of the worldwide air transportation
+	network, a critical infrastructure with an enormous impact on local,
+	national, and international economies. We find that the worldwide
+	air transportation network is a scale-free small-world network. In
+	contrast to the prediction of scale-free network models, however,
+	we find that the most connected cities are not necessarily the most
+	central, resulting in anomalous values of the centrality. We demonstrate
+	that these anomalies arise because of the multicommunity structure
+	of the network. We identify the communities in the air transportation
+	network and show that the community structure cannot be explained
+	solely based on geographical constraints and that geopolitical considerations
+	have to be taken into account. We identify each city's global role
+	based on its pattern of intercommunity and intracommunity connections,
+	which enables us to obtain scale-specific representations of the
+	network.},
+	author = {Guimer\`{a}, R and Mossa, S and Turtschi, A and Amaral, Lu\'{\i}s A. Nunes},
+	doi = {10.1073/pnas.0407994102},
+	journal = {Proceedings of the National Academy of Sciences of the United States of America},
+	number = {22},
+	pages = {7794--9},
+	title = {The worldwide air transportation network: Anomalous centrality, community structure, and cities' global roles.},
+	volume = {102},
+	year = {2005},
+	Bdsk-Url-1 = {https://doi.org/10.1073/pnas.0407994102}}
+
+@article{Guimera2010,
+	author = {Guimer{\`a}, Roger and Stouffer, D B and Sales-Pardo, M and Leicht, E A and Newman, M E J and Amaral, Lu{\'\i}s A Nunes},
+	journal = {Ecology},
+	number = {10},
+	pages = {2941--2951},
+	title = {Origin of compartmentalization in food webs},
+	volume = {91},
+	year = {2010}}
+
+@article{Hausdorf2007,
+	author = {Hausdorf, Bernhard and Hennig, Christian},
+	doi = {10.1111/j.2007.0030-1299.15661.x},
+	journal = {Oikos},
+	month = may,
+	number = {5},
+	pages = {818--828},
+	title = {Null model tests of clustering of species, negative co-occurrence patterns and nestedness in meta-communities},
+	volume = {116},
+	year = {2007},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2007.0030-1299.15661.x}}
+
+@article{Ings2009,
+	abstract = {1. A fundamental goal of ecological network research is to understand
+	how the complexity observed in nature can persist and how this affects
+	ecosystem functioning. This is essential for us to be able to predict,
+	and eventually mitigate, the consequences of increasing environmental
+	perturbations such as habitat loss, climate change, and invasions
+	of exotic species. 2. Ecological networks can be subdivided into
+	three broad types: 'traditional' food webs, mutualistic networks
+	and host-parasitoid networks. There is a recent trend towards cross-comparisons
+	among network types and also to take a more mechanistic, as opposed
+	to phenomenological, perspective. For example, analysis of network
+	configurations, such as compartments, allows us to explore the role
+	of co-evolution in structuring mutualistic networks and host-parasitoid
+	networks, and of body size in food webs. 3. Research into ecological
+	networks has recently undergone a renaissance, leading to the production
+	of a new catalogue of evermore complete, taxonomically resolved,
+	and quantitative data. Novel topological patterns have been unearthed
+	and it is increasingly evident that it is the distribution of interaction
+	strengths and the configuration of complexity, rather than just its
+	magnitude, that governs network stability and structure. 4. Another
+	significant advance is the growing recognition of the importance
+	of individual traits and behaviour: interactions, after all, occur
+	between individuals. The new generation of high-quality networks
+	is now enabling us to move away from describing networks based on
+	species-averaged data and to start exploring patterns based on individuals.
+	Such refinements will enable us to address more general ecological
+	questions relating to foraging theory and the recent metabolic theory
+	of ecology. 5. We conclude by suggesting a number of 'dead ends'
+	and 'fruitful avenues' for future research into ecological networks.},
+	author = {Ings, Thomas C and Montoya, Jos\'{e} M and Bascompte, Jordi and Bl\"{u}thgen, Nico and Brown, Lee and Dormann, Carsten F and Edwards, Fran\c{c}ois and Figueroa, David and Jacob, Ute and Jones, J Iwan and Lauridsen, Rasmus B and Ledger, Mark E and Lewis, Hannah M and Olesen, Jens M and van Veen, F J Frank and Warren, Phil H and Woodward, Guy},
+	doi = {10.1111/j.1365-2656.2008.01460.x},
+	file = {:Users/dormann/Data/Lit/The Journal of animal ecology/Ings et al.\_2009\_The Journal of animal ecology.pdf:pdf},
+	issn = {1365-2656},
+	journal = {The Journal of Animal Ecology},
+	keywords = {Animals,Behavior, Animal,Behavior, Animal: physiology,Ecology,Ecology: methods,Ecology: trends,Evolution,Food Chain},
+	number = {1},
+	pages = {253--69},
+	pmid = {19120606},
+	title = {Ecological networks--beyond food webs},
+	volume = {78},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1365-2656.2008.01460.x}}
+
+@article{James2012,
+	author = {James, Alex and Pitchford, Jonathan W. and Plank, Michael J.},
+	doi = {10.1038/nature11214},
+	journal = {Nature},
+	month = jun,
+	number = {7406},
+	pages = {227--230},
+	title = {Disentangling nestedness from models of ecological complexity},
+	volume = {487},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1038/nature11214}}
+
+@article{Joppa2009,
+	abstract = {Theories suggest that food webs might consist of groups of species
+	forming 'blocks', 'compartments' or 'guilds'. We consider ecological
+	networks subsets of complete food webs involving species at adjacent
+	trophic levels. Reciprocal specializations occur when (say) a pollinator
+	(or group of pollinators) specializes on a particular flower species
+	(or group of such species) and vice versa. Such specializations tend
+	to group species into guilds. We characterize the level of reciprocal
+	specialization for both antagonistic interactions particularly parasitoids
+	and their hosts and mutualistic ones such as insects and the flowers
+	that they pollinate. We also examine whether trophic patterns might
+	be 'palimpsests'2013 that is, there might be reciprocal specialization
+	within taxonomically related species within a network, but these
+	might be obscured when these relationships are combined. Reciprocal
+	specializations are rare in all these systems when tested against
+	the most conservative null model.},
+	author = {Joppa, Lucas N and Bascompte, Jordi and Montoya, Jose M and Sol\'{e}, Ricard V and Sanderson, Jim and Pimm, Stuart L},
+	doi = {10.1111/j.1461-0248.2009.01341.x},
+	journal = {Ecology Letters},
+	number = {9},
+	pages = {961--969},
+	title = {Reciprocal specialization in ecological networks},
+	volume = {12},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1461-0248.2009.01341.x}}
+
+@article{Jordano1987,
+	author = {Jordano, Pedro},
+	journal = {The American Naturalist},
+	pages = {657--677},
+	timestamp = {2012.12.20},
+	title = {Patterns of mutualistic interactions in pollination and seed dispersal--connectance, dependence asymmetries, and coevolution},
+	volume = {129},
+	year = {1987}}
+
+@article{Jordano2003,
+	author = {Jordano, P and Bascompte, Jordi and Olesen, Jens M},
+	journal = {Ecology Letters},
+	pages = {69--81},
+	timestamp = {2013.01.02},
+	title = {Invariant properties in coevolutionary networks of plant-animal interactions},
+	volume = {6},
+	year = {2003}}
+
+@article{Jost2006,
+	abstract = {Entropies such as the Shannon-Wiener and Gini-Simpson indices are
+	not themselves diversities. Conversion of these to effective number
+	of species is the key to a unified and intuitive interpretation of
+	diversity. Effective numbers of species derived from standard diversity
+	indices share a common set of intuitive mathematical properties and
+	behave as one would expect of a diversity, while raw indices do not.
+	Contrary to Keylock, the lack of concavity of effective numbers of
+	species is irrelevant as long as they are used as transformations
+	of concave alpha, beta, and gamma entropies. The practical importance
+	of this transformation is demonstrated by applying it to a popular
+	community similarity measure based on raw diversity indices or entropies.
+	The standard similarity measure based on untransformed indices is
+	shown to give misleading results, but transforming the indices or
+	entropies to effective numbers of species produces a stable, easily
+	interpreted, sensitive general similarity measure. General overlap
+	measures derived from this transformed similarity measure yield the
+	Jaccard index, S\o rensen index, Horn index of overlap, and the Morisita-Horn
+	index as special cases.},
+	author = {Jost, Lou},
+	journal = {Oikos},
+	month = may,
+	number = {2},
+	pages = {363--375},
+	timestamp = {2012.12.05},
+	title = {Entropy and diversity},
+	volume = {113},
+	year = {2006}}
+
+@article{Julliard2006,
+	author = {Julliard, R. and Clavel, J. and Devictor, V. and Jiguet, F. and Couvet, D.},
+	journal = {Ecology Letters},
+	pages = {1237--1244},
+	timestamp = {2012.11.18},
+	title = {Spatial segregation of specialists and generalists in bird communities},
+	volume = {9},
+	year = {2006}}
+
+@article{Kallimanis2009,
+	abstract = {Plant-pollinator interaction networks are characterized by several
+	features that cannot be obtained from a totally random network (e.g.
+	nestedness, power law distribution of degree specialization, temporal
+	turnover). One reason is that both plants and pollinators are active
+	for only a part of the year, and so a plant species flowering in
+	spring cannot interact with a pollinator species that is active only
+	in autumn. In this paper we build a stochastic model to simulate
+	the plant-pollinator interaction network, taking into account the
+	duration of activity of each species. To build the model we used
+	an empirical plant-pollinator network from a Mediterranean scrub
+	community surveyed over four years. In our simulated annual cycle
+	we know which plant and pollinator species are active, and thus available
+	to interact. We can obtain simulated plant-pollinator interaction
+	networks with properties similar to the real ones in two different
+	ways: (i) by assuming that the frequency distribution of both plant
+	and pollinator duration of activity follow an exponential function,
+	and that interaction among temporally coexisting species are totally
+	random, and (ii) by assuming more realistic frequency distributions
+	(exponential for pollinators, lognormal for plants) and that the
+	interaction among coexisting species is occurring on a per capita
+	basis. In the latter case we assume that there is a positive relationship
+	between abundance and duration of activity. In our model the starting
+	date of the species activity had little influence on the network
+	structure. We conclude that the observed plant-pollinator network
+	properties can be produced stochastically, and the mechanism shaping
+	the network is not necessarily related to size constraints. Under
+	such conditions co-evolutionary explanations should be given with
+	caution.},
+	author = {Kallimanis, A and Petanidou, T and Tzanopoulos, J and Pantis, J and Sgardelis, S},
+	doi = {10.1016/j.ecolmodel.2008.11.008},
+	file = {:Users/dormann/Data/Lit/Ecological Modelling/Kallimanis et al.\_2009\_Ecological Modelling.pdf:pdf},
+	issn = {03043800},
+	journal = {Ecological Modelling},
+	month = mar,
+	number = {5},
+	pages = {684--693},
+	timestamp = {2013.02.25},
+	title = {Do plant--pollinator interaction networks result from stochastic processes?},
+	volume = {220},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.ecolmodel.2008.11.008}}
+
+@article{Klein2002,
+	author = {Klein, Alexandra-Maria and Steffan-Dewenter, Ingolf and Tscharntke, Teja},
+	file = {:Users/dormann/Data/Lit/Biodiversity and Conservation/Klein, Steffan-Dewenter, Tscharntke\_2002\_Biodiversity and Conservation.pdf:pdf},
+	journal = {Biodiversity and Conservation},
+	keywords = {agroforestry,arthropods,biological control,conservation,sulawesi,theobroma cacao},
+	pages = {683--693},
+	timestamp = {2013.02.25},
+	title = {Predator--prey ratios on cocoa along a land-use gradient in Indonesia},
+	volume = {11},
+	year = {2002}}
+
+@article{Kremen2007a,
+	abstract = {Many ecosystem services are delivered by organisms that depend on
+	habitats that are segregated spatially or temporally from the location
+	where services are provided. Management of mobile organisms contributing
+	to ecosystem services requires consideration not only of the local
+	scale where services are delivered, but also the distribution of
+	resources at the landscape scale, and the foraging ranges and dispersal
+	movements of the mobile agents. We develop a conceptual model for
+	exploring how one such mobile-agent-based ecosystem service (MABES),
+	pollination, is affected by land-use change, and then generalize
+	the model to other MABES. The model includes interactions and feedbacks
+	among policies affecting land use, market forces and the biology
+	of the organisms involved. Animal-mediated pollination contributes
+	to the production of goods of value to humans such as crops; it also
+	bolsters reproduction of wild plants on which other services or service-providing
+	organisms depend. About one-third of crop production depends on animal
+	pollinators, while 60-90\% of plant species require an animal pollinator.
+	The sensitivity of mobile organisms to ecological factors that operate
+	across spatial scales makes the services provided by a given community
+	of mobile agents highly contextual. Services vary, depending on the
+	spatial and temporal distribution of resources surrounding the site,
+	and on biotic interactions occurring locally, such as competition
+	among pollinators for resources, and among plants for pollinators.
+	The value of the resulting goods or services may feed back via market-based
+	forces to influence land-use policies, which in turn influence land
+	management practices that alter local habitat conditions and landscape
+	structure. Developing conceptual models for MABES aids in identifying
+	knowledge gaps, determining research priorities, and targeting interventions
+	that can be applied in an adaptive management context.},
+	author = {Kremen, Claire and Williams, Neal M and Aizen, Marcelo a and Gemmill-Herren, Barbara and LeBuhn, Gretchen and Minckley, Robert and Packer, Laurence and Potts, Simon G and Roulston, T'ai and Steffan-Dewenter, Ingolf and V\'{a}zquez, Diego P and Winfree, Rachael and Adams, Laurie and Crone, Elizabeth E and Greenleaf, Sarah S and Keitt, Timothy H and Klein, Alexandra-Maria and Regetz, James and Ricketts, Taylor H},
+	doi = {10.1111/j.1461-0248.2007.01018.x},
+	file = {:Users/dormann/Data/Lit/Ecology Letters/Kremen et al.\_2007\_Ecology Letters.pdf:pdf},
+	issn = {1461-0248},
+	journal = {Ecology letters},
+	keywords = {Animals,Bees,Bees: physiology,Conservation of Natural Resources,Crops, Agricultural,Crops, Agricultural: economics,Ecosystem,Models, Biological,Plant Physiological Phenomena,Pollen,Public Policy,Reproduction,Reproduction: physiology},
+	month = apr,
+	number = {4},
+	pages = {299--314},
+	pmid = {17355569},
+	timestamp = {2012.12.09},
+	title = {Pollination and other ecosystem services produced by mobile organisms: a conceptual framework for the effects of land-use change.},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/17355569},
+	volume = {10},
+	year = {2007},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/17355569},
+	Bdsk-Url-2 = {https://doi.org/10.1111/j.1461-0248.2007.01018.x}}
+
+@article{Krishna2008,
+	author = {Krishna, Abhay and {Guimar\~{a}es Jr}, Paulo R and Jordano, Pedro and Bascompte, Jordi},
+	doi = {10.1111/j.1600-0706.2008.16540.x},
+	journal = {Oikos},
+	month = oct,
+	number = {11},
+	pages = {1609--1618},
+	title = {A neutral-niche theory of nestedness in mutualistic networks},
+	volume = {117},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1600-0706.2008.16540.x}}
+
+@article{Latapy2006,
+	abstract = {Many real-world complex networks actually have a bipartite nature:
+	their nodes may be separated into two classes, the links being between
+	nodes of different classes only. Despite this, and despite the fact
+	that many ad-hoc tools have been designed for the study of special
+	cases, very few exist to analyse (describe, extract relevant information)
+	such networks in a systematic way. We propose here an extension of
+	the most basic notions used nowadays to analyse classical complex
+	networks to the bipartite case. To achieve this, we introduce a set
+	of simple statistics, which we discuss by comparing their values
+	on a representative set of real-world networks and on their random
+	versions.},
+	arxivid = {cond-mat/0611631},
+	author = {Latapy, Matthieu and Magnien, Clemence and {Del Vecchio}, Nathalie},
+	journal = {arXiv},
+	keywords = {Statistical Mechanics},
+	month = nov,
+	pages = {0611631v1},
+	timestamp = {2013.02.25},
+	title = {Basic notions for the analysis of large affiliation networks/bipartite graphs},
+	volume = {cond-mat},
+	year = {2006}}
+
+@article{Lewinsohn2006,
+	author = {Lewinsohn, Thomas M and Prado, Paulo In\'{a}cio and Jordano, Pedro and Bascompte, Jordi and Olesen, Jens M},
+	doi = {10.1111/j.0030-1299.2006.14583.x},
+	file = {:Users/dormann/Data/Lit/Oikos/Lewinsohn et al.\_2006\_Oikos.pdf:pdf},
+	issn = {00301299},
+	journal = {Oikos},
+	month = apr,
+	number = {1},
+	pages = {174--184},
+	timestamp = {2012.12.05},
+	title = {Structure in plant-animal interaction assemblages},
+	url = {http://doi.wiley.com/10.1111/j.0030-1299.2006.14583.x},
+	volume = {113},
+	year = {2006},
+	Bdsk-Url-1 = {http://doi.wiley.com/10.1111/j.0030-1299.2006.14583.x},
+	Bdsk-Url-2 = {https://doi.org/10.1111/j.0030-1299.2006.14583.x}}
+
+@article{Lind2005,
+	author = {Lind, Pedro G. and Gonz\'alez, Marta C. and Herrmann, Hans J.},
+	doi = {10.1103/PhysRevE.72.056127},
+	issue = {5},
+	journal = {Phys. Rev. E},
+	month = {Nov},
+	numpages = {9},
+	pages = {056127},
+	title = {Cycles and clustering in bipartite networks},
+	volume = {72},
+	year = {2005},
+	Bdsk-Url-1 = {https://doi.org/10.1103/PhysRevE.72.056127}}
+
+@article{Muller1999,
+	abstract = {1. A quantitative parasitoid web was constructed describing the trophic
+	relationships between the community of aphids, parasitoids and secondary
+	parasitoids in an abandoned field in southern England. Root aphids
+	were omitted and secondary parasitoids were associated with aphids
+	rather than primary parasitoids. All aphids, parasitoids and trophic
+	links were expressed in the same units (m-2). Over a 2-year period,
+	separate webs were constructed for every month that aphids and parasitoids
+	were active in the field. 2. Twenty-six species of plants were attacked
+	by 25 species of aphid which were parasitized by 18 species of primary
+	parasitoids. The primary parasitoids were attacked by 28 species
+	of secondary parasitoids, of which 18 directly attacked the still
+	living aphid (hyperparasitoids) and 10 attacked the aphid after mummification
+	(mummy parasitoids). The aphids were attended by three species of
+	ants. 3. Eleven webs were constructed for the months May to September
+	1994 and May to October 1995. Aphids and primary parasitoids were
+	most abundant and diverse in June, and secondary parasitoids one
+	month later. 4. The ratios of the number of aphid species to the
+	number of species of primary parasitoid and hyperparasitoid were
+	relatively constant across webs, as was the ratio of the number of
+	links involving hyperparasitoids and mummy parasitoids. The ratio
+	of the total number of links to the total number of species increased
+	with web size. 5. The relative abundance of the species in the different
+	webs was well described by a Dirichlet distribution with a common
+	parameter. This implies a gamma distribution of aphid abundances
+	in the field with few common and many rare species. 6. Predator (i.e.
+	parasitoid) overlap graphs were constructed to assess the potential
+	for indirect interactions between aphids. Mummy parasitoids were
+	the most important group linking different aphids. A quantitative
+	overlap diagram was developed to illustrate the potential strengths
+	of indirect linkages. Common aphid species shared few strong, indirect
+	links via primary parasitoids or hyperparasitoids, but could be strongly
+	linked by mummy parasitoids. Symmetrical links were uncommon, and
+	rare species were potentially strongly influenced by the presence
+	of common aphids with which they shared parasitoids. 7. Ant-attended
+	aphids were attacked by fewer species of primary parasitoids and
+	hyperparasitoids than those species not attended by ants. Species
+	of mummy parasitoids attack, on average, approximately twice the
+	number of host species than species of either primary parasitoids
+	or hyperparasitoids.},
+	author = {M\"{u}ller, C B and Adriaanse, I C T and Belshaw, R and Godfray, H C J},
+	journal = {Journal of Animal Ecology},
+	pages = {346--370},
+	timestamp = {2013.02.25},
+	title = {The structure of an aphid--parasitoid community},
+	volume = {68},
+	year = {1999}}
+
+@book{Manly1997,
+	address = {New York},
+	author = {Bryan F.J. Manly},
+	edition = {2nd},
+	owner = {carsten},
+	pages = {424},
+	publisher = {Chapman \& Hall/CRC},
+	timestamp = {2012.04.03},
+	title = {Randomization, Bootstrap and Monte Carlo Methods in Biology},
+	year = {1997}}
+
+@article{MartinGonzalez2010,
+	author = {Mart{\'\i}n Gonz\'{a}lez, Ana M and Dalsgaard, B and Olesen, Jens M},
+	doi = {doi:10.1016/j.ecocom.2009.03.008},
+	journal = {Ecological Complexity},
+	pages = {36-47},
+	timestamp = {2012.12.17},
+	title = {Centrality measures and the importance of generalist species in pollination networks},
+	volume = {7},
+	year = {2010},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.ecocom.2009.03.008}}
+
+@article{deMazancourt2000,
+	abstract = {Grazing optimization occurs when herbivory increases primary production
+	at low grazing intensities. In the case of simple plant-herbivore
+	interactions, such an effect can result from recycling of a limiting
+	nutrient. However, in more complex cases, herbivory can also lead
+	to species replacement in plant communities, which in turn alters
+	how primary production is affected by herbivory. Here we explore
+	this issue using a model of a limiting nutrient cycle in an ecosystem
+	with two plant species. We show that two major plant traits determine
+	primary production at equilibrium: plant recycling efficiency (i.e.,
+	the fraction of the plant nutrient stock that stays within the ecosystem
+	until it is returned to the nutrient pool in mineral form) and plant
+	ability to deplete the soil mineral nutrient pool through consumption
+	of this resource. In cases where sufficient time has occurred, grazing
+	optimization requires that herbivory improve nutrient conservation
+	in the system sufficiently. This condition sets a minimum threshold
+	for herbivore nutrient recycling efficiency, the fraction of nutrient
+	consumed by herbivores that is recycled within the ecosystem to the
+	mineral nutrient pool. This threshold changes with plant community
+	composition and herbivore preference and is, therefore, strongly
+	affected by plant species replacement. The quantitative effects of
+	these processes on grazing optimization are determined by both the
+	recycling efficiencies and depletion abilities of the plant species.
+	However, grazing optimization remains qualitatively possible even
+	with plant species replacement.},
+	author = {de Mazancourt, C and Loreau, M},
+	doi = {10.1086/303360},
+	journal = {The American Naturalist},
+	month = jul,
+	number = {6},
+	pages = {735--754},
+	title = {Effect of Herbivory and Plant Species Replacement on Primary Production.},
+	volume = {155},
+	year = {2000},
+	Bdsk-Url-1 = {https://doi.org/10.1086/303360}}
+
+@article{Memmott1999,
+	author = {Memmott, J},
+	journal = {Ecology Letters},
+	pages = {276--280},
+	title = {The structure of a plant-pollinator food web},
+	volume = {2},
+	year = {1999}}
+
+@article{Memmott2004,
+	abstract = {Mutually beneficial interactions between flowering plants and animal
+	pollinators represent a critical 'ecosystem service' under threat
+	of anthropogenic extinction. We explored probable patterns of extinction
+	in two large networks of plants and flower visitors by simulating
+	the removal of pollinators and consequent loss of the plants that
+	depend upon them for reproduction. For each network, we removed pollinators
+	at random, systematically from least-linked (most specialized) to
+	most-linked (most generalized), and systematically from most- to
+	least-linked. Plant species diversity declined most rapidly with
+	preferential removal of the most-linked pollinators, but declines
+	were no worse than linear. This relative tolerance to extinction
+	derives from redundancy in pollinators per plant and from nested
+	topology of the networks. Tolerance in pollination networks contrasts
+	with catastrophic declines reported from standard food webs. The
+	discrepancy may be a result of the method used: previous studies
+	removed species from multiple trophic levels based only on their
+	linkage, whereas our preferential removal of pollinators reflects
+	their greater risk of extinction relative to that of plants. In both
+	pollination networks, the most-linked pollinators were bumble-bees
+	and some solitary bees. These animals should receive special attention
+	in efforts to conserve temperate pollination systems.},
+	author = {Memmott, Jane and Waser, Nickolas M and Price, Mary V},
+	doi = {10.1098/rspb.2004.2909},
+	journal = {Proceedings of the Royal Society London B},
+	month = dec,
+	number = {1557},
+	pages = {2605--11},
+	title = {Tolerance of pollination networks to species extinctions},
+	volume = {271},
+	year = {2004},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rspb.2004.2909}}
+
+@article{Montoya2006,
+	abstract = {Darwin used the metaphor of a 'tangled bank' to describe the complex
+	interactions between species. Those interactions are varied: they
+	can be antagonistic ones involving predation, herbivory and parasitism,
+	or mutualistic ones, such as those involving the pollination of flowers
+	by insects. Moreover, the metaphor hints that the interactions may
+	be complex to the point of being impossible to understand. All interactions
+	can be visualized as ecological networks, in which species are linked
+	together, either directly or indirectly through intermediate species.
+	Ecological networks, although complex, have well defined patterns
+	that both illuminate the ecological mechanisms underlying them and
+	promise a better understanding of the relationship between complexity
+	and ecological stability.},
+	author = {Montoya, Jos\'{e} M and Pimm, Stuart L and Sol\'{e}, Ricard V},
+	doi = {10.1038/nature04927},
+	journal = {Nature},
+	month = jul,
+	number = {7100},
+	pages = {259--64},
+	title = {Ecological networks and their fragility},
+	volume = {442},
+	year = {2006},
+	Bdsk-Url-1 = {https://doi.org/10.1038/nature04927}}
+
+@article{Moore2007,
+	abstract = {A community is "nested" when species assemblages in less rich sites
+	form nonrandom subsets of those at richer sites. Conventional null
+	models used to test for statistically nonrandom nestedness are under-
+	or over-restrictive because they do not sufficiently isolate ecological
+	processes of interest, which hinders ecological inference. We propose
+	a class of null models that are ecologically explicit and interpretable.
+	Expected values of species richness and incidence, rather than observed
+	values, are used to create random presence-absence matrices for hypothesis
+	testing. In our examples, based on six datasets, expected values
+	were derived either by using an individually based random placement
+	model or by fitting empirical models to richness data as a function
+	of environmental covariates. We describe an algorithm for constructing
+	unbiased null matrices, which permitted valid testing of our null
+	models. Our approach avoids the problem of building too much structure
+	into the null model, and enabled us to explicitly test whether observed
+	communities were more nested than would be expected for a system
+	structured solely by species-abundance and species-area or similar
+	relationships. We argue that this test or similar tests are better
+	determinants of whether a system is truly nested; a nested system
+	should contain unique pattern not already predicted by more fundamental
+	ecological principles such as species-area relationships. Most species
+	assemblages we studied were not nested under these null models. Our
+	results suggest that nestedness, beyond that which is explained by
+	passive sampling processes, may not be as widespread as currently
+	believed. These findings may help to improve the utility of nestedness
+	as an ecological concept and conservation tool.},
+	author = {Moore, Jeffrey E and Swihart, Robert K},
+	doi = {10.1007/s00442-007-0696-0},
+	journal = {Oecologia},
+	month = jul,
+	number = {4},
+	pages = {763--77},
+	title = {Toward ecologically explicit null models of nestedness},
+	volume = {152},
+	year = {2007},
+	Bdsk-Url-1 = {https://doi.org/10.1007/s00442-007-0696-0}}
+
+@article{Morris2005,
+	abstract = {Competition has been widely discussed as a process that may structure
+	communities of plants and animals. Its role in insect communities
+	is less clear, especially as many insect species do not appear to
+	compete for resources. However, such communities could still be structured
+	by ``apparent competition'' where the species interact through shared
+	natural enemies. We explore recent attempts to assess whether apparent
+	com- petition may structure herbivorous insect communities. Communities
+	can be described by quantitative food webs from which the potential
+	for apparent competition can be inferred. We illustrate both the
+	construction of a diverse quantitative food web and a field experimental
+	test of apparent competition using our work on leaf-miner commu-
+	nities in Belize. We consider how a spatial perspective may be incorporated
+	into our leaf-miner community research, and speculate about the shape
+	of apparent competition kernels and their relevance for the structure
+	of herbivorous insect communities.},
+	author = {Morris, Rebecca J and Lewis, Owen T and Godfray, H Charles J},
+	file = {:Users/dormann/Data/Lit/Annales Zoologici Fennici/Morris, Lewis, Godfray\_2005\_Annales Zoologici Fennici.pdf:pdf},
+	journal = {Annales Zoologici Fennici},
+	pages = {449--462},
+	title = {Apparent competition and insect community structure: towards a spatial perspective},
+	volume = {42},
+	year = {2005}}
+
+@article{Morris2010,
+	abstract = {Mutualisms provide benefits to interacting species, but they also
+	involve costs. If costs come to exceed benefits as population density
+	or the frequency of encounters between species increases, the interaction
+	will no longer be mutualistic. Thus curves that represent benefits
+	and costs as functions of interaction frequency are important tools
+	for predicting when a mutualism will tip over into antagonism. Currently,
+	most of what we know about benefit and cost curves in pollination
+	mutualisms comes from highly specialized pollinating seed--consumer
+	mutualisms, such as the yucca moth--yucca interaction. There, benefits
+	to female reproduction saturate as the number of visits to a flower
+	increases (because the amount of pollen needed to fertilize all the
+	flower's ovules is finite), but costs continue to increase (because
+	pollinator offspring consume developing seeds), leading to a peak
+	in seed production at an intermediate number of visits. But for most
+	plant--pollinator mutualisms, costs to the plant are more subtle than
+	consumption of seeds, and how such costs scale with interaction frequency
+	remains largely unknown. Here, we present reasonable benefit and
+	cost curves that are appropriate for typical pollinator--plant interactions,
+	and we show how they can result in a wide diversity of relationships
+	between net benefit (benefit minus cost) and interaction frequency.
+	We then use maximum-likelihood methods to fit net-benefit curves
+	to measures of female reproductive success for three typical pollination
+	mutualisms from two continents, and for each system we chose the
+	most parsimonious model using information-criterion statistics. We
+	discuss the implications of the shape of the net-benefit curve for
+	the ecology and evolution of plant--pollinator mutualisms, as well
+	as the challenges that lie ahead for disentangling the underlying
+	benefit and cost curves for typical pollination mutualisms.},
+	author = {Morris, William F and V\'{a}zquez, Diego P and Chacoff, Natacha P},
+	journal = {Ecology},
+	keywords = {benefits and costs of,consumer mutualism,density dependence,interaction frequency,mutualism,nectar robbery,pollinating seed},
+	number = {5},
+	pages = {1276--1285},
+	timestamp = {2012.12.09},
+	title = {Benefit and cost curves for typical pollination mutualisms},
+	volume = {91},
+	year = {2010}}
+
+@article{Newman2003,
+	author = {Newman, M E J},
+	file = {:Volumes/pub\_biom\$/PDFs\_Books\&Paper/Journals/SIAM Review/Newman\_2003\_SIAM Review.pdf:pdf},
+	journal = {SIAM Review},
+	number = {2},
+	owner = {cdormann},
+	pages = {167--256},
+	timestamp = {2012.03.22},
+	title = {The structure and function of complex networks},
+	volume = {45},
+	year = {2003}}
+
+@article{Newman2004,
+	author = {Newman, M E J and Girvan, M},
+	doi = {10.1103/PhysRevE.69.026113},
+	journal = {Physical Review E},
+	number = {2},
+	pages = {1--15},
+	title = {Finding and evaluating community structure in networks},
+	volume = {69},
+	year = {2004},
+	Bdsk-Url-1 = {https://doi.org/10.1103/PhysRevE.69.026113}}
+
+@article{Olesen2007,
+	abstract = {In natural communities, species and their interactions are often organized
+	as nonrandom networks, showing distinct and repeated complex patterns.
+	A prevalent, but poorly explored pattern is ecological modularity,
+	with weakly interlinked subsets of species (modules), which, however,
+	internally consist of strongly connected species. The importance
+	of modularity has been discussed for a long time, but no consensus
+	on its prevalence in ecological networks has yet been reached. Progress
+	is hampered by inadequate methods and a lack of large datasets. We
+	analyzed 51 pollination networks including almost 10,000 species
+	and 20,000 links and tested for modularity by using a recently developed
+	simulated annealing algorithm. All networks with >150 plant and pollinator
+	species were modular, whereas networks with <50 species were never
+	modular. Both module number and size increased with species number.
+	Each module includes one or a few species groups with convergent
+	trait sets that may be considered as coevolutionary units. Species
+	played different roles with respect to modularity. However, only
+	15\% of all species were structurally important to their network.
+	They were either hubs (i.e., highly linked species within their own
+	module), connectors linking different modules, or both. If these
+	key species go extinct, modules and networks may break apart and
+	initiate cascades of extinction. Thus, species serving as hubs and
+	connectors should receive high conservation priorities.},
+	author = {Olesen, Jens M and Bascompte, Jordi and Dupont, Yoko L and Jordano, Pedro},
+	journal = {Proceedings of the National Academy of Sciences of the USA},
+	owner = {cdormann},
+	pages = {19891--19896},
+	timestamp = {2012.03.22},
+	title = {The modularity of pollination networks},
+	volume = {104},
+	year = {2007}}
+
+@article{Olesen2006,
+	abstract = {A pollination network may be either 2-mode, describing trophic and
+	reproductive interactions between communities of flowering plants
+	and pollinator species within a well-defined habitat, or 1-mode,
+	describing interactions between either plants or pollinators. In
+	a 1-mode pollinator network, two pollinator species are linked to
+	each other if they both visit the same plant species, and vice versa
+	for plants. Properties of 2-mode networks and their derived 1-mode
+	networks are highly correlated and so are properties of 1-mode pollinator
+	and 1-mode plant networks. Most network properties are scale-dependent,
+	i.e. they are dependent upon network size. Pollination networks have
+	the strongest small-world properties of any networks yet studied,
+	i.e. all species are close to each other (short average path length)
+	and species are highly clustered. Species in pollination networks
+	are much more densely linked than species in traditional food webs,
+	i.e. they have a higher density of links, a shorter distance between
+	species, and species are more clustered.},
+	author = {Olesen, Jens M and Bascompte, Jordi and Dupont, Yoko L and Jordano, Pedro},
+	doi = {10.1016/j.jtbi.2005.09.014},
+	file = {:Users/dormann/Data/Lit/Journal of theoretical Biology/Olesen et al.\_2006\_Journal of theoretical Biology.pdf:pdf},
+	issn = {0022-5193},
+	journal = {Journal of theoretical Biology},
+	keywords = {Animals,Biodiversity,Biological,Computational Biology,Ecosystem,Flowers,Flowers: physiology,Insects,Least-Squares Analysis,Models,Plant Physiological Phenomena,Pollen,Reproduction},
+	month = may,
+	number = {2},
+	pages = {270--6},
+	pmid = {16274698},
+	timestamp = {2012.12.05},
+	title = {The smallest of all worlds: pollination networks},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/16274698},
+	volume = {240},
+	year = {2006},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/16274698},
+	Bdsk-Url-2 = {https://doi.org/10.1016/j.jtbi.2005.09.014}}
+
+@article{Ollerton2007,
+	abstract = {The concept of a generalist flower appears to mean different things
+	to different people, depending upon their background and training.
+	We assess the different meanings of generalist flowers with respect
+	to the ecological ``set and setting'' of pollination, and then we discuss
+	notions of ecological, functional and phenotypic gener- alization.
+	These ideas are explored in more detail using examples from our own
+	published and unpublished studies on the pollination ecology of Daucus
+	carota, Hedera helix, and Chamerion angustifolium, and from the published
+	work of other researchers. Finally we relate these ideas and clarified
+	definitions of ``generalist'' and ``specialist'' flowers to the pollination
+	syndrome concept.},
+	author = {Ollerton, Jeff and Killick, Ant and Lamborn, Ellen and Watts, Stella and Whiston, Margaret},
+	file = {:Users/dormann/Data/Lit/Taxon/Ollerton et al.\_2007\_Taxon.pdf:pdf},
+	journal = {Taxon},
+	keywords = {apocynaceae,asclepias,mutualism,pollination biology,species interactions},
+	pages = {717--728},
+	timestamp = {2013.04.27},
+	title = {Multiple meanings and modes: on the many ways to be a generalist flower},
+	volume = {56},
+	year = {2007}}
+
+@article{Opsahl2010,
+	abstract = {Many network dataset are by definition two-mode networks. Yet, few
+	network measures can directly be applied to them. Therefore, two-mode
+	networks are often projected onto one-mode networks by selecting
+	a node set and linking two nodes if they were connected to common
+	nodes in the two-mode network. This process has a major impact on
+	the level of clustering in the network. If three or more nodes are
+	connected to a common node in the two-mode network, the nodes form
+	a fully-connected clique consisting of one or more triangles in the
+	one-mode projection. A number of modeling issues is associated with
+	this procedure. For example, a one-mode projection of a random two-mode
+	network will have a higher clustering coefficient than its randomly
+	expected value. This paper represents an attempt to overcome these
+	issues by redefining both the global and local clustering coefficients
+	so that they can be calculated directly on the two-mode structure.
+	I illustrate the benefits of such an approach by applying it to two-mode
+	networks from four different domains: event attendance, scientific
+	collaboration, interlocking directorates, and online forums.},
+	author = {Opsahl, Tore},
+	journal = {arXiv},
+	pages = {1006.0887v2},
+	timestamp = {2013.01.03},
+	title = {Triadic closure in two-mode networks: redefining the global and local cluster coefficient},
+	year = {2010}}
+
+@article{Patefield1981,
+	author = {Patefield, W M},
+	journal = {Applied Statistics},
+	pages = {91--97},
+	timestamp = {2013.02.25},
+	title = {Algorithm AS159. An efficient method of generating r x c tables with given row and column totals},
+	volume = {30},
+	year = {1981}}
+
+@article{Patterson1986,
+	author = {Patterson, B D and Atmar, W},
+	file = {:Users/dormann/Data/Lit/Biological Journal of the Linnean Society/Patterson, Atmar\_1986\_Biological Journal of the Linnean Society.pdf:pdf},
+	journal = {Biological Journal of the Linnean Society},
+	pages = {65--82},
+	timestamp = {2013.04.27},
+	title = {Nested subsets and the structure of insular mammalian faunas and archipelagos},
+	volume = {28},
+	year = {1986}}
+
+@article{Petanidou2008,
+	abstractnote = {Abstract We analysed the dynamics of a plant-pollinator interaction network of a scrub community surveyed over four consecutive years. Species composition within the annual networks showed high temporal variation. Temporal dynamics were also evident in the topology of the network, as interactions among plants and pollinators did not remain constant through time. This change involved both the number and the identity of interacting partners. Strikingly, few species and interactions were consistently present in all four annual plant-pollinator networks (53% of the plant species, 21% of the pollinator species and 4.9% of the interactions). The high turnover in species-to-species interactions was mainly the effect of species turnover (c. 70% in pairwise comparisons among years), and less the effect of species flexibility to interact with new partners (c. 30%). We conclude that specialization in plant-pollinator interactions might be highly overestimated when measured over short periods of time. This is because many plant or pollinator species appear as specialists in 1 year, but tend to be generalists or to interact with different partner species when observed in other years. The high temporal plasticity in species composition and interaction identity coupled with the low variation in network structure properties (e.g. degree centralization, connectance, nestedness, average distance and network diameter) imply (i) that tight and specialized coevolution might not be as important as previously suggested and (ii) that plant-pollinator interaction networks might be less prone to detrimental effects of disturbance than previously thought. We suggest that this may be due to the opportunistic nature of plant and animal species regarding the available partner resources they depend upon at any particular time.},
+	author = {Petanidou, Theodora and Kallimanis, Athanasios S and Tzanopoulos, Joseph and Sgardelis, Stefanos P and Pantis, John D},
+	doi = {doi:10.1111/j.1461-0248.2008.01170.x},
+	journal = {Ecology Letters},
+	number = {6},
+	pages = {564--575},
+	timestamp = {2013.01.02},
+	title = {Long-term observation of a pollination network: fluctuation in species and interactions, relative invariance of network structure and implications for estimates of specialization},
+	volume = {11},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1461-0248.2008.01170.x}}
+
+@article{Pielou1972,
+	author = {Pielou, E. C.},
+	journal = {Journal of Theoretical Biology},
+	pages = {337-352},
+	timestamp = {2013.01.27},
+	title = {2$^k$ contingency tables in ecology},
+	volume = {34},
+	year = {1972}}
+
+@article{Pocock2012,
+	abstractnote = {Understanding species' interactions and the robustness of interaction networks to species loss is essential to understand the effects of species' declines and extinctions. In most studies, different types of networks (such as food webs, parasitoid webs, seed dispersal networks, and pollination networks) have been studied separately. We sampled such multiple networks simultaneously in an agroecosystem. We show that the networks varied in their robustness; networks including pollinators appeared to be particularly fragile. We show that, overall, networks did not strongly covary in their robustness, which suggests that ecological restoration (for example, through agri-environment schemes) benefitting one functional group will not inevitably benefit others. Some individual plant species were disproportionately well linked to many other species. This type of information can be used in restoration management, because it identifies the plant taxa that can potentially lead to disproportionate gains in biodiversity.},
+	author = {Pocock, Michael J O and Evans, Darren M and Memmott, Jane},
+	doi = {10.1126/science.1214915},
+	journal = {Science},
+	month = {Feb},
+	pages = {973--977},
+	timestamp = {2013.02.25},
+	title = {The robustness and restoration of a network of ecological networks},
+	volume = {335},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1126/science.1214915}}
+
+@article{Poisot2011a,
+	abstractnote = {Ecological specialisation concerns all species and underlies many major ecological and evolutionary patterns. Yet its status as a unifying concept is not always appreciated because of its similarity to concepts of the niche, the many levels of biological phenomena to which it applies, and the complexity of the mechanisms influencing it. The evolution of specialisation requires the coupling of constraints on adaptive evolution with covariation of genotype and environmental performance. This covariation itself depends upon organismal properties such as dispersal behaviour and life history and complexity in the environment stemming from factors such as species interactions and spatio-temporal heterogeneity in resources. Here, we develop a view on specialisation that integrates across the range of biological phenomena with the goal of developing a more predictive conceptual framework that specifically accounts for the importance of biotic complexity and coevolutionary events.},
+	author = {Poisot, Timoth{\'e}e and Bever, James D and Nemri, Adnane and Thrall, Peter H and Hochberg, Michael E},
+	doi = {10.1111/j.1461-0248.2011.01645.x},
+	journal = {Ecology Letters},
+	month = {Jun},
+	pages = {841--851},
+	timestamp = {2012.12.05},
+	title = {A conceptual framework for the evolution of ecological specialisation},
+	volume = {14},
+	year = {2011},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1461-0248.2011.01645.x}}
+
+@article{Poisot2012,
+	abstractnote = {In a context of global changes, and amidst the perpetual modification of community structure undergone by most natural ecosystems, it is more important than ever to understand how species interactions vary through space and time. The integration of biogeography and network theory will yield important results and further our understanding of species interactions. It has, however, been hampered so far by the difficulty to quantify variation among interaction networks. Here, we propose a general framework to study the dissimilarity of species interaction networks over time, space or environments, allowing both the use of quantitative and qualitative data. We decompose network dissimilarity into interactions and species turnover components, so that it is immediately comparable to common measures of β-diversity. We emphasise that scaling up β-diversity of community composition to the β-diversity of interactions requires only a small methodological step, which we foresee will help empiricists adopt this method. We illustrate the framework with a large dataset of hosts and parasites interactions and highlight other possible usages. We discuss a research agenda towards a biogeographical theory of species interactions.},
+	author = {Poisot, Timoth{\'e}e and Canard, Elsa and Mouillot, David and Mouquet, Nicolas and Gravel, Dominique and Jordan, Ferenc},
+	doi = {10.1111/ele.12002},
+	journal = {Ecology Letters},
+	month = {Sep},
+	pages = {1353--1361},
+	timestamp = {2012.12.05},
+	title = {The dissimilarity of species interaction networks},
+	volume = {15},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1111/ele.12002}}
+
+@article{Poisot2012a,
+	author = {Poisot, Timoth{\'e}e and Canard, Elsa and Mouquet, Nicolas and Hochberg, Michael E.},
+	doi = {10.1111/j.2041-210X.2011.00174.x},
+	journal = {Methods in Ecology and Evolution},
+	month = {Jun},
+	number = {3},
+	pages = {537--544},
+	timestamp = {2012.12.05},
+	title = {A comparative study of ecological specialization estimators},
+	volume = {3},
+	year = {2012},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2041-210X.2011.00174.x}}
+
+@article{Poisot2011,
+	abstractnote = {Antagonistic networks are known to be structured in the wild, but knowledge on how this structure may change as a response to environmental perturbations is scarce. We describe a natural bipartite network between bacteria and lytic bacteriophages, and investigate how it is affected by environmental productivity in the form of different resource levels for the bacteria. We report that low amounts of resource decrease phage generality and lead to less robust and less stable communities. We discuss how resource levels in nature may alter the structure of complex communities.},
+	author = {Poisot, Timoth{\'e}e and Lepennetier, Gildas and Martinez, Esteban and Ramsayer, Johan and Hochberg, Michael E},
+	doi = {10.1098/rsbl.2010.0774},
+	journal = {Biology Letters},
+	month = {Apr},
+	number = {2},
+	pages = {201--4},
+	timestamp = {2012.12.05},
+	title = {Resource availability affects the structure of a natural bacteria-bacteriophage community.},
+	volume = {7},
+	year = {2011},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rsbl.2010.0774}}
+
+@article{Roberts1990,
+	author = {Roberts, Alan and Stone, Lewi},
+	journal = {Oecologia},
+	pages = {560--567},
+	timestamp = {2013.01.03},
+	title = {Island-sharing by archipelago species},
+	volume = {83},
+	year = {1990}}
+
+@article{RodriguezGirones2006,
+	author = {Rodr\'{\i}guez-Giron\'{e}s, Miguel A and Santamar\'{\i}a, Luis},
+	doi = {10.1111/j.1365-2699.2006.01444.x},
+	journal = {Journal of Biogeography},
+	month = may,
+	number = {5},
+	pages = {924--935},
+	title = {A new algorithm to calculate the nestedness temperature of presence-absence matrices},
+	volume = {33},
+	year = {2006},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1365-2699.2006.01444.x}}
+
+@article{Santamaria2007,
+	abstract = {Recent attempts to examine the biological processes responsible for
+	the general characteristics of mutualistic networks focus on two
+	types of explanations: nonmatching biological attributes of species
+	that prevent the occurrence of certain interactions (``forbidden
+	links''), arising from trait complementarity in mutualist networks
+	(as compared to barriers to exploitation in antagonistic ones), and
+	random interactions among individuals that are proportional to their
+	abundances in the observed community (``neutrality hypothesis'').
+	We explored the consequences that simple linkage rules based on the
+	first two hypotheses (complementarity of traits versus barriers to
+	exploitation) had on the topology of plant--pollination networks.
+	Independent of the linkage rules used, the inclusion of a small set
+	of traits (two to four) sufficed to account for the complex topological
+	patterns observed in real-world networks. Optimal performance was
+	achieved by a ``mixed model'' that combined rules that link plants
+	and pollinators whose trait ranges overlap (``complementarity models'')
+	and rules that link pollinators to flowers whose traits are below
+	a pollinator-specific barrier value (``barrier models''). Deterrence
+	of floral parasites (barrier model) is therefore at least as important
+	as increasing pollination efficiency (complementarity model) in the
+	evolutionary shaping of plant--pollinator networks.},
+	author = {Santamar\'{\i}a, Luis and Rodr\'{\i}guez-Giron\'{e}s, Miguel A},
+	doi = {10.1371/journal.pbio.0050031.t001},
+	file = {:Users/dormann/Data/Lit/PLoS Biology/Santamar\'{\i}a, Rodr\'{\i}guez-Giron\'{e}s\_2007\_PLoS Biology.pdf:pdf},
+	journal = {PLoS Biology},
+	number = {2},
+	pages = {e31},
+	timestamp = {2013.02.25},
+	title = {Linkage rules for plant--pollinator networks: trait complementarity or exploitation barriers ?},
+	volume = {5},
+	year = {2007},
+	Bdsk-Url-1 = {https://doi.org/10.1371/journal.pbio.0050031.t001}}
+
+@article{Scheffer2009a,
+	abstract = {Complex dynamical systems, ranging from ecosystems to financial markets
+	and the climate, can have tipping points at which a sudden shift
+	to a contrasting dynamical regime may occur. Although predicting
+	such critical points before they are reached is extremely difficult,
+	work in different scientific fields is now suggesting the existence
+	of generic early-warning signals that may indicate for a wide class
+	of systems if a critical threshold is approaching.},
+	author = {Scheffer, Marten and Bascompte, Jordi and Brock, William A and Brovkin, Victor and Carpenter, Stephen R and Dakos, Vasilis and Held, Hermann and van Nes, Egbert H and Rietkerk, Max and Sugihara, George},
+	doi = {10.1038/nature08227},
+	file = {:Users/dormann/Data/Lit/Nature/Scheffer et al.\_2009\_Nature.pdf:pdf},
+	issn = {1476-4687},
+	journal = {Nature},
+	keywords = {Animals,Asthma,Asthma: physiopathology,Biological,Climate,Economic,Ecosystem,Eutrophication,Extinction,Humans,Models,Seizures,Seizures: physiopathology,Stochastic Processes},
+	number = {7260},
+	pages = {53--9},
+	pmid = {19727193},
+	publisher = {Nature Publishing Group},
+	timestamp = {2012.12.05},
+	title = {Early-warning signals for critical transitions},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/19727193},
+	volume = {461},
+	year = {2009},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/19727193},
+	Bdsk-Url-2 = {https://doi.org/10.1038/nature08227}}
+
+@article{Schleuning2012,
+	abstractnote = {Species-rich tropical communities are expected to be more specialized than their temperate counterparts [1--3]. Several studies have reported increasing biotic specialization toward the tropics [4--7], whereas others have not found latitudinal trends once accounting for sampling bias [8, 9] or differences in plant diversity [10, 11]. Thus, the direction of the latitudinal specialization gradient remains conten- tious. With an unprecedented global data set, we investi- gated how biotic specialization between plants and animal pollinators or seed dispersers is associated with latitude, past and contemporary climate, and plant diversity. We show that in contrast to expectation, biotic specialization of mutualistic networks is significantly lower at tropical than at temperate latitudes. Specialization was more closely related to contemporary climate than to past climate stability, suggesting that current conditions have a stronger effect on biotic specialization than historical community stability. Biotic specialization decreased with increasing local and regional plant diversity. This suggests that high specialization of mutualistic interactions is a response of pollinators and seed dispersers to low plant diversity. This could explain why the latitudinal specialization gradient is reversed relative to the latitudinal diversity gradient. Low mutualistic network specialization in the tropics suggests higher tolerance against extinctions in tropical than in temperate communities.},
+	author = {Schleuning, Matthias and Fr{\"u}nd, Jochen and Klein, Alexandra-Maria and Abrahamczyk, Stefan and Alarc{\'o}n, Ruben and Albrecht, Matthias and Andersson, Georg K S and Bazarian, Simone and B{\"o}hning-Gaese, Katrin and Bommarco, Riccardo and et al.},
+	journal = {Current Biology},
+	pages = {1--7},
+	timestamp = {2012.12.05},
+	title = {Specialization of mutualistic interaction networks decreases toward tropical latitudes},
+	volume = {22},
+	year = {2012}}
+
+@article{Schluter1984,
+	abstractnote = {A little-used measure of species association is provided by the ratio of the variance in total species number (or total density of individuals) in samples to the sum of the variances of the individual species. Use of this ratlo allows a test of the null hqpothes~s that specles do not covary among samples As the test is simultaneous ~t is preferable to palnvise 2 x 2 contlngencq table analysis and palnvlse correlation analqs~ws hen the number of spec~esis large Simulat~onre veals that this test is also more powerful than Pearson's x2 test for comparing observed and expected frequency d~stribut~ onsof species In samples The variance test was applied to a select~ono f data from the literature Results reveal that posltlve assoclatlons are the rule In nature and negative assoclatlons are uncommon Invertebrate species tend to be more posltivelq assoc~ateda mong samples than are vertebrates, although the difference is not significant Examples of biological processes, especially interspecific Interactions that might produce assoclatlons among specles are suggested However one must be cautious not to infer the importance or unimportance of a specific process from the result of the test alone},
+	author = {Schluter, D},
+	journal = {Ecology},
+	pages = {998--1005},
+	timestamp = {2013.01.03},
+	title = {A variance test for detecting species associations, with some example applications},
+	volume = {65},
+	year = {1984}}
+
+@article{Schoener1989,
+	author = {Schoener, T.W.},
+	journal = {Ecology},
+	pages = {1559-1589},
+	timestamp = {2012.11.18},
+	title = {Food webs from the small to the large},
+	volume = {70},
+	year = {1989}}
+
+@book{Shermer2012,
+	address = {New York},
+	author = {Shermer, Michael},
+	owner = {carsten},
+	pages = {385},
+	publisher = {St. Martin's Griffin},
+	timestamp = {2013.04.03},
+	title = {The Believing Brain: From Ghosts and Gods to Politics and Conspiracies -- How We Construct Beliefs and Reinforce Them as Truths},
+	year = {2012}}
+
+@article{Stebbins1970,
+	author = {Stebbins, G L},
+	journal = {Annual Review of Ecology and Systematics},
+	pages = {307--326},
+	timestamp = {2013.04.18},
+	title = {Adaptive radiation of reproductive characteristics in angiosperms, I: pollination mechanisms},
+	volume = {1},
+	year = {1970}}
+
+@article{SteffanDewenter2008,
+	author = {Steffan-Dewenter, Ingolf and Schiele, Susanne},
+	journal = {Ecology},
+	keywords = {habitat fragmentation,mason bee,orchard meadows,osmia rufa,pollinators,population ecology,red,resource limitation,solitary bees,time series,top-down or bottom-up control},
+	number = {5},
+	pages = {1375--1387},
+	timestamp = {2013.02.25},
+	title = {Do resources or natural enemies drive bee population dynamics in fragmented habitats?},
+	volume = {89},
+	year = {2008}}
+
+@article{Stone1992,
+	abstractnote = {There is a long-standing dispute over whether the analysis of species co-occurrence data, typically on islands in an archipelago, can disclose the forces at work in structuring a community. Here we present and utilise three ``scores'' S, C and T. S gives the mean number of islands shared by a species pair in the presence/absence data under study. The scores C and T are based on the way that a pair of species occurs on a pair of islands. When each species occurs on a different island, this adds to the ``checkerboard score'' C; if they occupy the same island, this increases the ``togetherness score'' T. In judging whether observed values of S, C and T are compatible with a null hypothesis assuming no species interaction, we follow Connor and Simberloff (1979) in generating a ``control group'' of (constrained) simulated incidence patterns. Presence/absence matrices can have paradoxical features, in combining a high mutual exclusion by species (checkerboardedness) with a degree of species aggregation that is also high. We show that this is in fact inevitable - that, given the usual contraints, C and T can differ only by a constant. This means that extreme checkerboardedness can be produced by forces making for species aggregation, just as well as by those making for avoidance. If we restrict our attention to a subset of species, the constraints are less rigid and the S, C and T scores are somewhat freer to vary. We consider the confamilial subsets in the Vanuatu archipelago as likely candidates for revealing any competition forces at work. Calculating the actual S, C and T scores for these subsets, we compare them with the corresponding scores in a sample of simulated colonization patterns. The actual species-distributions differ significantly from what we would expect if the colonization choices of different species were uncorrelated (save for some biological constraints). The confamilial species of the real world share more islands, and occur in a pattern less checkerboarded, and more aggregated, than their simulation counterparts. This suggests that competition pressures, if they exist, are overcome by countervailing factors. The method used is applicable in other ways, and to a wider class of problems, in analysing the forces behind community structure.},
+	author = {Stone, Lewi and Roberts, Alan},
+	journal = {Oecologia},
+	pages = {419--424},
+	timestamp = {2013.01.03},
+	title = {Competitive exclusion, or species aggregation? An aid in deciding},
+	volume = {91},
+	year = {1992}}
+
+@article{Thebault2010,
+	author = {Th{\'e}bault, Elisa and Fontaine, Colin},
+	journal = {Science},
+	pages = {853--856},
+	timestamp = {2013.04.17},
+	title = {Stability of Ecological Communities and the Architecture of Mutualistic and Trophic Networks},
+	volume = {329},
+	year = {2010}}
+
+@book{Thompson2005,
+	address = {Chicago},
+	author = {Thompson, John N},
+	publisher = {University of Chicago Press},
+	title = {The Geographic Mosaic of Coevolution},
+	year = {2005}}
+
+@article{Tylianakis2009,
+	author = {Tylianakis, Jason M and Lalibert\'{e}, Etienne and Nielsen, Anders and Bascompte, Jordi},
+	doi = {10.1016/j.biocon.2009.12.004},
+	file = {:Users/dormann/Data/Lit/Biological Conservation/Tylianakis et al.\_2010\_Biological Conservation(2).pdf:pdf},
+	issn = {00063207},
+	journal = {Biological Conservation},
+	pages = {2270--2279},
+	timestamp = {2012.12.05},
+	title = {Conservation of species interaction networks},
+	volume = {143},
+	year = {2010},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.biocon.2009.12.004}}
+
+@article{Ulrich2009,
+	author = {Ulrich, Werner and Almeida-Neto, M\'{a}rio and Gotelli, Nicholas J},
+	doi = {10.1111/j.1600-0706.2008.17053.x},
+	journal = {Oikos},
+	month = jan,
+	number = {1},
+	pages = {3--17},
+	title = {A consumer's guide to nestedness analysis},
+	volume = {118},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1600-0706.2008.17053.x}}
+
+@incollection{Vazquez2006,
+	address = {Chicago},
+	author = {V\'{a}zquez, Diego P and Aizen, Marcelo Adri\'{a}n},
+	booktitle = {Plant-Pollinator Interactions: From Specialization to Generalization},
+	editor = {Waser, Nickolas M and Ollerton, Jeff},
+	pages = {200--219},
+	publisher = {University of Chicago Press},
+	timestamp = {2012.12.09},
+	title = {Community-wide patterns of specialization in plant-pollinator interactions revealed by null models},
+	year = {2006}}
+
+@article{Vazquez2004,
+	author = {V\'{a}zquez, Diego P and Aizen, Marcelo Adri\'{a}n},
+	doi = {10.1890/03-3112},
+	journal = {Ecology},
+	month = may,
+	number = {5},
+	pages = {1251--1257},
+	title = {Asymmetric specialization: a pervasive feature of plant--pollinator nteractions},
+	volume = {85},
+	year = {2004},
+	Bdsk-Url-1 = {https://doi.org/10.1890/03-3112}}
+
+@article{Vazquez2003a,
+	author = {V\'{a}zquez, Diego P and Aizen, Marcelo Adri\'{a}n},
+	doi = {10.1890/02-0587},
+	journal = {Ecology},
+	month = sep,
+	number = {9},
+	pages = {2493--2501},
+	title = {Null model analyses of specialization in plant--pollinator interactions},
+	volume = {84},
+	year = {2003},
+	Bdsk-Url-1 = {https://doi.org/10.1890/02-0587}}
+
+@article{Vazquez2009,
+	abstract = {BACKGROUND: Ecologists and evolutionary biologists are becoming increasingly
+	interested in networks as a framework to study plant-animal mutualisms
+	within their ecological context. Although such focus on networks
+	has brought about important insights into the structure of these
+	interactions, relatively little is still known about the mechanisms
+	behind these patterns. SCOPE: The aim in this paper is to offer an
+	overview of the mechanisms influencing the structure of plant-animal
+	mutualistic networks. A brief summary is presented of the salient
+	network patterns, the potential mechanisms are discussed and the
+	studies that have evaluated them are reviewed. This review shows
+	that researchers of plant-animal mutualisms have made substantial
+	progress in the understanding of the processes behind the patterns
+	observed in mutualistic networks. At the same time, we are still
+	far from a thorough, integrative mechanistic understanding. We close
+	with specific suggestions for directions of future research, which
+	include developing methods to evaluate the relative importance of
+	mechanisms influencing network patterns and focusing research efforts
+	on selected representative study systems throughout the world.},
+	author = {V\'{a}zquez, Diego P and Bl\"{u}thgen, Nico and Cagnolo, Luciano and Chacoff, Natacha P},
+	doi = {10.1093/aob/mcp057},
+	journal = {Annals of Botany},
+	month = jun,
+	number = {9},
+	pages = {1445--57},
+	title = {Uniting pattern and process in plant-animal mutualistic networks: a review},
+	volume = {103},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1093/aob/mcp057}}
+
+@article{Vazquez2003,
+	author = {V\'{a}zquez, Diego P and Simberloff, Daniel},
+	journal = {Ecology Letters},
+	keywords = {1077,1083,2003,6,cattle,ecology letters,interaction biodiversity,introduced species,matrix dissimilarity,network,nonmetric multidimensional scaling,plant,pollinator interactions,structure},
+	number = {12},
+	pages = {1077--1083},
+	title = {Changes in interaction biodiversity induced by an introduced ungulate},
+	volume = {6},
+	year = {2003}}
+
+@article{Vazquez2002,
+	abstract = {Niche breadth of species has been hypothesized to be associated with
+	species' responses to disturbance. Disturbance is usually believed
+	to affect specialists negatively, while generalists are believed
+	to benefit from disturbance; we call this the "specialization-disturbance"
+	hypothesis. We also propose an associated hypothesis (the "specialization-asymmetry-disturbance"
+	hypothesis) under which both specialization and asymmetry of interactions
+	would explain species' responses to disturbance. We test these hypotheses
+	using data from a plant-pollinator system that has been grazed by
+	cattle (i.e., a biological disturbance) in southern Argentina. We
+	quantified specialization in species interactions, specialization
+	of interaction partners, and species' responses to disturbance. We
+	found no relationship between degree of specialization and a species'
+	response to disturbance. We also found that plant-pollinator interactions
+	tend to be asymmetric in this system; there was no relationship between
+	the degree of specialization of a given species and the degree of
+	specialization of its interaction partners. However, asymmetry of
+	interactions did not explain the variability in species' responses
+	to disturbance. Thus, both hypotheses are rejected by our data. Possible
+	reasons include failure to assess crucial resources, substantial
+	direct effects of disturbance, inaccurate measures of specialization,
+	difficulty detecting highly nonlinear relationships, and limitations
+	of a nonexperimental approach. Or, in fact, there may be no relationship
+	between specialization and response to disturbance.},
+	author = {V\'{a}zquez, Diego P and Simberloff, Daniel},
+	doi = {10.1086/339991},
+	file = {:Users/dormann/Data/Lit/The American Naturalist/V\'{a}zquez, Simberloff\_2002\_The American Naturalist.pdf:pdf},
+	issn = {1537-5323},
+	journal = {The American Naturalist},
+	keywords = {asymmetric interactions,cattle,disturbance,generali-,grazing,in fact,ization,most fundamental con-,mutualism,plant-pollinator interactions,southern andes,special-,specialization is arguably the,temperate forests of the,zation},
+	month = jul,
+	number = {6},
+	pages = {606--23},
+	pmid = {18707385},
+	timestamp = {2012.12.09},
+	title = {Ecological specialization and susceptibility to disturbance: conjectures and refutations},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/18707385},
+	volume = {159},
+	year = {2002},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/18707385},
+	Bdsk-Url-2 = {https://doi.org/10.1086/339991}}
+
+@article{VanValen1973,
+	author = {Van Valen, Leigh},
+	journal = {Evolutionary Theory},
+	pages = {1---30},
+	timestamp = {2013.04.27},
+	title = {A new evolutionary law},
+	volume = {1},
+	year = {1973}}
+
+@article{Vazquez2007,
+	author = {V{\'a}zquez, Diego P and Meli\'{a}n, Carlos J and Williams, Neal M and Bl\"{u}thgen, Nico and Krasnov, Boris R and Poulin, Robert},
+	doi = {10.1111/j.2007.0030-1299.15828.x},
+	journal = {Oikos},
+	number = {7},
+	pages = {1120--1127},
+	title = {Species abundance and asymmetric interaction strength in ecological networks},
+	volume = {116},
+	year = {2007},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2007.0030-1299.15828.x}}
+
+@article{Waser1996,
+	author = {Waser, Nickolas M and Chittka, L and Price, M V and Williams, Neal M and Ollerton, J},
+	file = {:Users/dormann/Data/Lit/Ecology/Waser et al.\_1996\_Ecology.pdf:pdf},
+	journal = {Ecology},
+	pages = {1043--1060},
+	timestamp = {2013.02.25},
+	title = {Generalization in pollination systems, and why it matters},
+	volume = {77},
+	year = {1996}}
+
+@book{Waser2006,
+	address = {Chicago},
+	author = {Waser, Nickolas M and Ollerton, Jeff},
+	booktitle = {Plant-Pollinator Interactions: From Specialization to Generalization},
+	pages = {488},
+	publisher = {University of Chicago Press},
+	timestamp = {2013.02.25},
+	title = {Plant-Pollinator Interactions: From Specialization to Generalization},
+	year = {2006}}
+
+@article{Watts1998,
+	abstract = {Networks of coupled dynamical systems have been used to model biological
+	oscillators, Josephson junction arrays, excitable media, neural networks,
+	spatial games, genetic control networks and many other self-organizing
+	systems. Ordinarily, the connection topology is assumed to be either
+	completely regular or completely random. But many biological, technological
+	and social networks lie somewhere between these two extremes. Here
+	we explore simple models of networks that can be tuned through this
+	middle ground: regular networks 'rewired' to introduce increasing
+	amounts of disorder. We find that these systems can be highly clustered,
+	like regular lattices, yet have small characteristic path lengths,
+	like random graphs. We call them 'small-world' networks, by analogy
+	with the small-world phenomenon (popularly known as six degrees of
+	separation. The neural network of the worm Caenorhabditis elegans,
+	the power grid of the western United States, and the collaboration
+	graph of film actors are shown to be small-world networks. Models
+	of dynamical systems with small-world coupling display enhanced signal-propagation
+	speed, computational power, and synchronizability. In particular,
+	infectious diseases spread more easily in small-world networks than
+	in regular lattices.},
+	author = {Watts, D J and Strogatz, S H},
+	doi = {10.1038/30918},
+	journal = {Nature},
+	month = jul,
+	number = {6684},
+	pages = {440--442},
+	title = {Collective dynamics of 'small-world' networks},
+	volume = {393},
+	year = {1998},
+	Bdsk-Url-1 = {https://doi.org/10.1038/30918}}
+
+@article{Wells2013,
+	author = {Wells, Konstans and O'Hara, Robert B.},
+	doi = {10.1111/j.2041-210x.2012.00249.x},
+	editor = {Freckleton, RobertEditor},
+	journal = {Methods in Ecology and Evolution},
+	month = {Oct},
+	pages = {1-8},
+	timestamp = {2013.01.20},
+	title = {Species interactions: estimating per-individual interaction strength and covariates before simplifying data into per-species ecological networks},
+	volume = {4},
+	year = {2013},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.2041-210x.2012.00249.x}}
+
+@book{Whittaker1998,
+	author = {Whittaker, Robert J},
+	isbn = {0-19-850021-1},
+	place = {Oxford},
+	publisher = {Oxford University Press},
+	timestamp = {2012.12.20},
+	title = {Island Biogeography - Ecology, Evolution, and Conservation},
+	year = {1998}}
+
+@article{Zhou2007,
+	author = {Zhou, Tao and Ren, Jie and Medo, Mat\'u\ifmmode \check{s}\else \v{s}\fi{} and Zhang, Yi-Cheng},
+	doi = {10.1103/PhysRevE.76.046115},
+	issue = {4},
+	journal = {Phys. Rev. E},
+	month = {Oct},
+	numpages = {7},
+	pages = {046115},
+	publisher = {American Physical Society},
+	timestamp = {2013.04.17},
+	title = {Bipartite network projection and personal recommendation},
+	url = {http://link.aps.org/doi/10.1103/PhysRevE.76.046115},
+	volume = {76},
+	year = {2007},
+	Bdsk-Url-1 = {http://link.aps.org/doi/10.1103/PhysRevE.76.046115},
+	Bdsk-Url-2 = {https://doi.org/10.1103/PhysRevE.76.046115}}
+
+@article{Pilosof2017,
+	author = {Pilosof, Shai and Porter, Mason A. and Pascual, Mercedes and K{\'e}fi, Sonia},
+	doi = {10.1038/s41559-017-0101},
+	journal = {Nature Ecology \& Evolution},
+	number = {4},
+	pages = {0101--0101},
+	timestamp = {2019.04.30},
+	title = {The multilayer nature of ecological networks},
+	volume = {1},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1038/s41559-017-0101}}
+
+@article{Aleta2019,
+	abstractnote = {Complex systems are characterized by many interacting units that give rise to emergent behavior. A particularly advantageous way to study these systems is through the analysis of the networks that encode the interactions among the system's constituents. During the last two decades, network science has provided many insights in natural, social, biological and technological systems. However, real systems are more often than not interconnected, with many interdependencies that are not properly captured by single layer networks. To account for this source of complexity, a more general framework, in which different networks evolve or interact with each other, is needed. These are known as multilayer networks. Here we provide an overview of the basic methodology used to describe multilayer systems as well as of some representative dynamical processes that take place on top of them. We round off the review with a summary of several applications in diverse fields of science.},
+	author = {Aleta, Alberto and Moreno, Yamir},
+	doi = {10.1146/annurev-conmatphys-031218-013259},
+	issn = {1947-5454, 1947-5462},
+	journal = {Annual Review of Condensed Matter Physics},
+	month = {Mar},
+	note = {arXiv: 1804.03488},
+	number = {1},
+	pages = {45--62},
+	timestamp = {2019.04.30},
+	title = {Multilayer networks in a nutshell},
+	volume = {10},
+	year = {2019},
+	Bdsk-Url-1 = {https://doi.org/10.1146/annurev-conmatphys-031218-013259}}
+
+@article{bipartiteVignette,
+	author = {Dormann, C. F.},
+	journal = {github},
+	timestamp = {2019.04.30},
+	title = {Bipartite vignette},
+	year = {2019}}
+
+@article{Dormann2014,
+	author = {Dormann, Carsten F and Strau{\ss}, Rouven},
+	doi = {10.1111/2041-210X.12139},
+	journal = {Methods in Ecology and Evolution},
+	keywords = {peer reviewed},
+	month = {Jan},
+	number = {1},
+	pages = {90--98},
+	timestamp = {2019.04.30},
+	title = {A method for detecting modules in quantitative bipartite networks},
+	volume = {5},
+	year = {2014},
+	Bdsk-Url-1 = {https://doi.org/10.1111/2041-210X.12139}}
+
+@article{Dormann2017AREES,
+	abstractnote = {Ecological networks depict the interactions between species, mainly based on observations in the field. The information contained in such interac-tion matrices depends on the sampling design, and typically, compounds preferences (specialization) and abundances (activity). Null models are the primary vehicles to disentangle the effects of specialization from those of sampling and abundance, but they ignore the feedback of network structure on abundances. Hence, network structure, as exemplified here by modu-larity, is difficult to link to specific causes. Indeed, various processes lead to modularity and to specific interaction patterns more generally. Inferring (co)evolutionary dynamics is even more challenging, as competition and trait matching yield identical patterns of interactions. A satisfactory resolution of the underlying factors determining network structure will require substan-tial additional information, not only on independently assessed abundances, but also on traits, and ideally on fitness consequences as measured in exper-imental setups.},
+	author = {Dormann, Carsten F and Fr{\"u}nd, Jochen and Schaefer, H. Martin},
+	doi = {10.1146/annurev-ecolsys-110316},
+	journal = {Annual Reviews in Ecology, Evolution, and Systematics},
+	keywords = {peer reviewed},
+	number = {September},
+	pages = {559--84},
+	timestamp = {2019.04.30},
+	title = {Identifying Causes of Patterns in Ecological Networks: Opportunities and Limitations},
+	volume = {48},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1146/annurev-ecolsys-110316}}
+
+@inbook{Dormann2017networks,
+	abstractnote = {" Ecological network " and " food web " are summary terms covering a continuum from species-association based networks to quantified-links networks to interaction-specified ecosystem models. In particular " classical " one-mode (" unipartite ") food webs and bipartite (two-mode) interaction networks are two very active research fields. While often aiming to tackle similar topics (such as community stabil-ity and species coexistence) their data, methods and approaches often differ substantially. In this chapter we shall review the continuum of food web approaches along a set of questions: * Which kind of data form the basis of the network? Are interactions observed or inferred? * What do network nodes and links represent? * What is the focus of scientific questions, which key features and topics are being investigated? * Which methods are employed, and what are their potential pitfalls? We find that the literature on food webs and bipartite networks reveals very different challenges, alt-hough the questions addressed are often very similar. For example, sampling artifacts and ecological interpretation of link strength are issues of vigorous discussion in many studies of bipartite networks, while being accepted largely unquestioned in classical food webs. In contrast, dynamic analyses and their mathematical challenges are behind many food webs papers, while being marginal to bipartite network research. In fact, several substantial criticisms leveled at one type of network are absent from the other for purely historic reasons. We identify challenges common to all network types and suggest avenues for a potentially fruitful transfer of approaches as well as applications between them.},
+	author = {Dormann, Carsten F and Bl{\"u}thgen, Nico},
+	booktitle = {Adaptive Food Webs: Stability and Transitions of Real and Model Ecosystems},
+	editor = {Moore, John C and de Ruiter, Peter C. and McCann, Kevin S and Wolters, VolkmarEditors},
+	isbn = {978-1-107-18211-0},
+	keywords = {book chapter},
+	pages = {1--11},
+	place = {Cambridge, U.K.},
+	publisher = {Cambridge University Press},
+	timestamp = {2019.04.30},
+	title = {Food webs versus interaction networks: principles, pitfalls and perspectives},
+	url = {https://www.biom.uni-freiburg.de/mitarbeiter/dormann/foodnetworks-biorxiv.pdf},
+	year = {2017},
+	Bdsk-Url-1 = {https://www.biom.uni-freiburg.de/mitarbeiter/dormann/foodnetworks-biorxiv.pdf}}
+
+@book{Motten1982,
+	author = {Motten, A F},
+	place = {Durham, North Carolina, USA},
+	publisher = {PhD thesis, Duke University},
+	timestamp = {2019.04.30},
+	title = {Pollination Ecology of the Spring Wildflower Community in the Deciduous Forests of {P}iedmont {N}orth {C}arolina},
+	year = {1982}}
+
+@manual{Butts2013,
+	author = {Carter T. Butts},
+	note = {R package version 2.2-2},
+	timestamp = {2019.04.30},
+	title = {sna: Tools for Social Network Analysis},
+	url = {http://CRAN.R-project.org/package=sna},
+	year = {2013},
+	Bdsk-Url-1 = {http://CRAN.R-project.org/package=sna}}
+
+@article{Bluthgen2008,
+	abstract = {The structure of ecological interaction networks is often interpreted as a product of meaningful ecological and evolutionary mechanisms that shape the degree of specialization in community associations. However, here we show that both unweighted network metrics (connectance, nestedness, and degree distribution) and weighted network metrics (interaction evenness, interaction strength asymmetry) are strongly constrained and biased by the number of observations. Rarely observed species are inevitably regarded as "specialists," irrespective of their actual associations, leading to biased estimates of specialization. Consequently, a skewed distribution of species observation records (such as the lognormal), combined with a relatively low sampling density typical for ecological data, already generates a "nested" and poorly "connected" network with "asymmetric interaction strengths" when interactions are neutral. This is confirmed by null model simulations of bipartite networks, assuming that partners associate randomly in the absence of any specialization and any variation in the correspondence of biological traits between associated species (trait matching). Variation in the skewness of the frequency distribution fundamentally changes the outcome of network metrics. Therefore, interpretation of network metrics in terms of fundamental specialization and trait matching requires an appropriate control for such severe constraints imposed by information deficits. When using an alternative approach that controls for these effects, most natural networks of mutualistic or antagonistic systems show a significantly higher degree of reciprocal specialization (exclusiveness) than expected under neutral conditions. A higher exclusiveness is coherent with a tighter coevolution and suggests a lower ecological redundancy than implied by nested networks.},
+	author = {Bl\"{u}thgen, Nico and Fr\"{u}nd, Jochen and V\'{a}zquez, Diego P and Menzel, Florian},
+	file = {:Users/dormann/Data/Lit/Ecology/Bl\"{u}thgen et al.\_2008\_Ecology.pdf:pdf},
+	issn = {0012-9658},
+	journal = {Ecology},
+	keywords = {Adaptation, Physiological,Animals,Biodiversity,Biological Evolution,Computer Simulation,Demography,Ecosystem,Food Chain,Models, Biological,Population Density,Population Dynamics,Population Growth,Species Specificity},
+	month = dec,
+	number = {12},
+	pages = {3387--99},
+	pmid = {19137945},
+	timestamp = {2019.04.30},
+	title = {What do interaction network metrics tell us about specialization and biological traits?},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/19137945},
+	volume = {89},
+	year = {2008},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/19137945}}
+
+@article{Bluthgen2006,
+	abstract = {BACKGROUND:Network analyses of plant-animal interactions hold valuable biological information. They are often used to quantify the degree of specialization between partners, but usually based on qualitative indices such as 'connectance' or number of links. These measures ignore interaction frequencies or sampling intensity, and strongly depend on network size.RESULTS:Here we introduce two quantitative indices using interaction frequencies to describe the degree of specialization, based on information theory. The first measure (d') describes the degree of interaction specialization at the species level, while the second measure (H2') characterizes the degree of specialization or partitioning among two parties in the entire network. Both indices are mathematically related and derived from Shannon entropy. The species-level index d' can be used to analyze variation within networks, while H2' as a network-level index is useful for comparisons across different interaction webs. Analyses of two published pollinator networks identified differences and features that have not been detected with previous approaches. For instance, plants and pollinators within a network differed in their average degree of specialization (weighted mean d'), and the correlation between specialization of pollinators and their relative abundance also differed between the webs. Rarefied sampling effort in both networks and null model simulations suggest that H2' is not affected by network size or sampling intensity.CONCLUSION:Quantitative analyses reflect properties of interaction networks more appropriately than previous qualitative attempts, and are robust against variation in sampling intensity, network size and symmetry. These measures will improve our understanding of patterns of specialization within and across networks from a broad spectrum of biological interactions.},
+	author = {Bl\"{u}thgen, Nico and Menzel, Florian and Bl\"{u}thgen, Nils},
+	doi = {10.1186/1472-6785-6-9},
+	file = {:Users/dormann/Data/Lit/BMC Ecology/Bl\"{u}thgen, Menzel, Bl\"{u}thgen\_2006\_BMC Ecology.pdf:pdf},
+	issn = {1472-6785},
+	journal = {BMC Ecology},
+	number = {1},
+	pages = {9},
+	timestamp = {2019.04.30},
+	title = {Measuring specialization in species interaction networks},
+	url = {http://www.biomedcentral.com/1472-6785/6/9},
+	volume = {6},
+	year = {2006},
+	Bdsk-Url-1 = {http://www.biomedcentral.com/1472-6785/6/9},
+	Bdsk-Url-2 = {https://doi.org/10.1186/1472-6785-6-9}}
+
+@article{Bluthgen2007,
+	abstract = {The topology of ecological interaction webs holds important information for theories of coevolution, biodiversity, and ecosystem stability . However, most previous network analyses solely counted the number of links and ignored variation in link strength. Because of this crude resolution, results vary with scale and sampling intensity, thus hampering a comparison of network patterns at different levels . We applied a recently developed quantitative and scale-independent analysis based on information theory to 51 mutualistic plant-animal networks, with interaction frequency as measure of link strength. Most networks were highly structured, deviating significantly from random associations. The degree of specialization was independent of network size. Pollination webs were significantly more specialized than seed-dispersal webs, and obligate symbiotic ant-plant mutualisms were more specialized than nectar-mediated facultative ones. Across networks, the average specialization of animal and plants was correlated, but is constrained by the ratio of plant to animal species involved. In pollination webs, rarely visited plants were on average more specialized than frequently attended ones, whereas specialization of pollinators was positively correlated with their interaction frequency. We conclude that quantitative specialization in ecological communities mirrors evolutionary trade-offs and constraints of web architecture. This approach can be easily expanded to other types of biological interactions.},
+	author = {Bl\"{u}thgen, Nico and Menzel, Florian and Hovestadt, Thomas and Fiala, Brigitte and Bl\"{u}thgen, Nils},
+	doi = {10.1016/j.cub.2006.12.039},
+	file = {:Users/dormann/Data/Lit/Current Biology/Bl\"{u}thgen et al.\_2007\_Current Biology.pdf:pdf},
+	issn = {0960-9822},
+	journal = {Current Biology},
+	keywords = {Adaptation,Animals,Biological,Ecosystem,Evolution,Information Theory,Models,Plants,Symbiosis,Theoretical},
+	month = feb,
+	number = {4},
+	pages = {341--346},
+	pmid = {17275300},
+	timestamp = {2019.04.30},
+	title = {Specialization, constraints, and conflicting interests in mutualistic networks},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/17275300},
+	volume = {17},
+	year = {2007},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/17275300},
+	Bdsk-Url-2 = {https://doi.org/10.1016/j.cub.2006.12.039}}
+
+@article{Tylianakis2007,
+	abstract = {Global conversion of natural habitats to agriculture has led to marked changes in species diversity and composition. However, it is less clear how habitat modification affects interactions among species. Networks of feeding interactions (food webs) describe the underlying structure of ecological communities, and might be crucially linked to their stability and function. Here, we analyse 48 quantitative food webs for cavity-nesting bees, wasps and their parasitoids across five tropical habitat types. We found marked changes in food-web structure across the modification gradient, despite little variation in species richness. The evenness of interaction frequencies declined with habitat modification, with most energy flowing along one or a few pathways in intensively managed agricultural habitats. In modified habitats there was a higher ratio of parasitoid to host species and increased parasitism rates, with implications for the important ecosystem services, such as pollination and biological control, that are performed by host bees and wasps. The most abundant parasitoid species was more specialized in modified habitats, with reduced attack rates on alternative hosts. Conventional community descriptors failed to discriminate adequately among habitats, indicating that perturbation of the structure and function of ecological communities might be overlooked in studies that do not document and quantify species interactions. Altered interaction structure therefore represents an insidious and functionally important hidden effect of habitat modification by humans.},
+	author = {Tylianakis, Jason M and Tscharntke, Teja and Lewis, Owen T},
+	doi = {10.1038/nature05429},
+	file = {:Users/dormann/Data/Lit/Nature/Tylianakis, Tscharntke, Lewis\_2007\_Nature.pdf:pdf},
+	issn = {1476-4687},
+	journal = {Nature},
+	keywords = {Agricultural,Agricultural: metabolism,Agricultural: parasitology,Agriculture,Animals,Bees,Bees: physiology,Biodiversity,Crops,Food Chain,Host-Parasite Interactions,Human Activities,Plants,Plants: metabolism,Plants: parasitology,Pollen,Pollen: physiology,Reproduction,Reproduction: physiology,Tropical Climate,Wasps,Wasps: physiology},
+	month = jan,
+	number = {7124},
+	pages = {202--5},
+	pmid = {17215842},
+	timestamp = {2019.04.30},
+	title = {Habitat modification alters the structure of tropical host-parasitoid food webs},
+	url = {http://www.ncbi.nlm.nih.gov/pubmed/17215842},
+	volume = {445},
+	year = {2007},
+	Bdsk-Url-1 = {http://www.ncbi.nlm.nih.gov/pubmed/17215842},
+	Bdsk-Url-2 = {https://doi.org/10.1038/nature05429}}
+
+@article{Fisher1943,
+	author = {Fisher, R.A. and Corbet, A.S. and Williams, C.B.},
+	journal = {Journal of Animal Ecology},
+	pages = {42-58},
+	timestamp = {2019.04.30},
+	title = {The relation between the number of species and the number of individuals in a random sample of animal population. 12, 42--58.},
+	volume = {12},
+	year = {1943}}
+
+@article{Stone1990,
+	author = {Stone, Lewi and Roberts, Alan},
+	journal = {Oecologia},
+	pages = {74--79},
+	timestamp = {2019.04.30},
+	title = {The checkerboard score and species distributions},
+	volume = {85},
+	year = {1990}}
+
+@article{Hurlbert1978,
+	abstract = {Existing overlap indices are examined and are judged to be inadequate on the grounds (1) that they lack simple and appropriate biological interpretations, and (2) that they ignore possible variation among resource states in abundance or availability (a\_i). Two indices interpretable in terms of encounters are proposed. Niche overlap (L) is measured as the degree to which frequency of interspecific encounter is higher or lower than it would be if each species utilized each resource state in proportion to its abundance (a\_i). Directional overlap (Z\_(xy)) is measured as the density of species Y encountered, on the average, by an individual of species X. When resource states are equal in size, L is equivalent to Lloyd's `interspecies patchiness,' and Z\_(x(y)) is equivalent to his `mean crowding on species 1 by species 2.' Indices which in corporate variation in resource state abundance are also developed for mean crowding, patchiness and niche breadth.},
+	annote = {0012-9658},
+	author = {Hurlbert, S H},
+	journal = {Ecology},
+	number = {1},
+	owner = {cdormann},
+	pages = {67--77},
+	timestamp = {2019.04.30},
+	title = {Measurement of niche overlap and some relatives},
+	url = {<Go to ISI>://A1978FA46900005},
+	volume = {59},
+	year = {1978},
+	Bdsk-Url-1 = {%3CGo%20to%20ISI%3E://A1978FA46900005}}
+
+@article{Dalsgaard2008,
+	abstractnote = {Network analysis has in recent years improved our understanding of pollination systems. However, there is very little information about how functionally specialized plants and pollinators interact directly and indirectly in pollination networks. We have developed a parameter, Functional specialization index, to quantify functional specialization in pollination networks. Using this parameter, we examined whether different sized hummingbirds visit a distinct set of flowers in five hummingbird-pollinated plant assemblages from the Lesser Antilles, obtaining a simple relationship between hummingbird body size, network parameter and ecological function. In the Lesser Antilles, functionally specialized hummingbird pollination is distinct for plant species pollinated by the largest hummingbird species, whereas the pollination niche gradually integrates with the insect pollinator community as hummingbird body size decreases. The network approach applied in this study can be used to validate functional specialization and community-level interdependence between plants and pollinators, and it is therefore useful for evaluating and predicting plant resilience to pollinator loss, presently a global concern.},
+	author = {Dalsgaard, Bo and Mart{\'\i}n Gonz{\'a}lez, Ana M and Olesen, Jens M and Timmermann, Allan and Andersen, Laila H and Ollerton, Jeff},
+	doi = {doi:10.1111/j.0030-1299.2008.16537.x},
+	journal = {Oikos},
+	number = {5},
+	pages = {789--793},
+	timestamp = {2019.04.30},
+	title = {Pollination networks and functional specialization: a test using Lesser Antillean plant-hummingbird assemblages},
+	volume = {117},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.0030-1299.2008.16537.x}}
+
+@article{Feinsinger1981,
+	author = {Feinsinger, Peter and Spears, E. Eugene and Poole, Robert W.},
+	doi = {10.2307/1936664},
+	journal = {Ecology},
+	month = {Feb},
+	number = {1},
+	pages = {27--32},
+	timestamp = {2019.04.30},
+	title = {A simple measure of niche breadth},
+	volume = {62},
+	year = {1981},
+	Bdsk-Url-1 = {https://doi.org/10.2307/1936664}}
+
+@article{Latapy2008,
+	author = {Latapy, Matthieu and Magnien, Cl{\'e}mence and Vecchio, Nathalie Del},
+	doi = {10.1016/j.socnet.2007.04.006},
+	journal = {Social Networks},
+	month = {Jan},
+	number = {1},
+	pages = {31--48},
+	timestamp = {2019.04.30},
+	title = {Basic notions for the analysis of large two-mode networks},
+	volume = {30},
+	year = {2008},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.socnet.2007.04.006}}
+
+@article{Fortunato2010,
+	author = {Fortunato, Santo},
+	doi = {10.1016/j.physrep.2009.11.002},
+	file = {:Users/dormann/Data/Lit/Physics Reports/Unknown\_2010\_Physics Reports.pdf:pdf},
+	issn = {03701573},
+	journal = {Physics Reports},
+	month = feb,
+	number = {3-5},
+	pages = {75--174},
+	publisher = {Elsevier B.V.},
+	timestamp = {2019.04.30},
+	title = {Community detection in graphs},
+	url = {http://linkinghub.elsevier.com/retrieve/pii/S0370157309002841},
+	volume = {486},
+	year = {2010},
+	Bdsk-Url-1 = {http://linkinghub.elsevier.com/retrieve/pii/S0370157309002841},
+	Bdsk-Url-2 = {https://doi.org/10.1016/j.physrep.2009.11.002}}
+
+@article{Beckett2016,
+	abstractnote = {Real-world complex networks are composed of non-random quantitative interactions. Identifying communities of nodes that tend to interact more with each other than the network as a whole is a key research focus across multiple disciplines, yet many community detection algorithms only use information about the presence or absence of interactions between nodes. Weighted modularity is a potential method for evaluating the quality of community partitions in quantitative networks. In this framework, the optimal community partition of a network can be found by searching for the partition that maximizes modularity. Attempting to find the partition that maximizes modularity is a computationally hard problem requiring the use of algorithms. QuanBiMo is an algorithm that has been proposed to maximize weighted modularity in bipartite networks. This paper introduces two new algorithms, LPAwb+ and DIRTLPAwb+, for maximizing weighted modularity in bipartite networks. LPAwb+ and DIRTLPAwb+ robustly identify partitions with high modularity scores. DIRTLPAwb+ consistently matched or outperformed QuanBiMo, while the speed of LPAwb+ makes it an attractive choice for detecting the modularity of larger networks. Searching for modules using weighted data (rather than binary data) provides a different and potentially insightful method for evaluating network partitions.},
+	author = {Beckett, Stephen J},
+	doi = {10.1098/rsos.140536},
+	journal = {Royal Society open science},
+	number = {1},
+	pages = {140536--140536},
+	timestamp = {2019.04.30},
+	title = {Improved community detection in weighted bipartite networks.},
+	volume = {3},
+	year = {2016},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rsos.140536}}
+
+@article{Thebault2013,
+	author = {Th\'{e}bault, Elisa},
+	doi = {10.1111/jbi.12015},
+	editor = {Veech, Joseph},
+	file = {:Volumes/pub\_biom\$/PDFs\_Books\&Paper/Journals/Journal of Biogeography/Th\'{e}bault\_2013\_Journal of Biogeography.pdf:pdf},
+	issn = {03050270},
+	journal = {Journal of Biogeography},
+	keywords = {absence matrices,biogeography,bipartite,compartmentalization,modularity,nestedness,network theory,networks,power analysis,presence},
+	mendeley-tags = {bipartite,modularity},
+	month = apr,
+	number = {4},
+	pages = {759--768},
+	timestamp = {2019.04.30},
+	title = {Identifying compartments in presence-absence matrices and bipartite networks: insights into modularity measures},
+	url = {http://doi.wiley.com/10.1111/jbi.12015},
+	volume = {40},
+	year = {2013},
+	Bdsk-Url-1 = {http://doi.wiley.com/10.1111/jbi.12015},
+	Bdsk-Url-2 = {https://doi.org/10.1111/jbi.12015}}
+
+@inbook{Allesina2009,
+	author = {Allesina, Stefano},
+	booktitle = {Ecosystem Ecology},
+	editor = {Jorgensen, Sven ErikEditor},
+	pages = {50--57},
+	place = {Amsterdam},
+	publisher = {Elsevier},
+	timestamp = {2019.04.30},
+	title = {Cycling and cycling indices},
+	year = {2009}}
+
+@article{Allesina2009a,
+	abstractnote = {The concept of a group is ubiquitous in biology. It underlies classifications in evolution and ecology, including those used to describe phylogenetic levels, the habitat and functional roles of organisms in ecosystems. Surprisingly, this concept is not explicitly included in simple models for the structure of food webs, the ecological networks formed by consumer-resource interactions. We present here the simplest possible model based on groups, and show that it performs substantially better than current models at predicting the structure of large food webs. Our group-based model can be applied to different types of biological and non-biological networks, and for the first time merges in the same framework two important notions in network theory: that of compartments (sets of highly interacting nodes) and that of roles (sets of nodes that have similar interaction patterns). This model provides a basis to examine the significance of groups in biological networks and to develop more accurate models for ecological network structure. It is especially relevant at a time when a new generation of empirical data is providing increasingly large food webs.},
+	author = {Allesina, Stefano and Pascual, Mercedes},
+	doi = {10.1111/j.1461-0248.2009.01321.x},
+	journal = {Ecology Letters},
+	month = {Jul},
+	number = {7},
+	pages = {652--62},
+	timestamp = {2019.04.30},
+	title = {Food web models: a plea for groups},
+	volume = {12},
+	year = {2009},
+	Bdsk-Url-1 = {https://doi.org/10.1111/j.1461-0248.2009.01321.x}}
+
+@article{Derville2018,
+	abstractnote = {Aim: Accurate predictions of cetacean distributions are essential to their conservation but are limited by statistical challenges and a paucity of data. This study aimed at comparing the capacity of various statistical algorithms to deal with biases commonly found in nonsystematic cetacean surveys and to evaluate the potential for citizen science data to improve habitat modelling and predictions. An endangered population of humpback whales (Megaptera novaeangliae) in their breeding ground was used as a case study.},
+	author = {Derville, Solene and Torres, Leigh G. and Iovan, Corina and Garrigue, Claire},
+	doi = {10.1111/ddi.12782},
+	editor = {Elith, JaneEditor},
+	issn = {13669516},
+	journal = {Diversity and Distributions},
+	month = {Nov},
+	number = {11},
+	pages = {1657--1673},
+	timestamp = {2019.07.21},
+	title = {Finding the right fit: Comparative cetacean distribution models using multiple data sources and statistical approaches},
+	volume = {24},
+	year = {2018},
+	Bdsk-Url-1 = {https://doi.org/10.1111/ddi.12782}}
+
+@article{Rohr2016,
+	author = {Rohr, Rudolf P. and Naisbit, Russell E. and Mazza, Christian and Bersier, Louis-F{\'e}lix},
+	doi = {10.1098/rspb.2015.2702},
+	issn = {0962-8452, 1471-2954},
+	journal = {Proceedings of the Royal Society B: Biological Sciences},
+	month = {Feb},
+	number = {1824},
+	pages = {20152702},
+	timestamp = {2019.08.07},
+	title = {Matching--centrality decomposition and the forecasting of new links in networks},
+	volume = {283},
+	year = {2016},
+	Bdsk-Url-1 = {https://doi.org/10.1098/rspb.2015.2702}}
+
+@article{Brousseau2018,
+	author = {Brousseau, Pierre-Marc and Gravel, Dominique and Handa, I. Tanya},
+	doi = {10.1111/1365-2435.12943},
+	editor = {Ferrari, MaudEditor},
+	issn = {02698463},
+	journal = {Functional Ecology},
+	month = {Jan},
+	number = {1},
+	pages = {192--202},
+	timestamp = {2019.08.07},
+	title = {Trait matching and phylogeny as predictors of predator-prey interactions involving ground beetles},
+	volume = {32},
+	year = {2018},
+	Bdsk-Url-1 = {https://doi.org/10.1111/1365-2435.12943}}
+
+@article{Tinoco2017,
+	abstractnote = {Specialization of species in interaction networks influences network stability and ecosystem functioning. Spatial and temporal variation in resource availability may provide insight into how ecological factors, such as resource abundance, and evolutionary factors, such as phylogenetically conserved morphological traits, influence specialization within mutualistic networks. We used independent measures of hummingbird abundance and resources (nectar), information on hummingbird traits and plant--hummingbird interactions to examine how resource availability and species' morphology influence the specialization of hummingbirds in three habitat types (forest, shrubs, cattle ranch) sampled over 10 sessions across two years in the southern Andes of Ecuador. Specialization of hummingbird species in the networks was measured by three indices: d' (related to niche partitioning), generality (related to niche width) and PSI (related to pollination services). Specialization indices d', generality and PSI of hummingbird species were influenced by resource availability. All indices indicated that specialization of hummingbirds increased when the availability of resources decreased. Variation in d' was also explained by an interaction between resource availability and bill length; hummingbirds with a long bill switched from being more specialized than other species when resource availability was low to being similarly specialized when availability was high. Overall, our results highlight the importance of ecological and evolutionary factors determining the specialization of species in interaction networks. We demonstrate in particular that ecological gradients in resource availability cause substantial changes in consumers' foraging behavior contingent on their morphology. Changes in pollinator specialization along resource gradients can have impacts on ecosystem functions, such as pollination by animals.},
+	author = {Tinoco, Boris A. and Graham, Catherine H. and Aguilar, Juan M. and Schleuning, Matthias},
+	doi = {10.1111/oik.02998},
+	issn = {1600-0706},
+	journal = {Oikos},
+	number = {1},
+	pages = {52--60},
+	timestamp = {2019.08.07},
+	title = {Effects of hummingbird morphology on specialization in pollination networks vary with resource availability},
+	volume = {126},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1111/oik.02998}}
+
+@article{Morris2004,
+	author = {Morris, Rebecca J and Lewis, Owen T and Godfray, H C J},
+	journal = {Nature},
+	pages = {310--313},
+	timestamp = {2019.08.12},
+	title = {Experimental evidence for apparent competition in a tropical forest food web},
+	volume = {428},
+	year = {2004}}
+
+@article{Vazquez2009a,
+	author = {V{\'a}zquez, Diego P and Chacoff, NP and Cagnolo, L},
+	journal = {Ecology},
+	number = {8},
+	pages = {2039--2046},
+	timestamp = {2019.08.12},
+	title = {Evaluating multiple determinants of the structure of plant-animal mutualistic networks},
+	volume = {90},
+	year = {2009}}
+
+@article{valdovinos_species_2018,
+	abstract = {Species invasions constitute a major and poorly understood threat to plant--pollinator systems. General theory predicting which factors drive species invasion success and subsequent effects on native ecosystems is particularly lacking. We address this problem using a consumer--resource model of adaptive behavior and population dynamics to evaluate the invasion success of alien pollinators into plant--pollinator networks and their impact on native species. We introduce pollinator species with different foraging traits into network models with different levels of species richness, connectance, and nestedness. Among 31 factors tested, including network and alien properties, we find that aliens with high foraging efficiency are the most successful invaders. Networks exhibiting high alien--native diet overlap, fraction of alien-visited plant species, most-generalist plant connectivity, and number of specialist pollinator species are the most impacted by invaders. Our results mimic several disparate observations conducted in the field and potentially elucidate the mechanisms responsible for their variability.},
+	author = {Valdovinos, Fernanda S. and Berlow, Eric L. and de Espan{\'e}s, Pablo Moisset and {Ramos-Jiliberto}, Rodrigo and V{\'a}zquez, Diego P. and Martinez, Neo D.},
+	copyright = {2018 The Author(s)},
+	doi = {10.1038/s41467-018-04593-y},
+	file = {/home/gita/PhD/Literatur/Valdovinos_et_al_Species_traits_and_network_structure_predict_the_success_2018.pdf},
+	issn = {2041-1723},
+	journal = {Nature Communications},
+	keywords = {Model,Functional traits,Networks},
+	language = {En},
+	month = may,
+	number = {1},
+	pages = {2153},
+	timestamp = {2019.08.14},
+	title = {Species Traits and Network Structure Predict the Success and Impacts of Pollinator Invasions},
+	volume = {9},
+	year = {2018},
+	Bdsk-Url-1 = {https://doi.org/10.1038/s41467-018-04593-y}}
+
+@article{Bartomeus2016,
+	author = {Bartomeus, Ignasi and Gravel, Dominique and Tylianakis, Jason M and Aizen, Marcelo A. and Dickie, Ian A. and Bernard-Verdier, Maud},
+	journal = {Functional Ecology},
+	pages = {1894--1903},
+	timestamp = {2019.08.14},
+	title = {A common framework for identifying linkage rules across different types of interactions},
+	volume = {30},
+	year = {2016}}
+
+@book{Bascompte2014,
+	author = {Bascompte, Jordi and Jordano, Pedro},
+	place = {Princeton, N.J.},
+	publisher = {Princeton University Press},
+	timestamp = {2019.08.20},
+	title = {Mutualistic Networks},
+	year = {2014}}
+
+@book{Moore2017,
+	author = {Moore, John C and de Ruiter, Peter C and McCann, Kevin S and Wolters, Volkmar},
+	doi = {10.1017/9781316871867},
+	isbn = {978-1-107-18211-0},
+	month = {Dec},
+	place = {Cambridge, UK},
+	publisher = {Cambridge University Press},
+	timestamp = {2019.08.20},
+	title = {Adaptive Food Webs: Stability and Transitions of Real and Model Ecosystems},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1017/9781316871867}}
+
+@article{Chittka2006,
+	abstractnote = {The flowers of angiosperm plants present us with a staggering diversity of signal designs, but how did this diversity evolve? Answering this question requires us to understand how pollinators analyze these signals with their visual and olfactory sense organs, and how the sensory systems work together with post-receptor neural wiring to produce a coherent percept of the world around them. Recent research on the dynamics with which bees store, manage and retrieve memories all have fundamental implications for how pollinators choose between flowers, and in turn for floral evolution. New findings regarding how attention, peak-shift phenomena, and speed--accuracy tradeoffs affect pollinator choice between flower species show that analyzing the evolutionary ecology of signal--receiver relationships can substantially benefit from knowledge about the neural mechanisms of visual and olfactory information processing.},
+	author = {Chittka, Lars and Raine, Nigel E},
+	collection = {Biotic interactions / edited by Anne Osbourn and Sheng Yang He},
+	doi = {10.1016/j.pbi.2006.05.002},
+	issn = {1369-5266},
+	journal = {Current Opinion in Plant Biology},
+	month = {Aug},
+	number = {4},
+	pages = {428--435},
+	series = {Biotic interactions / edited by Anne Osbourn and Sheng Yang He},
+	timestamp = {2019.08.20},
+	title = {Recognition of flowers by pollinators},
+	volume = {9},
+	year = {2006},
+	Bdsk-Url-1 = {https://doi.org/10.1016/j.pbi.2006.05.002}}
+
+@article{Zanata2017,
+	abstractnote = {Aim Among the world's three major nectar-feeding bird taxa, hummingbirds are the most phenotypically specialized for nectarivory, followed by sunbirds, while the honeyeaters are the least phenotypically specialized taxa. We tested whether this phenotypic specialization gradient is also found in the interaction patterns with their floral resources. Location Americas, Africa, Asia and Oceania/Australia. Methods We compiled interaction networks between birds and floral resources for 79 hummingbird, nine sunbird and 33 honeyeater communities. Interaction specialization was quantified through connectance (C), complementary specialization (H2′), binary (QB) and weighted modularity (Q), with both observed and null-model corrected values. We compared interaction specialization among the three types of bird--flower communities, both independently and while controlling for potential confounding variables, such as plant species richness, asymmetry, latitude, insularity, topography, sampling methods and intensity. Results Hummingbird--flower networks were more specialized than honeyeater--flower networks. Specifically, hummingbird--flower networks had a lower proportion of realized interactions (lower C), decreased niche overlap (greater H2′) and greater modularity (greater QB). However, we found no significant differences between hummingbird-- and sunbird--flower networks, nor between sunbird-- and honeyeater--flower networks. Main conclusions As expected, hummingbirds and their floral resources have greater interaction specialization than honeyeaters, possibly because of greater phenotypic specialization and greater floral resource richness in the New World. Interaction specialization in sunbird--flower communities was similar to both hummingbird--flower and honeyeater--flower communities. This may either be due to the relatively small number of sunbird--flower networks available, or because sunbird--flower communities share features of both hummingbird--flower communities (specialized floral shapes) and honeyeater--flower communities (fewer floral resources). These results suggest a link between interaction specialization and both phenotypic specialization and floral resource richness within bird--flower communities at a global scale.},
+	author = {Zanata, Thais B. and Dalsgaard, Bo and Passos, Fernando C. and Cotton, Peter A. and Roper, James J. and Maruyama, Pietro K. and Fischer, Erich and Schleuning, Matthias and Mart{\'\i}n Gonz{\'a}lez, Ana M. and Vizentin-Bugoni, Jeferson and et al.},
+	doi = {10.1111/jbi.13045},
+	journal = {Journal of Biogeography},
+	pages = {1891--1910},
+	timestamp = {2019.08.21},
+	title = {Global patterns of interaction specialization in bird-flower networks},
+	volume = {44},
+	year = {2017},
+	Bdsk-Url-1 = {https://doi.org/10.1111/jbi.13045}}

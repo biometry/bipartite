@@ -47,11 +47,13 @@ source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
 source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
+
+
 #  as.one.mode
 image(as.one.mode(Safariland))
 visweb(as.one.mode(Safariland, project="lower", fill=NA), NA.col="green") #NA.col should have no effect and cause no problem!
 # check fill=NA and visweb's NA.col:
-visweb(as.one.mode(vazquenc, fill=NA), NA.col="green") #slow!
+visweb(as.one.mode(vazquenc, fill=NA), NA.col="green")
 
 
 # array2linkmx
@@ -478,6 +480,9 @@ cor(colSums(nulls[[1]]), colSums(Safariland)) # very close to 1
 # visweb
 
 # web2edges
+web2edges(Safariland)
+web2edges(Safariland, both.directions=TRUE)
+web2edges(as.one.mode(Safariland, project="lower"), is.one.mode=T)
 
 # webs2array
 data(Safariland, vazquenc, vazquec)
@@ -511,3 +516,77 @@ as.character(webinput)
 ## source files, excluding zzz.r
 #for (i in seq_along(rfiles)[-length(rfiles)]) source(paste0("bipartite/R/", rfiles[i]))
 # C.score(Safariland) # error: could not find "designdist"
+
+
+Package: bipartite
+Type: Package
+Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
+Version: 2.17
+Date: 2021-05-18
+Authors@R: c(person(given = "Carsten F.",
+                    family = "Dormann",
+                    role = c("aut", "cre"),
+                    email = "carsten.dormann@biom.uni-freiburg.de",
+                    comment = c(ORCID = "0000-0002-9835-1794")),
+             person(given = "Jochen",
+                    family = "Fruend",
+                    role = c("cre", "ctb"),
+                    comment = c(ORCID = "0000-0002-7079-3478")),
+             person(given = "Bernd",
+                    family = "Gruber",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0003-0078-8179")),
+             person(given = "Stephen",
+                    family = "Beckett",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0002-4410-2960")),
+             person(given = "Mariano",
+                    family = "Devoto",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0003-3098-236X")),
+             person(given = "Gabriel M.F.",
+                    family = "Felix",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0002-3901-4333")),
+             person(given = "José M.",
+                    family = "Iriondo",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0003-2710-3889")),
+             person(given = "Tore",
+                    family = "Opsahl",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0003-0346-8082")),
+             person(given = "Rafael B.P.",
+                    family = "Pinheiro",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0003-2342-8483")),
+             person(given = "Rouven",
+                    family = "Strauss",
+                    role = c("ctb")),
+             person(given = "Diego P.",
+                    family = "Vázquez",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0002-3449-5748")) )
+Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
+Jochen Fruend [cre, ctb] (<https://orcid.org/0000-0002-7079-3478>),
+Bernd Gruber [ctb] (<https://orcid.org/0000-0003-0078-8179>),
+Stephen Beckett [ctb] (<https://orcid.org/0000-0002-4410-2960>),
+Mariano Devoto [ctb] (<https://orcid.org/0000-0003-3098-236X>),
+Gabriel M.F. Felix [ctb] (<https://orcid.org/0000-0002-3901-4333>),
+José M. Iriondo [ctb] (<https://orcid.org/0000-0003-2710-3889>),
+Tore Opsahl [ctb] (<https://orcid.org/0000-0003-0346-8082>),
+Rafael  B.P. Pinheiro [ctb] (<https://orcid.org/0000-0003-2342-8483>),
+Rouven Strauss[ctb],
+Diego P. Vázquez [ctb] (<https://orcid.org/0000-0002-3449-5748>)
+Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
+  Depends: R(>= 3.5.0), vegan, sna
+Imports: fields, igraph, MASS, methods, permute
+Suggests: knitr
+LazyData: TRUE
+ByteCompile: TRUE
+Encoding: UTF-8
+NeedsCompilation: yes
+VignetteBuilder: knitr, utils
+URL: https://github.com/biometry/bipartite
+Description: Functions to visualise webs and calculate a series of indices commonly used to describe pattern in (ecological) webs. It focuses on webs consisting of only two levels (bipartite), e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the web's topology. 
+License: GPL

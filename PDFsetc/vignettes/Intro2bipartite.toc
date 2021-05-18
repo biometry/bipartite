@@ -1,0 +1,37 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Introduction for ecologists}{2}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Introduction for non-ecologists}{2}{subsection.1.2}% 
+\contentsline {subsection}{\numberline {1.3}Introduction continued for both, ecologists and non-ecologists}{2}{subsection.1.3}% 
+\contentsline {section}{\numberline {2}What other network packages are out there in the \textsl {R}-universe?}{3}{section.2}% 
+\contentsline {section}{\numberline {3}Preparing data for analysis}{4}{section.3}% 
+\contentsline {section}{\numberline {4}Visualising bipartite networks}{4}{section.4}% 
+\contentsline {section}{\numberline {5}Computing indices}{8}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}Network-level indices}{8}{subsection.5.1}% 
+\contentsline {subsection}{\numberline {5.2}Group-level indices}{9}{subsection.5.2}% 
+\contentsline {subsection}{\numberline {5.3}Link-level indices}{11}{subsection.5.3}% 
+\contentsline {subsection}{\numberline {5.4}Species-level (= node-level) indices}{11}{subsection.5.4}% 
+\contentsline {subsubsection}{\numberline {5.4.1}The betweenness mess}{12}{subsubsection.5.4.1}% 
+\contentsline {subsection}{\numberline {5.5}Which index to choose?}{14}{subsection.5.5}% 
+\contentsline {subsubsection}{\numberline {5.5.1}Index redundancy: do different indices tell the same thing?}{15}{subsubsection.5.5.1}% 
+\contentsline {subsubsection}{\numberline {5.5.2}Variations on on the same theme: which index of a group of similar ones should I choose?}{18}{subsubsection.5.5.2}% 
+\contentsline {section}{\numberline {6}Null models}{19}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}Why null models?}{19}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {6.2}Justifying conservative null models}{19}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {6.3}Using null models to test for significant tests in data}{20}{subsection.6.3}% 
+\contentsline {paragraph}{Corrected indices and $z$-scores}{20}{subsection.6.3}% 
+\contentsline {paragraph}{Null-model the entire analysis}{21}{figure.7}% 
+\contentsline {section}{\numberline {7}Modularity}{22}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}Using modularity to identifying species with important roles in the network}{25}{subsection.7.1}% 
+\contentsline {section}{\numberline {8}Analyses beyond \textbf {bipartite}}{26}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Plotting pretty bipartites}{26}{subsection.8.1}% 
+\contentsline {subsubsection}{\numberline {8.1.1}\textbf {bipartiteD3}}{26}{subsubsection.8.1.1}% 
+\contentsline {subsubsection}{\numberline {8.1.2}\textbf {igraph}}{26}{subsubsection.8.1.2}% 
+\contentsline {subsubsection}{\numberline {8.1.3}\textbf {ggbipart}}{26}{subsubsection.8.1.3}% 
+\contentsline {subsubsection}{\numberline {8.1.4}\textbf {multigraph}}{26}{subsubsection.8.1.4}% 
+\contentsline {subsection}{\numberline {8.2}Analysing the structure of bipartite networks}{26}{subsection.8.2}% 
+\contentsline {subsubsection}{\numberline {8.2.1}\textbf {bmotif}}{26}{subsubsection.8.2.1}% 
+\contentsline {subsubsection}{\numberline {8.2.2}\textbf {dynsbm}}{26}{subsubsection.8.2.2}% 
+\contentsline {subsubsection}{\numberline {8.2.3}\textbf {infomapecology}}{26}{subsubsection.8.2.3}% 
+\contentsline {subsection}{\numberline {8.3}Multi-layer networks}{26}{subsection.8.3}% 
+\contentsline {section}{Bibliography}{27}{subsection.8.3}% 
+\contentsline {section}{Index}{31}{subsection.8.3}% 

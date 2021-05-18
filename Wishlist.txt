@@ -48,17 +48,10 @@ small
 * togetherness: allow for weighting: compute only the 0011-patterns and return this value. Then compute (weighted) averages in group level.
 * C score: allow for weighting: compute only the 0110-patterns and return this value. Then compute (weighted) averages in group level.
 * external extinction sequence across trophic levels for second.extinct
-* two-level czvalues (e.g. weighted mean of the two trophic levels; see help file) into species level, from there into networklevel
 * in second.extinct, use plot.it="higher"/"lower" to plot only one of the trophic levels (wish of Georg Anderson).
 * include robustnessLD50 (Dunne et al. 2002, MacFadyen et al. 2009) and revise help for robustness accordingly
 * search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
 * functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
-* clean up authors and add ORCID (as in https://github.com/ropensci/codemetar/blob/master/DESCRIPTION)
-
-* web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
-* as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
-* as.one.mode: revise help page; should be more consistent with the different projection options, and what the default is; more clearly warn against the "inner projection" (loss of information); think about (and write about) if the default for "full" should really be a symmetric matrix (i.e. assuming interaction in both directions); at least for food webs (e.g. h-p) it would be more consistent to only fill the upper right corner
-* this means make directions argument for as.one.mode
 
 * revise startup note in bipartite-package.Rd, saying that we usually assume quantitative webs to be of interaction frequencies and examples are for plant-pollinators if not stated otherwise
 This means: 
@@ -120,7 +113,7 @@ It also doesn't seem to work ...
 BIN (rejected feature)
 * optionally redirect computeModule output to a file (using "sink" in the function before and after the C-call?); this will allow monitoring of larger for loops without wading through the likelihoods of the function
 * include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
-
+* two-level czvalues (e.g. weighted mean of the two trophic levels; see help file) into species level, from there into networklevel  | CFD no: czvalues are meaningless without null model reference and hence not suitable for inclusion in ~level functions
 
 FIXED/ADDED/DONE:
 * add node overlap/segretation (Strona & Veech 2015 MEE)
@@ -155,7 +148,9 @@ Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
 * retire bmn5: it is available from vegan (re-implemented) and NODF has taken over  |  CFD 17.5.2021
 * add option to plot names in PAC!  |  CFD 17.5.2021
 * make modularity available from networklevel   |  CFD 17.5.2021
-* sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).  |  CFD 17.5.2021; now a subsection in the vignette
-
-
-Sweavel.sty
+* sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).  |  CFD 18.5.2021; now a subsection in the vignette
+* clean up authors and add ORCID (as in https://github.com/ropensci/codemetar/blob/master/DESCRIPTION)  |  CFD 18.5.2021
+* web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
+* as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
+* as.one.mode: revise help page; should be more consistent with the different projection options, and what the default is; more clearly warn against the "inner projection" (loss of information); think about (and write about) if the default for "full" should really be a symmetric matrix (i.e. assuming interaction in both directions); at least for food webs (e.g. h-p) it would be more consistent to only fill the upper right corner
+* this means make directions argument for as.one.mode  |  last 4 points are the same; CFD 18.5.2021
