@@ -16,7 +16,7 @@ large changes
 * for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!, possibly with interactive warning for large networks
 
 * NULLMODEL-LIKE:
-* also, check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
+* check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
@@ -36,7 +36,6 @@ small
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
-* warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
@@ -53,12 +52,6 @@ small
 * search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
 * functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
 
-* revise startup note in bipartite-package.Rd, saying that we usually assume quantitative webs to be of interaction frequencies and examples are for plant-pollinators if not stated otherwise
-This means: 
-- delete % before the first paragraph
-- add "Networks can be either binary (0/1 or FALSE/TRUE matrices) or quantitative (matrices containing estimates of pairwise interaction strength, usually assumed here to be interaction frequency)."
-- revise to be more inviting to other disciplines (social scientists)
-
 * enable networklevel / grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel; also offer specieslevel for grouplevel indices that not yet exist
 
 
@@ -68,19 +61,16 @@ This means:
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
 * DolŽdec 2000: OMI implementation
 * add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex)
-* WINE-artiger von Marco: Araujo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)
 * put Strona's NOS-index into bipartite (there is an R-package)
 * Eigenvector, Katz, PageRank as well as a few similarity measures such as cosine, Pearson and Euclidean for weighted bipartite networks in the package
 * make "small world" a directly accessible index
 * check Poisot's python and matlab packages
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
-* check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure; see also Runghen et al. 2021
 
 
 NICE TO HAVE
 * check the C4b of Gilarranz: is it the same as Opsahl's?
-* make Rcpp-version of computeModule's LPA
-* compare betweenness in sna and igraph and tnet and Pajek
+* make Rcpp-version of computeModule's LPA (why? it is already very fast!)
 * add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!) @Carsten: we should talk about the network data availability / database topic
 * future outlook: rethink patefield (and modularity and H2') regarding non-integer weights as well as non-independent (overdispersed) counts
 
@@ -105,7 +95,6 @@ In the .Rbuildignore file the syntax is a bit strange:
 \..* means (in Perl): starts with . (has to be escaped, hence \.) and is followed by characters ("."), and as many as you want ("*" is a wildcard).
 So \..* refers to any file/directory starting with a ".".
 To exclude specifically .hg, I guess it would be \..hg or so.
-
 It also doesn't seem to work ...
 
 # done:
@@ -114,6 +103,10 @@ BIN (rejected feature)
 * optionally redirect computeModule output to a file (using "sink" in the function before and after the C-call?); this will allow monitoring of larger for loops without wading through the likelihoods of the function
 * include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
 * two-level czvalues (e.g. weighted mean of the two trophic levels; see help file) into species level, from there into networklevel  | CFD no: czvalues are meaningless without null model reference and hence not suitable for inclusion in ~level functions
+* warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!  |  CFD largely irreproducible and never complained about by users
+* WINE-artiger von Marco: Araujo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)  |  CFD 18.5.2021: by now, there are several weighted indices, not least nest.smdm; since hardly anybody has used/cited this approach, it may be save to ignore
+
+
 
 FIXED/ADDED/DONE:
 * add node overlap/segretation (Strona & Veech 2015 MEE)
@@ -149,8 +142,15 @@ Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
 * add option to plot names in PAC!  |  CFD 17.5.2021
 * make modularity available from networklevel   |  CFD 17.5.2021
 * sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).  |  CFD 18.5.2021; now a subsection in the vignette
+* compare betweenness in sna and igraph and tnet and Pajek  |  CFD 18.5.2021: see vignette, section 5.4.1
 * clean up authors and add ORCID (as in https://github.com/ropensci/codemetar/blob/master/DESCRIPTION)  |  CFD 18.5.2021
 * web2edges/as.one.mode: check that only one direction is given; seems that some links are represented twice, even if both.directions=FALSE
 * as.one.mode/web2edges: use the number of interactions to affect the edge.weight, so that the edge.weight is the weighted mean of weights of links (or so).
 * as.one.mode: revise help page; should be more consistent with the different projection options, and what the default is; more clearly warn against the "inner projection" (loss of information); think about (and write about) if the default for "full" should really be a symmetric matrix (i.e. assuming interaction in both directions); at least for food webs (e.g. h-p) it would be more consistent to only fill the upper right corner
 * this means make directions argument for as.one.mode  |  last 4 points are the same; CFD 18.5.2021
+* revise startup note in bipartite-package.Rd, saying that we usually assume quantitative webs to be of interaction frequencies and examples are for plant-pollinators if not stated otherwise
+This means: 
+- delete % before the first paragraph
+- add "Networks can be either binary (0/1 or FALSE/TRUE matrices) or quantitative (matrices containing estimates of pairwise interaction strength, usually assumed here to be interaction frequency)."
+- revise to be more inviting to other disciplines (social scientists)  |  CFD 18.5.2021
+* check out Diego's collaborator in France algorithm for finding the best descriptor of a matrix structure; see also Runghen et al. 2021 |  CFD  18.5.2021; paper by Miele, added to vignette other packages overview

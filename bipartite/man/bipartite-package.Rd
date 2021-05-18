@@ -16,6 +16,8 @@ Bipartite provides functions to visualise webs and calculate a series of indices
 \details{
 Note: We only had three types of bipartite webs in mind when starting this package: seed-disperser, plant-pollinator and host-parasitoid systems. In how far it makes sense to use these functionalities for other systems (or indeed even for these systems) lies in the hands of the user. Please refer to the literature cited for details on the theory behind the indices.
 
+Networks can be either binary (0/1 or FALSE/TRUE matrices) or quantitative (matrices containing estimates of pairwise interaction strength, usually assumed here to be interaction frequency).
+
 Input for most analyses is an interaction matrix of m nodes (= species) from one group (\dQuote{higher}) with n nodes (= species) from another group (\dQuote{lower}), i.e. a n x m matrix, where higher level nodes are in columns, lower level nodes in rows. Column and row names can be provided. This is fundamentally different from \dQuote{one-mode} networks, which are organised as k x k matrix, i.e. one group of nodes only, in which each node can link (= interact) with each other. Such a format is incompatible with the functions we provide here. (Note, however, that functions \code{\link{as.one.mode}} and \code{\link{web2edges}} are convenience functions to morph bipartite networks into one-mode webs. Furthermore, some indices build on one-mode networks and \emph{are} called from bipartite.)
 
 Before you start with the network, you have to get the data into the right shape. The function \code{\link{frame2webs}} aims to facilitate this process. Arranging a web, e.g. by size, is supported by \code{\link{sortweb}}.
@@ -38,7 +40,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.17\cr
-Date: \tab 2021-04-18\cr
+Date: \tab 2021-05-18\cr
 License: \tab GPL \cr
 }
 }

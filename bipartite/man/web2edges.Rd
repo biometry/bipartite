@@ -11,7 +11,7 @@
 \usage{
 web2edges(web, webName=NULL, weight.column=TRUE, both.directions=FALSE, 
 	is.one.mode=FALSE, out.files=c("edges", "names", "groups")[1:2],
-	return=FALSE, verbose=FALSE)
+	return=TRUE, verbose=FALSE)
 }
 
 \arguments{
@@ -22,7 +22,7 @@ web2edges(web, webName=NULL, weight.column=TRUE, both.directions=FALSE,
   \item{both.directions}{Logical; shall each link be represented twice, i.e. once from A to B and also from B to A? Defaults to FALSE.}
   \item{is.one.mode}{Logical; if TRUE, labels for species will be used as they currently are in the web; otherwise, species will be re-labelled so that the first column will have number NROW(web) + 1. This is also the default.}
   \item{out.files}{String indicating which files to produce: "edges" writes an edge list, "names" writes a list with names belonging to the edges and "groups" writes a file assigning the species to higher and lower trophic levels. The default produces the edge list and the names file.}
-  \item{return}{Logical; shall the edge list be returned by this function (for future use in R)? Defaults to FALSE. Setting \option{return} to TRUE will prevent writing of files to the hard drive!}
+  \item{return}{Logical; shall the edge list be returned by this function (for future use in R)? Defaults to TRUE. Setting \option{return} to FALSE will cause writing of files to the hard drive!}
   \item{verbose}{Logical; shall some feedback tell you that the files have been generated? Defaults to FALSE.}
 }
 
@@ -41,7 +41,7 @@ Similar to \code{\link{as.one.mode}} this function is there to increase intercha
   If return=FALSE, this matrix (and possibly names and groups) are written to a text-file in the working directory.
 }
 
-\author{ Carsten F. Dormann \email{carsten.dormann@ufz.de} }
+\author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de} }
 
 \note{ 
 The function is used as export helper (default) or as link to \pkg{tnet} (with return=TRUE).
@@ -49,7 +49,8 @@ The function is used as export helper (default) or as link to \pkg{tnet} (with r
 
 \examples{
 data(Safariland)
-web2edges(Safariland, return=TRUE)
+web2edges(Safariland)
+web2edges(as.one.mode(Safariland, project="lower"), is.one.mode=TRUE)
 }
 
 \keyword{package}

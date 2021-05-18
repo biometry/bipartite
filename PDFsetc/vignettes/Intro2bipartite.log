@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.22)  18 MAY 2021 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.22)  18 MAY 2021 15:24
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -751,14 +751,14 @@ s[][]([][]tnet_igraph[][](SafPlantsEL),[] []cutoff[][]=[][]9[][]),[][]
  []
 
 [13 <./figures/betweenPlot.pdf>]
-Overfull \hbox (3.48871pt too wide) in paragraph at lines 587--588
+Overfull \hbox (3.48871pt too wide) in paragraph at lines 599--600
 []\OT1/pplx/m/n/10.95 To sum-ma-rize: \OT1/cmtt/m/n/10.95 bipartite::BC \OT1/pp
 lx/m/n/10.95 and \OT1/cmtt/m/n/10.95 influenceR::betweenness/2 \OT1/pplx/m/n/10
 .95 yield val-ues as one would
  []
 
 
-Overfull \hbox (30.91187pt too wide) in paragraph at lines 587--588
+Overfull \hbox (30.91187pt too wide) in paragraph at lines 599--600
 \OT1/pplx/m/n/10.95 ex-pect for \OT1/pplx/m/it/10.95 unique \OT1/pplx/m/n/10.95
  short-est paths; \OT1/cmtt/m/n/10.95 DiagrammeR::get[]betweenness \OT1/pplx/m/
 n/10.95 and \OT1/cmtt/m/n/10.95 igraph::estimate[]betweeness
@@ -766,84 +766,84 @@ n/10.95 and \OT1/cmtt/m/n/10.95 igraph::estimate[]betweeness
 
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 626.
-
-
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 638.
 
 
 Package xcolor Warning: Incompatible color definition on input line 651.
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 669--669
+Package xcolor Warning: Incompatible color definition on input line 663.
+
+
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ##                            PC8     PC9    PC10    PC11
     PC12    PC13    PC14[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 669--669
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Standard deviation     0.81058 0.64158 0.62560 0.56960
  0.49217 0.43179 0.36230[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 669--669
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Proportion of Variance 0.01428 0.00895 0.00851 0.00705
  0.00527 0.00405 0.00285[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 669--669
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Cumulative Proportion  0.95812 0.96707 0.97558 0.98263
  0.98789 0.99195 0.99480[] 
  []
 
 
-Overfull \hbox (16.14828pt too wide) in paragraph at lines 669--669
+Overfull \hbox (16.14828pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ##                           PC15    PC16   PC17    PC18 
    PC19    PC20      PC21[] 
  []
 
 
-Overfull \hbox (16.14828pt too wide) in paragraph at lines 669--669
+Overfull \hbox (16.14828pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Standard deviation     0.26591 0.25249 0.2254 0.18080 
 0.11401 0.09049 7.038e-16[] 
  []
 
 
-Overfull \hbox (16.14828pt too wide) in paragraph at lines 669--669
+Overfull \hbox (16.14828pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Proportion of Variance 0.00154 0.00139 0.0011 0.00071 
 0.00028 0.00018 0.000e+00[] 
  []
 
 
-Overfull \hbox (16.14828pt too wide) in paragraph at lines 669--669
+Overfull \hbox (16.14828pt too wide) in paragraph at lines 681--681
 []\OT1/cmtt/m/n/10.95 ## Cumulative Proportion  0.99634 0.99772 0.9988 0.99954 
 0.99982 1.00000 1.000e+00[] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 676.
+Package xcolor Warning: Incompatible color definition on input line 688.
 
 [15]
 <figures/PCAnetworklevel.pdf, id=599, 505.89pt x 505.89pt>
 File: figures/PCAnetworklevel.pdf Graphic file (type pdf)
 <use figures/PCAnetworklevel.pdf>
-Package pdftex.def Info: figures/PCAnetworklevel.pdf  used on input line 738.
+Package pdftex.def Info: figures/PCAnetworklevel.pdf  used on input line 750.
 (pdftex.def)             Requested size: 364.19667pt x 364.20192pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 747.
+Package xcolor Warning: Incompatible color definition on input line 759.
 
 [16]
 <figures/clusternetworklevel.pdf, id=606, 689.04974pt x 402.59561pt>
 File: figures/clusternetworklevel.pdf Graphic file (type pdf)
 <use figures/clusternetworklevel.pdf>
-Package pdftex.def Info: figures/clusternetworklevel.pdf  used on input line 76
-2.
+Package pdftex.def Info: figures/clusternetworklevel.pdf  used on input line 77
+4.
 (pdftex.def)             Requested size: 364.19667pt x 212.79106pt.
 
-Overfull \hbox (8.99203pt too wide) in paragraph at lines 767--768
+Overfull \hbox (8.99203pt too wide) in paragraph at lines 779--780
 \OT1/pplx/m/n/10.95 one clus-ter (to-wards the left, with ex-tinc-tion.slope.HL
  but also to-wards the cen-tre, with weighted
  []
@@ -851,72 +851,72 @@ Overfull \hbox (8.99203pt too wide) in paragraph at lines 767--768
 [17 <./figures/PCAnetworklevel.pdf>] [18 <./figures/clusternetworklevel.pdf>]
 [19]
 
-Package xcolor Warning: Incompatible color definition on input line 832.
+Package xcolor Warning: Incompatible color definition on input line 844.
 
 <figures/NODFnull.pdf, id=750, 361.35pt x 361.35pt>
 File: figures/NODFnull.pdf Graphic file (type pdf)
 <use figures/NODFnull.pdf>
-Package pdftex.def Info: figures/NODFnull.pdf  used on input line 851.
+Package pdftex.def Info: figures/NODFnull.pdf  used on input line 863.
 (pdftex.def)             Requested size: 227.62206pt x 227.62413pt.
 [20]
 
-Package xcolor Warning: Incompatible color definition on input line 874.
+Package xcolor Warning: Incompatible color definition on input line 886.
 
 [21 <./figures/NODFnull.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 880
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 892
 .
 
 (/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/omscmtt.fd
 File: omscmtt.fd 
 )
 LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 880.
-
-
-Package xcolor Warning: Incompatible color definition on input line 893.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 892.
 
 
 Package xcolor Warning: Incompatible color definition on input line 905.
 
+
+Package xcolor Warning: Incompatible color definition on input line 917.
+
 <figures/cattle_nullmodelled.pdf, id=789, 505.89pt x 505.89pt>
 File: figures/cattle_nullmodelled.pdf Graphic file (type pdf)
 <use figures/cattle_nullmodelled.pdf>
-Package pdftex.def Info: figures/cattle_nullmodelled.pdf  used on input line 91
-9.
+Package pdftex.def Info: figures/cattle_nullmodelled.pdf  used on input line 93
+1.
 (pdftex.def)             Requested size: 227.62206pt x 227.62523pt.
 
-Package xcolor Warning: Incompatible color definition on input line 925.
+Package xcolor Warning: Incompatible color definition on input line 937.
 
 [22]
 <figures/random_small_high_nonoise_small.pdf, id=814, 1210.5225pt x 730.73pt>
 File: figures/random_small_high_nonoise_small.pdf Graphic file (type pdf)
 <use figures/random_small_high_nonoise_small.pdf>
 Package pdftex.def Info: figures/random_small_high_nonoise_small.pdf  used on i
-nput line 951.
+nput line 963.
 (pdftex.def)             Requested size: 145.68144pt x 87.94026pt.
 <figures/CA_small_high_nonoise_small.pdf, id=815, 1211.52625pt x 729.72626pt>
 File: figures/CA_small_high_nonoise_small.pdf Graphic file (type pdf)
 <use figures/CA_small_high_nonoise_small.pdf>
 Package pdftex.def Info: figures/CA_small_high_nonoise_small.pdf  used on input
- line 953.
+ line 965.
 (pdftex.def)             Requested size: 145.68144pt x 87.74152pt.
 <figures/sorted_small_high_nonoise_small.pdf, id=816, 1136.245pt x 684.5575pt>
 File: figures/sorted_small_high_nonoise_small.pdf Graphic file (type pdf)
 <use figures/sorted_small_high_nonoise_small.pdf>
 Package pdftex.def Info: figures/sorted_small_high_nonoise_small.pdf  used on i
-nput line 955.
+nput line 967.
 (pdftex.def)             Requested size: 145.68144pt x 87.76302pt.
 <figures/memmott1999_nested_modules_small.png, id=820, 1319.93124pt x 848.16875
 pt>
 File: figures/memmott1999_nested_modules_small.png Graphic file (type png)
 <use figures/memmott1999_nested_modules_small.png>
 Package pdftex.def Info: figures/memmott1999_nested_modules_small.png  used on 
-input line 965.
+input line 977.
 (pdftex.def)             Requested size: 364.19667pt x 234.0301pt.
 <figures/poll_mod_QvsH2.pdf, id=822, 505.89pt x 505.89pt>
 File: figures/poll_mod_QvsH2.pdf Graphic file (type pdf)
 <use figures/poll_mod_QvsH2.pdf>
-Package pdftex.def Info: figures/poll_mod_QvsH2.pdf  used on input line 976.
+Package pdftex.def Info: figures/poll_mod_QvsH2.pdf  used on input line 988.
 (pdftex.def)             Requested size: 204.85846pt x 204.86116pt.
  [23 <./figures/cattle_nullmodelled.pdf> <./figures/random_small_high_nonoise_s
 mall.pdf> <./figures/CA_small_high_nonoise_small.pdf> <./figures/sorted_small_h
@@ -926,39 +926,39 @@ igh_nonoise_small.pdf>] [24 <./figures/memmott1999_nested_modules_small.png> <.
 File: figures/czvalues_memmott_pollinators.pdf Graphic file (type pdf)
 <use figures/czvalues_memmott_pollinators.pdf>
 Package pdftex.def Info: figures/czvalues_memmott_pollinators.pdf  used on inpu
-t line 1000.
+t line 1012.
 (pdftex.def)             Requested size: 218.51521pt x 218.51651pt.
 <figures/czvalues_memmott_plants.pdf, id=1060, 505.89pt x 505.89pt>
 File: figures/czvalues_memmott_plants.pdf Graphic file (type pdf)
 <use figures/czvalues_memmott_plants.pdf>
 Package pdftex.def Info: figures/czvalues_memmott_plants.pdf  used on input lin
-e 1002.
+e 1014.
 (pdftex.def)             Requested size: 218.51521pt x 218.51651pt.
  [25 <./figures/czvalues_memmott_pollinators.pdf> <./figures/czvalues_memmott_p
 lants.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1015--1015
+Underfull \hbox (badness 10000) in paragraph at lines 1027--1027
 [][][]\OT1/pplx/m/n/9 Partly based on this ques-tion on SO: []$\OT1/cmtt/m/n/9 
 https : / / stackoverflow . com / questions / 31366066 /
  []
 
 
-Overfull \hbox (32.21494pt too wide) in paragraph at lines 1020--1021
+Overfull \hbox (32.21494pt too wide) in paragraph at lines 1032--1033
 []$\OT1/cmtt/m/n/10.95 https : / / kateto . net / netscix2016 . html$[]\OT1/ppl
 x/m/n/10.95 ; []$\OT1/cmtt/m/n/10.95 https : / / rpubs . com / pjmurphy / 31783
 8$[]\OT1/pplx/m/n/10.95 ; []$\OT1/cmtt/m/n/10.95 https : / / igraph .
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1025.
+Package xcolor Warning: Incompatible color definition on input line 1037.
 
 
-Overfull \hbox (21.33473pt too wide) in paragraph at lines 1034--1035
+Overfull \hbox (21.33473pt too wide) in paragraph at lines 1046--1047
 \OT1/pplx/m/n/10.95 See []$\OT1/cmtt/m/n/10.95 https : / / stackoverflow . com 
 / questions / 31366066 / how-[]to-[]plot-[]a-[]bipartite-[]graph-[]in-[]r$[] 
  []
 
 [26]
-Overfull \hbox (23.01045pt too wide) in paragraph at lines 1070--1071
+Overfull \hbox (23.01045pt too wide) in paragraph at lines 1082--1083
 []\OT1/pplx/m/n/10.95 The Rnw source of this doc-u-ment is at []$\OT1/cmtt/m/n/
 10.95 https : / / github . com / biometry / bipartite / bipartite /
  []
@@ -972,11 +972,11 @@ Overfull \hbox (23.01045pt too wide) in paragraph at lines 1070--1071
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1085.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1085.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1097.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1097.
  (./Intro2bipartite.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1085.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1085.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1097.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1097.
 
 Package rerunfilecheck Info: File `Intro2bipartite.out' has not changed.
 (rerunfilecheck)             Checksum: 4E44AA68C020C3769E5906B3FD765F1F;7776.
@@ -986,7 +986,7 @@ Package rerunfilecheck Info: File `Intro2bipartite.brf' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1085.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1097.
  ) 
 Here is how much of TeX's memory you used:
  12367 strings out of 492609
@@ -1009,7 +1009,7 @@ f-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-dist/
 fonts/type1/urw/palatino/uplbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/
 type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/u
 rw/palatino/uplri8a.pfb>
-Output written on Intro2bipartite.pdf (31 pages, 1120154 bytes).
+Output written on Intro2bipartite.pdf (31 pages, 1120227 bytes).
 PDF statistics:
  1389 PDF objects out of 1440 (max. 8388607)
  1249 compressed objects within 13 object streams

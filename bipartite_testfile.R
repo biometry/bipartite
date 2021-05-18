@@ -23,6 +23,7 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 
 
 ## Comments on the workflow above:
+## ad 0.: The vignette is a pain in the neck! The vignettes folder in the level of the top bipartite folder (in PDFetc) is the one to use for writing and processing the vignette! There are some problems, for example that in the betweenness comparison I call packages not listed in "Depends" of bipartite. Since I don't want to make bipartite dependent on packages that do not work well, I now compile the vignette in this folder with "eval=T", then copy the output for this since R-chunk from the .tex-file into the .Rnw file and set "eval=F" (there is a note to that effect in the .Rnw). Then I put the .Rnw into the vignettes-folder and the inst/doc of the package. What a mess!
 ## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do.
 ## ad 2.: You can try 
 ## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", qpdf=Sys.which(Sys.getenv("R_QPDF", "qpdf")), gs_quality = "ebook") ## but for me this did not yield any compression;
@@ -518,7 +519,6 @@ as.character(webinput)
 # C.score(Safariland) # error: could not find "designdist"
 
 
-Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
 Version: 2.17
@@ -530,11 +530,11 @@ Authors@R: c(person(given = "Carsten F.",
                     comment = c(ORCID = "0000-0002-9835-1794")),
              person(given = "Jochen",
                     family = "Fruend",
-                    role = c("cre", "ctb"),
+                    role = c("aut"),
                     comment = c(ORCID = "0000-0002-7079-3478")),
              person(given = "Bernd",
                     family = "Gruber",
-                    role = c("ctb"),
+                    role = c("aut"),
                     comment = c(ORCID = "0000-0003-0078-8179")),
              person(given = "Stephen",
                     family = "Beckett",
@@ -568,8 +568,8 @@ Authors@R: c(person(given = "Carsten F.",
                     role = c("ctb"),
                     comment = c(ORCID = "0000-0002-3449-5748")) )
 Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
-Jochen Fruend [cre, ctb] (<https://orcid.org/0000-0002-7079-3478>),
-Bernd Gruber [ctb] (<https://orcid.org/0000-0003-0078-8179>),
+Jochen Fruend [aut] (<https://orcid.org/0000-0002-7079-3478>),
+Bernd Gruber [aut] (<https://orcid.org/0000-0003-0078-8179>),
 Stephen Beckett [ctb] (<https://orcid.org/0000-0002-4410-2960>),
 Mariano Devoto [ctb] (<https://orcid.org/0000-0003-3098-236X>),
 Gabriel M.F. Felix [ctb] (<https://orcid.org/0000-0002-3901-4333>),
@@ -590,3 +590,5 @@ VignetteBuilder: knitr, utils
 URL: https://github.com/biometry/bipartite
 Description: Functions to visualise webs and calculate a series of indices commonly used to describe pattern in (ecological) webs. It focuses on webs consisting of only two levels (bipartite), e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the web's topology. 
 License: GPL
+Packaged: 2021-02-04 08:24:39 UTC; Carsten
+RoxygenNote: 7.1.1

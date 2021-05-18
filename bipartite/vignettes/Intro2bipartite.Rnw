@@ -417,6 +417,7 @@ btws <- cbind("t:betw"=tnet::betweenness_w(SafPlantsEL)[,2],
 rownames(btws) <- rownames(Safariland)
 btws
 @
+% eval auf T setzen, und das verbatim unten auskommentieren, wenn es darum geht, die neue Vignette zu machen!
 \vspace{-24pt}
 \begin{verbatim}
 

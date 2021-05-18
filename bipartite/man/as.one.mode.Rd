@@ -27,6 +27,8 @@ Much network theory, however, is based on one-mode networks, where all participa
 
 The lower trophic level (e.g. plants or rows) is listed first, then the higher trophic level (e.g. pollinators or columns). Hence, pollinator 2 becomes species number r+2, where r is the number of rows of the network matrix.
 
+In addition to the "full" projection, there are "inner" projections, yielding a network \bold{only} of the lower or higher level (hence the argument \option{project="lower"/"higher"/"full"}). Such an inner projection inevitably loses information: if two pollinators pollinate three plant species, then they are connected in such a projection through 3 links. The weight of each link will be different, but in the projection only one weight can be given. This is where the information is lost. Several indices (betweenness, centrality) depend on one-mode projections of this kind. Still, the user should always ask herself, whether the projection might not have unintended consequences!
+
 If \option{weighted=TRUE}, then the returned one-mode network contains the parallel minimum of the observed interactions between two species. That means, if two species A and B interact with species 1 to 5 in the other group, then the two interaction vectors for A with 1 to 5 and B with 1 to 5 are placed next to each other, and for every species 1 to 5 the minimum for each of these 5 values for the two vectors is retained (the parallel minimum). The idea is that the similarity between A and B is driven by their lowest communality in interactions. Next, the five parallel minimum values are added to yield the final weight for this link.
   
 The benefit of this conversion is access to the wonderful R-package Social Network Analysis (\pkg{sna}), with its many one-mode indices (such as \code{betweenness}, \code{closeness}, \code{centralization}, \code{degree}, \code{kpath.census} and so forth). Furthermore, \code{gplot} in that package also provides cool network depictions well worth checking out.
@@ -40,12 +42,16 @@ With respect to \pkg{bipartite}, \code{as.one.mode} is employed in the function 
 
 \author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de} }
 
-\seealso{Function \code{projecting_tm} in package \pkg{tnet} provide smarter ways of converting two-modes into one-modes. This function can be accessed after transforming the web-matrix into an edge list using \code{\link{web2edges}}.}
+\seealso{Function \code{projecting_tm} in package \pkg{tnet} provide an analogous ways of converting two-modes into one-modes. This function can be accessed after transforming the web-matrix into an edge list using \code{\link{web2edges}}.}
 
 \examples{
 data(Safariland)
 image(Safariland)
 image(as.one.mode(Safariland))
+par(xpd=TRUE, mar=c(0, 6, 0, 6))
+gplot(as.one.mode(Safariland, project="lower"), 
+	label=rownames(Safariland), gmode="graph", 
+	label.cex=0.6, vertex.cex=2, vertex.col="green")
 }
 
 \keyword{package}

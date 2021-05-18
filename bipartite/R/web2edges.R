@@ -1,5 +1,5 @@
 web2edges <- function(web, webName=NULL, weight.column=TRUE, both.directions=FALSE, is.one.mode=FALSE, 
-	out.files=c("edges", "names", "groups")[1:2], return=FALSE, verbose=FALSE){
+	out.files=c("edges", "names", "groups")[1:2], return=TRUE, verbose=FALSE){
 	# function to turn a web-matrix into an edge list
 	#
 	# webName		name under which the files shall be saved
