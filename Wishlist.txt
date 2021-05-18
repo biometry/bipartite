@@ -1,5 +1,5 @@
 IMPORTANT
-* sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).
+<>
 
 EDITORIAL
 
@@ -155,3 +155,7 @@ Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
 * retire bmn5: it is available from vegan (re-implemented) and NODF has taken over  |  CFD 17.5.2021
 * add option to plot names in PAC!  |  CFD 17.5.2021
 * make modularity available from networklevel   |  CFD 17.5.2021
+* sort out the betweenness mess, which reports three qualitatively different values for three different approaches (see separate file on this).  |  CFD 17.5.2021; now a subsection in the vignette
+
+
+Sweavel.sty

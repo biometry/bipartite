@@ -1,17 +1,21 @@
 # This now is the command line version; in particular the R CMD CHECK is better here than in the devtools version (which throws an error related to roxygen)
 
 # workflow: 
+# 0. sync vignette-folder for save-keeping with same directory one level higher (the one-level higher is the one I use for everything and only copy-paste the .Rnw into vignette before building the package).
+#
 # 1. build package normally (trying to compact the vignette)
 R CMD build bipartite --compact-vignettes=gs+qpdf
 # 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com 
 ...
-# 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the built!
+# 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the just-built .tar.gz!
 ...
-# 4. copy-paste the "built" folder of the .tar.gz of step 1 into the development folder; it contains the data and vignette reference .rdb and .rds needed for a working package!
+# 4. copy-paste the "build" folder of the .tar.gz of step 1 into the development folder; it contains the data and vignette reference .rdb and .rds needed for a working package!
 ...
-# 5. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
+# 5. Delete, in vignettes, the cache-folder and auxiliary LaTeX-files and Sweave.sty; keep only the .Rnw and the .bib, and the figures-folder (and the styles: mee.bst and Sweavel.sty) 
+...
+# 6. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
 R CMD build bipartite --no-build-vignettes --resave-data
-# 6. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
+# 7. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
 R CMD check bipartite_2.17.tar.gz --as-cran
 R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to vignette in RStudio 
 # if you get this error: Error in fetch(key) : lazy-load database '/Users/Carsten/Library/R/4.0/library/bipartite/help/bipartite.rdb' is corrupt
@@ -27,7 +31,7 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 ## Misc:
 ## * find non-UTF8 characters: find . | egrep [^a-zA-Z0-9_\.\/\-\s]
 ## * check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
-
+## * if something goes wrong with the vignette build, fix and start over with the package building (it is difficult to move the right files into the right folders; R even checks the date of .Rnw files!)
 
 
 ## bipartite test file ##

@@ -4,18 +4,18 @@
 ### code chunk number 1: setup
 ###################################################
 library(knitr)
-opts_chunk$set(fig.path='figure/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE, fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, tidy=T, tidy.opts=list(width.cutoff=70))
-render_listings()
+opts_chunk$set(fig.path='figures/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE, fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, tidy=F, tidy.opts=list(width.cutoff=70))
+#render_listings()
 
 
 ###################################################
-### code chunk number 2: Intro2bipartite.Rnw:153-154
+### code chunk number 2: Intro2bipartite.Rnw:154-155
 ###################################################
 library(bipartite)
 
 
 ###################################################
-### code chunk number 3: Intro2bipartite.Rnw:162-165 (eval = FALSE)
+### code chunk number 3: Intro2bipartite.Rnw:163-166 (eval = FALSE)
 ###################################################
 ## par(xpd=T)
 ## plotweb(motten1982)
@@ -23,20 +23,20 @@ library(bipartite)
 
 
 ###################################################
-### code chunk number 4: Intro2bipartite.Rnw:189-190 (eval = FALSE)
+### code chunk number 4: Intro2bipartite.Rnw:190-191 (eval = FALSE)
 ###################################################
 ## plotPAC(PAC(motten1982), outby=0.9)
 
 
 ###################################################
-### code chunk number 5: Intro2bipartite.Rnw:205-207 (eval = FALSE)
+### code chunk number 5: Intro2bipartite.Rnw:206-208 (eval = FALSE)
 ###################################################
 ## mod <- computeModules(motten1982)
 ## plotModuleWeb(mod)
 
 
 ###################################################
-### code chunk number 6: Intro2bipartite.Rnw:220-227 (eval = FALSE)
+### code chunk number 6: Intro2bipartite.Rnw:221-228 (eval = FALSE)
 ###################################################
 ## par(mfrow=c(1,2), xpd=T)
 ## gplot(as.one.mode(motten1982, project="higher"), 
@@ -48,34 +48,77 @@ library(bipartite)
 
 
 ###################################################
-### code chunk number 7: Intro2bipartite.Rnw:290-292
+### code chunk number 7: Intro2bipartite.Rnw:291-293
 ###################################################
 networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), 
              SAmethod="log")
 
 
 ###################################################
-### code chunk number 8: Intro2bipartite.Rnw:322-324
+### code chunk number 8: Intro2bipartite.Rnw:323-325
 ###################################################
 grouplevel(bezerra2009, level="both", index=c("mean number of links", "weighted 
      cluster coefficient", "effective partners", "niche overlap"), dist="bray")
 
 
 ###################################################
-### code chunk number 9: Intro2bipartite.Rnw:337-338
+### code chunk number 9: Intro2bipartite.Rnw:338-339
 ###################################################
 str(linklevel(bezerra2009, index=c("dependence", "endpoint")))
 
 
 ###################################################
-### code chunk number 10: Intro2bipartite.Rnw:369-371
+### code chunk number 10: Intro2bipartite.Rnw:370-372
 ###################################################
 specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI", 
       "effective partners"), PDI.normalise=F)
 
 
 ###################################################
-### code chunk number 11: networkPCA (eval = FALSE)
+### code chunk number 11: betweenPlot
+###################################################
+data(Safariland)
+
+# plot the one-mode projection for the lower level:
+set.seed(4) # don't ask me why gplot is stochastic ...
+par(xpd=T, mar=c(0,6,0,6))
+gplot(as.one.mode(Safariland, project="lower"), label=rownames(Safariland))
+
+
+###################################################
+### code chunk number 12: Intro2bipartite.Rnw:395-397
+###################################################
+# convert matrix into one-mode edgelist:
+SafPlantsEL <- as.tnet(as.one.mode(Safariland, project="lower"))
+
+
+###################################################
+### code chunk number 13: Intro2bipartite.Rnw:399-407 (eval = FALSE)
+###################################################
+## # compute betweenness:
+## tnet::betweenness_w(SafPlantsEL) # 6
+## bipartite::BC(Safariland, rescale=F)$lower # 6
+## DiagrammeR::get_betweenness(DiagrammeR::from_igraph(tnet_igraph(SafPlantsEL))) # 6
+## igraph::estimate_betweenness(tnet_igraph(SafPlantsEL), cutoff=9) # 6
+## influenceR::betweenness(tnet_igraph(SafPlantsEL)) # 12
+## sna::betweenness(SafPlantsEL) # length 36!!
+## sna::betweenness(as.matrix(SafPlantsEL)) # length 27!!
+
+
+###################################################
+### code chunk number 14: Intro2bipartite.Rnw:411-418 (eval = FALSE)
+###################################################
+## btws <- cbind("t:betw"=tnet::betweenness_w(SafPlantsEL)[,2],
+##     "b:BC"=bipartite::BC(Safariland, rescale=F)$lower,
+##     "DR:betw"=DiagrammeR::get_betweenness(DiagrammeR::from_igraph(tnet_igraph(SafPlantsEL)))[,2],
+##     "i:estbetw"=igraph::estimate_betweenness(tnet_igraph(SafPlantsEL), cutoff=9),
+##     "inf:betw"=influenceR::betweenness(tnet_igraph(SafPlantsEL))/2 )
+## rownames(btws) <- rownames(Safariland)
+## btws
+
+
+###################################################
+### code chunk number 15: networkPCA (eval = FALSE)
 ###################################################
 ## web.names <- data(package="bipartite")$results[,3]
 ## data(list=web.names) #loads all webs
@@ -85,39 +128,39 @@ specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI",
 
 
 ###################################################
-### code chunk number 12: load external data
+### code chunk number 16: load external data
 ###################################################
 #load("/Volumes/Macintosh HD/Users/Carsten/Data/aktuell/bipartite/bipartite/vignettes/figures/netw.indic.webs.Rdata")
 load("./figures/netw.indic.webs.Rdata") # loads the files stored above; avoids re-running this time-consuming analysis!
 
 
 ###################################################
-### code chunk number 13: Intro2bipartite.Rnw:422-424 (eval = FALSE)
+### code chunk number 17: Intro2bipartite.Rnw:494-496 (eval = FALSE)
 ###################################################
 ## PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
 ## biplot(PCA.out, xpd=T, las=1)
 
 
 ###################################################
-### code chunk number 14: Intro2bipartite.Rnw:430-431
+### code chunk number 18: Intro2bipartite.Rnw:502-503
 ###################################################
 summary(PCA.out)
 
 
 ###################################################
-### code chunk number 15: Intro2bipartite.Rnw:435-436
+### code chunk number 19: Intro2bipartite.Rnw:507-508
 ###################################################
 PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
 
 
 ###################################################
-### code chunk number 16: Intro2bipartite.Rnw:438-439
+### code chunk number 20: Intro2bipartite.Rnw:510-511
 ###################################################
 round(PCA.out$rotation[, 1:4], 3)
 
 
 ###################################################
-### code chunk number 17: varclus (eval = FALSE)
+### code chunk number 21: varclus (eval = FALSE)
 ###################################################
 ## library(Hmisc)
 ## plot(varclus(netw.indic.webs), cex=0.8)
@@ -125,7 +168,7 @@ round(PCA.out$rotation[, 1:4], 3)
 
 
 ###################################################
-### code chunk number 18: Intro2bipartite.Rnw:537-543 (eval = FALSE)
+### code chunk number 22: Intro2bipartite.Rnw:609-615 (eval = FALSE)
 ###################################################
 ## data(Safariland)
 ## Iobs <- nestednodf(Safariland)$statistic[3]
@@ -136,7 +179,7 @@ round(PCA.out$rotation[, 1:4], 3)
 
 
 ###################################################
-### code chunk number 19: Intro2bipartite.Rnw:575-584
+### code chunk number 23: Intro2bipartite.Rnw:647-656
 ###################################################
 weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc", 
                        "vazmasnc", "vazquec", "vazquenc"), get)
@@ -150,14 +193,14 @@ meandiff <- function(webs){
 
 
 ###################################################
-### code chunk number 20: Intro2bipartite.Rnw:587-589
+### code chunk number 24: Intro2bipartite.Rnw:659-661
 ###################################################
 nulllist <- lapply(weblist, nullmodel, N=1, method="r2d")
 meandiff(weblist)
 
 
 ###################################################
-### code chunk number 21: Intro2bipartite.Rnw:592-597
+### code chunk number 25: Intro2bipartite.Rnw:664-669
 ###################################################
 res <- 1:5000
 for (i in 1:5000){ # takes a few minutes !!
@@ -167,7 +210,7 @@ for (i in 1:5000){ # takes a few minutes !!
 
 
 ###################################################
-### code chunk number 22: Intro2bipartite.Rnw:608-612 (eval = FALSE)
+### code chunk number 26: Intro2bipartite.Rnw:680-684 (eval = FALSE)
 ###################################################
 ## hist(res, xlim=c(-0.3, 0.3), border="white", col="grey")
 ## abline(v=observed, col="red", lwd=2)
@@ -176,7 +219,7 @@ for (i in 1:5000){ # takes a few minutes !!
 
 
 ###################################################
-### code chunk number 23: Intro2bipartite.Rnw:704-706 (eval = FALSE)
+### code chunk number 27: Intro2bipartite.Rnw:776-778 (eval = FALSE)
 ###################################################
 ## library(devtools)
 ## install_github(rep="pedroj/bipartite_plots")
