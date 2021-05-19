@@ -79,8 +79,6 @@ Mello, M. A. R., G. M. Felix, R. B. P. Pinheiro, R. L. Muylaert, C. Geiselman, S
 
 Pinheiro, R. B. P., G. M. F. Félix, A. V Chaves, G. A. Lacorte, F. R. Santos, É. M. Braga, and M. A. R. Mello. 2016. Trade-offs and resource breadth processes as drivers of performance and specificity in a host–parasite system: a new integrative hypothesis. \emph{Int. J. Parasitol.} \bold{46}: 115-–121. \url{https://www.sciencedirect.com/science/article/pii/S0020751915002933}
 
-Pinheiro, R. B. P. 2019. \emph{As topologias de redes de interações ecológicas e suas origens}. PhD Thesis, Federal Univesity of Minas Gerais, Brazil. @comment \url{http://hdl.handle.net/1843/33333}
-
 Pinheiro, R. B. P., G. M. F. Felix, C. F. Dormann, and M. A. R. Mello. 2019. A new model explaining the origin of different topologies in interaction networks. \emph{Ecology} \bold{100}: e02796. \doi{10.1002/ecy.2796}
 
 }

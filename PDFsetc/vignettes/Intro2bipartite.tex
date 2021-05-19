@@ -558,7 +558,12 @@ Let's put them all next to each other, into a named matrix:
 \hlkwd{rownames}\hlstd{(btws)} \hlkwb{<-} \hlkwd{rownames}\hlstd{(Safariland)}
 \hlstd{btws}
 \end{alltt}
+\end{kframe}
+\end{knitrout}
+% eval auf T setzen, und das verbatim unten auskommentieren, wenn es darum geht, die neue Vignette zu machen!
+\vspace{-24pt}
 \begin{verbatim}
+
 ##                          t:betw b:BC DR:betw i:estbetw inf:betw
 ## Aristotelia chilensis         6    6       6         6        6
 ## Alstroemeria aurea           11   10      14        14       10
@@ -570,22 +575,6 @@ Let's put them all next to each other, into a named matrix:
 ## Mutisia decurrens             0    0       0         0        0
 ## Calceolaria crenatiflora      0    0       9         9        0
 \end{verbatim}
-\end{kframe}
-\end{knitrout}
-% \vspace{-24pt}
-% \begin{verbatim}
-% 
-% ##                          t:betw b:BC DR:betw i:estbetw inf:betw
-% ## Aristotelia chilensis         6    6       6         6        6
-% ## Alstroemeria aurea           11   10      14        14       10
-% ## Schinus patagonicus           0    0       0         0        0
-% ## Berberis darwinii             0    0       0         0        0
-% ## Rosa eglanteria              13    4       6         6        4
-% ## Cynanchum diemii              0    0       0         0        0
-% ## Ribes magellanicum            0    0       0         0        0
-% ## Mutisia decurrens             0    0       0         0        0
-% ## Calceolaria crenatiflora      0    0       9         9        0
-% \end{verbatim}
 
 
 So they all agree on the betweenness-value for \emph{Aristotelia}, but not for \emph{Alstroemeria} and \emph{Rosa}, and not at all for \emph{Calceolaria}. 
@@ -891,7 +880,7 @@ As an example, we can use a question addressed in \citet{Vazquez2003}, where the
 \hlcom{# between grazed and ungrazed:}
 \hlstd{meandiff} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{webs}\hlstd{)\{}
    \hlstd{obs} \hlkwb{<-} \hlkwd{sapply}\hlstd{(webs, networklevel,} \hlkwc{index}\hlstd{=}\hlstr{"linkage density"}\hlstd{)}
-   \hlkwd{mean}\hlstd{(obs[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{]} \hlopt{-} \hlstd{obs[}\hlnum{5}\hlopt{:}\hlnum{8}\hlstd{])}
+   \hlkwd{mean}\hlstd{(obs[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{])} \hlopt{-} \hlkwd{mean}\hlstd{(obs[}\hlnum{5}\hlopt{:}\hlnum{8}\hlstd{])}
 \hlstd{\}}
 \hlstd{(observed} \hlkwb{<-} \hlkwd{meandiff}\hlstd{(weblist))}
 \end{alltt}

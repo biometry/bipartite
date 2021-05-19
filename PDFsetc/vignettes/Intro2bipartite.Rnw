@@ -652,7 +652,7 @@ weblist <- lapply(c("Safariland", "vazarr", "vazllao", "vazcer", "vazmasc",
 # between grazed and ungrazed:
 meandiff <- function(webs){
    obs <- sapply(webs, networklevel, index="linkage density")  
-   mean(obs[1:4] - obs[5:8])
+   mean(obs[1:4]) - mean(obs[5:8])
 }
 (observed <- meandiff(weblist))
 @
