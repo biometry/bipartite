@@ -4,73 +4,92 @@
 # for development only
 # web <- testweb
 
-sortweb2 <- function(web, method="cca", empty=TRUE, sequence=NULL){
-  if (empty) {web <- empty(web)} else {method <- "normal"}  # cannot use cca with 0-rows/cols (issue1)
+sortweb2 <- function(web, sort.order="cca", empty=TRUE, sequence=NULL){
+  if (empty) {web <- empty(web)}
   web <- as.matrix(web) # to convert data.frames into matrix: needed for cumsum
   
   # give rownames & colnames if missing
   colnames(web) <- colnames(web, do.NULL = FALSE)
   rownames(web) <- rownames(web, do.NULL = FALSE)
   
-  # the following should be combined in one place with 0-rows/cols and "same value in each cell" conditions, which all share that cca isn't possible (but should only trigger if cca was asked for!) (issue1, issue2, issue3)
-  if (NROW(web) == 1 | NCOL(web) ==1) {
-  	# sequence <- NULL # I guess this is wrong and not needed?
-  	method <- "normal" # cannot use cca with 1 species in a guild
-  }
+  # choose sort.order (method in plotwebr)
+  methods <- c("normal", "cca", "sequence", "decreasing", "increasing")
+  method.matched <- methods[pmatch(sort.order, methods)]
+  if (is.na(method.matched)) stop("Choose one of the available sorting-methods (sort.order in sortweb)!\n")
 
-  meths <- c("normal", "cca")
-  meths.match <- pmatch(method, meths)
-  if (is.na(meths.match)) stop("Choose sorting-method: normal/cca.\n")
-  if (length(unique(as.vector(web))) == 1) { # (issue3)
-    meths.match <- 1
-    warning("CCA-sorting does not work with same value in each cell. Uses method='normal' instead.")
+  if (method.matched=="cca"){
+    # all cases where cca wouldn't work now combined in one place
+    if (NROW(web) == 1 | NCOL(web) ==1 | length(unique(as.vector(web))) == 1) {
+      sort.order <- "normal"
+    }
+    if (any(rowSums(web)==0, colSums(web)==0)) {
+      sort.order <- "normal"
+      warning("cannot use cca with 0-rows/cols, using sort.order='normal' instead")
+    }
   }
   
-  # simplest sorting: as is (i.e. meths.match==1 and sequence=NULL)
+  # simplest sorting as start; for sort.order="normal", no other sorting will be applied
   row.seq <- 1:nrow(web)
   col.seq <- 1:ncol(web)
-  
+
   # option "cca" = the web is re-arranged by ordination (& separating compartments)
-  if (meths.match==2){
+  if (method.matched=="cca"){
     # Problem: cca sometimes doesn't get the compartments right!
     # Solution: Function "compart" returns a matrix with links assigned to compartments
-    # So, we need to extract the compartments there and put them in sequence,
-    # order by cca only within compartments
+    # So, we need to extract the compartments there and put them in sequence, sort by cca within
     co <- compart(web)
-    if (co$n.compart>1){ # do the arrangement for each compartment separately
-      row.seq <- NULL
-      col.seq <- NULL
-      for (m in 1:co$n.compart){
-        comp.member <- which(abs(co$cweb)==m, arr.ind=TRUE)
-        rs <- unique(comp.member[,1])
-        cs <- unique(comp.member[,2])
-        if (length(rs) < 3 | length(cs) < 3){
-          row.seq <- c(row.seq, rs)
-          col.seq <- c(col.seq, cs)
-        } else { # works fine for webs with only one compartment
-          ca <- cca(web[rs, cs])
-          row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
-          col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
-        }
+    # do the arrangement for each compartment separately
+    row.seq <- NULL
+    col.seq <- NULL
+    for (m in 1:co$n.compart){
+      comp.member <- which(abs(co$cweb)==m, arr.ind=TRUE)
+      rs <- unique(comp.member[,1])
+      cs <- unique(comp.member[,2])
+      if (length(rs) < 3 | length(cs) < 3){
+        row.seq <- c(row.seq, rs)
+        col.seq <- c(col.seq, cs)
+      } else { # works fine for webs with only one compartment
+        ca <- cca(web[rs, cs])
+        row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
+        col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
       }
-    } else {  # webs with 1 compartment; this may not be needed, as the code above likely works also for these
-      ca <- cca(web)
-      row.seq <- order(summary(ca)$sites[,1], decreasing=TRUE)
-      col.seq <- order(summary(ca)$species[,1], decreasing=TRUE)
     }
-  } # end for meths.match==2 condition; start of the "normal" plotting
+  } # end of cca method
 
-  if (!is.null(sequence)) {
-    if (meths.match==2) {warning("cca sorting is not used with given sequence")}
+  if (method.matched=="increasing"){
+    web <- web[order(rowSums(web),decreasing=FALSE), order(colSums(web),decreasing=FALSE)]
+  }
+
+  if (method.matched=="decreasing"){
+    web <- web[order(rowSums(web),decreasing=TRUE), order(colSums(web),decreasing=TRUE)]
+  } 
+
+  if (!is.null(sequence) & method.matched!="sequence") {
+    warning("giving a sorting sequence overrides other sorting options")  # I guess this can be deactivated later
+    method.matched <- "sequence"
+  }
+  
+  if (method.matched=="sequence"){
+    if (is.null(sequence) | !is.list(sequence)) stop("Please give sequences as properly formatted list (see ?sortweb).")
+    if (length(sequence)==2){
+      if (is.null(names(sequence))){
+        # for compatibility with old sortweb and for convenience, accept other or missing names
+        names(sequence) <- c("seq.low","seq.high")  
+      }
+      if (all(names(sequence)==c("seq.lower","seq.higher"))){
+        # for compatibility with old sortweb and for convenience, accept other or missing names
+        names(sequence) <- c("seq.low","seq.high")  
+      }
+    }
     row.seq <- sequence$seq.low[sequence$seq.low %in% rownames(web)]
     col.seq <- sequence$seq.high[sequence$seq.high %in% colnames(web)]
   }
   
-  web <- web[row.seq, col.seq, drop=FALSE]  # now once for all methods
+  web <- web[row.seq, col.seq, drop=FALSE]  # now called once for all methods (sort.orders)
   return(web)
 }
 
 # Examples:
 # sortweb2(testweb)
-# sortweb2(testweb, sequence=sequence)
+# sortweb2(testweb, sequence=list(rownames(testweb)[3:2], colnames(testweb)[1:5]))
 # sortweb2(testweb, empty=FALSE)

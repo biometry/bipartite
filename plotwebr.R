@@ -6,7 +6,8 @@
 # web <- testweb
 
 plotwebr <- function(web, 
-  space.perc = c(15,15), # space % between boxes (lower, higher)
+  space.perc = c(10,10), # space % between boxes (lower, higher)
+  scale.spacing = 0.01, # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
   # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
   col.boxes = c("darkgreen","grey10"),
   col.int = "grey80",
@@ -47,7 +48,7 @@ plotwebr <- function(web,
   if (is.null(names(add_abun.high))) names(add_abun.high) <- colnames(web)
   
   # rearrangement of web: now outsourced!
-  web <- sortweb2(web, sequence=sequence, empty=empty, method=method)
+  web <- sortweb2(web, sequence=sequence, empty=empty, sort.order=method)
   
   # also re-sort abundances!
   add_abun.low <- add_abun.low[rownames(web)]
@@ -74,8 +75,11 @@ plotwebr <- function(web,
   prop.add.high <- add_abun.high / (websum + sum(add_abun.high))
   
   # calculate box-spacing automatically!
-  space.low <- space.perc[1] / (100*(nr-1)) 
-  space.high <- space.perc[2] / (100*(nc-1)) 
+  space.low <- space.perc[1] / (100*(nr-1)) * (1 + max(nr,nc)*scale.spacing)
+  space.high <- space.perc[2] / (100*(nc-1)) * (1 + max(nr,nc)*scale.spacing)
+  #! to make better plots of large webs, total space should not be fixed %, but increase with No. species
+    # although the old plotweb approach is still strange to me, I should probably understand it
+    # scale space.perc with No species (?)
   
   
   #-- lower boxes --
@@ -98,7 +102,7 @@ plotwebr <- function(web,
   coord.high.xl <- coord.high.xl / (max(coord.high.xr) + prop.add.high[nc])
   coord.high.xr <- coord.high.xr / (max(coord.high.xr) + prop.add.high[nc])
   # draw them
-  rect(coord.high.xl, 1 - box.height[2] + yshift, coord.high.xr, 1 + yshift, col=col.high)
+  rect(coord.high.xl, 1 - box.height[2] + yshift, coord.high.xr, 1 + yshift, col=col.high, border=NA) #!! just experimentally, omitting the borders to explore spacing
   # add optional drawing of additional abuns
   
   # higher labels

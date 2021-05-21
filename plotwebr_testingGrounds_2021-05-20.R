@@ -4,13 +4,13 @@
 # three new functions (helper, main, meta)
 
 #*** To Do sortweb2 ***
-#! check through code, comment, and extract to do from comments
-#! merge with sortweb !  (also allow sort.order inc, dec)
-#! give warnings when method is changed to "normal" or cca overridden by sequence
-  # simplify the code (issue1, issue2, issue3 together)
-#! likely simplify cca-method, always using the compartment-loop even with 1 compartment
-#! advanced sorting functionality
+#! change name to sortweb (also checking dependencies)
+  # check if problems occur because new default sorting of sortweb is not longer "dec"!
+  # then use sortweb in plotwebr and plot2webs
 #! make helpfile
+  #- note that the sequence now must have names seq.low and seq.high, for consistency with plotweb! (was seq.lower and seq.higher)
+  #- partial matching now allowed, e.g. "dec" or "decreasing"
+#! check through code, comment, and extract to do from comments
 source("sortweb2.R")
 
 #*** To Do plotwebr ***
@@ -21,6 +21,7 @@ source("sortweb2.R")
 #! cleanup arguments / sort them better, etc
 #! add all customization options from plotweb
 #! make helpfile
+  #- note that !is.null(sequence) now changes method (sort.order in sortweb) to "seq"
 #! check if it works with many different webs, including those with 1sp in a guild, 0cols, etc
 source("plotwebr.R")  
 
@@ -36,8 +37,10 @@ source("plot2webs.R")
 
 #*** To Do all functions ***
 #* rename argument "sequence"? conflicts with base function; maybe use specseq?
+#* maybe visweb could be taken next, calling sortweb and making arguments more consistent with plotweb?
 
-# before installing lates bipartite:
+
+# before installing latest bipartite, call the fixed webs2array function:
 source("bipartite/R/webs2array.R")
 
 
@@ -45,9 +48,12 @@ source("bipartite/R/webs2array.R")
 testweb1 <- Safariland[1:4,1:5]
 testweb2 <- Safariland[c(1:3,5), c(1:3, 7:9)]
 
+testweb1 <- memmott1999#[1:2,]
+
 testweb1 <- Safariland
 testweb2 <- vazarr
 
+# plotweb(testweb1)
 plotwebr(testweb1)
 plotwebr(testweb2, empty=TRUE)
 
