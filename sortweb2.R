@@ -65,8 +65,7 @@ sortweb2 <- function(web, sort.order="cca", empty=TRUE, sequence=NULL){
   } 
 
   if (!is.null(sequence) & method.matched!="sequence") {
-    warning("giving a sorting sequence overrides other sorting options")  # I guess this can be deactivated later
-    method.matched <- "sequence"
+    # warning("giving a sorting sequence overrides other sorting options")
   }
   
   if (method.matched=="sequence"){

@@ -1,6 +1,6 @@
 #-- plotwebr = a revised new implementation of plotweb, for easier making changes ----
 # by Jochen Fründ, May2021
-# a quick and dirty attempt for a new plotweb version "engine"; many things of previous plo
+# a quick and dirty attempt for a new plotweb version "engine"; many things taken from previous plotweb
 
 # for development only
 # web <- testweb
@@ -9,8 +9,9 @@ plotwebr <- function(web,
   space.perc = c(10,10), # space % between boxes (lower, higher)
   scale.spacing = 0.01, # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
   # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
-  col.boxes = c("darkgreen","grey10"),
-  col.int = "grey80",
+  col.boxes = c("darkgreen","grey10"), # name the elements?, maybe call it col.species?
+  col.int = "grey80",  # maybe change back to original name "col.interaction"? or partial matching
+  col.add_abun = c("green","green"),
   box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network 
   text.rot = c(30,30), # low, high;
   abbr.lab = c(NA, 6), # low, high; if not NA, using abbreviate with minlength = value; cf. lablength in old plotweb
@@ -19,20 +20,22 @@ plotwebr <- function(web,
   x.lim = c(0,1),
   y.lim = c(0,1),
   # y.lim = c(0, 1 + 1+0.3), # for two plots
-  mar = c(3,1,3,1),  # if NULL, preserve user setting
+  mar = c(4,3,4,3),  # if NULL, preserve user setting of par
   add_abun.low = NULL, 
-  add_abun.high = NULL, # add_abun.high = rep(1,27)
+  add_abun.high = NULL,
+  plot.add_abun = FALSE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr
+  rescale.boxwidth = TRUE,
   method = "cca",
   empty = TRUE
   )
 {
   # setting margins # make this settable for user! (old plotweb overwrites!)
-  if (is.null(mar)) {mymar <- par()$mar} else  {par(mar = mar)} 
+  if (is.null(mar)) {mar <- par()$mar} else {par(mar = mar)}  
   
   # initialize plot
   if (add==FALSE){
     yshift <- 0
-    # 
+    # make the yshift more flexible!! (for plot2webs)
     plot(0, type = "n", xlim = x.lim, ylim = y.lim, axes = FALSE, xlab = "", ylab = "", xaxs = "i", yaxs = "i") # original plotweb code, but option plot.axes removed
     # could use par(xaxs = "i", yaxs = "i") for making the plotting region follow xlim/ylim exactly
   } else {
@@ -53,6 +56,7 @@ plotwebr <- function(web,
   # also re-sort abundances!
   add_abun.low <- add_abun.low[rownames(web)]
   add_abun.high <- add_abun.high[colnames(web)]
+  
   # labels etc (truncation only after re-sorting abuns)
   labels.low <- rownames(web)
   if (!is.na(abbr.lab[1])) {labels.low <- abbreviate(labels.low, minlength=abbr.lab[1])} 
@@ -64,7 +68,10 @@ plotwebr <- function(web,
   srt.high <- ifelse(length(text.rot)==1, text.rot[1], text.rot[2])
   col.low <- col.boxes[1]
   col.high <- ifelse(length(col.boxes)==1, col.boxes[1], col.boxes[2]) # allow similar functionality elsewhere!
-
+  col.add_abun.low <- col.add_abun[1]
+  col.add_abun.high <- ifelse(length(col.add_abun)==1, col.add_abun[1], col.add_abun[2]) # allow similar functionality elsewhere!
+  #! if color is a vector, don't forget to also resort it! (unless strictly calling by name?)
+  
   # web-stuff
   websum <- sum(web)
   nr <- nrow(web) # recalculating species numbers here, as it might have changed with empty
@@ -73,23 +80,35 @@ plotwebr <- function(web,
   prop.high <- colSums(web) / (websum + sum(add_abun.high))
   prop.add.low <- add_abun.low / (websum + sum(add_abun.low))
   prop.add.high <- add_abun.high / (websum + sum(add_abun.high))
+  # with add_abun, size of one guild might have to be rescaled for parallel shape of link edge (as in plotweb), e.g. in host-parasitoid web, but maybe not e.g. with arrow
+  if (rescale.boxwidth){
+    rescale.low <- min(1, (websum + sum(add_abun.low)) / (websum + sum(add_abun.high)))
+    rescale.high <- min(1, (websum + sum(add_abun.high)) / (websum + sum(add_abun.low)))
+  }
   
   # calculate box-spacing automatically!
+    # for better plots of large webs, total space is not fixed %, but increases with No. species (of guild with more species)
   space.low <- space.perc[1] / (100*(nr-1)) * (1 + max(nr,nc)*scale.spacing)
   space.high <- space.perc[2] / (100*(nc-1)) * (1 + max(nr,nc)*scale.spacing)
-  #! to make better plots of large webs, total space should not be fixed %, but increase with No. species
-    # although the old plotweb approach is still strange to me, I should probably understand it
-    # scale space.perc with No species (?)
-  
+
   
   #-- lower boxes --
-  coord.low.xl <- c(0, cumsum(prop.low[-nr])) + c(0, cumsum(rep(space.low, nr-1))) + c(0,cumsum(prop.add.low[-nr]))
-  coord.low.xr <- cumsum(prop.low) + c(0, cumsum(rep(space.low, nr-1))) + c(0,cumsum(prop.add.low[-nr]))
-  coord.low.xl <- coord.low.xl / (max(coord.low.xr) + prop.add.low[nr]) # custom scaling (of total width of lower bars) could be implemented here
-  coord.low.xr <- coord.low.xr / (max(coord.low.xr) + prop.add.low[nr])
-  # draw them
+  coord.low.xl <- c(0, cumsum(prop.low[-nr])) + c(0, cumsum(rep(space.low, nr-1))) + c(0, cumsum(prop.add.low[-nr]))
+  coord.low.xr <- cumsum(prop.low) + c(0, cumsum(rep(space.low, nr-1))) + c(0, cumsum(prop.add.low[-nr]))
+  coord.addlow.xl <- coord.low.xr
+  coord.addlow.xr <- coord.low.xr + prop.add.low
+  center <- function(x){x + (1-rescale.low)/2} # a specific function for centering in case the x-spread of boxes is below 1
+  # rescale all coords to maximum of 1 (or possibly lower if add_abun given)
+  coord.low.xl <- center(coord.low.xl * rescale.low / coord.addlow.xr[nr])
+  coord.low.xr <- center(coord.low.xr * rescale.low / coord.addlow.xr[nr])
+  coord.addlow.xl <- center(coord.addlow.xl * rescale.low / coord.addlow.xr[nr])
+  coord.addlow.xr <- center(coord.addlow.xr * rescale.low / coord.addlow.xr[nr])
+  # draw the boxes
   rect(coord.low.xl, 0 + yshift,  coord.low.xr, box.height[1] + yshift, col=col.low)
-  # currently I am not plotting the additional abundance boxes, but leaving them empty (always on the right)
+  # optional plotting of additional abundance boxes (not just whitespace)
+  if (plot.add_abun){
+    rect(coord.addlow.xl, 0 + yshift,  coord.addlow.xr, box.height[1] + yshift, col=col.add_abun.low)
+  }
   
   # lower labels
   #! hoffset-Zeug einbauen (original function, strwidth)
@@ -97,13 +116,22 @@ plotwebr <- function(web,
   
   
   #-- higher boxes --
-  coord.high.xl <- c(0, cumsum(prop.high[-nc])) + c(0, cumsum(rep(space.high, nc-1))) + c(0,cumsum(prop.add.high[-nc]))
-  coord.high.xr <- cumsum(prop.high) + c(0, cumsum(rep(space.high, nc-1))) + c(0,cumsum(prop.add.high[-nc]))
-  coord.high.xl <- coord.high.xl / (max(coord.high.xr) + prop.add.high[nc])
-  coord.high.xr <- coord.high.xr / (max(coord.high.xr) + prop.add.high[nc])
-  # draw them
-  rect(coord.high.xl, 1 - box.height[2] + yshift, coord.high.xr, 1 + yshift, col=col.high, border=NA) #!! just experimentally, omitting the borders to explore spacing
-  # add optional drawing of additional abuns
+  coord.high.xl <- c(0, cumsum(prop.high[-nc])) + c(0, cumsum(rep(space.high, nc-1))) + c(0, cumsum(prop.add.high[-nc]))
+  coord.high.xr <- cumsum(prop.high) + c(0, cumsum(rep(space.high, nc-1))) + c(0, cumsum(prop.add.high[-nc]))
+  coord.addhigh.xl <- coord.high.xr
+  coord.addhigh.xr <- coord.high.xr + prop.add.high
+  center <- function(x){x + (1-rescale.high)/2} # a specific function for centering in case the x-spread of boxes is below 1
+  # rescale all coords to maximum of 1 (or possibly higher if add_abun given)
+  coord.high.xl <- center(coord.high.xl * rescale.high / coord.addhigh.xr[nc])
+  coord.high.xr <- center(coord.high.xr * rescale.high / coord.addhigh.xr[nc])
+  coord.addhigh.xl <- center(coord.addhigh.xl * rescale.high / coord.addhigh.xr[nc])
+  coord.addhigh.xr <- center(coord.addhigh.xr * rescale.high / coord.addhigh.xr[nc])
+  # draw the boxes
+  rect(coord.high.xl, 1 + yshift,  coord.high.xr, 1-box.height[1] + yshift, col=col.high)
+  # optional plotting of additional abundance boxes (not just whitespace)
+  if (plot.add_abun){
+    rect(coord.addhigh.xl, 1 + yshift,  coord.addhigh.xr, 1-box.height[1] + yshift, col=col.add_abun.high)
+  }
   
   # higher labels
   #! hoffset-Zeug einbauen (original function, strwidth)
