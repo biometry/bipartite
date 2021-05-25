@@ -91,8 +91,12 @@ plotweb(testweb, empty = FALSE)
 plotweb(testweb, empty = FALSE, high.abun=abun.high, low.abun=abun.low)
 plotweb(testweb, empty = FALSE, high.abun=abun.high, low.abun=abun.low, abuns.type="independent")
 
+# hidden additional abuns
 plotwebr(testweb, empty = FALSE, add_abun.high=abun.high, add_abun.low=abun.low)
+# additional abuns
 plotwebr(testweb, empty = FALSE, add_abun.high=abun.high, add_abun.low=abun.low, plot.add_abun = TRUE)
+# independent abuns
+plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE)
 
 
 #-- Example code from old plotweb help (edited for plotwebr dvlp) ---------

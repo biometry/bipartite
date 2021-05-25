@@ -21,10 +21,12 @@ plotwebr <- function(web,
   y.lim = c(0,1),
   # y.lim = c(0, 1 + 1+0.3), # for two plots
   mar = c(4,3,4,3),  # if NULL, preserve user setting of par
+  abun.low = NULL,
+  abun.high = NULL,
   add_abun.low = NULL, 
   add_abun.high = NULL,
   plot.add_abun = FALSE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr
-  rescale.boxwidth = TRUE,
+  rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise
   method = "cca",
   empty = TRUE
   )
@@ -43,19 +45,26 @@ plotwebr <- function(web,
   }
   
   #-- preparatory calculations --
+
+  # unnamed abundances currently unsupported! should allow it, but figure out how to re-sort unnamed abundances!!
+  # if (is.null(names(abun.low))) names(add_abun.low) <- rownames(web)
+  # if (is.null(names(abun.high))) names(add_abun.high) <- colnames(web)
+
+  # rearrangement of web: now outsourced!
+  web <- sortweb2(web, sequence=sequence, empty=empty, sort.order=method)
+ 
+  # preparing and re-sorting abundances according to sorted web
+    #! still to do for colors etc!
   nr <- nrow(web)
   nc <- ncol(web)
   if (is.null(add_abun.low)) add_abun.low <- rep(0,nr)
   if (is.null(names(add_abun.low))) names(add_abun.low) <- rownames(web)
   if (is.null(add_abun.high)) add_abun.high <- rep(0,nc)
   if (is.null(names(add_abun.high))) names(add_abun.high) <- colnames(web)
-  
-  # rearrangement of web: now outsourced!
-  web <- sortweb2(web, sequence=sequence, empty=empty, sort.order=method)
-  
-  # also re-sort abundances!
   add_abun.low <- add_abun.low[rownames(web)]
   add_abun.high <- add_abun.high[colnames(web)]
+  if (!is.null(abun.low)){abun.low <- abun.low[rownames(web)]}
+  if (!is.null(abun.high)){abun.high <- abun.high[colnames(web)]}
   
   # labels etc (truncation only after re-sorting abuns)
   labels.low <- rownames(web)
@@ -72,18 +81,23 @@ plotwebr <- function(web,
   col.add_abun.high <- ifelse(length(col.add_abun)==1, col.add_abun[1], col.add_abun[2]) # allow similar functionality elsewhere!
   #! if color is a vector, don't forget to also resort it! (unless strictly calling by name?)
   
-  # web-stuff
-  websum <- sum(web)
-  nr <- nrow(web) # recalculating species numbers here, as it might have changed with empty
-  nc <- ncol(web)
-  prop.low <- rowSums(web) / (websum + sum(add_abun.low))
-  prop.high <- colSums(web) / (websum + sum(add_abun.high))
-  prop.add.low <- add_abun.low / (websum + sum(add_abun.low))
-  prop.add.high <- add_abun.high / (websum + sum(add_abun.high))
+  # preparations for calculating coordinates
+  if (rescale.boxwidth=="choose"){
+        rescale.boxwidth <- is.null(abun.low) & is.null(abun.high)
+  }
+  if (is.null(abun.low)){abun.low <- rowSums(web)}
+  prop.low <- abun.low / (sum(abun.low) + sum(add_abun.low))
+  prop.add.low <- add_abun.low / (sum(abun.low) + sum(add_abun.low))
+  if (is.null(abun.high)){abun.high <- colSums(web)}
+  prop.high <- abun.high / (sum(abun.high) + sum(add_abun.high))
+  prop.add.high <- add_abun.high / (sum(abun.high) + sum(add_abun.high))
   # with add_abun, size of one guild might have to be rescaled for parallel shape of link edge (as in plotweb), e.g. in host-parasitoid web, but maybe not e.g. with arrow
   if (rescale.boxwidth){
-    rescale.low <- min(1, (websum + sum(add_abun.low)) / (websum + sum(add_abun.high)))
-    rescale.high <- min(1, (websum + sum(add_abun.high)) / (websum + sum(add_abun.low)))
+    rescale.low <- min(1, (sum(abun.low) + sum(add_abun.low)) / (sum(abun.high) + sum(add_abun.high)))
+    rescale.high <- min(1, (sum(abun.high) + sum(add_abun.high)) / (sum(abun.low) + sum(add_abun.low)))
+  } else {
+    rescale.low <- 1
+    rescale.high <- 1
   }
   
   # calculate box-spacing automatically!
@@ -111,7 +125,8 @@ plotwebr <- function(web,
   }
   
   # lower labels
-  #! hoffset-Zeug einbauen (original function, strwidth)
+    #! hoffset-Zeug einbauen (original function, strwidth)
+    #* maybe use coord.addlow.xr, but only if plot.add_abun
   text(labels=labels.low, x=(coord.low.xl + coord.low.xr)/2, y=-0.01 + yshift, cex=0.6, adj=1, srt=srt.low, xpd=TRUE)
   
   
@@ -134,8 +149,9 @@ plotwebr <- function(web,
   }
   
   # higher labels
-  #! hoffset-Zeug einbauen (original function, strwidth)
-  text(labels=labels.high, x=(coord.high.xl + coord.high.xr)/2, y=1.01 + yshift, cex=0.6, adj=0, srt=srt.high, xpd=TRUE)
+    #! hoffset-Zeug einbauen (original function, strwidth)
+    #* maybe use coord.addhigh.xr, but only if plot.add_abun
+  text(labels=labels.high, x=(coord.high.xl + coord.addhigh.xr)/2, y=1.01 + yshift, cex=0.6, adj=0, srt=srt.high, xpd=TRUE)
   
   
   #-- interactions --
