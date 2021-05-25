@@ -80,9 +80,11 @@ plotwebr(testweb, y.lim = c(0, 1 + 1+0.3))
 testweb <- t(vazarr)
 plotwebr(testweb, add=T)
 
-plotwebr(testweb, add_abun.low = c(500,1:8), add_abun.high=seq(100,2700, by=100))
+plotwebr(testweb, add_abun.low = c(500,1:8), add_abun.high=seq(10,270, by=10), plot.add_abun = T)
 
 plotweb(testweb)
+
+testweb <- Safariland[1:4,1:5]
 abun.high <- 5:1
 names(abun.high) <- colnames(testweb)
 abun.low <- rep(100,4)
@@ -97,6 +99,11 @@ plotwebr(testweb, empty = FALSE, add_abun.high=abun.high, add_abun.low=abun.low)
 plotwebr(testweb, empty = FALSE, add_abun.high=abun.high, add_abun.low=abun.low, plot.add_abun = TRUE)
 # independent abuns
 plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE)
+plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE, arrow="down")
+plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE, arrow="both")
+plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE, arrow="down.center")
+
+plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE, arrow="down.center", add_abun.high=rep(10,5))
 
 
 #-- Example code from old plotweb help (edited for plotwebr dvlp) ---------
@@ -107,7 +114,7 @@ plotweb(Safariland)
 plotweb(Safariland, high.lablength=3, low.lablength=0, arrow="down")
 
 # centered triangles for displaying interacions
-plotweb(Safariland, text.rot=90, arrow="down.center", col.interaction="wheat2",
+plotwebr(Safariland, text.rot=90, arrow="down.center", col.int="wheat2",
 	y.lim=c(-1,2.5))
 
 #orginal sequence, up arrows and different box width
@@ -130,10 +137,13 @@ plotwebr(Safariland, text.rot=90, add_abun.high=high.abun, col.int="purple",plot
 plotwebr(Safariland, text.rot=90, add_abun.high=high.abun, col.int="purple",plot.add_abun = FALSE)
 
 plotwebr(Safariland, text.rot=90, add_abun.low=low.abun, col.int="purple",plot.add_abun = TRUE)
+plotwebr(Safariland, text.rot=90, add_abun.low=low.abun, col.int="purple",plot.add_abun = TRUE, rescale.boxwidth = FALSE)
+plotwebr(Safariland, text.rot=90, add_abun.low=low.abun, col.int="purple",plot.add_abun = TRUE, rescale.boxwidth = FALSE, space.perc = c(10,30))
 
 
 plotweb(Safariland, text.rot=90, low.abun=low.abun, col.interaction ="red", 
 	bor.col.interaction="red", arrow="down")
+
 
 # now vectors for all colours can be given, to mark certain species or 
 # interactions. Colour vectors are recycled if not of appropriate length

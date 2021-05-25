@@ -5,30 +5,34 @@
 # for development only
 # web <- testweb
 
-plotwebr <- function(web, 
-  space.perc = c(10,10), # space % between boxes (lower, higher)
-  scale.spacing = 0.01, # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
-  # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
-  col.boxes = c("darkgreen","grey10"), # name the elements?, maybe call it col.species?
-  col.int = "grey80",  # maybe change back to original name "col.interaction"? or partial matching
-  col.add_abun = c("green","green"),
-  box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network 
-  text.rot = c(30,30), # low, high;
-  abbr.lab = c(NA, 6), # low, high; if not NA, using abbreviate with minlength = value; cf. lablength in old plotweb
+# Note: earlier arguments are more likely to be changed by user
+
+plotwebr <- function(web,
+  arrow = "no", # display type of connection between upper and lower boxes, options are down, up, both, down.center, up.center, both.center and no, default is no, which is a polygonal connection between boxes.
+  method = "cca", # the sorting method, passed to sortweb2
   sequence = NULL,
+  empty = TRUE,
   add = FALSE,
-  x.lim = c(0,1),
-  y.lim = c(0,1),
-  # y.lim = c(0, 1 + 1+0.3), # for two plots
-  mar = c(4,3,4,3),  # if NULL, preserve user setting of par
   abun.low = NULL,
   abun.high = NULL,
   add_abun.low = NULL, 
   add_abun.high = NULL,
+  col.boxes = c("darkgreen","grey10"), # name the elements?, maybe call it col.species?
+  col.int = "grey80",  # maybe change back to original name "col.interaction"? or partial matching
+  col.add_abun = c("green","green"),
+  # need support for border colors!
+  box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network 
+  text.rot = c(30,30), # low, high;
+  abbr.lab = c(NA, 6), # low, high; if not NA, using abbreviate with minlength = value; cf. lablength in old plotweb
+  x.lim = c(0,1),
+  y.lim = c(0,1),
+  # y.lim = c(0, 1 + 1+0.3), # for two plots
+  mar = c(4,3,4,3),  # if NULL, preserve user setting of par
   plot.add_abun = FALSE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr
   rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise
-  method = "cca",
-  empty = TRUE
+  space.perc = c(10,10), # space % between boxes (lower, higher)
+  scale.spacing = 0.01 # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
+  # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
   )
 {
   # setting margins # make this settable for user! (old plotweb overwrites!)
@@ -46,10 +50,19 @@ plotwebr <- function(web,
   
   #-- preparatory calculations --
 
-  # unnamed abundances currently unsupported! should allow it, but figure out how to re-sort unnamed abundances!!
-  # if (is.null(names(abun.low))) names(add_abun.low) <- rownames(web)
-  # if (is.null(names(abun.high))) names(add_abun.high) <- colnames(web)
-
+  # prepare abundance vectors:
+  # give rownames & colnames if missing
+  colnames(web) <- colnames(web, do.NULL = FALSE)
+  rownames(web) <- rownames(web, do.NULL = FALSE)
+  # create 0 add_abun if not provided
+  if (is.null(add_abun.low)) add_abun.low <- rep(0, nrow(web))
+  if (is.null(add_abun.high)) add_abun.high <- rep(0, ncol(web))
+  # naming abundance vectors (-> now supporting unnamed input of correct order!)
+  if (is.null(names(add_abun.low))) names(add_abun.low) <- rownames(web)
+  if (is.null(names(add_abun.high))) names(add_abun.high) <- colnames(web)
+  if (is.null(names(abun.low))) names(add_abun.low) <- rownames(web)
+  if (is.null(names(abun.high))) names(add_abun.high) <- colnames(web)
+  
   # rearrangement of web: now outsourced!
   web <- sortweb2(web, sequence=sequence, empty=empty, sort.order=method)
  
@@ -57,10 +70,6 @@ plotwebr <- function(web,
     #! still to do for colors etc!
   nr <- nrow(web)
   nc <- ncol(web)
-  if (is.null(add_abun.low)) add_abun.low <- rep(0,nr)
-  if (is.null(names(add_abun.low))) names(add_abun.low) <- rownames(web)
-  if (is.null(add_abun.high)) add_abun.high <- rep(0,nc)
-  if (is.null(names(add_abun.high))) names(add_abun.high) <- colnames(web)
   add_abun.low <- add_abun.low[rownames(web)]
   add_abun.high <- add_abun.high[colnames(web)]
   if (!is.null(abun.low)){abun.low <- abun.low[rownames(web)]}
@@ -156,33 +165,39 @@ plotwebr <- function(web,
   
   #-- interactions --
   web.df <- data.frame(row=rep(1:nr, nc), col=rep(1:nc, each=nr), weight=c(web))
-  # web.df <- web.df[order(-web.df$weight),] # messes up positions, moved to loop
   web.df <- web.df[web.df$weight>0,]
-  # XYcoords <- as.matrix(web.df[, 1:2])  # I guess not needed
   web.df[, c("xcoord.tl", "xcoord.tr", "xcoord.br", "xcoord.bl")] <- NA # x-coordinates of interactions: tl=topleft, etc
   
   # low coordinates for interactions (in order of the web.df)
-  # for i in lower species
-  for (i in unique(web.df$row)){
+  for (i in unique(web.df$row)){   # for i in lower species
     # i <- 3
     links.i <- web.df[web.df$row==i, ]
     relpos <- cumsum(links.i$weight) / sum(links.i$weight)
     coords.int.low <- (coord.low.xl[i] + relpos*(coord.low.xr[i] - coord.low.xl[i]))
     web.df[web.df$row==i, "xcoord.bl"] <- c(coord.low.xl[i], coords.int.low[-nrow(links.i)])
     web.df[web.df$row==i, "xcoord.br"] <- c(coords.int.low)
-    # abline(v=coords.int.high, col="red") # for checking only
+    if (arrow %in% c("down.center", "both.center")){
+      web.df[web.df$row==i, "xcoord.bl"] <- web.df[web.df$row==i, "xcoord.br"] <- mean(c(coord.low.xl[i], coord.low.xr[i]))
+    }    
+  }
+  if (arrow %in% c("down","both")){
+    web.df[, "xcoord.bl"] <- web.df[, "xcoord.br"] <- rowMeans(web.df[, c("xcoord.bl", "xcoord.br")])
   }
   
   # high coordinates for interactions (in order of the web.df)
-  # for j in higher species
-  for (j in unique(web.df$col)){
+  for (j in unique(web.df$col)){   # for j in higher species
     # j <- 3
     links.j <- web.df[web.df$col==j, ]
     relpos <- cumsum(links.j$weight) / sum(links.j$weight)
     coords.int.high <- (coord.high.xl[j] + relpos*(coord.high.xr[j] - coord.high.xl[j]))
     web.df[web.df$col==j, "xcoord.tl"] <- c(coord.high.xl[j], coords.int.high[-nrow(links.j)])
     web.df[web.df$col==j, "xcoord.tr"] <- c(coords.int.high)
-    # abline(v=coords.int.high, col="red") # for checking only
+    if (arrow %in% c("up.center", "both.center")){
+      web.df[web.df$col==j, "xcoord.tl"] <- web.df[web.df$col==j, "xcoord.tr"] <- mean(c(coord.high.xl[j], coord.high.xr[j]))
+    }  
+  }
+  if (arrow %in% c("up","both")){
+    web.df[, "xcoord.tl"] <- web.df[, "xcoord.tr"] <- rowMeans(web.df[, c("xcoord.tl", "xcoord.tr")])
   }
   
   # loop through interactions

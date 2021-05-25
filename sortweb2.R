@@ -20,10 +20,10 @@ sortweb2 <- function(web, sort.order="cca", empty=TRUE, sequence=NULL){
   if (method.matched=="cca"){
     # all cases where cca wouldn't work now combined in one place
     if (NROW(web) == 1 | NCOL(web) ==1 | length(unique(as.vector(web))) == 1) {
-      sort.order <- "normal"
+      method.matched <- "normal"
     }
     if (any(rowSums(web)==0, colSums(web)==0)) {
-      sort.order <- "normal"
+      method.matched <- "normal"
       warning("cannot use cca with 0-rows/cols, using sort.order='normal' instead")
     }
   }
