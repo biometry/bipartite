@@ -18,8 +18,6 @@ source("sortweb2.R")
 #*** To Do plotwebr ***
 #! check through code, comment, and extract to do from comments
 #! color customization per species (as in plotweb), and smarter for interactions (e.g. based on the species)
-#! independent abundances
-  #- abundance options ("independent" AND "additional", with "additional" possible to suppress [for alignment], and position left or right)
 #! cleanup arguments / sort them better, etc
 #! add all customization options from plotweb
 #! make helpfile
@@ -56,7 +54,7 @@ testweb1 <- Safariland
 testweb2 <- vazarr
 
 # plotweb(testweb1)
-plotwebr(testweb1)
+plotwebr(testweb1, col.boxes=c("darkgreen", "purple"))
 plotwebr(testweb2, empty=TRUE)
 
 # testweb1 <- testweb1 * (sum(testweb2) / sum(testweb1))
@@ -66,7 +64,7 @@ plot2webs(webs2array(testweb1, testweb2))
 plot2webs(testweb1, testweb2) # not yet working
 
 
-
+source("plotwebr.R")
 
 #-- playground -------
 
@@ -79,6 +77,22 @@ plotwebr(testweb)
 plotwebr(testweb, y.lim = c(0, 1 + 1+0.3))
 testweb <- t(vazarr)
 plotwebr(testweb, add=T)
+
+plotwebr(testweb, text.rot=45)
+plotwebr(testweb, text.rot=0)
+plotwebr(testweb, text.rot=90)
+plotwebr(testweb, text.rot=180)
+plotwebr(testweb, text.rot=135)
+plotwebr(testweb, text.rot=90, cex.lab=c(0.6,0.4))
+plotwebr(testweb, text.rot=c(315,45))
+
+plotwebr(testweb, text.rot=0, abbr.lab = c(3,3), space.scaling = 0.04)
+plotweb(testweb, text.rot=0, high.lablength = 3)
+
+plotwebr(testweb, text.rot=0, abbr.lab = c("s2","s2"), space.scaling = 0.04)
+
+plotwebr(testweb, text.rot=0, abbr.lab = c("s2","s2"), space.scaling = 0.04, cex.lab=c(0.6,0.5))
+
 
 plotwebr(testweb, add_abun.low = c(500,1:8), add_abun.high=seq(10,270, by=10), plot.add_abun = T)
 

@@ -21,17 +21,18 @@ plotwebr <- function(web,
   col.int = "grey80",  # maybe change back to original name "col.interaction"? or partial matching
   col.add_abun = c("green","green"),
   # need support for border colors!
-  box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network 
-  text.rot = c(30,30), # low, high;
-  abbr.lab = c(NA, 6), # low, high; if not NA, using abbreviate with minlength = value; cf. lablength in old plotweb
+  box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network
+  text.rot = c(30,30), # low, high; should be between 0 and 180, otherwise positioning (adj) may fail
+  abbr.lab = c("s3", "s3"), # low, high; NA does not abbreviate; a number cuts label to this number of character (like lablength in old plotweb); a number preceded by "s" (default) tries good species abbreviation by taking this number of letter from genus and species name (if those are separated by " ", "." or "_")
   x.lim = c(0,1),
   y.lim = c(0,1),
   # y.lim = c(0, 1 + 1+0.3), # for two plots
   mar = c(4,3,4,3),  # if NULL, preserve user setting of par
   plot.add_abun = FALSE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr
   rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise
+  cex.lab = c(0.6,0.6),
   space.perc = c(10,10), # space % between boxes (lower, higher)
-  scale.spacing = 0.01 # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
+  space.scaling = 0.01 # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
   # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
   )
 {
@@ -52,8 +53,8 @@ plotwebr <- function(web,
 
   # prepare abundance vectors:
   # give rownames & colnames if missing
-  colnames(web) <- colnames(web, do.NULL = FALSE)
-  rownames(web) <- rownames(web, do.NULL = FALSE)
+  rownames(web) <- rownames(web, do.NULL = FALSE, prefix="r")
+  colnames(web) <- colnames(web, do.NULL = FALSE, prefix="c")
   # create 0 add_abun if not provided
   if (is.null(add_abun.low)) add_abun.low <- rep(0, nrow(web))
   if (is.null(add_abun.high)) add_abun.high <- rep(0, ncol(web))
@@ -76,10 +77,29 @@ plotwebr <- function(web,
   if (!is.null(abun.high)){abun.high <- abun.high[colnames(web)]}
   
   # labels etc (truncation only after re-sorting abuns)
+  abbr.sp <- function(x, nlett=2){
+    # a function to abbreviate species names (move out of plotwebr??)
+    if (substr(nlett,1,1)=="s"){
+      nlett <- as.numeric(substr(nlett,2,3))
+      splitter <- c(" ", ".", "_")[which.max(sapply(c(" ", ".", "_"), function(mysplit)sum(grepl(mysplit, x, fixed=TRUE))))]
+      step1 <- strsplit(x, split=splitter, fixed=TRUE)
+      step2 <- lapply(step1, FUN=function(x){substr(x,1,nlett)})
+      return(sapply(step2, paste, collapse="."))
+    } else {
+      return(substr(x, 0, as.numeric(nlett)))
+    }
+  }
+  # here is where expression-style labels could be used instead
   labels.low <- rownames(web)
-  if (!is.na(abbr.lab[1])) {labels.low <- abbreviate(labels.low, minlength=abbr.lab[1])} 
+  if (!is.na(abbr.lab[1])) {
+    # labels.low <- abbreviate(labels.low, minlength=abbr.lab[1])
+    labels.low <- abbr.sp(labels.low, nlett=abbr.lab[1])
+  } 
   labels.high <- colnames(web)
-  if (!is.na(abbr.lab[2])) {labels.high <- abbreviate(labels.high, minlength=abbr.lab[2])}
+  if (!is.na(abbr.lab[2])) {
+    # labels.high <- abbreviate(labels.high, minlength=abbr.lab[2])
+    labels.high <- abbr.sp(labels.high, nlett=abbr.lab[2])
+  }
 
   # aesthetics preparations
   srt.low <- text.rot[1]
@@ -111,8 +131,8 @@ plotwebr <- function(web,
   
   # calculate box-spacing automatically!
     # for better plots of large webs, total space is not fixed %, but increases with No. species (of guild with more species)
-  space.low <- space.perc[1] / (100*(nr-1)) * (1 + max(nr,nc)*scale.spacing)
-  space.high <- space.perc[2] / (100*(nc-1)) * (1 + max(nr,nc)*scale.spacing)
+  space.low <- space.perc[1] / (100*(nr-1)) * (1 + max(nr,nc)*space.scaling)
+  space.high <- space.perc[2] / (100*(nc-1)) * (1 + max(nr,nc)*space.scaling)
 
   
   #-- lower boxes --
@@ -135,9 +155,35 @@ plotwebr <- function(web,
   
   # lower labels
     #! hoffset-Zeug einbauen (original function, strwidth)
-    #* maybe use coord.addlow.xr, but only if plot.add_abun
-  text(labels=labels.low, x=(coord.low.xl + coord.low.xr)/2, y=-0.01 + yshift, cex=0.6, adj=1, srt=srt.low, xpd=TRUE)
+    #* maybe use coord.addlow.xr (instead of coord.low.xr), but only if plot.add_abun
+  # text(labels=labels.low, x=(coord.low.xl + coord.low.xr)/2, y=-0.01 + yshift, cex=cex.lab[1], adj=1, srt=srt.low, xpd=TRUE)
   
+  if (plot.add_abun) {
+    # maybe I should always use this choice, for good labels in plot2webs?
+    coord.lab.low <- (coord.low.xl + coord.addlow.xr)/2
+  } else {
+     coord.lab.low <- (coord.low.xl + coord.low.xr)/2   
+  }
+  labshift <- numeric(nr)
+  labelheight <- strheight(labels.low, cex=cex.lab[2])
+  # shifting labels up to avoid overwriting (only with hoirzontal labels)
+  if (nr > 1 & (srt.low==0 | srt.low==180)){
+    labelwidth <- strwidth(labels.low, cex=cex.lab[2])
+    label.xl <- coord.lab.low - labelwidth/2
+    label.xr <- coord.lab.low + labelwidth/2
+    for (j in 2:nr){
+      labshift[j] <- 0
+      while (suppressWarnings(max(label.xr[labshift==labshift[j] & (1:nr)<j]) >= label.xl[j])){
+        labshift[j] <- labshift[j] + 1
+      }
+    }
+  }  
+  adj.low <- c(ifelse(srt.low %in% c(0,180), 0.5, 1), ifelse(srt.low>90,-0.5,1))
+  # plotting the labels:
+  text(labels=labels.low, x=coord.lab.low, y=-0.01 + yshift - labshift*labelheight, cex=cex.lab[1], adj=adj.low, srt=srt.low, xpd=TRUE)
+
+  
+    
   
   #-- higher boxes --
   coord.high.xl <- c(0, cumsum(prop.high[-nc])) + c(0, cumsum(rep(space.high, nc-1))) + c(0, cumsum(prop.add.high[-nc]))
@@ -158,9 +204,29 @@ plotwebr <- function(web,
   }
   
   # higher labels
-    #! hoffset-Zeug einbauen (original function, strwidth)
-    #* maybe use coord.addhigh.xr, but only if plot.add_abun
-  text(labels=labels.high, x=(coord.high.xl + coord.addhigh.xr)/2, y=1.01 + yshift, cex=0.6, adj=0, srt=srt.high, xpd=TRUE)
+  if (plot.add_abun) {
+    # maybe I should always use this choice, for good labels in plot2webs?
+    coord.lab.high <- (coord.high.xl + coord.addhigh.xr)/2
+  } else {
+     coord.lab.high <- (coord.high.xl + coord.high.xr)/2   
+  }
+  labshift <- numeric(nc)
+  labelheight <- strheight(labels.high, cex=cex.lab[2])
+  # shifting labels up to avoid overwriting (only with hoirzontal labels)
+  if (nc > 1 & (srt.high==0 | srt.high==180)){
+    labelwidth <- strwidth(labels.high, cex=cex.lab[2])
+    label.xl <- coord.lab.high - labelwidth/2
+    label.xr <- coord.lab.high + labelwidth/2
+    for (j in 2:nc){
+      labshift[j] <- 0
+      while (suppressWarnings(max(label.xr[labshift==labshift[j] & (1:nc)<j]) >= label.xl[j])){
+        labshift[j] <- labshift[j] + 1
+      }
+    }
+  }  
+  adj.high <- c(ifelse(srt.high %in% c(0,180), 0.5, 0), 0.5*sin(srt.high*pi/180))
+  # plotting the labels:
+  text(labels=labels.high, x=coord.lab.high, y=1.01 + yshift + labshift*labelheight, cex=cex.lab[2], adj=adj.high, srt=srt.high, xpd=TRUE)
   
   
   #-- interactions --
