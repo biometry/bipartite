@@ -57,6 +57,18 @@ testweb2 <- vazarr
 plotwebr(testweb1, col.boxes=c("darkgreen", "purple"))
 plotwebr(testweb2, empty=TRUE)
 
+plotwebr(testweb1, col.boxes=list(c("darkgreen", "purple"),"orange"))
+
+# a flashy version
+plotwebr(testweb1, col.boxes=list(c("darkgreen", "purple", "turquoise", "goldenrod"),"orange"), border.boxes=NA, border.int="pink", method="inc")
+
+plotwebr(testweb1, col.boxes=list(c("darkgreen", "purple", "turquoise", "goldenrod"),"orange"), border.boxes=NA, border.int="pink", method="inc")
+
+
+webcolors <- matrix(c("grey80", "red", "grey80", "grey80", "grey80"),byrow=T,nrow=nrow(testweb1),ncol=ncol(testweb1))
+plotwebr(testweb1, col.boxes=list("darkgreen", c("purple", "red",  "purple", "purple",  "purple")), col.int = webcolors, border.int = webcolors )
+
+
 # testweb1 <- testweb1 * (sum(testweb2) / sum(testweb1))
 
 plot2webs(webs2array(testweb1, testweb2))
@@ -93,8 +105,11 @@ plotwebr(testweb, text.rot=0, abbr.lab = c("s2","s2"), space.scaling = 0.04)
 
 plotwebr(testweb, text.rot=0, abbr.lab = c("s2","s2"), space.scaling = 0.04, cex.lab=c(0.6,0.5))
 
-
+# for Safariland
 plotwebr(testweb, add_abun.low = c(500,1:8), add_abun.high=seq(10,270, by=10), plot.add_abun = T)
+
+# for subset of Safari
+plotwebr(testweb, add_abun.low = c(500,50,100,200), add_abun.high=seq(10,50, by=10), plot.add_abun = T, col.add_abun = list(c("white","lightblue","white","yellow"), rep("red",5)))
 
 plotweb(testweb)
 
@@ -119,6 +134,7 @@ plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.ad
 
 plotwebr(testweb, empty = FALSE, abun.high=abun.high, abun.low=abun.low, plot.add_abun = TRUE, arrow="down.center", add_abun.high=rep(10,5))
 
+plotwebr(testweb, plot.boxes=c(T,F), plot.labels=c(T,F), border.boxes=NA, border.int=NA)
 
 #-- Example code from old plotweb help (edited for plotwebr dvlp) ---------
 data(Safariland)
