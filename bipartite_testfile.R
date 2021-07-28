@@ -206,6 +206,9 @@ discrepancy(vazquenc)
 #nested(vazquenc, method="discrepancy2")
 ## Not nice, this; it's a namespace issue; somehow permute::allPerms is not available to nesteddisc, forcing me to load all of vegan here! Don't know what's going wrong.
 ## OUTCOMMENTED because otherwise vegan would be loaded (through nested)! That would obviously affect the check of all following functions!
+replicate(10, discrepancy(vazquenc[, sample(1:24)])) # varies with sequence!
+replicate(10, vegan::nesteddisc(vazquenc[, sample(1:24)])$statistic) # pre-sorts the matrix
+
 
 # Check that this works, because vegan is being restructured and now has a function "nullmodel"!
 nulls <- simulate(vegan::nullmodel(Safariland, method="quasiswap"), nsim = 10)
@@ -313,6 +316,7 @@ networklevel(vazquenc, legacy=TRUE)
 networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
 networklevel(Safariland, index="NODF")
 networklevel(Safariland, index="modularity")
+replicate(10, networklevel(Safariland[sample(1:9), sample(1:27)], index="discrepancy")) # despite reordering ties, this is not always achieved within the 200 iterations of nesteddisc
 
 # nodespec
 nodespec(Safariland)

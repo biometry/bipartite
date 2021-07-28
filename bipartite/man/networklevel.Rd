@@ -136,7 +136,7 @@ Depending on the selected indices, some or all of the below (returned as vector 
     \item{togetherness}{Mean number of co-occupancies across all species combinations.}
     \item{C score}{Mean (normalised) number of checkerboard combinations across all species.}
     \item{V ratio}{Variance-ratio of species numbers to individual numbers within species for that level.}
-    \item{discrepancy}{Discrepancy as proposed by Brualdi & Sanderson (1999); see \code{\link{discrepancy}} for details.}
+    \item{discrepancy}{Discrepancy as proposed by Brualdi & Sanderson (1999); see also \code{\link{discrepancy}} for details. However, \code{networklevel} actually calls \bold{vegan}'s \code{nesteddisc} to better handle ties.}
     \item{degree distribution}{See \code{\link{degreedistr}} for details and references.}
     \item{extinction slope}{Slope of the secondary extinction sequence in that level, following extermination of species in the other level.}
     \item{robustness}{Area below the \dQuote{secondary extinction} curve; see \code{\link{robustness}} for details. Corresponds to \dQuote{extinction slope}.}

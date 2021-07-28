@@ -478,7 +478,7 @@ if ("V ratio" %in% index){
 }
 #-------------------
 if ("discrepancy" %in% index){
-    out$discrepancy <- as.integer(unname(discrepancy(web)))
+    out$discrepancy <- as.integer(unname(vegan::nesteddisc(web)$statistic))
 }
 #-------------------
 if ("nestedness" %in% index){
