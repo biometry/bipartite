@@ -26,9 +26,9 @@ Usually this will be number of pollinators on each species of plants or number o
       \item \option{number of compartments}, 
       \item \option{compartment diversity}, 
       \item \option{cluster coefficient}, which will compute both the network-wide cluster coefficient as well as those for each level,
-      \item \option{nestedness}, 
+      \item \option{nestedness} (where ties may induce variation when changing the sequence of species in \option{web}), 
       \item \option{NODF},
-      \item \option{weighted nestedness}, 
+      \item \option{weighted nestedness} (where ties may induce variation when changing the sequence of species in \option{web}), 
       \item \option{weighted NODF}, 
       \item \option{ISA} (or alternatively \option{interaction strength asymmetry} or 
       	\cr \option{dependence asymmetry}), 
@@ -51,9 +51,9 @@ Usually this will be number of pollinators on each species of plants or number o
      \item \option{togetherness}, 
      \item \option{C score}, 
      \item \option{V ratio}, 
-     \item \option{discrepancy}, 
-     \item \option{extinction slope}, 
-     \item \option{robustness},  
+     \item \option{discrepancy} (where ties may induce variation when changing the sequence of species in \option{web}), 
+     \item \option{extinction slope} (where ties may induce variation when changing the sequence of species in \option{web}), 
+     \item \option{robustness} (where ties may induce variation when changing the sequence of species in \option{web}),  
       \item \option{niche overlap},  
       \item \option{generality},
       \item \option{vulnerability},
@@ -114,18 +114,18 @@ Depending on the selected indices, some or all of the below (returned as vector 
 	\item{NODF}{Another index for nestedness, calling \code{\link[vegan]{nestednodf}}. High values indicate nestedness. According to the analysis of Almeida-Neto et al. (2008, 2010), NODF is more consistent and \dQuote{better} than usual measures of nestedness.}
 	\item{weighted nestedness}{A nestedness version that considers interaction frequencies (and is hence weighted), proposed by Galeano et al. (2007) and implemented in \code{\link{wine}}. It ranges between 1 (perfect nestedness) and 0 (perfect chaos). Note that this is the OPPOSITE interpretation of nestedness temperature!}
 	\item{weighted NODF}{Another quantitative (=weighted) index for nestedness, building on NODF (see \code{\link[vegan]{nestednodf}}). High values indicate nestedness. According to the analysis of Almeida-Neto et al. (2008, 2010), NODF is more consistent and \dQuote{better} than usual measures of nestedness.}
-	\item{interaction strength asymmetry}{(selected using \option{index = "ISA"}) Explaining dependence asymmetry is also a measure of specialisation, across both trophic levels. Proposed by Bascompte et al. (2006) and critised and alterations proposed by Blüthgen et al. (2007). The latter also show that dependence asymmetry can be almost entirely explained by web asymmetry (see above). Positive values (only possible of \option{ISAmethod = "Bluethgen"}) indicate higher dependence in the higher trophic level. See function \code{\link{specieslevel}} and its index \option{interaction push/pull}, which quantifies the balance of affecting and being effected by other species. Similarly, index \option{strength} quantifies the average effect of each species on all its partners.}
-	\item{specialisation asymmetry}{(selected using \option{index="SA"}) Asymmetry (higher vs. lower trophic level) of specialisation now based on d' (see \code{\link{dfun}}), which is insensitive to the dimensions of the web. Again, two options of calculation are available: the one proposed by Blüthgen et al. (2007), where they weight the specialisation value for each species by its abundance (\option{SAmethod="Bluethgen"}) or where d'-values are log-transformed (arguing that d'-values are indeed log-normally distributed: \option{SAmethod="log"}). Since the mean d-value for the lower trophic level is subtracted from that of the higher, positive values indicate a higher specialisation of the higher trophic level.}
+	\item{interaction strength asymmetry}{(selected using \option{index = "ISA"}). Explaining dependence asymmetry is also a measure of specialisation, across both trophic levels. Proposed by Bascompte et al. (2006) and critised and alterations proposed by Blüthgen et al. (2007). The latter also show that dependence asymmetry can be almost entirely explained by web asymmetry (see above). Positive values (only possible of \option{ISAmethod = "Bluethgen"}) indicate higher dependence in the higher trophic level. See function \code{\link{specieslevel}} and its index \option{interaction push/pull}, which quantifies the balance of affecting and being effected by other species. Similarly, index \option{strength} quantifies the average effect of each species on all its partners.}
+	\item{specialisation asymmetry}{(selected by using \option{index="SA"}). Asymmetry (higher vs. lower trophic level) of specialisation now based on d' (see \code{\link{dfun}}), which is insensitive to the dimensions of the web. Again, two options of calculation are available: the one proposed by Blüthgen et al. (2007), where they weight the specialisation value for each species by its abundance (\option{SAmethod="Bluethgen"}) or where d'-values are log-transformed (arguing that d'-values are indeed log-normally distributed: \option{SAmethod="log"}). Since the mean d-value for the lower trophic level is subtracted from that of the higher, positive values indicate a higher specialisation of the higher trophic level.}
     \item{linkage density}{Marginal totals-weighted diversity of interactions per species (quantitative). Actually, this is computed as the average of vulnerability and generality (Bersier et al. 2002). Does not respond to setting \code{weighted=FALSE}.}
     \item{weighted connectance}{Linkage density divided by number of species in the network (Bersier et al. 2002). This will respond to whether non-interacting species (e.g. unparasitised hosts) are included or not!}
-    \item{Fisher's alpha}{An alternative measure of interaction diversity (using \code{fisherfit} from \pkg{vegan}).}
+    \item{Fisher's alpha}{An alternative measure of interaction diversity (using \code{\link[vegan]{fisherfit}}).}
 %         \item{interaction diversity LTL}{Mean diversity of predators per prey. LTL refers to Lower Trophic Level. LTL is analog to Shannon's diversity index for interactions (see below), but calculated for each species in the LTL, then averaged. Or, in other words, it is the log-version of vulnerability, but averaged without weighting.}
 %         \item{interaction diversity HTL}{Mean diversity of prey per predator. HTL refers to Higher Trophic Level.}
     \item{interaction evenness}{Shannon's evenness for the web entries. Note that the two options are rather different. By definition, IE = H/Hmax; H = -sum(p.i.mat*log(p.i.mat)), where p.i.mat = matrix/sum(entries in matrix). This means, when calculating H, do we treat all possible links as species, and the interactions (cell values) as measure of their abundance? By definition, Hmax = ln(N). The key question is: What is the right value for N? Since we treat the matrix cells as species, it is (clearly?) the number of matrix cells, i.e. number of higher trophic level species x number of lower trophic level species. We think this logic justifies our default \code{"prod"}. However, others argue in favour of N=number of links. Please see note for our discussion on this point.}
 %What else?  Were we to use the interpretation of Tylianakis et al. (2007), then Hmax = ln(sum of entries in matrix). This means, we equate ``number of links'' = ``number of species''. That means, each link is a potential species. What should that mean? Why should that measure ``interactions evenness''? Why should we move from a view of ``cells are species'' when calculating H to a view of ``interactions are species'' when calculating N? To say the least, it doesn't seem consistent. 
     \item{Alatalo interaction evenness}{A different measure for web entry evenness, as proposed by Müller et al. (1999). }
     \item{Shannon diversity}{Shannon's diversity of interactions (i.e. network entries).}
-    \item{H2}{H2' is a network-level measure of specialisation. It ranges between 0 (no specialisation) and 1 (complete specialisation). H2' is a measure of discrimination, i.e. calculated in comparison of no specialisation (see \code{\link{H2fun}} for details. To avoid confusion of keys (apostrophe vs. accent), we call the H2' only H2 here.}
+    \item{H2}{H2' is a network-level measure of specialisation. It ranges between 0 (no specialisation) and 1 (complete specialisation). More specifically, H2' is a measure of discrimination, i.e. calculated in comparison to no specialisation (see \code{\link{H2fun}} for details. To avoid confusion of keys (apostrophe vs. accent), we call H2' only H2 here.}
     \item{}{}
     \item{}{others now to come: all other indices are returned as output from \code{\link{grouplevel}}. Please see there for details, we here only provide minimal listing.}
     \item{number of species}{}
@@ -170,6 +170,9 @@ Some indices require rather long computation times on large webs. If you want to
 	 \item Number (and diversity) of compartments calls a recursive and hence relatively slow algorithm. 
 	 \item H2 and specialisation asymmetry require an iterative, heuristic search algorithm. Finally, excluding discrepancy can also moderately decrease computation time.
    }
+   
+\bold{Does the species sequence in the data matter?}
+Obviously, it shouldn't, and for most indices it doesn't. However, particularly indices based on binary representation of \option{web} will have ties, where several species have the number of links. In this case, it does matter how the matrix is sorted before simulating extinctions or computing discrepancy. There is no (known) foolproof way to get this sequence "right" (see also "Details" of help for \code{\link[vegan]{nesteddisc}}). Re-running the same code with a shuffled network may thus yield (slightly) different values for (weighted) nestedness, togetherness, discrepancy, extinction slopes and robustness. (Thanks to Valentin Stefan for making us explicitly addressing this issue!)
 }
 
 \references{ 
