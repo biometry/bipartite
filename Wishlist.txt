@@ -1,5 +1,6 @@
 IMPORTANT
 <>
+* add to networklevel.Rd that modularity Q is now available!
 
 EDITORIAL
 
