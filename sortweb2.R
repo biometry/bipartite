@@ -4,7 +4,7 @@
 # for development only
 # web <- testweb
 
-sortweb2 <- function(web, sort.order="cca", empty=TRUE, sequence=NULL){
+sortweb2 <- function(web, sort.order="dec", empty=TRUE, sequence=NULL){
   if (empty) {web <- empty(web)}
   web <- as.matrix(web) # to convert data.frames into matrix: needed for cumsum
   

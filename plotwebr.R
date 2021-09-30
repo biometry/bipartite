@@ -21,19 +21,20 @@ plotwebr <- function(web,
   col.int = "grey80",  # maybe change back to original name "col.interaction"? or partial matching; can be a single value or a matrix; to assign interaction color by higher species: e.g. matrix(c("red",rep("grey80",ncol(web)-1)),byrow=T,nrow=nrow(web),ncol=ncol(web))
   col.add_abun = c("green","green"),
   # need support for border colors!
-  border.boxes = c("black","black"),  # currently used also for add_abun
-  border.int = "black", # can be a single color value or a matrix (see col.int)
+  border.boxes = c("black","black"),  # currently used also for add_abun; NA means no border
+  border.int = "black", # can be a single color value or a matrix (see col.int); NA means no border
   box.height = c(0.1,0.1), # low, high; in proportion of vertical size of one network
   text.rot = c(30,30), # low, high; should be between 0 and 180, otherwise positioning (adj) may fail
   abbr.lab = c("s3", "s3"), # low, high; NA does not abbreviate; a number cuts label to this number of character (like lablength in old plotweb); a number preceded by "s" (default) tries good species abbreviation by taking this number of letter from genus and species name (if those are separated by " ", "." or "_")
   x.lim = c(0,1),
   y.lim = c(0,1),
-  # y.lim = c(0, 1 + 1+0.3), # for two plots
+  # y.lim = c(0, 1 + 1+ydist.add), # for two plots
+  ydist.add = 0.3, # only for add=TRUE: vertical distance between sub-graphs
   mar = c(4,3,4,3),  # if NULL, preserve user setting of par
   plot.boxes=c(TRUE, TRUE),  # low, high; maybe set to FALSE for combined plots (e.g. multitrophic)
   plot.labels=c(TRUE, TRUE),
-  plot.add_abun = FALSE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr
-  rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise
+  plot.add_abun = TRUE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr; make a vector of two! (and avoid obsolete calls)
+  rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise; WHAT DOES IT MEAN?
   cex.lab = c(0.6,0.6),
   space.perc = c(10,10), # space % between boxes (lower, higher)
   space.scaling = 0.01 # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
@@ -46,11 +47,10 @@ plotwebr <- function(web,
   # initialize plot
   if (add==FALSE){
     yshift <- 0
-    # make the yshift more flexible!! (for plot2webs)
     plot(0, type = "n", xlim = x.lim, ylim = y.lim, axes = FALSE, xlab = "", ylab = "", xaxs = "i", yaxs = "i") # original plotweb code, but option plot.axes removed
     # could use par(xaxs = "i", yaxs = "i") for making the plotting region follow xlim/ylim exactly
   } else {
-    yshift <- 1+0.3
+    yshift <- 1 + ydist.add
   }
   
   #-- preparatory calculations --
@@ -65,8 +65,8 @@ plotwebr <- function(web,
   # naming abundance vectors (-> now supporting unnamed input of correct order!)
   if (is.null(names(add_abun.low))) names(add_abun.low) <- rownames(web)
   if (is.null(names(add_abun.high))) names(add_abun.high) <- colnames(web)
-  if (is.null(names(abun.low))) names(add_abun.low) <- rownames(web)
-  if (is.null(names(abun.high))) names(add_abun.high) <- colnames(web)
+  if (!is.null(abun.low) & is.null(names(abun.low))) names(abun.low) <- rownames(web)
+  if (!is.null(abun.high) & is.null(names(abun.high))) names(abun.high) <- colnames(web)
   if (is.list(col.boxes)){
     if (length(col.boxes[[1]])>1 & is.null(names(col.boxes[[1]]))){
       names(col.boxes[[1]]) <- rownames(web)
@@ -244,11 +244,11 @@ plotwebr <- function(web,
   coord.addhigh.xr <- center(coord.addhigh.xr * rescale.high / coord.addhigh.xr[nc])
   # draw the boxes
   if (plot.boxes[2]){
-    rect(coord.high.xl, 1 + yshift,  coord.high.xr, 1-box.height[1] + yshift, col=col.high, border=border.high)
+    rect(coord.high.xl, 1 + yshift,  coord.high.xr, 1-box.height[2] + yshift, col=col.high, border=border.high)
   }
   # optional plotting of additional abundance boxes (not just whitespace)
   if (plot.add_abun){
-    rect(coord.addhigh.xl, 1 + yshift,  coord.addhigh.xr, 1-box.height[1] + yshift, col=col.add_abun.high, border=border.high)
+    rect(coord.addhigh.xl, 1 + yshift,  coord.addhigh.xr, 1-box.height[2] + yshift, col=col.add_abun.high, border=border.high)
   }
   
   # higher labels
