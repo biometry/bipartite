@@ -30,7 +30,7 @@ plot2webs <- function(web1, web2,
     mywebarray <- webs2array(list(web1, web2))
     web1 <- mywebarray[,,1] # now with matched names
     web2 <- mywebarray[,,2] # now with matched names
-    # Note: if orignal webs are emptied, non-interacting species are missing from web1 / web2 (different from case with web1 being a webarray)
+    # Note: if original webs are emptied, non-interacting species are missing from web1 / web2 (different from case with web1 being a webarray)
     #--> let's see if this causes problems, or gives nice options
     # can always reassign webs from array, as in option before the else
   }
@@ -61,13 +61,13 @@ plot2webs <- function(web1, web2,
     add_abun2.high[add_abun2.high < 0] <- 0
   
   # plot the webs
-  plotwebr(web1, y.lim = c(0, 1 + 1+ydist.add), empty=FALSE, method="normal", sequence=sequence, col.boxes = col.boxes, abbr.lab = abbr.lab, add_abun.low = add_abun1.low, add_abun.high = add_abun1.high, plot.add_abun = plot.abun_other)
+  plotwebr(web1, y.lim = c(0, 1 + 1+ydist.add), empty=FALSE, method="sequence", sequence=sequence, col.boxes = col.boxes, abbr.lab = abbr.lab, add_abun.low = add_abun1.low, add_abun.high = add_abun1.high, plot.add_abun = plot.abun_other)
   if (flipweb2){ # often nice for web alignment [multilayer, centering the shared species], but not for multitrophic webs!
     web2 <- t(web2)
     # flipping the sequence: need to switch the vectors, but keep the names
     seq2 <- sequence
     seq2[2:1] <- sequence
-    plotwebr(web2, add=TRUE, empty=FALSE, method="normal", sequence=seq2, col.boxes = col.boxes[2:1], abbr.lab = abbr.lab[2:1], add_abun.low = add_abun2.high, add_abun.high = add_abun2.low, plot.add_abun = plot.abun_other, ydist.add=ydist.add, plot.labels = c(FALSE, TRUE))
+    plotwebr(web2, add=TRUE, empty=FALSE, method="sequence", sequence=seq2, col.boxes = col.boxes[2:1], abbr.lab = abbr.lab[2:1], add_abun.low = add_abun2.high, add_abun.high = add_abun2.low, plot.add_abun = plot.abun_other, ydist.add=ydist.add, plot.labels = c(FALSE, TRUE))
     # beware of changes in col.boxes!
   }
   
