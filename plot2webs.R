@@ -14,7 +14,7 @@ plot2webs <- function(web1, web2,
                       sorting="pooledweb",
                       # optional arguments for sortweb2
                       sequence=NULL,
-                      col.boxes=c("grey10","darkgreen"),
+                      col.boxes=c("darkgreen", "grey10"),
                       abbr.lab=c(NA,6),
                       ydist.add = 0.2,
                       plot.abun_other = FALSE # should a species' excess abundance in the other web of the pair be plotted as additional abundance or left empty? (used as setting for plot.add_abun in the call to plotwebr; note that externally provided "additional abundances" are not supported in plot2webs)
@@ -39,7 +39,7 @@ plot2webs <- function(web1, web2,
   if (sorting=="pooledweb"){
     if (!is.null(sequence)){warning("given sequence is overridden by sorting='pooledweb'")}
     #? how to deal with empty here?
-    sorted.aggweb <- sortweb2(apply(mywebarray, 1:2, sum))
+    sorted.aggweb <- sortweb2(apply(mywebarray, 1:2, sum), sort.order="cca")
     sequence <- dimnames(sorted.aggweb)
     names(sequence) <- c("seq.low","seq.high")
   } else { # sorts by given sequence
