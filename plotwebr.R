@@ -31,9 +31,9 @@ plotwebr <- function(web,
   # y.lim = c(0, 1 + 1+ydist.add), # for two plots
   ydist.add = 0.3, # only for add=TRUE: vertical distance between sub-graphs
   mar = c(4,3,4,3),  # if NULL, preserve user setting of par
-  plot.boxes=c(TRUE, TRUE),  # low, high; maybe set to FALSE for combined plots (e.g. multitrophic)
-  plot.labels=c(TRUE, TRUE),
-  plot.add_abun = TRUE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr; make a vector of two! (and avoid obsolete calls)
+  plot.boxes = c(TRUE, TRUE),  # low, high; can be set to FALSE for combined plots (e.g. multitrophic); now supporting also a single TRUE or FALSE value that applies to both levels
+  plot.labels = c(TRUE, TRUE), # now supporting also a single TRUE or FALSE value that applies to both levels
+  plot.add_abun = c(TRUE, TRUE), # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr; make a vector of two! (and avoid obsolete calls); now supporting also a single TRUE or FALSE value that applies to both levels
   rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise;  determines if total width of species bars is 1 (or higher for given additional abundances) or can differ from that and possibly be lower; FALSE may lead to unexpected behavior (especially for webs with single species on one level), but is needed if size of web is supposed to be absolute (for comparing to other webs)
   cex.lab = c(0.6,0.6),
   space.perc = c(10,10), # space % between boxes (lower, higher); warning: this only defines the minimum space, spacing is further increased depending on number of species and space.scaling
@@ -54,6 +54,12 @@ plotwebr <- function(web,
   }
   
   #-- preparatory calculations --
+  # handle single value inputs for convenience)
+  if (length(plot.boxes)==1) plot.boxes <- rep(plot.boxes, 2)
+  if (length(plot.labels)==1) plot.labels <- rep(plot.labels, 2)
+  if (length(plot.add_abun)==1) plot.add_abun <- rep(plot.add_abun, 2)
+  if (is.null(add_abun.low)) plot.add_abun[1] <- FALSE  # if there are no additional abundances, don't plot them...
+  if (is.null(add_abun.high)) plot.add_abun[2] <- FALSE
 
   # prepare abundance vectors:
   # give rownames & colnames if missing
@@ -205,12 +211,12 @@ plotwebr <- function(web,
     rect(coord.low.xl, 0 + yshift,  coord.low.xr, box.height[1] + yshift, col=col.low, border=border.low)
   }
   # optional plotting of additional abundance boxes (not just whitespace)
-  if (plot.add_abun){
+  if (plot.add_abun[1]){
     rect(coord.addlow.xl, 0 + yshift,  coord.addlow.xr, box.height[1] + yshift, col=col.add_abun.low, border=border.low)
   }
   
   # lower labels
-  if (plot.add_abun) {
+  if (plot.add_abun[1]) {
     # maybe I should always use this choice, for good labels in plot2webs?
     coord.lab.low <- (coord.low.xl + coord.addlow.xr)/2
   } else {
@@ -258,12 +264,12 @@ plotwebr <- function(web,
     rect(coord.high.xl, 1 + yshift,  coord.high.xr, 1-box.height[2] + yshift, col=col.high, border=border.high)
   }
   # optional plotting of additional abundance boxes (not just whitespace)
-  if (plot.add_abun){
+  if (plot.add_abun[2]){
     rect(coord.addhigh.xl, 1 + yshift,  coord.addhigh.xr, 1-box.height[2] + yshift, col=col.add_abun.high, border=border.high)
   }
   
   # higher labels
-  if (plot.add_abun) {
+  if (plot.add_abun[2]) {
     # maybe I should always use this choice, for good labels in plot2webs?
     coord.lab.high <- (coord.high.xl + coord.addhigh.xr)/2
   } else {
