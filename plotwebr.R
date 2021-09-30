@@ -34,9 +34,9 @@ plotwebr <- function(web,
   plot.boxes=c(TRUE, TRUE),  # low, high; maybe set to FALSE for combined plots (e.g. multitrophic)
   plot.labels=c(TRUE, TRUE),
   plot.add_abun = TRUE, # FALSE is a good default for plot2webs, but should be TRUE for single use of plotwebr; make a vector of two! (and avoid obsolete calls)
-  rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise; WHAT DOES IT MEAN?
+  rescale.boxwidth = "choose",  # either TRUE, FALSE, or "choose", which uses FALSE for given abun.low/abun.high, and TRUE otherwise;  determines if total width of species bars is 1 (or higher for given additional abundances) or can differ from that and possibly be lower; FALSE may lead to unexpected behavior (especially for webs with single species on one level), but is needed if size of web is supposed to be absolute (for comparing to other webs)
   cex.lab = c(0.6,0.6),
-  space.perc = c(10,10), # space % between boxes (lower, higher)
+  space.perc = c(10,10), # space % between boxes (lower, higher); warning: this only defines the minimum space, spacing is further increased depending on number of species and space.scaling
   space.scaling = 0.01 # factor for increasing the space.perc with increasing number of species (keep at 0 if setting a custom spacing with space.perc!!)
   # basic color stuff: better allow vectors for high, low, interactions [with these following the higher/lower sp!]
   )
@@ -179,13 +179,15 @@ plotwebr <- function(web,
   
   # calculate box-spacing automatically!
     # for better plots of large webs, total space is not fixed %, but increases with No. species (of guild with more species)
+    # not that whereas space.perc is defined for all species of the level, space.low/.high is for each gap between species
   space.low <- space.perc[1] / (100*(nr-1)) * (1 + max(nr,nc)*space.scaling)
   space.high <- space.perc[2] / (100*(nc-1)) * (1 + max(nr,nc)*space.scaling)
 
   
   #-- lower boxes --
-  coord.low.xl <- c(0, cumsum(prop.low[-nr])) + c(0, cumsum(rep(space.low, nr-1))) + c(0, cumsum(prop.add.low[-nr]))
-  coord.low.xr <- cumsum(prop.low) + c(0, cumsum(rep(space.low, nr-1))) + c(0, cumsum(prop.add.low[-nr]))
+  cumspaces.low <- c(0, cumsum(rep(space.low, nr-1)))
+  coord.low.xl <- c(0, cumsum(prop.low[-nr])) + cumspaces.low + c(0, cumsum(prop.add.low[-nr]))
+  coord.low.xr <- cumsum(prop.low) + cumspaces.low + c(0, cumsum(prop.add.low[-nr]))
   coord.addlow.xl <- coord.low.xr
   coord.addlow.xr <- coord.low.xr + prop.add.low
   center <- function(x){x + (1-rescale.low)/2} # a specific function for centering in case the x-spread of boxes is below 1
@@ -194,6 +196,10 @@ plotwebr <- function(web,
   coord.low.xr <- center(coord.low.xr * rescale.low / coord.addlow.xr[nr])
   coord.addlow.xl <- center(coord.addlow.xl * rescale.low / coord.addlow.xr[nr])
   coord.addlow.xr <- center(coord.addlow.xr * rescale.low / coord.addlow.xr[nr])
+  if (nr==1 & nc>1 & rescale.boxwidth) {
+    # to keep interaction borders parallel in cases with single lower species, adjust rescale.low based on width of higher boxes
+    rescale.low <- sum(prop.high) / (sum(prop.high) + space.high*(nc-1) + sum(prop.add.high))
+  }
   # draw the boxes
   if (plot.boxes[1]){
     rect(coord.low.xl, 0 + yshift,  coord.low.xr, box.height[1] + yshift, col=col.low, border=border.low)
@@ -232,12 +238,17 @@ plotwebr <- function(web,
   
   
   #-- higher boxes --
-  coord.high.xl <- c(0, cumsum(prop.high[-nc])) + c(0, cumsum(rep(space.high, nc-1))) + c(0, cumsum(prop.add.high[-nc]))
-  coord.high.xr <- cumsum(prop.high) + c(0, cumsum(rep(space.high, nc-1))) + c(0, cumsum(prop.add.high[-nc]))
+  cumspaces.high <- c(0, cumsum(rep(space.high, nc-1)))
+  coord.high.xl <- c(0, cumsum(prop.high[-nc])) + cumspaces.high + c(0, cumsum(prop.add.high[-nc]))
+  coord.high.xr <- cumsum(prop.high) + cumspaces.high + c(0, cumsum(prop.add.high[-nc]))
   coord.addhigh.xl <- coord.high.xr
   coord.addhigh.xr <- coord.high.xr + prop.add.high
   center <- function(x){x + (1-rescale.high)/2} # a specific function for centering in case the x-spread of boxes is below 1
   # rescale all coords to maximum of 1 (or possibly higher if add_abun given)
+  if (nc==1 & nr>1 & rescale.boxwidth) {
+    # to keep interaction borders parallel in cases with single higher species, adjust rescale.high based on width of lower boxes
+    rescale.high <- sum(prop.low) / (sum(prop.low) + space.low*(nr-1) + sum(prop.add.low))
+  }
   coord.high.xl <- center(coord.high.xl * rescale.high / coord.addhigh.xr[nc])
   coord.high.xr <- center(coord.high.xr * rescale.high / coord.addhigh.xr[nc])
   coord.addhigh.xl <- center(coord.addhigh.xl * rescale.high / coord.addhigh.xr[nc])
