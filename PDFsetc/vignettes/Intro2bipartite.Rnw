@@ -131,6 +131,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
 % \item[\package{latentnet}] ; % has nothing to do with our kind of networks;
+\item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
 \item[\package{tnet},] which aims at re-thinking one-mode indices in a mathematically consistent way for bipartite networks; some functions of \package{tnet} were lifted to \package{bipartite} (thanks to Tore for allowing that!);
@@ -694,7 +695,9 @@ The idea here is to compute a statistic of interest, in this case the mean diffe
 
 
 \section{Modularity}
-Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003,Newman2004,Fortunato2010}. In other words, modules are link-rich clusters of species in a community. What causes such modules and whether they actually teach us something is discussed at length by \citet{Dormann2017AREES}. 
+Aggregated sets of interacting species are called `modules'. Their defining feature is that \emph{within}-module interactions are more prevalent than \emph{between}-module interactions \citep{Newman2003, Newman2004, Fortunato2010}. In other words, modules are link-rich clusters of species in a community. What causes such modules and whether they actually teach us something is discussed at length by \citet{Dormann2017AREES}. 
+
+There are several algorithms for \emph{one-mode} networks, particularly for binary one-mode networks, such as the Louvain algorithm, the infomap or \citet{Clauset2004}'s ``fast greedy'' algorithm. These algorithms vary substantially in their robustness, in the sense that small changes in the network may yield very different modules, as compared by \citet{Policastro2021}. That paper also expores ways to test for significance of modularity, based on null model simulations.
 
 The package \package{bipartite} offers an algorithm \citep[QuaBiMo, described in technical detail in][]{Dormann2014} to detect modules in bipartite networks, taking into account the quantitative nature of links. The algorithm has become outdated after a vastly improved approach was published by \citet{Beckett2016}, which is also now the default algorithm used in \package{bipartite}'s \code{computeModules} function.
 
@@ -780,18 +783,14 @@ install_github(rep="pedroj/bipartite_plots")
 @
 
 \subsubsection{\package{multigraph}}
-See \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-graph-in-r}
+Plot several bipartite layers into one graph: see \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-graph-in-r}
 
 
 
 \subsection{Analysing the structure of bipartite networks}
 [to be continued ...]
 
-\subsubsection{\package{bmotif}}
-
-\subsubsection{\package{dynsbm}}
-
-\subsubsection{\package{infomapecology}}
+There are a range of packages that aim at identifying structure within networks, be it clusters/modules/compartments of a larger subset of interactions, or specific motifs of only few links. It is almost impossible to keep up with these developments, so here are just a few pointers to such packages: \package{bmotif}, \package{dynsbm} and \package{infomapecology}.
 
 
 \subsection{Multi-layer networks}
@@ -801,6 +800,7 @@ While statistically and mathematically a lot of things are conceivable, few idea
 
 Currently, \package{bipartite} does not support any such analysis (apart from a pathetic function \code{npartite} and \code{plotweb2} for plotting stacked bipartite networks).
 
+Packages such as \package{robber} address some of the challenges of intersecting multiple bipartite networks.
 
 \section*{Conclusions}%----------------------------------------------
 The analysis of bipartite networks has seen a recent explosion of applications in ecology. The \proglang{R}-package \package{bipartite} aims at providing a user-friendly set of function to aid the visualisation and analysis of such networks. This vignette hopefully illustrated some of the challenges and solutions to such analyses. The main take-home-message it aims to convey is that there are considerable interpretational strings attached, and that the analysis of bipartite networks is not as straightforward as one might have initially hoped.

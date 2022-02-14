@@ -1,4 +1,4 @@
-\begin{thebibliography}{91}
+\begin{thebibliography}{93}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Alarc{\'o}n \emph{et~al.}(2008)Alarc{\'o}n, Waser \&
@@ -107,6 +107,11 @@ Burgos, E., Ceva, H., Perazzo, R.P.J., Devoto, M., Medan, D., Zimmermann, M. \&
 \bibitem[{Butts(2013)}]{Butts2013}
 Butts, C.T. (2013) \emph{sna: Tools for Social Network Analysis}.
 \newblock R package version 2.2-2.
+
+\bibitem[{Clauset \emph{et~al.}(2004)Clauset, Newman \& Moore}]{Clauset2004}
+Clauset, A., Newman, M. \& Moore, C. (2004) Finding community structure in very
+  large networks.
+\newblock \emph{Physical Review E}, \textbf{70}, 066111–066111.
 
 \bibitem[{Crawley(1987)}]{Crawley1987}
 Crawley, M.J. (1987) \emph{Herbivory: The Dynamics of Animal Plant
@@ -400,6 +405,13 @@ Poisot, T., Lepennetier, G., Martinez, E., Ramsayer, J. \& Hochberg, M.E.
   (2011{\natexlab{b}}) Resource availability affects the structure of a natural
   bacteria-bacteriophage community.
 \newblock \emph{Biology Letters}, \textbf{7}, 201--4.
+
+\bibitem[{Policastro \emph{et~al.}(2021)Policastro, Righelli, Carissimo,
+  Cutillo \& De~Feis}]{Policastro2021}
+Policastro, V., Righelli, D., Carissimo, A., Cutillo, L. \& De~Feis, I. (2021)
+  {ROB}ustness {I}n {N}etwork (robin): an {R} package for comparison and
+  validation of communities.
+\newblock \emph{The R Journal}, \textbf{13}, 292–309.
 
 \bibitem[{Roberts \& Stone(1990)}]{Roberts1990}
 Roberts, A. \& Stone, L. (1990) Island-sharing by archipelago species.
