@@ -32,9 +32,9 @@ r2dexternal <- function(N, web, abun.higher=NULL, abun.lower=NULL){
 		here.cc <- sample(1:ncol(web), abs(missing.cc), prob=rel.abun.higher, replace=TRUE)
 		move.cc <- table(here.cc)
 		if (missing.cc < 0){# some left over:
-			cc[as.numeric(names(move.cc))] <- cc[as.numeric(names(move.cc))] + move.cc
+			cc[as.numeric(names(move.cc))] <- cc[as.numeric(names(move.cc))] + as.numeric(move.cc)
 		} else {		# some missing :
-			cc[here.cc] <- cc[here.cc] - 1
+			cc[as.numeric(names(move.cc))] <- cc[as.numeric(names(move.cc))] - as.numeric(move.cc)
 		}
 	} 
 	
@@ -53,7 +53,7 @@ r2dexternal <- function(N, web, abun.higher=NULL, abun.lower=NULL){
 		if (missing.rr < 0){# some left over:
 			rr[as.numeric(names(move.rr))] <- rr[as.numeric(names(move.rr))] + move.rr
 		} else {		# some missing :
-			rr[here.rr] <- rr[here.rr] - 1
+			rr[as.numeric(names(move.rr))] <- rr[as.numeric(names(move.rr))] - as.numeric(move.rr)
 		}
 	} 
 	## Problem remaining: what if 1 is subtracted from a cell with only 1 in it?
