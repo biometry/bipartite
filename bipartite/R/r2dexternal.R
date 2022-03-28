@@ -14,7 +14,7 @@ r2dexternal <- function(N, web, abun.higher=NULL, abun.lower=NULL){
 	if (is.null(abun.higher)) abun.higher <- colSums(web)
 	if (is.null(abun.lower)) abun.lower <- rowSums(web)
 	
-	total <- sum(web)
+	total <- as.integer(sum(web))
 		
 	rel.abun.higher <- abun.higher/sum(abun.higher)
 	rel.abun.lower <- abun.lower/sum(abun.lower)
