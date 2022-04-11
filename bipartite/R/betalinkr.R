@@ -4,7 +4,7 @@
 # main FUNCTION betalinkr --------------------
 betalinkr <- function(webarray, index = "bray", binary=TRUE, partitioning="commondenom", proportions=!binary, function.dist="vegdist", distofempty="zero", partition.st=FALSE, partition.rr=FALSE){
   
-  if (class(webarray)=="list") {webarray <- webs2array(webarray)}
+  if (is.list(webarray)){webarray <- webs2array(webarray)}
   if (dim(webarray)[[3]]!=2) warning("function is designed for a single pair of two webs; unclear output")
 
   webarray <- webarray[apply(webarray,1,sum)>0, apply(webarray,2,sum)>0, , drop=FALSE] # removing species not observed in either web: improves speed :-)

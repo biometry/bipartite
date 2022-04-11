@@ -40,7 +40,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.17\cr
-Date: \tab 2021-05-18\cr
+Date: \tab 2022-04-12\cr
 License: \tab GPL \cr
 }
 }
@@ -49,7 +49,7 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-	\item 2.17 (not yet released)
+	\item 2.17 (release date: 12-Apr-2022)
 	\describe{
   	\item{New null model for "compound network structure" using \code{\link{restrictednull}}:}{This function, contributed by Gabriel Felix, Rafael Pinheiro, and Marco Mello from the Ecological Synthesis Lab (SintECO) in São Paulo, constructs null model expectations for networks with modules. So far, nestedness could not be properly tested for \emph{within} null model modules, only at the level of the entire network. This function uses information from previously identified modules (typically using \code{\link{computeModules}}) to generate expectations based on marginal totals and observed connectivity. It builds on \code{\link{vaznull}} in that respect, but adds the modular structure.}
   	\item{Major rehaul of \code{\link{mgen}}:}{1. the biggest change is that \option{keep.species=TRUE} now respects the probabilities of the input web (before it had used marginal totals) already for the first interaction of each species, and tries to minimize the number of interactions assigned in this first part of the function. 2. the main part of the function has been changed, not using a while-loop anymore and thus dropping the argument \option{trials}. 3. handling of \option{autotransfrom} has been slightly changed, avoiding unnecessary warnings. 4. the output web now keeps dimnames of input web.}

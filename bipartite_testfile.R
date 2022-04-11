@@ -5,7 +5,7 @@
 #
 # 1. build package normally (trying to compact the vignette)
 R CMD build bipartite --compact-vignettes=gs+qpdf
-# 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com 
+# 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com !!! Only if larger than 1MB !!!
 ...
 # 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the just-built .tar.gz!
 ...
@@ -24,7 +24,7 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 
 ## Comments on the workflow above:
 ## ad 0.: The vignette is a pain in the neck! The vignettes folder in the level of the top bipartite folder (in PDFetc) is the one to use for writing and processing the vignette! There are some problems, for example that in the betweenness comparison I call packages not listed in "Depends" of bipartite. Since I don't want to make bipartite dependent on packages that do not work well, I now compile the vignette in this folder with "eval=T", then copy the output for this since R-chunk from the .tex-file into the .Rnw file and set "eval=F" (there is a note to that effect in the .Rnw). Then I put the .Rnw into the vignettes-folder and the inst/doc of the package. What a mess!
-## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do.
+## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do. (Note: Last time (2.17) it all worked fine! Thus, steps 2-6 could be skipped!)
 ## ad 2.: You can try 
 ## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", qpdf=Sys.which(Sys.getenv("R_QPDF", "qpdf")), gs_quality = "ebook") ## but for me this did not yield any compression;
 ## ad 5.: There are other check options, e.g. rhub::check("bipartite_2.16.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run; rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)

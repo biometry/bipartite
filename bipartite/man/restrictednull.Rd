@@ -67,7 +67,7 @@ Our restricted null model was designed for testing for a compound topology, i.e.
 \author{Gabriel Felix, Rafael Pinheiro, and Marco Mello from the Ecological Synthesis Lab (SintECO) in São Paulo. The code was taken, with permission and encouragement, from Gabriel's github repository (\url{https://github.com/gabrielmfelix/Restricted-Null-Model}) and modified by Carsten F. Dormann for conformity with \pkg{bipartite}'s naming style. The helper function \code{PosteriorProb}, which computes the probabilities of an interaction, given the modular structure, is not exported and hence would have to be called as \code{bipartite:::PosteriorProb}. See Gabriel's github page for further details.}
 
 \references{
-Bezerra, E. L. S., I. C. Machado, and M. A. R. Mello. 2009. Pollination networks of oil-flowers: a tiny world within the smallest of all worlds. \emph{J. Anim. Ecol.} \bold{78}: 1096--1101. \url{https://www.ncbi.nlm.nih.gov/pubmed/19515098}.
+Bezerra, E. L. S., I. C. Machado, and M. A. R. Mello. 2009. Pollination networks of oil-flowers: a tiny world within the smallest of all worlds. \emph{J. Anim. Ecol.} \bold{78}: 1096--1101. \url{https://pubmed.ncbi.nlm.nih.gov/19515098/}.
 
 Felix, G. M., R. B. P. Pinheiro, R. Poulin, B. R. Krasnov, and M. A. R. Mello. 2017. The compound topology of a continent-wide interaction network explained by an integrative hypothesis of specialization. \emph{bioRxiv} 236687. \doi{10.1101/236687}
 
