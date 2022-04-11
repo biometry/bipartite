@@ -63,6 +63,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   	\item{Added text-option to \code{\link{plotPAC}}.}{Species names have a tendency to always be in the way, and too long. Therefore the original function only plotted numbers. Now we added the option to plot (and scale and move) labels for each species. Not nice, but practical.}
   	\item{Function \code{\link{networklevel}} now}{calls \pkg{vegan}'s \code{\link[vegan]{nesteddisc}} when computing the index "discrepancy". That function tries to handle ties in the data consistently, although for webs with many columns (or rows) with the same number of links this will still lead to slightly different values. Thanks to Valentin Stefan for drawing our attention to this! Also, we added an explicit note of this behaviour in \code{networklevel}.}
 	  	\item{Bug fix in \code{\link{r2dexternal}} and \code{\link{vaznullexternal}}:}{Sometimes did not yield the correct row/column sums, when margins were extremely skewed.}
+	  	\item{Addressed long-standing confusion in \code{\link{nested}},}{ which reports some indices in [0,1], others in [0, 100] (i.e. as percent). Thanks to Jari Oksanen for reminding me of this point. All but one now report in the 0-100\% range. While fixing this, also added WNODA (based on \code{\link{nest.smdm}}) to the fray.}
 }
 	
   \item 2.16 (release date: 08-Jan-2021)

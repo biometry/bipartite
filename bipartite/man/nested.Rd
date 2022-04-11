@@ -24,7 +24,7 @@ nested(web, method = "binmatnest", rescale=FALSE, normalised=TRUE)
 }
 
 \details{
-  There are five different measures currently available:
+  There are seven different measures (with variations yielding ten indices) currently available:
   \describe{
     \item{1}{binmatnest calculates nestedness temperature following the function \code{\link[vegan]{nestedtemp}} (0 = cold = highly nested; 100 = hot = not nested at all).   (Note that we replaced \option{binmatnest}, which calls the retired \code{nestedness}, which used the original C++-program of Miguel Rodriguez-Girones, by what used to be \code{binmatnest2}. Because binmatnest sometimes (and to us unexplicably) invert the matrix, we prefer the \pkg{vegan}'s binmatnest2, now binmatnest, option. That is the implementation by Jari Oksanen in \code{\link[vegan]{nestedtemp}} of the same algorithm.)}
     \item{2}{Discrepancy calculates the number of non-nested 0s and 1s. While \code{discrepancy} calls the function with the same name, discrepancy2 calls \code{\link[vegan]{nesteddisc}}, which handles ties differently. Most of the time, these two should deliver very, very similar results. Higher values indicate lower nestedness.}
@@ -32,9 +32,8 @@ nested(web, method = "binmatnest", rescale=FALSE, normalised=TRUE)
     \item{4}{\code{\link{C.score}} calculates the number of checkerboard pattern in the matrix. As default, it normalises this value between min and max, so that values of 0 indicate no checkerboards (i.e. nesting), while a value of 1 indicates a perfect checkerboard. checker is the non-normalised version, based on \code{\link[vegan]{nestedchecker}}.}
     \item{5}{wine is one of two nestedness measure using the information on the weight of a link. See \code{\link{wine}} for details.}
     \item{6}{weighted NODF is a version of 3, but now incorporating information on the weights of the link; it is the second quantitative nestedness measure, (chronologically) after wine. It uses the sorted matrix to compute NODF. If you want NODF of the unsorted, you have to directly use \code{nestednodf} in \pkg{vegan}.}
-    \item{7}{weighted NODA, or WNODA, does try to give a good nestedness measure \emph{without} correcting for column/row expectations, as that should be left to the null model; see Félix et al. for details. }
+    \item{7}{weighted NODA, or WNODA, does try to give a good nestedness measure \emph{without} correcting for column/row expectations, as that should be left to the null model; see Félix et al. (2017) for details. Also, NODA accounts for modular structures of the network, computing nestedness separately in each (see \code{\link{nest.smdm}} for further details).}
   }
-
 }
 
 \value{
