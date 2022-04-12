@@ -1,38 +1,14 @@
 # This now is the command line version; in particular the R CMD CHECK is better here than in the devtools version (which throws an error related to roxygen)
 
 # workflow: 
-# 0. sync vignette-folder for save-keeping with same directory one level higher (the one-level higher is the one I use for everything and only copy-paste the .Rnw into vignette before building the package).
-#
-# 1. build package normally (trying to compact the vignette)
+## At the bottom of the testfile is the workflow on the old computer, where the compression did not work and thus several detours had to be taken.
+
 R CMD build bipartite --compact-vignettes=gs+qpdf
-# 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com !!! Only if larger than 1MB !!!
-...
-# 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the just-built .tar.gz!
-...
-# 4. copy-paste the "build" folder of the .tar.gz of step 1 into the development folder; it contains the data and vignette reference .rdb and .rds needed for a working package!
-...
-# 5. Delete, in vignettes, the cache-folder and auxiliary LaTeX-files and Sweave.sty; keep only the .Rnw and the .bib, and the figures-folder (and the styles: mee.bst and Sweavel.sty) 
-...
-# 6. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
-R CMD build bipartite --no-build-vignettes --resave-data
-# 7. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
 R CMD check bipartite_2.17.tar.gz --as-cran
-R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to vignette in RStudio 
-# if you get this error: Error in fetch(key) : lazy-load database '/Users/Carsten/Library/R/4.0/library/bipartite/help/bipartite.rdb' is corrupt
-# re-start R (RStudio); this is just a point of the install not updating the central help pages (https://stackoverflow.com/questions/30424608/error-in-fetchkey-lazy-load-database).
+# upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
+R CMD install bipartite_2.17.tar.gz
 
 
-## Comments on the workflow above:
-## ad 0.: The vignette is a pain in the neck! The vignettes folder in the level of the top bipartite folder (in PDFetc) is the one to use for writing and processing the vignette! There are some problems, for example that in the betweenness comparison I call packages not listed in "Depends" of bipartite. Since I don't want to make bipartite dependent on packages that do not work well, I now compile the vignette in this folder with "eval=T", then copy the output for this since R-chunk from the .tex-file into the .Rnw file and set "eval=F" (there is a note to that effect in the .Rnw). Then I put the .Rnw into the vignettes-folder and the inst/doc of the package. What a mess!
-## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do. (Note: Last time (2.17) it all worked fine! Thus, steps 2-6 could be skipped!)
-## ad 2.: You can try 
-## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", qpdf=Sys.which(Sys.getenv("R_QPDF", "qpdf")), gs_quality = "ebook") ## but for me this did not yield any compression;
-## ad 5.: There are other check options, e.g. rhub::check("bipartite_2.16.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run; rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
-##
-## Misc:
-## * find non-UTF8 characters: find . | egrep [^a-zA-Z0-9_\.\/\-\s]
-## * check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
-## * if something goes wrong with the vignette build, fix and start over with the package building (it is difficult to move the right files into the right folders; R even checks the date of .Rnw files!)
 
 
 ## bipartite test file ##
@@ -44,8 +20,8 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 library(bipartite)
 library(testthat)
 
-source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
-source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
+#source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
+#source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
 
@@ -513,86 +489,38 @@ as.character(webinput)
 
 
 
-## ----------some not so bright ideas ---------##
-###source function to make sure we use the most recent ones:
-# NOT SO BRIGHT! because the namespace will import specified functions. When we now load the functions via source, these imported functions are NOT available, unless we explicitly load the package, too:
-#setwd("/Users/cdormann/Data/aktuell/BESS/R_FoodWeb/")
-#rfiles <- list.files("bipartite/R")
-## source files, excluding zzz.r
-#for (i in seq_along(rfiles)[-length(rfiles)]) source(paste0("bipartite/R/", rfiles[i]))
-# C.score(Safariland) # error: could not find "designdist"
+
+## Below the testfile is the workflow on the old computer, where the compression did not work and thus several detours had to be taken.
+
+# 0. sync vignette-folder for save-keeping with same directory one level higher (the one-level higher is the one I use for everything and only copy-paste the .Rnw into vignette before building the package).
+#
+# 1. build package normally (trying to compact the vignette)
+R CMD build bipartite --compact-vignettes=gs+qpdf
+# 2. go to some webpage and compact there the vignette from inst/doc in the built package, e.g. https://www.ilovepdf.com !!! Only if larger than 1MB !!!
+...
+# 3. put the thus compacted PDF into inst/doc of the development folder (not into the built!), put in there also the .R and .Rnw files from inst/doc of the just-built .tar.gz!
+...
+# 4. copy-paste the "build" folder of the .tar.gz of step 1 into the development folder; it contains the data and vignette reference .rdb and .rds needed for a working package!
+...
+# 5. Delete, in vignettes, the cache-folder and auxiliary LaTeX-files and Sweave.sty; keep only the .Rnw and the .bib, and the figures-folder (and the styles: mee.bst and Sweavel.sty) 
+...
+# 6. build package anew without rebuilding the vignettes (and without cleaning the docs, in case you are using devtools::build!)
+R CMD build bipartite --no-build-vignettes --resave-data
+# 7. check all is fine: first locally, then on win-builder (https://win-builder.r-project.org/upload.aspx)
+R CMD check bipartite_2.17.tar.gz --as-cran
+R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to vignette in RStudio 
+# if you get this error: Error in fetch(key) : lazy-load database '/Users/Carsten/Library/R/4.0/library/bipartite/help/bipartite.rdb' is corrupt
+# re-start R (RStudio); this is just a point of the install not updating the central help pages (https://stackoverflow.com/questions/30424608/error-in-fetchkey-lazy-load-database).
 
 
-Type: Package
-Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
-Version: 2.17
-Date: 2021-05-18
-Authors@R: c(person(given = "Carsten F.",
-                    family = "Dormann",
-                    role = c("aut", "cre"),
-                    email = "carsten.dormann@biom.uni-freiburg.de",
-                    comment = c(ORCID = "0000-0002-9835-1794")),
-             person(given = "Jochen",
-                    family = "Fruend",
-                    role = c("aut"),
-                    comment = c(ORCID = "0000-0002-7079-3478")),
-             person(given = "Bernd",
-                    family = "Gruber",
-                    role = c("aut"),
-                    comment = c(ORCID = "0000-0003-0078-8179")),
-             person(given = "Stephen",
-                    family = "Beckett",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0002-4410-2960")),
-             person(given = "Mariano",
-                    family = "Devoto",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0003-3098-236X")),
-             person(given = "Gabriel M.F.",
-                    family = "Felix",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0002-3901-4333")),
-             person(given = "José M.",
-                    family = "Iriondo",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0003-2710-3889")),
-             person(given = "Tore",
-                    family = "Opsahl",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0003-0346-8082")),
-             person(given = "Rafael B.P.",
-                    family = "Pinheiro",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0003-2342-8483")),
-             person(given = "Rouven",
-                    family = "Strauss",
-                    role = c("ctb")),
-             person(given = "Diego P.",
-                    family = "Vázquez",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0002-3449-5748")) )
-Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
-Jochen Fruend [aut] (<https://orcid.org/0000-0002-7079-3478>),
-Bernd Gruber [aut] (<https://orcid.org/0000-0003-0078-8179>),
-Stephen Beckett [ctb] (<https://orcid.org/0000-0002-4410-2960>),
-Mariano Devoto [ctb] (<https://orcid.org/0000-0003-3098-236X>),
-Gabriel M.F. Felix [ctb] (<https://orcid.org/0000-0002-3901-4333>),
-José M. Iriondo [ctb] (<https://orcid.org/0000-0003-2710-3889>),
-Tore Opsahl [ctb] (<https://orcid.org/0000-0003-0346-8082>),
-Rafael  B.P. Pinheiro [ctb] (<https://orcid.org/0000-0003-2342-8483>),
-Rouven Strauss[ctb],
-Diego P. Vázquez [ctb] (<https://orcid.org/0000-0002-3449-5748>)
-Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
-  Depends: R(>= 3.5.0), vegan, sna
-Imports: fields, igraph, MASS, methods, permute
-Suggests: knitr
-LazyData: TRUE
-ByteCompile: TRUE
-Encoding: UTF-8
-NeedsCompilation: yes
-VignetteBuilder: knitr, utils
-URL: https://github.com/biometry/bipartite
-Description: Functions to visualise webs and calculate a series of indices commonly used to describe pattern in (ecological) webs. It focuses on webs consisting of only two levels (bipartite), e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the web's topology. 
-License: GPL
-Packaged: 2021-02-04 08:24:39 UTC; Carsten
-RoxygenNote: 7.1.1
+## Comments on the workflow above:
+## ad 0.: The vignette is a pain in the neck! The vignettes folder in the level of the top bipartite folder (in PDFetc) is the one to use for writing and processing the vignette! There are some problems, for example that in the betweenness comparison I call packages not listed in "Depends" of bipartite. Since I don't want to make bipartite dependent on packages that do not work well, I now compile the vignette in this folder with "eval=T", then copy the output for this since R-chunk from the .tex-file into the .Rnw file and set "eval=F" (there is a note to that effect in the .Rnw). Then I put the .Rnw into the vignettes-folder and the inst/doc of the package. What a mess!
+## ad 1.: Somehow --compact-vignettes... does not compact at all. I tried all options (both, gs+qpdf, qpdf, gs; always without quotes!), nothing happened. I ran qpdf::pdf_compact and that did work, so qpdf is on my system(s); I have no idea what else to do. 
+## ad 2.: You can try 
+## tools::compactPDF("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/inst/doc", qpdf=Sys.which(Sys.getenv("R_QPDF", "qpdf")), gs_quality = "ebook") ## but for me this did not yield any compression;
+## ad 5.: There are other check options, e.g. rhub::check("bipartite_2.16.tar.gz", platform = "fedora-clang-devel") # requires validate_email() before first run; rhub misses some packages or package options (e.g. titlesec and nottoc in tocbibind and hidelinks in hyperref)
+##
+## Misc:
+## * find non-UTF8 characters: find . | egrep [^a-zA-Z0-9_\.\/\-\s]
+## * check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
+## * if something goes wrong with the vignette build, fix and start over with the package building (it is difficult to move the right files into the right folders; R even checks the date of .Rnw files!)
