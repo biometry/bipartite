@@ -116,7 +116,7 @@ Blüthgen, N. 2010. Why network analysis is often disconnected from community ec
 
 Blüthgen, N., Menzel, F., Hovestadt, T., Fiala, B. and Blüthgen N. 2007 Specialization, constraints and conflicting interests in mutualistic networks. \emph{Current Biology} \bold{17}, 1--6
 
-Devoto M., Bailey S., Craze P., and Memmott J. (2012) Understanding and planning ecological restoration of plant-pollinator networks. \emph{Ecology Letters} \bold{15}, 319--328. \doi{10.1111/j.1461-0248.2012.01740.x}
+Devoto M., Bailey S., Craze P., and Memmott J. (2012) Understanding and planning ecological restoration of plant-pollinator networks. \emph{Ecology Letters} \bold{15}, 319--328. %\doi{10.1111/j.1461-0248.2012.01740.x}
 
 Dormann, C.F., Fründ, J., Blüthgen, N., and Gruber, B. (2009) Indices, graphs and null models: analysing bipartite ecological networks. \emph{The Open Ecology Journal} \bold{2}, 7--24.
 
@@ -124,7 +124,7 @@ Dunne, J. A., R. J. Williams, and N. D. Martinez. 2002 Food-web structure and ne
 
 Gotelli, N. J., and G. R. Graves. 1996 Null Models in Ecology. Smithsonian Institution Press, Washington D.C.
 
-Jost, L. 2006. Entropy and diversity. \emph{Oikos} \bold{113}, 363-–375. \doi{10.1111/j.2006.0030-1299.14714.x}
+Jost, L. 2006. Entropy and diversity. \emph{Oikos} \bold{113}, 363-–375. %\doi{10.1111/j.2006.0030-1299.14714.x}
 
 Krebs, C. J. 1989 \emph{Ecological Methodology}. Harper Collins, New York.
 

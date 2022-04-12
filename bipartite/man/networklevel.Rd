@@ -126,8 +126,7 @@ Depending on the selected indices, some or all of the below (returned as vector 
     \item{Alatalo interaction evenness}{A different measure for web entry evenness, as proposed by Müller et al. (1999). }
     \item{Shannon diversity}{Shannon's diversity of interactions (i.e. network entries).}
     \item{H2}{H2' is a network-level measure of specialisation. It ranges between 0 (no specialisation) and 1 (complete specialisation). More specifically, H2' is a measure of discrimination, i.e. calculated in comparison to no specialisation (see \code{\link{H2fun}} for details. To avoid confusion of keys (apostrophe vs. accent), we call H2' only H2 here.}
-    \item{}{}
-    \item{}{others now to come: all other indices are returned as output from \code{\link{grouplevel}}. Please see there for details, we here only provide minimal listing.}
+    \item{others now to come:}{all other indices are returned as output from \code{\link{grouplevel}}. Please see there for details, we here only provide minimal listing.}
     \item{number of species}{}
     \item{mean number of shared partners}{in this level}
     \item{cluster coefficient}{for this level (same for both levels if \option{weighted=FALSE}).}

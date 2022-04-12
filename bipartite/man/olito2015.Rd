@@ -18,7 +18,7 @@ An interaction was recorded when an insect visitor was observed contacting flora
 \references{
 When using this data, please cite the original publication:
 
-Olito C, Fox JW (2015) Species traits and abundances predict metrics of plant–pollinator network structure, but not pairwise interactions. Oikos 124(4): 428--436. \doi{10.1111/oik.01439}
+Olito C, Fox JW (2015) Species traits and abundances predict metrics of plant–pollinator network structure, but not pairwise interactions. Oikos 124(4): 428--436. %\doi{10.1111/oik.01439}
 
 Additionally, please cite the Dryad data package:
 

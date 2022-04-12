@@ -96,7 +96,7 @@ cM = function(web, depth, nrOfModule, ytop, xleft, ybottom, xright, prev_orderA,
     webName = paste("web-", depth, "-", nrOfModule, sep="");
     
     # write web to file
-    web2edges(web[ytop:ybottom, xleft:xright], webName=webName);
+    web2edges(web[ytop:ybottom, xleft:xright], webName=webName, return=FALSE);
     argv = c("identifyModules", "-filename", paste(webName, ".pairs", sep=""), "-steps", round(steps), "-tolerance", as.double(tolerance)); # round instead of "as.integer(steps)" because the latter works only up to 1E9!!
     if (experimental) {
       argv = append(argv, c("-method", "Strauss"));

@@ -76,18 +76,18 @@ A named vector of four (or more) dissimilarities (components), naming follows Po
 \item{OS}{beta_OS, the dissimilarity (component) explained by ``rewiring'' among shared species}
 \item{WN}{beta_WN, the dissimilarity between the two networks}
 \item{ST}{beta_ST, the dissimilarity (component) explained by difference in species community composition}
-\item{}{possibly more elements, same names as above, but with secondary partitioning added after ``.'', see \code{partition.st} and \code{partition.rr}}
+\item{(others)}{possibly more elements, same names as above, but with secondary partitioning added after ``.'', see \code{partition.st} and \code{partition.rr}}
 For \code{betalinkr_multi}, output is a dataframe with one row per pair of webs compared.
 }
 
 \references{
-Poisot, T., E. Canard, D. Mouillot, N. Mouquet, D. Gravel, and F. Jordan. 2012. The dissimilarity of species interaction networks. \emph{Ecology Letters} \bold{15}, 1353--1361. \doi{10.1111/ele.12002}
+Poisot, T., E. Canard, D. Mouillot, N. Mouquet, D. Gravel, and F. Jordan. 2012. The dissimilarity of species interaction networks. \emph{Ecology Letters} \bold{15}, 1353--1361. %\doi{10.1111/ele.12002}
 
-Legendre, P. 2014. Interpreting the replacement and richness difference components of beta diversity. \emph{Global Ecology and Biogeography} \bold{23}, 1324--1334. \doi{10.1111/geb.12207}
+Legendre, P. 2014. Interpreting the replacement and richness difference components of beta diversity. \emph{Global Ecology and Biogeography} \bold{23}, 1324--1334. %\doi{10.1111/geb.12207}
 
 Koleff, P., Gaston, K.J., and J.J. Lennon. 2003. Measuring beta diversity for presence–absence data. \emph{Journal of Animal Ecology} \bold{72}, 367--382.
 
-Novotny, V. 2009. Beta diversity of plant-insect food webs in tropical forests: a conceptual framework. \emph{Insect Conservation and Diversity} \bold{2}, 5--9. \doi{10.1111/j.1752-4598.2008.00035.x}
+Novotny, V. 2009. Beta diversity of plant-insect food webs in tropical forests: a conceptual framework. \emph{Insect Conservation and Diversity} \bold{2}, 5--9. %\doi{10.1111/j.1752-4598.2008.00035.x}
 
 Noreika, N., Bartomeus, I., Winsa, M., Bommarco, R., and  E. Öckinger. 2019. Pollinator foraging flexibility mediates rapid plant-pollinator network restoration in semi-natural grasslands.\emph{Scientific Reports}, \bold{9}, 1--11. \doi{10.1038/s41598-019-51912-4}
 }

@@ -550,9 +550,9 @@ bool readInputFile() {
 	FILE *fp;
 
 	int n_a, n_b, n, m, vertex_i, vertex_j, virtualVertex_i, virtualVertex_j, countBVertices;
-	double edgeWeight, sumEdgeWeight;
+    double edgeWeight; //, sumEdgeWeight;
 	n_a = n_b = n = m = countBVertices = 0;
-	sumEdgeWeight = 0;
+	// sumEdgeWeight = 0;
 	elementrb *item;
 	time_t t1 = time(&t1);
 	time_t t2 = time(&t2);
@@ -577,7 +577,7 @@ bool readInputFile() {
 			}
 			else {
 				m++;									// count number of edges
-				sumEdgeWeight += edgeWeight;						// compute total sum of edge weights
+				// sumEdgeWeight += edgeWeight;						// compute total sum of edge weights
 				if (namesLUT->findItem(vertex_i) == NULL) {
 					namesLUT->insertItem(vertex_i, n_a);
 					n_a++;								// increment number of A vertices

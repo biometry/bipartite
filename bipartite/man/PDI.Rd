@@ -54,7 +54,7 @@ Poisot, T., Lepennetier, G., Martinez, E., Ramsayer, J., and Hochberg, M.E. (201
 
 Poisot, T., Bever, J.D., Nemri, A., Thrall, P.H., and Hochberg, M.E. (2011b) A conceptual framework for the evolution of ecological specialisation. \emph{Ecology Letters} \bold{14}, 841--851
 
-Poisot, T., E. Canard, N. Mouquet, and M. E. Hochberg. 2012. A comparative study of ecological specialization estimators. \emph{Methods in Ecology and Evolution} \bold{3}, 537--544. \doi{10.1111/j.2041-210X.2011.00174.x}
+Poisot, T., E. Canard, N. Mouquet, and M. E. Hochberg. 2012. A comparative study of ecological specialization estimators. \emph{Methods in Ecology and Evolution} \bold{3}, 537--544. % \doi{10.1111/j.2041-210X.2011.00174.x}
 }
 
 \author{ Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de> }
