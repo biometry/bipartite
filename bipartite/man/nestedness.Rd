@@ -13,15 +13,14 @@ n.ind = 7, n.gen = 2000, binmatnestout=FALSE)
 
 \arguments{
   \item{m}{ \code{m} is the matrix object for which the temperature is calculated. \code{m} will be converted to a binary matrix as temperature is only based on binary data}
-  \item{null.models}{Logical; shall the three different null models to check for significance of the matrix temperature be calculated? The null models procedure is 
+  \item{null.models}{Ignored. Logical; shall the three different null models to check for significance of the matrix temperature be calculated? The null models procedure is 
 quite time consuming and therefore we added this switch. Defaults to \code{null.models}=TRUE.}
-  \item{n.nulls}{How many null models should be calculated. Defaults to \code{n.nulls=100}.}
-  \item{popsize}{For the genetic algorithm some parameters have to be initialised. First is \code{popsize}, default is 30}
-  \item{n.ind}{Second is number of individuals picked for the next generation. Default of \code{n.ind} is 7.}
-  \item{n.gen}{Third is the number of generations until the genetic algorithm stops. Default of \code{n.gen} is 2000.}
-  \item{binmatnestout}{if set to TRUE a file "binmat.out" is saved in the current working directory , which stores the original binmatnest output}
+  \item{n.nulls}{Ignored. How many null models should be calculated. Defaults to \code{n.nulls=100}.}
+  \item{popsize}{Ignored. For the genetic algorithm some parameters have to be initialised. First is \code{popsize}, default is 30}
+  \item{n.ind}{Ignored. Second is number of individuals picked for the next generation. Default of \code{n.ind} is 7.}
+  \item{n.gen}{Ignored. Third is the number of generations until the genetic algorithm stops. Default of \code{n.gen} is 2000.}
+  \item{binmatnestout}{Ignored. If set to TRUE a file "binmat.out" is saved in the current working directory , which stores the original binmatnest output}
 }
-
 
 \details{
 This is a note that the original function provided here, and detailed below, has been retired. \pkg{vegan}'s \code{\link[vegan]{nestedtemp}} is more stable and replaces this call whereever we use it in \pkg{bipartite}. Indeed, calling \pkg{bipartite}'s \code{nestedness} now simply call's \pkg{vegan}'s \code{\link[vegan]{nestedtemp}}. The function will eventually disappear, but for now this fix is provided as legacy support for dependent packages.
@@ -37,10 +36,21 @@ Notice also that the original software BINMATNEST is available as a stand-alone 
 }
 
 
+\value{
+  \item{comm}{Returns the input.}
+  \item{u}{null model matrix}
+  \item{r}{marginal row proportions}
+  \item{c}{marginal col proportions}
+  \item{p}{??}
+  \item{fill}{connectance: proportion of non-zero cells}
+  \item{statistic}{nestedness temperature}
+  \item{smooth}{??}
+}
+
+
 \references{
 Rodríguez-Gironés M.A., and Santamaría L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence matrices. \emph{Journal of Biogeography} \bold{33}, 924--935
 }
-
 
 
 \keyword{ package}
