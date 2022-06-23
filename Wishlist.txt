@@ -59,6 +59,7 @@ small
 
 
 (add new stuff)
+* add "assortativity" of Newman 2002 as cited in Ona & Kost 2022
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)

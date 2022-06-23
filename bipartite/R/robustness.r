@@ -18,6 +18,6 @@ robustness<- function (object)
     y <- (sum(y) - cumsum(y))/sum(y) #calculates the proportional cumulative sum of secondary extinctions
     x <- (object[, "no"]/max(object[, "no"])) #calculates the proportional primary extinctions
     ext.curve <- splinefun(x,y) #interpolates a function for the secondary extinctions
-    ext.area <- integrate(ext.curve,0,1) # calculates the area below the curve
+    ext.area <- integrate(ext.curve, min(x), max(x), subdivisions=max(100L, length(x))) # calculates the area below the curve
     return(as.numeric(ext.area[[1]]))
 }

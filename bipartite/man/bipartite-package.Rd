@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.17\cr
-Date: \tab 2022-04-12\cr
+Version: \tab 2.18\cr
+Date: \tab 2022-06-23\cr
 License: \tab GPL \cr
 }
 }
@@ -49,6 +49,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.18 (XX-YYY-2022)
+  \describe{
+    \item{Bug fix in \code{\link{robustness}}:}{For large matrices, the (too short) subdivision length and the possible non-zero starting values caused an error. Thanks to Rafael Pinheir for reporting.}
+  }
+  
 	\item 2.17 (release date: 12-Apr-2022)
 	\describe{
   	\item{New null model for "compound network structure" using \code{\link{restrictednull}}:}{This function, contributed by Gabriel Felix, Rafael Pinheiro, and Marco Mello from the Ecological Synthesis Lab (SintECO) in São Paulo, constructs null model expectations for networks with modules. So far, nestedness could not be properly tested for \emph{within} null model modules, only at the level of the entire network. This function uses information from previously identified modules (typically using \code{\link{computeModules}}) to generate expectations based on marginal totals and observed connectivity. It builds on \code{\link{vaznull}} in that respect, but adds the modular structure.}
