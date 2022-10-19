@@ -3,7 +3,7 @@
 \alias{NOS} 
 
 
-\title{Calculates the node overlap and separation according to Strona \& Veech (2015)}
+\title{Calculates the node overlap and separation according to Strona & Veech (2015)}
 \description{
 This index computes a variation of nestedness, called node overlap and segragation, as well as a modularity measure
 }

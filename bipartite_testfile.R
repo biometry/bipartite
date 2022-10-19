@@ -3,10 +3,14 @@
 # workflow: 
 ## At the bottom of the testfile is the workflow on the old computer, where the compression did not work and thus several detours had to be taken.
 
+Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax check in R CMD check
+## DOES NOT WORK! (I used "_" before and after the option, as indicate in the NEWS-section.)
+#Sys.getenv()
+
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.17.tar.gz --as-cran
+R CMD check bipartite_2.18.tar.gz --as-cran
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
-R CMD install bipartite_2.17.tar.gz
+R CMD install bipartite_2.18.tar.gz
 
 
 

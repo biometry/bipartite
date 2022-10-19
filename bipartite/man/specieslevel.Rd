@@ -153,7 +153,7 @@ Poisot, T., E. Canard, N. Mouquet, and M. E. Hochberg (2012) A comparative study
 Vázquez, D. P., Melian, C. J., Williams, N. M., Blüthgen N., Krasnov B. R. and Poulin, R. (2007) Species abundance and asymmetric interaction strength in ecological networks. \emph{Oikos} \bold{116}, 1120--1127
 }
 
-\author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de} \& Jochen Fründ}
+\author{ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de} & Jochen Fründ}
 
 \note{
 A comparison of specialisation indices is provided in Dormann (2011); the PDI is missing (since it was published later).
