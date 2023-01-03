@@ -49,9 +49,14 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.19 (XX-YYY-2023)
+  \describe{
+    \item{Warning fix in internal function \code{\link{isCorrectModuleWebObject}}:}{Incorrect testing of dimensions of modularity object. Thanks to Frazer Moore for reporting.}
+  }
+
   \item 2.18 (22-Oct-2022)
   \describe{
-    \item{Bug fix in \code{\link{robustness}}:}{For large matrices, the (too short) subdivision length and the possible non-zero starting values caused an error. Thanks to Rafael Pinheir for reporting.}
+    \item{Bug fix in \code{\link{robustness}}:}{For large matrices, the (too short) subdivision length and the possible non-zero starting values caused an error. Thanks to Rafael Pinheiro for reporting.}
     \item{Small semantic}{fixes newly picked up by sterner CRAN checks (e.g. non-UTF in comment; escaped ampersand in title).}
   }
   
