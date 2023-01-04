@@ -20,7 +20,7 @@ czvalues <- function(moduleWebObject, weighted=FALSE, level="higher"){
 	# Note: for modules with only one species from the lower trophic level, the z-values will be NaN, since SD.ks is 0!
 	# I decided to SET these values to 0, since they only occur when all species in that module will have the same number of links (which is obviously the case when there is only one lower-level species). Then the numerator is also 0. Thus, the value of 0 indicates that this species has no deviation from the rest of the module members (which is what I think z is supposed to represent).
 	
-	if(!isCorrectModuleWebObject(moduleWebObject)) stop("This function cannot be applied to this type of object!")
+	if (!isCorrectModuleWebObject(moduleWebObject)) stop("This function cannot be applied to this type of object!")
 	
 	## zvalues
 	zvalues <- function(web, weighted=FALSE){

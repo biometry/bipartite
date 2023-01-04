@@ -16,21 +16,21 @@ drawModules = function(foundModules) {
 }
 
 # Auxiliary function checking whether the passed object is an object of class "moduleWeb" and contains correctly formatted information
-isCorrectModuleWebObject = function(moduleWebObject) {
-
-	if (!is(moduleWebObject, "moduleWeb")) {
-		warning("Object of wrong class.");
-		FALSE;
-	}
-	else if(dim(slot(moduleWebObject, "originalWeb")) == 0 ||  dim(slot(moduleWebObject, "moduleWeb")) != dim(slot(moduleWebObject, "originalWeb")) || dim(slot(moduleWebObject, "modules")) == 0) {
-		warning("Object corrupt.");
-		FALSE;
-	}
-	else if(min(slot(moduleWebObject, "originalWeb")) < 0 || min(slot(moduleWebObject, "moduleWeb")) < 0) {
-		warning("entries of matrix have to be greater than or equal to 0.");
-		FALSE;
-	}
-	else {
-		TRUE;
-	}
-}
+# isCorrectModuleWebObject = function(moduleWebObject) {
+# 
+# 	if (!is(moduleWebObject, "moduleWeb")) {
+# 		warning("Object of wrong class.");
+# 		FALSE;
+# 	}
+# 	else if(dim(slot(moduleWebObject, "originalWeb")) == 0 ||  dim(slot(moduleWebObject, "moduleWeb")) != dim(slot(moduleWebObject, "originalWeb")) || dim(slot(moduleWebObject, "modules")) == 0) {
+# 		warning("Object corrupt.");
+# 		FALSE;
+# 	}
+# 	else if(min(slot(moduleWebObject, "originalWeb")) < 0 || min(slot(moduleWebObject, "moduleWeb")) < 0) {
+# 		warning("entries of matrix have to be greater than or equal to 0.");
+# 		FALSE;
+# 	}
+# 	else {
+# 		TRUE;
+# 	}
+# }

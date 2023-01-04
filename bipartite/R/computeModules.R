@@ -309,8 +309,7 @@ isCorrectModuleWebObject = function(moduleWebObject) {
 	if (!is(moduleWebObject, "moduleWeb")) {
 		warning("Object of wrong class.");
 		FALSE;
-	}
-	else if (any(dim(slot(moduleWebObject, "originalWeb")) == 0) ||  any(dim(slot(moduleWebObject, "moduleWeb")) != dim(slot(moduleWebObject, "originalWeb"))) || any(dim(slot(moduleWebObject, "modules")) == 0)) {
+	}	else if (any(dim(slot(moduleWebObject, "originalWeb")) == 0) ||  any(dim(slot(moduleWebObject, "moduleWeb")) != dim(slot(moduleWebObject, "originalWeb"))) || any(dim(slot(moduleWebObject, "modules")) == 0)) {
 		warning("Object corrupt.");
 		FALSE;
 	}
@@ -338,12 +337,12 @@ listModuleInformation = function(moduleWebObject) {
 
 		offset	= 2;
 
-		for(depth in unique(modules[,1])) {
+		for (depth in unique(modules[,1])) {
 			result[[depth+1]] = list();
 
 			counter = 1;
 
-			for(i in 1:nrow(modules)) {
+			for (i in 1:nrow(modules)) {
 				if(modules[i,1] == depth) {
 					result[[depth+1]][[counter]]		= list();
 					result[[depth+1]][[counter]][[1]]	= rownames(web)[modules[i,(offset+1):(n_a+offset)][modules[i,(offset+1):(n_a+offset)] > 0]];

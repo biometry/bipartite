@@ -24,7 +24,7 @@ R CMD install bipartite_2.18.tar.gz
 library(bipartite)
 library(testthat)
 
-#source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/vaznull.R")
+#source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/computeModules.R")
 #source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
 
 # lazy load data does not require data to be loaded via "data(.)"!
@@ -154,7 +154,10 @@ slot(computeModules(a), "likelihood")
 
 
 # czvalues
-czvalues(comp1)
+comp1 <- computeModules(memmott1999)
+czvalues(comp1, weighted=T)
+czvalues(comp1, level="lower")
+# plotModuleWeb(comp1)
 czvalues(comp3)
 
 

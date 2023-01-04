@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.18\cr
-Date: \tab 2022-06-23\cr
+Version: \tab 2.19\cr
+Date: \tab 2023-01-04\cr
 License: \tab GPL \cr
 }
 }
