@@ -41,10 +41,17 @@ r2dexternal <- function(N, web, abun.higher=NULL, abun.lower=NULL){
 	## rows: 
 	rr <- floor(rel.abun.lower * total)
 	missing.rr <- sum(rr) - total
+	zerorows <- which(rr == 0)
 	if (missing.rr != 0 & length(which(rr == 0)) > 0){
-		# allocate to missing species first
-		rr[which(rr == 0)] <- rr[which(rr == 0)] + 1
-		missing.rr <- sum(rr) - total
+		if (length(zerorows) > total){
+		  warning("There are fewer interactions observed than rows of species. Interactions will be allocated randomly.")
+		  put.here <- table(sample(zerorows, abs(missing.rr), prob=rel.abun.lower[zerorows], replace=TRUE))
+		  rr[as.numeric(names(put.here))] <- put.here
+		} else {
+	    # allocate to missing species first
+		  rr[zerorows] <- rr[zerorows] + 1
+		  missing.rr <- sum(rr) - total
+		}
 	}
 
 	if (missing.rr != 0 & length(which(rr == 0)) == 0){

@@ -51,6 +51,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.19 (XX-YYY-2023)
   \describe{
+    \item{When a matrix has more columns/rows than the sum of entries, \code{\link{r2dexternal}}}{will not work without external abundances. The fix is incomplete, as it is only applied to columns in the moment, and not to \code{\link{vaznullexternal}} either. Thanks to Emilie Ellis for reporting!}
     \item{Warning fix in internal function \code{\link{isCorrectModuleWebObject}}:}{Incorrect testing of dimensions of modularity object. Thanks to Frazer Moore for reporting.}
   }
 

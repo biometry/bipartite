@@ -33,6 +33,8 @@ If neither row nor column abundances are provided this function will be identica
 \note{
 Since the function contains a rounding operation, it also has to include a re-distribution of 1s to keep all species in the system. That means, if one species has been observed in the external abundances extremely rarely (compared to the others), it will be overrepresented in this null model, because otherwise it would have to be dropped altogether! If you have a better solution, please let me know.
 
+When you hand over a web with lots of empty columns/rows, chances are that you have more columns/rows than interactions. In this case you \bold{must} provide an external abundance vector, otherwise the function will throw an error. If you cannot provide an external abundance vector, consider removing all empty columns and rows (using \code{\link{empty}}) before applying a null model.
+
 Also note that \code{\link{vaznull}} itself does not return a matrix with exactly the same marginal totals as the input, so don't expect any different from \code{vaznullexternal}!
 }
 
