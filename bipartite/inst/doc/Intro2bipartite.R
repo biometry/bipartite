@@ -99,7 +99,7 @@ SafPlantsEL <- as.tnet(as.one.mode(Safariland, project="lower"))
 ## tnet::betweenness_w(SafPlantsEL) # 6
 ## bipartite::BC(Safariland, rescale=F)$lower # 6
 ## DiagrammeR::get_betweenness(DiagrammeR::from_igraph(tnet_igraph(SafPlantsEL))) # 6
-## igraph::estimate_betweenness(tnet_igraph(SafPlantsEL), cutoff=9) # 6
+## igraph::betweenness(tnet_igraph(SafPlantsEL), cutoff=9) # 6
 ## influenceR::betweenness(tnet_igraph(SafPlantsEL)) # 12
 ## sna::betweenness(SafPlantsEL) # length 36!!
 ## sna::betweenness(as.matrix(SafPlantsEL)) # length 27!!
@@ -111,7 +111,7 @@ SafPlantsEL <- as.tnet(as.one.mode(Safariland, project="lower"))
 ## btws <- cbind("t:betw"=tnet::betweenness_w(SafPlantsEL)[,2],
 ##     "b:BC"=bipartite::BC(Safariland, rescale=F)$lower,
 ##     "DR:betw"=DiagrammeR::get_betweenness(DiagrammeR::from_igraph(tnet_igraph(SafPlantsEL)))[,2],
-##     "i:estbetw"=igraph::estimate_betweenness(tnet_igraph(SafPlantsEL), cutoff=9),
+##     "i:estbetw"=igraph::betweenness(tnet_igraph(SafPlantsEL), cutoff=9),
 ##     "inf:betw"=influenceR::betweenness(tnet_igraph(SafPlantsEL))/2 )
 ## rownames(btws) <- rownames(Safariland)
 ## btws
