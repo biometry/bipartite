@@ -19,6 +19,7 @@ large changes
 * how small can a network be before it is a problem? --> funnel plot of network index against sample size: when does it start exhibiting a bias (for observed and null model values; put this with an example into the vignette)
 
 * NULLMODEL-LIKE:
+* r2dexternal/vaznullexternal: extend changes for too many 0s for rows also to columns and to vaznullexternal
 * check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
