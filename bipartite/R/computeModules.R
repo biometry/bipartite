@@ -313,7 +313,7 @@ isCorrectModuleWebObject = function(moduleWebObject) {
 		warning("Object corrupt.");
 		FALSE;
 	}
-	else if any(min(slot(moduleWebObject, "originalWeb")) < 0 || min(slot(moduleWebObject, "moduleWeb")) < 0) {
+	else if (any(min(slot(moduleWebObject, "originalWeb")) < 0 || min(slot(moduleWebObject, "moduleWeb")) < 0)) {
 		warning("entries of matrix have to be greater than or equal to 0.");
 		FALSE
 	}
