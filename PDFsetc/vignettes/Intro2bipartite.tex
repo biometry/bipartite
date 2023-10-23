@@ -1,7 +1,7 @@
 %\VignetteIndexEntry{Starting with bipartite}
 %\VignetteEncoding{UTF-8}
 
-\documentclass[a4paper, 11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[a4paper, 11pt]{article}\usepackage[]{graphicx}\usepackage[dvipsnames]{xcolor}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -15,9 +15,6 @@
 \makeatother
 
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\makeatletter
-\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}}}
-\makeatother
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
 \newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
 \newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
@@ -52,14 +49,6 @@
 \definecolor{messagecolor}{rgb}{0, 0, 0}
 \definecolor{warningcolor}{rgb}{1, 0, 1}
 \definecolor{errorcolor}{rgb}{1, 0, 0}
-\makeatletter
-\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-}}
-\makeatother
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
@@ -550,7 +539,7 @@ Let's see what its betweenness score is, using several different functions acros
 \hlstd{tnet}\hlopt{::}\hlkwd{betweenness_w}\hlstd{(SafPlantsEL)} \hlcom{# 6}
 \hlstd{bipartite}\hlopt{::}\hlkwd{BC}\hlstd{(Safariland,} \hlkwc{rescale}\hlstd{=F)}\hlopt{$}\hlstd{lower} \hlcom{# 6}
 \hlstd{DiagrammeR}\hlopt{::}\hlkwd{get_betweenness}\hlstd{(DiagrammeR}\hlopt{::}\hlkwd{from_igraph}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL)))} \hlcom{# 6}
-\hlstd{igraph}\hlopt{::}\hlkwd{estimate_betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL),} \hlkwc{cutoff}\hlstd{=}\hlnum{9}\hlstd{)} \hlcom{# 6}
+\hlstd{igraph}\hlopt{::}\hlkwd{betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL),} \hlkwc{cutoff}\hlstd{=}\hlnum{9}\hlstd{)} \hlcom{# 6}
 \hlstd{influenceR}\hlopt{::}\hlkwd{betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL))} \hlcom{# 12}
 \hlstd{sna}\hlopt{::}\hlkwd{betweenness}\hlstd{(SafPlantsEL)} \hlcom{# length 36!!}
 \hlstd{sna}\hlopt{::}\hlkwd{betweenness}\hlstd{(}\hlkwd{as.matrix}\hlstd{(SafPlantsEL))} \hlcom{# length 27!!}
@@ -565,7 +554,7 @@ Let's put them all next to each other, into a named matrix:
 \hlstd{btws} \hlkwb{<-} \hlkwd{cbind}\hlstd{(}\hlstr{"t:betw"}\hlstd{=tnet}\hlopt{::}\hlkwd{betweenness_w}\hlstd{(SafPlantsEL)[,}\hlnum{2}\hlstd{],}
     \hlstr{"b:BC"}\hlstd{=bipartite}\hlopt{::}\hlkwd{BC}\hlstd{(Safariland,} \hlkwc{rescale}\hlstd{=F)}\hlopt{$}\hlstd{lower,}
     \hlstr{"DR:betw"}\hlstd{=DiagrammeR}\hlopt{::}\hlkwd{get_betweenness}\hlstd{(DiagrammeR}\hlopt{::}\hlkwd{from_igraph}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL)))[,}\hlnum{2}\hlstd{],}
-    \hlstr{"i:estbetw"}\hlstd{=igraph}\hlopt{::}\hlkwd{estimate_betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL),} \hlkwc{cutoff}\hlstd{=}\hlnum{9}\hlstd{),}
+    \hlstr{"i:estbetw"}\hlstd{=igraph}\hlopt{::}\hlkwd{betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL),} \hlkwc{cutoff}\hlstd{=}\hlnum{9}\hlstd{),}
     \hlstr{"inf:betw"}\hlstd{=influenceR}\hlopt{::}\hlkwd{betweenness}\hlstd{(}\hlkwd{tnet_igraph}\hlstd{(SafPlantsEL))}\hlopt{/}\hlnum{2} \hlstd{)}
 \hlkwd{rownames}\hlstd{(btws)} \hlkwb{<-} \hlkwd{rownames}\hlstd{(Safariland)}
 \hlstd{btws}
@@ -597,7 +586,7 @@ Also \emph{Rosa} is instructive. Here we encounter the problem of ties: several 
 
 Note that all functions used here have options and arguments that affect the outcome. Setting them differently will yield, for example, standardised values. We only investigated out-of-the-box behaviour and are not suggesting something is actually wrong with the functions, but you may have to tweak them to yield an intuitive result. A case in point is \package{influenceR}'s \code{betweenness}, which will return \package{igraph}'s value if the argument \texttt{snap} is set to \code{FALSE}, but 2*\code{BC}'s values for the default (\code{TRUE}).
 
-To summarize: \code{bipartite::BC} and \code{influenceR::betweenness/2} yield values as one would expect for \emph{unique} shortest paths; \code{DiagrammeR::get\_betweenness} and \code{igraph::estimate\_betweeness} yield number of non-unique shortest paths, which we also regard as an intuitive measure. 
+To summarize: \code{bipartite::BC} and \code{influenceR::betweenness/2} yield values as one would expect for \emph{unique} shortest paths; \code{DiagrammeR::get\_betweenness} and \code{igraph::betweeness} yield number of non-unique shortest paths, which we also regard as an intuitive measure. 
 
 As always in data analysis: it is the responsibility of the analyst to make sure suitable-for-purpose indices are used!
 
