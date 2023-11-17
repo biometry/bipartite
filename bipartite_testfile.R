@@ -8,9 +8,9 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.18.tar.gz --as-cran
+R CMD check bipartite_2.19.tar.gz --as-cran
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
-R CMD install bipartite_2.18.tar.gz
+R CMD install bipartite_2.19.tar.gz
 
 
 
@@ -22,7 +22,7 @@ R CMD install bipartite_2.18.tar.gz
 
 ## run this file after every change in bipartite before submitting it to CRAN!!
 library(bipartite)
-library(testthat)
+library(testthat) # if we want to formally test expressions and functions!
 
 #source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/computeModules.R")
 #source("/Users/Carsten/Data/aktuell/Networks/bipartite/bipartite/R/restrictednull.R")
@@ -496,7 +496,7 @@ as.character(webinput)
 
 
 
-
+#### OLD STUFF ####
 ## Below the testfile is the workflow on the old computer, where the compression did not work and thus several detours had to be taken.
 
 # 0. sync vignette-folder for save-keeping with same directory one level higher (the one-level higher is the one I use for everything and only copy-paste the .Rnw into vignette before building the package).

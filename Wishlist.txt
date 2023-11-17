@@ -3,6 +3,7 @@ IMPORTANT
 * add to networklevel.Rd that modularity Q is now available!
 
 EDITORIAL
+...
 
 large changes
 * PLOTWEB: plotweb/visweb revision!
@@ -34,6 +35,7 @@ large changes
 
 
 small
+* make option "empty.web=FALSE" available in "specieslevel". Test that "d" runs when some rows/columns are empty (encountered by Jie Hu)
 * clean up help files (e.g. diversity terminology is not really uptodate: "diversity" is H, but exp(H) is "effective partners")
 * clean help file for nullmodel, related to mgen (e.g. the example with binary web is nonsensical, unless rep.cell=F; and it should be stated that method "equiprobable" is used); also, how does nullmodel know what is binary and what is quantitative?
 
