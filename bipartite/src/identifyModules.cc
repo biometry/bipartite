@@ -171,7 +171,7 @@ void identifyModules(int* r_argc, char* argv[]) {
 	ioparm.maxconverge		= 0;
 	minTemperature			= 0;
 	string input   			= "";
-	t				= 1;
+	long int t				= 1;
 	billionCount			= 0;
 	nrOfRecordBreakings		= 0;
 	period				= 10000;
