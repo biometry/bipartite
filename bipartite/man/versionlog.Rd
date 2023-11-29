@@ -232,8 +232,8 @@ Indices are usually VERY sensitive to the exact number of species, number of obs
 
 \item 0.73 (release date: 1-Sept-2008)
 \describe{	
-	\item{new feature}{\code{\link{plotweb}}}{Named abundance-vector for each level can be used.}
-	\item{new function \code{\link{plotweb2}} (not debugged!)}{For plotting tripartite networks.}
+	\item{new feature \code{\link{plotweb}}:}{Named abundance-vector for each level can be used.}
+	\item{new function \code{\link{plotweb2}:} (not debugged!)}{For plotting tripartite networks.}
 }
 
 \item 0.72 (release date: 12-June-2008)

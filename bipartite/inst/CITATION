@@ -1,11 +1,11 @@
 citHeader("To cite bipartite in publications please use Dormann et al. (2008 R News); for network-level analyses Dormann et al. (2009 Open Ecol J) and for species-level analyses Dormann (2011 Network Biology):")
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title = "Indices, graphs and null models: analyzing bipartite ecological networks.",
-         author = personList(as.person("C. F. Dormann"),
-                             as.person("J. Frueund"),
-                             as.person("N. Bluethgen"),
-                             as.person("B. Gruber")),
+         author = c(person("Carsten F.", "Dormann"),
+                             person("Jochen", "Fruend"),
+                             person("Nico", "Bluethgen"),
+                             person("Bernd", "Gruber")),
  journal="The Open Ecology Journal",
  volume= "2",
  pages="7-24",
@@ -13,11 +13,11 @@ citEntry(entry="Article",
 
  textVersion="Dormann, C.F., Fruend, J., Bluethgen, N. & Gruber B. 2009. Indices, graphs and null models: analyzing bipartite ecological networks. The Open Ecology Journal, 2, 7-24.")
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title = "Introducing the bipartite Package: Analysing Ecological Networks.",
-         author = personList(as.person("C. F. Dormann"),
-                             as.person("B. Gruber"),
-                             as.person("J. Fruend")),
+         author = c(person("Carsten F.", "Dormann"),
+                             person("Bernd", "Gruber"),
+                             person("Jochen", "Fruend")),
 
  journal="R News",
  volume= "8",
@@ -27,9 +27,9 @@ citEntry(entry="Article",
 
  textVersion="Dormann, C.F., Gruber B. & Fruend, J. (2008). Introducing the bipartite Package: Analysing Ecological Networks. R news Vol 8/2, 8 - 11.")
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title = "How to be a specialist? Quantifying specialisation in pollination networks.",
-         author = personList(as.person("C. F. Dormann")),
+         author = c(person("Carsten F.", "Dormann")),
  journal="Network Biology",
  volume= "1",
  number="1",

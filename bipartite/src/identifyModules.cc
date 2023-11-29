@@ -91,7 +91,7 @@ extern "C" { // wrapper for R
 // ******** Function Prototypes ***************************************************************************
 
 bool		markovChainMonteCarlo();
-const char*	num2str(const unsigned int);
+//const char*	num2str(const unsigned int);
 bool		parseCommandLine(int argc, char * argv[]);
 bool		readInputFile();
 void		recordModules();
@@ -121,7 +121,7 @@ struct ioparameters {
 	string		s_scratch;		// filename sans extension
 	string		s_tag;			// user defined filename tag
 	string		start_time;		// time simulation was started
-	int		timer;			// timer for reading input
+	int		    timer;			// timer for reading input
 	bool		flag_filename;		// flag indicating whether -filename invoked
 	bool		flag_steps;		// flag indicating whether -steps invoked
 	bool		flag_onlyEdgeWeights;	// flag indicating whether -onlyEdgeWeights invoked
@@ -133,13 +133,13 @@ struct ioparameters {
 ioparameters	ioparm;				// program parameters
 rbtree*		namesLUT;			// look-up table; translates input file vertex names to graph indices
 rbtree*		reverseNamesLUT;		// reverse look-up table; translates graph indices to input file vertex names
-dendro*		d;				// hrg data structure
-dendro*		bestDendro;			// dendrogram with best modularity found so far
-unsigned int	t;				// number of time steps
+dendro*		d;				        // hrg data structure
+dendro*		bestDendro;			    // dendrogram with best modularity found so far
+long int	t;				        // number of time steps
 double		temperature;			// current SA temperature (default: 1e-1)
 double		dTemperature;			// SA temperature step
 double		averageStartTemperature;	// average temperature at which increase of
-int		averageDenominator;		// auxiliary variable
+int		    averageDenominator;		// auxiliary variable
 unsigned int	converge;			// current number of steps without increase of modularity
 double		minTemperature;			// minimum SA temperature (default: 1/100 of start temperature)
 short int	billionCount;			// counts number of billion steps
@@ -171,7 +171,7 @@ void identifyModules(int* r_argc, char* argv[]) {
 	ioparm.maxconverge		= 0;
 	minTemperature			= 0;
 	string input   			= "";
-	long int t				= 1;
+	t			        	= 1;
 	billionCount			= 0;
 	nrOfRecordBreakings		= 0;
 	period				= 10000;
@@ -718,8 +718,8 @@ void recordModules() {
 	else {
 		fprintf(infoFile, 	"Modularity                     : %f\n", bestM);
 	}
-	if(billionCount > 0) fprintf(infoFile, 	"Number of MCMC steps           : %d %s %d\n", billionCount, (billionCount > 1 ? "billions" : "billion"), t);
-	else fprintf(infoFile, 	"Number of MCMC steps           : %d\n", t);
+	if(billionCount > 0) fprintf(infoFile, 	"Number of MCMC steps           : %d %s %ld\n", billionCount, (billionCount > 1 ? "billions" : "billion"), t);
+	else fprintf(infoFile, 	"Number of MCMC steps           : %ld\n", t);
 	fprintf(infoFile, 	"Number of improvements         : %d\n", nrOfRecordBreakings);
 	fprintf(infoFile, 	"\n--- Information about created files ---\n\n" \
 				"Created files                  : %s.mod\n", ioparm.s_scratch.c_str());
