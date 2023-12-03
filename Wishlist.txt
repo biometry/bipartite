@@ -5,7 +5,7 @@ IMPORTANT
 EDITORIAL
 ...
 
-large changes
+LARGE CHANGES
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
 	** plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
@@ -34,7 +34,7 @@ large changes
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 
 
-small
+SMALL CHANGES
 * make option "empty.web=FALSE" available in "specieslevel". Test that "d" runs when some rows/columns are empty (encountered by Jie Hu)
 * clean up help files (e.g. diversity terminology is not really uptodate: "diversity" is H, but exp(H) is "effective partners")
 * clean help file for nullmodel, related to mgen (e.g. the example with binary web is nonsensical, unless rep.cell=F; and it should be stated that method "equiprobable" is used); also, how does nullmodel know what is binary and what is quantitative?
@@ -62,6 +62,7 @@ small
 
 
 (add new stuff)
+* add multilayer centrality "Gnorm" to function "npartite" (Lofti et al. 2023, MEE)
 * add "assortativity" of Newman 2002 as cited in Ona & Kost 2022
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)

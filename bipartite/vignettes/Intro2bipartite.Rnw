@@ -21,7 +21,7 @@
 \usepackage{breakurl}
 \usepackage{titlesec} % for titleformat
 \usepackage[nottoc]{tocbibind} % include reference in table of content
-\usepackage{wrapfig}
+%\usepackage{wrapfig}
 \usepackage[dvipsnames]{xcolor}
 
 %\makeatletter
