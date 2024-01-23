@@ -5,7 +5,7 @@
 #! JFedit: fddist and fdweighted replace throughout by fcdist and fcweighted
   
   ## !!!!! when adding a new index, make sure to also add it to the "exclude from grouplevel"-list !!!!!##
-  
+
   
   
     if(empty.web) {web <- empty(web)}
@@ -17,7 +17,7 @@
         #binary based and related:
         "links per species", "number of compartments", "compartment diversity",
         "cluster coefficient", "degree distribution", "mean number of shared partners",
-        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", "NODF", "weighted nestedness",
+        "togetherness", "C score", "V ratio", "discrepancy", "nestedness", "NODF", "weighted nestedness", "spectral radius",
         #miscelleneous:
         "ISA", "SA", "extinction slope", "robustness", "niche overlap",   
         #quantitative series:
@@ -42,7 +42,7 @@
                         # logic: metrics for binary networks
                         "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness", "NODF"),
                         # logic: more abstract, topological metrics for binary networks
-                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "modularity", "nestedness", "NODF", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2"),
+                        "networklevel" = c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "cluster coefficient", "modularity", "nestedness", "NODF", "weighted NODF", "ISA", "SA", "linkage density", "Fisher alpha", "diversity", "interaction evenness", "Alatalo interaction evenness", "H2", "spectral radius"),
                         # only the truly networky indices
                         stop("Your index is not recognised! Typo? Check help for options!", call.=FALSE) #default for all non-matches
         )
@@ -288,9 +288,18 @@
             H2 <- as.numeric(H2fun(web, H2_integer=H2_integer)[1]) #1.element is the standardised H2 prime
             out$"H2"= ifelse(H2<0, 0, H2)
         }
+        #------------------
+        if ('spectral radius' %in% index) {
+            # Convert the input bipartite web to a one-mode matrix
+            net <- as.one.mode(web)
+            # Calculate the Eigenvalues of the one-mode adjacency matrix
+            ev <- eigen(net)$values
+            # The spectral radius is the largest Eigenvalue 
+            out$"spectral radius" <- ev[1]
+        }
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):
-        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "modularity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance"), index)
+        netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "modularity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance", "spectral radius"), index)
         exclude.index <- netw.index[!is.na(netw.index)]
         gindex <- if (length(exclude.index)==0) index else index[-exclude.index] # exclude NAs from this vector
         if (length(gindex) > 0) outg <- grouplevel(web, index=gindex, level=level, weighted=weighted, extinctmethod=extinctmethod, nrep=nrep, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fcweighted=fcweighted, fcdist=fcdist)
