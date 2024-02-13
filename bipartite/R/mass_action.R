@@ -1,12 +1,20 @@
 ###
 # @author: Tobias Bauer
 # Implementation of mass-action calculations based on
+# section 6.2 "Effective abundance, pseudo-inverse and mass action" in
+# the Supplementary Information of Staniczenko et al. 2013 Nature comm.
 # "The ghost of nestedness in ecological networks"
 
 massaction <- function(web) {
+    # Computes the effective abundances for all species in web and
+    # normalizes the matrix for mass action.
+    # Args:
+    #   web: the preference matrix as an integer matrix object.
+    # Return:
+    #  The preference matrix normalized for mass action.
     r <- nrow(web)
     c <- ncol(web)
-    # Bipartite web as 1-D vector. Note: This is done by column eg.
+    # Bipartite web as 1-D vector. Note: This is done by column i.e.
     # 30 0 16
     # 33 0  0 is converted to (30, 33, 19, 0, 0, 0, 1, 2, 16, 0, 15, 7)
     # 19 1 15
@@ -18,9 +26,9 @@ massaction <- function(web) {
     M <- matrix(0, nrow = length(y), ncol = r + c)
     k <- 1
     # Fill matrix M 
-    for (i in 1:r){
-        for (j in 1:c){
-            if (web[i,j] != 0){
+    for (i in 1:r) {
+        for (j in 1:c) {
+            if (web[i, j] != 0) {
                 M[k, i] <- 1
                 M[k, r + j] <- 1
                 # Increment k by one so the next row in M is filled
@@ -32,6 +40,11 @@ massaction <- function(web) {
     # x = [x_i; x_j]
     # Use pseudo inverse (M^T*M)^(-1)*M^T * y = x
     x <- corpcor::pseudoinverse(M) %*% y
+    # Applying exponential function to vector x,
+    # since the logarithm was applied to y in the steps above
+    x <- exp(x)
+    print(mean(x))
+    print(norm(x, type="2"))
     # Devide each row in the incidence matrix by corresponding mass action in x.
     # MARGIN = 1 indicates applying FUN for each row in web.
     # The first r elements of x contain the mass action of "row"-species.
