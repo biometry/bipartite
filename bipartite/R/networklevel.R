@@ -1,4 +1,4 @@
-`networklevel` <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, fcdist="euclidean", legacy=FALSE){
+`networklevel` <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, fcdist="euclidean", legacy=FALSE, mass.action.norm=FALSE){
     ##
     ## web         interaction matrix, with lower trophic level in rows, higher in columns
     ## legacy      se to TRUE allows to run networklevel in its old form
@@ -290,12 +290,8 @@
         }
         #------------------
         if ('spectral radius' %in% index) {
-            # Convert the input bipartite web to a one-mode matrix
-            net <- as.one.mode(web)
-            # Calculate the Eigenvalues of the one-mode adjacency matrix
-            ev <- eigen(net)$values
             # The spectral radius is the largest Eigenvalue 
-            out$"spectral radius" <- ev[1]
+            out$"spectral radius" <- spectral.radius(web, mass.action.norm)
         }
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):

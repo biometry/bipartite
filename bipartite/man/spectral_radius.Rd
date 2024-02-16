@@ -7,7 +7,7 @@
 
 \description{
   This function calculates the spectral radius (i.e. the maximum absolute value of the Eigenvalues) 
-  of the square adjacency matrix for a given bipartite matrix. This may be used as a measure of 
+  of the square adjacency matrix corresponding tp a given bipartite matrix. This may be used as a measure of 
   nestedness as described by Staniczenko et al. (2013).
 }
 
@@ -24,11 +24,11 @@
 }
 
 \details{
-
 }
 
 \value{
-  The spectral radius (i.e. the largest Eigenvalue) of the square adjacency matrix.
+  The spectral radius (i.e. the largest Eigenvalue) of the square adjacency matrix
+  corresponding to the given bipartite matrix.
 }
 
 \references{

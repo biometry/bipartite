@@ -43,8 +43,6 @@ massaction <- function(web) {
     # Applying exponential function to vector x,
     # since the logarithm was applied to y in the steps above
     x <- exp(x)
-    print(mean(x))
-    print(norm(x, type="2"))
     # Devide each row in the incidence matrix by corresponding mass action in x.
     # MARGIN = 1 indicates applying FUN for each row in web.
     # The first r elements of x contain the mass action of "row"-species.
