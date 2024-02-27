@@ -25,9 +25,10 @@ massaction <- function(web) {
     # Create zero-filled matrix M
     M <- matrix(0, nrow = length(y), ncol = r + c)
     k <- 1
-    # Fill matrix M 
-    for (i in 1:r) {
-        for (j in 1:c) {
+    # Fill matrix M
+    # this has to be done in the same order as the web to 1-D vector conversion
+    for (j in 1:c) {
+        for (i in 1:r) {
             if (web[i, j] != 0) {
                 M[k, i] <- 1
                 M[k, r + j] <- 1
