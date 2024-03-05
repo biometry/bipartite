@@ -22,7 +22,7 @@ betalinkr_multi(webarray, ...)
 }
 \arguments{
   \item{webarray}{
-    Input data, an array with three dimensions, third dimension has length 2 and separates the two webs to compare. First two dimensions are the species (typically first Lower and second Higher). For convenience, if webarray is a list of two webs, it will be converted to array format first using \code{webs2array} (that function can also be used to convert single web matrices to array format, but then needs to be called explicitly).
+    Input data, an array with three dimensions, third dimension has length 2 and separates the two webs to compare. First two dimensions are the species (typically first Lower and second Higher). For convenience, if \option{webarray} is a list of two webs, it will be converted to array format first using \code{webs2array} (that function can also be used to convert single web matrices to array format, but then needs to be called explicitly). NOTE: When using \code{betalinkr_multi}, \option{webarray} \bold{must} be an array! Use \code{\link{webs2array}} when providing networks (see last example below).
   }
   \item{index}{ 
     The dissimilarity index, passed to "method" of either vegdist or betadiver (see there for naming). If \option{partitioning="commondenom"} (and thus no external function is used), it has to be one of \option{sorensen} (for Sorensen or Bray-Curtis dissimilarity index) or \option{jaccard} (for Jaccard or Ruzicka); \option{bray} is also allowed and gives the same result as \option{sorensen}.  }
