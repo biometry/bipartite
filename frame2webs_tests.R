@@ -41,6 +41,32 @@ frame2webs_test <- function(lower_species_names,
   return(check_v & check_r & check_c)
 }
 
+frame2webs_test_float <- function(lower_species_names,
+                            higher_species_names,
+                            web_id_names,
+                            n_lower,
+                            n_higher,
+                            n_ids,
+                            n_total) {
+  t_lower  <- sample(lower_species_names, n_lower)
+  t_higher <- sample(higher_species_names, n_higher)
+  t_id     <- sample(web_id_names, n_ids)
+  t_frame <- data.frame(higher = sample(t_higher, n_total, replace = TRUE),
+                        lower  = sample(t_lower, n_total, replace = TRUE),
+                        webID  = sample(t_id, n_total, replace = TRUE),
+                        freq   = runif(n_total, min = 1, max = 10))
+  web_old  <- frame2webs(t_frame, type.out = "array", emptylist = FALSE)
+  web_fast <- frame2webs_fast(t_frame, type.out = "array", emptylist = FALSE)
+
+  check_v <- identical(web_old, web_fast)
+  check_r <- identical(rownames(web_old), rownames(web_fast))
+  check_c <- identical(colnames(web_old), colnames(web_fast))
+
+  rm(web_old, web_fast, t_frame)
+
+  return(check_v & check_r & check_c)
+}
+
 frame2webs_test_old <- function(lower_species_names,
                              higher_species_names,
                              web_id_names,
@@ -54,8 +80,7 @@ frame2webs_test_old <- function(lower_species_names,
   t_frame <- data.frame(higher = sample(t_higher, n_total, replace = TRUE),
                         lower  = sample(t_lower, n_total, replace = TRUE),
                         webID  = sample(t_id, n_total, replace = TRUE),
-                        freq   = sample.int(10, n_total, replace = TRUE,
-                                            prob = 1 / (1:10)))
+                        freq   = runif(n_total, min = 1, max = 10))
   web  <- frame2webs(t_frame, type.out = "array", emptylist = FALSE)
   rm(web, t_frame)
 }
@@ -72,8 +97,7 @@ frame2webs_test_fast <- function(lower_species_names,
   t_frame <- data.frame(higher = sample(t_higher, n_total, replace = TRUE),
                         lower  = sample(t_lower, n_total, replace = TRUE),
                         webID  = sample(t_id, n_total, replace = TRUE),
-                        freq   = sample.int(10, n_total, replace = TRUE,
-                                            prob = 1 / (1:10)))
+                        freq   = runif(n_total, min = 1, max = 10))
   web  <- frame2webs_fast(t_frame, type.out = "array", emptylist = FALSE)
   rm(web, t_frame)
 }
@@ -92,7 +116,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = 1,
@@ -111,7 +135,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = 1,
@@ -130,7 +154,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = sample.int(1e3, 1),
@@ -150,7 +174,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = 1,
@@ -169,7 +193,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = 1,
@@ -187,7 +211,7 @@ pb <- txtProgressBar(min = 0, max = n_tests, initial = 0,
 all_res <- array(FALSE, n_tests)
 for (i in 1:n_tests) {
   setTxtProgressBar(pb, i)
-  res <- frame2webs_test(lower_species_names,
+  res <- frame2webs_test_float(lower_species_names,
                          higher_species_names,
                          web_id_names,
                          n_lower = sample.int(200, 1),
@@ -201,26 +225,26 @@ print(paste0("Pass: ", all(all_res)))
 ##################
 ### BENCHMARKS ###
 ##################
-benchmark <- microbenchmark(
+benchmark <- bench::mark(
     frame2webs_test_old(lower_species_names, higher_species_names,
                         web_id_names, 1, 1, 1, 1e5),
     frame2webs_test_fast(lower_species_names, higher_species_names,
                         web_id_names, 1, 1, 1, 1e5),
-    times = 100, unit = "ms")
+    iterations = 100, time_unit = "ms")
 print(benchmark)
-benchmark <- microbenchmark(
+benchmark <- bench::mark(
     frame2webs_test_old(lower_species_names, higher_species_names,
                         web_id_names, 200, 200, 10, 5e4),
     frame2webs_test_fast(lower_species_names, higher_species_names,
                         web_id_names, 200, 200, 10, 5e4),
-    times = 100, unit = "ms")
+    iterations = 100, time_unit = "ms")
 print(benchmark)
-benchmark <- microbenchmark(
+benchmark <- bench::mark(
     frame2webs_test_old(lower_species_names, higher_species_names,
                         web_id_names, 200, 200, 100, 5e4),
     frame2webs_test_fast(lower_species_names, higher_species_names,
                         web_id_names, 200, 200, 100, 5e4),
-    times = 100, unit = "ms")
+    iterations = 100, time_unit = "ms")
 print(benchmark)
 
 rm(lower_species_names, higher_species_names, web_id_names)
