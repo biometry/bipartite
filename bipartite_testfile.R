@@ -124,6 +124,9 @@ compart(bezerra2009) # an uncomparted network
 # computeModules
 ## a lot to test here! let's start with the problem of calling computeModules twice in a row:
 comp1 <- computeModules(vazquenc)
+comp1 <- LPA_wb_plus(vazquenc)$modularity
+comp1plus <- LPA_wb_plus(cbind(vazquenc, rep(0, nrow(vazquenc))))$modularity
+comp1plus2 <- LPA_wb_plus(rbind(cbind(vazquenc, rep(0, nrow(vazquenc))), rep(0, ncol(vazquenc)+1)) )$modularity
 comp2 <- computeModules(vazquenc, forceLPA=TRUE)
 comp3 <- computeModules(vazquenc, method="DormannStrauss")
 plotModuleWeb(comp1)
@@ -300,6 +303,7 @@ networklevel(matrix(rpois(16,4),nrow=4),c("H2","H2"))
 networklevel(Safariland, index="NODF")
 networklevel(Safariland, index="modularity")
 replicate(10, networklevel(Safariland[sample(1:9), sample(1:27)], index="discrepancy")) # despite reordering ties, this is not always achieved within the 200 iterations of nesteddisc
+networklevel(Safariland, effective=T) # check changes relative to default for "interaction evenness" and "H2"
 
 # nodespec
 nodespec(Safariland)

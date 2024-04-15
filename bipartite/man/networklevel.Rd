@@ -12,7 +12,7 @@ networklevel(web, index="ALLBUTDD", level="both", weighted=TRUE,
    ISAmethod="Bluethgen",  SAmethod = "Bluethgen", extinctmethod = "r", 
    nrep = 100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, 
    logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, 
-   fcdist="euclidean", legacy=FALSE)
+   fcdist="euclidean", effective=FALSE, legacy=FALSE)
 }
 
 \arguments{
@@ -87,6 +87,7 @@ Usually this will be number of pollinators on each species of plants or number o
   \item{H2_integer}{Logical; indicates whether values in web are integers. Passed on to \code{\link{H2fun}}; see there for details.}
   \item{fcweighted}{Logical; when computing ``functional complementarity'' sensu function \code{\link{fc}}, should the weights of the matrix be used. Defaults to TRUE, but original paper (Devoto et al. 2012) is based on FALSE.}
   \item{fcdist}{Distance measure to be used to compute functional complementarity through \code{\link{fc}}; any measure accepted by \code{\link{dist}} is acceptable.}
+  \item{effective}{logical; should interaction evenness, Alatalo evenness, H2' and diversity be expressed as ``effective'' diversity? For Jost (2010, page 210) this seems to be the better decomposition of an index into a diversity and an evenness component. On a downside, H2' is then no longer ranged in [0,1], and ``diversity'' becomes the same as ``vulnerability'' and ``generality''. For these reasons, and backward compatibility, the default is \code{FALSE}.}
   \item{legacy}{Logical; should the old (pre-2.00) version of \code{networklevel} be used? To be backward compatible, the old \code{networklevel}-function is still available (\code{.networklevel}) and can be called by setting \option{legacy=TRUE}. This is only for the transition period until all papers in the making have been published (or binned). Index names and sometimes unclear focal level were downsides of the old implementation, which is now remedied. Thus, the use of \option{legacy=TRUE} and the direct call of \code{.networklevel} are strongly discouraged!}
 }
 
@@ -121,7 +122,7 @@ Depending on the selected indices, some or all of the below (returned as vector 
     \item{Fisher's alpha}{An alternative measure of interaction diversity (using \code{\link[vegan]{fisherfit}}).}
 %         \item{interaction diversity LTL}{Mean diversity of predators per prey. LTL refers to Lower Trophic Level. LTL is analog to Shannon's diversity index for interactions (see below), but calculated for each species in the LTL, then averaged. Or, in other words, it is the log-version of vulnerability, but averaged without weighting.}
 %         \item{interaction diversity HTL}{Mean diversity of prey per predator. HTL refers to Higher Trophic Level.}
-    \item{interaction evenness}{Shannon's evenness for the web entries. Note that the two options are rather different. By definition, IE = H/Hmax; H = -sum(p.i.mat*log(p.i.mat)), where p.i.mat = matrix/sum(entries in matrix). This means, when calculating H, do we treat all possible links as species, and the interactions (cell values) as measure of their abundance? By definition, Hmax = ln(N). The key question is: What is the right value for N? Since we treat the matrix cells as species, it is (clearly?) the number of matrix cells, i.e. number of higher trophic level species x number of lower trophic level species. We think this logic justifies our default \code{"prod"}. However, others argue in favour of N=number of links. Please see note for our discussion on this point.}
+    \item{interaction evenness}{Shannon's evenness for the web entries. Note that the two options are rather different. By definition, IE = H/Hmax; H = -sum(p.i.mat*log(p.i.mat)), where p.i.mat = matrix/sum(entries in matrix). This means, when calculating H, do we treat all possible links as species, and the interactions (cell values) as measure of their abundance? By definition, Hmax = ln(N). The key question is: What is the right value for N? Since we treat the matrix cells as species, it is (clearly?) the number of matrix cells, i.e. number of higher trophic level species x number of lower trophic level species. We think this logic justifies our default \code{"prod"}. However, others argue in favour of N=number of links. Please see note for our discussion on this point. Note that \option{effective=TRUE} will turn this into Jost (2019)'s ``effective evenness''.}
 %What else?  Were we to use the interpretation of Tylianakis et al. (2007), then Hmax = ln(sum of entries in matrix). This means, we equate ``number of links'' = ``number of species''. That means, each link is a potential species. What should that mean? Why should that measure ``interactions evenness''? Why should we move from a view of ``cells are species'' when calculating H to a view of ``interactions are species'' when calculating N? To say the least, it doesn't seem consistent. 
     \item{Alatalo interaction evenness}{A different measure for web entry evenness, as proposed by Müller et al. (1999). }
     \item{Shannon diversity}{Shannon's diversity of interactions (i.e. network entries).}
@@ -144,7 +145,7 @@ Depending on the selected indices, some or all of the below (returned as vector 
     \item{partner diversity}{(Weighted) mean Shannon diversity of the number of interactions for the species of that level. Choose \option{logbase=2} to change to a log2-based version.}
     %#! JFedit: effpartners and gen/vul combined
     %\item{effective partners}{(Weighted) mean of exp(Shannon diversity). Simply the Jost (2006)-recommended version of diversity, which happens to be identical to generality (higher level) or vulnerability (lower level), as defined in Bersier et al. (2002).}
-     \item{generality/vulnerability}{(Weighted) mean effective number of LL species per HL species (generality; HL species per LL species for vulnerability), weighted by their marginal totals (row sums); see Tylianakis et al. (2007) and Bersier et al. (2002). This is identical to exp(\dQuote{partner diversity}, i.e., simply the Jost (2006)-recommended version of diversity.}
+    \item{generality/vulnerability}{(Weighted) mean effective number of LL species per HL species (generality; HL species per LL species for vulnerability), weighted by their marginal totals (row sums); see Tylianakis et al. (2007) and Bersier et al. (2002). This is identical to exp(\dQuote{partner diversity}, i.e., simply the Jost (2006)-recommended version of diversity.}
 }
 
 \note{
@@ -195,17 +196,19 @@ Devoto M., Bailey S., Craze P., and Memmott J. (2012) Understanding and planning
 
 Dormann, C.F., Fründ, J., Blüthgen, N., and Gruber, B. (2009) Indices, graphs and null models: analysing bipartite ecological networks. \emph{The Open Ecology Journal} \bold{2}, 7--24.
 
-Dunne, J. A., R. J. Williams, and N. D. Martinez. 2002 Food-web structure and network theory: the role of connectance and size. \emph{Proceedings of the National Academy of Science USA} \bold{99}, 12917--12922
+Dunne, J. A., R. J. Williams, and N. D. Martinez 2002. Food-web structure and network theory: the role of connectance and size. \emph{Proceedings of the National Academy of Science USA} \bold{99}, 12917--12922
 
-Galeano, J., Pastor, J.M. and Iriondo, J.M. (2008) Weighted-Interaction Nestedness Estimator (WINE): A new estimator to calculate over frequency matrices. \emph{arXiv} 0808.3397v1 [physics.bio-ph]
+Galeano, J., Pastor, J.M. and Iriondo, J.M. 2008. Weighted-Interaction Nestedness Estimator (WINE): A new estimator to calculate over frequency matrices. \emph{arXiv} 0808.3397v1 [physics.bio-ph]
 
 Gotelli, N. J., and G. R. Graves. 1996 Null Models in Ecology. Smithsonian Institution Press, Washington D.C.
 
+Jost, L. 2010. The relation between evenness and diversity. \emph{Diversity} \bold{2}, 207--232. https://doi.org/10.3390/d2020207 
+
 Krebs, C. J. 1989. Ecological Methodology. Harper Collins, New York.
 
-Memmott, J., Waser, N. M. and Price M. V. 2004 Tolerance of pollination networks to species extinctions. \emph{Proceedings of the Royal Society B} \bold{271}, 2605--2611
+Memmott, J., Waser, N. M. and Price M. V. 2004. Tolerance of pollination networks to species extinctions. \emph{Proceedings of the Royal Society B} \bold{271}, 2605--2611
 
-Müller, C. B., Adriaanse, I. C. T., Belshaw, R. and Godfray, H. C. J. 1999 The structure of an aphid-parasitoid community. \emph{Journal of Animal Ecology} \bold{68}, 346--370
+Müller, C. B., Adriaanse, I. C. T., Belshaw, R. and Godfray, H. C. J. 1999. The structure of an aphid-parasitoid community. \emph{Journal of Animal Ecology} \bold{68}, 346--370
 
 Roberts, A. and Stone, L. 1990 Island-sharing by archipelago species. \emph{Oecologia} \bold{83}, 560--567
 

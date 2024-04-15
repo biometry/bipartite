@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.19\cr
-Date: \tab 2023-11-29\cr
+Version: \tab 2.20\cr
+Date: \tab 2024-05-10\cr
 License: \tab GPL \cr
 }
 }
@@ -49,6 +49,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.20 (10-May-2024)
+  \describe{
+    \item{Added new option \option{effective} to \code{\link{networklevel}}:}{With this option, diversity, H2' and evenness indices are turned into ``effective'' diversity and evenness indices, by exponentiating them. It has been repeatedly argued that Shannon's H is ecologically difficult to interpret and should instead be exponentiated to yield the ``effective number of species, if all were equally abundant'' (e.g. Jost 2006). The same logic goes for evenness (Jost 2010) and, by extension, for H2'. Since H2' then becomes an index with data-dependent upper bound, rather than one on [0,1], this version may not fly. For diversity, exponentiating will yield the same values as indices ``vulnerability'' and ``generality'', which is why we had removed that option from an earlier version (and now it's back). So largely this option is useful for ``interaction evenness'' and for experimenting.} 
+  }
+
   \item 2.19 (29-Nov-2023)
   \describe{
     \item{Fixed missing \code{any} causing a problem when plotting modules,}{reported by rubenroos and Celia Ferriol Gonzalez: many thanks!}
@@ -295,6 +300,10 @@ Dormann, C.F., Fründ, J., Blüthgen, N., and Gruber, B. (2009) Indices, graphs 
 Dormann, C.F. (2011) How to be a specialist? Quantifying specialisation in pollination networks. \emph{Network Biology} \bold{1}, 1--20
 
 Galeano J., Pastor J.M. and Iriondo J.M. (2008) Weighted-Interaction Nestedness Estimator (WINE): A new estimator to calculate over frequency matrices. \emph{arXiv} 0808.3397v1 [physics.bio-ph]
+
+Jost, L. (2006). Entropy and diversity. \emph{Oikos}, \bold{113}, 363–375. https://doi.org/10.1111/j.2006.0030-1299.14714.x
+
+Jost, L. (2010). The relation between evenness and diversity. \emph{Diversity}, \bold{2}, Article 2. https://doi.org/10.3390/d2020207
 
 Martín Gonzáles, A.M., Dalsgaard, B. and Olesen, J.M. (2009) Centrality measures and the importance of generalist species in pollination networks. \emph{Ecological Complexity}, \bold{7}, 36--43
 
