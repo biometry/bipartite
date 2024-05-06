@@ -62,6 +62,7 @@ SMALL CHANGES
 
 
 (add new stuff)
+* add DGCD (Brimacombe et al. 2023 PLoS Biology): Directed graphlet correlation distance, as measure of network distance
 * add IMC of Rohr et al. (2016): matching centrality
 * add multilayer centrality "Gnorm" to function "npartite" (Lofti et al. 2023, MEE)
 * add "assortativity" of Newman 2002 as cited in Ona & Kost 2022
