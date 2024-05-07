@@ -22,8 +22,8 @@ visweb <- function (web, type = "nested", prednames = TRUE, preynames = TRUE,
     if (type == "diagonal") {
         #web <- empty(web)
         ca <- cca(web)
-        web <- web[order(summary(ca)$sites[, 1], decreasing = TRUE), 
-            order(summary(ca)$species[, 1], decreasing = TRUE)]
+        web <- web[order(scores(ca, display="sites", choices=1), decreasing = TRUE), 
+            order(scores(ca, display="species", choices=1), decreasing = TRUE)]
     }
     if (type == "nested") {
         #web <- empty(web)

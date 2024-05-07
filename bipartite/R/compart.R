@@ -33,8 +33,8 @@ compart <- function(web) {
 #      out <- list(cweb=web, n.compart=1)
 #    } else {
 #      ca <- cca(web)
-#      rindex <- order(summary(ca)$sites[,1], decreasing=TRUE)
-#      cindex <- order(summary(ca)$species[,1], decreasing=TRUE)
+#      rindex <- order(scores(ca, display="sites", choices=1), decreasing=TRUE)
+#      cindex <- order(summary(ca), display="species", choices=1), decreasing=TRUE)
 #      web2 <- web[rindex, cindex]
 #      # 2. analyse for compartments, first rows, then cols:
 #      cr <- distconnected(vegdist(web2, "jaccard"), trace=FALSE)
