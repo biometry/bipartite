@@ -49,7 +49,7 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.20 (10-May-2024)
+  \item 2.20 (19-May-2024)
   \describe{
     \item{Code changes to}{\code{\link{plotweb}},  \code{\link{plotweb2}}, \code{\link{visweb}} and  \code{\link{compart}} as well as the namespace, due to changes in the  \code{cca}-function in \pkg{vegan}. Many thanks to Jari Oksanen (maintainer of vegan) to provide these patches!}
     \item{Added new option \option{effective} to \code{\link{networklevel}}:}{With this option, diversity, H2' and evenness indices are turned into ``effective'' diversity and evenness indices, by exponentiating them. It has been repeatedly argued that Shannon's H is ecologically difficult to interpret and should instead be exponentiated to yield the ``effective number of species, if all were equally abundant'' (e.g. Jost 2006). The same logic goes for evenness (Jost 2010) and, by extension, for H2'. Since H2' then becomes an index with data-dependent upper bound, rather than one on [0,1], this version may not fly. For diversity, exponentiating will yield the same values as indices ``vulnerability'' and ``generality'', which is why we had removed that option from an earlier version (and now it's back). So largely this option is useful for ``interaction evenness'' and for experimenting.} 

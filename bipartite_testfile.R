@@ -8,9 +8,10 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.19.tar.gz --as-cran
+R CMD check bipartite_2.20.tar.gz --as-cran
+R CMD install bipartite_2.20.tar.gz
+# now check in the testfile below anything that changed whether it actually works!
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
-R CMD install bipartite_2.19.tar.gz
 
 
 
@@ -384,10 +385,10 @@ printoutModuleInformation(comp1)
 
 
 # restrictednull
-  Mod <- computeModules(Safariland)
-  Part <- module2constraints(Mod)
-  row.Part <- Part[1:nrow(Safariland)]
-  col.Part <- Part[(nrow(Safariland)+1):(nrow(Safariland)+ncol(Safariland))]
+Mod <- computeModules(Safariland)
+Part <- module2constraints(Mod)
+row.Part <- Part[1:nrow(Safariland)]
+col.Part <- Part[(nrow(Safariland)+1):(nrow(Safariland) + ncol(Safariland))]
 nulls <- restrictednull(web = Safariland, R.partitions = row.Part, C.partitions = col.Part)
 nulls <- restrictednull(web = Safariland, Prior.Pij = "equiprobable", R.partitions = row.Part, C.partitions = col.Part)
 nulls <- restrictednull(web = Safariland, conditional.level="matrix") # this should essential be vaznull, I think
