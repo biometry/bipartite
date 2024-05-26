@@ -37,6 +37,14 @@ visweb(as.one.mode(Safariland, project="lower", fill=NA), NA.col="green") #NA.co
 # check fill=NA and visweb's NA.col:
 visweb(as.one.mode(vazquenc, fill=NA), NA.col="green")
 
+as.one.mode(Safariland, project="lower", legacy=F)
+as.one.mode(Safariland, project="lower", legacy=T)
+
+as.one.mode(Safariland, project="lower", weighted=F, legacy=T)
+as.one.mode(Safariland, project="lower", legacy=T)
+
+gplot(as.one.mode(Safariland, project="higher", weighted=T, legacy=F))
+
 
 # array2linkmx
 array2linkmx(webs2array(Safariland, vazquenc))
