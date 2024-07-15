@@ -64,6 +64,7 @@ SMALL CHANGES
 
 
 (add new stuff)
+* add network diffusion (Allen-Perkins 2024 Oikos)
 * add DGCD (Brimacombe et al. 2023 PLoS Biology): Directed graphlet correlation distance, as measure of network distance
 * add IMC of Rohr et al. (2016): matching centrality
 * add multilayer centrality "Gnorm" to function "npartite" (Lofti et al. 2023, MEE)
@@ -81,6 +82,7 @@ SMALL CHANGES
 
 
 NICE TO HAVE
+* replace degree.dist-function by functionality in igraph (IF THAT IT BETTER!): https://r.igraph.org/news/index.html#breaking-changes-2-0-0
 * check the C4b of Gilarranz: is it the same as Opsahl's?
 * add setting seeds to C-code of "computeModules", which is passed down from R: make the algorithm perfectly reproducible
 * make Rcpp-version of computeModule's LPA (why? it is already very fast!)
