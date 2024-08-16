@@ -1,0 +1,296 @@
+```{r}
+library(bipartite)
+source("./plotweb_v2.R") 
+source("./sortweb2.R")
+```
+
+```{r, fig.width=10, fig.height=8}
+web <- motten1982
+plotweb(motten1982, plot.axes = TRUE)
+```
+
+# How to plot a bipartite network with plotweb
+
+In many cases it can be a useful first step to visualize a given network. The easiest way to do this is to c
+
+```{r}
+source("./plotweb_v2.R") 
+plotweb_v2(web)
+```
+
+all the function `plotweb` giving the web as argument.
+
+```{r, fig.width=7, fig.height=10}
+source("./plotweb_v2.R") 
+plotweb_v2(web, text_size = 0.5)
+```
+
+```{r, fig.width=10, fig.height=8}
+source("./new_plotweb.R") 
+#pdf("test.pdf")
+plotweb_tb_abun(motten1982, horizontal = TRUE, 
+           style = "curve", plot_axes = FALSE, x_lim = c(0, 1),
+           text_size = 1.5, link_alpha = 0.5, mar = c(2,0.5,2,0.5))
+#dev.off()
+```
+
+```{r}
+1/(1-0.662)
+par(pty="s")
+plot(0, xlim=c(0,1), ylim=c(0,1), xlab = "", ylab = "", xaxs = "i", yaxs = "i", type="n", axes=TRUE, asp=1)
+```
+
+```{r}
+plot(0, xlim=c(0,1), ylim=c(0,1), xlab = "", ylab = "", xaxs = "i", yaxs = "i", type="n", axes=TRUE, asp=1)
+text(x=0.5, y=0.5, "Parastratiosphecomyia stratiosphecomyioides Brunetti")
+strwidth("Parastratiosphecomyia stratiosphecomyioides Brunetti")
+```
+
+```{r}
+par("mai" = NULL)
+```
+
+```{r}
+web <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
+colnames(web) <- c("U1", "U2", "U3")
+rownames(web) <- c("L1", "L2")
+web
+plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "independent")
+plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), low.abun = c("L1" = 15, "L2" = 15), abuns.type = "independent")
+```
+
+```{r}
+plotweb(web)
+```
+
+```{r}
+c(15,15,15) / colSums(web)
+rowSums(web) / c(15, 15)
+rowSums(web)
+colSums(web)
+web
+```
+
+```{r}
+web2 <- sweep(web, MARGIN=2, c(15,15,15) / colSums(web), `*`)
+web2
+colSums(web2)
+rowSums(web2)
+plotweb(web2)
+```
+
+## Changing the layout
+
+### Defining borders
+
+### Switching higher and lower species
+
+The
+
+### Changing the species order
+
+## Changing the style
+
+### Switching to a horizontal plot
+
+```{r}
+plotweb_v2(web = NULL, horizontal = TRUE)
+```
+
+### Changing the connections
+
+### Adding color
+
+### Making the labels italic
+
+## Adding the output to another plot
+
+```{r}
+plot(0, xlim = c(0,5), ylim = c(0, 10))
+plotweb(web, add = TRUE)
+```
+
+## Example of independent abundances (estimates)
+
+```{r}
+plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "independent")
+```
+
+## Example of added abundances (not-parasitized hosts)
+
+```{r}
+plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "additional")
+```
+
+```{r}
+source("plotwebr.R")
+plotwebr(web, add_abun.high = c("U1" = 15, "U2" = 15, "U3" = 15))
+```
+
+# How to plot two connected networks with plot2webs
+
+```{r}
+source("./plot2webs_v2.R")
+align_webs(Safariland, Safariland)
+```
+
+```{r}
+month <- sample(month.abb, 40, replace = TRUE)
+test_data <- data.frame(month)
+test_data
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+test_data |> mutate(season = case_when(
+  (month == "Dec" | month == "Jan" | month == "Feb") ~ "Winter",
+  (month == "Mar" | month == "Apr" | month == "May") ~ "Spring",
+  (month == "Jun" | month == "Jul" | month == "Aug") ~ "Summer",
+  (month == "Sep" | month == "Oct" | month == "Nov") ~ "Fall"
+))
+```
+
+```{r, fig.width=10, fig.height=8}
+par(mar = c(1,1,1,1))
+par(fig=c(0,0.5,0,1), mar = c(1,1,1,3))
+plot(1:10, 2*1:10-3, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+par(fig=c(0.5,1,0,1), new = TRUE, mar = c(1,2,1,1))
+plot(1:10, 2*1:10-3, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+text(-0.5, 10, "Test", xpd=NA)
+```
+
+```{r, fig.width=10, fig.height=6}
+source("./plot2webs_v2.R")
+plot2webs_v2(Safariland[1:5,1:5], Safariland[1:5,c(6,7,8,10,12)], upper_color = c("green", "yellow"), upper_border = "black")
+plot2webs_v2(Safariland[1:5,1:5], 2*Safariland[1:5,2:8], upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute")
+plot2webs_v2(Safariland[1:5,1:5], Safariland[1:5,2:8], upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "relative", space_upper = 0.2)
+```
+
+```{r, fig.width=10, fig.height=6}
+source("./new_plot2webs.R")
+web1 <- Safariland[1:2,1:3]
+web2 <- Safariland[1:2,2:3]
+print("Prop")
+print(sum(web1) / sum(web2))
+r_names_1 <- rownames(web1)
+r_names_2 <- rownames(web2)
+c_names_1 <- colnames(web1)
+c_names_2 <- colnames(web2)
+u_abun_1 <- c(1, 2, 2)
+u_abun_2 <- c(1, 2, 2)
+names(u_abun_1) <- c_names_1
+names(u_abun_2) <- c_names_1
+u_abun <- list(u_abun_1, u_abun_2)
+l_abun_1 <- c(5, 5)
+l_abun_2 <- c(2, 2)
+l_abun <- list(l_abun_1, l_abun_2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", lower_abundances = l_abun, upper_abundances = u_abun, add_upper_abundances = c(1, 2, 2), space_lower = 0.1, space_upper = 0.1)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "relative", lower_abundances = l_abun, upper_abundances = u_abun)
+```
+
+```{r, fig.width=10, fig.height=6}
+source("./plot2webs_v2.R")
+web1 <- Safariland[1:2,1:3]
+web2 <- Safariland[1:2,2:3]
+print("Prop")
+print(sum(web1) / sum(web2))
+r_names_1 <- rownames(web1)
+r_names_2 <- rownames(web2)
+c_names_1 <- colnames(web1)
+c_names_2 <- colnames(web2)
+u_abun_1 <- c(1, 2, 2)
+u_abun_2 <- c(1, 2, 2)
+names(u_abun_1) <- c_names_1
+names(u_abun_2) <- c_names_1
+u_abun <- list(u_abun_1, u_abun_2)
+l_abun_1 <- c(5, 5)
+l_abun_2 <- c(2, 2)
+l_abun <- list(l_abun_1, l_abun_2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = TRUE, scaling = "absolute", lower_abundances = l_abun, upper_abundances = u_abun, add_upper_abundances = u_abun, add_lower_abundances = l_abun, space_lower = 0.1, space_upper = 0.1)
+```
+
+### Test
+
+```{r, fig.width=10, fig.height=6}
+source("./new_plot2webs.R")
+web1 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
+web2 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=3)
+colnames(web1) <- c("U1", "U2", "U3")
+rownames(web1) <- c("L1", "L2")
+colnames(web2) <- c("U1", "U2")
+rownames(web2) <- c("L1", "L2", "L3")
+web1
+web2
+u_abun_1 <- c(500, 10, 5)
+u_abun_2 <- c(0, 0, 10)
+names(u_abun_1) <- c("U1", "U2", "U3")
+names(u_abun_2) <- c("U1", "U2", "U3")
+
+u_abun <- list(u_abun_1, u_abun_2)
+l_abun_1 <- c(10, 10)
+l_abun_2 <- c(10, 10, 10)
+l_abun <- list(l_abun_1, l_abun_2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = TRUE, scaling = "absolute", space_lower = 0.2, space_upper = 0.2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_upper_abundances = u_abun, add_lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
+```
+
+```{r, fig.width=10, fig.height=6}
+source("./new_plot2webs.R")
+web1 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
+web2 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=3)
+colnames(web1) <- c("U1", "U2", "U3")
+rownames(web1) <- c("L1", "L2")
+colnames(web2) <- c("U1", "U2")
+rownames(web2) <- c("L1", "L2", "L3")
+web1
+web2
+u_abun_1 <- c(500, 10, 5)
+u_abun_2 <- c(0, 0, 10)
+names(u_abun_1) <- c("U1", "U2", "U3")
+names(u_abun_2) <- c("U1", "U2", "U3")
+
+u_abun <- list(u_abun_1, u_abun_2)
+l_abun_1 <- c(10, 10)
+l_abun_2 <- c(10, 10, 100)
+l_abun <- list(l_abun_1, l_abun_2)
+new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), lower_color = "blue", add_lower_color = "red", upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_lower_abundances = l_abun, lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
+```
+
+### The difference between relative and absolute scaling
+
+With "relative" scaling, the total area of the rectangles representing the abundances of the species displayed in the center of the plot is the same for both webs. For example, 50% of the plot's height.
+
+With "absolute" scaling, the ratio of the areas of the rectangles representing the abundances of the species displayed in the center of the plot matches the ratio between the total abundances of the two webs. This also means that equal abundances between the webs are displayed with the same area.
+
+```{r}
+
+```
+
+```{r}
+sweb1 <- Safariland[1:5,1:5]
+sweb2 <- Safariland[1:5,2:8]
+sum(colSums(sweb1))
+sum(colSums(sweb2))
+sum(sweb1)
+sum(sweb2)
+sum(sweb1)/sum(sweb2)
+```
+
+```{r}
+c_w <- strwidth("Hallo Welt", units = "inches")
+c_w
+plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
+       axes = TRUE, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+text(0.5, 0.5, "Hallo Welt")
+grconvertX(0, from = "inches", to = "user")
+```
+
+```{r}
+source("./new_plotweb.R")
+plotweb_tb_add_abun(web, horizontal = TRUE, plot_axes = TRUE)
+plotweb_tb_add_abun(web, add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 5), add_lower_abundances = c("L1" = 5, "L2" = 5), horizontal = TRUE, plot_axes = TRUE, upper_color = c("U3" = "yellow", "U1" = "gray20"), upper_border = "black", lower_color = c("green", "blue"), lower_border = "black", style = "curve")
+```
