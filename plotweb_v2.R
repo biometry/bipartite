@@ -3,8 +3,7 @@ plotweb_v2 <- function(web,
                        lower_abundances = NULL,
                        add_upper_abundances = NULL,
                        add_lower_abundances = NULL,
-                       upper_scaling = "relative",
-                       lower_scaling = "relative",
+                       scaling = "relative",
                        font = NULL,
                        family = NULL,
                        srt = 0,
@@ -142,11 +141,9 @@ plotweb_v2 <- function(web,
     # Sort the additional upper abundances according to the column-order in the web
     add_upper_abundances <- add_upper_abundances[colnames(web)]
     upper_abundances <- c(rbind(upper_abundances, add_upper_abundances))
-    c_space <- c(0, c_space)
-    nc <- nc * 2
+    #c_space <- c(0, c_space)
     upper_color <- rep(upper_color, each = 2)
   }
-  c_prop_sizes <- (1 - spacing[1]) * upper_abundances / sum(upper_abundances)
 
   if (is.null(lower_abundances)) {
     lower_abundances <- rowSums(web)
@@ -157,11 +154,29 @@ plotweb_v2 <- function(web,
     # Merge the abundances and additional abundances vector
     # by alternating indices
     lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
-    r_space <- c(0, r_space)
-    nr <- nr * 2
+    #r_space <- c(0, r_space)
     lower_color <- rep(lower_color, each = 2)
   }
-  r_prop_sizes <- (1 - spacing[2]) * lower_abundances / sum(lower_abundances)
+
+  if (scaling == "relative") {
+    c_prop_sizes <- (1 - spacing[1]) * upper_abundances / sum(upper_abundances)
+    r_prop_sizes <- (1 - spacing[2]) * lower_abundances / sum(lower_abundances)
+  } else if (scaling == "absolute") {
+    max_abundances <- max(sum(upper_abundances), sum(lower_abundances))
+    c_prop_sizes <- (1 - spacing[1]) * upper_abundances / max_abundances
+    r_prop_sizes <- (1 - spacing[2]) * lower_abundances / max_abundances
+    c_space <- (1 - sum(c_prop_sizes)) / (nc - 1)
+    r_space <- (1 - sum(r_prop_sizes)) / (nr - 1)
+  }
+
+  if (!is.null(add_upper_abundances)) {
+    c_space <- c(0, c_space)
+    nc <- nc * 2
+  }
+  if (!is.null(add_lower_abundances)) {
+    r_space <- c(0, r_space)
+    nr <- nr * 2
+  }
 
   c_xl <- c(0, cumsum(c_prop_sizes[-nc] + c_space))
   c_xr <- c(c_prop_sizes[1],
@@ -171,13 +186,13 @@ plotweb_v2 <- function(web,
   r_xr <- c(r_prop_sizes[1],
             r_prop_sizes[1] + cumsum(r_prop_sizes[-1] + r_space))
 
-  if (!is.null(add_lower_abundances)) {
+  if (!is.null(add_upper_abundances)) {
     c_tx <- (c_xl[seq(1, nc, 2)] + c_xr[seq(2, nc, 2)]) / 2
   } else{
     c_tx <- (c_xl + c_xr) / 2
   }
-  if (!is.null(add_upper_abundances)) {
-    r_tx <- (r_xl[seq(1, nc, 2)] + r_xr[seq(2, nc, 2)]) / 2
+  if (!is.null(add_lower_abundances)) {
+    r_tx <- (r_xl[seq(1, nr, 2)] + r_xr[seq(2, nr, 2)]) / 2
   } else {
     r_tx <- (r_xl + r_xr) / 2
   }
@@ -227,10 +242,18 @@ plotweb_v2 <- function(web,
                        col = rep(1:nc, each = nr),
                        weight = c(web))
 
-  if (!is.null(add_lower_abundances)) {
+  if (!is.null(add_lower_abundances) && !is.null(add_upper_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
-                        col = rep(seq(1, nc, 2), each = nr/2),
-                        weight = c(web))
+                         col = rep(seq(1, nc, 2), each = nr/2),
+                         weight = c(web))
+  } else if (!is.null(add_lower_abundances)) {
+    web.df <- data.frame(row = rep(seq(1, nr, 2), nc),
+                         col = rep(1:nc, each = nr/2),
+                         weight = c(web))
+  } else if (!is.null(add_upper_abundances)) {
+    web.df <- data.frame(row = rep(1:nr, nc/2),
+                         col = rep(seq(1, nc, 2), each = nr),
+                         weight = c(web))
   }
   web.df <- web.df[web.df$weight > 0, ]
 

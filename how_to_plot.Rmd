@@ -1,5 +1,6 @@
 ```{r}
 library(bipartite)
+source("./draw_link.R")
 source("./plotweb_v2.R") 
 source("./sortweb2.R")
 ```
@@ -13,9 +14,9 @@ plotweb(motten1982, plot.axes = TRUE)
 
 In many cases it can be a useful first step to visualize a given network. The easiest way to do this is to c
 
-```{r}
+```{r, fig.width=10, fig.height=10}
 source("./plotweb_v2.R") 
-plotweb_v2(web)
+plotweb_v2(web, horizontal = TRUE)
 ```
 
 all the function `plotweb` giving the web as argument.
@@ -293,4 +294,11 @@ grconvertX(0, from = "inches", to = "user")
 source("./new_plotweb.R")
 plotweb_tb_add_abun(web, horizontal = TRUE, plot_axes = TRUE)
 plotweb_tb_add_abun(web, add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 5), add_lower_abundances = c("L1" = 5, "L2" = 5), horizontal = TRUE, plot_axes = TRUE, upper_color = c("U3" = "yellow", "U1" = "gray20"), upper_border = "black", lower_color = c("green", "blue"), lower_border = "black", style = "curve")
+```
+
+```{r, fig.width=10, fig.height=10}
+web
+source("~/bipartite/plotweb_v2.R")
+plotweb_v2(web, horizontal = TRUE, style = "curve")
+plotweb_v2(web, add_lower_abundances =  c("L1" = 5, "L2" = 5), add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 10), horizontal = FALSE, style = "curve", scaling = "absolute", plot_axes = TRUE, lower_abundances = c("L1" = 0.5, "L2" = 10))
 ```
