@@ -225,23 +225,19 @@ plotweb_v2 <- function(web,
     text(1.01, r_tx, r_names, adj = c(0, 0.5), srt = srt, cex = text_size,
          xpd = TRUE, font = font, family = family)
   } else {
-    rect(c_xl, 0, c_xr, 0.1, col = upper_color, border = upper_border)
-    rect(r_xl, 0.9, r_xr, 1, col = lower_color, border = lower_border)
-    text(c_tx, -0.01, c_names, adj = c(1, 0.5), cex = text_size,
+    rect(r_xl, 0, r_xr, 0.1, col = lower_color, border = lower_border)
+    rect(c_xl, 0.9, c_xr, 1, col = upper_color, border = upper_border)
+    text(r_tx, -0.01, r_names, adj = c(1, 0.5), cex = text_size,
          xpd = TRUE, srt = 90 + srt, font = font, family = family)
     # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
     #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
     #      font = font, family = family)
-    text(r_tx, 1.01, r_names,
+    text(c_tx, 1.01, c_names,
          adj = c(0, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
          font = font, family = family)
   }
 
   # Interactions
-  web.df <- data.frame(row = rep(1:nr, nc),
-                       col = rep(1:nc, each = nr),
-                       weight = c(web))
-
   if (!is.null(add_lower_abundances) && !is.null(add_upper_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
                          col = rep(seq(1, nc, 2), each = nr/2),
@@ -253,6 +249,10 @@ plotweb_v2 <- function(web,
   } else if (!is.null(add_upper_abundances)) {
     web.df <- data.frame(row = rep(1:nr, nc/2),
                          col = rep(seq(1, nc, 2), each = nr),
+                         weight = c(web))
+  } else {
+    web.df <- data.frame(row = rep(1:nr, nc),
+                         col = rep(1:nc, each = nr),
                          weight = c(web))
   }
   web.df <- web.df[web.df$weight > 0, ]
@@ -292,8 +292,13 @@ plotweb_v2 <- function(web,
   }
   for (linki in order(-web.df$weight)) {
     link <- web.df[linki, ]
-    x1 <- 0.1
-    x2 <- 0.9
+    if (horizontal) {
+      x1 <- 0.1
+      x2 <- 0.9
+    } else {
+      x1 <- 0.9
+      x2 <- 0.1
+    }
     y1 <- link$xcoord.tl
     y2 <- link$xcoord.bl
     y3 <- link$xcoord.tr
