@@ -302,3 +302,9 @@ source("~/bipartite/plotweb_v2.R")
 plotweb_v2(web, horizontal = TRUE, style = "curve")
 plotweb_v2(web, add_lower_abundances =  c("L1" = 5, "L2" = 5), add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 10), horizontal = FALSE, style = "curve", scaling = "absolute", plot_axes = TRUE, lower_abundances = c("L1" = 0.5, "L2" = 10))
 ```
+
+```{r, fig.width=10, fig.height=10}
+source("~/bipartite/plot2webs_v2.R")
+plot2webs_v2(web, web, horizontal = TRUE, add_upper_abundances = list(c("U1" = 5, "U2" = 5, "U3" = 10), c("U1" = 5, "U2" = 5, "U3" = 10)), scaling = "relative")
+plot2webs_v2(web, web, horizontal = FALSE, add_upper_abundances = list(c("U1" = 5, "U2" = 5, "U3" = 10), c("U1" = 5, "U2" = 5, "U3" = 10)), scaling = "relative", plot_axes = TRUE, srt = 0)
+```

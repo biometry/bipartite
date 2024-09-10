@@ -298,8 +298,15 @@ plot2webs_v2 <- function(web1,
   c_m_t_width <- max(strwidth(c_names, units = "inches"))
   r_m_t_width_1 <- max(strwidth(r_names_1, units = "inches"))
   r_m_t_width_2 <- max(strwidth(r_names_2, units = "inches"))
+  print(c_m_t_width)
+  print(r_m_t_width_1)
+  print(r_m_t_width_2)
 
-  par(fig=c(0,0.5,0,1), mai = c(0.5, r_m_t_width_1 + 0.1, 0.5, c_m_t_width/2 + 0.1))
+  if (horizontal) {
+    par(fig=c(0,0.5,0,1), mai = c(0.5, r_m_t_width_1 + 0.1, 0.5, c_m_t_width/2 + 0.1))
+  } else {
+    par(fig=c(0,1,0,0.5), mai = c(r_m_t_width_1 + 0.1, 0.5, c_m_t_width/2 + 0.1, 0.5))
+  }
   plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
        axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
 
@@ -336,9 +343,6 @@ plot2webs_v2 <- function(web1,
   }
 
 
-  rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color, border = lower_border)
-  rect(0.9, c_xl_1, 1, c_xr_1, col = upper_color, border = upper_border)
-
   if (!is.null(add_upper_abundances)) {
     c_tx <- (c_xl[seq(1, nc, 2)] + c_xr[seq(2, nc, 2)]) / 2
   } else{
@@ -362,8 +366,17 @@ plot2webs_v2 <- function(web1,
     r_names_1 <- as.expression(r_names_1)
   }
 
-  text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T)
-  text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_tx, c_names, adj = c(0.5, 0.5), xpd=NA)
+  if (horizontal) {
+    rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color, border = lower_border)
+    rect(0.9, c_xl_1, 1, c_xr_1, col = upper_color, border = upper_border)
+    text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt)
+    text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_tx, c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt)
+  } else {
+    rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color, border = lower_border)
+    rect(c_xl_1, 0.9, c_xr_1, 1, col = upper_color, border = upper_border)
+    text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt + 90)
+    text(c_tx, 1 + 0.5 * grconvertY(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt + 90)
+  }
   # text(1, c_tx, c_names, adj = c(0, 0.5), xpd=NA)
 
   # # Interactions
@@ -414,7 +427,7 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     draw_link(x2, x1, y1, y2, y3, y4,
-              upper_color[link$col], horizontal = TRUE,
+              upper_color[link$col], horizontal = horizontal,
               style = style)
   }
 
@@ -422,12 +435,14 @@ plot2webs_v2 <- function(web1,
   # plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
   #      axes = FALSE, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
 
-
-  par(fig=c(0.5, 1, 0, 1), mai = c(0.5, c_m_t_width / 2 + 0.1, 0.5, r_m_t_width_2 + 0.1), new = TRUE)
+  if(horizontal) {
+    par(fig=c(0.5, 1, 0, 1), mai = c(0.5, c_m_t_width / 2 + 0.1, 0.5, r_m_t_width_2 + 0.1), new = TRUE)
+  } else {
+    par(fig=c(0, 1, 0.5, 1), mai = c(c_m_t_width / 2 + 0.1, 0.5, r_m_t_width_2 + 0.1, 0.5), new = TRUE)
+  }
   plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
        axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-  rect(0, c_xl_2, 0.1, c_xr_2, col = upper_color, border = upper_border)
-  rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color, border = lower_border)
+
 
   # r_tx_2 <- (r_xr_2 + r_xl_2) / 2
   if (!is.null(add_lower_abundances)) {
@@ -441,7 +456,16 @@ plot2webs_v2 <- function(web1,
     r_names_2 <- lapply(r_names_2, function(x) bquote(italic(.(x))))
     r_names_2 <- as.expression(r_names_2)
   }
-  text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), xpd=T)
+
+  if (horizontal) {
+    rect(0, c_xl_2, 0.1, c_xr_2, col = upper_color, border = upper_border)
+    rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color, border = lower_border)
+    text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt)
+  } else {
+    rect(c_xl_2, 0, c_xr_2, 0.1, col = upper_color, border = upper_border)
+    rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color, border = lower_border)
+    text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt + 90)
+  }
   #text(-0.5 * c_m_t_width, c_tx, c_names, adj = c(0.5, 0.5), xpd=T)
 
   # # Interactions
@@ -492,7 +516,7 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     draw_link(x1, x2, y1, y2, y3, y4,
-              upper_color[link$col], horizontal = TRUE,
+              upper_color[link$col], horizontal = horizontal,
               style = style)
   }
 }
