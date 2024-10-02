@@ -17,7 +17,7 @@ plotweb_v2 <- function(web,
                        upper_color = "black",
                        upper_border = "same",
                        horizontal = FALSE,
-                       abbr_names = FALSE,
+                       #abbr_names = FALSE,
                        link_color = "lower",
                        link_border = "same",
                        link_alpha = 0.5,
@@ -26,7 +26,8 @@ plotweb_v2 <- function(web,
                        spacing = "auto",
                        plot_axes = FALSE,
                        mar = c(1, 1, 1, 1),
-                       mai = NULL) {
+                       mai = NULL)#,
+                       #legend = FALSE) {
   #web <- sortweb2(web, sequence = NULL, empty = TRUE, sort.order = "cca")
 
   # Set the figure border via the mai or mar argument
@@ -34,15 +35,30 @@ plotweb_v2 <- function(web,
     warning("Both mar and mai have been set to values other than NULL. ",
             "This leads to mai overriding mar.")
   }
-  if (!is.null(mar)){
+
+  stopifnot(is.logical(upper_italic),
+            is.logical(lower_italic),
+            is.logical(horizontal),
+            is.logical(plot_axes),
+            (is.numeric(text_size) && text_size > 0))
+
+  if (!is.null(mar)) {
     par(mar = mar)
   }
-  if (!is.null(mai)){
+  if (!is.null(mai)) {
     par(mai = mai)
   }
 
-  r_names <- rownames(web)
-  c_names <- colnames(web)
+  if (!is.null(rownames(web))) {
+    r_names <- rownames(web)
+  } else {
+    r_names <- 1:nrow(web)
+  }
+  if (!is.null(rownames(web))) {
+    c_names <- colnames(web)
+  } else {
+    c_names <- 1:ncol(web)
+  }
 
   nr <- nrow(web)
   nc <- ncol(web)
@@ -61,19 +77,20 @@ plotweb_v2 <- function(web,
     upper_color <- upper_color[c_names]
   }
 
-  if (abbr_names == "numbers") {
-    r_names <- (nc + 1):(nc + nr)
-    c_names <- 1:nc
-    r_full_names <- rownames(web)
-    c_full_names <- colnames(web)
-  } else if (abbr_names == "letters") {
-    r_names <- letters[(nc + 1):(nc + nr)]
-    c_names <- letters[1:nc]
-    r_names <- paste("lower_", r_names)
-    c_names <- paste("upper_", c_names)
-    r_full_names <- rownames(web)
-    c_full_names <- colnames(web)
-  }
+  ## TODO: Implement this correctly and add an option to create a legend
+  # if (abbr_names == "numbers") {
+  #   r_names <- (nc + 1):(nc + nr)
+  #   c_names <- 1:nc
+  #   r_full_names <- rownames(web)
+  #   c_full_names <- colnames(web)
+  # } else if (abbr_names == "letters") {
+  #   r_names <- letters[(nc + 1):(nc + nr)]
+  #   c_names <- letters[1:nc]
+  #   r_names <- paste("lower_", r_names)
+  #   c_names <- paste("upper_", c_names)
+  #   r_full_names <- rownames(web)
+  #   c_full_names <- colnames(web)
+  # }
 
   if (text_size == "auto") {
     total_str_h <- sum(strheight(c_names, srt = srt))
@@ -188,7 +205,7 @@ plotweb_v2 <- function(web,
 
   if (!is.null(add_upper_abundances)) {
     c_tx <- (c_xl[seq(1, nc, 2)] + c_xr[seq(2, nc, 2)]) / 2
-  } else{
+  } else {
     c_tx <- (c_xl + c_xr) / 2
   }
   if (!is.null(add_lower_abundances)) {
@@ -315,4 +332,8 @@ plotweb_v2 <- function(web,
               alpha = link_alpha,
               style = style)
   }
+
+  # if (legend == TRUE) {
+  #   plot()
+  # }
 }

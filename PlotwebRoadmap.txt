@@ -1,0 +1,30 @@
+# Important (has to be finished before release)
+
+ * Finish R help files for all function
+ * Finish markdown file "How to plot"
+ * Test all new and old functionality
+ * Add more checks for correct inputs
+ * Make the spacing between the boxes more configurable 
+
+# Nice to have
+
+ * Make the size of the boxes configurable with an option 
+ * Auto generated legend 
+    - Automatic abbreviating of labels
+    - Different options with numbers, characters, or shortened species names
+ * Sorting 2 webs with as few crossings as possible 
+ * Making the margins and positions of the plots configurable 
+ * Adding the option for double labels in plot2webs
+ * Plot the labels inside the boxes
+ * Make alpha channel a list so that it can be configured for every link individually 
+ * Option to group species together, so that they share a color
+   and are plotted with some distance to other groups
+    - Sorting algorithms should be adapted to that 
+    - Could be implemented with nested named list
+    - inner group distance between group distance 
+
+ # Designfragen 
+
+  * Lieber eigene Parameter für Italic, Rotation, etc. oder über par-Argumente (font, srt) definieren?
+  * Do we need an option to flip the plot or is it enough to document that transposing the web in the function call does the same?
+  * Should wrong inputs be handled each with a separate error message or is stopifnot sufficient?
