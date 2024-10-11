@@ -1,0 +1,38 @@
+# How to Plot
+
+```{r}
+library(bipartite)
+source("./plotweb_v2.R")
+source("./draw_link.R")
+```
+
+## Creating a web matrix
+
+```{r}
+n_higher_species <- 7
+n_lower_species <- 15
+higher_species <- paste("Pollinator", 1:n_higher_species)
+lower_species <- paste("Plant", 1:n_lower_species)
+web <- matrix(sample(0:100, n_higher_species * n_lower_species, replace = TRUE, prob = c(50, sqrt(1/(1:100)))), 
+              ncol = n_higher_species,
+              nrow = n_lower_species)
+colnames(web) <- higher_species
+rownames(web) <- lower_species
+web
+```
+
+## Plotting the old way
+
+```{r, fig.width=10, fig.heigth=10}
+plotweb(web, method = "cca")
+```
+
+## Plotting the new way
+
+```{r, fig.height = 10, fig.width = 20}
+source("./plotweb_v2.R")
+plotweb(motten1982)
+plotweb_v2(web)
+plotweb_v2(motten1982, text_size=0.9)
+plotweb_v2(motten1982, text_size=1, horizontal = T)
+```

@@ -17,6 +17,7 @@ plotweb_v2 <- function(web,
                        family = NULL,
                        srt = 0,
                        text_size = 1,
+                       box_size = 0.1,
                        upper_italic = FALSE,
                        lower_italic = FALSE,
                        x_lim = c(0, 1),
@@ -34,6 +35,7 @@ plotweb_v2 <- function(web,
                        arrow = "no",
                        spacing = "auto",
                        plot_axes = FALSE,
+                       add = FALSE,
                        mar = c(1, 1, 1, 1),
                        mai = NULL)
 }
@@ -50,14 +52,15 @@ plotweb_v2 <- function(web,
   \item{family}{}
   \item{srt}{Orientation of the labels in degrees. If horizontal = TRUE an automatic offset of 90 is added. (Defualt: 0)}
   \item{text_size}{Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: 1)}
+  \item{box_size}{Size of the boxes. Numerical with either c(upper_box_size, lower_box_size) or one value if both should be the same. (Default: 0.1)}
   \item{upper_italic}{If set to TRUE, the labels of the upper species are plotted in italics. (Default: FALSE)}
   \item{lower_italic}{If set to TRUE, the labels of the lower species are plotted in italics. (Default: FALSE)}
   \item{x_lim}{}
   \item{y_lim}{}
-  \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes.}
+  \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes. (Default: "black")}
   \item{lower_border}{Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
                       If "same", the borders have the same color as the corresponding boxes.}
-  \item{higher_color}{A single color or a list of colors used to plot the higher species (columns) boxes.}
+  \item{higher_color}{A single color or a list of colors used to plot the higher species (columns) boxes. (Default: "black")}
   \item{higher_border}{Either "same" or a single color or a list of colors used to plot the higher species (columns) boxes borders.
                       If "same", the borders have the same color as the corresponding boxes.}
   \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
@@ -80,6 +83,7 @@ plotweb_v2 <- function(web,
   }
   \item{spacing}{Either "auto", a single value or a numerical vector of the form c(lower, upper). (Default: "auto")}
   \item{plot_axes}{(Default: FALSE)}
+  \item{add}{If set to TRUE a new bipartite network is added to the previous plot. (Default: FALSE)}
   \item{mar}{A numerical vector of the form c(bottom, left, top, right) which gives the number of lines of margin to be specified on the four sides of the plot. 
              The default is NULL which takes the global setting from par(). }
   \item{mai}{A numerical vector of the form c(bottom, left, top, right) which gives the margin size specified in inches.
