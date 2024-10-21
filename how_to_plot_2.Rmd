@@ -59,7 +59,19 @@ plotweb_v2(motten1982, horizontal = T, text_size = 0.5)
 ### Additional abundances colors
 
 ```{r}
-u_add_abun <- 
+source("./plotweb_v2.R")
+u_add_abun <- sample(0:100, n_higher_species, replace = TRUE)
+names(u_add_abun) <- higher_species
+print(u_add_abun)
+add_u_colors <- c("Pollinator 7" = "blue",
+                  "Pollinator 6" = "black",
+                  "Pollinator 5" = "black",
+                  "Pollinator 4" = "red",
+                  "Pollinator 3" = "black", 
+                  "Pollinator 2" = "red",
+                  "Pollinator 1" = "black")
+plotweb_v2(web, horizontal = TRUE)
+plotweb_v2(web, add_upper_abundances = u_add_abun, horizontal = TRUE, upper_color = "green", upper_border = "black", upper_add_color = add_u_colors, link_color = "upper")
 ```
 
 ```{r}
