@@ -158,6 +158,7 @@ plotweb_v2 <- function(web,
     l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - grconvertY(0, from = "inches")
   }
 
+  print("-------------------------------------------")
   print(space_size)
 
   # if (horizontal) {
@@ -216,8 +217,24 @@ plotweb_v2 <- function(web,
     # Sort the additional upper abundances according to the column-order in the web
     add_upper_abundances <- add_upper_abundances[colnames(web)]
     upper_abundances <- c(rbind(upper_abundances, add_upper_abundances))
-    #c_space <- c(0, c_space)
-    upper_color <- rep(upper_color, each = 2)
+    # Include the custom colors into the color vector
+    if (length(upper_add_color) == 1) {
+      if (upper_add_color == "same") {
+        upper_add_color <- upper_color
+        # upper_color <- rep(upper_color, each = 2)
+      } else {
+        upper_add_color <- rep_len(upper_add_color, nc)
+      }
+    } else if (!is.null(names(upper_add_color))) {
+      stopifnot(length(upper_add_color) == nc)
+      if (!setequal(names(upper_add_color), c_names)) {
+        stop("Names of upper_add_color does not match upper species names.")
+      }
+      upper_add_color <- upper_add_color[colnames(web)]
+    } else if (length(upper_add_color) < nc) {
+      upper_add_color <- rep_len(upper_add_color, nc)
+    }
+    upper_color <- c(rbind(upper_color, upper_add_color))
   }
 
   if (is.null(lower_abundances)) {
@@ -230,7 +247,24 @@ plotweb_v2 <- function(web,
     # by alternating indices
     lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
     #r_space <- c(0, r_space)
-    lower_color <- rep(lower_color, each = 2)
+    # Include the custom colors into the color vector
+    if (length(lower_add_color) == 1) {
+      if (lower_add_color == "same") {
+        lower_add_color <- lower_color
+        # upper_color <- rep(upper_color, each = 2)
+      } else {
+        lower_add_color <- rep_len(lower_add_color, nr)
+      }
+    } else if (!is.null(names(lower_add_color))) {
+      stopifnot(length(lower_add_color) == nr)
+      if (!setequal(names(lower_add_color), r_names)) {
+        stop("Names of lower_add_color does not match lower species names.")
+      }
+      lower_add_color <- lower_add_color[rownames(web)]
+    } else if (length(lower_add_color) < nr) {
+      lower_add_color <- rep_len(lower_add_color, nr)
+    }
+    lower_color <- c(rbind(lower_color, lower_add_color))
   }
 
   if (scaling == "relative") {
@@ -245,12 +279,12 @@ plotweb_v2 <- function(web,
   }
 
   if (!is.null(add_upper_abundances)) {
-    c_space <- c(0, c_space)
     nc <- nc * 2
+    c_space <- rep(c(0, c_space), length.out = (nc - 1))
   }
   if (!is.null(add_lower_abundances)) {
-    r_space <- c(0, r_space)
     nr <- nr * 2
+    r_space <- rep(c(0, r_space), length.out = (nr - 1))
   }
 
   c_xl <- c(space_start, space_start + cumsum(c_prop_sizes[-nc] + c_space))
