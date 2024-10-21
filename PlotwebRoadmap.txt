@@ -8,11 +8,15 @@
  * Add compatibility to old version:
    - Add configurable color for additional abundances
    - Configurable color for label text
- * Make the size of the boxes configurable with an option 
- * sortweb call einbauen
  * plot2web sortweb option which web to sort
  * Rotation der Labels bei vertikalem Plot lösen
  * plot2webs Option um festzulegen was in der Mitte geplottet wird (higher, lower)
+
+# Done
+ * sortweb call einbauen
+ * Make the size of the boxes configurable with an option 
+ * fix bug that doesn't allow negative x_lim and y_lim values
+ * Add option for distance between boxes and text
 
 # Nice to have
 

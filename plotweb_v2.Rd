@@ -57,6 +57,7 @@ plotweb_v2 <- function(web,
   \item{lower_italic}{If set to TRUE, the labels of the lower species are plotted in italics. (Default: FALSE)}
   \item{x_lim}{}
   \item{y_lim}{}
+  \item{lab_distance}{Distance between the boxes and the labels in \strong{inches}}
   \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes. (Default: "black")}
   \item{lower_border}{Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
                       If "same", the borders have the same color as the corresponding boxes.}
