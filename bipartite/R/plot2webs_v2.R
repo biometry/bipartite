@@ -1,5 +1,6 @@
 plot2webs_v2 <- function(web1,
                          web2,
+                         middle = "upper",
                          upper_abundances = NULL,
                          lower_abundances = NULL,
                          add_upper_abundances = NULL,
@@ -31,6 +32,40 @@ plot2webs_v2 <- function(web1,
                          mar = c(1, 1, 1, 1),
                          mai = NULL,
                          plot_axes = FALSE) {
+
+
+  # By default the the higher species (columns)
+  # are plotted in the middle. So to enable plotting the lower
+  # species (rows) in the middle a trick is used. That is,
+  # both webs are transposed and all corresponding variables are swapped.
+  if (middle == "lower") {
+    web1 <- t(web1)
+    web2 <- t(web2)
+    # swap independent abundances
+    tmp <- upper_abundances 
+    upper_abundances <- lower_abundances
+    lower_abundances <- tmp
+    # swap additional abundances
+    tmp <- add_upper_abundances
+    add_upper_abundances <- add_lower_abundances
+    add_lower_abundances <- tmp
+    # swap italics
+    tmp <- upper_italic
+    upper_italic <- lower_italic
+    lower_italic <- tmp
+    # swap color
+    tmp <- upper_color
+    upper_color <- lower_color
+    lower_color <- tmp
+    # swap border color
+    tmp <- upper_border
+    upper_border <- lower_border
+    lower_border <- tmp
+    # swap additional color
+    tmp <- add_upper_color
+    add_upper_color <- add_lower_color
+    add_lower_color <- tmp
+  }
 
   r_names_1 <- rownames(web1)
   r_names_2 <- rownames(web2)

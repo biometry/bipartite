@@ -2,9 +2,9 @@
 
 ```{r}
 library(bipartite)
-source("./sortweb2.R")
-source("./plotweb_v2.R")
-source("./draw_link.R")
+#source("./sortweb2.R")
+#source("./plotweb_v2.R")
+#source("./draw_link.R")
 ```
 
 ## Creating a web matrix
@@ -25,7 +25,7 @@ web
 ## Plotting the old way
 
 ```{r, fig.width=10, fig.heigth=10}
-source("./plotweb_v2.R")
+#source("./plotweb_v2.R")
 plotweb(web, method = "cca")
 plotweb(motten1982, method = "cca")
 ```
@@ -33,7 +33,7 @@ plotweb(motten1982, method = "cca")
 ## Plotting the new way
 
 ```{r, fig.width=15, fig.heigth=10}
-source("./plotweb_v2.R")
+#source("./plotweb_v2.R")
 plotweb_v2(web, sorting = "cca")
 plotweb_v2(web, sorting = "cca", srt = 90, lab_distance = 0.4)
 ```
@@ -59,7 +59,7 @@ plotweb_v2(motten1982, horizontal = T, text_size = 0.5)
 ### Additional abundances colors
 
 ```{r}
-source("./plotweb_v2.R")
+#source("./plotweb_v2.R")
 u_add_abun <- sample(0:100, n_higher_species, replace = TRUE)
 names(u_add_abun) <- higher_species
 print(u_add_abun)
@@ -71,11 +71,12 @@ add_u_colors <- c("Pollinator 7" = "blue",
                   "Pollinator 2" = "red",
                   "Pollinator 1" = "black")
 plotweb_v2(web, horizontal = TRUE)
-plotweb_v2(web, add_upper_abundances = u_add_abun, horizontal = TRUE, upper_color = "green", upper_border = "black", upper_add_color = add_u_colors, link_color = "upper")
+plotweb_v2(web, add_upper_abundances = u_add_abun, upper_abundances = u_add_abun, horizontal = TRUE, upper_color = "green", upper_border = "black", upper_add_color = add_u_colors, link_color = "upper")
 ```
 
-```{r}
-
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(web, web, horizontal = TRUE, upper_color="darkgreen")
+plot2webs_v2(web, web, horizontal = TRUE, middle = "lower", upper_color="darkgreen")
 ```
 
 ```{r}
