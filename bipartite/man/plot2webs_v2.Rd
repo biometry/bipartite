@@ -9,6 +9,9 @@ Two 2-D matrices are plotted as a tripartite graph.
 \usage{
 plot2webs_v2 <- function(web1,
                          web2,
+                         middle = "upper",
+                         sort_by = 1,
+                         sorting = "normal",
                          upper_abundances = NULL,
                          lower_abundances = NULL,
                          add_upper_abundances = NULL,
@@ -27,6 +30,8 @@ plot2webs_v2 <- function(web1,
                          upper_color = "black",
                          upper_border = "same",
                          add_upper_color = "same",
+                         higher_text_color = "black",
+                         lower_text_color = "black",
                          horizontal = FALSE,
                          abbr_names = FALSE,
                          link_color = "lower",
@@ -83,7 +88,7 @@ plot2webs_v2 <- function(web1,
     }
   }
   \item{spacing}{Either "auto", a single value or a numerical vector of the form c(lower, upper). (Default: "auto")}
-  \item{plot_axes}{(Default: FALSE)}
+  \item{plot_axes}{Indicates whether both axes should be drawn on the plot. (Default: FALSE)}
   \item{mar}{A numerical vector of the form c(bottom, left, top, right) which gives the number of lines of margin to be specified on the four sides of the plot. 
              The default is NULL which takes the global setting from par(). }
   \item{mai}{A numerical vector of the form c(bottom, left, top, right) which gives the margin size specified in inches.

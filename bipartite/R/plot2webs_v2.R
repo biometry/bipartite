@@ -1,6 +1,8 @@
 plot2webs_v2 <- function(web1,
                          web2,
                          middle = "upper",
+                         sort_by = 1,
+                         sorting = "normal",
                          upper_abundances = NULL,
                          lower_abundances = NULL,
                          add_upper_abundances = NULL,
@@ -19,6 +21,8 @@ plot2webs_v2 <- function(web1,
                          upper_color = "black",
                          upper_border = "same",
                          add_upper_color = "same",
+                         higher_text_color = "black",
+                         lower_text_color = "black",
                          horizontal = FALSE,
                          abbr_names = FALSE,
                          link_color = "lower",
@@ -65,16 +69,29 @@ plot2webs_v2 <- function(web1,
     tmp <- add_upper_color
     add_upper_color <- add_lower_color
     add_lower_color <- tmp
+    # swap text color
+    tmp <- higher_text_color
+    higher_text_color <- lower_text_color
+    lower_text_color <- tmp
+  }
+
+  if (sort_by == 1) {
+    web1 <- sortweb2(web1, sort.order = sorting)
+  } else if (sort_by == 2) {
+    web2 <- sortweb2(web2, sort.order = sorting)
   }
 
   r_names_1 <- rownames(web1)
   r_names_2 <- rownames(web2)
   c_names_1 <- colnames(web1)
   c_names_2 <- colnames(web2)
-  c_names <- union(c_names_1, c_names_2)
+  if (sort_by == 1) {
+    c_names <- union(c_names_1, c_names_2)
+  } else if (sort_by == 2) {
+    c_names <- union(c_names_2, c_names_1)
+  }
   nr_1 <- nrow(web1)
   nr_2 <- nrow(web2)
-
 
   # Calculate the set difference between the column names
   c_diff_1 <- setdiff(c_names_2, c_names_1)
@@ -85,7 +102,12 @@ plot2webs_v2 <- function(web1,
   c_fill_2 <- matrix(0, nrow = nr_2,
                      ncol = length(c_diff_2), dimnames = list(c(), c_diff_2))
   web2 <- cbind(web2, c_fill_2)
-  web2 <- web2[, colnames(web1)]
+
+  if (sort_by == 1) {
+    web2 <- web2[, colnames(web1)]
+  } else if (sort_by == 2) {
+    web1 <- web1[, colnames(web2)]
+  }
 
   nc <- length(c_names)
   nr <- length(union(r_names_1, r_names_2))
@@ -404,13 +426,15 @@ plot2webs_v2 <- function(web1,
   if (horizontal) {
     rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color, border = lower_border)
     rect(0.9, c_xl_1, 1, c_xr_1, col = upper_color, border = upper_border)
-    text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt)
-    text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_tx, c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt)
+    text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt, col = lower_text_color)
+    text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_tx,
+         c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt, col = higher_text_color)
   } else {
     rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color, border = lower_border)
     rect(c_xl_1, 0.9, c_xr_1, 1, col = upper_color, border = upper_border)
-    text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt + 90)
-    text(c_tx, 1 + 0.5 * grconvertY(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt + 90)
+    text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt + 90, col = lower_text_color)
+    text(c_tx, 1 + 0.5 * grconvertY(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"),
+         c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt + 90, col = higher_text_color)
   }
   # text(1, c_tx, c_names, adj = c(0, 0.5), xpd=NA)
 
@@ -495,11 +519,11 @@ plot2webs_v2 <- function(web1,
   if (horizontal) {
     rect(0, c_xl_2, 0.1, c_xr_2, col = upper_color, border = upper_border)
     rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color, border = lower_border)
-    text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt)
+    text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt, col = lower_text_color)
   } else {
     rect(c_xl_2, 0, c_xr_2, 0.1, col = upper_color, border = upper_border)
     rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color, border = lower_border)
-    text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt + 90)
+    text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt + 90, col = lower_text_color)
   }
   #text(-0.5 * c_m_t_width, c_tx, c_names, adj = c(0.5, 0.5), xpd=T)
 

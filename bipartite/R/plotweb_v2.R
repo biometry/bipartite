@@ -22,10 +22,11 @@ plotweb_v2 <- function(web,
                        upper_color = "black",
                        upper_border = "same",
                        upper_add_color = "red",
-                       text_color = "black",
+                       higher_text_color = "black",
+                       lower_text_color = "black",
                        horizontal = FALSE,
                        #abbr_names = FALSE,
-                       link_color = "lower",
+                       link_color = "upper",
                        link_border = "same",
                        link_alpha = 0.5,
                        style = "line",
@@ -52,7 +53,7 @@ plotweb_v2 <- function(web,
   }
   if (!is.null(mai)) {
     par(mai = mai)
-    }
+  }
 
   web <- sortweb2(web, sort.order = sorting, empty = TRUE)
 
@@ -342,9 +343,11 @@ plotweb_v2 <- function(web,
     rect(x_end - lower_box_size, r_xl, x_end, r_xr,
          col = lower_color, border = lower_border)
     text(x_start - u_lab_distance, c_tx, c_names, adj = c(1, 0.5), srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family)
+         cex = text_size, xpd = TRUE, font = font, family = family,
+         col = higher_text_color)
     text(x_end + l_lab_distance, r_tx, r_names, adj = c(0, 0.5), srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family)
+         cex = text_size, xpd = TRUE, font = font, family = family,
+         col = lower_text_color)
   } else {
     y_start <- y_lim[1]
     y_end <- y_lim[2]
@@ -355,7 +358,7 @@ plotweb_v2 <- function(web,
     #      xpd = TRUE, srt = srt + 90, font = font, family = family)
 
     text(r_tx, y_start - l_lab_distance, r_names, pos = 1, cex = text_size,
-         xpd = TRUE, srt = srt, font = font, family = family)
+         xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
     # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
     #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
     #      font = font, family = family)
@@ -364,7 +367,7 @@ plotweb_v2 <- function(web,
     #      font = font, family = family)
     text(c_tx, y_end + u_lab_distance, c_names,
          pos = 3, cex = text_size, xpd = TRUE, srt = srt,
-         font = font, family = family)
+         font = font, family = family, col = higher_text_color)
   }
 
   # Interactions
