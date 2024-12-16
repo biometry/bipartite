@@ -74,6 +74,13 @@ plot2webs_v2 <- function(web1,
     tmp <- higher_text_color
     higher_text_color <- lower_text_color
     lower_text_color <- tmp
+
+    if (link_color == "higher") {
+      link_color <- "lower"
+    } else if (link_color == "lower") {
+      link_color <- "higher"
+    }
+
   }
 
   if (sort_by == 1) {
@@ -498,8 +505,15 @@ plot2webs_v2 <- function(web1,
     y2 <- link$xcoord.br
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
+    if (link_color == "lower") {
+      l_col <- lower_color[link$row]
+    } else if (link_color == "higher") {
+      l_col <- higher_color[link$col]
+    } else {
+      l_col <- link_color
+    }
     draw_link(x2, x1, y1, y2, y3, y4,
-              higher_color[link$col], horizontal = horizontal,
+              l_col, horizontal = horizontal,
               curved = curved_links)
   }
 
@@ -589,8 +603,15 @@ plot2webs_v2 <- function(web1,
     y2 <- link$xcoord.br
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
+    if (link_color == "lower") {
+      l_col <- lower_color[link$row]
+    } else if (link_color == "higher") {
+      l_col <- higher_color[link$col]
+    } else {
+      l_col <- link_color
+    }
     draw_link(x1, x2, y1, y2, y3, y4,
-              higher_color[link$col], horizontal = horizontal,
+              l_col, horizontal = horizontal,
               curved = curved_links)
   }
 }

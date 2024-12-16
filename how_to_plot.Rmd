@@ -129,7 +129,8 @@ We now have abundances for the pollinator species that were randomly drawn form 
 We can also see that some of the links are increasing or decreasing in size from the left to the right.
 
 ```{r, fig.width=10, fig.height=10}
-higher_abundances <- sample(0:1000, n_higher_species, replace = TRUE)
+n_higher_species <- ncol(Safariland)
+higher_abundances <- sample(0:100, n_higher_species, replace = TRUE)
 plotweb_v2(Safariland, 
            horizontal = TRUE,
            higher_abundances = higher_abundances,
@@ -215,6 +216,9 @@ plotweb_v2(Safariland,
 plotweb_v2(Safariland, 
            horizontal = TRUE,
            add_lower_abundances = lower_abundances,
+           curved_links = TRUE,
+           lower_color = "lightgreen",
+           link_color = "lower",
            lower_add_color = "darkgreen")
 ```
 
@@ -235,4 +239,55 @@ plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              middle = "lower",
              text_size = 0.7)
+```
+
+### Switching to a relative scaling
+
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             middle = "higher",
+             text_size = 0.7,
+             scaling = "relative")
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             middle = "lower",
+             text_size = 0.7,
+             scaling = "relative")
+```
+
+### Adding some color
+
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             text_size = 0.7,
+             scaling = "relative",
+             lower_color = lower_color,
+             link_color = "lower")
+```
+
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             text_size = 0.7,
+             middle = "lower",
+             scaling = "relative",
+             lower_color = lower_color,
+             link_color = "lower")
+```
+
+```{r, fig.width = 10, fig.height = 10}
+combined_lower_names <- union(rownames(Safariland), rownames(vazarr)) 
+combined_lower_color <- rep("black", length(combined_lower_names))
+names(combined_lower_color) <- combined_lower_names
+combined_lower_color["Alstroemeria aurea"] <- "orange"
+
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             text_size = 0.7,
+             middle = "lower",
+             scaling = "relative",
+             lower_color = combined_lower_color,
+             link_color = "lower")
 ```
