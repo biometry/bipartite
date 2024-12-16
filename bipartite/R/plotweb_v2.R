@@ -211,6 +211,8 @@ plotweb_v2 <- function(web,
   # calculate the sum of all columns as abundances
   if (is.null(higher_abundances)) {
     higher_abundances <- colSums(web)
+  } else {
+    higher_abundances <- higher_abundances[colnames(web)]
   }
   if (!is.null(add_higher_abundances)) {
     # Sort the additional higher abundances according to the column-order in the web
@@ -240,6 +242,8 @@ plotweb_v2 <- function(web,
   # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
     lower_abundances <- rowSums(web)
+  } else {
+    lower_abundances <- lower_abundances[rownames(web)]
   }
   if (!is.null(add_lower_abundances)) {
     # Sort the additional lower abundances according to the row-order in the web
