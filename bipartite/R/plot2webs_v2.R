@@ -1,26 +1,27 @@
 plot2webs_v2 <- function(web1,
                          web2,
-                         middle = "upper",
+                         middle = "higher",
                          sort_by = 1,
                          sorting = "normal",
-                         upper_abundances = NULL,
+                         higher_abundances = NULL,
                          lower_abundances = NULL,
-                         add_upper_abundances = NULL,
+                         add_higher_abundances = NULL,
                          add_lower_abundances = NULL,
                          scaling = "absolute",
                          font = NULL,
                          family = NULL,
                          srt = 0,
-                         upper_italic = FALSE,
+                         higher_italic = FALSE,
                          lower_italic = FALSE,
+                         text_size = 1,
                          x_lim = c(0, 1),
                          y_lim = c(0, 1),
                          lower_color = "black",
                          lower_border = "same",
                          add_lower_color = "same",
-                         upper_color = "black",
-                         upper_border = "same",
-                         add_upper_color = "same",
+                         higher_color = "black",
+                         higher_border = "same",
+                         add_higher_color = "same",
                          higher_text_color = "black",
                          lower_text_color = "black",
                          horizontal = FALSE,
@@ -28,11 +29,11 @@ plot2webs_v2 <- function(web1,
                          link_color = "lower",
                          link_border = "same",
                          link_alpha = 0.6,
-                         style = "line",
+                         curved_links = FALSE,
                          arrow = "no",
                          spacing = "auto",
                          space_lower = 0.2,
-                         space_upper = 0.2,
+                         space_higher = 0.2,
                          mar = c(1, 1, 1, 1),
                          mai = NULL,
                          plot_axes = FALSE) {
@@ -46,28 +47,28 @@ plot2webs_v2 <- function(web1,
     web1 <- t(web1)
     web2 <- t(web2)
     # swap independent abundances
-    tmp <- upper_abundances 
-    upper_abundances <- lower_abundances
+    tmp <- higher_abundances 
+    higher_abundances <- lower_abundances
     lower_abundances <- tmp
     # swap additional abundances
-    tmp <- add_upper_abundances
-    add_upper_abundances <- add_lower_abundances
+    tmp <- add_higher_abundances
+    add_higher_abundances <- add_lower_abundances
     add_lower_abundances <- tmp
     # swap italics
-    tmp <- upper_italic
-    upper_italic <- lower_italic
+    tmp <- higher_italic
+    higher_italic <- lower_italic
     lower_italic <- tmp
     # swap color
-    tmp <- upper_color
-    upper_color <- lower_color
+    tmp <- higher_color
+    higher_color <- lower_color
     lower_color <- tmp
     # swap border color
-    tmp <- upper_border
-    upper_border <- lower_border
+    tmp <- higher_border
+    higher_border <- lower_border
     lower_border <- tmp
     # swap additional color
-    tmp <- add_upper_color
-    add_upper_color <- add_lower_color
+    tmp <- add_higher_color
+    add_higher_color <- add_lower_color
     add_lower_color <- tmp
     # swap text color
     tmp <- higher_text_color
@@ -85,11 +86,15 @@ plot2webs_v2 <- function(web1,
   r_names_2 <- rownames(web2)
   c_names_1 <- colnames(web1)
   c_names_2 <- colnames(web2)
+
   if (sort_by == 1) {
     c_names <- union(c_names_1, c_names_2)
+    r_names <- union(r_names_1, r_names_2)
   } else if (sort_by == 2) {
     c_names <- union(c_names_2, c_names_1)
+    r_names <- union(r_names_2, r_names_1)
   }
+
   nr_1 <- nrow(web1)
   nr_2 <- nrow(web2)
 
@@ -104,9 +109,12 @@ plot2webs_v2 <- function(web1,
   web2 <- cbind(web2, c_fill_2)
 
   if (sort_by == 1) {
-    web2 <- web2[, colnames(web1)]
+    #print("SORT")
+    web2 <- web2[intersect(r_names, r_names_2), colnames(web1)]
+    r_names_2 <- rownames(web2)
   } else if (sort_by == 2) {
-    web1 <- web1[, colnames(web2)]
+    web1 <- web1[intersect(r_names, r_names_1), colnames(web2)]
+    r_names_1 <- rownames(web1)
   }
 
   nc <- length(c_names)
@@ -115,15 +123,15 @@ plot2webs_v2 <- function(web1,
   nc_2 <- ncol(web2)
 
   # Recycle the color vectors
-  if (!is.null(names(upper_color))) {
-    stopifnot(length(upper_color) == nc)
-    if (!setequal(names(upper_color), c_names)) {
-      stop("Names of upper_color does not match names of upper species.")
+  if (!is.null(names(higher_color))) {
+    stopifnot(length(higher_color) == nc)
+    if (!setequal(names(higher_color), c_names)) {
+      stop("Names of higher_color does not match names of higher species.")
     }
-    upper_color <- upper_color[colnames(web1)]
+    higher_color <- higher_color[colnames(web1)]
   } else {
-    if (length(upper_color) < nc) {
-      upper_color <- rep_len(upper_color, nc)
+    if (length(higher_color) < nc) {
+      higher_color <- rep_len(higher_color, nc)
     }
   }
   if (length(lower_color) < nr) {
@@ -146,17 +154,17 @@ plot2webs_v2 <- function(web1,
   c_abuns_1 <- colSums(web1)
   c_abuns_2 <- colSums(web2)
 
-  if (!is.null(upper_abundances)) {
-    c_abuns_1 <- upper_abundances[[1]]
-    c_abuns_2 <- upper_abundances[[2]]
+  if (!is.null(higher_abundances)) {
+    c_abuns_1 <- higher_abundances[[1]]
+    c_abuns_2 <- higher_abundances[[2]]
   }
-  if (!is.null(add_upper_abundances)) {
+  if (!is.null(add_higher_abundances)) {
     # Assert the abundances are given as a list of length 2
-    stopifnot(is.list(add_upper_abundances),
-              length(add_upper_abundances) == 2)
+    stopifnot(is.list(add_higher_abundances),
+              length(add_higher_abundances) == 2)
     # Extract the abundances for each web
-    add_c_abundances_1 <- add_upper_abundances[[1]]
-    add_c_abundances_2 <- add_upper_abundances[[2]]
+    add_c_abundances_1 <- add_higher_abundances[[1]]
+    add_c_abundances_2 <- add_higher_abundances[[2]]
     add_c_abun_names_1 <- names(add_c_abundances_1)
     add_c_abun_names_2 <- names(add_c_abundances_2)
 
@@ -164,26 +172,26 @@ plot2webs_v2 <- function(web1,
     if (!is.null(add_c_abun_names_1)) {
       if (length(add_c_abun_names_1) == nc) {
         if (setequal(add_c_abun_names_1, c_names)) {
-          # Sort the additional upper abundances
+          # Sort the additional higher abundances
           # according to the column-order in the web
           add_c_abundances_1 <- add_c_abundances_1[colnames(web1)]
         }
       } else { # The length does not fit
-        warning(paste("The length of the upper additional abundances of web1",
-                      "does not match with the number of upper species."))
+        warning(paste("The length of the higher additional abundances of web1",
+                      "does not match with the number of higher species."))
         stop()
       }
     } else { # unnamed list
       warning(
-        paste("The upper additional abundances of web1 are an unnamed list.",
+        paste("The higher additional abundances of web1 are an unnamed list.",
               "Assuming the they are given in the same order as the web.",
               "This easily leads to unwanted behavior."))
       if (length(add_c_abundances_1) == nc) {
         # TODO sort the vector correctly
         add_c_abundances_1 <- add_c_abundances_1
       } else {
-        stop(paste("The length of the upper additional abundances of web1",
-                   "does not match with the number of upper species."))
+        stop(paste("The length of the higher additional abundances of web1",
+                   "does not match with the number of higher species."))
       }
     }
 
@@ -191,26 +199,26 @@ plot2webs_v2 <- function(web1,
     if (!is.null(add_c_abun_names_2)) {
       if (length(add_c_abun_names_2) == nc) {
         if (setequal(add_c_abun_names_2, c_names)) {
-          # Sort the additional upper abundances
+          # Sort the additional higher abundances
           # according to the column-order in the web
           add_c_abundances_2 <- add_c_abundances_2[colnames(web1)]
         }
       } else {
-        warning(paste("The length of the upper additional abundances of web2",
-                      "does not match with the number of upper species."))
+        warning(paste("The length of the higher additional abundances of web2",
+                      "does not match with the number of higher species."))
         stop()
       }
     } else { # unnamed list
       warning(
-        paste("The upper additional abundances of web2 are an unnamed list.",
+        paste("The higher additional abundances of web2 are an unnamed list.",
               "Assuming the they are given in the same order as the web.",
               "This easily leads to unwanted behavior."))
       if (length(add_c_abundances_2) == nc) {
         # TODO sort the vector correctly
         add_c_abundances_2 <- add_c_abundances_2
       } else {
-        stop(paste("The length of the upper additional abundances of web2",
-                   "does not match with the number of upper species."))
+        stop(paste("The length of the higher additional abundances of web2",
+                   "does not match with the number of higher species."))
       }
     }
     add_c_abundances_1[is.na(add_c_abundances_1)] <- 0
@@ -218,18 +226,18 @@ plot2webs_v2 <- function(web1,
     c_abuns_1 <- c(rbind(c_abuns_1, add_c_abundances_1))
     c_abuns_2 <- c(rbind(c_abuns_2, add_c_abundances_2))
 
-    if (add_upper_color == "same") {
-      upper_color <- rep(upper_color, each = 2)
-    } else if (!is.null(names(add_upper_color))) {
-      stopifnot(length(add_upper_color) == nc)
-      if (!setequal(names(add_upper_color), c_names)) {
-        stop("Names of add_upper_color does not match upper species names.")
+    if (add_higher_color == "same") {
+      higher_color <- rep(higher_color, each = 2)
+    } else if (!is.null(names(add_higher_color))) {
+      stopifnot(length(add_higher_color) == nc)
+      if (!setequal(names(add_higher_color), c_names)) {
+        stop("Names of add_higher_color does not match higher species names.")
       }
-      add_upper_color <- add_upper_color[colnames(web1)]
-      upper_color <- c(rbind(upper_color, add_upper_color))
-    } else if (length(add_upper_color) < nc) {
-      add_upper_color <- rep_len(upper_color, nc)
-      upper_color <- c(rbind(upper_color, add_upper_color))
+      add_higher_color <- add_higher_color[colnames(web1)]
+      higher_color <- c(rbind(higher_color, add_higher_color))
+    } else if (length(add_higher_color) < nc) {
+      add_higher_color <- rep_len(higher_color, nc)
+      higher_color <- c(rbind(higher_color, add_higher_color))
     }
   }
 
@@ -275,13 +283,13 @@ plot2webs_v2 <- function(web1,
   # c_prop_sizes_2 <- colSums(web2) / sum(colSums(web2))
 
   c_prop_sizes_max <- pmax(c_prop_sizes_1, c_prop_sizes_2)
-  
-  c_prop_sizes_1 <- (1 - space_upper) * c_prop_sizes_1
-  c_prop_sizes_2 <- (1 - space_upper) * c_prop_sizes_2
 
-  # Adjust the lower space so that it matches the necessary upper space
+  c_prop_sizes_1 <- (1 - space_higher) * c_prop_sizes_1
+  c_prop_sizes_2 <- (1 - space_higher) * c_prop_sizes_2
+
+  # Adjust the lower space so that it matches the necessary higher space
   if (scaling == "relative") {
-    space_lower <- 1 - ((1 - space_upper) / sum(c_prop_sizes_max))
+    space_lower <- 1 - ((1 - space_higher) / sum(c_prop_sizes_max))
     r_prop_sizes_1 <- (1 - space_lower) * r_abuns_1 / sum(r_abuns_1)
     r_prop_sizes_2 <- (1 - space_lower) * r_abuns_2 / sum(r_abuns_2)
     r_space_1 <- space_lower / (nr_1 - 1)
@@ -292,27 +300,27 @@ plot2webs_v2 <- function(web1,
   }
 
   max_prop_size <- max(sum(c_prop_sizes_max), sum(r_prop_sizes_1), sum(r_prop_sizes_2))
-  c_prop_sizes <- (1 - space_upper) * c_prop_sizes_max / max_prop_size
+  c_prop_sizes <- (1 - space_higher) * c_prop_sizes_max / max_prop_size
 
-  c_space <- space_upper / (nc - 1)
+  c_space <- space_higher / (nc - 1)
 
   if (scaling == "absolute") {
     r_prop_sizes_1 <- (1 - space_lower) * r_prop_sizes_1 / max_prop_size
     r_prop_sizes_2 <- (1 - space_lower) * r_prop_sizes_2 / max_prop_size
     r_space_1 <- (1 - sum(r_prop_sizes_1)) / (nr_1 - 1)
     r_space_2 <- (1 - sum(r_prop_sizes_2)) / (nr_2 - 1)
-    # c_prop_sizes_1 <- (1 - space_upper) * c_prop_sizes_1 / max_prop_size
-    # c_prop_sizes_2 <- (1 - space_upper) * c_prop_sizes_2 / max_prop_size
+    # c_prop_sizes_1 <- (1 - space_higher) * c_prop_sizes_1 / max_prop_size
+    # c_prop_sizes_2 <- (1 - space_higher) * c_prop_sizes_2 / max_prop_size
     c_prop_sizes_1 <- c_prop_sizes_1 / max_prop_size
     c_prop_sizes_2 <- c_prop_sizes_2 / max_prop_size
     c_space <- (1 - sum(c_prop_sizes)) / (nc - 1)
   } else if (scaling == "relative") {
     c_prop_sizes_1 <- c_prop_sizes_1 / sum(c_prop_sizes_max)
     c_prop_sizes_2 <- c_prop_sizes_2 / sum(c_prop_sizes_max)
-    print(sum(r_prop_sizes_1))
-    print(sum(r_prop_sizes_2))
-    print(sum(c_prop_sizes_1))
-    print(sum(c_prop_sizes_2))
+    #print(sum(r_prop_sizes_1))
+    #print(sum(r_prop_sizes_2))
+    #print(sum(c_prop_sizes_1))
+    #print(sum(c_prop_sizes_2))
   }
 
   # if (scaling == "relative") {
@@ -321,7 +329,7 @@ plot2webs_v2 <- function(web1,
   #   r_prop_sizes_2 <- (1 - space_lower) * rowSums(web2) / sum(c(rowSums(web1), rowSums(web2)))
   # }
 
-  if (!is.null(add_upper_abundances)) {
+  if (!is.null(add_higher_abundances)) {
     c_space <- c(0, c_space)
     nc <- nc * 2
   }
@@ -352,12 +360,12 @@ plot2webs_v2 <- function(web1,
   # r_m_t_width_1 <- 2 * max(strwidth(r_names_1))
   # r_m_t_width_2 <- 2 * max(strwidth(r_names_2))
 
-  c_m_t_width <- max(strwidth(c_names, units = "inches"))
-  r_m_t_width_1 <- max(strwidth(r_names_1, units = "inches"))
-  r_m_t_width_2 <- max(strwidth(r_names_2, units = "inches"))
-  print(c_m_t_width)
-  print(r_m_t_width_1)
-  print(r_m_t_width_2)
+  c_m_t_width <- max(strwidth(c_names, units = "inches", cex = text_size))
+  r_m_t_width_1 <- max(strwidth(r_names_1, units = "inches", cex = text_size))
+  r_m_t_width_2 <- max(strwidth(r_names_2, units = "inches", cex = text_size))
+  #print(c_m_t_width)
+  #print(r_m_t_width_1)
+  #print(r_m_t_width_2)
 
   if (horizontal) {
     par(fig=c(0,0.5,0,1), mai = c(0.5, r_m_t_width_1 + 0.1, 0.5, c_m_t_width/2 + 0.1))
@@ -368,7 +376,7 @@ plot2webs_v2 <- function(web1,
        axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
 
 
-  if (!is.null(add_upper_abundances)) {
+  if (!is.null(add_higher_abundances)) {
     c_xl_1 <- rep(0, length(c_prop_sizes))
     c_xr_1 <- rep(0, length(c_prop_sizes))
     c_xl_1[c(TRUE, FALSE)] <- c_xl[c(TRUE, FALSE)] + 0.5 * (c_prop_sizes[c(TRUE, FALSE)] - c_prop_sizes_1[c(TRUE, FALSE)])
@@ -388,19 +396,19 @@ plot2webs_v2 <- function(web1,
     c_xl_2 <- c_xl + 0.5 * (c_prop_sizes - c_prop_sizes_2)
     c_xr_2 <- c_xr - 0.5 * (c_prop_sizes - c_prop_sizes_2)
   }
-  # rect(0.2, c_xl_1, 0.3, c_xr_1, col = upper_color, border = upper_color)
+  # rect(0.2, c_xl_1, 0.3, c_xr_1, col = higher_color, border = higher_color)
 
-  # rect(0.4, c_xl_2, 0.5, c_xr_2, col = upper_color, border = upper_color)
+  # rect(0.4, c_xl_2, 0.5, c_xr_2, col = higher_color, border = higher_color)
 
-  if (upper_border == "same") {
-    upper_border <- upper_color
+  if (higher_border == "same") {
+    higher_border <- higher_color
   }
   if (lower_border == "same") {
     lower_border <- lower_color
   }
 
 
-  if (!is.null(add_upper_abundances)) {
+  if (!is.null(add_higher_abundances)) {
     c_tx <- (c_xl[seq(1, nc, 2)] + c_xr[seq(2, nc, 2)]) / 2
   } else{
     c_tx <- (c_xl + c_xr) / 2
@@ -414,7 +422,7 @@ plot2webs_v2 <- function(web1,
   # r_tx_1 <- (r_xr_1 + r_xl_1) / 2
   # c_tx <- (c_xr + c_xl) / 2
 
-  if (upper_italic) {
+  if (higher_italic) {
     c_names <- lapply(c_names, function(x) bquote(italic(.(x))))
     c_names <- as.expression(c_names)
   }
@@ -425,16 +433,20 @@ plot2webs_v2 <- function(web1,
 
   if (horizontal) {
     rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color, border = lower_border)
-    rect(0.9, c_xl_1, 1, c_xr_1, col = upper_color, border = upper_border)
-    text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt, col = lower_text_color)
-    text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), c_tx,
-         c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt, col = higher_text_color)
+    rect(0.9, c_xl_1, 1, c_xr_1, col = higher_color, border = higher_border)
+    text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T,
+         cex = text_size, srt = srt, col = lower_text_color)
+    text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"), 
+         c_tx, c_names, adj = c(0.5, 0.5), xpd=NA, cex = text_size,
+         srt = srt, col = higher_text_color)
   } else {
     rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color, border = lower_border)
-    rect(c_xl_1, 0.9, c_xr_1, 1, col = upper_color, border = upper_border)
-    text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T, srt = srt + 90, col = lower_text_color)
+    rect(c_xl_1, 0.9, c_xr_1, 1, col = higher_color, border = higher_border)
+    text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T,
+         cex = text_size, srt = srt + 90, col = lower_text_color)
     text(c_tx, 1 + 0.5 * grconvertY(c_m_t_width + r_m_t_width_1 + 0.3, from="inches"),
-         c_names, adj = c(0.5, 0.5), xpd=NA, srt = srt + 90, col = higher_text_color)
+         c_names, adj = c(0.5, 0.5), xpd=NA, cex = text_size,
+         srt = srt + 90, col = higher_text_color)
   }
   # text(1, c_tx, c_names, adj = c(0, 0.5), xpd=NA)
 
@@ -442,7 +454,7 @@ plot2webs_v2 <- function(web1,
   # web.df_1 <- data.frame(row = rep(1:nr_1, nc), col = rep(1:nc, each = nr_1), weight = c(web1))
   # web.df_1 <- data.frame(row = rep(1:nr_1, nc_1), col = rep(which(c_names %in% c_names_1), each = nr_1), weight = c(web1))
   web.df_1 <- data.frame(row = rep(1:nr_1, nc), col = rep(1:nc, each = nr_1), weight = c(web1))
-  if (!is.null(add_upper_abundances) && !is.null(add_lower_abundances)) {
+  if (!is.null(add_higher_abundances) && !is.null(add_lower_abundances)) {
     web.df_1 <- data.frame(row = rep(seq(1, nr_1, 2), nc / 2),
                            col = rep(seq(1, nc, 2), each = nr_1 / 2),
                            weight = c(web1))
@@ -450,13 +462,14 @@ plot2webs_v2 <- function(web1,
     web.df_1 <- data.frame(row = rep(seq(1, nr_1, 2), nc),
                            col = rep(1:nc, each = nr_1 / 2),
                            weight = c(web1))
-  } else if (!is.null(add_upper_abundances)) {
+  } else if (!is.null(add_higher_abundances)) {
     web.df_1 <- data.frame(row = rep(1:nr_1, nc / 2),
                            col = rep(seq(1, nc, 2), each = nr_1),
                            weight = c(web1))
   }
   web.df_1 <- web.df_1[web.df_1$weight > 0, ]
-  web.df_1[, c("xcoord.tl", "xcoord.tr", "xcoord.br", "xcoord.bl")] <- NA # x-coordinates of interactions: tl=topleft, etc
+  # x-coordinates of interactions: tl=topleft, etc
+  web.df_1[, c("xcoord.tl", "xcoord.tr", "xcoord.br", "xcoord.bl")] <- NA 
 
   # # low coordinates for interactions (in order of the web.df)
   for (i in unique(web.df_1$row)) { # for i in lower species
@@ -486,8 +499,8 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     draw_link(x2, x1, y1, y2, y3, y4,
-              upper_color[link$col], horizontal = horizontal,
-              style = style)
+              higher_color[link$col], horizontal = horizontal,
+              curved = curved_links)
   }
 
   # par(fig=c(0.5, 0.5, 0, 1), mai = c(0, c_m_t_width/2, 0, c_m_t_width/2), new = TRUE)
@@ -517,19 +530,21 @@ plot2webs_v2 <- function(web1,
   }
 
   if (horizontal) {
-    rect(0, c_xl_2, 0.1, c_xr_2, col = upper_color, border = upper_border)
+    rect(0, c_xl_2, 0.1, c_xr_2, col = higher_color, border = higher_border)
     rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color, border = lower_border)
-    text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt, col = lower_text_color)
+    text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), cex = text_size,
+         xpd=T, srt = srt, col = lower_text_color)
   } else {
-    rect(c_xl_2, 0, c_xr_2, 0.1, col = upper_color, border = upper_border)
+    rect(c_xl_2, 0, c_xr_2, 0.1, col = higher_color, border = higher_border)
     rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color, border = lower_border)
-    text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), xpd=T, srt = srt + 90, col = lower_text_color)
+    text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), cex = text_size,
+         xpd=T, srt = srt + 90, col = lower_text_color)
   }
   #text(-0.5 * c_m_t_width, c_tx, c_names, adj = c(0.5, 0.5), xpd=T)
 
-  # # Interactions
+  # Interactions
   # web.df_2 <- data.frame(row = rep(1:nr_2, nc_2), col = rep(which(c_names %in% c_names_2), each = nr_2), weight = c(web2))
-  if (!is.null(add_upper_abundances) && !is.null(add_lower_abundances)) {
+  if (!is.null(add_higher_abundances) && !is.null(add_lower_abundances)) {
     web.df_2 <- data.frame(row = rep(seq(1, nr_2, 2), nc / 2),
                            col = rep(seq(1, nc, 2), each = nr_2 / 2),
                            weight = c(web2))
@@ -537,7 +552,7 @@ plot2webs_v2 <- function(web1,
     web.df_2 <- data.frame(row = rep(seq(1, nr_2, 2), nc),
                            col = rep(1:nc, each = nr_2 / 2),
                            weight = c(web2))
-  } else if (!is.null(add_upper_abundances)) {
+  } else if (!is.null(add_higher_abundances)) {
     web.df_2 <- data.frame(row = rep(1:nr_2, nc / 2),
                            col = rep(seq(1, nc, 2), each = nr_2),
                            weight = c(web2))
@@ -575,7 +590,7 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     draw_link(x1, x2, y1, y2, y3, y4,
-              upper_color[link$col], horizontal = horizontal,
-              style = style)
+              higher_color[link$col], horizontal = horizontal,
+              curved = curved_links)
   }
 }

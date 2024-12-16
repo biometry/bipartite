@@ -9,27 +9,27 @@ Two 2-D matrices are plotted as a tripartite graph.
 \usage{
 plot2webs_v2 <- function(web1,
                          web2,
-                         middle = "upper",
+                         middle = "higher",
                          sort_by = 1,
                          sorting = "normal",
-                         upper_abundances = NULL,
+                         higher_abundances = NULL,
                          lower_abundances = NULL,
-                         add_upper_abundances = NULL,
+                         add_higher_abundances = NULL,
                          add_lower_abundances = NULL,
                          scaling = "absolute",
                          font = NULL,
                          family = NULL,
                          srt = 0,
-                         upper_italic = FALSE,
+                         higher_italic = FALSE,
                          lower_italic = FALSE,
                          x_lim = c(0, 1),
                          y_lim = c(0, 1),
                          lower_color = "black",
                          lower_border = "same",
                          add_lower_color = "same",
-                         upper_color = "black",
-                         upper_border = "same",
-                         add_upper_color = "same",
+                         higher_color = "black",
+                         higher_border = "same",
+                         add_higher_color = "same",
                          higher_text_color = "black",
                          lower_text_color = "black",
                          horizontal = FALSE,
@@ -37,11 +37,11 @@ plot2webs_v2 <- function(web1,
                          link_color = "lower",
                          link_border = "same",
                          link_alpha = 0.6,
-                         style = "line",
+                         curved_links = FALSE,
                          arrow = "no",
                          spacing = "auto",
                          space_lower = 0.2,
-                         space_upper = 0.2,
+                         space_higher = 0.2,
                          mar = c(1, 1, 1, 1),
                          mai = NULL,
                          plot_axes = FALSE)
@@ -50,16 +50,16 @@ plot2webs_v2 <- function(web1,
 \arguments{
   \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
              Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{higher_abundances}{Vector with independent abundance estimates for the upper trophic level, NULL if none exist. See Notes!}
+  \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, NULL if none exist. See Notes!}
   \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, NULL if none exist. See Notes!}
-  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the upper trophic level, NULL if none exist. See Notes!}
+  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, NULL if none exist. See Notes!}
   \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, NULL if none exist. See Notes!}
   \item{scaling}{Choice of either "relative" or "absoulte". If set to "relative" both }
   \item{font}{}
   \item{family}{}
   \item{srt}{Orientation of the labels in degrees. If horizontal = TRUE an automatic offset of 90 is added. (Defualt: 0)}
   \item{text_size}{Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: 1)}
-  \item{upper_italic}{If set to TRUE, the labels of the upper species are plotted in italics. (Default: FALSE)}
+  \item{higher_italic}{If set to TRUE, the labels of the higher species are plotted in italics. (Default: FALSE)}
   \item{lower_italic}{If set to TRUE, the labels of the lower species are plotted in italics. (Default: FALSE)}
   \item{x_lim}{}
   \item{y_lim}{}
@@ -71,11 +71,11 @@ plot2webs_v2 <- function(web1,
                       If "same", the borders have the same color as the corresponding boxes.}
   \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
   %\item{abbr_names}{}
-  \item{link_color}{"lower", "upper", or single color value.}
+  \item{link_color}{"lower", "higher", or single color value.}
   \item{link_border}{}
   \item{link_alpha}{Number between 0.0 and 1.0 setting the transparency of the links. 
                     0 means full transparency 1 means full opacity. (Default: 0.5)}
-  \item{style}{"line" or "curve" indicating whether the links should be straight or curved.}
+  \item{curved_links}{If FALSE links are plotted as straight lines otherwise they are curved. (Default: FALSE)}
   \item{arrow}{
     \itemize{
       \item "no"
@@ -87,7 +87,7 @@ plot2webs_v2 <- function(web1,
       \item "both.center"
     }
   }
-  \item{spacing}{Either "auto", a single value or a numerical vector of the form c(lower, upper). (Default: "auto")}
+  \item{spacing}{Either "auto", a single value or a numerical vector of the form c(lower, higher). (Default: "auto")}
   \item{plot_axes}{Indicates whether both axes should be drawn on the plot. (Default: FALSE)}
   \item{mar}{A numerical vector of the form c(bottom, left, top, right) which gives the number of lines of margin to be specified on the four sides of the plot. 
              The default is NULL which takes the global setting from par(). }

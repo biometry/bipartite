@@ -1,7 +1,7 @@
 draw_link <- function(x1, x2, y1, y2, y3, y4, col,
-                      style = "line", horizontal = FALSE,
+                      curved = FALSE, horizontal = FALSE,
                       alpha = 0.4) {
-  if (style == "curve") {
+  if (curved) { # Curved (polygon) links
     x <- matrix(c(x1, x2))
     xm <- 0.5 * (x1 + x2)
     A <- cbind(x^3, x^2, x, 1)
@@ -23,7 +23,7 @@ draw_link <- function(x1, x2, y1, y2, y3, y4, col,
               col = adjustcolor(col, alpha.f = alpha),
               border = adjustcolor(col, alpha.f = alpha))
     }
-  } else if (style == "line") {
+  } else { # Straight lines
     if (horizontal) { 
       polygon(c(x1, x1, x2, x2), c(y1, y3, y4, y2),
               col = adjustcolor(col, alpha.f = alpha),

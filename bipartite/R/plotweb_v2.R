@@ -1,15 +1,15 @@
 plotweb_v2 <- function(web,
                        sorting = "normal",
                        empty = FALSE,
-                       upper_abundances = NULL,
+                       higher_abundances = NULL,
                        lower_abundances = NULL,
-                       add_upper_abundances = NULL,
+                       add_higher_abundances = NULL,
                        add_lower_abundances = NULL,
                        scaling = "relative",
                        font = NULL,
                        family = NULL,
                        srt = 0,
-                       upper_italic = FALSE,
+                       higher_italic = FALSE,
                        lower_italic = FALSE,
                        text_size = 1,
                        box_size = 0.1,
@@ -19,17 +19,17 @@ plotweb_v2 <- function(web,
                        lower_color = "black",
                        lower_border = "same",
                        lower_add_color = "red",
-                       upper_color = "black",
-                       upper_border = "same",
-                       upper_add_color = "red",
+                       higher_color = "black",
+                       higher_border = "same",
+                       higher_add_color = "red",
                        higher_text_color = "black",
                        lower_text_color = "black",
                        horizontal = FALSE,
                        #abbr_names = FALSE,
-                       link_color = "upper",
+                       link_color = "higher",
                        link_border = "same",
                        link_alpha = 0.5,
-                       style = "line",
+                       curved_links = FALSE,
                        arrow = "no",
                        spacing = "auto",
                        plot_axes = FALSE,
@@ -42,12 +42,13 @@ plotweb_v2 <- function(web,
             "This leads to mai overriding mar.")
   }
 
-  stopifnot(is.logical(upper_italic),
+  stopifnot(is.logical(higher_italic),
             is.logical(lower_italic),
             is.logical(horizontal),
             is.logical(plot_axes),
             (is.numeric(text_size) && text_size > 0))
 
+  # Update the user defined margin in either rows or inches
   if (!is.null(mar)) {
     par(mar = mar)
   }
@@ -55,8 +56,11 @@ plotweb_v2 <- function(web,
     par(mai = mai)
   }
 
+  # Sort the web according to the user defined method
   web <- sortweb2(web, sort.order = sorting, empty = TRUE)
 
+  # Extract the row and column names if existing
+  # otherwise generate number sequence instead
   if (!is.null(rownames(web))) {
     r_names <- rownames(web)
   } else {
@@ -68,21 +72,22 @@ plotweb_v2 <- function(web,
     c_names <- 1:ncol(web)
   }
 
+  # Extract the number of rows and columns
   nr <- nrow(web)
   nc <- ncol(web)
 
   # Recycle the color vectors
-  if (length(upper_color) < nc) {
-    upper_color <- rep_len(upper_color, nc)
+  if (length(higher_color) < nc) {
+    higher_color <- rep_len(higher_color, nc)
   }
   if (length(lower_color) < nr) {
     lower_color <- rep_len(lower_color, nr)
   }
 
   # Check whether the color vector is a named vector
-  if (!is.null(names(upper_color))) {
-    # Sort the upper color vector the same way as the web
-    upper_color <- upper_color[c_names]
+  if (!is.null(names(higher_color))) {
+    # Sort the higher color vector the same way as the web
+    higher_color <- higher_color[c_names]
   }
 
   ## TODO: Implement this correctly and add an option to create a legend
@@ -95,12 +100,12 @@ plotweb_v2 <- function(web,
   #   r_names <- letters[(nc + 1):(nc + nr)]
   #   c_names <- letters[1:nc]
   #   r_names <- paste("lower_", r_names)
-  #   c_names <- paste("upper_", c_names)
+  #   c_names <- paste("higher_", c_names)
   #   r_full_names <- rownames(web)
   #   c_full_names <- colnames(web)
   # }
 
-
+  # Split the label distance to higher and lower
   if (length(lab_distance) == 1) {
     u_lab_distance <- lab_distance
     l_lab_distance <- lab_distance
@@ -109,35 +114,75 @@ plotweb_v2 <- function(web,
     l_lab_distance <- lab_distance[2]
   }
 
+  # Auto scale the label text
+  # TODO: Hier richtige x_lim und y_lim einfuegen
   if (text_size == "auto") {
     total_str_h <- sum(strheight(c_names, srt = srt))
     text_size <- 1 / total_str_h
   }
 
-  c_m_t_width <- max(strwidth(c_names, srt = srt,
-                              cex = text_size, units = "inches"))
-  r_m_t_width <- max(strwidth(r_names, srt = srt,
-                              cex = text_size, units = "inches"))
-
-  mai <- par()$mai
-
   if (horizontal) {
-    mai[2] <- mai[2] + c_m_t_width + u_lab_distance
-    mai[4] <- mai[4] + r_m_t_width + l_lab_distance
+    theta <- srt * pi / 180
   } else {
-    mai[3] <- mai[3] + c_m_t_width + u_lab_distance
-    mai[1] <- mai[1] + r_m_t_width + l_lab_distance
+    theta <- (srt - 90) * pi / 180
   }
 
+  # Get the maximal width of the higher and lower labels
+  # in inches to set the margin accordingly
+  c_m_t_width <- max(strwidth(c_names, #srt = srt,
+                              cex = text_size, units = "inches"))
+  r_m_t_width <- max(strwidth(r_names, #srt = srt,
+                              cex = text_size, units = "inches"))
+
+  c_t_width <- (c_m_t_width) * cos(theta)
+  r_t_width <- (r_m_t_width) * cos(theta)
+
+  #print(c(c_t_width, r_t_width))
+
+  c_height_1 <- strwidth(c_names[1], cex = text_size, units = "inches")
+  c_height_1 <- sin(theta) * c_height_1
+  r_height_1 <- strwidth(r_names[1], cex = text_size, units = "inches")
+  r_height_1 <- sin(theta) * r_height_1
+
+  c_height_n <- strwidth(c_names[nc], cex = text_size, units = "inches")
+  c_height_n <- sin(theta) * c_height_n
+  r_height_n <- strwidth(r_names[nr], cex = text_size, units = "inches")
+  r_height_n <- sin(theta) * r_height_n
+
+  max_height_1 <- max(c_height_1, -r_height_1)
+  max_height_n <- max(-c_height_n, r_height_n)
+  #print(c(c_height_1, -r_height_1))
+  #print(c(-c_height_n, r_height_n))
+
+  # Extract the user set margin in inches
+  mai <- par()$mai
+
+  # Add the label widths of the labels so they always fit on the plot
+  if (horizontal) {
+    mai[1] <- mai[1] + max_height_1
+    mai[2] <- mai[2] + c_t_width + u_lab_distance
+    mai[3] <- mai[3] + max_height_n
+    mai[4] <- mai[4] + r_t_width + l_lab_distance
+  } else {
+    mai[1] <- mai[1] + r_t_width + l_lab_distance
+    mai[2] <- mai[2] + max_height_1
+    mai[3] <- mai[3] + c_t_width + u_lab_distance
+    mai[4] <- mai[4] + max_height_n
+  }
+
+  # Set the new margins in inches
   par(mai = mai)
 
+  # Call plot() to create the empty plot object with the correct size
+  if (add == FALSE) {
+    plot(0, type = "n",
+         ylim = y_lim,
+         xlim = x_lim,
+         axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+  }
+
+  # TODO: Document
   if (horizontal) {
-    if (add == FALSE) {
-      plot(0, type = "n",
-          xlim = x_lim,
-          ylim = y_lim,
-          axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-    }
     space_size <- y_lim[2] - y_lim[1]
     space_start <- y_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
@@ -145,12 +190,6 @@ plotweb_v2 <- function(web,
     u_lab_distance <- grconvertX(u_lab_distance, from = "inches") - grconvertX(0, from = "inches")
     l_lab_distance <- grconvertX(l_lab_distance, from = "inches") - grconvertX(0, from = "inches")
   } else {
-    if (add == FALSE) {
-      plot(0, type = "n",
-          ylim = y_lim,
-          xlim = x_lim,
-          axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-    }
     space_size <- x_lim[2] - x_lim[1]
     space_start <- x_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
@@ -159,8 +198,8 @@ plotweb_v2 <- function(web,
     l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - grconvertY(0, from = "inches")
   }
 
-  print("-------------------------------------------")
-  print(space_size)
+  # #print("-------------------------------------------")
+  # #print(space_size)
 
   # if (horizontal) {
   #   str_h <- 1.1 * strheight(c_names[1], srt = srt, cex = text_size)
@@ -168,76 +207,37 @@ plotweb_v2 <- function(web,
   #   str_h <- 1.1 * strwidth(c_names[1], srt = srt, cex = text_size)
   # }
 
-  if (horizontal) {
-    theta <- srt * pi / 180
-  } else {
-    theta <- (srt + 90) * pi / 180
+  # If no independent abundances are given for the higher species
+  # calculate the sum of all columns as abundances
+  if (is.null(higher_abundances)) {
+    higher_abundances <- colSums(web)
   }
-  print(theta)
-
-  # Get the unrotated height and width of the text
-  H <- strheight(c_names[1], srt = srt, cex = text_size)
-  print(H)
-  W <- strwidth(c_names[1], srt = srt, cex = text_size)
-  print(W)
-
-  # Calculate the effective rotated height and width
-  str_h <- abs(H * cos(theta)) + abs(W * sin(theta))
-
-  print(str_h)
-
-  if (length(spacing) == 2) {
-    c_space <- space_size * spacing[1] / (nc - 1)
-    r_space <- space_size * spacing[2] / (nr - 1)
-  } else if (length(spacing) == 1) {
-    if (is.numeric(spacing)) {
-      spacing <- c(spacing, spacing)
-      c_space <- space_size * spacing[1] / (nc - 1)
-      r_space <- space_size * spacing[2] / (nr - 1)
-    } else if (spacing == "auto")  {
-      space <- max(nc, nr) * str_h
-      if (space > space_size) {
-        print("Space")
-        print(space)
-        stop(paste("Text size is too large for auto spacing.",
-                   "Decrease size or increase figure height for better results."))
-      }
-      spacing <- c(space, space)
-      r_space <- space / (nr - 1)
-      c_space <- space / (nc - 1)
-    }
-  } else {
-    stop("Invalid spacing option.")
-  }
-
-
-  if (is.null(upper_abundances)) {
-    upper_abundances <- colSums(web)
-  }
-  if (!is.null(add_upper_abundances)) {
-    # Sort the additional upper abundances according to the column-order in the web
-    add_upper_abundances <- add_upper_abundances[colnames(web)]
-    upper_abundances <- c(rbind(upper_abundances, add_upper_abundances))
+  if (!is.null(add_higher_abundances)) {
+    # Sort the additional higher abundances according to the column-order in the web
+    add_higher_abundances <- add_higher_abundances[colnames(web)]
+    higher_abundances <- c(rbind(higher_abundances, add_higher_abundances))
     # Include the custom colors into the color vector
-    if (length(upper_add_color) == 1) {
-      if (upper_add_color == "same") {
-        upper_add_color <- upper_color
-        # upper_color <- rep(upper_color, each = 2)
+    if (length(higher_add_color) == 1) {
+      if (higher_add_color == "same") {
+        higher_add_color <- higher_color
+        # higher_color <- rep(higher_color, each = 2)
       } else {
-        upper_add_color <- rep_len(upper_add_color, nc)
+        higher_add_color <- rep_len(higher_add_color, nc)
       }
-    } else if (!is.null(names(upper_add_color))) {
-      stopifnot(length(upper_add_color) == nc)
-      if (!setequal(names(upper_add_color), c_names)) {
-        stop("Names of upper_add_color does not match upper species names.")
+    } else if (!is.null(names(higher_add_color))) {
+      stopifnot(length(higher_add_color) == nc)
+      if (!setequal(names(higher_add_color), c_names)) {
+        stop("Names of higher_add_color does not match higher species names.")
       }
-      upper_add_color <- upper_add_color[colnames(web)]
-    } else if (length(upper_add_color) < nc) {
-      upper_add_color <- rep_len(upper_add_color, nc)
+      higher_add_color <- higher_add_color[colnames(web)]
+    } else if (length(higher_add_color) < nc) {
+      higher_add_color <- rep_len(higher_add_color, nc)
     }
-    upper_color <- c(rbind(upper_color, upper_add_color))
+    higher_color <- c(rbind(higher_color, higher_add_color))
   }
 
+  # If no independent abundances are given for the lower species
+  # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
     lower_abundances <- rowSums(web)
   }
@@ -252,7 +252,7 @@ plotweb_v2 <- function(web,
     if (length(lower_add_color) == 1) {
       if (lower_add_color == "same") {
         lower_add_color <- lower_color
-        # upper_color <- rep(upper_color, each = 2)
+        # higher_color <- rep(higher_color, each = 2)
       } else {
         lower_add_color <- rep_len(lower_add_color, nr)
       }
@@ -268,18 +268,97 @@ plotweb_v2 <- function(web,
     lower_color <- c(rbind(lower_color, lower_add_color))
   }
 
+  if (horizontal) {
+    theta <- srt * pi / 180
+  } else {
+    theta <- (srt + 90) * pi / 180
+  }
+  # #print(theta)
+
+  # Get the not rotated height and width of the text
+  H <- strheight(c_names, cex = text_size)
+  # #print(H)
+  W <- strwidth(c_names, cex = text_size)
+  # #print(W)
+
+
+  # Calculate the effective rotated height and width
+  str_h_c <- abs(H * cos(theta)) + abs(W * sin(theta))
+  #str_h_c <- H
+
+  # Get the not rotated height and width of the text
+  H <- strheight(r_names, cex = text_size)
+  # #print(H)
+  W <- strwidth(r_names, cex = text_size)
+  # #print(W)
+
+  # Calculate the effective rotated height and width
+  str_h_r <- abs(H * cos(theta)) + abs(W * sin(theta))
+
+  # str_h_r <- H
+
+  # #print(str_h_r)
+
+  # TODO: Document scaling
   if (scaling == "relative") {
-    c_prop_sizes <- (space_size - spacing[1]) * upper_abundances / sum(upper_abundances)
-    r_prop_sizes <- (space_size - spacing[2]) * lower_abundances / sum(lower_abundances)
+    u_scaling_factor <- sum(higher_abundances)
+    l_scaling_factor <- sum(lower_abundances)
   } else if (scaling == "absolute") {
-    max_abundances <- max(sum(upper_abundances), sum(lower_abundances))
-    c_prop_sizes <- (space_size - spacing[1]) * upper_abundances / max_abundances
-    r_prop_sizes <- (space_size - spacing[2]) * lower_abundances / max_abundances
+    max_abundances <- max(sum(higher_abundances), sum(lower_abundances))
+    u_scaling_factor <- max_abundances
+    l_scaling_factor <- max_abundances
+  }
+
+  # TODO: Document
+  if (length(spacing) == 2) {
+    c_space <- space_size * spacing[1] / (nc - 1)
+    r_space <- space_size * spacing[2] / (nr - 1)
+  } else if (length(spacing) == 1) {
+    if (is.numeric(spacing)) {
+      spacing <- c(spacing, spacing)
+      c_space <- space_size * spacing[1] / (nc - 1)
+      r_space <- space_size * spacing[2] / (nr - 1)
+    } else if (spacing == "auto")  {
+      # space <- max(nc, nr) * str_h
+
+      # Calculate the maximum overlap of a label with its corresponding box
+      # and set the space to that value times 1.05
+      space_c <- nc * max(str_h_c - (space_size * higher_abundances / u_scaling_factor))
+      space_r <- nr * max(str_h_r - (space_size * lower_abundances / l_scaling_factor))
+      space <- 1.05 * max(space_c, space_r, 0.05)
+      if (space > space_size) {
+        # #print("Space")
+        # #print(space)
+        stop(paste("Text size is too large for auto spacing.",
+                   "Decrease size or increase figure height for better results."))
+      }
+      spacing <- c(space, space)
+      r_space <- space / (nr - 1)
+      c_space <- space / (nc - 1)
+    }
+  } else {
+    stop("Invalid spacing option.")
+  }
+
+  # Scale the abundances according to the scaling factor
+  # (see relative or absolute)
+  c_prop_sizes <- (space_size - spacing[1]) * higher_abundances / u_scaling_factor
+  r_prop_sizes <- (space_size - spacing[2]) * lower_abundances / l_scaling_factor
+
+  # TODO: Document scaling
+  if (scaling == "relative") {
+    # c_prop_sizes <- (space_size - spacing[1]) * higher_abundances / sum(higher_abundances)
+    # r_prop_sizes <- (space_size - spacing[2]) * lower_abundances / sum(lower_abundances)
+  } else if (scaling == "absolute") {
+    # max_abundances <- max(sum(higher_abundances), sum(lower_abundances))
+    # c_prop_sizes <- (space_size - spacing[1]) * higher_abundances / max_abundances
+    # r_prop_sizes <- (space_size - spacing[2]) * lower_abundances / max_abundances
     c_space <- (space_size - sum(c_prop_sizes)) / (nc - 1)
     r_space <- (space_size - sum(r_prop_sizes)) / (nr - 1)
   }
 
-  if (!is.null(add_upper_abundances)) {
+  # TODO: Document additional abundances
+  if (!is.null(add_higher_abundances)) {
     nc <- nc * 2
     c_space <- rep(c(0, c_space), length.out = (nc - 1))
   }
@@ -288,15 +367,19 @@ plotweb_v2 <- function(web,
     r_space <- rep(c(0, r_space), length.out = (nr - 1))
   }
 
+  # Calculate the edge positions of the higher boxes
   c_xl <- c(space_start, space_start + cumsum(c_prop_sizes[-nc] + c_space))
   c_xr <- c(space_start + c_prop_sizes[1],
             space_start + c_prop_sizes[1] + cumsum(c_prop_sizes[-1] + c_space))
 
+  # Calculate the edge positions of the lower boxes
   r_xl <- c(space_start, space_start + cumsum(r_prop_sizes[-nr] + r_space))
   r_xr <- c(space_start + r_prop_sizes[1],
             space_start + r_prop_sizes[1] + cumsum(r_prop_sizes[-1] + r_space))
 
-  if (!is.null(add_upper_abundances)) {
+  # If additional abundances are given 
+  # the label has the be aligned in the middle between two connected boxes
+  if (!is.null(add_higher_abundances)) {
     c_tx <- (c_xl[seq(1, nc, 2)] + c_xr[seq(2, nc, 2)]) / 2
   } else {
     c_tx <- (c_xl + c_xr) / 2
@@ -307,8 +390,8 @@ plotweb_v2 <- function(web,
     r_tx <- (r_xl + r_xr) / 2
   }
 
-  if (upper_border == "same") {
-    upper_border <- upper_color
+  if (higher_border == "same") {
+    higher_border <- higher_color
   }
   if (lower_border == "same") {
     lower_border <- lower_color
@@ -317,20 +400,22 @@ plotweb_v2 <- function(web,
   c_m_t_width <- max(strwidth(c_names, srt = srt, cex = text_size))
   r_m_t_width <- max(strwidth(r_names, srt = srt, cex = text_size))
 
-  if (upper_italic) {
+  # Apply italics to all higher labels
+  if (higher_italic) {
     c_names <- lapply(c_names, function(x) bquote(italic(.(x))))
     c_names <- as.expression(c_names)
   }
+  # Apply italics to all lower labels
   if (lower_italic) {
     r_names <- lapply(r_names, function(x) bquote(italic(.(x))))
     r_names <- as.expression(r_names)
   }
 
   if (length(box_size) == 1) {
-    upper_box_size <- box_size
+    higher_box_size <- box_size
     lower_box_size <- box_size
   } else if (length(box_size) == 2) {
-    upper_box_size <- box_size[1]
+    higher_box_size <- box_size[1]
     lower_box_size <- box_size[2]
   }
 
@@ -338,40 +423,58 @@ plotweb_v2 <- function(web,
   if (horizontal) {
     x_start <- x_lim[1]
     x_end <- x_lim[2]
-    rect(x_start, c_xl, x_start + upper_box_size, c_xr,
-         col = upper_color, border = upper_border)
+    rect(x_start, c_xl, x_start + higher_box_size, c_xr,
+         col = higher_color, border = higher_border)
     rect(x_end - lower_box_size, r_xl, x_end, r_xr,
          col = lower_color, border = lower_border)
-    text(x_start - u_lab_distance, c_tx, c_names, adj = c(1, 0.5), srt = srt,
+    # If the text is rotated more than 45 degrees
+    # center align the labels 
+    if (srt == 90 | srt == -90) {
+      u_adj <- c(0.5, 0.5)
+      l_adj <- c(0.5, 0.5)
+    } else {
+      u_adj <- c(1, 0.5)
+      l_adj <- c(0, 0.5)
+    }
+    text(x_start - u_lab_distance, c_tx, c_names, adj = u_adj, srt = srt,
          cex = text_size, xpd = TRUE, font = font, family = family,
          col = higher_text_color)
-    text(x_end + l_lab_distance, r_tx, r_names, adj = c(0, 0.5), srt = srt,
+    text(x_end + l_lab_distance, r_tx, r_names, adj = l_adj, srt = srt,
          cex = text_size, xpd = TRUE, font = font, family = family,
          col = lower_text_color)
+
   } else {
     y_start <- y_lim[1]
     y_end <- y_lim[2]
     rect(r_xl, y_start, r_xr, y_start + lower_box_size, col = lower_color, border = lower_border)
-    rect(c_xl, y_end - upper_box_size, c_xr, y_end, col = upper_color, border = upper_border)
+    rect(c_xl, y_end - higher_box_size, c_xr, y_end, col = higher_color, border = higher_border)
 
-    # text(r_tx, y_start - l_lab_distance, r_names, adj = c(1, 0.5), cex = text_size,
-    #      xpd = TRUE, srt = srt + 90, font = font, family = family)
 
-    text(r_tx, y_start - l_lab_distance, r_names, pos = 1, cex = text_size,
-         xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
+    if (srt == 0 | srt == 180) {
+      text(r_tx, y_start - l_lab_distance, r_names, pos = 1, cex = text_size,
+           xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
+      text(c_tx, y_end + u_lab_distance, c_names,
+           pos = 3, cex = text_size, xpd = TRUE, srt = srt,
+           font = font, family = family, col = higher_text_color)
+    } else {
+      text(r_tx, y_start - l_lab_distance, r_names,
+           adj = c(1, 0.5), cex = text_size, xpd = TRUE, srt = srt,
+           font = font, family = family)
+      # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
+      #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
+      #      font = font, family = family)
+      text(c_tx, y_end + u_lab_distance, c_names,
+           adj = c(0, 0.5), cex = text_size, xpd = TRUE, srt = srt,
+           font = font, family = family)
+    }
     # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
     #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
     #      font = font, family = family)
-    # text(c_tx, y_end + u_lab_distance, c_names,
-    #      adj = c(0, 0.5), cex = text_size, xpd = TRUE, srt = srt + 90,
-    #      font = font, family = family)
-    text(c_tx, y_end + u_lab_distance, c_names,
-         pos = 3, cex = text_size, xpd = TRUE, srt = srt,
-         font = font, family = family, col = higher_text_color)
+
   }
 
   # Interactions
-  if (!is.null(add_lower_abundances) && !is.null(add_upper_abundances)) {
+  if (!is.null(add_lower_abundances) && !is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
                          col = rep(seq(1, nc, 2), each = nr/2),
                          weight = c(web))
@@ -379,7 +482,7 @@ plotweb_v2 <- function(web,
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc),
                          col = rep(1:nc, each = nr/2),
                          weight = c(web))
-  } else if (!is.null(add_upper_abundances)) {
+  } else if (!is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(1:nr, nc/2),
                          col = rep(seq(1, nc, 2), each = nr),
                          weight = c(web))
@@ -426,11 +529,11 @@ plotweb_v2 <- function(web,
   for (linki in order(-web.df$weight)) {
     link <- web.df[linki, ]
     if (horizontal) {
-      x1 <- x_start + upper_box_size
+      x1 <- x_start + higher_box_size
       x2 <- x_end - lower_box_size
     } else {
       x1 <- y_end - lower_box_size#0.9
-      x2 <- y_start + upper_box_size#0.1
+      x2 <- y_start + higher_box_size#0.1
     }
     y1 <- link$xcoord.tl
     y2 <- link$xcoord.bl
@@ -438,15 +541,15 @@ plotweb_v2 <- function(web,
     y4 <- link$xcoord.br
     if (link_color == "lower") {
       l_col <- lower_color[link$row]
-    } else if (link_color == "upper") {
-      l_col <- upper_color[link$col]
+    } else if (link_color == "higher") {
+      l_col <- higher_color[link$col]
     } else {
       l_col <- link_color
     }
     draw_link(x1, x2, y1, y2, y3, y4, l_col,
               horizontal = horizontal,
               alpha = link_alpha,
-              style = style)
+              curved = curved_links)
   }
 
   ## TODO: Implement legend plotting
@@ -454,3 +557,129 @@ plotweb_v2 <- function(web,
   #   plot()
   # }
 }
+
+do_labels_cross <- function(label_height, label_width, positions, alpha = 0) {
+  n <- nrow(positions)
+  cos_a <- cos(alpha / 180 * pi)
+  sin_a <- sin(alpha / 180 * pi)
+  m_cos_a <- cos(-alpha / 180 * pi)
+  m_sin_a <- sin(-alpha / 180 * pi)
+  max_overlap <- 0
+  for (i in 1:(n - 1)) {
+    # First text rectangle
+    c1_x <- positions[i, 1]
+    c1_y <- positions[i, 2]
+    r1_x1 <- c1_x - label_width[i]
+    r1_x2 <- c1_x
+    r1_y1 <- c1_y - (label_height[i] / 2)
+    r1_y2 <- c1_y + (label_height[i] / 2)
+    r1_x <- c(r1_x1, r1_x1, r1_x2, r1_x2)
+    r1_y <- c(r1_y1, r1_y2, r1_y2, r1_y1)
+
+    # Rotate first text rectangle 
+    r1_r_x <- cos_a * (r1_x - c1_x) - sin_a * (r1_y - c1_y)
+    r1_r_x <- r1_r_x + c1_x
+    r1_r_y <- sin_a * (r1_x - c1_x) + cos_a * (r1_y - c1_y)
+    r1_r_y <- r1_r_y + c1_y
+    polygon(r1_r_x, r1_r_y, col = "red", xpd = TRUE)
+
+    # Second text rectangle
+    c2_x <- positions[i + 1, 1]
+    c2_y <- positions[i + 1, 2]
+    r2_x1 <- c2_x - label_width[i]
+    r2_x2 <- c2_x
+    r2_y1 <- c2_y - (label_height[i + 1] / 2)
+    r2_y2 <- c2_y + (label_height[i + 1] / 2)
+    r2_x <- c(r2_x1, r2_x1, r2_x2, r2_x2)
+    r2_y <- c(r2_y1, r2_y2, r2_y2, r2_y1)
+
+    # Rotate second text rectangle
+    r2_r_x <- cos_a * (r2_x - c2_x) - sin_a * (r2_y - c2_y)
+    r2_r_x <- r2_r_x + c2_x
+    r2_r_y <- sin_a * (r2_x - c2_x) + cos_a * (r2_y - c2_y)
+    r2_r_y <- r2_r_y + c2_y
+
+    # Rotate back around the point of origin (0, 0)
+    r1_rr_x <- m_cos_a * r1_r_x - m_sin_a * r1_r_y
+    r1_rr_y <- m_sin_a * r1_r_x + m_cos_a * r1_r_y
+    r2_rr_x <- m_cos_a * r2_r_x - m_sin_a * r2_r_y
+    r2_rr_y <- m_sin_a * r2_r_x + m_cos_a * r2_r_y
+
+    o1 <- r2_rr_x[4] - r1_rr_x[2]
+    o2 <- r1_rr_x[4] - r2_rr_x[2]
+    o3 <- r1_rr_y[2] - r2_rr_y[4]
+    o4 <- r2_rr_y[2] - r1_rr_y[4]
+
+    max_o <- max(o1, o2, o3, o4)
+
+    overlap <- (o1 > 0) & (o2 > 0) & (o3 > 0) & (o4 > 0)
+    if(overlap) {
+      max_overlap <- max(max_overlap, max_o)
+      #print(i)
+      #print("OVERLAP")
+    }
+  }
+  #print("Max Overlap")
+  #print(max_overlap)
+}
+
+do_rectangles_cross <- function(r1_x, r1_y,
+                                r2_x, r2_y,
+                                alpha, beta = 1) {
+  cos_a <- cos(alpha)
+  sin_a <- sin(alpha)
+  #print(cos_a)
+  #print(sin_a)
+  plot(c(2 * r1_x, -2 * r2_x),
+       c(2 * r1_y, -2 * r2_y),
+       type = "n",
+       asp = 1)
+  polygon(r1_x, r1_y, col = "#1f5f1f")
+  polygon(r2_x, r2_y, col = "#5f1f1f")
+  c_1_x <- r1_x[2] + 0.5 * (r1_x[3] - r1_x[2]) - beta
+  c_1_y <- r1_y[2] + 0.5 * (r1_y[3] - r1_y[2])
+  c_2_x <- r2_x[2] + 0.5 * (r2_x[3] - r2_x[2]) - beta
+  c_2_y <- r2_y[2] + 0.5 * (r2_y[3] - r2_y[2])
+  points(c_1_x, c_1_y)
+  points(c_2_x, c_2_y)
+  r1_r_x <- cos_a * (r1_x - c_1_x) - sin_a * (r1_y - c_1_y)
+  r1_r_x <- r1_r_x + c_1_x
+  r1_r_y <- sin_a * (r1_x - c_1_x) + cos_a * (r1_y - c_1_y)
+  r1_r_y <- r1_r_y + c_1_y
+  r2_r_x <- cos_a * (r2_x - c_2_x) - sin_a * (r2_y - c_2_y)
+  r2_r_x <- r2_r_x + c_2_x
+  r2_r_y <- sin_a * (r2_x - c_2_x) + cos_a * (r2_y - c_2_y)
+  r2_r_y <- r2_r_y + c_2_y
+  polygon(r1_r_x, r1_r_y, col = "#1f5f1f")
+  polygon(r2_r_x, r2_r_y, col = "#5f1f1f")
+  cos_a <- cos(-alpha)
+  sin_a <- sin(-alpha)
+  r1_rr_x <- cos_a * r1_r_x - sin_a * r1_r_y
+  r1_rr_y <- sin_a * r1_r_x + cos_a * r1_r_y
+  r2_rr_x <- cos_a * r2_r_x - sin_a * r2_r_y
+  r2_rr_y <- sin_a * r2_r_x + cos_a * r2_r_y
+  polygon(r1_rr_x, r1_rr_y, col = "#1f5f1f")
+  polygon(r2_rr_x, r2_rr_y, col = "#5f1f1f")
+
+  points(r1_rr_x[2], r1_rr_y[2], col = "yellow")
+  points(r1_rr_x[4], r1_rr_y[4], col = "yellow")
+  points(r2_rr_x[2], r2_rr_y[2], col = "yellow")
+  points(r2_rr_x[4], r2_rr_y[4], col = "yellow")
+
+  overlap <- (r1_rr_x[2] <= r2_rr_x[4]) &
+             (r1_rr_x[4] >= r2_rr_x[2]) &
+             (r1_rr_y[2] >= r2_rr_y[4]) &
+             (r1_rr_y[4] <= r2_rr_y[2])
+
+  #print(overlap)
+}
+
+# r1_x <- c(3, 0, 0, 3)
+# r1_y <- c(5, 5, 4, 4)
+# r2_x <- c(3, 0, 0, 3)
+# r2_y <- c(7, 7, 6, 6)
+
+# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 4)
+# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 2)
+# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 2.5, 1)
+# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 3, 1)
