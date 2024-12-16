@@ -1,310 +1,146 @@
+---
+title: How to Plot
+author: Tobias Bauer
+date: 2024-12-04
+output: 
+    html_document:
+        toc: TRUE
+editor_options: 
+  chunk_output_type: inline
+---
+
+# How to plot plant-pollinator (or any other) webs with bipartite
+
+First we have to install and then load the `bipartite`-package.
+
+> **NOTE:** The new plotting functionality is currently still under development and not yet included in the CRAN version of `bipartite`. For demonstration purposes we will install the development version from github using the `devtools`-package. On Windows make sure the `RTools` are installed.
+
 ```{r}
+devtools::install_github("https://github.com/TobiasB22/bipartite", 
+                         ref = "plotweb_v2", subdir = "bipartite")
 library(bipartite)
-source("./draw_link.R")
-source("./plotweb_v2.R")
-source("./sortweb2.R")
 ```
 
-```{r, fig.width=10, fig.height=8}
-web <- motten1982
-plotweb(motten1982, plot.axes = TRUE)
+## Plotting the old way
+
+To visualize the plotting capabilities of `bipartite` we will use a plant-pollinator web included in the package namely `Safariland`.
+
+```{r}
+?Safariland
+dim(Safariland)
+str(Safariland)
 ```
 
-# How to plot a bipartite network with plotweb
+As we can see its a 9x27 integer matrix. The help reveals that the 9 rows represent plant species and the 27 columns represent different pollinators.
 
-In many cases it can be a useful first step to visualize a given network. The easiest way to do this is to c
+Now up to the current version `v2.20` of `bipartite` the standard way to visualize this network would be to simply call the function `plotweb`.
+
+> **NOTE:** To increase the plotting area we will use `fig.width = 10` and `fig.height = 10` in the following chunks. This extends the area from the default size of 7x5 inches to 10x10 inches.
+
+```{r, fig.width = 10, fig.height = 10}
+?plotweb
+plotweb(Safariland)
+```
+
+However, as you can see, for larger networks the placement of the labels quickly becomes somewhat confusing. To demonstrate the function better we will plot only the first 5 species of both plants and pollinators next.
+
+```{r, fig.width = 10, fig.height = 10}
+plotweb(Safariland[1:6, 1:6])
+```
+
+## Plotting the new way
+
+This development version contains a refined version of the plotting function currently called `plotweb_v2`. Among other things the stacking of labels is replaced in that version.
 
 ```{r, fig.width=10, fig.height=10}
-source("./plotweb_v2.R") 
-plotweb_v2(web, horizontal = TRUE)
+?plotweb_v2
+plotweb_v2(Safariland)
 ```
 
-all the function `plotweb` giving the web as argument.
+The error message tells us, that with the current text size, the labels can't be plotted without overlap. This error only occurs when the option `spacing = "auto"` is set. With this option the plot is arranged such that the maximal space is used without overlapping any labels.
 
-```{r, fig.width=7, fig.height=10}
-source("./plotweb_v2.R") 
-plotweb_v2(web, text_size = 0.5)
+So to solve this issue there are multiple solutions. The most intuitive would be decrease the `text_size` option to a value between 0 and 1 that is small enough to plot. The other would be to ignore the error and set the `spacing` to a fixed value.
+
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, text_size = 0.1)
+plotweb_v2(Safariland, spacing = 0.5)
 ```
 
-```{r, fig.width=10, fig.height=8}
-source("./new_plotweb.R") 
-#pdf("test.pdf")
-plotweb_tb_abun(motten1982, horizontal = TRUE, 
-           style = "curve", plot_axes = FALSE, x_lim = c(0, 1),
-           text_size = 1.5, link_alpha = 0.5, mar = c(2,0.5,2,0.5))
-#dev.off()
+Obviously both options are ideal. A more readable way however is to rotate the labels 90° with the `srt`-argument.
+
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, srt = 90)
 ```
-
-```{r}
-1/(1-0.662)
-par(pty="s")
-plot(0, xlim=c(0,1), ylim=c(0,1), xlab = "", ylab = "", xaxs = "i", yaxs = "i", type="n", axes=TRUE, asp=1)
-```
-
-```{r}
-plot(0, xlim=c(0,1), ylim=c(0,1), xlab = "", ylab = "", xaxs = "i", yaxs = "i", type="n", axes=TRUE, asp=1)
-text(x=0.5, y=0.5, "Parastratiosphecomyia stratiosphecomyioides Brunetti")
-strwidth("Parastratiosphecomyia stratiosphecomyioides Brunetti")
-```
-
-```{r}
-par("mai" = NULL)
-```
-
-```{r}
-web <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
-colnames(web) <- c("U1", "U2", "U3")
-rownames(web) <- c("L1", "L2")
-web
-plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "independent")
-plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), low.abun = c("L1" = 15, "L2" = 15), abuns.type = "independent")
-```
-
-```{r}
-plotweb(web)
-```
-
-```{r}
-c(15,15,15) / colSums(web)
-rowSums(web) / c(15, 15)
-rowSums(web)
-colSums(web)
-web
-```
-
-```{r}
-web2 <- sweep(web, MARGIN=2, c(15,15,15) / colSums(web), `*`)
-web2
-colSums(web2)
-rowSums(web2)
-plotweb(web2)
-```
-
-## Changing the layout
-
-### Defining borders
-
-### Switching higher and lower species
-
-The
-
-### Changing the species order
-
-## Changing the style
 
 ### Switching to a horizontal plot
 
-```{r}
-plotweb_v2(web = NULL, horizontal = TRUE)
-```
-
-### Changing the connections
-
-### Adding color
-
-### Making the labels italic
-
-## Adding the output to another plot
-
-```{r}
-plot(0, xlim = c(0,5), ylim = c(0, 10))
-plotweb(web, add = TRUE)
-```
-
-## Example of independent abundances (estimates)
-
-```{r}
-plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "independent")
-```
-
-## Example of added abundances (not-parasitized hosts)
-
-```{r}
-plotweb(web, high.abun = c("U1" = 15, "U2" = 15, "U3" = 15), abuns.type = "additional")
-```
-
-```{r}
-source("plotwebr.R")
-plotwebr(web, add_abun.high = c("U1" = 15, "U2" = 15, "U3" = 15))
-```
-
-# How to plot two connected networks with plot2webs
-
-```{r}
-source("./plot2webs_v2.R")
-align_webs(Safariland, Safariland)
-```
-
-```{r}
-month <- sample(month.abb, 40, replace = TRUE)
-test_data <- data.frame(month)
-test_data
-```
-
-```{r}
-library(tidyverse)
-```
-
-```{r}
-test_data |> mutate(season = case_when(
-  (month == "Dec" | month == "Jan" | month == "Feb") ~ "Winter",
-  (month == "Mar" | month == "Apr" | month == "May") ~ "Spring",
-  (month == "Jun" | month == "Jul" | month == "Aug") ~ "Summer",
-  (month == "Sep" | month == "Oct" | month == "Nov") ~ "Fall"
-))
-```
-
-```{r, fig.width=10, fig.height=8}
-par(mar = c(1,1,1,1))
-par(fig=c(0,0.5,0,1), mar = c(1,1,1,3))
-plot(1:10, 2*1:10-3, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-par(fig=c(0.5,1,0,1), new = TRUE, mar = c(1,2,1,1))
-plot(1:10, 2*1:10-3, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-text(-0.5, 10, "Test", xpd=NA)
-```
-
-```{r, fig.width=10, fig.height=6}
-source("./plot2webs_v2.R")
-plot2webs_v2(Safariland[1:5,1:5], Safariland[1:5,c(6,7,8,10,12)], upper_color = c("green", "yellow"), upper_border = "black")
-plot2webs_v2(Safariland[1:5,1:5], 2*Safariland[1:5,2:8], upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute")
-plot2webs_v2(Safariland[1:5,1:5], Safariland[1:5,2:8], upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "relative", space_upper = 0.2)
-```
-
-```{r, fig.width=10, fig.height=6}
-source("./new_plot2webs.R")
-web1 <- Safariland[1:2,1:3]
-web2 <- Safariland[1:2,2:3]
-print("Prop")
-print(sum(web1) / sum(web2))
-r_names_1 <- rownames(web1)
-r_names_2 <- rownames(web2)
-c_names_1 <- colnames(web1)
-c_names_2 <- colnames(web2)
-u_abun_1 <- c(1, 2, 2)
-u_abun_2 <- c(1, 2, 2)
-names(u_abun_1) <- c_names_1
-names(u_abun_2) <- c_names_1
-u_abun <- list(u_abun_1, u_abun_2)
-l_abun_1 <- c(5, 5)
-l_abun_2 <- c(2, 2)
-l_abun <- list(l_abun_1, l_abun_2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", lower_abundances = l_abun, upper_abundances = u_abun, add_upper_abundances = c(1, 2, 2), space_lower = 0.1, space_upper = 0.1)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "relative", lower_abundances = l_abun, upper_abundances = u_abun)
-```
-
-```{r, fig.width=10, fig.height=6}
-source("./plot2webs_v2.R")
-web1 <- Safariland[1:2,1:3]
-web2 <- Safariland[1:2,2:3]
-print("Prop")
-print(sum(web1) / sum(web2))
-r_names_1 <- rownames(web1)
-r_names_2 <- rownames(web2)
-c_names_1 <- colnames(web1)
-c_names_2 <- colnames(web2)
-u_abun_1 <- c(1, 2, 2)
-u_abun_2 <- c(1, 2, 2)
-names(u_abun_1) <- c_names_1
-names(u_abun_2) <- c_names_1
-u_abun <- list(u_abun_1, u_abun_2)
-l_abun_1 <- c(5, 5)
-l_abun_2 <- c(2, 2)
-l_abun <- list(l_abun_1, l_abun_2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = TRUE, scaling = "absolute", lower_abundances = l_abun, upper_abundances = u_abun, add_upper_abundances = u_abun, add_lower_abundances = l_abun, space_lower = 0.1, space_upper = 0.1)
-```
-
-### Test
-
-```{r, fig.width=10, fig.height=6}
-source("./new_plot2webs.R")
-web1 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
-web2 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=3)
-colnames(web1) <- c("U1", "U2", "U3")
-rownames(web1) <- c("L1", "L2")
-colnames(web2) <- c("U1", "U2")
-rownames(web2) <- c("L1", "L2", "L3")
-web1
-web2
-u_abun_1 <- c(500, 10, 5)
-u_abun_2 <- c(0, 0, 10)
-names(u_abun_1) <- c("U1", "U2", "U3")
-names(u_abun_2) <- c("U1", "U2", "U3")
-
-u_abun <- list(u_abun_1, u_abun_2)
-l_abun_1 <- c(10, 10)
-l_abun_2 <- c(10, 10, 10)
-l_abun <- list(l_abun_1, l_abun_2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = TRUE, scaling = "absolute", space_lower = 0.2, space_upper = 0.2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_upper_abundances = u_abun, add_lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
-```
-
-```{r, fig.width=10, fig.height=6}
-source("./new_plot2webs.R")
-web1 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=2)
-web2 <- matrix(data = c(10, 5, 3, 2, 4, 100), nrow=3)
-colnames(web1) <- c("U1", "U2", "U3")
-rownames(web1) <- c("L1", "L2")
-colnames(web2) <- c("U1", "U2")
-rownames(web2) <- c("L1", "L2", "L3")
-web1
-web2
-u_abun_1 <- c(500, 10, 5)
-u_abun_2 <- c(0, 0, 10)
-names(u_abun_1) <- c("U1", "U2", "U3")
-names(u_abun_2) <- c("U1", "U2", "U3")
-
-u_abun <- list(u_abun_1, u_abun_2)
-l_abun_1 <- c(10, 10)
-l_abun_2 <- c(10, 10, 100)
-l_abun <- list(l_abun_1, l_abun_2)
-new_plot2webs_abun2(web1, web2, upper_color = c("green", "black"), lower_color = "blue", add_lower_color = "red", upper_border = "black", plot_axes = FALSE, scaling = "absolute", add_lower_abundances = l_abun, lower_abundances = l_abun, space_lower = 0.2, space_upper = 0.2)
-```
-
-### The difference between relative and absolute scaling
-
-With "relative" scaling, the total area of the rectangles representing the abundances of the species displayed in the center of the plot is the same for both webs. For example, 50% of the plot's height.
-
-With "absolute" scaling, the ratio of the areas of the rectangles representing the abundances of the species displayed in the center of the plot matches the ratio between the total abundances of the two webs. This also means that equal abundances between the webs are displayed with the same area.
-
-```{r}
-
-```
-
-```{r}
-sweb1 <- Safariland[1:5,1:5]
-sweb2 <- Safariland[1:5,2:8]
-sum(colSums(sweb1))
-sum(colSums(sweb2))
-sum(sweb1)
-sum(sweb2)
-sum(sweb1)/sum(sweb2)
-```
-
-```{r}
-c_w <- strwidth("Hallo Welt", units = "inches")
-c_w
-plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
-       axes = TRUE, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
-text(0.5, 0.5, "Hallo Welt")
-grconvertX(0, from = "inches", to = "user")
-```
-
-```{r}
-source("./new_plotweb.R")
-plotweb_tb_add_abun(web, horizontal = TRUE, plot_axes = TRUE)
-plotweb_tb_add_abun(web, add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 5), add_lower_abundances = c("L1" = 5, "L2" = 5), horizontal = TRUE, plot_axes = TRUE, upper_color = c("U3" = "yellow", "U1" = "gray20"), upper_border = "black", lower_color = c("green", "blue"), lower_border = "black", style = "curve")
-```
+Another possibility is to rotate the whole plot by 90° altogether. This can be accomplished by setting `horizontal = TRUE`.
 
 ```{r, fig.width=10, fig.height=10}
-web
-source("~/bipartite/plotweb_v2.R")
-plotweb_v2(web, horizontal = TRUE, style = "curve")
-plotweb_v2(web, add_lower_abundances =  c("L1" = 5, "L2" = 5), add_upper_abundances =  c("U1" = 5, "U2" = 5, "U3" = 10), horizontal = FALSE, style = "curve", scaling = "absolute", plot_axes = TRUE, lower_abundances = c("L1" = 0.5, "L2" = 10))
+plotweb_v2(Safariland, horizontal = TRUE)
 ```
 
+Now we are able to clearly read every single label and interpret the plotted interactions.
+
+## Sorting the web
+
+By default the species in the plot are arranged just like the rows and columns in the given web matrix. So the first row/column is plotted at the bottom/left of the plot. So to arrange the plot in a specific order that order just has to be given during the call of `plotweb_v2`.
+
 ```{r, fig.width=10, fig.height=10}
-source("~/bipartite/plot2webs_v2.R")
-plot2webs_v2(web, web, horizontal = TRUE, add_upper_abundances = list(c("U1" = 5, "U2" = 5, "U3" = 10), c("U1" = 5, "U2" = 5, "U3" = 10)), scaling = "relative")
-plot2webs_v2(web, web, horizontal = FALSE, add_upper_abundances = list(c("U1" = 5, "U2" = 5, "U3" = 10), c("U1" = 5, "U2" = 5, "U3" = 10)), scaling = "relative", plot_axes = TRUE, srt = 0)
+plotweb_v2(Safariland[rev(rownames(Safariland)), ], horizontal = TRUE)
 ```
+
+Now the plant species are plotted in reverse order.
+
+However a built-in call to `sortweb` is also possible with the argument `sorting`. The options are the same as for `sortweb`. So `dec` orders the species in decreasing row/column totals, `inc` orders by increasing totals, and `cca` performs a cca algorithm which might reduce link crossings in the plot.
+
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE, sorting = "dec")
+plotweb_v2(Safariland, 
+           horizontal = TRUE, sorting = "inc")
+plotweb_v2(Safariland, 
+           horizontal = TRUE, sorting = "cca")
+```
+
+## Adding independent abundances
+
+In some cases beside the recoreded interactions there might also be data about the actual abundance of each or some species available. Now it might be interesting to alter the plot so that the boxes visualize these abundances while still representing the recorded interaction preferences via the link widths. This can be accomplished with the two arguments `higher_abundances` and `lower_abundances`.
+
+These accept a named vector each for the higher trophic level species (columns) and lower trophic level species (rows).
+
+Since we don't have actual recorded abundances we will generate some randomly for demonstration.
+
+```{r, fig.width=10, fig.height=10}
+n_higher_species <- ncol(Safariland)
+higher_abundances <- sample(0:100, n_higher_species, replace = TRUE)
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           higher_abundances = higher_abundances)
+```
+
+We now have abundances for the pollinator species that were randomly drawn form a uniform distribution between 0 and 100. As we can see the box sizes on the left are more homogenous.
+
+We can also see that some of the links are increasing or decreasing in size from the left to the right.
+
+```{r, fig.width=10, fig.height=10}
+higher_abundances <- sample(0:1000, n_higher_species, replace = TRUE)
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           higher_abundances = higher_abundances,
+           scaling = "relative")
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           higher_abundances = higher_abundances,
+           scaling = "absolute")
+```
+
+## Changing the style
+
+### Switching to curved links
+
+### Changing the color of some species
+
+### Changing the color of additional abundances
+
+## Plotting 2 webs
