@@ -154,6 +154,8 @@ As you can see in the second plot the boxes on the right are scaled according to
 
 ## Adding additional abundances
 
+In some cases there are individuals which didn't participate in any interactions but are still counted (e.g. parasited vs. unparasited hosts). For those cases it's not enough to just specify independent abundances. However
+
 ```{r, fig.width=10, fig.height=10}
 plotweb_v2(Safariland, 
            horizontal = TRUE,
@@ -163,6 +165,8 @@ plotweb_v2(Safariland,
 ## Changing the style
 
 ### Switching to curved links
+
+With the option `curved_links = TRUE` the interaction links can be changed from straight lines to curves.
 
 ```{r, fig.width=10, fig.height=10}
 plotweb_v2(Safariland, 
@@ -175,6 +179,8 @@ plotweb_v2(Safariland,
 
 ### Making the species labels cursive
 
+The options `higher_italic` and `lower_italic` make the higher trophic level and lower trophic level species labels respectively cursive.
+
 ```{r, fig.width=10, fig.height=10}
 plotweb_v2(Safariland, 
            horizontal = TRUE,
@@ -185,6 +191,8 @@ plotweb_v2(Safariland,
 
 ### Changing the color of all species
 
+With the arguments `higher_color` and `lower_color` the colors of the boxes can be changed. For example setting these to a single color value changes the color of all boxes on each side.
+
 ```{r, fig.width = 10, fig.height = 10}
 plotweb_v2(Safariland, 
            horizontal = TRUE,
@@ -193,7 +201,11 @@ plotweb_v2(Safariland,
            lower_color = "darkgreen")
 ```
 
+As you can see all boxes on the left (higher or columns) are orange and all boxes on the right (lower or rows) are dark green.
+
 ### Changing the color of some species
+
+However oftentimes we want to highlight just a few species. For the example below we are especially interested in the interaction of the plant species *Alstroemeria aurea*. So in the first step we generate a vector for all lower species and fill it with the value `"black"`. In the next step we change the value only for the considered species to `"orange"`.
 
 ```{r, fig.width = 10, fig.height = 10}
 lower_color <- rep("black", nrow(Safariland))
@@ -205,7 +217,11 @@ plotweb_v2(Safariland,
            lower_color = lower_color)
 ```
 
+As you can see now only the box of *Alstroemeria aurea* is orange.
+
 ### Changing the color of the links
+
+In the example above we highlighted the box of our species of interest. But it would be even nicer if we could highlight all the interactions that species has in the same color as well. To do so we just have to switch the option `link_color = "higher"` to `link_color = "lower"`.
 
 ```{r, fig.width = 10, fig.height = 10}
 plotweb_v2(Safariland, 
@@ -213,12 +229,17 @@ plotweb_v2(Safariland,
            curved_links = TRUE,
            lower_color = lower_color,
            link_color = "lower")
+```
+
+Of course you can also set all the links to a single color value.
+
+```{r, fig.width = 10, fig.height = 10}
 plotweb_v2(Safariland, 
            horizontal = TRUE,
            curved_links = TRUE,
            higher_color = "orange",
            lower_color = "darkgreen",
-           link_color = "gray")
+           link_color = "brown")
 ```
 
 ### Changing the color of additional abundances
