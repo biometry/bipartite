@@ -52,7 +52,7 @@ plotweb(Safariland[1:6, 1:6])
 
 This development version contains a refined version of the plotting function currently called `plotweb_v2`. Among other things the stacking of labels is replaced in that version.
 
-```{r, fig.width=10, fig.height=10}
+```{r, fig.width=10, fig.height=10, error=TRUE}
 ?plotweb_v2
 plotweb_v2(Safariland)
 ```
@@ -249,7 +249,7 @@ plotweb_v2(Safariland,
 Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
 
 ```{r, fig.width = 10, fig.height = 10}
-plotweb_v2(Safariland, 
+plotweb_v2(Safariland,
            horizontal = TRUE,
            add_lower_abundances = lower_abundances,
            curved_links = TRUE,
@@ -277,7 +277,7 @@ As you can see both webs are plotted in one figure with the pollinator species (
 Sometimes you might be more interested in the interactions of the lower trophic level species (plants / rows). So to switch the focus onto them you can change the default option `middle = "higher"` to `middle = "lower"`.
 
 ```{r, fig.width = 10, fig.height = 10}
-plot2webs_v2(Safariland, vazarr, 
+plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              middle = "lower",
              text_size = 0.7)
@@ -290,12 +290,12 @@ The plot is now flipped inside out with the plant species being aligned in the m
 Similarly to the total abundances being different on each side of a single plot the total abundances of each plot in `plot2webs_v2` can differ as well. However here the default is to use the absolute scaling so you can compare the total change of abundances. If you're only interested in the relative change you might use the option `scaling = "relative"`.
 
 ```{r, fig.width = 10, fig.height = 10}
-plot2webs_v2(Safariland, vazarr, 
+plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              middle = "higher",
              text_size = 0.7,
              scaling = "relative")
-plot2webs_v2(Safariland, vazarr, 
+plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              middle = "lower",
              text_size = 0.7,
@@ -317,8 +317,8 @@ plot2webs_v2(Safariland, vazarr,
 
 However it would be even nicer if we had our species of interest in the middle of the plot so we just set `middle = "lower"`.
 
-```{r, fig.width = 10, fig.height = 10}
-plot2webs_v2(Safariland, vazarr, 
+```{r, fig.width = 10, fig.height = 10, error=TRUE}
+plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              text_size = 0.7,
              middle = "lower",
@@ -330,12 +330,12 @@ plot2webs_v2(Safariland, vazarr,
 Now the error tells us that our `lower_color` vector doesn't contain all the lower species present in the plot. That is because the `vazarr` data set contains some plants which are not in `Safariland`. So to fix this we just need to generate a new vector `combined_lower_color` that contains all the lower trophic species names in the plot.
 
 ```{r, fig.width = 10, fig.height = 10}
-combined_lower_names <- union(rownames(Safariland), rownames(vazarr)) 
+combined_lower_names <- union(rownames(Safariland), rownames(vazarr))
 combined_lower_color <- rep("black", length(combined_lower_names))
 names(combined_lower_color) <- combined_lower_names
 combined_lower_color["Alstroemeria aurea"] <- "orange"
 
-plot2webs_v2(Safariland, vazarr, 
+plot2webs_v2(Safariland, vazarr,
              horizontal = T,
              text_size = 0.7,
              middle = "lower",
