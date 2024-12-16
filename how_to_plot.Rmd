@@ -61,6 +61,8 @@ The error message tells us, that with the current text size, the labels can't be
 
 So to solve this issue there are multiple solutions. The most intuitive would be decrease the `text_size` option to a value between 0 and 1 that is small enough to plot. The other would be to ignore the error and set the `spacing` to a fixed value.
 
+> **NOTE:** In future version there will also be the option to automatically shorten the species labels and generate a legend.
+
 ```{r, fig.width=10, fig.height=10}
 plotweb_v2(Safariland, text_size = 0.1)
 plotweb_v2(Safariland, spacing = 0.5)
@@ -105,7 +107,7 @@ plotweb_v2(Safariland,
 
 ## Adding independent abundances
 
-In some cases beside the recoreded interactions there might also be data about the actual abundance of each or some species available. Now it might be interesting to alter the plot so that the boxes visualize these abundances while still representing the recorded interaction preferences via the link widths. This can be accomplished with the two arguments `higher_abundances` and `lower_abundances`.
+In some cases beside the recorded interactions there might also be data about the actual abundance of each or some species available. Now it might be interesting to alter the plot so that the boxes visualize these abundances while still representing the recorded interaction preferences via the link widths. This can be accomplished with the two arguments `higher_abundances` and `lower_abundances`.
 
 These accept a named vector each for the higher trophic level species (columns) and lower trophic level species (rows).
 
@@ -128,9 +130,16 @@ We now have abundances for the pollinator species that were randomly drawn form 
 
 We can also see that some of the links are increasing or decreasing in size from the left to the right.
 
+### Switching to absolute scaling
+
+In many cases having independent abundances will lead to the total abundances on one side being larger than on the other side. However by default the `plotweb_v2` function will make both sides use the maximum available space.
+
+If you are interested in the absolute relations between both sides you need to set the option `scaling = "absolute"`. To demonstrate the difference we will generate uniformly random abundance value for the pollinator that are much larger than the actual values in the web.
+
 ```{r, fig.width=10, fig.height=10}
 n_higher_species <- ncol(Safariland)
-higher_abundances <- sample(0:100, n_higher_species, replace = TRUE)
+higher_abundances <- sample(0:1000, n_higher_species, replace = TRUE)
+names(higher_abundances) <- colnames(Safariland)
 plotweb_v2(Safariland, 
            horizontal = TRUE,
            higher_abundances = higher_abundances,
@@ -140,6 +149,8 @@ plotweb_v2(Safariland,
            higher_abundances = higher_abundances,
            scaling = "absolute")
 ```
+
+As you can see in the second plot the boxes on the right are scaled according to the total abundances on the left and are thus much smaller.
 
 ## Adding additional abundances
 
@@ -289,5 +300,6 @@ plot2webs_v2(Safariland, vazarr,
              middle = "lower",
              scaling = "relative",
              lower_color = combined_lower_color,
-             link_color = "lower")
+             link_color = "lower",
+             curved_links = TRUE)
 ```
