@@ -112,11 +112,16 @@ These accept a named vector each for the higher trophic level species (columns) 
 Since we don't have actual recorded abundances we will generate some randomly for demonstration.
 
 ```{r, fig.width=10, fig.height=10}
-n_higher_species <- ncol(Safariland)
-higher_abundances <- sample(0:100, n_higher_species, replace = TRUE)
+n_lower_species <- nrow(Safariland)
+lower_abundances <- sample(0:100, n_lower_species, replace = TRUE)
+names(lower_abundances) <- rownames(Safariland)
 plotweb_v2(Safariland, 
            horizontal = TRUE,
-           higher_abundances = higher_abundances)
+           lower_abundances = lower_abundances)
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           sorting = "cca",
+           lower_abundances = lower_abundances)
 ```
 
 We now have abundances for the pollinator species that were randomly drawn form a uniform distribution between 0 and 100. As we can see the box sizes on the left are more homogenous.
@@ -135,12 +140,99 @@ plotweb_v2(Safariland,
            scaling = "absolute")
 ```
 
+## Adding additional abundances
+
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           add_lower_abundances = lower_abundances)
+```
+
 ## Changing the style
 
 ### Switching to curved links
 
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, 
+           srt = 90,
+           curved_links = TRUE)
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE)
+```
+
+### Making the species labels cursive
+
+```{r, fig.width=10, fig.height=10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE,
+           higher_italic = TRUE,
+           lower_italic = TRUE)
+```
+
+### Changing the color of all species
+
+```{r, fig.width = 10, fig.height = 10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE,
+           higher_color = "orange",
+           lower_color = "darkgreen")
+```
+
 ### Changing the color of some species
+
+```{r, fig.width = 10, fig.height = 10}
+lower_color <- rep("black", nrow(Safariland))
+names(lower_color) <- rownames(Safariland)
+lower_color["Alstroemeria aurea"] <- "orange"
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE,
+           lower_color = lower_color)
+```
+
+### Changing the color of the links
+
+```{r, fig.width = 10, fig.height = 10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE,
+           lower_color = lower_color,
+           link_color = "lower")
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           curved_links = TRUE,
+           higher_color = "orange",
+           lower_color = "darkgreen",
+           link_color = "gray")
+```
 
 ### Changing the color of additional abundances
 
+```{r, fig.width = 10, fig.height = 10}
+plotweb_v2(Safariland, 
+           horizontal = TRUE,
+           add_lower_abundances = lower_abundances,
+           lower_add_color = "darkgreen")
+```
+
 ## Plotting 2 webs
+
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(Safariland, vazarr,
+             text_size = 0.7)
+plot2webs_v2(Safariland, vazarr,
+             text_size = 0.7,
+             horizontal = T)
+```
+
+### Changing the middle
+
+```{r, fig.width = 10, fig.height = 10}
+plot2webs_v2(Safariland, vazarr, 
+             horizontal = T,
+             middle = "lower",
+             text_size = 0.7)
+```
