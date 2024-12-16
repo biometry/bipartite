@@ -244,6 +244,8 @@ plotweb_v2(Safariland,
 
 ### Changing the color of additional abundances
 
+Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
+
 ```{r, fig.width = 10, fig.height = 10}
 plotweb_v2(Safariland, 
            horizontal = TRUE,
@@ -255,6 +257,8 @@ plotweb_v2(Safariland,
 ```
 
 ## Plotting 2 webs
+
+Many times we aren't just interested in visualizing a single web but rather want to show how a network changes with regards to a specific factor (e.g. time). At least for two webs this is now possible with the function `plot2webs_v2`. This function just takes two webs as input and generates the following plot.
 
 ```{r, fig.width = 10, fig.height = 10}
 plot2webs_v2(Safariland, vazarr,
