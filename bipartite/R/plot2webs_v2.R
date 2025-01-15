@@ -140,6 +140,7 @@ plot2webs_v2 <- function(web1,
     higher_color <- higher_color[c_names]
   } else {
     if (length(higher_color) < nc) {
+      warning("Length of higher_color vector does not match number of higher species.")
       higher_color <- rep_len(higher_color, nc)
     }
   }
@@ -154,7 +155,8 @@ plot2webs_v2 <- function(web1,
     lower_color_1 <- lower_color[r_names_1]
     lower_color_2 <- lower_color[r_names_2]
   } else if (length(lower_color) < nr) {
-    lower_color <- rep_len(lower_color, nr)
+    lower_color_1 <- rep_len(lower_color, nr_1)
+    lower_color_2 <- rep_len(lower_color, nr_2)
   }
 
   #c_sums_1 <- rep(0, nc)
