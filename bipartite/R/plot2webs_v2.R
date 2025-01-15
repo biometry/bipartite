@@ -140,7 +140,6 @@ plot2webs_v2 <- function(web1,
     higher_color <- higher_color[c_names]
   } else {
     if (length(higher_color) < nc) {
-      warning("Length of higher_color vector does not match number of higher species.")
       higher_color <- rep_len(higher_color, nc)
     }
   }
