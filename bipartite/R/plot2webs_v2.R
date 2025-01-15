@@ -133,15 +133,27 @@ plot2webs_v2 <- function(web1,
   if (!is.null(names(higher_color))) {
     stopifnot(length(higher_color) == nc)
     if (!setequal(names(higher_color), c_names)) {
+      # TODO: fix bug when middle = "lower"
       stop("Names of higher_color does not match names of higher species.")
     }
-    higher_color <- higher_color[colnames(web1)]
+    #higher_color <- higher_color[colnames(web1)]
+    higher_color <- higher_color[c_names]
   } else {
     if (length(higher_color) < nc) {
       higher_color <- rep_len(higher_color, nc)
     }
   }
-  if (length(lower_color) < nr) {
+
+  if (!is.null(names(lower_color))) {
+    stopifnot(length(lower_color) == nr)
+    if (!setequal(names(lower_color), r_names)) {
+      # TODO: fix bug when middle = "lower"
+      stop("Names of lower_color does not match names of lower species.")
+    }
+    #higher_color <- higher_color[colnames(web1)]
+    lower_color_1 <- lower_color[r_names_1]
+    lower_color_2 <- lower_color[r_names_2]
+  } else if (length(lower_color) < nr) {
     lower_color <- rep_len(lower_color, nr)
   }
 
@@ -267,6 +279,7 @@ plot2webs_v2 <- function(web1,
     #lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
     r_abuns_1 <- c(rbind(r_abuns_1, add_r_abundances_1))
     r_abuns_2 <- c(rbind(r_abuns_2, add_r_abundances_2))
+    # TODO: fix bug with new lower_color_1 and lower_color_2
     if (add_lower_color == "same") {
       lower_color <- rep(lower_color, each = 2)
     } else if (!is.null(names(add_lower_color))) {
@@ -411,7 +424,8 @@ plot2webs_v2 <- function(web1,
     higher_border <- higher_color
   }
   if (lower_border == "same") {
-    lower_border <- lower_color
+    lower_border_1 <- lower_color_1
+    lower_border_2 <- lower_color_2
   }
 
 
@@ -439,7 +453,7 @@ plot2webs_v2 <- function(web1,
   }
 
   if (horizontal) {
-    rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color, border = lower_border)
+    rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color_1, border = lower_border_1)
     rect(0.9, c_xl_1, 1, c_xr_1, col = higher_color, border = higher_border)
     text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd=T,
          cex = text_size, srt = srt, col = lower_text_color)
@@ -447,7 +461,7 @@ plot2webs_v2 <- function(web1,
          c_tx, c_names, adj = c(0.5, 0.5), xpd=NA, cex = text_size,
          srt = srt, col = higher_text_color)
   } else {
-    rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color, border = lower_border)
+    rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color_1, border = lower_border_1)
     rect(c_xl_1, 0.9, c_xr_1, 1, col = higher_color, border = higher_border)
     text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd=T,
          cex = text_size, srt = srt + 90, col = lower_text_color)
@@ -506,7 +520,7 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     if (link_color == "lower") {
-      l_col <- lower_color[link$row]
+      l_col <- lower_color_1[link$row]
     } else if (link_color == "higher") {
       l_col <- higher_color[link$col]
     } else {
@@ -545,12 +559,12 @@ plot2webs_v2 <- function(web1,
 
   if (horizontal) {
     rect(0, c_xl_2, 0.1, c_xr_2, col = higher_color, border = higher_border)
-    rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color, border = lower_border)
+    rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color_2, border = lower_border_2)
     text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), cex = text_size,
          xpd=T, srt = srt, col = lower_text_color)
   } else {
     rect(c_xl_2, 0, c_xr_2, 0.1, col = higher_color, border = higher_border)
-    rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color, border = lower_border)
+    rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color_2, border = lower_border_2)
     text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), cex = text_size,
          xpd=T, srt = srt + 90, col = lower_text_color)
   }
@@ -604,7 +618,7 @@ plot2webs_v2 <- function(web1,
     y3 <- link$xcoord.tl
     y4 <- link$xcoord.bl
     if (link_color == "lower") {
-      l_col <- lower_color[link$row]
+      l_col <- lower_color_2[link$row]
     } else if (link_color == "higher") {
       l_col <- higher_color[link$col]
     } else {
