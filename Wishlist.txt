@@ -6,6 +6,7 @@ EDITORIAL
 ...
 
 LARGE CHANGES
+* update the entire set of available nestedness measures, and think of strategies to "test" them (what do we use them for, how do they respond to null models; using specific clear made-up cases or simulations)
 * invent/compute "rewirability" across networks; use variability in interaction portfolio across several networks as an index of how flexibly a species can "rewire". We can also call flexible species "shifty" ;-)
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
