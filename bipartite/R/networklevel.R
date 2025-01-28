@@ -1,6 +1,7 @@
-`networklevel` <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, fcdist="euclidean", legacy=FALSE){
+`networklevel` <- function(web, index="ALLBUTDD", level="both", weighted=TRUE, ISAmethod="Bluethgen", SAmethod="Bluethgen", extinctmethod="r", nrep=100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, fcdist="euclidean", effective=FALSE, legacy=FALSE){
     ##
     ## web         interaction matrix, with lower trophic level in rows, higher in columns
+    ## effective   logical; should interaction evenness, Alatalo evenness, H2', diversity be expressed as "effective" diversity; suggestion by Nico, 11.04.2024 = exp(SH)/prod(dim(web)) # e.g. Jost 2010 page 210
     ## legacy      se to TRUE allows to run networklevel in its old form
 #! JFedit: fddist and fdweighted replace throughout by fcdist and fcweighted
   
@@ -260,11 +261,13 @@
             # interaction evenness
             p_i.mat <- web/sum(web)
             #---------------        
-            SH <- -sum(p_i.mat*log(p_i.mat), na.rm=TRUE)
+            SH <- if(effective) exp(-sum(p_i.mat*log(p_i.mat), na.rm=TRUE)) else -sum(p_i.mat*log(p_i.mat), na.rm=TRUE)
             if ("Shannon diversity" %in% index) out$"Shannon diversity" <- SH
             IE <- ifelse(intereven=="prod", SH/log(prod(dim(web))), SH/log(sum(web>0)))
             #---------------
-            if ("interaction evenness" %in% index) out$"interaction evenness" <- IE
+            if ("interaction evenness" %in% index) {
+              out$"interaction evenness" <- if (effective) exp(IE) else IE
+            }
             #---------------
             if ("Alatalo interaction evenness" %in% index){
             evenness <- function(web){
@@ -277,7 +280,7 @@
                 (Alatalo <- (1/sum(pk^2) -1) / (exp(-sum(pk * log(pk), na.rm=TRUE)) -1))
             }
             E <- evenness(web)
-            out$"Alatalo interaction evenness" <- E
+            out$"Alatalo interaction evenness" <- if (effective) exp(E) else E
             }
         }      
         #---------------
@@ -286,7 +289,7 @@
             is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol # from the help of is.integer!
             if (any(is.wholenumber(web)==FALSE)) H2_integer <- FALSE # turns H2_integer off if values are not integers
             H2 <- as.numeric(H2fun(web, H2_integer=H2_integer)[1]) #1.element is the standardised H2 prime
-            out$"H2"= ifelse(H2<0, 0, H2)
+            out$"H2" <- if (effective) exp(max(0, H2)) else max(0, H2)
         }
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):

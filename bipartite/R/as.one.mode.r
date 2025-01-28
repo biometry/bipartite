@@ -1,12 +1,20 @@
-as.one.mode <- function(web, fill=0, project="full", weighted=TRUE){
+as.one.mode <- function(web, fill=0, project="full", weighted=TRUE, legacy=FALSE){
     # helper function
     #turns 2-mode matrix into 1-mode matrix
     # output can be used with the sna-package and its various indices
     #
     # after conversion, the object is called a "graph" in sna
-
+  
     projection <- function(web, weighted=TRUE){
-      # projection helper function
+      # projection helper function, higher level as default
+      if (weighted == FALSE){web <- web>0}
+      o <- t(web) %*% web
+      diag(o) <- 0 # e.g. https://en.wikipedia.org/wiki/Laplacian_matrix
+      return(o)
+    }
+    
+    projectionLegacy <- function(web, weighted=TRUE){
+      # legacy projection helper function, higher level as default
       N <- NCOL(web)
       as.one.mode.web <- matrix(0, N, N)
       colnames(as.one.mode.web) <- rownames(as.one.mode.web) <- colnames(web)
@@ -43,11 +51,13 @@ as.one.mode <- function(web, fill=0, project="full", weighted=TRUE){
     # project to one mode for higher trophic level
     if (project == "higher"){
       o <- projection(web, weighted=weighted)
+      if (legacy){ o <- projectionLegacy(web, weighted=weighted) }
     }
     
     # project to one model for lower trophic level
     if (project == "lower"){                                                
       o <- projection(t(web), weighted=weighted)
+      if (legacy){ o <- projectionLegacy(t(web), weighted=weighted) }
     }   
     o
 }
