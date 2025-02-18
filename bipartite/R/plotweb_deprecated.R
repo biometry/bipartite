@@ -1,4 +1,4 @@
-`plotweb` <-
+`plotweb_deprecated` <-
 function(web, method = "cca", empty = TRUE, labsize = 1, ybig = 1,
     y.width.low = 0.1, y.width.high = 0.1,
     low.spacing = NULL, high.spacing = NULL,

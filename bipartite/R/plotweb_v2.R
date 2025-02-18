@@ -25,7 +25,6 @@ plotweb_v2 <- function(web,
                        higher_text_color = "black",
                        lower_text_color = "black",
                        horizontal = FALSE,
-                       #abbr_names = FALSE,
                        link_color = "higher",
                        link_border = "same",
                        link_alpha = 0.5,
@@ -678,12 +677,6 @@ do_rectangles_cross <- function(r1_x, r1_y,
   #print(overlap)
 }
 
-# r1_x <- c(3, 0, 0, 3)
-# r1_y <- c(5, 5, 4, 4)
-# r2_x <- c(3, 0, 0, 3)
-# r2_y <- c(7, 7, 6, 6)
 
-# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 4)
-# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 2)
-# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 2.5, 1)
-# do_rectangles_cross(r1_x, r1_y, r2_x, r2_y, pi / 3, 1)
+# Define plotweb to be the new version plotweb_v2 by default
+plotweb <- plotweb_v2

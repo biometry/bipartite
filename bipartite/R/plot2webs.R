@@ -1,4 +1,4 @@
-plot2webs_v2 <- function(web1,
+plot2webs <- function(web1,
                          web2,
                          middle = "higher",
                          sort_by = 1,

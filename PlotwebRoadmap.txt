@@ -1,13 +1,14 @@
 # Important (has to be finished before release)
 
- * Finish R help files for all function
- * Finish markdown file "How to plot"
+ * Finish R help files for all functions
  * Test all new and old functionality
  * Add more checks for correct inputs
  * Make the spacing between the boxes more configurable 
  * Brauchen die Labels bei Rotation wirklich mehr Platz?
+ * Fix automatic spacing bei plot2webs_v2
 
 # Done
+ * Finish markdown file "How to plot"
  * Rotation der Labels bei vertikalem Plot lösen
    - Bei 90° werden Label zentriert ansonsten links/rechts-bündig
  * Bei sortweb in plot2webs die äußeren Boxen auch sortieren
@@ -24,7 +25,7 @@
  * plot2web sortweb option which web to sort
 
 # Nice to have
-
+ * Configuration data.frame
  * Auto generated legend 
  * Automatic abbreviating of labels
    - Different options with numbers, characters, or shortened species names
