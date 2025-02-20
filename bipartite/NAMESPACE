@@ -19,7 +19,7 @@ import(grDevices)
 import(methods)
 import(stats)
 import(utils)
-importFrom(vegan, betadiver, cca, decostand, designdist, fisher.alpha, fisherfit, nestedchecker, nesteddisc, nestednodf, nestedtemp, treeheight, vegdist)
+importFrom(vegan, betadiver, cca, decostand, designdist, fisher.alpha, fisherfit, nestedchecker, nesteddisc, nestednodf, nestedtemp, scores, treeheight, vegdist)
 importFrom(permute, allPerms) # for use in vegan::nesteddisc
 importFrom(sna, betweenness, closeness, geodist, gplot)
 importFrom(fields, image.plot)

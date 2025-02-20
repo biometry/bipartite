@@ -21,7 +21,7 @@ function(web,  web2, method = "cca", empty = FALSE, labsize = 1, ybig = 1,
   if (meths.match==2)
   {
     ca <- cca(web)
-    web <- web[order(summary(ca)$sites[,1], decreasing=TRUE), order(summary(ca)$species[,1], decreasing=TRUE)]
+    web <- web[order(scores(ca, display="sites", choices=1), decreasing=TRUE), order(summary(ca)$species[,1], decreasing=TRUE)]
 
   }
 

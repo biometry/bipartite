@@ -81,11 +81,12 @@ opts_chunk$set(fig.path='figures/twocolumn-', fig.align='center', fig.show='hold
 
 
 \begin{abstract}
-\noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions.
+\noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions. It also critically comments on some approaches and presents functions from related packages. 
 \end{abstract}
 
 \tableofcontents
 
+\clearpage
 
 \section{Introduction}
 \subsection{Introduction for ecologists}
@@ -119,7 +120,7 @@ Of course, we don't mind if this documented would be cited, e.g. as \citet{bipar
 \section{What other network packages are out there in the \proglang{R}-universe?}
 Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
 
-There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages (on CRAN) we are aware of for handling bipartite networks (in alphabetical order):
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages (on CRAN) we are aware of for handling bipartite networks (in alphabetical order). Some of these are exemplified in section~\ref{sec:beyondbipartite}.
 \begin{description}
 \item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
@@ -131,7 +132,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
 % \item[\package{latentnet}] ; % has nothing to do with our kind of networks;
-\item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
+\item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context;%, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
 \item[\package{tnet},] which aims at re-thinking one-mode indices in a mathematically consistent way for bipartite networks; some functions of \package{tnet} were lifted to \package{bipartite} (thanks to Tore for allowing that!);
@@ -374,7 +375,36 @@ specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI",
 @
 A relatively comprehensive comparison of species-level indices of specialisation, \citet{Dormann2011} has shown substantial redundancy among these indices, and only few of them have a sound theoretical basis \citep{Poisot2012a}.
 
-\subsubsection{The betweenness mess}
+
+\subsection{Which index to choose?}%--------------------------------------------------------------
+Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low sampling intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
+
+Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
+
+Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluthgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
+
+This, if two indices are available to quantify the same idea, one binary and one quantitative, one should generally choose the quantitative one. Rather than species degree, we should use species strength or linkage density. Table \ref{tab:binaryquantitative} depicts some such binary-quantitative index pairs.
+%
+\begin{table}
+\label{tab:binaryquantitative}
+\caption{Binary-quantitative pairs of network indices. Note: Most quantitative indices can also be computed on binary networks. That does not make them a quantitative measure!}
+\begin{tabular}{l|ll}
+\hline
+& binary & quantitative \\ \hline
+%link level    & --     & --           \\ \hline
+network level & connectance & $H_2'$\\ 
+& links per species & linkage density \\ 
+& nestedness        & weighted NODF, wine \\ %\hline
+group level   & mean number of partners & effective number of partners \\%\hline
+species level & degree & species strength, effective number of partners \\\hline
+\end{tabular}
+\end{table}
+
+
+In a nutshell: Quantitative indices make use of more information in the data. They are generally more advisable, although most of them also are strongly affected by sampling issues.
+
+
+\subsubsection{One index, many values: A cautionary tale told by the betweenness mess}
 Betweenness is a graph index which quantifies the importance of a node for fluxes between nodes. It does so by counting how many of all shortest paths between two nodes go through the target node. That means, a peripheral node will have a betweenness score of 0, while a central node can have values up to $n$ (if all shortest paths go through it).
 
 <<betweenPlot, fig.show="hide", fig.width = 5, fig.height = 5, out.width = "0.75\\textwidth">>=
@@ -446,35 +476,6 @@ Note that all functions used here have options and arguments that affect the out
 To summarize: \code{bipartite::BC} and \code{influenceR::betweenness/2} yield values as one would expect for \emph{unique} shortest paths; \code{DiagrammeR::get\_betweenness} and \code{igraph::betweeness} yield number of non-unique shortest paths, which we also regard as an intuitive measure. 
 
 As always in data analysis: it is the responsibility of the analyst to make sure suitable-for-purpose indices are used!
-
-
-\subsection{Which index to choose?}%--------------------------------------------------------------
-Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low sampling intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
-
-Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
-
-Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluthgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
-
-This, if two indices are available to quantify the same idea, one binary and one quantitative, one should generally choose the quantitative one. Rather than species degree, we should use species strength or linkage density. Table \ref{tab:binaryquantitative} depicts some such binary-quantitative index pairs.
-%
-\begin{table}
-\label{tab:binaryquantitative}
-\caption{Binary-quantitative pairs of network indices. Note: Most quantitative indices can also be computed on binary networks. That does not make them a quantitative measure!}
-\begin{tabular}{l|ll}
-\hline
-& binary & quantitative \\ \hline
-%link level    & --     & --           \\ \hline
-network level & connectance & $H_2'$\\ 
-& links per species & linkage density \\ 
-& nestedness        & weighted NODF, wine \\ %\hline
-group level   & mean number of partners & effective number of partners \\%\hline
-species level & degree & species strength, effective number of partners \\\hline
-\end{tabular}
-\end{table}
-
-
-In a nutshell: Quantitative indices make use of more information in the data. They are generally more advisable, although most of them also are strongly affected by sampling issues.
-
 
 
 \subsubsection{Index redundancy: do different indices tell the same thing?}
@@ -765,6 +766,7 @@ To objectively define this threshold one could run null models of the original n
 
 
 \section{Analyses beyond \package{bipartite}}%----------------------------------------------
+\label{sec:beyondbipartite}
 Of course, there are many different packages that analyse one or the other aspect of networks, and some even of bipartite networks (listed in the introduction of this vignette). Some of them we find particularly interesting or useful or innovative, and here we quickly show some of them at work.
 
 \subsection{Plotting pretty bipartites}

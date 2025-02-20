@@ -1,14 +1,32 @@
+* new S3 class "web" (then: "weblist", "webarray"):
+** single web: matrix plus attributes (higher, lower); plus web attribute
+** web.list: list of single webs with attributes, plus web attributes
+** web.array: 
+** also provide back and forth conversion to emln-style webs
+
+
+
 IMPORTANT
-<>
 * add to networklevel.Rd that modularity Q is now available!
+* update list of related R packages and their main functionalities
+* "nodelevel" attributes handed over consistently to plotting etc (e.g. taxonomy, abundance, size or whatever); hand over as data.frame, not as "named vector" or so, a la vegan or FD
+* add Jochen's preference-abundance (makeweb, sampleweb) to handcraft matrices of different preference and abundance heterogeneity
+(* describe this as a new point in the bipartite overview on the main help page)
 
 EDITORIAL
 ...
 
 LARGE CHANGES
+* Start using vignette as report-style QnA!
+* update the entire set of available nestedness measures (e.g. add Song, see below), and think of strategies to "test" them (what do we use them for, how do they respond to null models; using specific clear made-up cases or simulations)
+* vignette: expand on null models and what function they serve and why they probably do not do what the user thinks (see Agroecology chapter). 
+* invent/compute "rewirability" across networks; use variability in interaction portfolio across several networks as an index of how flexibly a species can "rewire". We can also call flexible species "shifty" ;-)
+
+* indextestbed for nestedness, specialisation, modularity, betweenness, ...: pre-specify desired properties, make manual matrices for those, test the different measures on it
+
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
-	** plotweb: add a new option ÒnamesÓ, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
+	** plotweb: add a new option â€œnamesâ€, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
 	** Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
 	** revise plotweb (incl. device settings, vertical option, margin control; easy and explained coloring per sp etc)
 	** allow for multiple networks next to each other (i.e. mfrow=c(1,2)) ) 
@@ -25,7 +43,7 @@ LARGE CHANGES
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
-* add makeweb function(s) from FrŸnd et al 2016 Oikos
+* add makeweb function(s) from FrÃ¼nd et al 2016 Oikos
 * nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019) --> "reconsider your question" reply into help file
 * mgen: preserve species names! also make check for probability matrix robust to floating point errors (if I divide by the sum before, the warning can still appear!)
 
@@ -42,6 +60,7 @@ SMALL CHANGES
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
+* frame2webs: option to condense all, i.e. without a group
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
@@ -57,17 +76,22 @@ SMALL CHANGES
 * include robustnessLD50 (Dunne et al. 2002, MacFadyen et al. 2009) and revise help for robustness accordingly
 * search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
 * functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
+* include NODFc by Song et al. (2017): Song, C., Rohr, R. P., & Saavedra, S. (2017). Why are some plant-pollinator networks more nested than othersâ€¯? Journal of Animal Ecology, 86(July), 1417â€“1424. https://doi.org/10.1111/1365-2656.12749
+
 
 * enable networklevel / grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel; also offer specieslevel for grouplevel indices that not yet exist
 
 
 (add new stuff)
+* add network diffusion (Allen-Perkins 2024 Oikos)
+* add DGCD (Brimacombe et al. 2023 PLoS Biology): Directed graphlet correlation distance, as measure of network distance
+* add IMC of Rohr et al. (2016): matching centrality
 * add multilayer centrality "Gnorm" to function "npartite" (Lofti et al. 2023, MEE)
 * add "assortativity" of Newman 2002 as cited in Ona & Kost 2022
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
 * add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
-* DolŽdec 2000: OMI implementation
+* DolÃ©dec 2000: OMI implementation
 * add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex)
 * put Strona's NOS-index into bipartite (there is an R-package)
 * Eigenvector, Katz, PageRank as well as a few similarity measures such as cosine, Pearson and Euclidean for weighted bipartite networks in the package
@@ -77,6 +101,7 @@ SMALL CHANGES
 
 
 NICE TO HAVE
+* replace degree.dist-function by functionality in igraph (IF THAT IT BETTER!): https://r.igraph.org/news/index.html#breaking-changes-2-0-0
 * check the C4b of Gilarranz: is it the same as Opsahl's?
 * add setting seeds to C-code of "computeModules", which is passed down from R: make the algorithm perfectly reproducible
 * make Rcpp-version of computeModule's LPA (why? it is already very fast!)
@@ -113,7 +138,7 @@ BIN (rejected feature)
 * include Hurlbert's PIE to compute interaction evenness (see Albrecht et al. 2010 Oikos); --> paleotree:::HurlbertPIE
 * two-level czvalues (e.g. weighted mean of the two trophic levels; see help file) into species level, from there into networklevel  | CFD no: czvalues are meaningless without null model reference and hence not suitable for inclusion in ~level functions
 * warning "Rtools is required to build R packages but is not currently installed" should not appear for user install!!  |  CFD largely irreproducible and never complained about by users
-* WINE-artiger von Marco: Araujo MS, Guimarães PR, Svanbäck R, Pinheiro A, Guimarães P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)  |  CFD 18.5.2021: by now, there are several weighted indices, not least nest.smdm; since hardly anybody has used/cited this approach, it may be save to ignore
+* WINE-artiger von Marco: Araujo MS, Guimarâ€žes PR, Svanbâ€°ck R, Pinheiro A, Guimarâ€žes P, Reis SF, Bolnick DI (2008) Network analysis reveals contrasting effects of intraspecific competition on individual versus population diets. Ecology 89:1981-1993 (downloadable from https://webspace.utexas.edu/ma4775/software.html)  |  CFD 18.5.2021: by now, there are several weighted indices, not least nest.smdm; since hardly anybody has used/cited this approach, it may be save to ignore
 
 
 
@@ -126,7 +151,7 @@ FIXED/ADDED/DONE:
 * add network of Olito & Fox (2015) http://doi.org/10.5061/dryad.7st32; 9 Nov 2017 CFD
 * FIX ERROR: computeModules(netw, method="DormannStrauss", deep=T):
 Error in validObject(.Object) : 
-  invalid class “moduleWeb” object: invalid object for slot "modules" in class "moduleWeb": got class "numeric", should be or extend class "matrix"
+  invalid class Ã¬moduleWebÃ® object: invalid object for slot "modules" in class "moduleWeb": got class "numeric", should be or extend class "matrix"
 Calls: computeModules -> new -> initialize -> initialize -> validObject
 Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
 * in nullmodel, the check for binary networks is flawed for numbers < 1; use length(unique(web)<3) instead    |  CFD 24.3.2019

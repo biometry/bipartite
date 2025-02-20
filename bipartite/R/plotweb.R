@@ -77,8 +77,8 @@ if (abuns.type %in% c('additional','none')){
             col.seq <- c(col.seq, cs)
           } else { #works fine for webs with only one compartment
             ca <- cca(web[rs, cs])
-            row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
-            col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
+            row.seq <- c(row.seq, rs[order(scores(ca, display="sites", choices=1), decreasing=TRUE)])
+            col.seq <- c(col.seq, cs[order(scores(ca, display="species", choices=1), decreasing=TRUE)])
           }
         }
         web <- web[row.seq, col.seq]
@@ -86,9 +86,9 @@ if (abuns.type %in% c('additional','none')){
         high.order <- col.seq
       } else {
         ca <- cca(web)
-        web <- web[order(summary(ca)$sites[,1], decreasing=TRUE), order(summary(ca)$species[,1], decreasing=TRUE)]
-        low.order <- order(summary(ca)$sites[,1], decreasing=TRUE)
-        high.order <- order(summary(ca)$species[,1], decreasing=TRUE)
+        web <- web[order(scores(ca, display="sites", choices=1), decreasing=TRUE), order(scores(ca, display="species", choices=1), decreasing=TRUE)]
+        low.order <- order(scores(ca, display="sites", choices=1), decreasing=TRUE)
+        high.order <- order(scores(ca, display="species", choices=1), decreasing=TRUE)
       }
     } # end for meths.match==2 condition; start of the "normal" plotting
   
@@ -382,8 +382,8 @@ if (abuns.type=='independent'){
             col.seq <- c(col.seq, cs)
           } else { #works fine for webs with only one compartment
             ca <- cca(web[rs, cs])
-            row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
-            col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
+            row.seq <- c(row.seq, rs[order(scores(ca, display="sites", choices=1), decreasing=TRUE)])
+            col.seq <- c(col.seq, cs[order(scores(ca, display="species", choices=1), decreasing=TRUE)])
           }
         }
         web <- web[row.seq, col.seq]
@@ -391,9 +391,10 @@ if (abuns.type=='independent'){
         high.order <- col.seq
       } else {
         ca <- cca(web)
-        web <- web[order(summary(ca)$sites[,1], decreasing=TRUE), order(summary(ca)$species[,1], decreasing=TRUE)]
-        low.order <- order(summary(ca)$sites[,1], decreasing=TRUE)
-        high.order <- order(summary(ca)$species[,1], decreasing=TRUE)
+        web <- web[order(scores(ca, display="sites", choices=1), decreasing=TRUE),
+                   order(scores(ca, display="species", choices=1), decreasing=TRUE)]
+        low.order <- order(scores(ca, display="sites", choices=1), decreasing=TRUE)
+        high.order <- order(scores(ca, display="species", choices=1), decreasing=TRUE)
       }
     } # end for meths.match==2 condition; start of the "normal" plotting
   

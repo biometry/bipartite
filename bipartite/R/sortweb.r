@@ -1,4 +1,4 @@
-sortweb<-function(web, sort.order="dec", sequence=NULL){
+sortweb <- function(web, sort.order="dec", sequence=NULL){
 # sort a matrix by the following option
 #      inc (increasing col and row totals)
 #      dec (decreasing col and row totals)

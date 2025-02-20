@@ -1,8 +1,8 @@
 Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
-Version: 2.19
-Date: 2023-11-29
+Version: 2.20
+Date: 2024-05-19
 Authors@R: c(person(given = "Carsten F.",
                     family = "Dormann",
                     role = c("aut", "cre"),
@@ -59,8 +59,8 @@ Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
   Rouven Strauss [ctb],
   Diego P. Vazquez [ctb] (<https://orcid.org/0000-0002-3449-5748>)
 Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
-Depends: R(>= 3.5.0), vegan, sna
-Imports: fields, igraph, MASS, methods, permute
+Depends: R(>= 3.5.0)
+Imports: fields, igraph, MASS, methods, permute, vegan, sna
 Suggests: knitr
 LazyData: TRUE
 ByteCompile: TRUE
