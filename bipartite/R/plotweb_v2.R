@@ -56,7 +56,7 @@ plotweb_v2 <- function(web,
   }
 
   # Sort the web according to the user defined method
-  web <- sortweb2(web, sort.order = sorting, empty = TRUE)
+  web <- sortweb2(web, sort.order = sorting, empty = empty)
 
   # Extract the row and column names if existing
   # otherwise generate number sequence instead
@@ -120,33 +120,44 @@ plotweb_v2 <- function(web,
     text_size <- 1 / total_str_h
   }
 
-  if (horizontal) {
+  if (!horizontal) {
     theta <- srt * pi / 180
   } else {
-    theta <- (srt - 90) * pi / 180
+    theta <- (srt + 90) * pi / 180
   }
 
   # Get the maximal width of the higher and lower labels
   # in inches to set the margin accordingly
-  c_m_t_width <- max(strwidth(c_names, #srt = srt,
-                              cex = text_size, units = "inches"))
-  r_m_t_width <- max(strwidth(r_names, #srt = srt,
-                              cex = text_size, units = "inches"))
+  if (theta != 0 && theta != 180) {
+    c_m_t_width <- max(strwidth(c_names,
+                                cex = text_size, 
+                                units = "inches"))
+    r_m_t_width <- max(strwidth(r_names,
+                                cex = text_size, 
+                                units = "inches"))
 
-  c_t_width <- (c_m_t_width) * cos(theta)
-  r_t_width <- (r_m_t_width) * cos(theta)
+    c_t_width <- (c_m_t_width) * sin(theta)
+    r_t_width <- (r_m_t_width) * sin(theta)
+  } else { # If the labels are horizontal use their height.
+    c_t_width <- max(strheight(c_names,
+                               cex = text_size, 
+                               units = "inches"))
+    r_t_width <- max(strheight(r_names, 
+                               cex = text_size, 
+                               units = "inches"))
+  }
 
   #print(c(c_t_width, r_t_width))
 
   c_height_1 <- strwidth(c_names[1], cex = text_size, units = "inches")
-  c_height_1 <- sin(theta) * c_height_1
+  c_height_1 <- cos(theta) * c_height_1
   r_height_1 <- strwidth(r_names[1], cex = text_size, units = "inches")
-  r_height_1 <- sin(theta) * r_height_1
+  r_height_1 <- cos(theta) * r_height_1
 
   c_height_n <- strwidth(c_names[nc], cex = text_size, units = "inches")
-  c_height_n <- sin(theta) * c_height_n
+  c_height_n <- cos(theta) * c_height_n
   r_height_n <- strwidth(r_names[nr], cex = text_size, units = "inches")
-  r_height_n <- sin(theta) * r_height_n
+  r_height_n <- cos(theta) * r_height_n
 
   max_height_1 <- max(c_height_1, -r_height_1)
   max_height_n <- max(-c_height_n, r_height_n)
