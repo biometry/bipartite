@@ -149,6 +149,11 @@
             out$"weighted NODF" <- if (inherits(wNODF, "try-error")) NA else wNODF
         }
         #------------------
+        if ('spectral radius' %in% index) {
+          # The spectral radius is the largest Eigenvalue 
+          out$"spectral radius" <- spectral.radius(web, mass.action.norm)
+        }
+        #------------------
         if (any(c("ISA", "interaction strength asymmetry", "dependence asymmetry") %in% index)){
             # Dependence asymmetry (Bascompte et al. 2006; Bluethgen et al. 2007, Fig. S2)
             depL <- web.e/matrix(rowSums(web.e), nrow=NROW(web.e), ncol=NCOL(web.e), byrow=FALSE)
@@ -292,11 +297,7 @@
             H2 <- as.numeric(H2fun(web, H2_integer=H2_integer)[1]) #1.element is the standardised H2 prime
             out$"H2" <- if (effective) exp(max(0, H2)) else max(0, H2)
         }
-        #------------------
-        if ('spectral radius' %in% index) {
-            # The spectral radius is the largest Eigenvalue 
-            out$"spectral radius" <- spectral.radius(web, mass.action.norm)
-        }
+        
         #----------------------- now: grouplevel -------------------
         # a list of network indices (which should not be called through grouplevel):
         netw.index <- match(c("connectance", "web asymmetry", "links per species", "number of compartments", "compartment diversity", "modularity", "nestedness", "NODF", "weighted nestedness", "weighted NODF", "ISA", "SA", "interaction evenness", "Alatalo interaction evenness", "Fisher alpha", "H2", "Shannon diversity", "linkage density", "weighted connectance", "spectral radius"), index)

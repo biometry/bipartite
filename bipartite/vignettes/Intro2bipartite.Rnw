@@ -222,10 +222,10 @@ plotModuleWeb(mod)
 To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
 <<eval=F>>=
 par(mfrow=c(1,2), xpd=T)
-gplot(as.one.mode(motten1982, project="higher"), 
+sna::gplot(as.one.mode(motten1982, project="higher"), 
  label=colnames(motten1982), gmode="graph", 
 label.cex=0.6, vertex.cex=2)
-gplot(as.one.mode(motten1982, project="lower"), 
+sna::gplot(as.one.mode(motten1982, project="lower"), 
 	label=rownames(motten1982), gmode="graph", 
 	label.cex=0.6, vertex.cex=2, vertex.col="green")
 @
@@ -413,7 +413,7 @@ data(Safariland)
 # plot the one-mode projection for the lower level:
 set.seed(4) # don't ask me why gplot is stochastic ...
 par(xpd=T, mar=c(0,6,0,6))
-gplot(as.one.mode(Safariland, project="lower"), label=rownames(Safariland))
+sna::gplot(as.one.mode(Safariland, project="lower"), label=rownames(Safariland))
 @
 {
 \centering

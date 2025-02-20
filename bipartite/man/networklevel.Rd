@@ -12,7 +12,7 @@ networklevel(web, index="ALLBUTDD", level="both", weighted=TRUE,
    ISAmethod="Bluethgen",  SAmethod = "Bluethgen", extinctmethod = "r", 
    nrep = 100, CCfun=median, dist="horn", normalise=TRUE, empty.web=TRUE, 
    logbase="e", intereven="prod", H2_integer=TRUE, fcweighted=TRUE, 
-   fcdist="euclidean", effective=FALSE, legacy=FALSE)
+   fcdist="euclidean", effective=FALSE, legacy=FALSE, mass.action.norm=FALSE)
 }
 
 \arguments{
@@ -30,6 +30,7 @@ Usually this will be number of pollinators on each species of plants or number o
       \item \option{NODF},
       \item \option{weighted nestedness} (where ties may induce variation when changing the sequence of species in \option{web}), 
       \item \option{weighted NODF}, 
+      \item \option{spectral radius},
       \item \option{ISA} (or alternatively \option{interaction strength asymmetry} or 
       	\cr \option{dependence asymmetry}), 
       \item \option{SA} (or alternatively \option{specialisation asymmetry}),
@@ -89,6 +90,7 @@ Usually this will be number of pollinators on each species of plants or number o
   \item{fcdist}{Distance measure to be used to compute functional complementarity through \code{\link{fc}}; any measure accepted by \code{\link{dist}} is acceptable.}
   \item{effective}{logical; should interaction evenness, Alatalo evenness, H2' and diversity be expressed as ``effective'' diversity? For Jost (2010, page 210) this seems to be the better decomposition of an index into a diversity and an evenness component. On a downside, H2' is then no longer ranged in [0,1], and ``diversity'' becomes the same as ``vulnerability'' and ``generality''. For these reasons, and backward compatibility, the default is \code{FALSE}.}
   \item{legacy}{Logical; should the old (pre-2.00) version of \code{networklevel} be used? To be backward compatible, the old \code{networklevel}-function is still available (\code{.networklevel}) and can be called by setting \option{legacy=TRUE}. This is only for the transition period until all papers in the making have been published (or binned). Index names and sometimes unclear focal level were downsides of the old implementation, which is now remedied. Thus, the use of \option{legacy=TRUE} and the direct call of \code{.networklevel} are strongly discouraged!}
+  \item{mass.action.norm}{Logical; shall the spectral radius be normalised by mass action? Defaults to FALSE. See \code{\link{spectral.radius}} for details.}
 }
 
 \details{
@@ -115,6 +117,7 @@ Depending on the selected indices, some or all of the below (returned as vector 
 	\item{NODF}{Another index for nestedness, calling \code{\link[vegan]{nestednodf}}. High values indicate nestedness. According to the analysis of Almeida-Neto et al. (2008, 2010), NODF is more consistent and \dQuote{better} than usual measures of nestedness.}
 	\item{weighted nestedness}{A nestedness version that considers interaction frequencies (and is hence weighted), proposed by Galeano et al. (2007) and implemented in \code{\link{wine}}. It ranges between 1 (perfect nestedness) and 0 (perfect chaos). Note that this is the OPPOSITE interpretation of nestedness temperature!}
 	\item{weighted NODF}{Another quantitative (=weighted) index for nestedness, building on NODF (see \code{\link[vegan]{nestednodf}}). High values indicate nestedness. According to the analysis of Almeida-Neto et al. (2008, 2010), NODF is more consistent and \dQuote{better} than usual measures of nestedness.}
+	\item{spectral radius}{Another nestedness index, proposed by Staniczenko et al. (2013), possibly correcting for "mass action". See \code{\link{spectral.radius}} and/or \code{\link{massaction}} for details.}
 	\item{interaction strength asymmetry}{(selected using \option{index = "ISA"}). Explaining dependence asymmetry is also a measure of specialisation, across both trophic levels. Proposed by Bascompte et al. (2006) and critised and alterations proposed by Blüthgen et al. (2007). The latter also show that dependence asymmetry can be almost entirely explained by web asymmetry (see above). Positive values (only possible of \option{ISAmethod = "Bluethgen"}) indicate higher dependence in the higher trophic level. See function \code{\link{specieslevel}} and its index \option{interaction push/pull}, which quantifies the balance of affecting and being effected by other species. Similarly, index \option{strength} quantifies the average effect of each species on all its partners.}
 	\item{specialisation asymmetry}{(selected by using \option{index="SA"}). Asymmetry (higher vs. lower trophic level) of specialisation now based on d' (see \code{\link{dfun}}), which is insensitive to the dimensions of the web. Again, two options of calculation are available: the one proposed by Blüthgen et al. (2007), where they weight the specialisation value for each species by its abundance (\option{SAmethod="Bluethgen"}) or where d'-values are log-transformed (arguing that d'-values are indeed log-normally distributed: \option{SAmethod="log"}). Since the mean d-value for the lower trophic level is subtracted from that of the higher, positive values indicate a higher specialisation of the higher trophic level.}
     \item{linkage density}{Marginal totals-weighted diversity of interactions per species (quantitative). Actually, this is computed as the average of vulnerability and generality (Bersier et al. 2002). Does not respond to setting \code{weighted=FALSE}.}
@@ -215,6 +218,8 @@ Roberts, A. and Stone, L. 1990 Island-sharing by archipelago species. \emph{Oeco
 Rodríguez-Girónes M.A., and Santamaría L. 2006. A new algorithm to calculate the nestedness temperature of presence-absence matrices. \emph{Journal of Biogeography} \bold{33}, 924--935
 
 Schluter, D. 1984. A variance test for detecting species associations, with some example applications. \emph{Ecology} \bold{65}, 998-1005.
+
+Staniczenko, P., Kopp, J. & Allesina, S. (2013) The ghost of nestedness in ecological networks. \emph{Nat. Commun.} \bold{4}, 1391. \doi{10.1038/ncomms2422}
 
 Stone, L. and Roberts, A. 1990. The checkerboard score and species distributions. \emph{Oecologia} \bold{85}, 74--79.
 
