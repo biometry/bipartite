@@ -1,13 +1,29 @@
+* new S3 class "web" (then: "weblist", "webarray"):
+** single web: matrix plus attributes (higher, lower); plus web attribute
+** web.list: list of single webs with attributes, plus web attributes
+** web.array: 
+** also provide back and forth conversion to emln-style webs
+
+
+
 IMPORTANT
-<>
 * add to networklevel.Rd that modularity Q is now available!
+* update list of related R packages and their main functionalities
+* "nodelevel" attributes handed over consistently to plotting etc (e.g. taxonomy, abundance, size or whatever); hand over as data.frame, not as "named vector" or so, a la vegan or FD
+* add Jochen's preference-abundance (makeweb, sampleweb) to handcraft matrices of different preference and abundance heterogeneity
+(* describe this as a new point in the bipartite overview on the main help page)
 
 EDITORIAL
 ...
 
 LARGE CHANGES
-* update the entire set of available nestedness measures, and think of strategies to "test" them (what do we use them for, how do they respond to null models; using specific clear made-up cases or simulations)
+* Start using vignette as report-style QnA!
+* update the entire set of available nestedness measures (e.g. add Song, see below), and think of strategies to "test" them (what do we use them for, how do they respond to null models; using specific clear made-up cases or simulations)
+* vignette: expand on null models and what function they serve and why they probably do not do what the user thinks (see Agroecology chapter). 
 * invent/compute "rewirability" across networks; use variability in interaction portfolio across several networks as an index of how flexibly a species can "rewire". We can also call flexible species "shifty" ;-)
+
+* indextestbed for nestedness, specialisation, modularity, betweenness, ...: pre-specify desired properties, make manual matrices for those, test the different measures on it
+
 * PLOTWEB: plotweb/visweb revision!
 	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
 	** plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
@@ -44,6 +60,7 @@ SMALL CHANGES
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
 * frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
+* frame2webs: option to condense all, i.e. without a group
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
