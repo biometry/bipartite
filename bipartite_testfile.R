@@ -8,8 +8,8 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.20.tar.gz --as-cran
-R CMD install bipartite_2.20.tar.gz
+R CMD check bipartite_2.21.tar.gz --as-cran
+R CMD install bipartite_2.21.tar.gz
 # now check in the testfile below anything that changed whether it actually works!
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
 

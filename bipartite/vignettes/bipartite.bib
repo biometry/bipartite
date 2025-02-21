@@ -1,8 +1,5 @@
 % Encoding: UTF-8
 
-
-
-
 @article{Farage2021,
 	abstract = {Analysing how species interact in modules is a fundamental problem in network ecology. Theory shows that a modular network structure can reveal underlying dynamic ecological and evolutionary processes, influence dynamics that operate on the network and affect the stability of the ecological system. Although many ecological networks describe flows, such as biomass flows in food webs or disease transmission, most modularity analyses have ignored network flows, which can hinder our understanding of the interplay between structure and dynamics. Here we present Infomap, an established method based on network flows to the field of ecological networks. Infomap is a flexible tool that can identify modules in virtually any type of ecological network and is particularly useful for directed, weighted and multilayer networks. We illustrate how Infomap works on all these network types. We also provide a fully documented repository with additional ecological examples. Finally, to help researchers to analyse their networks with Infomap, we introduce the open-source R package infomapecology. Analysing flow-based modularity is useful across ecology and transcends to other biological and non-biological disciplines. A dynamic approach for detecting modular structure has strong potential to provide new insights into the organisation of ecological networks.},
 	author = {Farage, Carmel and Edler, Daniel and Ekl{\"o}f, Anna and Rosvall, Martin and Pilosof, Shai},
@@ -2495,6 +2492,54 @@
   number  = {1},
   pages   = {292–309},
   volume  = {13},
+}
+
+ 
+@Article{Simmons2019,
+  author       = {Simmons, Benno I. and Sweering, Michelle J. M. and Schillinger, Maybritt and Dicks, Lynn V. and Sutherland, William J. and Di Clemente, Riccardo},
+  journal      = {Methods in Ecology and Evolution},
+  title        = {bmotif: A package for motif analyses of bipartite networks},
+  year         = {2019},
+  issn         = {2041-210X},
+  month        = jan,
+  number       = {0},
+  volume       = {0},
+  abstractnote = {Abstract Bipartite networks are widely used to represent a diverse range of species interactions, such as pollination, herbivory, parasitism and seed dispersal. The structure of these networks is usually characterised by calculating one or more indices that capture different aspects of network architecture. While these indices capture useful properties of networks, they are relatively insensitive to changes in network structure. Consequently, variation in ecologically-important interactions can be missed. Network motifs are a way to characterise network structure that is substantially more sensitive to changes in pairwise interactions and is gaining in popularity. However, there is no software available in R, the most popular programming language among ecologists, for conducting motif analyses in bipartite networks. Similarly, no mathematical formalisation of bipartite motifs has been developed. Here we introduce bmotif: a package for motif analyses of bipartite networks. Our code is primarily an r package, but we also provide matlab and Python code of the core functionality. The software is based on a mathematical framework where, for the first time, we derive formal expressions for motif frequencies and the frequencies with which species occur in different positions within motifs. This framework means that analyses with bmotif are fast, making motif methods compatible with the permutational approaches often used in network studies, such as null model analyses. We describe the package and demonstrate how it can be used to conduct ecological analyses, using two examples of plant?pollinator networks. We first use motifs to examine the assembly and disassembly of an Arctic plant?pollinator community and then use them to compare the roles of native and introduced plant species in an unrestored site in Mauritius. bmotif will enable motif analyses of a wide range of bipartite ecological networks, allowing future research to characterise these complex networks without discarding important meso-scale structural detail.},
+  creationdate = {2025-02-21T09:57:05},
+  doi          = {10.1111/2041-210X.13149},
+  url          = {https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13149},
+}
+
+ 
+@Article{JacomeFlores2020,
+  author       = {Jácome‐Flores, Miguel E. and Jordano, Pedro and Delibes, Miguel and Fedriani, Jose M.},
+  journal      = {Oikos},
+  title        = {Interaction motifs variability in a {M}editerranean palm under environmental disturbances: the mutualism–antagonism continuum},
+  year         = {2020},
+  issn         = {1600-0706},
+  number       = {3},
+  pages        = {367–379},
+  volume       = {129},
+  abstractnote = {The nature and the strength of plant–frugivore interactions often vary along an antagonism–mutualism continuum and are highly influenced by the local ecological context (e.g. level of environmental disturbances). However, little is known concerning how the local ecological setting where plant–frugivore interactions take place affects the seed dispersal effectiveness (SDE) and, eventually, plant recruitment. This knowledge gap relates to the scarcity of empirical investigations on individual-based plant–frugivore networks. We assessed whether the assembly of interaction modes (antagonist and mutualist) of the dwarf palm Chamaerops humilis (Arecaeae) affect the individual and the population level SDE in two Mediterranean sites differing in perturbation levels. We analysed the frequency distribution of interaction typologies and test its relationship with variation among individual palms in SDE. Additionally, we document how variation in interaction motif frequency (e.g. overrepresented interaction typologies) relates to changes in the SDE landscape of both disturbed study sites. We found that the interaction typologies of individual palms and its frugivores did not occur randomly. In a more complex landscape, interactions were more diverse and less dominated by simpler typologies, which may increase the stability of the plant–disperser interaction over the long term. We demonstrate that plants that interact with a more complex assemblage of frugivores, including both mutualistic and antagonistic partners, had the highest probability of recruitment. We found that the highly variable SDE among individual palms resulted from a few interaction modes occurring at higher than expected frequencies. We suggest this may be a reasonably frequent situation in diversified frugivore assemblages with a high heterogeneity of functional effects among mutualistic and antagonistic partners.},
+  creationdate = {2025-02-21T09:59:23},
+  doi          = {10.1111/oik.06688},
+  language     = {en},
+  rights       = {© 2019 Nordic Society Oikos. Published by John Wiley & Sons Ltd},
+}
+
+ 
+@Article{Monteiro2016,
+  author       = {Monteiro, Angelo B. and Faria, Lucas Del Bianco},
+  journal      = {Journal of Theoretical Biology},
+  title        = {The interplay between population stability and food-web topology predicts the occurrence of motifs in complex food-webs},
+  year         = {2016},
+  issn         = {0022-5193},
+  month        = nov,
+  pages        = {165–171},
+  volume       = {409},
+  abstractnote = {In this paper, we analyzed the occurrence of motifs (modules) in empirical food-webs from different ecosystem types. Differently from previous studies, our analysis did not relied on randomized networks with specific a priori assumptions, which has been demonstrated to produce inconsistent patterns. We aimed to evaluate the interplay between population dynamics and food-web topology, and its consequences to module occurrences in complex food-webs. We evaluated 13 arrangements of three-species modules and 199 arrangements of four-species modules. For each module, we assembled, a corresponding Jacobian predation matrix, and evaluated the arrangements expected to persist after a disturbance in the equilibrium of the populations dynamics (local stability). Our general results were that (1) a limited set of stable arrangements occurs most frequently; (2) the omnivory module is the only three-species module expected to occur both in the stable and unstable region; (3) connectance and omnivory affects the proportion of stable modules; and (4) the type of ecosystem influence the proportion of stable modules. Further, we demonstrated that food-web topology and population dynamics influenced module occurrences in natural communities; presented a function for the ways that local stability increases the probability of module occurrence; and highlighted the use of omnivory degree to access the effect of feeding at more than one trophic level on food-web stability.},
+  creationdate = {2025-02-21T10:01:58},
+  doi          = {10.1016/j.jtbi.2016.09.006},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

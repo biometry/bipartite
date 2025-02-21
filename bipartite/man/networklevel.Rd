@@ -26,6 +26,7 @@ Usually this will be number of pollinators on each species of plants or number o
       \item \option{number of compartments}, 
       \item \option{compartment diversity}, 
       \item \option{cluster coefficient}, which will compute both the network-wide cluster coefficient as well as those for each level,
+      \item \option{modularity Q},
       \item \option{nestedness} (where ties may induce variation when changing the sequence of species in \option{web}), 
       \item \option{NODF},
       \item \option{weighted nestedness} (where ties may induce variation when changing the sequence of species in \option{web}), 

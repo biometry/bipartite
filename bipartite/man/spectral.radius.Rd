@@ -44,7 +44,7 @@
 
 \examples{
   data(bezerra2009, package="bipartite")
-  spectral.radius.bezerra2009 <- massaction(bezerra2009, mass.action.norm = TRUE)
+  spectral.radius(bezerra2009, mass.action.norm = TRUE)
 }
 
 \keyword{ package }

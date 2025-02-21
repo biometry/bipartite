@@ -24,7 +24,7 @@ plotweb(web,
 
 \arguments{
   \item{web}{ Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{method}{ Default method is \option{cca}, which leads to as few crossings of interactions as possible. The other option is \option{normal}, which leaves order as given by the matrix.}
+  \item{method}{ Default method is \option{cca}, which reduced the number of crossings of interactions by ordination. The other option is \option{normal}, which leaves order as given by the matrix.}
   \item{empty}{logical; should empty columns or empty rows be omitted from plotting; defaults to true}
   \item{labsize}{ factor for size of labels, default is 1 }
   \item{ybig}{ vertical distance between upper and lower boxes, default is 1}

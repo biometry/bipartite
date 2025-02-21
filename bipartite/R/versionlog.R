@@ -1,1 +1,1 @@
-versionlog <- function(){help("zversionlog")}
+versionlog <- function(){help("versionlog")}
