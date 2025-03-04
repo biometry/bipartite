@@ -53,20 +53,21 @@ plotweb <- function(web,
 \arguments{
   \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
              Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, NULL if none exist. See Notes!}
-  \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, NULL if none exist. See Notes!}
-  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, NULL if none exist. See Notes!}
-  \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, NULL if none exist. See Notes!}
-  \item{scaling}{Choice of either "relative" or "absoulte". For more information see Scaling.}
-  \item{font}{See \link[graphics]{par}}
-  \item{family}{See \link[graphics]{par}}
+  \item{sorting}{Sorting option passed to the sortweb function. The default \code{"normal"} doesn't reorder the web.}
+  \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!}
+  \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!}
+  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!}
+  \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!}
+  \item{scaling}{Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.}
+  \item{font}{See \code{\link[graphics]{par}}.}
+  \item{family}{See \code{\link[graphics]{par}}.}
   \item{srt}{Orientation of the labels in degrees. (Default: 0)}
   \item{text_size}{Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: 1)}
   \item{box_size}{Size of the boxes. Numerical with either c(higher_box_size, lower_box_size) or one value if both should be the same. (Default: 0.1)}
-  \item{higher_italic}{If set to TRUE, the labels of the higher species are plotted in italics. (Default: FALSE)}
-  \item{lower_italic}{If set to TRUE, the labels of the lower species are plotted in italics. (Default: FALSE)}
-  \item{x_lim}{Vector with 2 numerical values. The range in which to plot on the x-axis. (Default: c(0, 1))}
-  \item{y_lim}{Vector with 2 numerical values. The range in which to plot on the y-axis. (Default: c(0, 1))}
+  \item{higher_italic}{If set to TRUE, the labels of the higher species are plotted in italics. (Default: \code{FALSE})}
+  \item{lower_italic}{If set to TRUE, the labels of the lower species are plotted in italics. (Default: \code{FALSE})}
+  \item{x_lim}{Vector with 2 numerical values. The range in which to plot on the x-axis. (Default: \code{c(0, 1)})}
+  \item{y_lim}{Vector with 2 numerical values. The range in which to plot on the y-axis. (Default: \code{c(0, 1)})}
   \item{lab_distance}{Distance between the boxes and the labels in \strong{inches}}
   \item{higher_color}{A single color or a list of colors used to plot the higher species (columns) boxes. (Default: "black")}
   \item{higher_border}{Either "same" or a single color or a list of colors used to plot the higher species (columns) boxes borders.
@@ -87,13 +88,13 @@ plotweb <- function(web,
   \item{curved_links}{If FALSE links are plotted as straight lines otherwise they are curved. (Default: FALSE)}
   \item{arrow}{Display type of connection between higher and lower boxes, options are 
     \itemize{
-      \item "no" (Default)
-      \item "up"
-      \item "down"
-      \item "both"
-      \item "up.center"
-      \item "down.center"
-      \item "both.center"
+      \item \code{"no"} (Default)
+      \item \code{"up"}
+      \item \code{"down"}
+      \item \code{"both"}
+      \item \code{"up.center"}
+      \item \code{"down.center"}
+      \item \code{"both.center"}
     }
   }
   \item{spacing}{Either "auto", a single value or a numerical vector of the form c(lower, higher). Defines the total space between boxes. See Notes!  (Default: "auto")}
