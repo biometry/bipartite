@@ -13,18 +13,18 @@ sortweb2 <- function(web, sort.order="dec", empty=TRUE, sequence=NULL){
   rownames(web) <- rownames(web, do.NULL = FALSE)
   
   # choose sort.order (method in plotwebr)
-  methods <- c("normal", "cca", "sequence", "decreasing", "increasing")
+  methods <- c("normal", "ca", "sequence", "decreasing", "increasing")
   method.matched <- methods[pmatch(sort.order, methods)]
   if (is.na(method.matched)) stop("Choose one of the available sorting-methods (sort.order in sortweb)!\n")
 
-  if (method.matched=="cca"){
-    # all cases where cca wouldn't work now combined in one place
+  if (method.matched=="ca"){
+    # all cases where ca wouldn't work now combined in one place
     if (NROW(web) == 1 | NCOL(web) ==1 | length(unique(as.vector(web))) == 1) {
       method.matched <- "normal"
     }
     if (any(rowSums(web)==0, colSums(web)==0)) {
       method.matched <- "normal"
-      warning("cannot use cca with 0-rows/cols, using sort.order='normal' instead")
+      warning("cannot use ca with 0-rows/cols, using sort.order='normal' instead")
     }
   }
   
@@ -32,11 +32,11 @@ sortweb2 <- function(web, sort.order="dec", empty=TRUE, sequence=NULL){
   row.seq <- 1:nrow(web)
   col.seq <- 1:ncol(web)
 
-  # option "cca" = the web is re-arranged by ordination (& separating compartments)
-  if (method.matched=="cca"){
-    # Problem: cca sometimes doesn't get the compartments right!
+  # option "ca" = the web is re-arranged by ordination (& separating compartments)
+  if (method.matched=="ca"){
+    # Problem: ca sometimes doesn't get the compartments right!
     # Solution: Function "compart" returns a matrix with links assigned to compartments
-    # So, we need to extract the compartments there and put them in sequence, sort by cca within
+    # So, we need to extract the compartments there and put them in sequence, sort by ca within
     co <- compart(web)
     # do the arrangement for each compartment separately
     row.seq <- NULL
@@ -49,12 +49,12 @@ sortweb2 <- function(web, sort.order="dec", empty=TRUE, sequence=NULL){
         row.seq <- c(row.seq, rs)
         col.seq <- c(col.seq, cs)
       } else { # works fine for webs with only one compartment
-        ca <- cca(web[rs, cs])
+        ca <- ca(web[rs, cs])
         row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
         col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
       }
     }
-  } # end of cca method
+  } # end of ca method
 
   if (method.matched=="increasing"){
     web <- web[order(rowSums(web),decreasing=FALSE), order(colSums(web),decreasing=FALSE)]
