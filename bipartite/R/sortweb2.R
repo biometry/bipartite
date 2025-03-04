@@ -32,9 +32,9 @@ sortweb2 <- function(web, sort.order="dec", empty=TRUE, sequence=NULL){
   row.seq <- 1:nrow(web)
   col.seq <- 1:ncol(web)
 
-  # option "ca" = the web is re-arranged by ordination (& separating compartments)
+  # option "cca" = the web is re-arranged by ordination (& separating compartments)
   if (method.matched=="ca"){
-    # Problem: ca sometimes doesn't get the compartments right!
+    # Problem: cca sometimes doesn't get the compartments right!
     # Solution: Function "compart" returns a matrix with links assigned to compartments
     # So, we need to extract the compartments there and put them in sequence, sort by ca within
     co <- compart(web)
