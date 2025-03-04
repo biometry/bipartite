@@ -73,13 +73,13 @@ Felix, G. M., R. B. P. Pinheiro, R. Poulin, B. R. Krasnov, and M. A. R. Mello. 2
 
 Flores, C. O., S. Valverde, and J. S. Weitz. 2013. Multi-scale structure and geographic drivers of cross-infection within marine bacteria and phages. \emph{ISME J.} \bold{7}: 520-–532. \doi{10.1038/ismej.2012.135}.
 
-Lewinsohn, T. M., P. Inácio Prado, P. Jordano, J. Bascompte, and J. M. Olesen. 2006. Structure in plant-animal interaction assemblages. \emph{Oikos} \bold{113}: 174–-184. %\doi{10.1111/j.0030-1299.2006.14583.x}
+Lewinsohn, T. M., P. Inácio Prado, P. Jordano, J. Bascompte, and J. M. Olesen. 2006. Structure in plant-animal interaction assemblages. \emph{Oikos} \bold{113}: 174–-184. \doi{10.1111/j.0030-1299.2006.14583.x}
 
 Mello, M. A. R., G. M. Felix, R. B. P. Pinheiro, R. L. Muylaert, C. Geiselman, S. E. Santana, M. Tschapka, N. Lotfi, F. A. Rodrigues, and R. D. Stevens. 2019. Insights into the assembly rules of a continent-wide multilayer network. \emph{Nat. Ecol. Evol.} \bold{3}: 1525--1532. \doi{10.1038/s41559-019-1002-3}
 
-Pinheiro, R. B. P., G. M. F. Félix, A. V Chaves, G. A. Lacorte, F. R. Santos, É. M. Braga, and M. A. R. Mello. 2016. Trade-offs and resource breadth processes as drivers of performance and specificity in a host–parasite system: a new integrative hypothesis. \emph{Int. J. Parasitol.} \bold{46}: 115-–121. \url{https://www.sciencedirect.com/science/article/pii/S0020751915002933}
+Pinheiro, R. B. P., G. M. F. Félix, A. V Chaves, G. A. Lacorte, F. R. Santos, É. M. Braga, and M. A. R. Mello. 2016. Trade-offs and resource breadth processes as drivers of performance and specificity in a host–parasite system: a new integrative hypothesis. \emph{Int. J. Parasitol.} \bold{46}: 115-–121. \doi{10.1016/j.ijpara.2015.10.002}
 
-Pinheiro, R. B. P., G. M. F. Felix, C. F. Dormann, and M. A. R. Mello. 2019. A new model explaining the origin of different topologies in interaction networks. \emph{Ecology} \bold{100}: e02796. %\doi{10.1002/ecy.2796}
+Pinheiro, R. B. P., G. M. F. Felix, C. F. Dormann, and M. A. R. Mello. 2019. A new model explaining the origin of different topologies in interaction networks. \emph{Ecology} \bold{100}: e02796. \doi{10.1002/ecy.2796}
 
 }
 

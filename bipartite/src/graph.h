@@ -398,13 +398,13 @@ double graph::getMarginTotal(int i) {
 
 void graph::printPairs() {
 	edge* curr;
-	int edgeCount = 0;
+	// int edgeCount = 0;
 	for (int i=0; i<n; i++) {
 		//cout << "[" << i << "]\t";
 		curr = vertexLink[i];
 		while (curr != NULL) {
 			//cout << curr->x << "\t";
-			edgeCount++;
+			// edgeCount++;
 			curr = curr->next;
 		}
 		//cout << "\n";

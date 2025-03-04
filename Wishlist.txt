@@ -1,38 +1,67 @@
-IMPORTANT
-<>
-* add to networklevel.Rd that modularity Q is now available!
+SORTED BY PRIORITY
 
-EDITORIAL
-...
 
-LARGE CHANGES
-* update the entire set of available nestedness measures, and think of strategies to "test" them (what do we use them for, how do they respond to null models; using specific clear made-up cases or simulations)
+
+CHRONIC TASK
+* keep updating list of related R packages and their main functionalities in vignette (e.g. emln, Strona's NOS index)
+
+
+VIGNETTE: 
+* new section: what to do with multiple webs, which functionality is available (in bipartite and beyond)
+* extend the "visualisation" section, and refer to a new visualisation tutorial
+* revise sections 2 and 8 (other packages): short list early in vignette (2), details and comments at end of vignette (currently section 8)
+* add section indextestbed (we decided not to implement testbed functions into bipartite (at the moment), so just develop some text in the vignette, either based on published examples (e.g. Fründ2015 or Pinheiro bioRxiv) or create a small specific example (e.g. with focus nestedness) with some code included in the vignette document)
+  * think of using Jochen's preference-abundance (makeweb, sampleweb) to handcraft matrices of different preference and abundance heterogeneity
+  * "Does your index do what you think it does?" in Vignette 
+	* pre-specify desired properties, make manual matrices for those, test the different measures on it
+	* Generate extreme matrices and show the calculated indices for them
+	* Insert Code needed 
+	* Which index? Should ideally be the most simple to demonstrate
+		* Specialization
+		* Nestedness
+		* Modularity
+* expand on null models and what function they serve and why they probably do not do what the user thinks (see Agroecology chapter).
+* explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
+
+
+
+CLASS "web":
+* ISSUE github: new S3 class "web" (then: "weblist", "webarray"):
+  * single web: matrix plus attributes (higher, lower); plus web attribute
+  * web.list: list of single webs with attributes, plus web attributes
+  * web.array: 
+  * also provide back and forth conversion to emln-style webs
+
+
+
+PAPER IDEAS:
 * invent/compute "rewirability" across networks; use variability in interaction portfolio across several networks as an index of how flexibly a species can "rewire". We can also call flexible species "shifty" ;-)
-* PLOTWEB: plotweb/visweb revision!
-	** explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
-	** plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
-	** Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
-	** revise plotweb (incl. device settings, vertical option, margin control; easy and explained coloring per sp etc)
-	** allow for multiple networks next to each other (i.e. mfrow=c(1,2)) ) 
-	** customised alignment of webs (see Benjamin, 3rd chapter)
-
-* recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
-* for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!, possibly with interactive warning for large networks
-
 * how small can a network be before it is a problem? --> funnel plot of network index against sample size: when does it start exhibiting a bias (for observed and null model values; put this with an example into the vignette)
 
-* NULLMODEL-LIKE:
-* r2dexternal/vaznullexternal: extend changes for too many 0s for rows also to columns and to vaznullexternal
-* check that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
+
+PLOTWEB:
+* plotweb: add a new option “names”, which is a list of two vectors with names of species. The nice thing is that we then can pass on expression()s, so that we can have italics and partial italics (e.g. Episyrphus spec., where Episyrphus is italicised, but spec. is not).
+* revise plotweb (incl. device settings, vertical option, margin control; easy and explained coloring per sp etc)
+* allow for multiple networks next to each other (i.e. mfrow=c(1,2)) ) 
+* customised alignment of webs (see Benjamin, 3rd chapter): allow for large white space for species not interacting in both networks
+
+
+NULLMODEL:
 * use dirmult (in the same package) to fit Dirichlet-distribution to network data; use these to draw from random distributions in null models?
 * Guillaume & Latapy: implement random bipartite graph algorithm!
+* are massaction, dirmult and random graphs alternatives to r2dtable??
 * new method for nullmodel: visitsim (fixed frequency only for .higher level, probabilities for .lower from their marginal totals or other)
-* add makeweb function(s) from Fründ et al 2016 Oikos
 * nullmodel (r2dtable-like) for non-integer matrices (see email by Carmelo Gomez Martinez 30.4.2019) --> "reconsider your question" reply into help file
+* r2dexternal/vaznullexternal: extend changes for too many 0s for rows also to columns and to vaznullexternal
+* integrate r2dexternal/vaznullexternal into .web structure
+* check (how?) that values are large enough for r2dtable (small values will be rounded down to 0, making the whole null model approach wrong!)
 * mgen: preserve species names! also make check for probability matrix robust to floating point errors (if I divide by the sum before, the warning can still appear!)
+* add simulation function: makeweb/sampleweb function(s) from Fründ et al 2016 Oikos
 
+
+OTHER:
+* recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
 * turn testfile into proper testthat routine
-
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
 
 
@@ -43,7 +72,7 @@ SMALL CHANGES
 
 (improve existing functionality)
 * frame2webs: option empty.list doesn't work if only one row or column (problem with dropping dimensions; BUT this cannot be fixed by simply adding drop=F in weblist[[i]] <- webarray[,,i]) --> find a solution
-* frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis)
+* frame2webs: option to condense all, i.e. without a group
 * revise dfun (& specieslevel) help, e.g. regarding abuns
 * specieslevel/dfun: improve name-handling of abuns (e.g. re-sort if named, etc.); make consistent with species-name-handling in plotweb
 * add UNWEIGHTED vulnerability/generality/linkagedensity/weighted connectance to networklevel (see Email by Mark Murphy, 17-Oct-2018)
@@ -60,25 +89,23 @@ SMALL CHANGES
 * search for JFedit; then cleanup comments in species/group/networklevel .R / .Rd
 * functions accepting external abundances (esp. plotweb); check what happens with unnamed abun-vectors and maybe give warnings
 * include NODFc by Song et al. (2017): Song, C., Rohr, R. P., & Saavedra, S. (2017). Why are some plant-pollinator networks more nested than others ? Journal of Animal Ecology, 86(July), 1417–1424. https://doi.org/10.1111/1365-2656.12749
-
-
-* enable networklevel / grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel; also offer specieslevel for grouplevel indices that not yet exist
-
+* enable networklevel/grouplevel to call specieslevel for all metrics therein (and thus have only one version of their calculation); and give warnings for those not useful above specieslevel; also offer specieslevel for grouplevel indices that not yet exist
+* effective partners = generality = vulnerability: make consistent over network/specieslevel
 
 (add new stuff)
+* alphaPDI (Montoya Bustamente et al.)
 * add network diffusion (Allen-Perkins 2024 Oikos)
 * add DGCD (Brimacombe et al. 2023 PLoS Biology): Directed graphlet correlation distance, as measure of network distance
 * add IMC of Rohr et al. (2016): matching centrality
 * add multilayer centrality "Gnorm" to function "npartite" (Lofti et al. 2023, MEE)
 * add "assortativity" of Newman 2002 as cited in Ona & Kost 2022
 * add HS (Coux et al. 2016) to specieslevel() [basically just interaction evenness per sp]
-* add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.)
 * Alarcon et al. 2008: nestedness temperatur per species; eigenvector centrality (similar to dependence asymmetry); "components": hierarchical sorting of links (based on a commercial software)
 * Dolédec 2000: OMI implementation
 * add/implement the hub-species-detection procedure of Gonzales et al. (Ecol Complex)
 * put Strona's NOS-index into bipartite (there is an R-package)
 * Eigenvector, Katz, PageRank as well as a few similarity measures such as cosine, Pearson and Euclidean for weighted bipartite networks in the package
-* make "small world" a directly accessible index
+* make "small worldness" a directly accessible index
 * check Poisot's python and matlab packages
 * if everybody's index is added, why don't we add functional coverage as defined in our Ecology beediv-paper?
 
@@ -86,15 +113,17 @@ SMALL CHANGES
 NICE TO HAVE
 * replace degree.dist-function by functionality in igraph (IF THAT IT BETTER!): https://r.igraph.org/news/index.html#breaking-changes-2-0-0
 * check the C4b of Gilarranz: is it the same as Opsahl's?
-* add setting seeds to C-code of "computeModules", which is passed down from R: make the algorithm perfectly reproducible
 * make Rcpp-version of computeModule's LPA (why? it is already very fast!)
-* add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!) @Carsten: we should talk about the network data availability / database topic
+* add more networks from NCEAS and ask Jochen for other published networks; include all quantitative host-parasitoid webs (in different list as pollinators!); OR/AND: provide function to access European pollinator data base (EuPPollNet: Lanuza et al. 2025 GEB);
 * future outlook: rethink patefield (and modularity and H2') regarding non-integer weights as well as non-independent (overdispersed) counts
 
 
 
 LARGELY IRRELEVANT
 large
+* add setting seeds to C-code of "computeModules", which is passed down from R: make the algorithm perfectly reproducible
+* for each network index, run timing on increasing large networks (up to millions of cells): which indices are available for REALLY large networks? -> add that as index choice!, possibly with interactive warning for large networks
+* Borgatti & Everett 1997: visualise graph as bipartite graph but take positions from CA
 * sparseMatrix for Beckett algorithm?? (see email from Pierre Danelle (28 Aug 2017)
 * parallelise computeModuleMeta
 * quantitative modularity (Marco Araujo et al. 2008 Ecology: Dieta1): currently only a windows-exe is available!
@@ -126,6 +155,10 @@ BIN (rejected feature)
 
 
 FIXED/ADDED/DONE:
+* add spectral radius of network adjacency (Staniczenko et al. 2013 Nature comm.): Tobias 20.2.2025
+* frame2webs: maybe add the alternative for long lists from large datasets (as written for TrapnestSynthesis): Tobias 20.2.2025
+* add to networklevel.Rd that modularity Q is now available!
+* added spectral radius as nestedness measure, also in networklevel (Tobias 20.02.2025)
 * add node overlap/segretation (Strona & Veech 2015 MEE)
 * added Beckett's modularity algorithm (as default in computeModules)
 * add a null model construction function from abundance data! --> r2dexternal

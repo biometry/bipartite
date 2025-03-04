@@ -38,7 +38,7 @@ betalinkr_multi(webarray, ...)
     Should data be standardized to proportions before calculating quantitative dissimilarity metrics? Note that this is done here directly before calculating dissimilarities, thus gives a different result than if input data were already standardized. Will be set to TRUE by default if \option{binary=FALSE} and to FALSE otherwise.
   }
   \item{function.dist}{
-    Which function to use for calculating dissimilarity? The name of \bold{vegan} package function, either \option{vegdist} (quantitative indices available) or \option{betadiver} (gives compatibility to the 24 numbered indices of Koleff et al. (2003) as used by \bold{betalink} package, but only binary indices). Note that this argument is ignored if \code{partitioning="commondenom"}, which implements the dissimilarity index calculation directly.
+    Which function to use for calculating dissimilarity? The name of \bold{vegan} package function, either \option{vegdist} (quantitative indices available) or \option{betadiver} (gives compatibility to the 24 numbered indices of Koleff et al. (2003) as used by \pkg{betalink} package, but only binary indices). Note that this argument is ignored if \code{partitioning="commondenom"}, which implements the dissimilarity index calculation directly.
   }
   \item{distofempty}{
     Can be \option{zero} or \option{na}. How should dissimilarity be defined when there are either no links to use for OS (i.e. only links involving species just found in one of the 2 webs) or no links to use for ST (i.e. only ``rewiring links'' present)? \option{zero} is appropriate when interested in the contribution of components OS and ST, whereas \option{na} is appropriate when b_os should be interpreted separately as dissimilarity of shared species subwebs
@@ -111,7 +111,7 @@ Noreika, N., Bartomeus, I., Winsa, M., Bommarco, R., and  E. Öckinger. 2019. Po
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-  \code{\link{vegdist}} and \code{\link{betadiver}} for vegan package functions calculating dissimilarity / betadiversity, used here unless \option{partitioning="commondenom"}.
+  \code{\link[vegan]{vegdist}} and \code{\link[vegan]{betadiver}} for vegan package functions calculating dissimilarity / betadiversity, used here unless \option{partitioning="commondenom"}.
   
   For reshaping web data to the array input format expected here, see \code{\link{webs2array}} and \code{\link{frame2webs}}.
 }

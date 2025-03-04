@@ -2,9 +2,12 @@
 %\VignetteEncoding{UTF-8}
 
 \documentclass[a4paper, 11pt]{article}
-\usepackage[sc]{mathpazo}
-%\usepackage{authblk} % authors & affiliations
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ttscale=.7]{libertine} % hack to scale typewriter, despite not using Libertine ...
+\usepackage[sc]{mathpazo}
+
+%\usepackage{authblk} % authors & affiliations
 \usepackage{amsmath} % e.g. for \text{} in math
 \usepackage{geometry}
   \geometry{verbose,tmargin=1.45cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
@@ -81,11 +84,12 @@ opts_chunk$set(fig.path='figures/twocolumn-', fig.align='center', fig.show='hold
 
 
 \begin{abstract}
-\noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions.
+\noindent This vignette introduces the bipartite package to newbees. It describes it intention and, in seperate sections, the use of the most important functions. It also critically comments on some approaches and presents functions from related packages. 
 \end{abstract}
 
 \tableofcontents
 
+\clearpage
 
 \section{Introduction}
 \subsection{Introduction for ecologists}
@@ -119,9 +123,9 @@ Of course, we don't mind if this documented would be cited, e.g. as \citet{bipar
 \section{What other network packages are out there in the \proglang{R}-universe?}
 Before going through what \package{bipartite} offers, we shall briefly list what other packages in this direction can do for you:\footnote{ This is like a mini-CRAN-task view.}
 
-There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages (on CRAN) we are aware of for handling bipartite networks (in alphabetical order):
+There are several open-source packages devoted to the analysis of networks and food webs, but only few addressing bipartite networks explicitly. Of these, \package{bipartite} provides the most extensive set of features, both for plotting, computing indices, and for null models. For the sake of completeness, here are some other \proglang{R} packages (on CRAN) we are aware of for handling bipartite networks (in alphabetical order). Some of these are exemplified in section~\ref{sec:beyondbipartite}.
 \begin{description}
-\item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
+%\item[\package{AnnotationDbi}] for handling bimaps and annotation maps;
 \item[\package{biGraph}] discontinued and archived;
 \item[\package{bipartiteD3}] interactive visualisation of bipartite networks;\footnote{And no, this is not a typo, it is ``D3'', which apparently is a JavaScript library for ``data-driven documentation''}
 \item[\package{bmotif}] for counting ``motifs'' in bipartite networks;
@@ -131,7 +135,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
 % \item[\package{latentnet}] ; % has nothing to do with our kind of networks;
-\item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
+\item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context;%, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
 \item[\package{tnet},] which aims at re-thinking one-mode indices in a mathematically consistent way for bipartite networks; some functions of \package{tnet} were lifted to \package{bipartite} (thanks to Tore for allowing that!);
@@ -147,14 +151,83 @@ Additionally, there may well be dozens of packages on github or r-forge, which r
 \end{description}
 
 \section{Preparing data for analysis}%------------------------------------------------
-Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. Occasionally a third column records the number of interactions for this pair, or a weight. Also, several networks may be included into this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a little convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}
+Most functions in \package{bipartite} require the same type of input structure: an \ind{adjacency matrix} of what-interacts-with-what, for short called ``web''. 
 
-Most other packages (\proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be a so-called edge list, simply listing in two columns (plus an optional weights column) what interacts with what (see below). The function \indR{as.one.mode} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
+Researchers may have organised their data in different ways, primarily as \emph{wide} or \emph{long} format. 
 
-Now, before any further talk, let's start by loading the package:
+\subsection{From \emph{wide} format in a spreadsheet to ready-for-analysis for \package{bipartite}}
+The wide format is how \package{bipartite} wants the data to be: lower level species as rows, higher level species as columns, with the names of each as the first row and column, respectively:
+
+\noindent \includegraphics[width=\textwidth]{figures/ScreenshotSmall1976LibreOffice.png}
+
+This screenshot is from LibreOffice Calc, and writes names with a ``.'' as separator between genus and epithet. That is a matter of taste (and actually, I do not like it). 
+
+After saving as .csv, we read this file in as:
+<<>>=
+small1976 <- read.csv("small1976.csv", row.names=1)
+@
+The \texttt{row.names}-argument ensures that the names in the first column are used as (row) labels in the data set. Note that this object is a data.frame, not a matrix, even though it contains only numbers. \package{bipartite} internally converts it into a matrix if that is the required format for a function.
+
+If we want to have nicer name layouts, with an empty space instead of the ugly point, we can change it like this:
+<<>>=
+rownames(small1976) <- gsub(".", " ", rownames(small1976), fixed=T)
+colnames(small1976) <- gsub(".", " ", colnames(small1976), fixed=T)
+small1976[1:5, 1:2] # to save space
+@
+
+This object is now in the correct format for further analysis and plotting with \package{bipartite}.
+
+
+
+\subsection{From \emph{long} format in a spreadsheet to ready-for-analysis for \package{bipartite}}
+
+Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. A third column records the number of interactions for this pair, i.e. an ``edge weight'':
+
+%write.csv(web2edges(small1976), file="small1976long.csv")
+<<echo=F, eval=F>>=
+small.long <- c(1,2,3)
+for (i in 1:nrow(small1976)){
+  for (j in 1:ncol(small1976)){
+    small.long <- rbind(small.long, c(rownames(small1976)[i], colnames(small1976)[j], small1976[i, j]))
+  }
+}
+write.csv(small.long[-1,], file="small1976long.csv", quote=F)
+@
+
+{
+\centering 
+
+\includegraphics[width=0.5\textwidth]{figures/ScreenshotSmall1976Long.png}
+
+}
+
+
+Also, several networks may be included in this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}
+
 <<message=F>>=
 library(bipartite)
+small.long <- read.csv("small1976long.csv")
+small.wide <- frame2webs(small.long, varnames=c("Plant", "Pollinator", "site", "edge.weight"))
+str(small.wide)
+small.wide[[1]][, 1:2] # to save space
 @
+
+As we see, this returns a list of networks, even if only site was provided. We can access this element using double brackets ``\texttt{[[1]]}''.
+We now are back to our wide format, as required for most \package{bipartite} analyses.
+
+
+\subsection{From web to edge list}
+
+Many other packages (in \proglang{R} or otherwise) are based on one-mode representations of networks. The typical input file would be the edge list of the previous section. The function \indR{web2edges} transforms bipartite ``webs'' into edge lists to be used e.g.~in Pajek or by \package{sna} or \package{tnet}. %Notice that there are different projections from bipartite (two-mode) to one-mode (as detailed in the help to \indR{as.one.mode}).\footnote{The function \indR{sortweb} allows a sorting of the matrix by marginal totals or by a user defined sequence. This may indeed be a handy function when customising the plotting later on. The example networks in \package{bipartite} are typically sorted in decreasing order.}
+
+<<>>=
+head(web2edges(small1976)) # to save space
+@
+Note that this format is different to the edge list used as input above. That is because often not the names but the positions are used as reference. That is, the numbers refers to the position in a vector \{lower level species, higher level species\}. In this specific case, the first pollinator species is number 14, as there are 13 plant species. Note that the row names only list the plant species: it is \emph{this} plant that is visited by pollinator 14. To get the full list of names, we can simply append row and column names:
+<<>>=
+head(c(rownames(small1976), colnames(small1976)), 16)
+@
+
 
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
@@ -221,10 +294,10 @@ plotModuleWeb(mod)
 To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
 <<eval=F>>=
 par(mfrow=c(1,2), xpd=T)
-gplot(as.one.mode(motten1982, project="higher"), 
+sna::gplot(as.one.mode(motten1982, project="higher"), 
  label=colnames(motten1982), gmode="graph", 
 label.cex=0.6, vertex.cex=2)
-gplot(as.one.mode(motten1982, project="lower"), 
+sna::gplot(as.one.mode(motten1982, project="lower"), 
 	label=rownames(motten1982), gmode="graph", 
 	label.cex=0.6, vertex.cex=2, vertex.col="green")
 @
@@ -259,9 +332,8 @@ Indices (currently) come at the following hierarchical levels:
 \begin{enumerate}
 \item network-level (a single value, per index, for the entire network);
 \item group-level  (a value, per index, for each of the two groups);
-\item link-level  (a value, per index, for each edge = link);
-\item node-level (a value, per index, for each node = species); and
-\item species-level (a value, per index, for each species).
+\item link-level  (a value, per index, for each edge = link); and
+\item species-level (= node-level) (a value, per index, for each species).
 \end{enumerate}
 
 
@@ -276,6 +348,7 @@ This set of indices is computed for the entire network. They are called using th
 \item \texttt{compartment diversity} \citep{Tylianakis2007};
 \item \texttt{cluster coefficient}, which will compute both the network-wide binary, one-mode-based cluster coefficient as well as those for each level,
 \item \texttt{nestedness}, with the returned value indicating the `temperature' of the matrix, which is low ($0$) for a perfectly nested matrix \citep{RodriguezGirones2006};
+\item \texttt{NODF}, as an alternative measure of quantitative nestedness, automatically correcting for matrix filling and also indicating nestedness by values towards $1$ \citep{AlmeidaNeto2008}; 
 \item \texttt{weighted nestedness}, or more specifically `weighted interaction nestedness estimator' (WINE), with $1$ indicating perfected nestedness (thus exactly opposite to the previous index) \citep{Galeano2009a};
 \item \texttt{weighted NODF}, as an alternative measure of quantitative nestedness, automatically correcting for matrix filling and also indicating nestedness by values towards $1$ \citep{AlmeidaNeto2011}; 
 \item \texttt{interaction strength asymmetry} \citep{Bluthgen2007} \citep[or alternatively \texttt{ISA} or \texttt{dependence asymmetry}:][]{Bascompte2003}, which quantify whether specialised species interact with generalised ones in the other level (or vice versa);
@@ -293,8 +366,6 @@ This set of indices is computed for the entire network. They are called using th
 networklevel(bezerra2009, index=c("ISA", "weighted NODF", "Fisher alpha"), 
              SAmethod="log")
 @
-
-
 
 
 
@@ -374,7 +445,36 @@ specieslevel(bezerra2009, level="lower", index=c("normalised degree", "PDI",
 @
 A relatively comprehensive comparison of species-level indices of specialisation, \citet{Dormann2011} has shown substantial redundancy among these indices, and only few of them have a sound theoretical basis \citep{Poisot2012a}.
 
-\subsubsection{The betweenness mess}
+
+\subsection{Which index to choose?}%--------------------------------------------------------------
+Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low sampling intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
+
+Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
+
+Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluthgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
+
+This, if two indices are available to quantify the same idea, one binary and one quantitative, one should generally choose the quantitative one. Rather than species degree, we should use species strength or linkage density. Table \ref{tab:binaryquantitative} depicts some such binary-quantitative index pairs.
+%
+\begin{table}
+\label{tab:binaryquantitative}
+\caption{Binary-quantitative pairs of network indices. Note: Most quantitative indices can also be computed on binary networks. That does not make them a quantitative measure!}
+\begin{tabular}{l|ll}
+\hline
+& binary & quantitative \\ \hline
+%link level    & --     & --           \\ \hline
+network level & connectance & $H_2'$\\ 
+& links per species & linkage density \\ 
+& nestedness        & weighted NODF, wine \\ %\hline
+group level   & mean number of partners & effective number of partners \\%\hline
+species level & degree & species strength, effective number of partners \\\hline
+\end{tabular}
+\end{table}
+
+
+In a nutshell: Quantitative indices make use of more information in the data. They are generally more advisable, although most of them also are strongly affected by sampling issues.
+
+
+\subsubsection{One index, many values: A cautionary tale told by the betweenness mess}
 Betweenness is a graph index which quantifies the importance of a node for fluxes between nodes. It does so by counting how many of all shortest paths between two nodes go through the target node. That means, a peripheral node will have a betweenness score of 0, while a central node can have values up to $n$ (if all shortest paths go through it).
 
 <<betweenPlot, fig.show="hide", fig.width = 5, fig.height = 5, out.width = "0.75\\textwidth">>=
@@ -383,7 +483,7 @@ data(Safariland)
 # plot the one-mode projection for the lower level:
 set.seed(4) # don't ask me why gplot is stochastic ...
 par(xpd=T, mar=c(0,6,0,6))
-gplot(as.one.mode(Safariland, project="lower"), label=rownames(Safariland))
+sna::gplot(as.one.mode(Safariland, project="lower"), label=rownames(Safariland))
 @
 {
 \centering
@@ -446,35 +546,6 @@ Note that all functions used here have options and arguments that affect the out
 To summarize: \code{bipartite::BC} and \code{influenceR::betweenness/2} yield values as one would expect for \emph{unique} shortest paths; \code{DiagrammeR::get\_betweenness} and \code{igraph::betweeness} yield number of non-unique shortest paths, which we also regard as an intuitive measure. 
 
 As always in data analysis: it is the responsibility of the analyst to make sure suitable-for-purpose indices are used!
-
-
-\subsection{Which index to choose?}%--------------------------------------------------------------
-Different indices were invented (``developed'') for different purposes. However, for most indices, it has not been demonstrated that they actually achieve what their inventor had in mind. Most commonly indices quantify a specific pattern which may have come about by a whole variety of different causes. Take, for example, connectance, i.e. the proportion of possible links actually recorded. Low connectance may be caused by high specialisation or by low sampling intensity. The same holds true for a species' degree, which (typically) increases with sampling effort as well as generalisation. For the choice of an index this means that we cannot solely rely on what the inventor has proposed this index to be good for, but we have to keep in mind that it may actually quantify several other things, too.
-
-Apart from the different levels at which an index can quantify a network pattern (from the individual link to the entire network, as covered in sections \ref{linklevel}--\ref{networklevel}), indices can be divided into those for binary and those for weighted data (called here binary and weighted indices, respectively). Binary indices only use the information of whether a link exists, while weighted indices additionally account for how strong a link is, as judged from the actual value in a network matrix.%\footnote{This is the difference between graph $\vec{A}$ and graph $\vec{B}$ in section \ref{sec:graphtheory}.}
-
-Binary indices, by definition, use less information. It does not follow that they are thus more robust! In fact, \citet{Bluthgen2010} argues the opposite, since only a weighted index can tell whether an observed value indicates specialisation or not.\footnote{Imagine two species, one with entries (1, 1), the other with entries (1, 100). A binary index would not be able to tell between them, while a quantitative would expose the second as far more specialised.} 
-
-This, if two indices are available to quantify the same idea, one binary and one quantitative, one should generally choose the quantitative one. Rather than species degree, we should use species strength or linkage density. Table \ref{tab:binaryquantitative} depicts some such binary-quantitative index pairs.
-%
-\begin{table}
-\label{tab:binaryquantitative}
-\caption{Binary-quantitative pairs of network indices. Note: Most quantitative indices can also be computed on binary networks. That does not make them a quantitative measure!}
-\begin{tabular}{l|ll}
-\hline
-& binary & quantitative \\ \hline
-%link level    & --     & --           \\ \hline
-network level & connectance & $H_2'$\\ 
-& links per species & linkage density \\ 
-& nestedness        & weighted NODF, wine \\ %\hline
-group level   & mean number of partners & effective number of partners \\%\hline
-species level & degree & species strength, effective number of partners \\\hline
-\end{tabular}
-\end{table}
-
-
-In a nutshell: Quantitative indices make use of more information in the data. They are generally more advisable, although most of them also are strongly affected by sampling issues.
-
 
 
 \subsubsection{Index redundancy: do different indices tell the same thing?}
@@ -765,15 +836,35 @@ To objectively define this threshold one could run null models of the original n
 
 
 \section{Analyses beyond \package{bipartite}}%----------------------------------------------
+\label{sec:beyondbipartite}
 Of course, there are many different packages that analyse one or the other aspect of networks, and some even of bipartite networks (listed in the introduction of this vignette). Some of them we find particularly interesting or useful or innovative, and here we quickly show some of them at work.
 
 \subsection{Plotting pretty bipartites}
 The plotting functions provided by \package{bipartite} are somewhat rudimentary. We're happy with them, and they are surprisingly flexible already, but our graphical skills (and intentions) are limited. Other people have developed plotting functions/solutions, which we shall briefly (and probably incompletely) show here.\footnote{Partly based on this question on SO: \url{https://stackoverflow.com/questions/31366066/how-to-plot-a-bipartite-graph-in-r}}
 
 \subsubsection{\package{bipartiteD3}}
+This package allows for very customised plotting. 
+The coolest thing about \package{bipartiteD3} is that it can be used interactively. By moving the mouse over the plot, the link colours change and so forth.
+
+However, it is a bit awkward as it produces a plot in the viewer (or wherever), which then has to be saved and linked back into the document. Quite often, the plot is then incomplete, as in the example below (where the percentages are cut off despite being visible in the export-window of RStudio).
+
+Here is a very short and simple default plot:
+<<eval=FALSE>>=
+library(bipartiteD3)
+bipartite_D3(small1976, colouroption = 'brewer', ColourBy = 1, 
+             PercentageDecimals=1, filename = 'small1976Plot')
+@
+After saving the resulting image, it looks like this, wth the percentages representing the proportion of links in the network of the particular node (= species). 
+
+\includegraphics[width=0.75\textwidth]{figures/Small1976Plot}
+
+The main interest of D3 is the interactiveness, not publication-ready graphics. For this aim, it is a very nice tool and worth exploring.
+
 
 \subsubsection{\package{igraph}}
 \url{https://kateto.net/netscix2016.html}; \url{https://rpubs.com/pjmurphy/317838}; \url{https://igraph.org/r/doc/layout_as_bipartite.html}
+
+
 
 \subsubsection{\package{ggbipart}}
 There is the package \package{ggbipart}, on github.\footnote{See also \url{https://pedroj.github.io/bipartite_plots/} for more code examples.}
@@ -788,10 +879,13 @@ Plot several bipartite layers into one graph: see \url{https://stackoverflow.com
 
 
 \subsection{Analysing the structure of bipartite networks}
-[to be continued ...]
 
-There are a range of packages that aim at identifying structure within networks, be it clusters/modules/compartments of a larger subset of interactions, or specific motifs of only few links. It is almost impossible to keep up with these developments, so here are just a few pointers to such packages: \package{bmotif}, \package{dynsbm} and \package{infomapecology}.
-
+There are a range of packages that aim at identifying structure within networks, be it clusters/modules/compartments of a larger subset of interactions, or specific motifs of only few links. It is almost impossible to keep up with these developments, so here are just a few pointers to such packages: 
+\begin{description}
+ \item[\package{bmotif}] A ``motif'' is a pattern in a network, e.g. the v-shaped link of one plant to two pollinators. This packages \citep{Simmons2019} counts how often each of 44 such motifs is encountered in a bipartite network. This frequency distribution can then be compared to those of a null model. The majority of these motifs have no obvious ecological interpretation. For example, motif 5 is an N-shape, connecting in that N-way 2 lower with 2 higher nodes. Meaning what exactly? The brief hype following the release of this package and its main publications \citep{Monteiro2016, Simmons2019, JacomeFlores2020} has died down a bit, and the packages has been archived on CRAN in 2022 due to unresolved code issues. Its github version can be found here: \url{https://github.com/SimmonsBI/bmotif}.
+ \item[\package{dynsbm}]
+ \item[\package{infomapecology}]
+\end{description}
 
 \subsection{Multi-layer networks}
 This somewhat cryptic term refers to networks that are defined by different types of links, for example because links change over time (dynamic links) or because they depend on other networks \citep{Pilosof2017}. The mathematical description and analysis of such multilayer networks can be rather complex \citep{Aleta2019}, and in ecology typically only relatively simple types of multilayer networks are investigated; probably the most common being multi-level networks are temporally or spatially resolved networks.
