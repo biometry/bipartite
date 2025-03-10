@@ -67,7 +67,7 @@
 \title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
 
 \author{Carsten F. Dormann\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany
-%\and Jochen Fründ\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany
+\and Jochen Fründ\\Animal Network Ecology\\University of Hamburg, Germany
 }
 
 %\thanks{\href{mailto:carsten.dormann@biom.uni-freiburg.de}{carsten.dormann@biom.uni-freiburg.de}}
