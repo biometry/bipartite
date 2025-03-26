@@ -17,6 +17,8 @@ plotweb <- function(web,
                     lower_abundances = NULL,
                     add_higher_abundances = NULL,
                     add_lower_abundances = NULL,
+                    higher_labels = TRUE,
+                    lower_labels = TRUE,
                     scaling = "relative",
                     font = NULL,
                     family = NULL,
@@ -58,6 +60,8 @@ plotweb <- function(web,
   \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!}
   \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!}
   \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!}
+  \item{higher_labels}{Boolean or named list. Indicating whether the higher labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
+  \item{lower_labels}{Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
   \item{scaling}{Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.}
   \item{font}{See \code{\link[graphics]{par}}.}
   \item{family}{See \code{\link[graphics]{par}}.}
