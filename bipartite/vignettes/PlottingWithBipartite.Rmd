@@ -7,6 +7,7 @@ output:
     toc: true  
     fig_width: 7
     fig_height: 7
+    highlight: espresso
 editor_options: 
   chunk_output_type: inline
 vignette: >
@@ -15,7 +16,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`r knitr::opts_chunk$set(cache = FALSE, fig.align = 'center')`
+`r knitr::opts_chunk$set(cache = FALSE, fig.align = 'center', dpi = 300, out.width = 7, out.height = 7)`
 
 
 First we have to install and then load the `bipartite`-package.
@@ -79,6 +80,8 @@ Obviously both options aren't ideal. A more readable way however is to rotate th
 
 ```{r}
 plotweb(Safariland, srt = 90)
+box(col= 'red')
+plotweb(Safariland, srt = 90, lower_labels = rep("abcdefghijklmnop", 9))
 ```
 
 ### Switching to a horizontal plot
@@ -167,7 +170,7 @@ As you can see in the second plot the boxes on the right are scaled according to
 In some cases there are individuals which didn't participate in any interactions but are still counted (e.g. parasited vs. unparasited hosts). For those cases specify independent abundances doesn't work. However these additional abundances can be defined using the arguments `add_higher_abundances` and `add_lower_abundances`. Both arguments, just as their independent counterparts, take a named vector of all species as input. To demonstrate we take the same abundances as above.
 
 ```{r}
-plotweb(Safariland, 
+plotweb(Safariland,
         horizontal = TRUE,
         add_lower_abundances = lower_abundances)
 ```

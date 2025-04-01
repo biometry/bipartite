@@ -13,8 +13,8 @@ plotweb_v2 <- function(web,
                        srt = 0,
                        higher_italic = FALSE,
                        lower_italic = FALSE,
-                       text_size = 1,
-                       spacing = "auto",
+                       text_size = "auto",
+                       spacing = 0.2,
                        box_size = 0.1,
                        x_lim = c(0, 1),
                        y_lim = c(0, 1),
@@ -84,7 +84,7 @@ plotweb_v2 <- function(web,
     higher_labels <- c_names
   } else if (length(higher_labels) > 1) {
     stopifnot(length(higher_labels) == nc)
-    # If the higher_labels is a named list 
+    # If the higher_labels is a named list
     # reorder it according to the web column order
     if (!is.null(names(higher_labels))) {
       higher_labels <- higher_labels[c_names]
@@ -96,11 +96,16 @@ plotweb_v2 <- function(web,
          higher_labels)
   }
 
+  # Lower label texts
   if (is.null(lower_labels)) {
     lower_labels <- r_names
   } else if (length(lower_labels) > 1) {
     stopifnot(length(lower_labels) == nr)
-    lower_labels <- lower_labels[r_names]
+    # If the lower_labels is a named list
+    # reorder it according to the web row order
+    if (!is.null(names(lower_labels))) {
+      lower_labels <- lower_labels[r_names]
+    }
   } else if (lower_labels == FALSE) {
     lower_labels <- rep_len("", nr)
   } else {
@@ -122,22 +127,10 @@ plotweb_v2 <- function(web,
     higher_color <- higher_color[c_names]
   }
 
-  ## TODO: Implement this correctly and add an option to create a legend
-  # if (abbr_names == "numbers") {
-  #   r_names <- (nc + 1):(nc + nr)
-  #   c_names <- 1:nc
-  #   r_full_names <- rownames(web)
-  #   c_full_names <- colnames(web)
-  # } else if (abbr_names == "letters") {
-  #   r_names <- letters[(nc + 1):(nc + nr)]
-  #   c_names <- letters[1:nc]
-  #   r_names <- paste("lower_", r_names)
-  #   c_names <- paste("higher_", c_names)
-  #   r_full_names <- rownames(web)
-  #   c_full_names <- colnames(web)
-  # }
-
-  # Split the label distance to higher and lower
+  # lab_distance contains the distance between.
+  # the abundance boxes and the labels.
+  # If 2 values are given as a vector,
+  # split the label distance to higher and lower.
   if (length(lab_distance) == 1) {
     u_lab_distance <- lab_distance
     l_lab_distance <- lab_distance
@@ -146,26 +139,44 @@ plotweb_v2 <- function(web,
     l_lab_distance <- lab_distance[2]
   }
 
-  # Auto scale the label text
-  # TODO: Hier richtige x_lim und y_lim einfuegen
-  if (text_size == "auto") {
-    total_str_h <- sum(strheight(higher_labels, srt = srt))
-    text_size <- 1 / total_str_h
-  }
-
   if (!horizontal) {
     theta <- srt * pi / 180
   } else {
     theta <- (srt + 90) * pi / 180
   }
 
+  ## TODO: Documentation + change 0.2 to actual spacing values
+  if (text_size == "auto") {
+    dev_size <- dev.size("in")
+    dev_width <- dev_size[1]
+    dev_height <- dev_size[2]
+    if (horizontal) {
+      dev_max <- 0.2 * dev_height
+    } else {
+      dev_max <- 0.2 * dev_width
+    }
+    if (theta == 0 || theta == pi) {
+      sum_str_h <- sum(strwidth(higher_labels, units = "inches"))
+      sum_str_l <- sum(strwidth(lower_labels, units = "inches"))
+    } else {
+      sum_str_h <- sum(strheight(higher_labels, units = "inches"))
+      sum_str_l <- sum(strheight(lower_labels, units = "inches"))
+    }
+    if (sum_str_h > dev_max || sum_str_l > dev_max) {
+      text_size <- min(dev_max / sum_str_h, dev_max / sum_str_l)
+    } else {
+      text_size <- 1
+    }
+    print(text_size)
+  }
+
   # Get the maximal width of the higher and lower labels
   # in inches to set the margin accordingly
-  if (theta != 0 && theta != 180) {
+  if (theta != 0 && theta != pi) {
     c_m_t_width <- max(strwidth(higher_labels,
                                 cex = text_size,
                                 units = "inches"))
-    r_m_t_width <- max(strwidth(r_names,
+    r_m_t_width <- max(strwidth(lower_labels,
                                 cex = text_size,
                                 units = "inches"))
 
@@ -175,19 +186,19 @@ plotweb_v2 <- function(web,
     c_t_width <- max(strheight(higher_labels,
                                cex = text_size,
                                units = "inches"))
-    r_t_width <- max(strheight(r_names,
+    r_t_width <- max(strheight(lower_labels,
                                cex = text_size,
                                units = "inches"))
   }
 
   c_height_1 <- strwidth(higher_labels[1], cex = text_size, units = "inches")
   c_height_1 <- cos(theta) * c_height_1
-  r_height_1 <- strwidth(r_names[1], cex = text_size, units = "inches")
+  r_height_1 <- strwidth(lower_labels[1], cex = text_size, units = "inches")
   r_height_1 <- cos(theta) * r_height_1
 
   c_height_n <- strwidth(higher_labels[nc], cex = text_size, units = "inches")
   c_height_n <- cos(theta) * c_height_n
-  r_height_n <- strwidth(r_names[nr], cex = text_size, units = "inches")
+  r_height_n <- strwidth(lower_labels[nr], cex = text_size, units = "inches")
   r_height_n <- cos(theta) * r_height_n
 
   max_height_1 <- max(c_height_1, -r_height_1)
@@ -195,6 +206,7 @@ plotweb_v2 <- function(web,
 
   # Extract the user set margin in inches
   mai <- par()$mai
+  mai_orig <- mai
 
   # Add the label widths of the labels so they always fit on the plot
   if (horizontal) {
@@ -328,9 +340,9 @@ plotweb_v2 <- function(web,
   #str_h_c <- H
 
   # Get the not rotated height and width of the text
-  H <- strheight(r_names, cex = text_size)
+  H <- strheight(lower_labels, cex = text_size)
   # #print(H)
-  W <- strwidth(r_names, cex = text_size)
+  W <- strwidth(lower_labels, cex = text_size)
   # #print(W)
 
   # Calculate the effective rotated height and width
@@ -446,8 +458,8 @@ plotweb_v2 <- function(web,
   }
   # Apply italics to all lower labels
   if (lower_italic) {
-    r_names <- lapply(r_names, function(x) bquote(italic(.(x))))
-    r_names <- as.expression(r_names)
+    lower_labels <- lapply(lower_labels, function(x) bquote(italic(.(x))))
+    lower_labels <- as.expression(lower_labels)
   }
 
   if (length(box_size) == 1) {
@@ -478,7 +490,7 @@ plotweb_v2 <- function(web,
     text(x_start - u_lab_distance, c_tx, higher_labels, adj = u_adj, srt = srt,
          cex = text_size, xpd = TRUE, font = font, family = family,
          col = higher_text_color)
-    text(x_end + l_lab_distance, r_tx, r_names, adj = l_adj, srt = srt,
+    text(x_end + l_lab_distance, r_tx, lower_labels, adj = l_adj, srt = srt,
          cex = text_size, xpd = TRUE, font = font, family = family,
          col = lower_text_color)
 
@@ -490,23 +502,23 @@ plotweb_v2 <- function(web,
 
 
     if (srt == 0 | srt == 180) {
-      text(r_tx, y_start - l_lab_distance, r_names, pos = 1, cex = text_size,
+      text(r_tx, y_start - l_lab_distance, lower_labels, pos = 1, cex = text_size,
            xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            pos = 3, cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family, col = higher_text_color)
     } else {
-      text(r_tx, y_start - l_lab_distance, r_names,
+      text(r_tx, y_start - l_lab_distance, lower_labels,
            adj = c(1, 0.5), cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family)
-      # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
+      # text(r_tx, 1.0 + strwidth(lower_labels, srt = srt) / 2, lower_labels,
       #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
       #      font = font, family = family)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            adj = c(0, 0.5), cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family)
     }
-    # text(r_tx, 1.0 + strwidth(r_names, srt = srt) / 2, r_names,
+    # text(r_tx, 1.0 + strwidth(lower_labels, srt = srt) / 2, lower_labels,
     #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
     #      font = font, family = family)
 
