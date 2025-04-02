@@ -166,7 +166,7 @@ The wide format is how \package{bipartite} wants the data to be: lower level spe
 This screenshot is from LibreOffice Calc, and writes names with a ``.'' as separator between genus and epithet. That is a matter of taste (and actually, I do not like it). 
 
 After saving as .csv, we read this file in as:
-<<echo=F, eval=F>>=
+<<echo=F>>=
 small1976 <- read.csv("small1976.csv", row.names=1)
 @
 The \texttt{row.names}-argument ensures that the names in the first column are used as (row) labels in the data set. Note that this object is a data.frame, not a matrix, even though it contains only numbers. \package{bipartite} internally converts it into a matrix if that is the required format for a function.
@@ -208,7 +208,7 @@ write.table(small.long, file="small1976long.csv", quote=F, col.names = F, row.na
 
 Also, several networks may be included in this table, so another column would provide a web-ID (e.g.~a name of the site or the web itself). The function \indR{frame2webs} is a convenience function to convert such tables into one or more webs. Its output is a list or an array of webs in the appropriate format for further analysis.\footnote{\indR{webs2array} can also make an array of previously separate webs, padding non-overlapping species with zeros.}
 
-<<message=F, echo = F, eval=F>>=
+<<message=F>>=
 library(bipartite)
 small.long <- read.csv("small1976long.csv")
 small.wide <- frame2webs(small.long, varnames=c("Plant", "Pollinator", "site", "edge.weight"))
