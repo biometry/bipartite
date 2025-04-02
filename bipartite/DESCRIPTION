@@ -50,10 +50,7 @@ Authors@R: c(person(given = "Carsten F.",
              person(given = "Diego P.",
                     family = "Vazquez",
                     role = c("ctb"),
-                    comment = c(ORCID = "0000-0002-3449-5748")),
-             person(given = "Tobias",
-                    family = "Bauer",
-                    role = c("ctb")) )
+                    comment = c(ORCID = "0000-0002-3449-5748")))
 Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
   Jochen Fruend [aut] (<https://orcid.org/0000-0002-7079-3478>),
   Bernd Gruber [aut] (<https://orcid.org/0000-0003-0078-8179>),
@@ -65,8 +62,7 @@ Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
   Tore Opsahl [ctb] (<https://orcid.org/0000-0003-0346-8082>),
   Rafael  B.P. Pinheiro [ctb] (<https://orcid.org/0000-0003-2342-8483>),
   Rouven Strauss [ctb],
-  Diego P. Vazquez [ctb] (<https://orcid.org/0000-0002-3449-5748>),
-  Tobias Bauer [ctb],
+  Diego P. Vazquez [ctb] (<https://orcid.org/0000-0002-3449-5748>)
 Maintainer: Carsten F. Dormann <carsten.dormann@biom.uni-freiburg.de>
 Depends: R(>= 3.5.0), sna, vegan
 Imports: corpcor, fields, igraph, MASS, methods, permute
