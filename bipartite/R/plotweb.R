@@ -14,7 +14,7 @@ plotweb_v2 <- function(web,
                        higher_italic = FALSE,
                        lower_italic = FALSE,
                        text_size = "auto",
-                       spacing = 0.2,
+                       spacing = 0.3,
                        box_size = 0.1,
                        x_lim = c(0, 1),
                        y_lim = c(0, 1),
@@ -22,11 +22,11 @@ plotweb_v2 <- function(web,
                        lower_color = "black",
                        lower_border = "same",
                        lower_add_color = "red",
+                       lower_text_color = "black",
                        higher_color = "black",
                        higher_border = "same",
                        higher_add_color = "red",
                        higher_text_color = "black",
-                       lower_text_color = "black",
                        horizontal = FALSE,
                        link_color = "higher",
                        link_border = "same",
@@ -75,6 +75,14 @@ plotweb_v2 <- function(web,
     c_names <- colnames(web)
   } else {
     c_names <- 1:nc
+  }
+
+  # Reverse the web in horizontal mode, 
+  # so that the first species are plotted at the top
+  if (horizontal) {
+    r_names <- rev(r_names)
+    c_names <- rev(c_names)
+    web <- web[r_names, c_names]
   }
 
   # Extract the higher and lower label texts
@@ -145,15 +153,22 @@ plotweb_v2 <- function(web,
     theta <- (srt + 90) * pi / 180
   }
 
+  # Extract the user set margin in inches
+  mai <- par()$mai
+  mai_orig <- mai
+
   ## TODO: Documentation + change 0.2 to actual spacing values
   if (text_size == "auto") {
+    # Get the size of the plotting device in inches
     dev_size <- dev.size("in")
-    dev_width <- dev_size[1]
-    dev_height <- dev_size[2]
+    # Substract the margings from the total device size
+    # to get the actual plotting area.
+    dev_width <- dev_size[1] - mai[2] - mai[4]
+    dev_height <- dev_size[2] - mai[1] - mai[3]
     if (horizontal) {
-      dev_max <- 0.2 * dev_height
+      dev_max <- spacing * dev_height
     } else {
-      dev_max <- 0.2 * dev_width
+      dev_max <- spacing * dev_width
     }
     if (theta == 0 || theta == pi) {
       sum_str_h <- sum(strwidth(higher_labels, units = "inches"))
@@ -203,10 +218,6 @@ plotweb_v2 <- function(web,
 
   max_height_1 <- max(c_height_1, -r_height_1)
   max_height_n <- max(-c_height_n, r_height_n)
-
-  # Extract the user set margin in inches
-  mai <- par()$mai
-  mai_orig <- mai
 
   # Add the label widths of the labels so they always fit on the plot
   if (horizontal) {
