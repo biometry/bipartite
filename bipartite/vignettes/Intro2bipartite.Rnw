@@ -67,7 +67,7 @@
 \title{Using bipartite to describe and plot two-mode networks in \proglang{R}}
 
 \author{Carsten F. Dormann\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany
-%\and Jochen Fründ\\Biometry \& Environmental System Analysis\\University of Freiburg, Germany
+\and Jochen Fründ\\Animal Network Ecology\\University of Hamburg, Germany
 }
 
 %\thanks{\href{mailto:carsten.dormann@biom.uni-freiburg.de}{carsten.dormann@biom.uni-freiburg.de}}
@@ -79,6 +79,9 @@
 library(knitr)
 opts_chunk$set(fig.path='figures/twocolumn-', fig.align='center', fig.show='hold', cache=TRUE, fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, tidy=F, tidy.opts=list(width.cutoff=70))
 #render_listings()
+options(width=80)
+# Necessary to manage width of str outputs
+options(str = strOptions(strict.width= "cut"))
 @
 % render_listings() always gives problems with R-code not breaking at lines
 
@@ -184,14 +187,15 @@ This object is now in the correct format for further analysis and plotting with 
 Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. A third column records the number of interactions for this pair, i.e. an ``edge weight'':
 
 %write.csv(web2edges(small1976), file="small1976long.csv")
-<<echo=F, eval=F>>=
-small.long <- c(1,2,3)
+<<echo=F>>=
+small.long <- c("Plant", "Pollinator", "edge.weight", "site")
 for (i in 1:nrow(small1976)){
   for (j in 1:ncol(small1976)){
-    small.long <- rbind(small.long, c(rownames(small1976)[i], colnames(small1976)[j], small1976[i, j]))
+    small.long <- rbind(small.long, c(rownames(small1976)[i], colnames(small1976)[j], small1976[i, j], "A"))
   }
 }
-write.csv(small.long[-1,], file="small1976long.csv", quote=F)
+write.table(small.long, file="small1976long.csv", quote=F, col.names = F, row.names = F, sep = ",")
+
 @
 
 {
@@ -295,11 +299,11 @@ To visualise either level separately projected into one-mode mode, we have to em
 <<eval=F>>=
 par(mfrow=c(1,2), xpd=T)
 sna::gplot(as.one.mode(motten1982, project="higher"), 
- label=colnames(motten1982), gmode="graph", 
-label.cex=0.6, vertex.cex=2)
+           label=colnames(motten1982), gmode="graph", 
+           label.cex=0.6, vertex.cex=2)
 sna::gplot(as.one.mode(motten1982, project="lower"), 
-	label=rownames(motten1982), gmode="graph", 
-	label.cex=0.6, vertex.cex=2, vertex.col="green")
+           label=rownames(motten1982), gmode="graph", 
+           label.cex=0.6, vertex.cex=2, vertex.col="green")
 @
 %pdf(file="figures/motten1982_gplot.pdf", width=14, height=7)
 %par(mfrow=c(1,2), xpd=T)
