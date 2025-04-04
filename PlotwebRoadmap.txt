@@ -1,5 +1,5 @@
 # Important (has to be finished before release)
-
+ * Check spacing for absolute scaling!
  * Finish R help files for all functions
  * Test all new and old functionality
  * Add more checks for correct inputs
