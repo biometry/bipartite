@@ -98,6 +98,7 @@ plotweb_v2 <- function(web,
     # reorder it according to the web column order
     if (!is.null(names(higher_labels))) {
       higher_labels <- higher_labels[c_names]
+      higher_labels <- as.expression(higher_labels)
     }
   } else if (higher_labels == FALSE) {
     higher_labels <- rep_len("", nc)
@@ -115,6 +116,7 @@ plotweb_v2 <- function(web,
     # reorder it according to the web row order
     if (!is.null(names(lower_labels))) {
       lower_labels <- lower_labels[r_names]
+      lower_labels <- as.expression(lower_labels)
     }
   } else if (lower_labels == FALSE) {
     lower_labels <- rep_len("", nr)
@@ -135,6 +137,11 @@ plotweb_v2 <- function(web,
   if (!is.null(names(higher_color))) {
     # Sort the higher color vector the same way as the web
     higher_color <- higher_color[c_names]
+  }  
+  # Check whether the color vector is a named vector
+  if (!is.null(names(lower_color))) {
+    # Sort the higher color vector the same way as the web
+    lower_color <- lower_color[r_names]
   }
 
   # lab_distance contains the distance between.
@@ -489,13 +496,13 @@ plotweb_v2 <- function(web,
   # Apply italics to all higher labels
   if (higher_italic) {
     higher_labels <- lapply(higher_labels, function(x) bquote(italic(.(x))))
-    higher_labels <- as.expression(higher_labels)
   }
+  higher_labels <- as.expression(higher_labels)
   # Apply italics to all lower labels
   if (lower_italic) {
     lower_labels <- lapply(lower_labels, function(x) bquote(italic(.(x))))
-    lower_labels <- as.expression(lower_labels)
   }
+  lower_labels <- as.expression(lower_labels)
 
   if (length(box_size) == 1) {
     higher_box_size <- box_size
