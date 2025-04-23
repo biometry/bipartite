@@ -190,8 +190,6 @@ plotweb_v2 <- function(web,
 
       max_height_1 <- max(c_height_1, -r_height_1)
       max_height_n <- max(-c_height_n, r_height_n)
-      print(max_height_1)
-      print(max_height_n)
       # Substract the margings from the total device size
       # to get the actual plotting area.
       dev_width <- dev_size[1] - mai[2] - mai[4] - max_height_1 - max_height_n
@@ -496,13 +494,13 @@ plotweb_v2 <- function(web,
   # Apply italics to all higher labels
   if (higher_italic) {
     higher_labels <- lapply(higher_labels, function(x) bquote(italic(.(x))))
+    higher_labels <- as.expression(higher_labels)
   }
-  higher_labels <- as.expression(higher_labels)
   # Apply italics to all lower labels
   if (lower_italic) {
     lower_labels <- lapply(lower_labels, function(x) bquote(italic(.(x))))
+    lower_labels <- as.expression(lower_labels)
   }
-  lower_labels <- as.expression(lower_labels)
 
   if (length(box_size) == 1) {
     higher_box_size <- box_size

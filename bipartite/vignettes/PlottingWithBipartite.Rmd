@@ -104,21 +104,45 @@ plotweb(Safariland, text.rot = 90)
 
 # Plotting the new way
 
-This development version contains a refined version of the plotting function currently called `plotweb`. Among other things the stacking of labels is replaced in that version.
+```{r, cache = FALSE, echo = FALSE}
+use_deprecated_plotweb(FALSE)
+```
+
+Since version `2.23` `bipartite` contains a refined version of the `plotweb` function. 
+
+Among other things the stacking of labels is replaced in that version. 
+And instead by default the labels are scaled so that they will always fit in the plot.
+The default function call stays the same, so for our randomly generated web the results is. 
 
 ```{r, cache = FALSE}
 ?plotweb
-use_deprecated_plotweb(FALSE)
 plotweb(web)
+```
+
+However when we have a look at the produced plot for the `Safariland` web, ...
+```{r}
 plotweb(Safariland)
 ```
+
+we see that for crowded webs this might not be the ideal solution. 
+So for webs with many species with long names we recommend rotating the labels (e.g. 90°) via the `srt` argument. 
 
 ```{r}
 plotweb(Safariland,
         srt = 90)
 ```
 
+Now the graph is way more readable, even without a magnifying glass.
+
 ## Text size and spacing
+
+The "magic" behind 
+
+```{r}
+plotweb(Safariland,
+        text_size = 0.5,
+        spacing = "auto")
+```
 
 ```{r}
 plotweb(Safariland,
@@ -147,7 +171,9 @@ plotweb(Safariland,
 
 ## Switching to a horizontal plot
 
-Another possibility is to rotate the whole plot by 90° altogether. This can be accomplished by setting `horizontal = TRUE`.
+If you prefer your labels to be horizontal, 
+another option is to rotate the whole plot by 90° altogether. 
+This can be accomplished by setting `horizontal = TRUE`.
 
 ```{r}
 plotweb(web,
@@ -419,6 +445,9 @@ plotweb(Safariland,
 Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
 
 ```{r}
+lower_add_color <- rep(rgb(0, 0, 0, 0.5), nrow(Safariland))
+names(lower_add_color) <- rownames(Safariland)
+lower_add_color["Alstroemeria aurea"] <- "darkorange"
 plotweb(Safariland,
         sorting = "ca",
         horizontal = TRUE,
@@ -426,21 +455,7 @@ plotweb(Safariland,
         curved_links = TRUE,
         higher_labels = higher_labels,
         lower_italic = TRUE,
-        lower_color = "lightgreen",
+        lower_color = lower_color,
         link_color = "lower",
-        lower_add_color = "darkgreen")
-```
-
-
-```{r, cache = F}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        add_lower_abundances = lower_abundances,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
-        lower_color = "lightgreen",
-        lower_add_color = "darkgreen",
-        link_color = "lower")
+        lower_add_color = lower_add_color)
 ```

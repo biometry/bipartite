@@ -1,12 +1,10 @@
 #-- sortweb2: adjustments to matrix, outsorced from plotweb and adapted -------
 # by Jochen Fründ, May2021  (but largely copied code from Bernd Gruber's plotweb)
 
-# for development only
-# web <- testweb
 
 sortweb2 <- function(web,
-                     sort.order = "dec", 
-                     empty = TRUE, 
+                     sort.order = "dec",
+                     empty = TRUE,
                      sequence = NULL) {
   if (empty) {
     web <- empty(web)
@@ -39,7 +37,7 @@ sortweb2 <- function(web,
 
   # option "cca" = the web is re-arranged by ordination (& separating compartments)
   if (method.matched == "ca") {
-    # Problem: cca sometimes doesn't get the compartments right!
+    # Problem: ca sometimes doesn't get the compartments right!
     # Solution: Function "compart" returns a matrix with links assigned to compartments
     # So, we need to extract the compartments there and put them in sequence, sort by ca within
     co <- compart(web)
