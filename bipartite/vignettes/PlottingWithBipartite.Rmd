@@ -357,6 +357,36 @@ plotweb(Safariland,
 
 As you can see all boxes on the left (higher or columns) are orange and all boxes on the right (lower or rows) are dark green.
 
+```{r}
+plotweb(Safariland,
+        sorting = "ca",
+        horizontal = TRUE,
+        curved_links = TRUE,
+        higher_labels = higher_labels,
+        lower_italic = TRUE,
+        higher_color = 1:ncol(Safariland))
+```
+
+```{r}
+plotweb(Safariland,
+        sorting = "ca",
+        horizontal = TRUE,
+        curved_links = TRUE,
+        higher_labels = higher_labels,
+        lower_italic = TRUE,
+        lower_color = rainbow(nrow(Safariland)))
+```
+
+```{r}
+plotweb(Safariland,
+        sorting = "ca",
+        horizontal = TRUE,
+        curved_links = TRUE,
+        higher_labels = higher_labels,
+        lower_italic = TRUE,
+        higher_color = hcl.colors(ncol(Safariland), palette = "Dark 3"))
+```
+
 ## Changing the color of some species
 
 However oftentimes we want to highlight just a few species. For the example below we are especially interested in the interaction of the plant species *Alstroemeria aurea*. So in the first step we generate a vector for all lower species and fill it with the value `"black"`. In the next step we change the value only for the considered species to `"orange"`.
@@ -392,40 +422,6 @@ plotweb(Safariland,
         link_color = "lower")
 ```
 
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
-        lower_color = 1:nrow(Safariland),
-        link_color = "lower")
-```
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
-        lower_color = rainbow(nrow(Safariland)),
-        link_color = "lower")
-```
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
-        lower_color = hcl.colors(nrow(Safariland), palette = "Dark 3"),
-        link_color = "lower")
-```
-
 Of course you can also set all the links to a single color value.
 
 ```{r}
@@ -445,17 +441,46 @@ plotweb(Safariland,
 Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
 
 ```{r}
-lower_add_color <- rep(rgb(0, 0, 0, 0.5), nrow(Safariland))
+lower_add_color <- rep("black", nrow(Safariland))
+lower_color <- rep("gray50", nrow(Safariland))
 names(lower_add_color) <- rownames(Safariland)
+names(lower_color) <- rownames(Safariland)
 lower_add_color["Alstroemeria aurea"] <- "darkorange"
+lower_color["Alstroemeria aurea"] <- "orange"
 plotweb(Safariland,
         sorting = "ca",
         horizontal = TRUE,
         add_lower_abundances = lower_abundances,
         curved_links = TRUE,
         higher_labels = higher_labels,
+        higher_color = "gray50",
         lower_italic = TRUE,
         lower_color = lower_color,
         link_color = "lower",
+        lower_add_color = lower_add_color)
+```
+
+
+```{r}
+lower_add_color <- rep("black", nrow(Safariland))
+lower_color <- rep("gray50", nrow(Safariland))
+names(lower_add_color) <- rownames(Safariland)
+names(lower_color) <- rownames(Safariland)
+lower_add_color["Alstroemeria aurea"] <- "darkorange4"
+lower_color["Alstroemeria aurea"] <- "orange"
+plotweb(Safariland,
+        sorting = "ca",
+        horizontal = TRUE,      
+        add_lower_abundances = lower_abundances,
+        curved_links = TRUE,
+        higher_labels = higher_labels,
+        higher_color = "gray50",
+        lower_italic = TRUE,
+        lower_color = lower_color,
+        link_color = "lower",
+        link_alpha = 1,
+        higher_border = "black",
+        link_border = "black",
+        lower_border = "black",
         lower_add_color = lower_add_color)
 ```

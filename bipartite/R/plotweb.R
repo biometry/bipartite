@@ -47,6 +47,10 @@ plotweb_v2 <- function(web,
             is.logical(lower_italic),
             is.logical(horizontal),
             is.logical(plot_axes),
+            is.numeric(box_size),
+            is.numeric(lab_distance),
+            is.logical(curved_links),
+            is.logical(add),
             ((is.numeric(text_size) && text_size > 0) | text_size == "auto"))
 
   # Update the user defined margin in either rows or inches
@@ -79,7 +83,7 @@ plotweb_v2 <- function(web,
     c_names <- 1:nc
   }
 
-  # Reverse the web in horizontal mode, 
+  # Reverse the web in horizontal mode,
   # so that the first species are plotted at the top
   if (horizontal) {
     r_names <- rev(r_names)
@@ -137,7 +141,7 @@ plotweb_v2 <- function(web,
   if (!is.null(names(higher_color))) {
     # Sort the higher color vector the same way as the web
     higher_color <- higher_color[c_names]
-  }  
+  }
   # Check whether the color vector is a named vector
   if (!is.null(names(lower_color))) {
     # Sort the higher color vector the same way as the web
@@ -201,6 +205,7 @@ plotweb_v2 <- function(web,
       dev_max <- spacing * dev_width
     }
     a <- theta_pi - pi / 2
+    # TODO: Trust the math
     min_distance_at_angle <- tan(a)^2 * abs(cos(a)) + abs(cos(a))
     # if (theta < 45 || theta > 315 || (theta > 135 && theta < 225)) {
     if (min_distance_at_angle > max(nchar(c(higher_labels, lower_labels)))) {
@@ -275,28 +280,24 @@ plotweb_v2 <- function(web,
          axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
   }
 
-  # TODO: Document
+  # Here the space of the plot along the x- or y-axis is calculated.
   if (horizontal) {
     space_size <- y_lim[2] - y_lim[1]
     space_start <- y_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
     # for latex use in plotting with text()
-    u_lab_distance <- grconvertX(u_lab_distance, from = "inches") - grconvertX(0, from = "inches")
-    l_lab_distance <- grconvertX(l_lab_distance, from = "inches") - grconvertX(0, from = "inches")
+    x_zero_inch <-  grconvertX(0, from = "inches")
+    u_lab_distance <- grconvertX(u_lab_distance, from = "inches") - x_zero_inch
+    l_lab_distance <- grconvertX(l_lab_distance, from = "inches") - x_zero_inch
   } else {
     space_size <- x_lim[2] - x_lim[1]
     space_start <- x_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
     # for latex use in plotting with text()
-    u_lab_distance <- grconvertY(u_lab_distance, from = "inches") - grconvertY(0, from = "inches")
-    l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - grconvertY(0, from = "inches")
+    y_zero_inch <- grconvertY(0, from = "inches")
+    u_lab_distance <- grconvertY(u_lab_distance, from = "inches") - y_zero_inch
+    l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - y_zero_inch
   }
-
-  # if (horizontal) {
-  #   str_h <- 1.1 * strheight(c_names[1], srt = srt, cex = text_size)
-  # } else {
-  #   str_h <- 1.1 * strwidth(c_names[1], srt = srt, cex = text_size)
-  # }
 
   # If no independent abundances are given for the higher species
   # calculate the sum of all columns as abundances
@@ -368,27 +369,19 @@ plotweb_v2 <- function(web,
   # }
   # #print(theta)
 
-  # Get the not rotated height and width of the text
+  # Get the not rotated height and width of the higher labels
   H <- strheight(higher_labels, cex = text_size)
-  # #print(H)
   W <- strwidth(higher_labels, cex = text_size)
-  # #print(W)
-
 
   # Calculate the effective rotated height and width
   str_h_c <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
-  #str_h_c <- H
 
-  # Get the not rotated height and width of the text
+  # Get the not rotated height and width of the lower labels
   H <- strheight(lower_labels, cex = text_size)
-  # #print(H)
   W <- strwidth(lower_labels, cex = text_size)
-  # #print(W)
 
   # Calculate the effective rotated height and width
   str_h_r <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
-
-  # str_h_r <- H
 
   # TODO: Document scaling
   if (scaling == "relative") {
@@ -409,9 +402,7 @@ plotweb_v2 <- function(web,
       spacing <- c(spacing, spacing)
       c_space <- space_size * spacing[1] / (nc - 1)
       r_space <- space_size * spacing[2] / (nr - 1)
-    } else if (spacing == "auto")  {
-      # space <- max(nc, nr) * str_h
-
+    } else if (spacing == "auto") {
       # Calculate the maximum overlap of a label with its corresponding box
       # and set the space to that value times 1.05
       space_c <- nc * max(str_h_c - (space_size * higher_abundances / u_scaling_factor))
@@ -510,6 +501,7 @@ plotweb_v2 <- function(web,
     lower_box_size <- box_size[2]
   }
 
+  # TODO: Document this whole text label alignment mess!
   # Draw the boxes and labels either horizontal or vertical to each other.
   if (horizontal) {
     x_start <- x_lim[1]
@@ -543,15 +535,14 @@ plotweb_v2 <- function(web,
     rect(r_xl, y_start, r_xr, y_start + lower_box_size, col = lower_color, border = lower_border)
     rect(c_xl, y_end - higher_box_size, c_xr, y_end, col = higher_color, border = higher_border)
 
-
     if (srt == 0 | srt == 180) {
       text(r_tx, y_start - l_lab_distance, lower_labels, pos = 1, cex = text_size,
            xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            pos = 3, cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family, col = higher_text_color)
-    } else { 
-      if(srt > 180) {
+    } else {
+      if (srt > 180) {
         adj_l <- c(0, 0.5)
         adj_h <- c(1, 0.5)
       } else {
@@ -561,20 +552,14 @@ plotweb_v2 <- function(web,
       text(r_tx, y_start - l_lab_distance, lower_labels,
            adj = adj_l, cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family)
-      # text(r_tx, 1.0 + strwidth(lower_labels, srt = srt) / 2, lower_labels,
-      #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
-      #      font = font, family = family)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            adj = adj_h, cex = text_size, xpd = TRUE, srt = srt,
            font = font, family = family)
     }
-    # text(r_tx, 1.0 + strwidth(lower_labels, srt = srt) / 2, lower_labels,
-    #      adj = c(.5, 0.5), cex = text_size, xpd = TRUE, srt = 90 + srt,
-    #      font = font, family = family)
-
   }
 
   # Interactions
+  # TODO: short explanation what is going on
   if (!is.null(add_lower_abundances) && !is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
                          col = rep(seq(1, nc, 2), each = nr/2),
@@ -650,13 +635,11 @@ plotweb_v2 <- function(web,
     draw_link(x1, x2, y1, y2, y3, y4, l_col,
               horizontal = horizontal,
               alpha = link_alpha,
-              curved = curved_links)
+              curved = curved_links,
+              border = link_border)
   }
 
   ## TODO: Implement legend plotting
-  # if (legend == TRUE) {
-  #   plot()
-  # }
 }
 
 # Define plotweb to be the new version plotweb_v2 by default

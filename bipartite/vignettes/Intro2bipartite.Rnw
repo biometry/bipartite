@@ -138,6 +138,7 @@ There are several open-source packages devoted to the analysis of networks and f
 \item[\package{HiveR}] for fancy ``hive'' plots;
 \item[\package{igraph}] provides functionalities largely for one-mode networks, quite a bit of plotting options, too;
 % \item[\package{latentnet}] ; % has nothing to do with our kind of networks;
+\item[\package{networkD3}] various interactive visualisations of networks (also using the ``D3'' JavaScript library) including a ``Sankey diagram'' that is somewhat similar to a bipartite graph;
 \item[\package{NIMAA}] aims at exploring and imputing bipartite data in a pharmacological context;%, where for each subject (patient) the concentration of an inhibitor is known; the authors call this a ``nominal data mining analysis'', and from that title you would not think it is actually interesting also for ``friends of bipartite'', but it is!
 \item[\package{sna}] provides many traditional one-mode metrics, from a ``social network analysis'' perspective; in a way the bigger brother of \package{bipartite};
 \item[\package{statnet}] a set of largely one-mode network packages, includes \package{ergm, networksis, statnet.common, tergm};
@@ -236,11 +237,16 @@ head(c(rownames(small1976), colnames(small1976)), 16)
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
 
-A useful first step in the analysis of bipartite networks is to plot it. To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982}. Both offer a wide range of options to change sizes, colours and placement of labels. Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
+A useful first step in the analysis of bipartite networks is to plot it. 
+To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. 
+They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982}. 
+Both offer a wide range of options to change sizes, colours and placement of labels. 
+Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
+For a more in-depth guide on how to use the \indR{ploweb} function also have a look at the \indR{PlottingWithBipartite} vignette. 
 
 <<eval=F>>=
 par(xpd=T)
-plotweb(motten1982)
+plotweb(motten1982, srt= 90, sorting = "ca", curved_links = T)
 visweb(motten1982)
 @
 %pdf(file="figures/motten1982_plotweb.pdf", width=8, height=6)

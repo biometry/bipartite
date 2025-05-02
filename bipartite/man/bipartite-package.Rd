@@ -40,7 +40,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.22\cr
-Date: \tab 2025-02-20\cr
+Date: \tab 2025-05-02\cr
 License: \tab GPL \cr
 }
 }
@@ -52,7 +52,7 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
   \item 2.22 {}
   \describe{
     \item{New implementation of \code{\link{plotweb}}}{For a more in depth demonstration of the new functionalities have a look at the new \code{PlottingWithBipartite} vignette.}
-    \item{\code{\link{sortweb}} now accepts "ca" as a sort.order}
+    \item{Code changes to \code{\link{sortweb}}}{It now accepts "ca" as a sort.order}
   }
 
   \item 2.21 (20-Feb-2025)

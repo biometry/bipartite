@@ -1,6 +1,11 @@
 draw_link <- function(x1, x2, y1, y2, y3, y4, col,
-                      curved = FALSE, horizontal = FALSE,
-                      alpha = 0.4) {
+                      curved = FALSE,
+                      horizontal = FALSE,
+                      alpha = 0.4,
+                      border = "same") {
+  if (border == "same") {
+    border <- adjustcolor(col, alpha.f = alpha)
+  }
   if (curved) { # Curved (polygon) links
     x <- matrix(c(x1, x2))
     xm <- 0.5 * (x1 + x2)
@@ -17,21 +22,21 @@ draw_link <- function(x1, x2, y1, y2, y3, y4, col,
     if (horizontal) {
       polygon(c(xx, rev(xx)), c(curve1, rev(curve2)),
               col = adjustcolor(col, alpha.f = alpha),
-              border = adjustcolor(col, alpha.f = alpha))
+              border = border)
     } else {
       polygon(c(curve1, rev(curve2)), c(xx, rev(xx)),
               col = adjustcolor(col, alpha.f = alpha),
-              border = adjustcolor(col, alpha.f = alpha))
+              border = border)
     }
   } else { # Straight lines
     if (horizontal) { 
       polygon(c(x1, x1, x2, x2), c(y1, y3, y4, y2),
               col = adjustcolor(col, alpha.f = alpha),
-              border = adjustcolor(col, alpha.f = alpha))
+              border = border)
     } else {
       polygon(c(y1, y3, y4, y2), c(x1, x1, x2, x2),
               col = adjustcolor(col, alpha.f = alpha),
-              border = adjustcolor(col, alpha.f = alpha))
+              border = border)
     }
   }
 }
