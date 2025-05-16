@@ -104,7 +104,7 @@ plotweb(Safariland, text.rot = 90)
 
 # Plotting the new way
 
-```{r, cache = FALSE, echo = FALSE}
+```{r use_deprecated, cache = FALSE, echo = FALSE}
 use_deprecated_plotweb(FALSE)
 ```
 
@@ -114,20 +114,19 @@ Among other things the stacking of labels is replaced in that version.
 And instead by default the labels are scaled so that they will always fit in the plot.
 The default function call stays the same, so for our randomly generated web the results is. 
 
-```{r, cache = FALSE}
-?plotweb
+```{r first_plot, cache = FALSE}
 plotweb(web)
 ```
 
-However when we have a look at the produced plot for the `Safariland` web, ...
-```{r}
+However, when we have a look at the plot produced for the `Safariland` web, ...
+```{r new_safariland}
 plotweb(Safariland)
 ```
 
-we see that for crowded webs this might not be the ideal solution. 
-So for webs with many species with long names we recommend rotating the labels (e.g. 90°) via the `srt` argument. 
+it becomes clear that this approach may not be ideal for crowded webs.
+So for for networks with many species—especially those with long names—we recommend rotating the axis labels (e.g., by 90°) using the `srt` argument. 
 
-```{r}
+```{r safariland_90}
 plotweb(Safariland,
         srt = 90)
 ```
@@ -175,12 +174,12 @@ If you prefer your labels to be horizontal,
 another option is to rotate the whole plot by 90° altogether. 
 This can be accomplished by setting `horizontal = TRUE`.
 
-```{r}
+```{r web_horizontal}
 plotweb(web,
         horizontal = TRUE)
 ```
 
-```{r}
+```{r safariland_horizontal}
 plotweb(Safariland,
         horizontal = TRUE)
 ```
@@ -189,9 +188,13 @@ Now we are able to clearly read every single label and interpret the plotted int
 
 ## Sorting the web
 
-By default the species in the plot are arranged just like the rows and columns in the given web matrix. So the first row/column is plotted at the bottom/left of the plot. So to arrange the plot in a specific order that order just has to be given during the call of `plotweb`.
+By default, the species in the plot are arranged according to the rows and columns of the given web matrix.
+The first row/column is therefore plotted at the left of the plot (or at the top for horizontal plots).
+To arrange the plot in a specific order, simply provide that order when calling plotweb.
+Like in the example below, in which we reverese the row order for the `plotweb` call. 
 
-```{r}
+```{r sorting_reverse}
+plotweb(web[rev(rownames(web)), ], horizontal = TRUE)
 plotweb(Safariland[rev(rownames(Safariland)), ], horizontal = TRUE)
 ```
 
@@ -199,9 +202,10 @@ Now the plant species are plotted in reverse order.
 
 However a built-in call to `sortweb` is also possible with the argument `sorting`. 
 The options are the same as for `sortweb`. 
-So `dec` orders the species in decreasing row/column totals, `inc` orders by increasing totals, and `ca` performs a ca algorithm which might reduce link crossings in the plot.
+So `dec` orders the species in decreasing row/column totals, `inc` orders by increasing totals, 
+and `ca` performs a correspondence analysis which might reduce link crossings in the plot.
 
-```{r}
+```{r sorting_all}
 plotweb(Safariland,
         horizontal = TRUE,
         sorting = "dec")
@@ -215,19 +219,25 @@ plotweb(Safariland,
 
 ## Adding independent abundances
 
-In some cases beside the recorded interactions there might also be data about the actual abundance of each or some species available. 
-Now it might be interesting to alter the plot so that the boxes visualize these abundances while still representing the recorded interaction preferences via the link widths. 
-This can be accomplished with the two arguments `higher_abundances` and `lower_abundances`.
+In some cases, in addition to the recorded interactions, data on the actual abundance of some or all species may also be available.
+In such cases, it can be useful to modify the plot so that the boxes reflect species abundances, while the link widths continue to represent interaction preferences.
+This can be done using the two arguments `higher_abundance` and `lower_abundances`.
 
-These accept a named vector each for the higher trophic level species (columns) and lower trophic level species (rows).
+These take a named vector each—for the higher trophic level species (columns) and the lower trophic level species (rows).
 
-Since we don't have actual recorded abundances we will generate some randomly for demonstration.
+Since we don't have actual recorded abundances, we will generate some randomly for demonstration purposes.
 
 ```{r}
 n_lower_species <- nrow(Safariland)
 lower_abundances <- sample(0:100, n_lower_species, replace = TRUE)
-print(lower_abundances)
 names(lower_abundances) <- rownames(Safariland)
+print(lower_abundances)
+```
+
+Now we have a named vector with a random abundance for each row (lower-level species / plants) in the `Safariland` web, 
+as required by the funciton. When we call the function with this argument, we get the following result.
+
+```{r}
 plotweb(Safariland,
         sorting = "ca",
         horizontal = TRUE,
@@ -235,9 +245,26 @@ plotweb(Safariland,
 ```
 
 We now have abundances for the pollinator species that were randomly drawn form a uniform distribution between 0 and 100. 
-As we can see the box sizes on the left are more homogenous.
+As we can see the box sizes on the right are more homogenous.
 
 We can also see that some of the links are increasing or decreasing in size from the left to the right.
+
+## Adding additional abundances
+
+In some cases there are individuals which didn't participate in any interactions but are still counted (e.g. parasited vs. unparasited hosts). 
+For those cases specifying independent abundances doesn't work. 
+However, these additional abundances can be defined using the arguments `add_higher_abundances` and `add_lower_abundances`. 
+Both arguments, just as their independent counterparts, take a named vector of all species as input. 
+To demonstrate we take the same abundances as above.
+
+```{r}
+plotweb(Safariland,
+        sorting = "ca",
+        horizontal = TRUE,
+        add_lower_abundances = lower_abundances)
+```
+
+As you can see the additional abundances are now plotted as red extra boxes on top of the original boxes.
 
 ## Switching to absolute scaling
 
@@ -263,39 +290,21 @@ plotweb(Safariland,
         scaling = "absolute")
 ```
 
-As you can see in the second plot the boxes on the right are scaled according to the total abundances on the left and are thus much smaller.
-
-## Adding additional abundances
-
-In some cases there are individuals which didn't participate in any interactions but are still counted (e.g. parasited vs. unparasited hosts). For those cases specify independent abundances doesn't work. However these additional abundances can be defined using the arguments `add_higher_abundances` and `add_lower_abundances`. Both arguments, just as their independent counterparts, take a named vector of all species as input. To demonstrate we take the same abundances as above.
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        add_lower_abundances = lower_abundances)
-```
-
-As you can see the additional abundances are now plotted as red extra boxes on top of the original boxes.
+In the same way as for independent abundances a plot with additional abundances is by default scaled in a relative 
+manner. That means the boxes on both sides use as much space as possible. However, 
 
 ```{r}
 plotweb(Safariland,
         sorting = "ca",
         horizontal = TRUE,
         add_lower_abundances = lower_abundances,
-        lower_add_color = "darkgreen")
-```
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        add_lower_abundances = lower_abundances,
-        lower_add_color = "darkgreen",
         scaling = "absolute")
 ```
 
 # Changing the style
+
+Now after understanding the basics of plotting bipartite networks, 
+we will have a look at how you can make the plots fit the aestetics you are looking for. 
 
 ## Switching to curved links
 
@@ -305,6 +314,11 @@ With the option `curved_links = TRUE` the interaction links can be changed from 
 plotweb(Safariland,
         srt = 90,
         curved_links = TRUE)
+```
+
+This obviously also works for horizontal plots.
+
+```{r}
 plotweb(Safariland,
         horizontal = TRUE,
         curved_links = TRUE)
@@ -355,7 +369,8 @@ plotweb(Safariland,
 
 ```
 
-As you can see all boxes on the left (higher or columns) are orange and all boxes on the right (lower or rows) are dark green.
+As you can see all boxes on the left (higher or columns) are <span style="color:orange;">orange</span> 
+and all boxes on the right (lower or rows) are <span style="color:darkgreen;">dark green</span>.
 
 ```{r}
 plotweb(Safariland,
@@ -405,7 +420,7 @@ plotweb(Safariland,
 
 ```
 
-As you can see now only the box of *Alstroemeria aurea* is orange.
+As you can see now only the box of <span style="color:orange;">*Alstroemeria aurea*</span> is orange.
 
 ## Changing the color of the links
 
@@ -436,6 +451,8 @@ plotweb(Safariland,
         link_color = "brown")
 ```
 
+In doing so you can create very colorful plots. 
+
 ## Changing the color of additional abundances
 
 Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
@@ -460,6 +477,13 @@ plotweb(Safariland,
         lower_add_color = lower_add_color)
 ```
 
+## Link alpha value and border 
+
+In all of the examples above, the links appear partially transparent. This effect is controlled by the `link_alpha` parameter, which defaults to `0.5`. To reduce transparency and make the links more opaque, you can increase this value—for instance, setting it to `1.0` will render the links fully opaque.
+
+Another group of style parameters with default values relates to the border color of boxes and links. By default, these are set to `"same"`, meaning the border color matches the corresponding box or link color exactly. You can also specify a single color or use named vectors to apply different colors. In the example below, we set all border colors to `"black"`.
+
+We also modify the fill colors of the boxes and the links slightly for visual variation.
 
 ```{r}
 lower_add_color <- rep("black", nrow(Safariland))
@@ -470,7 +494,7 @@ lower_add_color["Alstroemeria aurea"] <- "darkorange4"
 lower_color["Alstroemeria aurea"] <- "orange"
 plotweb(Safariland,
         sorting = "ca",
-        horizontal = TRUE,      
+        horizontal = TRUE,
         add_lower_abundances = lower_abundances,
         curved_links = TRUE,
         higher_labels = higher_labels,
