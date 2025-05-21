@@ -5,7 +5,7 @@ author:
     affiliation: Animal Network Ecology, University of Hamburg
     email: tobias.bauer-2@uni-hamburg.de
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-abstract: This vignette is intended to give an overview of the plotting capabilities of the bipartite package.
+abstract: This vignette provides an overview of the plotting capabilities of the bipartite package.
           It includes multiple examples visualizing the intend of the function arguments. 
 toc-title: "Contents"
 output: 
@@ -21,7 +21,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`r knitr::opts_chunk$set(cache = TRUE, fig.align = 'center', dpi = 300, out.width = "100%")`
+`r knitr::opts_chunk$set(cache = TRUE, fig.align = 'center', dpi = 150, out.width = "100%")`
 
 # Preparing a web for plotting
 
@@ -135,38 +135,19 @@ Now the graph is way more readable, even without a magnifying glass.
 
 ## Text size and spacing
 
-The "magic" behind 
+> **Note**: This part isn't done yet, cause there are still some bugs in the code.
+
+The "magic" behind these well-scaled, out-of-the-box plots lies in the `text_size` and `spacing` arguments. By default, `text_size` is set to `"auto"` and `spacing` to `0.3`. This means that, unless specified otherwise, the spacing between the boxes on each side will occupy 30% of the total available space in that axis.
+
+To better understand the `spacing` parameter, let us have a look at a simple layout consisting of 2 columns and 1 row. To help visualize the structure, we enable the x- and y-axes by setting `plot_axes = TRUE`. In the resulting plot, the `row1` box spans exactly `0.7` units in width, while the `col1` and `col2` boxes are each `0.35` units wide. As described above, this leaves `0.3` units—or 30% of the total width—as spacing between the elements.
 
 ```{r}
-plotweb(Safariland,
-        text_size = 0.5,
-        spacing = "auto")
+web2 <- matrix(c(50, 50), ncol = 2)
+plotweb(web2,
+        plot_axes = TRUE)
 ```
 
-```{r}
-plotweb(Safariland,
-        srt = 90,
-        text_size = 0.1,
-        spacing = "auto")
-plotweb(Safariland,
-        srt = 90,
-        text_size = "auto",
-        spacing = 0.5)
-```
-
-```{r}
-plotweb(Safariland,
-        srt = 90,
-        text_size = 0.5,
-        spacing = 0.5)
-```
-
-```{r}
-plotweb(Safariland,
-        srt = 90,
-        text_size = 0.5,
-        spacing = c(0.5, 0.3))
-```
+The option `text_size = "auto"` is designed to automatically reduce the text size only when necessary. If all labels fit within the plot at the default size of 1, that size will be used. Otherwise, the text size is scaled down just enough to ensure everything fits without overlap.
 
 ## Switching to a horizontal plot
 
@@ -179,12 +160,7 @@ plotweb(web,
         horizontal = TRUE)
 ```
 
-```{r safariland_horizontal}
-plotweb(Safariland,
-        horizontal = TRUE)
-```
-
-Now we are able to clearly read every single label and interpret the plotted interactions.
+Now we are able to clearly read every label in the natural reading direction and still interpret the plotted interactions.
 
 ## Sorting the web
 
@@ -195,7 +171,6 @@ Like in the example below, in which we reverese the row order for the `plotweb` 
 
 ```{r sorting_reverse}
 plotweb(web[rev(rownames(web)), ], horizontal = TRUE)
-plotweb(Safariland[rev(rownames(Safariland)), ], horizontal = TRUE)
 ```
 
 Now the plant species are plotted in reverse order.
@@ -301,12 +276,11 @@ plotweb(Safariland,
         scaling = "absolute")
 ```
 
-# Changing the style
+# Aesthetics
 
-Now after understanding the basics of plotting bipartite networks, 
-we will have a look at how you can make the plots fit the aestetics you are looking for. 
+Now that we've covered the basics of plotting bipartite networks, let's explore how to customize the plots to better match your desired aesthetics.
 
-## Switching to curved links
+## Curved links
 
 With the option `curved_links = TRUE` the interaction links can be changed from straight lines to curves.
 
@@ -324,7 +298,7 @@ plotweb(Safariland,
         curved_links = TRUE)
 ```
 
-## Making the species labels cursive
+## Cursive species labels
 
 The options `higher_italic` and `lower_italic` make the higher trophic level and lower trophic level species labels respectively cursive.
 
@@ -336,6 +310,8 @@ plotweb(Safariland,
         higher_italic = TRUE,
         lower_italic = TRUE)
 ```
+
+If you take a closer look at the labels on the left (the pollinators or higher trophic species), you will notice that not all of them are full species names. For instance, `Phthiria` is just a genus name. So, to make things a bit more interesting in the example below, we use the `higher_labels` option to italicize only those labels that contain two words separated by a space—usually the species names. Feel free to copy the code snippet below if you ever want to do the same.
 
 ```{r}
 higher_labels <- colnames(Safariland)
@@ -353,7 +329,7 @@ plotweb(Safariland,
         lower_italic = TRUE)
 ```
 
-## Changing the color of all species
+## Coloring all species
 
 With the arguments `higher_color` and `lower_color` the colors of the boxes can be changed. For example setting these to a single color value changes the color of all boxes on each side.
 
@@ -379,30 +355,11 @@ plotweb(Safariland,
         curved_links = TRUE,
         higher_labels = higher_labels,
         lower_italic = TRUE,
-        higher_color = 1:ncol(Safariland))
-```
-
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
         lower_color = rainbow(nrow(Safariland)))
 ```
 
-```{r}
-plotweb(Safariland,
-        sorting = "ca",
-        horizontal = TRUE,
-        curved_links = TRUE,
-        higher_labels = higher_labels,
-        lower_italic = TRUE,
-        higher_color = hcl.colors(ncol(Safariland), palette = "Dark 3"))
-```
 
-## Changing the color of some species
+## Coloring some species
 
 However oftentimes we want to highlight just a few species. For the example below we are especially interested in the interaction of the plant species *Alstroemeria aurea*. So in the first step we generate a vector for all lower species and fill it with the value `"black"`. In the next step we change the value only for the considered species to `"orange"`.
 
@@ -422,7 +379,7 @@ plotweb(Safariland,
 
 As you can see now only the box of <span style="color:orange;">*Alstroemeria aurea*</span> is orange.
 
-## Changing the color of the links
+## Coloring the links
 
 In the example above we highlighted the box of our species of interest. But it would be even nicer if we could highlight all the interactions that species has in the same color as well. To do so we just have to switch the option `link_color = "higher"` to `link_color = "lower"`.
 
@@ -453,7 +410,7 @@ plotweb(Safariland,
 
 In doing so you can create very colorful plots. 
 
-## Changing the color of additional abundances
+## Coloring additional abundances
 
 Of course the color of the additional abundance boxes can be specified as well via the options `higher_add_color` and `lower_add_color`.
 

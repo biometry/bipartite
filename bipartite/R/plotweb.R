@@ -367,21 +367,23 @@ plotweb_v2 <- function(web,
   # } else {
   #   theta <- (srt + 90) * pi / 180
   # }
-  # #print(theta)
 
   # Get the not rotated height and width of the higher labels
   H <- strheight(higher_labels, cex = text_size)
   W <- strwidth(higher_labels, cex = text_size)
 
   # Calculate the effective rotated height and width
-  str_h_c <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
+  # str_h_c <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
+  str_h_c <- abs(H * sin(theta_pi)) + abs(W * cos(theta_pi))
 
   # Get the not rotated height and width of the lower labels
   H <- strheight(lower_labels, cex = text_size)
   W <- strwidth(lower_labels, cex = text_size)
 
   # Calculate the effective rotated height and width
-  str_h_r <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
+  # str_h_r <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
+  str_h_r <- abs(H * sin(theta_pi)) + abs(W * cos (theta_pi))
+
 
   # TODO: Document scaling
   if (scaling == "relative") {
@@ -409,10 +411,10 @@ plotweb_v2 <- function(web,
       space_r <- nr * max(str_h_r - (space_size * lower_abundances / l_scaling_factor))
       space <- 1.1 * max(space_c, space_r, 0.05)
       if (space > space_size) {
-        text_size <- text_size / space * space_size * 0.9
-        space <- 0.9
-        # stop(paste("Text size is too large for auto spacing.",
-        #            "Decrease size or increase figure height for better results."))
+        # text_size <- text_size / space * space_size * 0.9
+        # space <- 0.9
+        stop(paste("Text size is too large for auto spacing.",
+                   "Decrease size or increase figure height for better results."))
       }
       spacing <- c(space, space)
       r_space <- space / (nr - 1)
