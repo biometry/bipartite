@@ -6,7 +6,7 @@ author:
     email: tobias.bauer-2@uni-hamburg.de
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 abstract: This vignette provides an overview of the plotting capabilities of the bipartite package.
-          It includes multiple examples visualizing the intend of the function arguments. 
+          It includes multiple examples illustrating the intention behind various function arguments.
 toc-title: "Contents"
 output: 
   rmarkdown::html_vignette:
@@ -25,7 +25,7 @@ vignette: >
 
 # Preparing a web for plotting
 
-First we have to install the `bipartite`-package.
+First, we have to install the `bipartite`-package.
 
 ```{r, eval = FALSE}
 install.packages("bipartite")
@@ -35,6 +35,7 @@ After the installation we can load the package.
 
 ```{r, results = "hide", message = FALSE, cache = FALSE}
 library(bipartite)
+set.seed(123)
 ```
 
 To be able to demonstrate the different ways to plot a web, we first need ... a web. 
@@ -43,8 +44,7 @@ And to get one we might also want to understand how a web is defined in the `bip
 > **Note**: in this document we will only describe the necessary structure of a web. 
 For a more in depth guide on how to load your data into `bipartite` have a look at the `Intro2bipartite` vignette.
 
-To do so we will use the function `genweb` that basically generates a random bipartite web. 
-The arguements `N1` and `N2` define the number of species in the lower and higher trophic level respectively.
+To do so, we will use the function `genweb`, which generates a random bipartite web. The arguments `N1` and `N2` define the number of species in the lower and higher trophic levels, respectively.
 
 ```{r}
 web <- genweb(N1 = 5, N2 = 6)
@@ -58,7 +58,7 @@ web
 class(web)
 ```
 
-As we can see, a web in the `bipartite` package is just an $n \times m$ integer matrix (or more generally a numeric matrix).
+As we can see, a web in the `bipartite` package is simply an $n \times m$ integer matrix (more generally, a numeric matrix).
 The rows and columns represent the nodes of the two independent sets in the graph. 
 And the values indicate the weight of the edges between two nodes. 
 
@@ -73,10 +73,12 @@ rownames(web) <- paste("Lower", 1:5)
 web
 ```
 
-To visualize the plotting capabilities of `bipartite` we will use a plant-pollinator web included in the package namely `Safariland`.
+To demonstrate the plotting capabilities of `bipartite`, 
+we will use the included plant-pollinator network `Safariland`.
 
 ```{r}
 ?Safariland
+data(Safariland)
 dim(Safariland)
 str(Safariland)
 ```
@@ -85,7 +87,8 @@ As we can see its a 9x27 integer matrix. The help reveals that the 9 rows repres
 
 # Plotting the old way
 
-Now up to the current version `v2.20` of `bipartite` the standard way to visualize this network would be to simply call the function `plotweb`.
+Up to version `2.20` of `bipartite` the standard way to visualize networks
+was using the `plotweb` function.
 
 > **NOTE:** In this vignette the plotting device is square with a size of 7x7 inches. On devices with other sizes the results may differ.
 
@@ -108,7 +111,7 @@ plotweb(Safariland, text.rot = 90)
 use_deprecated_plotweb(FALSE)
 ```
 
-Since version `2.23` `bipartite` contains a refined version of the `plotweb` function. 
+Since version `2.22` `bipartite` contains a refined version of the `plotweb` function. 
 
 Among other things the stacking of labels is replaced in that version. 
 And instead by default the labels are scaled so that they will always fit in the plot.
@@ -124,7 +127,7 @@ plotweb(Safariland)
 ```
 
 it becomes clear that this approach may not be ideal for crowded webs.
-So for for networks with many species—especially those with long names—we recommend rotating the axis labels (e.g., by 90°) using the `srt` argument. 
+So for networks with many species—especially those with long names—we recommend rotating the axis labels (e.g., by 90°) using the `srt` argument. 
 
 ```{r safariland_90}
 plotweb(Safariland,
@@ -135,9 +138,12 @@ Now the graph is way more readable, even without a magnifying glass.
 
 ## Text size and spacing
 
-> **Note**: This part isn't done yet, cause there are still some bugs in the code.
-
-The "magic" behind these well-scaled, out-of-the-box plots lies in the `text_size` and `spacing` arguments. By default, `text_size` is set to `"auto"` and `spacing` to `0.3`. This means that, unless specified otherwise, the spacing between the boxes on each side will occupy 30% of the total available space in that axis.
+The "magic" behind these well-scaled, out-of-the-box plots lies in the 
+`text_size` and `spacing` arguments. By default, `text_size` is set to `"auto"` 
+and `spacing` to `0.3`. This means that, unless specified otherwise, 
+the spacing between the boxes on each side will occupy 30% of the total 
+available space in that axis, and the size of the text labels is automatically 
+scaled so that they cannot overlap.
 
 To better understand the `spacing` parameter, let us have a look at a simple layout consisting of 2 columns and 1 row. To help visualize the structure, we enable the x- and y-axes by setting `plot_axes = TRUE`. In the resulting plot, the `row1` box spans exactly `0.7` units in width, while the `col1` and `col2` boxes are each `0.35` units wide. As described above, this leaves `0.3` units—or 30% of the total width—as spacing between the elements.
 
@@ -145,6 +151,35 @@ To better understand the `spacing` parameter, let us have a look at a simple lay
 web2 <- matrix(c(50, 50), ncol = 2)
 plotweb(web2,
         plot_axes = TRUE)
+```
+
+If we explicitly set the `spacing` value to `0.1`, we can see that the width of 
+the lower box increases to `0.9` units, 
+and the size of the upper boxes increases to `0.45` units each.
+
+```{r}
+plotweb(web2,
+        spacing = 0.1,
+        plot_axes = TRUE)
+```
+
+If you prefer larger labels, you can set `text_size` to a value greater than 1 
+to increase their size. Conversely, if you want smaller labels, set `text_size` to a value between 0 and 1.
+
+```{r}
+plotweb(web2,
+        spacing = 0.1,
+        text_size = 2)
+```
+
+If you have found a `text_size` that you like and simply want to scale the plot automatically so that labels do not overlap, 
+you can also set `spacing = "auto"`.
+
+```{r}
+plotweb(Safariland,
+        spacing = "auto",
+        srt = 90,
+        text_size = 0.75)
 ```
 
 The option `text_size = "auto"` is designed to automatically reduce the text size only when necessary. If all labels fit within the plot at the default size of 1, that size will be used. Otherwise, the text size is scaled down just enough to ensure everything fits without overlap.
@@ -167,7 +202,7 @@ Now we are able to clearly read every label in the natural reading direction and
 By default, the species in the plot are arranged according to the rows and columns of the given web matrix.
 The first row/column is therefore plotted at the left of the plot (or at the top for horizontal plots).
 To arrange the plot in a specific order, simply provide that order when calling plotweb.
-Like in the example below, in which we reverese the row order for the `plotweb` call. 
+Like in the example below, in which we reverse the row order for the `plotweb` call. 
 
 ```{r sorting_reverse}
 plotweb(web[rev(rownames(web)), ], horizontal = TRUE)
@@ -196,7 +231,7 @@ plotweb(Safariland,
 
 In some cases, in addition to the recorded interactions, data on the actual abundance of some or all species may also be available.
 In such cases, it can be useful to modify the plot so that the boxes reflect species abundances, while the link widths continue to represent interaction preferences.
-This can be done using the two arguments `higher_abundance` and `lower_abundances`.
+This can be done using the two arguments `higher_abundances` and `lower_abundances`.
 
 These take a named vector each—for the higher trophic level species (columns) and the lower trophic level species (rows).
 
@@ -210,7 +245,7 @@ print(lower_abundances)
 ```
 
 Now we have a named vector with a random abundance for each row (lower-level species / plants) in the `Safariland` web, 
-as required by the funciton. When we call the function with this argument, we get the following result.
+as required by the function. When we call the function with this argument, we get the following result.
 
 ```{r}
 plotweb(Safariland,
@@ -219,17 +254,22 @@ plotweb(Safariland,
         lower_abundances = lower_abundances)
 ```
 
-We now have abundances for the pollinator species that were randomly drawn form a uniform distribution between 0 and 100. 
-As we can see the box sizes on the right are more homogenous.
+We now have abundances for the pollinator species that were randomly drawn from a uniform distribution between 0 and 100. 
+As we can see the box sizes on the right are more homogeneous.
 
 We can also see that some of the links are increasing or decreasing in size from the left to the right.
 
 ## Adding additional abundances
 
-In some cases there are individuals which didn't participate in any interactions but are still counted (e.g. parasited vs. unparasited hosts). 
-For those cases specifying independent abundances doesn't work. 
-However, these additional abundances can be defined using the arguments `add_higher_abundances` and `add_lower_abundances`. 
-Both arguments, just as their independent counterparts, take a named vector of all species as input. 
+Sometimes, not all individuals of a species are involved in observed interactions—such as unvisited plants, or unparasitized hosts.  
+
+For these cases, specifying independent abundances is not sufficient. 
+However, additional abundances can be defined using the arguments 
+`add_higher_abundances` and `add_lower_abundances`. 
+Simply set these to the number of individuals not observed in the interaction 
+matrix. These individuals will then be drawn as an extension to the main box.
+
+Both arguments, just as their independent counterparts, take a named vector of all species as input. Set `add_lower_abundances` 
 To demonstrate we take the same abundances as above.
 
 ```{r}
@@ -239,7 +279,8 @@ plotweb(Safariland,
         add_lower_abundances = lower_abundances)
 ```
 
-As you can see the additional abundances are now plotted as red extra boxes on top of the original boxes.
+As you can see the additional abundances are now plotted as 
+<span style="color:red;">red extra boxes</span> on top of the original boxes.
 
 ## Switching to absolute scaling
 
@@ -247,7 +288,7 @@ In many cases having independent abundances will lead to the total abundances on
 However by default the `plotweb` function will make both sides use the maximum available space.
 
 If you are interested in the absolute relations between both sides you need to set the option `scaling = "absolute"`. 
-To demonstrate the difference we will generate uniformly random abundance value for the pollinator that are much larger than the actual values in the web.
+To demonstrate the difference we will generate uniformly random abundance values for the pollinator that are much larger than the actual values in the web.
 
 ```{r}
 n_higher_species <- ncol(Safariland)
