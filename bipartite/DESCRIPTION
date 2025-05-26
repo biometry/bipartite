@@ -1,7 +1,7 @@
 Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
-Version: 2.21
+Version: 2.22
 Date: 2025-02-20
 Authors@R: c(person(given = "Carsten F.",
                     family = "Dormann",
@@ -50,7 +50,7 @@ Authors@R: c(person(given = "Carsten F.",
              person(given = "Diego P.",
                     family = "Vazquez",
                     role = c("ctb"),
-                    comment = c(ORCID = "0000-0002-3449-5748")) )
+                    comment = c(ORCID = "0000-0002-3449-5748")))
 Author: Carsten F. Dormann [aut, cre] (<https://orcid.org/0000-0002-9835-1794>),
   Jochen Fruend [aut] (<https://orcid.org/0000-0002-7079-3478>),
   Bernd Gruber [aut] (<https://orcid.org/0000-0003-0078-8179>),

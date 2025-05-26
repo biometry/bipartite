@@ -4,152 +4,164 @@
 
 \title{Visualize a bipartite interaction matrix (e.g. a foodweb)}
 \description{
+This is the help file for the new plotweb implementation. 
+For help with the old, deprecated plotweb function see \link{plotweb_deprecated}. 
+
+A more in depth guide on how to use this function to plot biparitte networks with multiple visual examples
+is given in the vignette \code{PlottingWithBipartite}.
+
 A two dimensional matrix is plotted as a bipartite graph.
 }
 \usage{
-plotweb(web,
-    method = "cca", empty = TRUE, labsize = 1, ybig = 1,  y.width.low = 0.1, 
-    y.width.high = 0.1, low.spacing = NULL, high.spacing = NULL,
-    arrow="no",  col.interaction="grey80", col.high = "grey10", 
-    col.low="grey10",  bor.col.interaction ="black", bor.col.high="black", 
-    bor.col.low="black", high.lablength = NULL, low.lablength = NULL,
-    sequence=NULL, low.abun=NULL, low.abun.col="green", 
-    bor.low.abun.col ="black", high.abun=NULL, high.abun.col="red", 
-    bor.high.abun.col="black", text.rot=0, text.high.col="black", 
-    text.low.col="black", adj.high=NULL, adj.low=NULL, plot.axes = FALSE,
-    low.y=0.5, high.y=1.5, add=FALSE, y.lim=NULL, x.lim=NULL, low.plot=TRUE, 
-    high.plot=TRUE, high.xoff = 0, low.xoff = 0, high.lab.dis = NULL, 
-    low.lab.dis = NULL, abuns.type="additional")
+plotweb <- function(web,
+                    sorting = "normal",
+                    empty = FALSE,
+                    higher_abundances = NULL,
+                    lower_abundances = NULL,
+                    add_higher_abundances = NULL,
+                    add_lower_abundances = NULL,
+                    higher_labels = TRUE,
+                    lower_labels = TRUE,
+                    scaling = "relative",
+                    text_size = "auto",
+                    spacing = 0.3,
+                    srt = 0,
+                    font = NULL,
+                    family = NULL,
+                    higher_italic = FALSE,
+                    lower_italic = FALSE,
+                    lab_distance = 0.05,
+                    box_size = 0.1,
+                    x_lim = c(0, 1),
+                    y_lim = c(0, 1),
+                    higher_color = "black",
+                    higher_border = "same",
+                    higher_add_color = "red",
+                    higher_text_color = "black",
+                    lower_color = "black",
+                    lower_border = "same",
+                    lower_add_color = "red",
+                    lower_text_color = "black",
+                    horizontal = FALSE,
+                    link_color = "higher",
+                    link_border = "same",
+                    link_alpha = 0.5,
+                    curved_links = FALSE,
+                    arrow = "no",
+                    plot_axes = FALSE,
+                    add = FALSE,
+                    mar = c(1, 1, 1, 1),
+                    mai = NULL)
 }
 
 \arguments{
-  \item{web}{ Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{method}{ Default method is \option{cca}, which reduced the number of crossings of interactions by ordination. The other option is \option{normal}, which leaves order as given by the matrix.}
-  \item{empty}{logical; should empty columns or empty rows be omitted from plotting; defaults to true}
-  \item{labsize}{ factor for size of labels, default is 1 }
-  \item{ybig}{ vertical distance between upper and lower boxes, default is 1}
-  \item{y.width.low}{ width of lower boxes, default is 0.1 }
-  \item{y.width.high}{ width of upper boxes, default is 0.1 }
-  \item{low.spacing}{ distance between lower boxes, default is NULL, so automatically spaced that length of upper and lower boxes is the same. Be aware if set to any value that x.lim may has to be adjusted to ensure that the network is not plotted outside the plotting region}
-  \item{high.spacing}{ distance between upper boxes, default is is NULL, so automatically spaced that length of upper and lower boxes is the same. Be aware if set to any value that x.lim may has to be adjusted to ensure that the network is not plotted outside the plotting region}
-
-  \item{arrow}{ display type of connection between upper and lower boxes, options are \option{up}, \option{down}, \option{both}, \option{up.center}, \option{down.center}, \option{both.center} and \option{no}, default is \option{no}, which is a polygonal connection between boxes. }
-  \item{col.interaction}{color of interaction, default is grey80. }
-  \item{col.high}{color of upper boxes, default is grey10.}
-  \item{col.low}{color of lower boxes, default is grey10.}
-  \item{bor.col.interaction}{border color of interaction, default is black}
-  \item{bor.col.high}{border color of upper boxes, default is black}
-  \item{bor.col.low}{border color of lower boxes, default is black}
-  \item{high.lablength}{number of characters of upper labels that should be plotted. If zero no labels are shown, default is NULL which plots the complete labels.}
-  \item{low.lablength}{number of characters of lower labels that should be plotted. If zero no labels are shown, default is NULL which plots the complete labels.}
-  \item{sequence}{list of two with two names vectors: \code{seq.high} and \code{seq.low}, which specify the order in which species are plotted. Cannot be set for \option{method="cca"}. Defaults to \code{NULL}, where the sequence remains as given or is determined by the CCA internally.}
-  \item{low.abun}{\bold{Named} vector with independent abundance estimates for the lower trophic level, NULL if none exists. See Notes!}
-  \item{low.abun.col}{Colour for depicting the abundance estimates for the lower trophic level; defaults to green.}
-  \item{bor.low.abun.col}{border color for depicting the abundance estimates for the lower trophic level, default is black}
-  \item{high.abun}{\bold{Named} vector with independent abundance estimates for the higher trophic level, NULL if none exists. See Notes!}
-  \item{high.abun.col}{Colour for depicting the abundance estimates for the lower trophic level; defaults to red.}
-  \item{bor.high.abun.col}{border color for depicting the abundance estimates for the higher trophic level, default is black}
-  \item{text.rot}{orientation of labels in the plot (to avoid overlapping of horizontal labels if dimension of the webs are high), default is 0 for horizontal labels, use text.rot=90 for vertical labels.}
-  \item{text.high.col}{Colour for text labels of higher trophic level, a vector of colours can be given}
-  \item{text.low.col}{Colour for text labels of lower trophic level. A vector of colours can be given}
-  \item{adj.high}{Adjust upper labels. See adj in ?text how to adjust labels }
-  \item{adj.low}{Adjust upper labels. See adj in ?text how to adjust labels }
-  \item{plot.axes}{axis are plotted. Sometimes useful to place boxes in higher order plots. Defaults to FALSE}
-  \item{low.y}{Position of the higher boxes on the y-axis. Defaults to 1.5 }
-  \item{high.y}{Position of the higher boxes on the y-axis. Defaults to 1.5 }
-  \item{add}{if set to TRUE a new bipartite network is added to the previous plot. In this way multitrophic webs can be plotted, see examples below. Defaults to FALSE.}
-  \item{y.lim}{To set limits for y-axis. Useful if labels are plotted outside the plotting region and for multitrophic plots, see examples below }
-  \item{x.lim}{To set limits for x-axis. Useful if labels are plotted outside the plotting region and for multitrophic plots, see examples below }
-  \item{low.plot}{Defines if lower boxes should be drawn. Use in multitrophic plots to avoid plotting boxes of some trophic levels - see examples below. Defaults to TRUE}
-  \item{high.plot}{Defines if higher boxes should be drawn. Use in multitrophic plots to avoid plotting boxes of some trophic levels - see examples below. Defaults to TRUE}
-  \item{high.xoff}{allows to set an offset to upper boxes. Useful if high.spacing is used to centre boxes manually. Use plot.axes=TRUE for easy centring}
-  \item{low.xoff}{allows to set an offset to lower boxes. Useful if low.spacing is used to centre boxes manually. Use plot.axes=TRUE for easy centring}
-  \item{high.lab.dis}{normally labels are staggered to avoid plotting over themselves. if set to 0, higher labels are all on one horizontal line. By using ad.low the position of the labels can be adjusted. If set to any other value labels are staggered with this distance. Defaults to NULL}
-  \item{low.lab.dis}{normally labels are staggered to avoid plotting over themselves. if set to 0, lower labels are all on one horizontal line. By using ad.low the position of the labels can be adjusted. If set to any other value labels are staggered with this distance. Defaults to NULL}
-  \item{abuns.type}{How to plot abundances - are they \option{independent} (e.g. flower cover) measurements or are they \option{additional} (e.g. unparasitised hosts) measurements? Defaults to \option{additional}. Option \option{none} is interpreted in the same way as \option{additional}. See Notes!}
+  \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
+             Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
+  \item{sorting}{Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.}
+  \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!}
+  \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!}
+  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!}
+  \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!}
+  \item{higher_labels}{Boolean or named list. Indicating whether the higher labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
+  \item{lower_labels}{Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
+  \item{scaling}{Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.}
+  \item{font}{An integer which specifies which font to use for the labels. See \code{\link[graphics]{par}}.}
+  \item{family}{The name of a font family for drawing the labels. See \code{\link[graphics]{par}}.}
+  \item{srt}{Orientation of the labels in degrees. (Default: \code{0})}
+  \item{text_size}{Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: \code{"auto"})}
+  \item{spacing}{Either \code{"auto"}, a single value or a numerical vector of the form \code{c(higher, lower)}. Defines the total space between boxes. See Notes!  (Default: \code{0.3})}  \item{plot_axes}{Indicates whether both axes should be drawn on the plot. (Default: \code{FALSE})}
+  \item{box_size}{Size of the boxes. Numerical with either c(higher_box_size, lower_box_size) or one value if both should be the same. (Default: \code{0.1})}
+  \item{higher_italic}{If set to \code{TRUE}, the labels of the higher species are plotted in italics. (Default: \code{FALSE})}
+  \item{lower_italic}{If set to \code{TRUE}, the labels of the lower species are plotted in italics. (Default: \code{FALSE})}
+  \item{x_lim}{Vector with 2 numerical values. The range in which to plot on the x-axis. (Default: \code{c(0, 1)})}
+  \item{y_lim}{Vector with 2 numerical values. The range in which to plot on the y-axis. (Default: \code{c(0, 1)})}
+  \item{lab_distance}{Distance between the boxes and the labels in \strong{inches}}
+  \item{higher_color}{A single color or a list of colors used to plot the higher species (columns) boxes. (Default: \code{"black"})}
+  \item{higher_border}{Either \code{"same"} or a single color or a list of colors used to plot the higher species (columns) boxes borders.
+                      If \code{"same"}, the borders have the same color as the corresponding boxes.}
+  \item{higher_add_color}{Only used when higher additional abundances are defined. 
+                          A single color or a list of colors used to plot the higher (column) additional boxes. (Default: \code{"red"})}
+  \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes. (Default: \code{"black"})}
+  \item{lower_border}{Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
+                      If "same", the borders have the same color as the corresponding boxes.}
+  \item{lower_add_color}{Only used when lower additional abundances are defined. 
+                         A single color or a list of colors used to plot the lower (row) additional boxes. (Default: "red")}
+  \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
+  \item{link_color}{"lower", "higher", or single color value. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")}
+  \item{link_border}{Either "same" or a single color or a list of colors used to plot the link borders.
+                      If "same", the borders have the same color as the corresponding boxes.}
+  \item{link_alpha}{Number between 0.0 and 1.0 setting the transparency of the links. 
+                    0 means full transparency 1 means full opacity. (Default: 0.5)}
+  \item{curved_links}{If \code{FALSE} links are plotted as straight lines otherwise they are curved. (Default: \code{FALSE})}
+  \item{arrow}{Display type of connection between higher and lower boxes, options are 
+    \itemize{
+      \item \code{"no"} (Default)
+      \item \code{"up"}
+      \item \code{"down"}
+      \item \code{"both"}
+      \item \code{"up.center"}
+      \item \code{"down.center"}
+      \item \code{"both.center"}
+    }
+  }
+  \item{add}{If set to \code{TRUE} a new bipartite network plot is added to the previous plot. (Default: \code{FALSE})}
+  \item{mar}{A numerical vector of the form \code{c(bottom, left, top, right)} which gives the number of lines of margin to be specified on the four sides of the plot. 
+             The default is NULL which takes the global setting from \code{par()}. }
+  \item{mai}{A numerical vector of the form \code{c(bottom, left, top, right)} which gives the margin size specified in inches.
+             Please note, that the margin is increased so that the labels are always visible in the plot.}
 }
 \value{
-  Returns a window with a bipartite graph of a food web.  For all colours vectors can be used (which are recycled if length differs. Now more trophic webs can be plotted by using \code{plotweb} and the \option{add} switch, which allows to add more webs and staggering them on top of each other. Preferred option is here to order webs by yourself and use \option{method="normal"} to keep your preferred order. See examples on three and four trophic networks.
+  Returns a window with a bipartite graph of the given web. 
+}
+
+\section{Text size & Spacing}{
+  The \code{"auto"} \code{text_size} or \code{spacing} option can be very handy for quickly creating a plot. 
+  However in certain cases it might not produce the best results. 
+  Especially in cases where there are plenty species with rather long names or multiple species with low abundances, 
+  the labels can tend to overlap. 
+  In those cases defining the \code{spacing} and \code{text_size} manually or rotating the labels with the \code{srt} argument might produce better results.
+
+  Special care must be taken if two different values are passed to the argument for the higher and lower species. 
+  The total size of the boxes will not be comparable between the sides in that case. 
+  So especially using the argument \code{scaling = "absolute"} might not yield the intended result.
+}
+
+\section{Abundances}{
+  Both independent as well as additional abundances should be passed as a named vector. 
+  
+  If no independent abundances are given the row and column sums are used to calculate the size of the boxes. 
+}
+
+\section{Scaling}{
+  The scaling option is only relevant, if either independent or additional or both have been defined.
+
+  In case \code{"relative"} is selected the boxes of higher and lower abundances are scaled so that they both utilize the whole space. 
+
+  In case \code{"absolute"} is selected only the boxes of the side with the higher total abundances uses the full space the other side is then scaled relatively to that side. 
+  So that species with the same abundance are plotted with boxes of the same size.
+
+  Be extra careful about the \code{spacing} option when using \code{"absolute"} scaling. 
 }
 
 \note{
-%Note that in the current implementation, \option{low.abun} is actually treated as 'additional abundances' (e.g. unparasitised hosts); we are yet to find a solution to plot fully independent abundance estimates; a workaround for fully independent abundance estimates (e.g. flower densities) is to first scale \option{low.abun} such that \code{all(low.abun > rowSums(web))} and 2. then use \code{plotweb(web, low.abun= low.abun - rowSums(web))}.
-
-Note that in previous implementations, \option{low.abun} and \option{high.abun} was actually treated as 'additional abundances' (e.g. unparasitised hosts). We added the parameter \option{abuns.type} to switch between the classic function (values \option{none} and \option{additional}, the default for backward compatibility) and an alternative function that plots fully independent abundance estimates (\option{abuns.type="independent"}). To change box (species) colors with \option{abuns.type='independent'}, use \option{low.abun.col} and \option{high.abun.col}. The function will likely be revised again in the future, so feedback welcome.
-
-If you have total abundance measure but want to plot used and unused resources, use \option{abuns.type='additional'} and \option{low.abun= your.low.abun - rowSums(web)}.
+Note the difference between relative and absolute scaling is mainly important in the case either additional or independent abundances have been defined.
+In case relative is selected the boxes of higher and lower abundances are scaled so that they both utilize the whole space.
+In case absolute is selected only the boxes of the side with the higher total abundances uses the full space the other side is then scaled relatively to that side. So that species with the same abundance are plotted with boxes of the same size.
 }
 
-\references{
-Tylianakis, J. M., Tscharntke, T. and Lewis, O. T. (2007) Habitat modification alters the structure of tropical host-parasitoid food webs. \emph{Nature} \bold{445}, 202--205
- }
-\author{ Bernd Gruber \email{bernd.gruber@canberra.edu.au} }
+\author{ Tobias Bauer \email{tobias.bauer-2@uni-hamburg.de} }
 
-\seealso{ For a different plot of food webs see  \code{\link{visweb}} }
+\seealso{ 
+  For a different plot of food webs see  \code{\link{visweb}}
+
+  %For a comparison of 2 webs see \code{\link{plot2webs}}
+}
 \examples{
 data(Safariland)
 plotweb(Safariland)
 
-# shorter labels
-plotweb(Safariland, high.lablength=3, low.lablength=0, arrow="down")
-
-# centered triangles for displaying interacions
-plotweb(Safariland, text.rot=90, arrow="down.center", col.interaction="wheat2",
-	y.lim=c(-1,2.5))
-
-#orginal sequence, up arrows and different box width
-plotweb(Safariland, method="normal", arrow="up", y.width.low=0.3, low.lablength=4)
-# interactions as lines
-plotweb(Safariland, arrow="both", y.width.low=0.05, text.rot=90, col.high="blue", 
-	col.low="green")
-
-# add an abundance vector for lower trophic species 
-low.abun = round(runif(dim(Safariland)[1],1,40)) #create
-names(low.abun) <- rownames(Safariland)
-plotweb(Safariland, text.rot=90, low.abun=low.abun, col.interaction="purple", 
-	y.width.low=0.05, y.width.high=0.05)
-
-plotweb(Safariland, text.rot=90, low.abun=low.abun, col.interaction ="red", 
-	bor.col.interaction="red", arrow="down")
-
-# now vectors for all colours can be given, to mark certain species or 
-# interactions. Colour vectors are recycled if not of appropriate length
-plotweb(Safariland,col.high=c("orange","green"))
-plotweb(Safariland,col.low=c("orange","green"),col.high=c("white","grey","purple"),
-	text.high.col=c("blue","red"), col.interaction=c("red",rep("green",26),rep("brown",242)),
-	bor.col.interaction=c(rep("green",26),rep("brown",242)),method="normal", 
-	text.rot=90, low.lablength=10, high.lablength=5)
-
-
-#example one (tritrophic)
-plotweb(Safariland,y.width.low=0.1, y.width.high=0.05,method="normal", 
-	y.lim=c(0,3), arrow="up", adj.high=c(0.5,1.5), col.high="orange",
-	high.lablength=3,high.lab.dis=0)
-
-plotweb(t(Safariland), y.width.low=0.05, y.width.high=0.1, method="normal",
-	add=TRUE,low.y=1.5,high.y=2.5, col.low="green", text.low.col="red", 
-	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1),low.plot=FALSE)
-
-#example two (4 trophic with abundance)
-low.abun = round(runif(dim(Safariland)[1],1,40)) #create
-names(low.abun) <- rownames(Safariland)
-plotweb(Safariland, text.rot=90, high.abun=low.abun, col.interaction="purple", 
-	y.lim=c(0,4.5), high.lablength=0, arrow="up", method="normal", 
-	y.width.high=0.05)
-
-plotweb(t(Safariland), y.width.low=0.05, y.width.high=0.1, method="normal", 
-	add=TRUE, low.y=1.7,high.y=2.7, col.low="green", text.low.col="black", 
-	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4, 
-	high.lablength=0)
-
-plotweb(Safariland,y.width.low=0.05, y.width.high=0.1, method="normal", 
-	add=TRUE, low.y=2.95, high.y=3.95, col.low="green", text.low.col="black", 
-	low.lab.dis=0, arrow="down", adj.low=c(0.5,1.1), low.lablength=4)
-
-# now some examples with the abuns.type-option:
-plotweb(Safariland, abuns.type='independent',arrow="down.center")
-plotweb(Safariland, abuns.type='additional',arrow="down.center")
-
+# To let the plot look a bit more modern
+plotweb(Safariland, horizontal = TRUE, style = "curve")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

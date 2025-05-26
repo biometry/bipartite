@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.21\cr
-Date: \tab 2025-02-20\cr
+Version: \tab 2.22\cr
+Date: \tab 2025-05-23\cr
 License: \tab GPL \cr
 }
 }
@@ -49,6 +49,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.22 (23-May-2025)
+  \describe{
+    \item{New implementation of \code{\link{plotweb}}}{For a more in depth demonstration of the new functionalities have a look at the new \code{PlottingWithBipartite} vignette.}
+    \item{Code changes to \code{\link{sortweb}}}{It now accepts "ca" as a sort.order}
+  }
+
   \item 2.21 (20-Feb-2025)
   \describe{
     \item{Added new index "spectral radius"}{to \code{\link{networklevel}}, as well as its own function (\code{\link{spectral.radius}}). It is just another way to compute nestedness of sorts. This function was contributed by Tobias Bauer!}
