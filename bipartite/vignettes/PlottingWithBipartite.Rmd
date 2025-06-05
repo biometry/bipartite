@@ -76,8 +76,10 @@ web
 To demonstrate the plotting capabilities of `bipartite`, 
 we will use the included plant-pollinator network `Safariland`.
 
-```{r}
+```{r, eval = FALSE}
 ?Safariland
+```
+```{r}
 data(Safariland)
 dim(Safariland)
 str(Safariland)
@@ -92,8 +94,10 @@ was using the `plotweb` function.
 
 > **NOTE:** In this vignette the plotting device is square with a size of 7x7 inches. On devices with other sizes the results may differ.
 
-```{r}
+```{r, eval = FALSE}
 ?plotweb
+```
+```{r}
 use_deprecated_plotweb(TRUE)
 plotweb(web)
 plotweb(Safariland)
