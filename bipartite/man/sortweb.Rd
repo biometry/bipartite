@@ -40,14 +40,14 @@ web[c(9, 1:8), c(27, 1:26)]}
 
 \examples{
 data(Safariland)
-web <- Safarilands
+web <- Safariland
 
-sortweb(Safariland, sort.order="dec") 
+sortweb(Safariland, sort.order = "dec") 
 
 # sorted by a given (here random) sequence
-sequence <- list(seq.higher=sample(colnames(Safariland)), 
-	seq.lower=sample(rownames(Safariland)))
-web.ordered <- sortweb(web, sort.order="seq", sequence=sequence)
+sequence <- list(seq.higher = sample(colnames(Safariland)), 
+	seq.lower = sample(rownames(Safariland)))
+web.ordered <- sortweb(web, sort.order = "seq", sequence = sequence)
 
 }
 \keyword{ package }

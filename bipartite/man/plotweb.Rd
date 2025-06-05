@@ -13,51 +13,52 @@ is given in the vignette \code{PlottingWithBipartite}.
 A two dimensional matrix is plotted as a bipartite graph.
 }
 \usage{
-plotweb <- function(web,
-                    sorting = "normal",
-                    empty = FALSE,
-                    higher_abundances = NULL,
-                    lower_abundances = NULL,
-                    add_higher_abundances = NULL,
-                    add_lower_abundances = NULL,
-                    higher_labels = TRUE,
-                    lower_labels = TRUE,
-                    scaling = "relative",
-                    text_size = "auto",
-                    spacing = 0.3,
-                    srt = 0,
-                    font = NULL,
-                    family = NULL,
-                    higher_italic = FALSE,
-                    lower_italic = FALSE,
-                    lab_distance = 0.05,
-                    box_size = 0.1,
-                    x_lim = c(0, 1),
-                    y_lim = c(0, 1),
-                    higher_color = "black",
-                    higher_border = "same",
-                    higher_add_color = "red",
-                    higher_text_color = "black",
-                    lower_color = "black",
-                    lower_border = "same",
-                    lower_add_color = "red",
-                    lower_text_color = "black",
-                    horizontal = FALSE,
-                    link_color = "higher",
-                    link_border = "same",
-                    link_alpha = 0.5,
-                    curved_links = FALSE,
-                    arrow = "no",
-                    plot_axes = FALSE,
-                    add = FALSE,
-                    mar = c(1, 1, 1, 1),
-                    mai = NULL)
+plotweb(web,
+        sorting = "normal",
+        empty = FALSE,
+        higher_abundances = NULL,
+        lower_abundances = NULL,
+        add_higher_abundances = NULL,
+        add_lower_abundances = NULL,
+        higher_labels = NULL,
+        lower_labels = NULL,
+        scaling = "relative",
+        font = NULL,
+        family = NULL,
+        srt = 0,
+        higher_italic = FALSE,
+        lower_italic = FALSE,
+        text_size = "auto",
+        spacing = 0.3,
+        box_size = 0.1,
+        x_lim = c(0, 1),
+        y_lim = c(0, 1),
+        lab_distance = 0.05,
+        lower_color = "black",
+        lower_border = "same",
+        lower_add_color = "red",
+        lower_text_color = "black",
+        higher_color = "black",
+        higher_border = "same",
+        higher_add_color = "red",
+        higher_text_color = "black",
+        horizontal = FALSE,
+        link_color = "higher",
+        link_border = "same",
+        link_alpha = 0.5,
+        curved_links = FALSE,
+        arrow = "no",
+        plot_axes = FALSE,
+        add = FALSE,
+        mar = c(1, 1, 1, 1),
+        mai = NULL)
 }
 
 \arguments{
   \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
              Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
   \item{sorting}{Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.}
+  \item{empty}{If \code{TRUE} empty columns and rows are removed from the web.}
   \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!}
   \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!}
   \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!}
@@ -81,11 +82,13 @@ plotweb <- function(web,
                       If \code{"same"}, the borders have the same color as the corresponding boxes.}
   \item{higher_add_color}{Only used when higher additional abundances are defined. 
                           A single color or a list of colors used to plot the higher (column) additional boxes. (Default: \code{"red"})}
+  \item{higher_text_color}{A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})}
   \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes. (Default: \code{"black"})}
   \item{lower_border}{Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
                       If "same", the borders have the same color as the corresponding boxes.}
   \item{lower_add_color}{Only used when lower additional abundances are defined. 
                          A single color or a list of colors used to plot the lower (row) additional boxes. (Default: "red")}
+  \item{lower_text_color}{A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})}
   \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
   \item{link_color}{"lower", "higher", or single color value. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")}
   \item{link_border}{Either "same" or a single color or a list of colors used to plot the link borders.
@@ -161,7 +164,7 @@ data(Safariland)
 plotweb(Safariland)
 
 # To let the plot look a bit more modern
-plotweb(Safariland, horizontal = TRUE, style = "curve")
+plotweb(Safariland, horizontal = TRUE, curved_links = TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

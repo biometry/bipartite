@@ -107,7 +107,7 @@ plotweb_v2 <- function(web,
   mai <- par()$mai
 
   # Sort the web according to the user defined method
-  web <- sortweb2(web, sort.order = sorting, empty = empty)
+  web <- sortweb(web, sort.order = sorting, empty = empty)
 
   # Extract the number of rows and columns
   nr <- nrow(web)

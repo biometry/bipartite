@@ -2,7 +2,7 @@
 # by Jochen Fründ, May2021  (but largely copied code from Bernd Gruber's plotweb)
 
 
-sortweb2 <- function(web,
+sortweb <- function(web,
                      sort.order = "dec",
                      empty = TRUE,
                      sequence = NULL) {

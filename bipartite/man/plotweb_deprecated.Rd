@@ -7,7 +7,7 @@
 A two dimensional matrix is plotted as a bipartite graph.
 }
 \usage{
-plotweb(web,
+plotweb_deprecated(web,
     method = "cca", empty = TRUE, labsize = 1, ybig = 1,  y.width.low = 0.1, 
     y.width.high = 0.1, low.spacing = NULL, high.spacing = NULL,
     arrow="no",  col.interaction="grey80", col.high = "grey10", 
@@ -87,6 +87,7 @@ Tylianakis, J. M., Tscharntke, T. and Lewis, O. T. (2007) Habitat modification a
 
 \seealso{ For a different plot of food webs see  \code{\link{visweb}} }
 \examples{
+use_deprecated_plotweb(TRUE)
 data(Safariland)
 plotweb(Safariland)
 
