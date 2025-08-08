@@ -98,22 +98,17 @@ was using the `plotweb` function.
 ?plotweb
 ```
 ```{r}
-use_deprecated_plotweb(TRUE)
-plotweb(web)
-plotweb(Safariland)
+plotweb_deprecated(web)
+plotweb_deprecated(Safariland)
 ```
 
 However, as you can see, for larger networks the placement of the labels quickly becomes somewhat confusing.
 
 ```{r}
-plotweb(Safariland, text.rot = 90)
+plotweb_deprecated(Safariland, text.rot = 90)
 ```
 
 # Plotting the new way
-
-```{r use_deprecated, cache = FALSE, echo = FALSE}
-use_deprecated_plotweb(FALSE)
-```
 
 Since version `2.22` `bipartite` contains a refined version of the `plotweb` function. 
 

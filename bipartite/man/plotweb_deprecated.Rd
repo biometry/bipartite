@@ -5,6 +5,8 @@
 \title{Visualize a bipartite interaction matrix (e.g. a foodweb)}
 \description{
 A two dimensional matrix is plotted as a bipartite graph.
+
+This is the older deprecated version of the \link{plotweb} function. If you prefer this version and want to use it instead, you can overwrite \code{plotweb} like this: \code{plotweb <- plotweb_deprecated}.
 }
 \usage{
 plotweb_deprecated(web,
@@ -87,7 +89,8 @@ Tylianakis, J. M., Tscharntke, T. and Lewis, O. T. (2007) Habitat modification a
 
 \seealso{ For a different plot of food webs see  \code{\link{visweb}} }
 \examples{
-use_deprecated_plotweb(TRUE)
+# Redefine plotweb to be plotweb_deprecated for compatibility with older code
+plotweb <- plotweb_deprecated
 data(Safariland)
 plotweb(Safariland)
 

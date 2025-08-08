@@ -53,8 +53,8 @@ sortweb <- function(web,
         col.seq <- c(col.seq, cs)
       } else { # works fine for webs with only one compartment
         ca <- ca(web[rs, cs])
-        row.seq <- c(row.seq, rs[order(summary(ca)$sites[,1], decreasing=TRUE)])
-        col.seq <- c(col.seq, cs[order(summary(ca)$species[,1], decreasing=TRUE)])
+        row.seq <- c(row.seq, rs[order(scores(ca)$sites[,1], decreasing=TRUE)])
+        col.seq <- c(col.seq, cs[order(scores(ca)$species[,1], decreasing=TRUE)])
       }
     }
   } # end of ca method
