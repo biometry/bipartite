@@ -246,7 +246,7 @@ For a more in-depth guide on how to use the \indR{ploweb} function also have a l
 
 <<eval=F>>=
 par(xpd=T)
-plotweb(motten1982, srt= 90, sorting = "ca", curved_links = T)
+plotweb(motten1982, srt= 90, sorting = "ca")
 visweb(motten1982)
 @
 %pdf(file="figures/motten1982_plotweb.pdf", width=8, height=6)
