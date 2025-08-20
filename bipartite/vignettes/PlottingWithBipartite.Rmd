@@ -21,7 +21,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`r knitr::opts_chunk$set(cache = TRUE, fig.align = 'center', dpi = 150, out.width = "100%")`
+`r knitr::opts_chunk$set(cache = FALSE, fig.align = 'center', 
+                         dpi = 100, out.width = "100%", dev = "jpeg")`
 
 # Preparing a web for plotting
 
