@@ -40,7 +40,7 @@ For an overview of other computing resources, data, books, journals etc. check o
 Package: \tab bipartite\cr
 Type: \tab Package\cr
 Version: \tab 2.22\cr
-Date: \tab 2025-05-23\cr
+Date: \tab 2025-08-21\cr
 License: \tab GPL \cr
 }
 }
@@ -49,10 +49,11 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 2.22 (23-May-2025)
+  \item 2.22 (21-Aug-2025)
   \describe{
-    \item{New implementation of \code{\link{plotweb}}}{For a more in depth demonstration of the new functionalities have a look at the new \code{PlottingWithBipartite} vignette.}
+    \item{New implementation of \code{\link{plotweb}}.}{For a more in depth demonstration of the new functionalities (provided by Tobias Bauer) have a look at the new \code{PlottingWithBipartite} vignette. The old function is deprecated but still available; see help file on how to invoke it.}
     \item{Code changes to \code{\link{sortweb}}}{It now accepts "ca" as a sort.order}
+    \item{Deleted}{accompanying papers from the doc-folder (to save space and traffic). The papers are open access anyway.}
   }
 
   \item 2.21 (20-Feb-2025)
