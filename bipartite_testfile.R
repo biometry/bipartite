@@ -14,9 +14,58 @@ R CMD install bipartite_2.22.tar.gz
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
 
 
+#### check reverse dependencies ####
+# identify, which packages depend on bipartite:
+devtools::revdep("bipartite")
+# [1] "bioregion"     "bipartiteD3"   "bootPLS"       "cassandRa"    
+# [5] "econetwork"    "econullnetr"   "HiveR"         "leiden"       
+# [9] "NIMAA"         "nos"           "PhageCocktail" "plsRbeta"     
+# [13] "plsRglm"       "primer"        "RPANDA"        "tapnet"  
+
+# check whether changes break reverse dependencies:
+pak::pkg_install("r-lib/revdepcheck")
+library(revdepcheck)
+setwd("bipartite/") # move into package-directory for this test
+getwd()
+revdep_check(num_workers = 4)
+
+# ── CHECK ───────────────────────────────────────────────────────────────────────────────────── 16 packages 
+# ✔ bipartiteD3 0.3.2                     ── E: 1     | W: 0     | N: 0                                          
+# ✔ cassandRa 0.2.0                       ── E: 0     | W: 0     | N: 0                                          
+# ✔ econetwork 0.7.0                      ── E: 1     | W: 0     | N: 0                                          
+# ✔ bootPLS 1.0.1                         ── E: 1     | W: 0     | N: 0                                          
+# ✖ econullnetr 0.2.1                     ── E: 0  +2 | W: 0     | N: 0                                          
+# ✔ bioregion 1.2.0                       ── E: 0     | W: 0     | N: 0                                          
+# ✔ HiveR 0.4.0                           ── E: 0     | W: 0     | N: 0                                          
+# ✔ leiden 0.4.3.1                        ── E: 1     | W: 0     | N: 0                                          
+# ✔ nos 2.0.0                             ── E: 0     | W: 0     | N: 0                                          
+# ✔ PhageCocktail 1.0.3                   ── E: 0     | W: 0     | N: 1                                          
+# ✔ NIMAA 0.2.1                           ── E: 0     | W: 0     | N: 0                                        
+# ✔ plsRbeta 0.3.1                        ── E: 0     | W: 0     | N: 0                                          
+# ✔ plsRglm 1.5.1                         ── E: 0     | W: 0     | N: 0                                          
+# ✔ primer 1.2.0                          ── E: 0     | W: 0     | N: 2                                          
+# ✔ tapnet 0.3                            ── E: 0     | W: 0     | N: 1                                          
+# ✖ RPANDA 2.4                            ── E: 0     | W: 0  +1 | N: 0  +1                                      OK: 14  
 
 
-## bipartite test file ##
+# econullnetr
+library(econullnetr)
+sil.null <- generate_null_net(Silene[, 2:7], Silene.plants[, 2:6], sims = 2, c.samples = Silene[, 1], r.samples = Silene.plants[, 1])
+plot_bipartite(sil.null)
+# change in econullnetr::plot_bipartite: method -> sorting
+
+# RPANDA
+plot_network: possible error in plotweb(as.matrix(link), col.low =
+                                          col.P, col.high = col.H, col.interaction = "lightgray", empty =
+                                          TRUE): unused arguments (col.low = col.P, col.high = col.H,
+                                                                   col.interaction = "lightgray")
+# offensive code:
+try(plotweb(as.matrix(link),col.low=col.P,col.high = col.H,col.interaction = "lightgray",empty=TRUE))
+col.low --> lower_color
+col.high --> higher_color
+col.interaction --> link_color
+
+#### bipartite test file ####
 
 ## CHECK R-CONSOLE FOR RED TEXT INDICATING ERRORS!! ##
 
