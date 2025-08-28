@@ -106,6 +106,25 @@ plotweb <- function(web,
   # Extract newly set margin in inches
   mai <- par()$mai
 
+  # link_color was given as an unnamed matrix
+  # rownames and colnames need to be set
+  if (is.matrix(link_color)) {
+    if (is.null(rownames(link_color))) {
+      rownames(link_color) <- rownames(web)
+    }
+    if (is.null(colnames(link_color))) {
+      colnames(link_color) <- colnames(web)
+    }
+  } else if (is.vector(link_color)) {
+    # link_color was given as a unnamed vector
+    # and needs to be converted to a named matrix
+    link_color <- matrix(link_color,
+                         nrow = nrow(web),
+                         ncol = ncol(web))
+    rownames(link_color) <- rownames(web)
+    colnames(link_color) <- colnames(web)
+  }
+
   # Sort the web according to the user defined method
   web <- sortweb(web, sort.order = sorting, empty = empty)
 
@@ -132,6 +151,11 @@ plotweb <- function(web,
     r_names <- rev(r_names)
     c_names <- rev(c_names)
     web <- web[r_names, c_names]
+  }
+
+  # link_color needs to be sorted accordingly
+  if (is.matrix(link_color)) {
+    link_color <- link_color[r_names, c_names]
   }
 
   # Extract the higher and lower label texts
@@ -670,7 +694,10 @@ plotweb <- function(web,
     y2 <- link$xcoord.bl
     y3 <- link$xcoord.tr
     y4 <- link$xcoord.br
-    if (link_color == "lower") {
+    if (length(dim(link_color)) == 2) { # Color is defined for each link
+      l_col <- link_color[link$row, link$col]
+    }
+    else if (link_color == "lower") {
       l_col <- lower_color[link$row]
     } else if (link_color == "higher") {
       l_col <- higher_color[link$col]

@@ -90,7 +90,7 @@ plotweb(web,
                          A single color or a list of colors used to plot the lower (row) additional boxes. (Default: "red")}
   \item{lower_text_color}{A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})}
   \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
-  \item{link_color}{"lower", "higher", or single color value. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")}
+  \item{link_color}{"lower", "higher", a single color value, or a matrix with color values for each entry in the interaction web. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")}
   \item{link_border}{Either "same" or a single color or a list of colors used to plot the link borders.
                       If "same", the borders have the same color as the corresponding boxes.}
   \item{link_alpha}{Number between 0.0 and 1.0 setting the transparency of the links. 
