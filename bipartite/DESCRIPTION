@@ -1,8 +1,8 @@
 Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
-Version: 2.22
-Date: 2025-08-18
+Version: 2.23
+Date: 2025-09-28
 Authors@R: c(person(given = "Carsten F.",
                     family = "Dormann",
                     role = c("aut", "cre"),

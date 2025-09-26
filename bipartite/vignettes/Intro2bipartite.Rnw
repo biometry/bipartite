@@ -168,12 +168,13 @@ This screenshot is from LibreOffice Calc, and writes names with a ``.'' as separ
 
 After saving as .csv, we read this file in as:
 <<>>=
+getwd()
 small1976 <- read.csv("small1976.csv", row.names=1)
 @
 The \texttt{row.names}-argument ensures that the names in the first column are used as (row) labels in the data set. Note that this object is a data.frame, not a matrix, even though it contains only numbers. \package{bipartite} internally converts it into a matrix if that is the required format for a function.
 
 If we want to have nicer name layouts, with an empty space instead of the ugly point, we can change it like this:
-<<>>=
+<<cache=T>>=
 rownames(small1976) <- gsub(".", " ", rownames(small1976), fixed=T)
 colnames(small1976) <- gsub(".", " ", colnames(small1976), fixed=T)
 small1976[1:5, 1:2] # to save space
@@ -188,7 +189,7 @@ This object is now in the correct format for further analysis and plotting with 
 Raw data often start as tables of individual observations, e.g.~one column containing the name of the species in the first level, another column the name of the species in the other level with which it interacts. A third column records the number of interactions for this pair, i.e. an ``edge weight'':
 
 %write.csv(web2edges(small1976), file="small1976long.csv")
-<<echo=F>>=
+<<echo=F, cache=T>>=
 small.long <- c("Plant", "Pollinator", "edge.weight", "site")
 for (i in 1:nrow(small1976)){
   for (j in 1:ncol(small1976)){
