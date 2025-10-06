@@ -115,7 +115,7 @@ plotweb <- function(web,
     if (is.null(colnames(link_color))) {
       colnames(link_color) <- colnames(web)
     }
-  } else if (is.vector(link_color)) {
+  } else if (is.vector(link_color) && length(link_color) == nrow(web) * ncol(web)) {
     # link_color was given as a unnamed vector
     # and needs to be converted to a named matrix
     link_color <- matrix(link_color,
@@ -696,8 +696,7 @@ plotweb <- function(web,
     y4 <- link$xcoord.br
     if (length(dim(link_color)) == 2) { # Color is defined for each link
       l_col <- link_color[link$row, link$col]
-    }
-    else if (link_color == "lower") {
+    } else if (link_color == "lower") {
       l_col <- lower_color[link$row]
     } else if (link_color == "higher") {
       l_col <- higher_color[link$col]
