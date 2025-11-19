@@ -66,7 +66,7 @@ sortweb <- function(web,
     if (sum(zero_cols) > 0){
       for (species in 1:sum(zero_cols)){
         index <- which(zero_cols)[species]
-        col.seq <- c(row.seq, index)
+        col.seq <- c(col.seq, index)
       }
     }
   } # end of ca method
@@ -107,3 +107,4 @@ sortweb <- function(web,
 # sortweb2(testweb)
 # sortweb2(testweb, sequence=list(rownames(testweb)[3:2], colnames(testweb)[1:5]))
 # sortweb2(testweb, empty=FALSE)
+
