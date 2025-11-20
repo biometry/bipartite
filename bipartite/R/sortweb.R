@@ -25,10 +25,6 @@ sortweb <- function(web,
     if (NROW(web) == 1 | NCOL(web) == 1 | length(unique(as.vector(web))) == 1) {
       method.matched <- "normal"
     }
-    if (any(rowSums(web) == 0, colSums(web) == 0)) {
-      method.matched <- "normal"
-      warning("cannot use ca with 0-rows/cols, using sort.order='normal' instead")
-    }
   }
 
   # simplest sorting as start; for sort.order="normal", no other sorting will be applied
@@ -55,6 +51,22 @@ sortweb <- function(web,
         ca <- ca(web[rs, cs])
         row.seq <- c(row.seq, rs[order(scores(ca)$sites[,1], decreasing=TRUE)])
         col.seq <- c(col.seq, cs[order(scores(ca)$species[,1], decreasing=TRUE)])
+      }
+    }
+    # add non-interacting species to end
+    zero_rows <- rowSums(web) == 0
+    if (sum(zero_rows) > 0){
+      for (species in 1:sum(zero_rows)){
+        index <- which(zero_rows)[species]
+        row.seq <- c(row.seq, index)
+      }
+    }
+    
+    zero_cols <- colSums(web) == 0
+    if (sum(zero_cols) > 0){
+      for (species in 1:sum(zero_cols)){
+        index <- which(zero_cols)[species]
+        col.seq <- c(col.seq, index)
       }
     }
   } # end of ca method
@@ -95,3 +107,4 @@ sortweb <- function(web,
 # sortweb2(testweb)
 # sortweb2(testweb, sequence=list(rownames(testweb)[3:2], colnames(testweb)[1:5]))
 # sortweb2(testweb, empty=FALSE)
+
