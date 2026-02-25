@@ -71,11 +71,11 @@ class MTRand {
 public:
 	typedef unsigned long uint32;  // unsigned integer type, at least 32 bits
 	
-	enum { N = 624 };       // length of state vector
+	static const int N = 624;       // length of state vector
 	enum { SAVE = N + 1 };  // length of array for save()
 
 protected:
-	enum { M = 397 };  // period parameter
+	static const int M = 397;  // period parameter
 	
 	uint32 state[N];   // internal state
 	uint32 *pNext;     // next value to get from state
