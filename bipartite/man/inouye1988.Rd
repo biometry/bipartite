@@ -24,6 +24,6 @@ Male and female pollinators were summed when moving this data set from NCEAS to 
 }
 \examples{
 data(inouye1988)
-plotweb(inouye1988)
+plotweb(data.matrix(inouye1988))
 }
 \keyword{datasets}

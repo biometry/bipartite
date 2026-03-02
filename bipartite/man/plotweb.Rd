@@ -14,6 +14,7 @@ A two dimensional matrix is plotted as a bipartite graph.
 }
 \usage{
 plotweb(web,
+        main = NULL,
         sorting = "normal",
         empty = FALSE,
         higher_abundances = NULL,
@@ -57,6 +58,7 @@ plotweb(web,
 \arguments{
   \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
              Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
+  \item{main}{An overall title (on top) for the plot.}
   \item{sorting}{Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.}
   \item{empty}{If \code{TRUE} empty columns and rows are removed from the web.}
   \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!}

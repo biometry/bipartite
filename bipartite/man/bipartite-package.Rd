@@ -49,6 +49,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 2.24 (5-Mar-2026)
+  \describe{
+    \item{\code{\link{sortweb}} using \code{sorting = "ca"} now works with empty rows/columns.}{Thanks to a contribution from Jake Dalzell.}
+    \item{Adding titles in \code{\link{plotweb}} is now possible,}{using the \code{main} argument.}
+  }
+
   \item 2.23 (XX-YYY-2025)
   \describe{
     \item{Colouring links individually is now possible in \code{\link{plotweb}},}{which now accepts a matrix defining the colours (\option{link_color}).}
