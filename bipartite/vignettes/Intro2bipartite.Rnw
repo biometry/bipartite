@@ -168,7 +168,6 @@ This screenshot is from LibreOffice Calc, and writes names with a ``.'' as separ
 
 After saving as .csv, we read this file in as:
 <<>>=
-getwd()
 small1976 <- read.csv("small1976.csv", row.names=1)
 @
 The \texttt{row.names}-argument ensures that the names in the first column are used as (row) labels in the data set. Note that this object is a data.frame, not a matrix, even though it contains only numbers. \package{bipartite} internally converts it into a matrix if that is the required format for a function.
@@ -197,7 +196,6 @@ for (i in 1:nrow(small1976)){
   }
 }
 write.table(small.long, file="small1976long.csv", quote=F, col.names = F, row.names = F, sep = ",")
-
 @
 
 {
@@ -246,23 +244,20 @@ Please run example code for these functions to get a feeling for their abilities
 For a more in-depth guide on how to use the \indR{ploweb} function also have a look at the \indR{PlottingWithBipartite} vignette. 
 
 <<eval=F>>=
-par(xpd=T)
 plotweb(motten1982, srt= 90, sorting = "ca")
 visweb(motten1982)
 @
-%pdf(file="figures/motten1982_plotweb.pdf", width=8, height=6)
-%par(xpd=T)
-%plotweb(motten1982)
+%pdf(file="figures/motten1982_plotweb.pdf", width=10, height=6)
+%plotweb(motten1982, srt= 90, sorting = "ca")
 %dev.off()
 %
 %pdf(file="figures/motten1982_visweb.pdf", width=7, height=3)
-%par(xpd=T)
 %visweb(motten1982)
 %dev.off()
 %
 \begin{figure}
 \centering
-	\includegraphics[width=0.7\textwidth]{figures/motten1982_plotweb}
+	\includegraphics[width=0.99\textwidth]{figures/motten1982_plotweb}
 	\smallskip
 	\includegraphics[width=0.9\textwidth]{figures/motten1982_visweb}
 	\caption{A bipartite graph of Motten's (1982) pollination network (\emph{top}) and a visualisation of the adjacency matrix (\emph{bottom}). The darker a cell is represented, the more interactions have been observed. By default, \texttt{plotweb} minimises overlap of lines and \texttt{visweb} sorts by marginal totals.}
@@ -302,7 +297,7 @@ plotModuleWeb(mod)
 	\label{fig:Amoduleplot}
 \end{figure}
 %
-To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot} top).
+To visualise either level separately projected into one-mode mode, we have to employ a different package, for example \package{sna} \citep{Butts2013}. We can do the projection on the fly, though. For networks with even a moderate number o species, such plots can become rather obtuse and uninformative (Fig.~\ref{fig:Amottengplot}).
 <<eval=F>>=
 par(mfrow=c(1,2), xpd=T)
 sna::gplot(as.one.mode(motten1982, project="higher"), 
@@ -327,12 +322,12 @@ sna::gplot(as.one.mode(motten1982, project="lower"),
   \begin{figure}
   \centering
   	\includegraphics[width=0.9\textwidth]{figures/motten1982_gplot}
-  	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{top}), plants in green (\emph{bottom}). Note that these plots are point-symmetrically variable, hence every plot will look somewhat different.}
+  	\caption{Plots of one-mode projections of Motten's (1982) pollination network. Pollinators in red (\emph{left}), plants in green (\emph{right}). Note that these plots are point-symmetrically variable, hence every plot will look somewhat different.}
   	\label{fig:Amottengplot}
   \end{figure}
 
 
-\clearpage
+%\clearpage
 
 \section{Computing indices} %--------------------------------------------------------------------
 Network indices are primarily that: metrics to quantify an aspect of the network. Each may have a justification, a purpose, but the information in a matrix is only finite. As a consequence, network indices are highly correlated. There is thus no point in computing all indices in the book; rather should we consider very carefully what we want to test with the data and select one (or a few) indices to do so.

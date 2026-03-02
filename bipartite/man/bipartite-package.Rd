@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 2.23\cr
-Date: \tab 2025-08-21\cr
+Version: \tab 2.24\cr
+Date: \tab 2026-03-05\cr
 License: \tab GPL \cr
 }
 }
@@ -51,11 +51,13 @@ Please see help page \code{\link{versionlog}} for all changes and updates prior 
 \itemize{
   \item 2.24 (5-Mar-2026)
   \describe{
+    \item{Changed definitions of two constants in C++ code of MersenneTwister.h}{for compatibility with C++20, following a bug report by CRAN. Fixed by Tobias Bauer.}
+    \item{Removed bmn5.cc,}{the old binmatnest nestedness algorithm of Rodríguez-Gironés and Santamaría (2006). \code{\link{nestednes}} now calls \pkg{vegan}'s \code{\link[vegan]{nestedtemp}}.}    
     \item{\code{\link{sortweb}} using \code{sorting = "ca"} now works with empty rows/columns.}{Thanks to a contribution from Jake Dalzell.}
     \item{Adding titles in \code{\link{plotweb}} is now possible,}{using the \code{main} argument.}
   }
 
-  \item 2.23 (XX-YYY-2025)
+  \item 2.23 (10-Oct-2025)
   \describe{
     \item{Colouring links individually is now possible in \code{\link{plotweb}},}{which now accepts a matrix defining the colours (\option{link_color}).}
   }
