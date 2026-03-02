@@ -916,7 +916,7 @@ The analysis of bipartite networks has seen a recent explosion of applications i
 
 \bigskip
 
-The Rnw source of this document is at \url{https://github.com/biometry/bipartite/bipartite/vignettes/Intro2bipartite.Rnw}.
+The Rnw source of this document is at \url{https://github.com/biometry/bipartite/tree/master/bipartite/vignettes/Intro2bipartite.Rnw}.
 
 %\backmatter % only if document type is book!
 %\begin{fullwidth}

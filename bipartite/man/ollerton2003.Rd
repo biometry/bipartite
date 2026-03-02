@@ -22,7 +22,7 @@ Ollerton, J., S.D. Johnson, L. Cranmer and S. Kellie (2003) The pollination ecol
 }
 \examples{
 data(ollerton2003)
-plotweb(data.matrix(ollerton2003))
+plotweb(ollerton2003)
 ## maybe str(ollerton2003) ; plot(ollerton2003) ...
 }
 \keyword{datasets}

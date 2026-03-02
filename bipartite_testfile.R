@@ -8,8 +8,8 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.23.tar.gz --as-cran
-R CMD install bipartite_2.23.tar.gz
+R CMD check bipartite_2.24.tar.gz --as-cran
+R CMD install bipartite_2.24.tar.gz
 # now check in the testfile below anything that changed whether it actually works!
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
 
@@ -431,8 +431,7 @@ plotweb(Safariland, abuns.type='independent',arrow="down.center",low.abun=myabun
 plotweb(Safariland, abuns.type='additional',arrow="down.center",low.abun=myabuns.low*0.2)       # always shows marginals as abundances
 plotweb(Safariland, abuns.type='independent',arrow="no",low.abun=myabuns.low*0.2)               # currently gives a warning, but the ratio between upper width and lower width could actually tell you something about preferences!
 
-
-
+plotweb(data.matrix(inouye1988)) # check that plotweb works for data.frame
 
 # plotweb2 ...
 
