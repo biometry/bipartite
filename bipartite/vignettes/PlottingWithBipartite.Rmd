@@ -105,10 +105,6 @@ plotweb_deprecated(Safariland)
 
 However, as you can see, for larger networks the placement of the labels quickly becomes somewhat confusing.
 
-```{r}
-plotweb_deprecated(Safariland, text.rot = 90)
-```
-
 # Plotting the new way
 
 Since version `2.22` `bipartite` contains a refined version of the `plotweb` function. 
@@ -117,23 +113,9 @@ Among other things the stacking of labels is replaced in that version.
 And instead by default the labels are scaled so that they will always fit in the plot.
 The default function call stays the same, so for our randomly generated web the results is. 
 
-```{r first_plot, cache = FALSE}
-plotweb(web)
-```
-
-However, when we have a look at the plot produced for the `Safariland` web, ...
 ```{r new_safariland}
 plotweb(Safariland)
 ```
-
-it becomes clear that this approach may not be ideal for crowded webs.
-So for networks with many species—especially those with long names—we recommend rotating the axis labels (e.g., by 90°) using the `srt` argument. 
-
-```{r safariland_90}
-plotweb(Safariland, srt = 90)
-```
-
-Now the graph is way more readable, even without a magnifying glass.
 
 ## Text size and spacing
 
@@ -165,7 +147,7 @@ If you have found a `text_size` that you like and simply want to scale the plot 
 you can also set `spacing = "auto"`.
 
 ```{r, fig.height=6, fig.width=6}
-plotweb(Safariland, spacing = "auto", srt = 90, text_size = 0.75)
+plotweb(Safariland, spacing = "auto", text_size = 0.75)
 ```
 
 The option `text_size = "auto"` is designed to automatically reduce the text size only when necessary. If all labels fit within the plot at the default size of 1, that size will be used. Otherwise, the text size is scaled down just enough to ensure everything fits without overlap.
@@ -292,7 +274,7 @@ Now that we've covered the basics of plotting bipartite networks, let's explore 
 With the option `curved_links = TRUE` the interaction links can be changed from straight lines to curves.
 
 ```{r}
-plotweb(Safariland, srt = 90, curved_links = TRUE)
+plotweb(Safariland, curved_links = TRUE)
 ```
 
 This obviously also works for horizontal plots.

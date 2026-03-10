@@ -88,7 +88,7 @@ plotweb <- function(web,
   }
 
   if (!is.matrix(web)) {
-        web <- as.matrix(web)
+    web <- as.matrix(web)
         # stop("The argument web must be a matrix.")
   }
 
@@ -237,6 +237,9 @@ plotweb <- function(web,
   }
 
   # Clean up text rotation inputs
+  if (!horizontal) {
+    srt <- srt + 90
+  }
   srt <- srt %% 360
 
   if (horizontal) {
