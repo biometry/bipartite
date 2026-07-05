@@ -22,8 +22,7 @@ VIGNETTE:
 		* Modularity
 * expand on null models and what function they serve and why they probably do not do what the user thinks (see Agroecology chapter).
 * explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
-
-
+* bmotifs (...)  |  CFD 17.5.2021; package discontinued on CRAN: pull over functionality to bipartite
 
 CLASS "web":
 * ISSUE github: new S3 class "web" (then: "weblist", "webarray"):
@@ -186,8 +185,7 @@ Execution halted: FIXED for version 2.09, but not released on CRAN until 2.10
 * provide links in vignette OR include function in bipartite for:
 	** dynsdm (by Miele et al., CRAN)
 	** infomapecology (github, not CRAN)
-	** bmotifs (...)  |  CFD 17.5.2021
-* alias "edgelist2webs" with frame2webs, as more people think of this input as an edgelist! | CFD 17.5.2021
+ alias "edgelist2webs" with frame2webs, as more people think of this input as an edgelist! | CFD 17.5.2021
 * retire bmn5: it is available from vegan (re-implemented) and NODF has taken over  |  CFD 17.5.2021
 * add option to plot names in PAC!  |  CFD 17.5.2021
 * make modularity available from networklevel   |  CFD 17.5.2021
