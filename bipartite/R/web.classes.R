@@ -87,6 +87,10 @@ lower_attributes <- function(web) {
   attr(web, "lower_attributes")
 }
 
+web_attributes <- function(web) {
+  attr(web, "web_attributes")
+}
+
 # Replacement functions -----------------------------
 `higher_attributes<-` <- function(x, value) {
   if (!is.data.frame(value)) {
@@ -114,6 +118,15 @@ lower_attributes <- function(web) {
   x
 }
 
+`web_attributes<-` <- function(x, value) {
+  if (!is.list(value)) {
+    stop("`web_attributes` must be a list.")
+  }
+
+  attr(x, "web_attributes") <- value
+  x
+}
+
 # Print function ------------------------------------
 print.bipartite_web <- function(web) {
   cat("<bipartite_web object>\n")
@@ -123,6 +136,8 @@ print.bipartite_web <- function(web) {
   print(higher_attributes(web))
   cat("Lower species attributes:\n")
   print(lower_attributes(web))
+  cat("Web attributes:\n")
+  print(web_attributes(web))
   cat(strrep("-", 50), "\n")
   cat("Matrix:\n")
   print(matrix(web,
