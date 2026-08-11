@@ -46,6 +46,38 @@ bipartite_web <- function(x,
   )
 }
 
+# Subsetting ----------------------------------------
+`[.bipartite_web` <- function(x, i, j, drop = TRUE) {
+
+  # Subset the actual matrix
+  y <- NextMethod("[", drop = drop)
+
+  # If dimensions have been dropped, we no longer have
+  # a my_matrix in the intended sense.
+  if (drop && !is.matrix(y)) {
+    return(y)
+  }
+
+  lower_attributes <- attr(x, "lower_attributes")
+  higher_attributes <- attr(x, "higher_attributes")
+  web_attributes <- attr(x, "web_attributes")
+
+  if (!missing(i)) {
+    lower_attributes <- lower_attributes[i, , drop = FALSE]
+  }
+
+  if (!missing(j)) {
+    higher_attributes <- higher_attributes[j, , drop = FALSE]
+  }
+
+  bipartite_web(
+    y,
+    lower_attributes = lower_attributes,
+    higher_attributes = higher_attributes,
+    web_attributes = web_attributes
+  )
+}
+
 # Access functions ----------------------------------
 higher_attributes <- function(web) {
   attr(web, "higher_attributes")
@@ -93,5 +125,8 @@ print.bipartite_web <- function(web) {
   print(lower_attributes(web))
   cat(strrep("-", 50), "\n")
   cat("Matrix:\n")
-  print(web[, ])
+  print(matrix(web,
+               nrow = nrow(web),
+               ncol = ncol(web),
+               dimnames = list(rownames(web), colnames(web))))
 }
