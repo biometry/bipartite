@@ -59,7 +59,7 @@ bipartite_web <- function(x,
   }
 
   if (!is.list(meta_attributes)) {
-    stop("`info` must be a list.")
+    stop("`meta_attributes` must be a list.")
   }
 
   structure(
@@ -220,7 +220,7 @@ bipartite_webarray <- function(webs, ...,
     if (is(webs, "list")) {
       web_names <- names(webs)
       if (is.null(web_names)) {
-        web_names <- paste0("web", seq_len(webs))
+        web_names <- paste0("web", seq_along(webs))
       }
     } else {
       # combine all ... and x into a single list:
@@ -476,10 +476,10 @@ print.bipartite_webarray <- function(webarray) {
   }
 }
 
-warray <- bipartite_webarray(Safariland, vazarr)
-higher_attributes(warray)$rand <- runif(41)
-higher_attributes(warray, "Safariland")$rand <- runif(41)
-warray[1:3, 3:5, "Safariland"]
-print(warray)
-web_names <- dimnames(warray)[[3]]
-web_names
+# warray <- bipartite_webarray(Safariland, vazarr)
+# higher_attributes(warray)$rand <- runif(41)
+# higher_attributes(warray, "Safariland")$rand <- runif(41)
+# warray[1:3, 3:5, "Safariland"]
+# print(warray)
+# web_names <- dimnames(warray)[[3]]
+# web_names
