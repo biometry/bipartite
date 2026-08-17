@@ -3,58 +3,58 @@
 
 # Generics ------------------------------------------------
 # Access and replacement functions are S3 generics
-higher_attributes <- function(web, ...) {
+higher_attributes <- function(x, web_id = NULL) {
   UseMethod("higher_attributes")
 }
-`higher_attributes<-` <- function(x, ..., value) {
+`higher_attributes<-` <- function(x, web_id = NULL, value) {
   UseMethod("higher_attributes<-")
 }
 
 
-lower_attributes <- function(web, ...) {
+lower_attributes <- function(x, web_id = NULL) {
   UseMethod("lower_attributes")
 }
-`lower_attributes<-` <- function(x, ..., value) {
+`lower_attributes<-` <- function(x, web_id = NULL, value) {
   UseMethod("lower_attributes<-")
 }
 
-meta_attributes <- function(web, ...) {
+meta_attributes <- function(x, web_id = NULL) {
   UseMethod("meta_attributes")
 }
-`meta_attributes<-` <- function(x, ..., value) {
+`meta_attributes<-` <- function(x, web_id = NULL, value) {
   UseMethod("meta_attributes<-")
 }
 
 # Base class bipartite_web --------------------------------
 ## Basic constructor --------------------------------------
-bipartite_web <- function(x,
+bipartite_web <- function(web,
                           higher_attributes = NULL,
                           lower_attributes = NULL,
                           meta_attributes = list()) {
   # Validate the underlying object
-  if (!is.matrix(x)) {
-    x <- as.matrix(x)
+  if (!is.matrix(web)) {
+    web <- as.matrix(web)
   }
 
   # Default metadata
   if (is.null(lower_attributes)) {
     lower_attributes <- data.frame(
-      row.names = rownames(x)
+      row.names = rownames(web)
     )
   }
 
   if (is.null(higher_attributes)) {
     higher_attributes <- data.frame(
-      row.names = colnames(x)
+      row.names = colnames(web)
     )
   }
 
   # Validate metadata dimensions
-  if (!is.data.frame(lower_attributes) || nrow(lower_attributes) != nrow(x)) {
+  if (!is.data.frame(lower_attributes) || nrow(lower_attributes) != nrow(web)) {
     stop("`lower_attributes` must be a data frame with one row per matrix row.")
   }
 
-  if (!is.data.frame(higher_attributes) || nrow(higher_attributes) != ncol(x)) {
+  if (!is.data.frame(higher_attributes) || nrow(higher_attributes) != ncol(web)) {
     stop("`higher_attributes` must be a data frame with one row per matrix column.")
   }
 
@@ -63,7 +63,7 @@ bipartite_web <- function(x,
   }
 
   structure(
-    x,
+    web,
     lower_attributes = lower_attributes,
     higher_attributes = higher_attributes,
     meta_attributes = meta_attributes,
@@ -105,20 +105,20 @@ bipartite_web <- function(x,
 
 ## Access functions ---------------------------------------
 
-higher_attributes.bipartite_web <- function(web, ...) {
-  attr(web, "higher_attributes")
+higher_attributes.bipartite_web <- function(x, web_id) {
+  attr(x, "higher_attributes")
 }
 
-lower_attributes.bipartite_web <- function(web) {
-  attr(web, "lower_attributes")
+lower_attributes.bipartite_web <- function(x, web_id) {
+  attr(x, "lower_attributes")
 }
 
-meta_attributes.bipartite_web <- function(web) {
-  attr(web, "meta_attributes")
+meta_attributes.bipartite_web <- function(x, web_id) {
+  attr(x, "meta_attributes")
 }
 
 ## Replacement functions ----------------------------------
-`higher_attributes<-.bipartite_web` <- function(x, ..., value) {
+`higher_attributes<-.bipartite_web` <- function(x, web_id, value) {
   if (!is.data.frame(value)) {
     stop("`higher_attributes` must be a data frame.")
   }
@@ -131,7 +131,7 @@ meta_attributes.bipartite_web <- function(web) {
   x
 }
 
-`lower_attributes<-.bipartite_web` <- function(x, ..., value) {
+`lower_attributes<-.bipartite_web` <- function(x, web_id, value) {
   if (!is.data.frame(value)) {
     stop("`lower_attributes` must be a data frame.")
   }
@@ -144,7 +144,7 @@ meta_attributes.bipartite_web <- function(web) {
   x
 }
 
-`meta_attributes<-.bipartite_web` <- function(x, ..., value) {
+`meta_attributes<-.bipartite_web` <- function(x, web_id, value) {
   if (!is.list(value)) {
     stop("`meta_attributes` must be a list.")
   }
@@ -154,34 +154,36 @@ meta_attributes.bipartite_web <- function(web) {
 }
 
 ## Print function -----------------------------------------
-print.bipartite_web <- function(web) {
+print.bipartite_web <- function(x, ...) {
   cat("<bipartite_web object>\n")
-  cat("Dimensions:", nrow(web), "x", ncol(web), "\n")
+  cat("Dimensions:", nrow(x), "x", ncol(x), "\n")
   cat(strrep("-", 50), "\n")
   cat("Higher species attributes:\n")
-  print(higher_attributes(web))
+  print(higher_attributes(x))
   cat("Lower species attributes:\n")
-  print(lower_attributes(web))
+  print(lower_attributes(x))
   cat("Meta attributes:\n")
-  print(meta_attributes(web))
+  print(meta_attributes(x))
   cat(strrep("-", 50), "\n")
   cat("Matrix:\n")
-  print(matrix(web,
-               nrow = nrow(web),
-               ncol = ncol(web),
-               dimnames = list(rownames(web), colnames(web))))
+  print(matrix(x,
+               nrow = nrow(x),
+               ncol = ncol(x),
+               dimnames = list(rownames(x), colnames(x))))
 }
 
 ## Plot function prototype --------------------------------
-plot.bipartite_web <- function(web,
+## Wrapper for plotweb function.
+## TODO: Decide whether to keep / extent the auto color functionality
+plot.bipartite_web <- function(x,
                                higher_color = "black",
                                higher_color_attr = NULL,
                                lower_color_attr = NULL,
                                ...) {
   if (!is.null(higher_color_attr)) {
-    stopifnot(higher_color_attr %in% colnames(higher_attributes(web)))
-    higher_color_attr_vec <- higher_attributes(web)[[higher_color_attr]]
-    higher_names <- rownames(higher_attributes(web))
+    stopifnot(higher_color_attr %in% colnames(higher_attributes(x)))
+    higher_color_attr_vec <- higher_attributes(x)[[higher_color_attr]]
+    higher_names <- rownames(higher_attributes(x))
     print(typeof(higher_color_attr_vec))
     if (is.numeric(higher_color_attr_vec)) {
       ramp <- colorRamp(c("white", "black"))
@@ -194,7 +196,7 @@ plot.bipartite_web <- function(web,
       print(higher_color)
     }
   }
-  plotweb(web, higher_color = higher_color, ...)
+  plotweb(x, higher_color = higher_color, ...)
 }
 
 
@@ -293,41 +295,41 @@ bipartite_webarray <- function(webs, ...,
 }
 
 ### Access functions --------------------------------------
-higher_attributes.bipartite_webarray <- function(x, web = NULL) {
-  if (is.null(web)) {
+higher_attributes.bipartite_webarray <- function(x, web_id = NULL) {
+  if (is.null(web_id)) {
     return(attr(x, "global_higher_attributes"))
-  }  else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  }  else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
     local_attrs <- attr(x, "local_higher_attributes")
-    return(local_attrs[[web]])
+    return(local_attrs[[web_id]])
   }
 }
 
-lower_attributes.bipartite_webarray <- function(x, web = NULL) {
-  if (is.null(web)) {
+lower_attributes.bipartite_webarray <- function(x, web_id = NULL) {
+  if (is.null(web_id)) {
     return(attr(x, "global_lower_attributes"))
-  }  else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  }  else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
     local_attrs <- attr(x, "local_lower_attributes")
-    return(local_attrs[[web]])
+    return(local_attrs[[web_id]])
   }
 }
 
-meta_attributes.bipartite_webarray <- function(x, web = NULL) {
-  if (is.null(web)) {
+meta_attributes.bipartite_webarray <- function(x, web_id = NULL) {
+  if (is.null(web_id)) {
     return(attr(x, "global_meta_attributes"))
-  }  else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  }  else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
     local_attrs <- attr(x, "local_meta_attributes")
-    return(local_attrs[[web]])
+    return(local_attrs[[web_id]])
   }
 }
 
 ### Replacement functions ---------------------------------
-`higher_attributes<-.bipartite_webarray` <- function(x, web = NULL, value) {
+`higher_attributes<-.bipartite_webarray` <- function(x, web_id = NULL, value) {
   if (!is.data.frame(value)) {
     stop("`higher_attributes` must be a data frame.")
   }
@@ -336,17 +338,17 @@ meta_attributes.bipartite_webarray <- function(x, web = NULL) {
     stop("`higher_attributes` must have one row per matrix column")
   }
 
-  if (is.null(web)) {
+  if (is.null(web_id)) {
     attr(x, "global_higher_attributes") <- value
-  } else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  } else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
-    attr(x, "local_higher_attributes")[[web]] <- value
+    attr(x, "local_higher_attributes")[[web_id]] <- value
   }
   x
 }
 
-`lower_attributes<-.bipartite_webarray` <- function(x, web = NULL, value) {
+`lower_attributes<-.bipartite_webarray` <- function(x, web_id = NULL, value) {
   if (!is.data.frame(value)) {
     stop("`lower_attributes` must be a data frame.")
   }
@@ -355,27 +357,27 @@ meta_attributes.bipartite_webarray <- function(x, web = NULL) {
     stop("`lower_attributes` must have one row per matrix column")
   }
 
-  if (is.null(web)) {
+  if (is.null(web_id)) {
     attr(x, "global_lower_attributes") <- value
-  } else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  } else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
-    attr(x, "local_lower_attributes")[[web]] <- value
+    attr(x, "local_lower_attributes")[[web_id]] <- value
   }
   x
 }
 
-`meta_attributes<-.bipartite_webarray` <- function(x, web = NULL, value) {
+`meta_attributes<-.bipartite_webarray` <- function(x, web_id = NULL, value) {
   if (!is.list(value)) {
     stop("`meta_attributes` must be a list.")
   }
 
-  if (is.null(web)) {
+  if (is.null(web_id)) {
     attr(x, "global_meta_attributes") <- value
-  } else if (!web %in% dimnames(x)[[3]] && !web %in% seq_len(dim(x)[[3]])) {
-    stop("Index ", web, " not in ", as.character(substitute(x)), ".")
+  } else if (!web_id %in% dimnames(x)[[3]] && !web_id %in% seq_len(dim(x)[[3]])) {
+    stop("Index ", web_id, " not in ", as.character(substitute(x)), ".")
   } else {
-    attr(x, "local_meta_attributes")[[web]] <- value
+    attr(x, "local_meta_attributes")[[web_id]] <- value
   }
   x
 }
@@ -443,31 +445,31 @@ meta_attributes.bipartite_webarray <- function(x, web = NULL) {
 }
 
 ### Print -------------------------------------------------
-print.bipartite_webarray <- function(webarray) {
+print.bipartite_webarray <- function(x, ...) {
   cat("<bipartite_webarray object>\n")
-  cat("Dimensions:", dim(webarray)[1L], "x", dim(webarray)[2L], "x", dim(webarray) [3L], "\n")
-  web_names <- dimnames(webarray)[[3]]
+  cat("Dimensions:", dim(x)[1L], "x", dim(x)[2L], "x", dim(x) [3L], "\n")
+  web_names <- dimnames(x)[[3]]
   cat("Web names:", web_names, "\n")
   cat(strrep("-", 50), "\n")
   cat("Global higher attributes:\n")
-  print(higher_attributes(webarray))
+  print(higher_attributes(x))
   cat("Global lower attributes:\n")
-  print(lower_attributes(webarray))
+  print(lower_attributes(x))
   cat("Global meta attributes:\n")
-  print(meta_attributes(webarray))
-  nr <- nrow(webarray)
-  nc <- ncol(webarray)
+  print(meta_attributes(x))
+  nr <- nrow(x)
+  nc <- ncol(x)
   for (web in web_names) {
     cat(strrep("-", 50), "\n")
     cat(web, "\n")
     cat("Higher attributes:\n")
-    print(higher_attributes(webarray, web))
+    print(higher_attributes(x, web))
     cat("Lower attributes:\n")
-    print(lower_attributes(webarray, web))
+    print(lower_attributes(x, web))
     cat("Meta attributes:\n")
-    print(meta_attributes(webarray, web))
+    print(meta_attributes(x, web))
     cat("Matrix:\n")
-    web_data <- webarray[,,web]
+    web_data <- x[,,web]
     web_matrix <- matrix(web_data,
                          nrow = nr,
                          ncol = nc,
