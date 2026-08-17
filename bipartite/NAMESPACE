@@ -12,8 +12,11 @@ slope.bipartite, sortmatrix, sortweb, specieslevel, spectral.radius, strength, s
 vaznull, vaznullexternal, versionlog, visweb, web2edges, webs2array, wine)
 
 S3method(plot, wine)
+S3method(plot, bipartite_web)
 S3method(print, bipartite_web)
 S3method(print, bipartite_webarray)
+S3method("[", bipartite_web)
+S3method("[", bipartite_webarray)
 S3method(higher_attributes, bipartite_web)
 S3method(higher_attributes, bipartite_webarray)
 S3method(lower_attributes, bipartite_web)
