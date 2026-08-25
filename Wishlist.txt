@@ -59,6 +59,7 @@ NULLMODEL:
 
 
 OTHER:
+* use difference in Shannon diversity of svd-based van Neuman entropy between web and null model as quantification of how much cannot be explained by marginal totals: amount of information included in specialisation: diversity(svd(small1976)$d/sum(svd(small1976)$d)) vs diversity(svd(nm)$d/sum(svd(nm)$d))
 * recursive modules with Beckett; also check for how negative values are used (apparently different by the two algorithms); are they locally defined?
 * turn testfile into proper testthat routine
 * Multilayer/NPARTITE/METAWEB (through trophic levels, time or space): npartite functionality for multilevel (parasitoid) data; e.g. makeweb.npart from a modelist {Species.higher, Species.lower, Freq, Level}; should correspond to plotweb2 or other multilevel functionality
