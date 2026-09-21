@@ -6,6 +6,8 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
     # participant   "high" or "low" or "both"
     # method        deletion following "random" or "abundance"
     # nrep          only for "random": number of repititions of random extinction sequence
+    # details       logical; should all simulation steps we returned (or only the counts)?
+    # ext.row/ext.col sequence in which to perform extinctions; at present, cannot be both
 
     # if (details==TRUE & pmatch(participant, c("both", "lower", "higher"))==1)
     # {
@@ -22,7 +24,13 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
 
   
     one.second.extinct <- function(web=web, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col){
-		    dead <- matrix(nrow=0, ncol=3)
+		    # Preallocated: this used to be a 0-row matrix grown by rbind() on every pass,
+		    # which reallocates and copies the whole thing each time (O(n^2) and the reason a
+		    # non-terminating sequence could reach gigabytes). The sequence can never be longer
+		    # than the number of species in the web.
+		    max.steps <- sum(dim(web)) + 1L
+		    dead <- matrix(NA_real_, nrow=max.steps, ncol=3)
+		    n.dead <- 0L
         colnames(dead) <- c("no", "ext.lower", "ext.higher")
         m2 <- web
         i <- 1
@@ -31,7 +39,9 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
             n <- extinction(m2, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col)
         #    rowSums(n)
 # test only:  (n <- extinction(m2, participant=participant, method=method, ext.row, ext.col))
-            dead <- rbind(dead, c(i, attributes(m2 <- empty(n, count=TRUE))$empty))
+            n.dead <- n.dead + 1L
+            if (n.dead > max.steps) stop("second.extinct: extinction sequence did not terminate.", call.=FALSE)
+            dead[n.dead, ] <- c(i, attributes(m2 <- empty(n, count=TRUE))$empty)
             if (participant == "lower" & NROW(m2) < 2) break;
             if (participant == "higher" & NCOL(m2) < 2) break;
             if (participant == "both" & min(dim(m2)) < 2) break;
@@ -48,9 +58,11 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
             i <- i + 1
         }
         #m2
+        dead <- dead[seq_len(n.dead), , drop=FALSE]   # trim to what was actually used
+        colnames(dead) <- c("no", "ext.lower", "ext.higher")
         dead2 <- rbind(dead, c(NROW(dead)+1, NROW(m2), NCOL(m2))) # counts extinction knock-on for the last species
        	#dead2
-       	# there is a completely mystifying bug somewhere, occassionally (roughly 1/50) producing a 2 for NROW(m2) but only under the settings participants="lower" and method="degree".
+       	# there is a completely mystifying bug somewhere, occasionally (roughly 1/50) producing a 2 for NROW(m2) but only under the settings participants="lower" and method="degree".
        	# This is a fix for these rare situations:
        	if (participant == "lower" & method== "degree"){
        		if (length(table(dead[,2])) > 1) dead2[,2] <- 1
@@ -58,9 +70,9 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
 		
       	# If I use a random sequence, sometimes it takes only 23 steps to let all pollinators go extinct, sometimes 24. So, the matrix "dead" will have different dimensions. Correct this:
         if (nrow(dead)+1 != nrow(dead2)) stop("PANIC! Something went wrong with the extinct sequence! Please contact the author to fix this!!")
-        if (participant == "lower") supposed.length <- NROW(web) 
+        if (participant == "lower")  supposed.length <- NROW(web) 
         if (participant == "higher") supposed.length <- NCOL(web) 
-        if (participant == "both") supposed.length <- NROW(dead2)#supposed.length <- sum(dim(web)) ### was max; but obviously can be the sum of both levels
+        if (participant == "both")   supposed.length <- NROW(dead2) #supposed.length <- sum(dim(web)) ### was max; but obviously can be the sum of both levels
 
         if (NROW(dead2) != supposed.length) { # Is dead of the right length?
         	missing <- supposed.length - NROW(dead2) 
@@ -79,7 +91,6 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
         return(dead2)
     }
 
-    if (is.vector(method)) sequence = method ### In case someone provides a sequence to the method, rather than ext.row or ext.col!
     if (pmatch(method, c("abundance", "random", "degree", "external")) %in% c(1,3,4)){# i.e. if "abundance", "degree" or "external"
         out <- one.second.extinct(web=web, participant=participant, method=method, ext.row=ext.row, ext.col=ext.col)
     
@@ -96,7 +107,7 @@ function(web, participant="higher", method="abun", nrep=10, details=FALSE, ext.r
             for (k in 1:length(o)) { 
             	nr <- nrow(o[[k]])
             	z[1:nr, ] <- z[1:nr, ] + o[[k]]
-            	rm(nr) 
+            	
             }
             out <- z/length(o)
             out[,1] <- 1:max(lengths)

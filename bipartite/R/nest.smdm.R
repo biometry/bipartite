@@ -30,6 +30,39 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     colnames(x) <- xcnames
   }
   
+
+  ### Vectorised pair counters #################################################
+  # The six scalar loops these replace were of the form
+  #     for (j in 2:n) for (i in 1:(j-1)) { S <- 0; for (k in 1:m) if (<cond>) S <- S+1 }
+  # i.e. O(n^2 * m) interpreted operations. The same counts come out of one matrix
+  # product (binary case) or one pass over columns (weighted case).
+
+  # binary: number of columns where BOTH rows carry a 1
+  cooccurrence.count <- function(m) tcrossprod(m == 1) * 1
+
+  # weighted: number of columns where row j is non-zero AND strictly smaller than row i
+  dominance.count <- function(m){
+    S <- matrix(0, nrow(m), nrow(m))
+    for (k in seq_len(ncol(m))){
+      v <- m[, k]
+      S <- S + outer(v, v, function(aj, ai) (aj != 0) & (aj < ai))
+    }
+    S
+  }
+
+  # fill the lower triangle: 0 where cmp[j] >= cmp[i], else S[j,i] * 100 / denom[j]
+  fill.N <- function(S, denom, cmp){
+    n <- length(denom)
+    dj <- matrix(denom, n, n, byrow=FALSE)
+    cj <- matrix(cmp,   n, n, byrow=FALSE)
+    ci <- matrix(cmp,   n, n, byrow=TRUE)
+    vals <- ifelse(cj >= ci, 0, S * 100 / dj)
+    N <- matrix(NA_real_, n, n)
+    lo <- lower.tri(N)
+    N[lo] <- vals[lo]
+    N
+  }
+
   ### Unweighted NODF Function ####
   unweightednodf = function (x, constraints){
     # Sorting matrix order by row and collumn sums
@@ -42,20 +75,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Nrow = matrix(rep(NA, times=nrow(tab0)^2), nrow(tab0), nrow(tab0))
     dimnames(Nrow)=list(rownames(tab0), rownames(tab0))
     
-    for (jrow in 2:nrow(tab0)){
-      for (irow in 1:(jrow-1)){
-        if (MTrow[jrow]>=MTrow[irow]){Nrow[jrow, irow] = 0
-        } else {
-          S=0
-          for(i in 1:ncol(tab0)){
-            if (tab0[jrow, i]==1&tab0[jrow, i]==tab0[irow, i]) {
-              S = S+1
-            }
-          }
-          Nrow[jrow, irow] = S*100/MTrow[jrow]
-        }
-      }
-    }      
+    Nrow[] <- fill.N(cooccurrence.count(tab0),  denom=MTrow, cmp=MTrow)
     Nrow = Nrow[rownames(x), rownames(x)]
     
     # NODF for rows
@@ -67,21 +87,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Ncol = matrix(rep(NA, times=ncol(tab0)^2), ncol(tab0), ncol(tab0))
     dimnames(Ncol) = list(colnames(tab0), colnames(tab0))
     
-    for (jcol in 2:ncol(tab0)){
-      for (icol in 1:(jcol-1)){
-        if (MTcol[jcol] >= MTcol[icol]){Ncol[jcol, icol]=0} 
-        else {
-          S=0
-          for(i in 1:nrow(tab0)){
-            if (tab0[i,jcol]==1&tab0[i,jcol]==tab0[i,icol]) {
-              S=S+1
-            }
-          }
-          Ncol[jcol,icol]=S*100/MTcol[jcol]
-        }
-      }
-      
-    }      
+    Ncol[] <- fill.N(cooccurrence.count(t(tab0)), denom=MTcol, cmp=MTcol)
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # NODF for rows
@@ -123,7 +129,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
       NODF_SM_row= SM_Nrow/SM_nrow
       NODF_DM_row= DM_Nrow/DM_nrow
       
-      # constraints for collumns
+      # constraints for columns
       
       colcons=cbind (colnames(x),constraints[(nrow(x)+1):length(constraints)])
       tabccons=table(colcons[,1],colcons[,2])
@@ -182,21 +188,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Nrow= matrix(rep(NA,times=nrow(tab0)^2),nrow(tab0),nrow(tab0))
     dimnames(Nrow)=list(rownames(tab0),rownames(tab0))
     
-    for (jrow in 2:nrow(tab0)){
-      for (irow in 1:(jrow-1)){
-        if (Frow[jrow]>=Frow[irow]){Nrow[jrow,irow]=0} 
-        else {
-          S=0
-          for(i in 1:ncol(tab0)){
-            if (tab0[jrow,i]!=0&tab0[jrow,i]<tab0[irow,i]) {
-              S=S+1
-            }
-          }
-          Nrow[jrow,irow]=S*100/Frow[jrow]
-        }
-      }
-      
-    }      
+    Nrow[] <- fill.N(dominance.count(tab0),    denom=Frow, cmp=Frow)
     Nrow=Nrow[rownames(x), rownames(x)]
     
     # WNODF for rows
@@ -209,21 +201,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Ncol= matrix(rep(NA,times=ncol(tab0)^2),ncol(tab0),ncol(tab0))
     dimnames(Ncol)=list(colnames(tab0),colnames(tab0))
     
-    for (jcol in 2:ncol(tab0)){
-      for (icol in 1:(jcol-1)){
-        if (Fcol[jcol]>=Fcol[icol]){Ncol[jcol,icol]=0}
-        else {
-          S=0
-          for(i in 1:nrow(tab0)){
-            if (tab0[i,jcol]!=0&tab0[i,jcol]<tab0[i,icol]) {
-              S=S+1
-            }
-          }
-          Ncol[jcol,icol]=S*100/Fcol[jcol]
-        }
-      }
-      
-    }      
+    Ncol[] <- fill.N(dominance.count(t(tab0)), denom=Fcol, cmp=Fcol)
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # WNODF for rows
@@ -321,21 +299,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Nrow= matrix(rep(NA,times=nrow(tab0)^2),nrow(tab0),nrow(tab0))
     dimnames(Nrow)=list(rownames(tab0),rownames(tab0))
     
-    for (jrow in 2:nrow(tab0)){
-      for (irow in 1:(jrow-1)){
-        if (MTrow[jrow]>=MTrow[irow]){Nrow[jrow,irow]=0}
-        else {
-          S=0
-          for(i in 1:ncol(tab0)){
-            if (tab0[jrow,i]!=0&tab0[jrow,i]<tab0[irow,i]) {
-              S=S+1
-            }
-          }
-          Nrow[jrow,irow]=S*100/Frow[jrow]
-        }
-      }
-      
-    }      
+    Nrow[] <- fill.N(dominance.count(tab0),    denom=Frow, cmp=MTrow)
     Nrow=Nrow[rownames(x), rownames(x)]
     
     # WNODA for rows
@@ -348,21 +312,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     Ncol= matrix(rep(NA,times=ncol(tab0)^2),ncol(tab0),ncol(tab0))
     dimnames(Ncol)=list(colnames(tab0),colnames(tab0))
     
-    for (jcol in 2:ncol(tab0)){
-      for (icol in 1:(jcol-1)){
-        if (MTcol[jcol]>=MTcol[icol]){Ncol[jcol,icol]=0}
-        else {
-          S=0
-          for(i in 1:nrow(tab0)){
-            if (tab0[i,jcol]!=0&tab0[i,jcol]<tab0[i,icol]) {
-              S=S+1
-            }
-          }
-          Ncol[jcol,icol]=S*100/Fcol[jcol]
-        }
-      }
-      
-    }      
+    Ncol[] <- fill.N(dominance.count(t(tab0)), denom=Fcol, cmp=MTcol)
     Ncol=Ncol[colnames(x),colnames(x)]
     
     # NODA for rows
@@ -455,7 +405,7 @@ nest.smdm <- function(x, constraints=NULL, weighted=FALSE, decreasing="fill", so
     return(weightednoda(x,constraints))
   }
   if (decreasing=="fill"){
-    if (weighted==F){
+    if (weighted==FALSE){
       return(unweightednodf(x,constraints))
     }
     if (weighted==TRUE){

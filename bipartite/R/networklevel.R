@@ -10,8 +10,8 @@
 
   
   
-    if(empty.web) {web <- empty(web)}
-    web.e <- empty(web) # emptied web for some indices 
+    # empty() is idempotent, so the old pair of calls did the work twice by default
+    if (empty.web) {web <- empty(web); web.e <- web} else {web.e <- empty(web)}
     if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")
     
     allindex <- c( #descriptive:
@@ -40,7 +40,7 @@
                         # logic: only rough information on the network's general structure
                         "quantitative" = c("weighted cluster coefficient", "modularity", "weighted nestedness", "weighted NODF", "functional complementarity", "partner diversity", "effective partners", "H2", "diversity","linkage density", "weighted connectance", "niche overlap"), #"mean interaction diversity", 
                         # logic: the "quantitative series"
-                        "binary" = c("connectance", "links per species", "nestedness", "mean number of partners","cluster coefficient",  "C-score", "Fisher alpha"),
+                        "binary" = c("connectance", "links per species", "nestedness", "mean number of shared partners","cluster coefficient",  "C score", "Fisher alpha"),
                         # logic: metrics for binary networks
                         "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness", "NODF"),
                         # logic: more abstract, topological metrics for binary networks
@@ -122,14 +122,14 @@
         }
         #-------------------
         if ("modularity" %in% index){
-          Q <- try(computeModules(web)@likelihood)
-          out$"modularity Q" <- ifelse(inherits(Q, "try-error"), NA, Q)
+          Q <- try(computeModules(web)@likelihood, silent=TRUE)
+          out$"modularity Q" <- if (inherits(Q, "try-error")) NA else unname(Q)
         }
         
         #-------------------
         if ("nestedness" %in% index){
             nest <- try(nestedtemp(web)$statistic, silent=TRUE)
-            out$nestedness <- ifelse(inherits(nest, "try-error"), NA, nest)
+            out$nestedness <- if (inherits(nest, "try-error")) NA else unname(nest)   # unname(): ifelse() used to drop vegan's "temperature" name
             # a fast implementation of nestedness by Jari Oksanen
             #old: nestedness(web, null.models=FALSE)$temperature
         }
@@ -304,7 +304,7 @@
         exclude.index <- netw.index[!is.na(netw.index)]
         gindex <- if (length(exclude.index)==0) index else index[-exclude.index] # exclude NAs from this vector
         if (length(gindex) > 0) outg <- grouplevel(web, index=gindex, level=level, weighted=weighted, extinctmethod=extinctmethod, nrep=nrep, CCfun=CCfun, dist=dist, normalise=normalise, empty.web=empty.web, logbase=logbase, fcweighted=fcweighted, fcdist=fcdist)
-        if (exists("outg")){
+        if (length(gindex) > 0){   # was exists("outg"), which also finds a global variable of that name
             # coerce potential list of HL/LL to one list:
             if (is.list(outg)){
                 SEQ <- seq(1, 2*length(outg[[1]]), by=2)
@@ -332,8 +332,8 @@
     ## web         interaction matrix, with lower trophic level in rows, higher in columns
     ## legacy      se to TRUE allows to run networklevel in its old form
     
-    if(empty.web) {web <- empty(web)}
-    web.e <- empty(web) # emptied web for some indices 
+    # empty() is idempotent, so the old pair of calls did the work twice by default
+    if (empty.web) {web <- empty(web); web.e <- web} else {web.e <- empty(web)}
     if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")
     
     allindex <- c( #descriptive:
@@ -359,7 +359,7 @@
                         # logic: only rough information on the network's general structure
                         "quantitative" = c("weighted cluster coefficient", "weighted nestedness", "weighted NODF", "functional complementarity", "H2", "diversity", "effective partners", "mean interaction diversity", "linkage density"),
                         # logic: the "quantitative series"
-                        "binary" = c("connectance", "links per species", "nestedness", "cluster coefficient",  "C-score"),
+                        "binary" = c("connectance", "links per species", "nestedness", "cluster coefficient",  "C score"),
                         # logic: metrics for binary networks
                         "topology" = c("connectance", "cluster coefficient", "degree distribution", "togetherness", "nestedness"),
                         # logic: more abstract, topological metrics for binary networks
@@ -493,7 +493,7 @@ if ("discrepancy" %in% index){
 #-------------------
 if ("nestedness" %in% index){
     nest <- try(nestedtemp(web)$statistic, silent=TRUE)
-    out$nestedness <- ifelse(inherits(nest, "try-error"), NA, nest)
+    out$nestedness <- if (inherits(nest, "try-error")) NA else unname(nest)   # unname(): ifelse() used to drop vegan's "temperature" name
     # a fast implementation of nestedness by Jari Oksanen
     #old: nestedness(web, null.models=FALSE)$temperature
 }

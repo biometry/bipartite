@@ -1,6 +1,6 @@
 togetherness <- function(web, normalise=TRUE, FUN=mean, ...){
     # calculates the T-score="togetherness" for all pollinator species; the T-score represents
-    # the average number of specis pair identical co-occurrences and co-absences.
+    # the average number of species-pair identical co-occurrences and co-absences.
     # (Stone & Roberts 1992)
     # J*(N-J-(A-J)-(B-J)) = J*(N-A-B+J)
     # for each species pair, we count the number of island pairs of the pattern (0,0,1,1) or (1,1,0,0,)
@@ -14,7 +14,9 @@ togetherness <- function(web, normalise=TRUE, FUN=mean, ...){
     # The maximum value possible for each species is simply the product of number of 
     # 0s and 1s, so the maximum of a species pair is the minimum of each species maximum.
     if (normalise){
-      maxD <- designdist(t(web), method="min(max(A*(P-A)), max(B*(P-B)))", terms="minimum")
+      # per species pair: pmin, not min(max(), max()) -- the latter collapses A and B
+      # (vectors over all pairs) to one global scalar. See comment above.
+      maxD <- designdist(t(web), method="pmin(A*(P-A), B*(P-B))", terms="minimum")
       D <- D/maxD
     }
     

@@ -49,6 +49,12 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
+  \item 3.00 (XX-Oct_2026)
+  This revision is a large step, based on a code-revision employing Anthropic's Claude LLM. The analysis itself can be found on github, and every line of proposed code was checked manually.
+  \describe{
+    \item{C.score}{was implemented very inefficiently, computing all observed combinations of pairs, when (a) c-score of "AxB" and "BxA" are the same, and (b) when AxB was empty (because I looped over all pairs, irrespective of whether there were interactions or not. Revised based on code suggested by Anthropic's Claude.)}
+  }
+  
   \item 2.24 (5-Mar-2026)
   \describe{
     \item{Changed definitions of two constants in C++ code of MersenneTwister.h}{for compatibility with C++20, following a bug report by CRAN. Fixed by Tobias Bauer.}

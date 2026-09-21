@@ -3,10 +3,10 @@ ND <- function(web, normalised=TRUE){
     # calculates the (normalised) degree of a species
     # by Carsten F. Dormann, 14 Dec 2010
     web <- (web > 0) * 1
-    k <- sum(web)
+    # (removed: k <- sum(web) -- k was never used)
     dlower <- rowSums(web)
     dhigher <- colSums(web)  
-    Nlow <- Nhigh <- 2 # effectively unnormalised
+    Nlow <- Nhigh <- 1 # unnormalised: return the raw degree
     if (normalised){
       Nlow <- length(dhigher)
       Nhigh <- length(dlower)

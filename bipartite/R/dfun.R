@@ -15,8 +15,8 @@ dfun <- function(web, abuns=NULL){     # abuns is external data on supply of "re
     expec <- floor(q * (sum(x)))                # fill in downrounded expected values
     restuse <- sum(x) - sum(expec)
     x.new <- expec                              # new vector/distribution of x
-	  if (!is.null(abuns)) {i.vec <- 1:length(x)}   # i.vec will be used in the below (cells which are not "full")
-    for (j in 1:restuse) {                      # add rest in single steps
+	  if (!is.null(abuns)) {i.vec <- 1:length(x)} # i.vec will be used in the below (cells which are not "full")
+    for (j in seq_len(restuse)) {               # add rest in single steps (seq_len: 1:0 would iterate twice)
       if (is.null(abuns)) {i.vec <- which(x.new < cs)}    # i.vec will be used in the next step (cells which are not "full" due to colSums reached)
       # looking for the cell where 1 can be added with the smallest increase in KLD = d
       d.check <- numeric(0)

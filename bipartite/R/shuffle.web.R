@@ -53,7 +53,7 @@ function(web, N, legacy=TRUE){
 	  remains <- shuf[nozero.index[-c(1:gone)]]
 #      remains <- shuf[!(shuf %in% out)]  
       option <- which(out == 0, arr.ind=TRUE)
-      out[option[sample(dim(option)[1], length(remains)),]] <- remains
+      out[option[sample(dim(option)[1], length(remains)), , drop=FALSE]] <- remains
       colnames(out) <- rownames(out) <- NULL
       out
 	} else { # this is the second part of the "legacy"-condition:
@@ -65,7 +65,7 @@ function(web, N, legacy=TRUE){
        gone <- sum(out > 0)
        remains <- shuf[nozero.index[-c(1:gone)]]
        option <- which(out == 0, arr.ind = TRUE)
-       out[option[sample(dim(option)[1], length(remains)), ]] <- remains
+       out[option[sample(dim(option)[1], length(remains)), , drop=FALSE]] <- remains
        colnames(out) <- rownames(out) <- NULL
        if(long){
       	   out=t(out) #if the input matrix was long, transform the output matix  so it is also long

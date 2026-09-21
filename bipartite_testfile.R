@@ -8,8 +8,8 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_2.24.tar.gz --as-cran
-R CMD install bipartite_2.24.tar.gz
+R CMD check bipartite_3.00.tar.gz --as-cran
+R CMD install bipartite_3.00.tar.gz
 # now check in the testfile below anything that changed whether it actually works!
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
 
@@ -315,6 +315,7 @@ mgen(mosquin1967, keep.species=TRUE, rep.cell=TRUE) # Not allowing zero marginal
 
 # ND, BC, CC
 ND(vazquenc)
+ND(Safariland, normalised=F) # should be integers!!
 BC(vazquenc)
 BC(vazquenc, rescale=FALSE, weighted=FALSE)
 CC(vazquenc)
@@ -333,6 +334,7 @@ nest.smdm(Safariland, constraint=const, weighted=T)
 
 # nested
 nested(vazquenc, method="ALL")
+
 
 # nestedness # DEPRECATED!!
 #nestedness(Safariland, n.nulls=20)[c(4, 9:20)]
@@ -457,6 +459,7 @@ bs <- second.extinct(Safariland, method="random", participant="both", details=T)
 slope.bipartite(bs) # should return an error with an explanation
 bs <- second.extinct(Safariland, method="random", participant="both", details=F) 
 slope.bipartite(bs) # should work
+slope.bipartite(second.extinct(Safariland, participant="lower", method="external", ext.row=9:1)) # should work!
 second.extinct(Safariland, participant="both", method="external", ext.row=1:9, ext.col=27:1) # should break!
 
 web <- matrix(c(3, 2, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1), ncol = 3)
