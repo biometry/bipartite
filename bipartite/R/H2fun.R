@@ -32,20 +32,30 @@ function(web, H2_integer=TRUE){
     	newweb <- exexpec
     	H2_max <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)    # first attempt of finding H2_max
     } else {
-    	expec <- matrix(0, nrow(web), ncol(web)) # empty web
-    	difexp <- exexpec-expec # where are differences between non-integer and 0-web greatest?
     	newweb <- floor(exexpec)  # start new web
-    	webfull <- matrix("no", nrow(web), ncol(web)) # makes boolean web, set to 0
-    	while (sum(newweb) < tot) {
-       	webfull[which(rowSums(newweb)==rs),] <- "yo" # sets columns/rows with correct cs/rs to 1
-       	webfull[,which(colSums(newweb)==cs)] <- "yo"
-       	OK <- webfull=="no" # matrix of potential cells
+    	# NOTE: as in all earlier versions, the first pass compares against the EMPTY web
+    	# (difexp = exexpec - 0), not against newweb; kept so results stay comparable.
+    	difexp <- exexpec
+    	webfull <- matrix(FALSE, nrow(web), ncol(web)) # cells whose row or column is already full
+    	# running marginals: only one cell changes per pass, so re-scanning the whole matrix
+    	# with rowSums()/colSums() every iteration was the dominant cost here
+    	rs.now <- rowSums(newweb); cs.now <- colSums(newweb); total.now <- sum(newweb)
+    	first.pass <- TRUE
+    	nr <- nrow(newweb)
+    	while (total.now < tot) {
+       	webfull[rs.now == rs, ] <- TRUE # rows/cols that have reached their marginal total
+       	webfull[, cs.now == cs] <- TRUE
+       	OK <- !webfull # matrix of potential cells
 	       smallestpossible <- newweb==min(newweb[OK])  # find cell with lowest number of interactions (e.g. 0)
        	greatestdif <- max(difexp[smallestpossible & OK]) # find cell value with largest different between "is" and "should"
        	bestone <- which(OK & smallestpossible & difexp==greatestdif ) # find cell for all three conditions
        	if (length(bestone)>1) bestone <- sample(bestone,1) # select randomly a cell, if different are possible
        	newweb[bestone] <- newweb[bestone] + 1 # put an interaction into that cell
-       	difexp <- exexpec - newweb
+       	r.idx <- (bestone - 1L) %% nr + 1L; c.idx <- (bestone - 1L) %/% nr + 1L
+       	rs.now[r.idx] <- rs.now[r.idx] + 1; cs.now[c.idx] <- cs.now[c.idx] + 1
+       	total.now <- total.now + 1
+       	if (first.pass) { difexp <- exexpec - newweb; first.pass <- FALSE
+       	} else difexp[bestone] <- exexpec[bestone] - newweb[bestone]
     	}
       H2_max <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)    # first attempt of finding H2_max
       
@@ -71,36 +81,53 @@ function(web, H2_integer=TRUE){
   	if (max(exexpec)>0.3679*tot) {    # 0.3679 is the proportion yielding maximal contribution
     # warning("one cell dominates too extremely, H2max can probably not be estimated correctly")
     # further modification to match expected values even better... ; great advance, but can get caught!!  introduce random step if this happens
+    	H2.of <- function(m) -sum(m/tot*log(m/tot), na.rm=TRUE)
+    	
+    	# This search wanders rather than converges (it changed the matrix on all 500 passes
+    	# on every web tested) and the old code kept whatever the LAST pass produced. H2max is
+    	# a maximum, so keep the best matrix seen and stop after `patience` fruitless passes.
+    	best.web <- newweb; best.H2 <- H2.of(newweb); stall <- 0; patience <- 50
     	for (tries in 1:500) {# reduces overfits, but NOT underfits!!
       		newmx <- newweb                         # "hin- und herschieben"
       		difexp <- exexpec - newmx #newmx=newweb!
       		greatestdif <- difexp==min(difexp)
       		if (length(which(greatestdif))>1) {
-          		largestvalue = newmx==max(newmx[greatestdif])  # evtl den groessten auswaehlen
+          		largestvalue <- newmx==max(newmx[greatestdif])  # evtl den groessten auswaehlen
           		first <- greatestdif & largestvalue
-      		} else {first=greatestdif}   # "first" is a boolean matrix
-      		newmx[first][1] <-  newmx[first][1] - 1                                    # remove one interaction from one cell (with largest difference to expected values; "too large")
-      		throw = which(rowSums(first)>0)[1] ;  thcol = which(colSums(first)>0)[1]  # find row- and column-number of removed cell (not elegant!!)
-      		mr=max(difexp[throw,])   ; mc=max(difexp[,thcol])                         # find largest difference value in row and column to expected; "too small"
-      		if (mr>=mc) {scnd = which(difexp[throw,]==mr) [1]                         # reallocation; start in row
-              	 newmx[throw,scnd] = newmx[throw,scnd]+1                      # put in cell
-                  thrd=which(difexp[,scnd]==min(difexp[,scnd]))[1]
-                   newmx[thrd,scnd] = newmx[thrd,scnd] - 1                      # remove interaction from "too large cell" in that column
-                   newmx[thrd,thcol] = newmx[thrd,thcol] + 1                    # put interaction in the cell that recovers original r/c-sums
-                  } else {                                                      # as above, but first reallocation in column
-                   scnd = which(difexp[,thcol]==mc)[1]
-                   newmx[scnd,thcol] = newmx[scnd,thcol] + 1
-                   thrd=which(difexp[scnd,]==min(difexp[scnd,]))[1]
-                   newmx[scnd,thrd] = newmx[scnd,thrd] - 1
-                   newmx[throw,thrd] = newmx[throw,thrd] + 1
+      		} else {first <- greatestdif}   # "first" is a boolean matrix
+      		newmx[first][1] <- newmx[first][1] - 1                                    # remove one interaction from one cell (with largest difference to expected values; "too large")
+      		throw <- which(rowSums(first)>0)[1] ;  thcol <- which(colSums(first)>0)[1]  # find row- and column-number of removed cell (not elegant!!)
+      		mr <- max(difexp[throw,])   ; mc <- max(difexp[,thcol])                         # find largest difference value in row and column to expected; "too small"
+      		if (mr >= mc) {
+      		  scnd <- which(difexp[throw,]==mr) [1]                         # reallocation; start in row
+            newmx[throw, scnd] <- newmx[throw,scnd] + 1                      # put in cell
+            thrd <- which(difexp[,scnd] == min(difexp[,scnd]))[1]
+            newmx[thrd,scnd] <- newmx[thrd,scnd] - 1                      # remove interaction from "too large cell" in that column
+            newmx[thrd,thcol] = newmx[thrd,thcol] + 1                    # put interaction in the cell that recovers original r/c-sums
+          } else {                                                      # as above, but first reallocation in column
+             scnd <- which(difexp[,thcol]==mc)[1]
+             newmx[scnd,thcol] <- newmx[scnd,thcol] + 1
+             thrd <- which(difexp[scnd,] == min(difexp[scnd,]))[1]
+             newmx[scnd,thrd] <- newmx[scnd,thrd] - 1
+             newmx[throw,thrd] <- newmx[throw,thrd] + 1
           }
-      }
       		newweb <- newmx
+      		H2.now <- H2.of(newweb)
+      		if (H2.now > best.H2) { 
+      		  best.H2 <- H2.now
+      		  best.web <- newweb
+      		  stall <- 0 
+      		} else {
+      		  stall <- stall + 1
+      		}
+      		if (stall >= patience) break
+      }
+      newweb <- best.web
   }     # end Hmaxfind
 		#  Hmax=H2(newmx)    
 	} # end else-part of initial exexpec
-    H2_max.improved <- -sum(newweb/tot*log(newweb/tot), na.rm=TRUE)
-    H2_max <- ifelse(H2_integer && H2_max >= H2_max.improved, H2_max, H2_max.improved) # JF: changed September 2019, as the improvement made things worse for certain small webs
+    H2_max.improved <- -sum(newweb/tot * log(newweb/tot), na.rm=TRUE)
+    H2_max <- max(H2_max, H2_max.improved) # was an ifelse(); with best-tracking above this is just the better of the two
    
     
 
@@ -110,7 +137,7 @@ function(web, H2_integer=TRUE){
     # maximum of aggregation possible.
     newweb <- matrix(0,length(rs),length(cs))
     rsrest=rs; csrest=cs
-    while (round(sum(rsrest), 10) != 0) { ## Bob O'Hara's suggestion: while (isTRUE(all.equal(sum(rsrest),0))) {
+    while (!isTRUE(all.equal(sum(rsrest), 0))) { ## was round(sum(rsrest), 10) != 0 (Bob O'Hara's suggestion, finally applied)
         newweb[which(rsrest==max(rsrest))[1],which(csrest==max(csrest))[1]] = min(c(max(rsrest),max(csrest)))
         rsrest=rs-rowSums(newweb)
         csrest=cs-colSums(newweb)

@@ -174,6 +174,8 @@ closeness(wf, cmode="suminvundir")
 closeness(wt, cmode="suminvundir") # makes no difference!
 specieslevel(Safariland, index="closeness") # same as CC(. , rescale=T); no option for rescale=F 
 
+# clustering_tm
+clustering_tm(Safariland) # 0.2857
 
 # compart
 compart(Safariland) # a comparted network

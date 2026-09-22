@@ -50,10 +50,14 @@ nullmodel <- function(web, N=1000, method="r2d", ...){
     }
     
     if (m == 4){ #shuffle.web
-        if (any(web > 1)) out <- shuffle.web(web, N, ...)
-        if (all(web < 2)) {
-            out <- unname(simulate(vegan::nullmodel(web, method="quasiswap"), nsim=N, ...)) 
+        # Binary webs go to quasiswap, everything else to shuffle.web. These used to be two
+        # independent ifs, so a web whose maximum fell in (1,2) satisfied both conditions and
+        # the quantitative result was silently overwritten by the binary one.
+        if (all(web %in% c(0, 1))) { # for binary networks
+            out <- unname(simulate(vegan::nullmodel(web, method="quasiswap"), nsim=N))
             out <- lapply(seq_len(N), function(i) out[,,i])
+        } else {
+            out <- shuffle.web(web, N, ...)
         }
     }
 

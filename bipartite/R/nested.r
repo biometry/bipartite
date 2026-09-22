@@ -1,8 +1,9 @@
 nested <- function(web, method="binmatnest", rescale=FALSE, normalised=TRUE){
   # a wrapper function to call any of the currently implemented measures of nestedness
  
-  if (! any(method %in% c("discrepancy", "binmatnest", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C score", "checker", "WNODA", "ALL"))) stop("Typo? Unknown method!")
-  if ("ALL" %in% method) index <- c("binmatnest", "discrepancy", "binmatnest", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C score", "checker", "WNODA") else index <- method
+  validmethods <- c("discrepancy", "binmatnest", "discrepancy2", "NODF", "NODF2", "weighted NODF", "wine", "C score", "checker", "WNODA", "ALL")
+  if (! all(method %in% validmethods)) stop("Typo? Unknown method(s): ", paste(setdiff(method, validmethods), collapse=", "))
+  if ("ALL" %in% method) index <- c("binmatnest", "discrepancy2", "discrepancy", "C score", "checker", "NODF2", "NODF", "weighted NODF", "wine", "WNODA") else index <- method
 
   out <- NULL
 	if ("binmatnest" %in% index){ 

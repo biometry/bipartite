@@ -40,8 +40,8 @@ one.grouplevel <- function(web, index="ALLBUTDD", level="higher", weighted=TRUE,
   if (level == "lower") web <- t(web)
   ######
   
-  if(empty.web) {web <- empty(web)}
   web.e <- empty(web) # emptied web for some indices 
+  if (empty.web) {web <- web.e} # if "empty=T", all indices use the emptied web
   if (NROW(web) < 2 | NCOL(web) <2) warning("Web is really too small to calculate any reasonable index. You will get the values nonetheless, but I wouldn't put any faith in them!")
                 
    allindex <- c( "number of species", "mean number of links", "mean number of shared partners",

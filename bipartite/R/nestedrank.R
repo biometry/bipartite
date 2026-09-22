@@ -23,7 +23,6 @@ nestedrank <- function(web, method="NODF", weighted=TRUE, normalise=TRUE, return
 			NODF = nestednodf(web, weighted=weighted)$comm,
 			nodf = nestednodf(web, weighted=weighted)$comm,
 			binmatnest = nestedtemp(web)$comm,
-			#{nn <- nestedness(web, null.models=FALSE); (web[nn$pack.order.row, nn$pack.order.col]>0)*1},
 			wine = sortweb(wine(web.for.wine)$dij.w[nrow(web):1, ncol(web):1]),
 			# a word of explanation: wine only returns a sorted-by-binary matrix; thus, we use the actual entries in this matrix to re-sort it, with the species with the highest sum of w_ij now being the most generalist
 			sort = sortweb(web.for.wine)

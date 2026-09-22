@@ -131,8 +131,7 @@
             nest <- try(nestedtemp(web)$statistic, silent=TRUE)
             out$nestedness <- if (inherits(nest, "try-error")) NA else unname(nest)   # unname(): ifelse() used to drop vegan's "temperature" name
             # a fast implementation of nestedness by Jari Oksanen
-            #old: nestedness(web, null.models=FALSE)$temperature
-        }
+       }
         #-------------------
         if ("NODF" %in% index){
           NODF <- try(unname(nestednodf(web, order=TRUE, weighted=FALSE)$statistic[3]), silent=TRUE)

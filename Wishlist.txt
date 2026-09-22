@@ -22,7 +22,7 @@ VIGNETTE:
 		* Modularity
 * expand on null models and what function they serve and why they probably do not do what the user thinks (see Agroecology chapter).
 * explore plotting options outside bipartite (igraph, tidygraph): italics, unparasitised individuals, ...
-* bmotifs (...)  |  CFD 17.5.2021; package discontinued on CRAN: pull over functionality to bipartite
+* bmotif (https://cran.r-project.org/src/contrib/Archive/bmotif/bmotif_2.0.2.tar.gz)  |  CFD 17.5.2021; package discontinued on CRAN: pull over functionality to bipartite
 
 CLASS "web":
 * ISSUE github: new S3 class "web" (then: "weblist", "webarray"):

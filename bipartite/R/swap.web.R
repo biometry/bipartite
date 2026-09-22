@@ -57,14 +57,19 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
     mat
   }
 
-  findmat.empty <- function(web){
+  findmat.empty <- function(web, c.crit=1e4){
     # helper function to find a 2 x 2 matrix with non-zero off-diagonal entries
+    # (counter added for symmetry with findmat.full: this loop had no upper bound at all)
     mat <- matrix(0, 2, 2)
-    while( any(diag(mat) == 0) | (all(c(mat[1,2], mat[2,1]) != 0)) ){
+    counter <- 0
+    while( (any(diag(mat) == 0) | (all(c(mat[1,2], mat[2,1]) != 0))) & counter < c.crit ){
       rselect <- sample(1:nrow(web), size=2, replace=FALSE)
       cselect <- sample(1:ncol(web), size=2, replace=FALSE)
       mat <- web[rselect, cselect]
+      counter <- counter + 1
     }
+    if (counter >= c.crit) stop("swap.web: could not find a swappable 2x2 submatrix in ", c.crit,
+                                " attempts. This web is probably too small or too densely filled.", call.=FALSE)
     attr(mat, "rows") <- rselect
     attr(mat, "cols") <- cselect
     mat
@@ -78,8 +83,8 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
         while (is.null(mat)){
             first <- r2dtable(1, r=rowSums(second), c=colSums(second))[[1]]
             n <- sum(first>0)
-            mat <- findmat.full(first)
-            cat("New null matrix needed: old one sucked.\n")
+            mat <- findmat.full(first, c.crit=c.crit)   # was dropping c.crit
+            if (verbose) message("New null matrix needed: the previous one had no swappable submatrix.")
         } 
         # cat("2x2 matrix found ")
         # swap:
@@ -89,8 +94,8 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
   		# check that we are not downswapping more than interactions still available:  
         trial <- first
         trial[attr(mat, "rows"), attr(mat, "cols")] <- mat.new
-		if (sum(trial > 0) < m) next 
-        if (sum(trial > 0) >= m) first[attr(mat, "rows"), attr(mat, "cols")] <- mat.new
+		if (sum(trial > 0) < m) next   # (the old code then re-tested the complement, which is always true here)
+        first[attr(mat, "rows"), attr(mat, "cols")] <- mat.new
 	    n <- sum(first > 0)
         #cat(paste(n, "vs.", m, "\n", sep=""))
       }
@@ -98,7 +103,7 @@ swap.web <- function(N, web, verbose=FALSE, c.crit=1e4){
   }
 
   upswap <- function(first, m, n){
-      if (m==n) {return(first); stop()}
+      if (m==n) return(first)   # (a dead stop() used to follow this return)
       while (m > n){
         mat <- findmat.empty(first) # yields a 2 x 2 matrix with non-zero diagonal and at least one 0 on off-diagonal
         # swap:
