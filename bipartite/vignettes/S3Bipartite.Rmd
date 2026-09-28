@@ -1,0 +1,249 @@
+---
+title: Object oriented bipartite
+author: 
+  - name: Tobias Bauer
+    affiliation: Animal Network Ecology, University of Hamburg
+    email: tobias.bauer-2@uni-hamburg.de
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+abstract: This vignette provides an overview of the new object oriented approach of the bipartite package.
+          It includes multiple examples illustrating the intention behind various function arguments.
+toc-title: "Contents"
+output: 
+  rmarkdown::html_vignette:
+    toc: true  
+    fig_width: 7
+    fig_height: 7
+editor_options: 
+  chunk_output_type: inline
+vignette: >
+  %\VignetteIndexEntry{Object oriented bipartite}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Creating S3-objects in bipartite
+
+Starting with version XX.XX the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that mean we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
+
+```{r, results = "hide", message = FALSE, cache = FALSE}
+library(bipartite)
+data(Safariland)
+options(max.print = 10)
+```
+
+
+
+```{r}
+class(Safariland)
+str(Safariland)
+```
+
+The dataset is an integer matrix of size $9\times 27$ with named rows and columns. From the help file we know that the columns represent pollinators and the rows represent plant species. 
+
+Sometimes, that's all the information available about a network. More often, however, additional information is available about individual nodes or the network as a whole. 
+
+```{r}
+plant_attributes <- read.csv("plant_attributes.csv", row.names = 1)
+plant_attributes <- plant_attributes[rownames(Safariland), ]
+plant_attributes
+```
+
+```{r}
+pollinator_attributes <- read.csv("pollinator_attributes.csv", row.names = 1)
+pollinator_attributes <- pollinator_attributes[colnames(Safariland), ]
+pollinator_attributes
+```
+
+```{r}
+Safariland.web <- bipartite_web(Safariland,
+                                lower_attributes = plant_attributes,
+                                higher_attributes = pollinator_attributes,
+                                meta_attributes = list("type" = "pollination"))
+class(Safariland.web)
+```
+
+```{r}
+print(Safariland.web, max = 10)
+plot(Safariland.web)
+```
+
+```{r}
+attributes(Safariland.web)
+```
+
+# Accessing the attributes
+```{r}
+meta_attributes(Safariland.web)$start_year <- 1999
+meta_attributes(Safariland.web)$end_year <- 2000
+# higher_attributes(Safariland.web) <- data.frame(rand = runif(ncol(Safariland.web)), row.names = colnames(Safariland))
+higher_attributes(Safariland.web)
+# higher_attributes(Safariland.web)$rand
+```
+
+# Subsetting
+```{r}
+Safariland.web[1:5, 1:3]
+Safariland.web[1:5, 1]
+Safariland.web[1:5, 1] <- 1:5
+Safariland.web[1:5, 1, drop = F]
+Safariland.web[1:5, 1, drop = T]
+Safariland.web[5, 3, drop = T]
+Safariland.web[5, 3, drop = F]
+```
+
+# Test space
+TODO: check whether names are taken with $ syntax.
+```{r}
+test.web <- bipartite_web(genweb(3, 5))
+rand_v <- runif(5)
+names(rand_v) <- c("col3", "col2", "col4", "col1", "col5")
+print(rand_v)
+higher_attributes(test.web)$rand <- rand_v
+higher_attributes(test.web)
+higher_attributes(test.web)$rand2 <- rand_v[colnames(test.web)]
+higher_attributes(test.web)
+```
+
+```{r}
+higher_attributes(Safariland.web)$rand2 <- runif(ncol(Safariland.web))
+higher_attributes(Safariland.web)
+```
+
+```{r, max.print = 100}
+options(max.print = 9999)
+print(higher_attributes(Safariland.web))
+```
+
+```{r}
+plot(Safariland.web, higher_color_attr = "rand2", higher_border = "black", link_border = "black")
+```
+
+```{r}
+plot(Safariland.web,
+     higher_color = c("Yellow", "Blue", "Green", "Red"),
+     higher_color_attr = "Order",
+     horizontal = TRUE)
+```
+
+```{r}
+plot(Safariland.web,
+     higher_color_attr = "Order",
+     horizontal = TRUE)
+```
+
+```{r}
+plot(Safariland.web,
+     higher_color = c("Hymenoptera" = "Yellow",
+                      "Diptera" = "Blue",
+                      "Coleoptera" = "Green",
+                      "Araneae" = "Red"),
+     higher_color_attr = "Order",
+     lower_color_attr = "Life.form",
+     lower_color = rainbow(10),
+     horizontal = TRUE)
+```
+
+## legend
+```{r}
+plot(Safariland.web,
+     higher_color = c("Hymenoptera" = "Yellow",
+                      "Diptera" = "Blue",
+                      "Coleoptera" = "Green",
+                      "Araneae" = "Red"),
+     higher_color_attr = "Order",
+     lower_color_attr = "Life.form",
+     lower_color = rainbow(10),
+     horizontal = TRUE,
+     higher_border = "black",
+     lower_border = "black",
+     link_border = "black",
+     mar = c(1,1,1,6))
+par(xpd = T)
+legend(1.2, 1,
+       legend = c("Hymenoptera",
+                  "Diptera",
+                  "Coleoptera",
+                  "Araneae"),
+       fill = c("Yellow",
+                "Blue",
+                "Green",
+                "Red"),
+       title = "Order")
+```
+
+```{r}
+plot(Safariland.web,
+     higher_color = c("Hymenoptera" = "Yellow",
+                      "Diptera" = "Blue",
+                      "Coleoptera" = "Green",
+                      "Araneae" = "Red"),
+     higher_color_attr = "Order",
+     lower_color_attr = "Life.form",
+     lower_color = rainbow(10),
+     horizontal = FALSE,
+     higher_border = "black",
+     lower_border = "black",
+     link_border = "black",
+     mar = c(1,1,1,6))
+par(xpd = T)
+legend(1, 1,
+       legend = c("Hymenoptera",
+                  "Diptera",
+                  "Coleoptera",
+                  "Araneae"),
+       fill = c("Yellow",
+                "Blue",
+                "Green",
+                "Red"),
+       title = "Order")
+```
+
+## boolean attribute plot
+
+```{r}
+higher_attributes(Safariland.web)$hymenoptera <- higher_attributes(Safariland.web)$Order == "Hymenoptera"
+plot(Safariland.web,
+     higher_color = c("Black", "#ffbb00"),
+     higher_color_attr = "hymenoptera",
+     lower_color_attr = "Life.form",
+     lower_color = hcl.colors(4, palette = "Dark 3"),
+     horizontal = TRUE,
+     sorting = "ca")
+```
+
+```{r}
+plot(order_web(Safariland.web, "Order"),
+     higher_color = rainbow(4),
+     higher_color_attr = "Order",
+     horizontal = TRUE)
+```
+
+```{r}
+Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"]
+
+plot(Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"],
+     horizontal = TRUE,
+     higher_color_attr = "Family",
+     higher_color = rainbow(5),
+     sorting = "ca")
+```
+
+# Bipartite webarrays
+
+```{r}
+warray <- bipartite_webarray(Safariland, vazarr)
+print(warray)
+```
+
+```{r}
+higher_attributes(warray, "Safariland")$rand <- runif(41)
+print(warray)
+higher_attributes(warray)$No <- 1:41
+warray[,,apply(warray,3,sum) > 50]
+warray[,higher_attributes(warray)$No > 10,]
+warray[1:2,higher_attributes(warray)$No > 10,]
+```
+
+```{r}
+warray[,,1]
+```
