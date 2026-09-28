@@ -64,10 +64,12 @@ plotweb <- function(web,
                     y_lim = c(0, 1),
                     lab_distance = 0.05,
                     lower_color = "black",
+                    lower_color_attr = NULL,
                     lower_border = "same",
                     lower_add_color = "red",
                     lower_text_color = "black",
                     higher_color = "black",
+                    higher_color_attr = NULL,
                     higher_border = "same",
                     higher_add_color = "red",
                     higher_text_color = "black",
@@ -205,23 +207,113 @@ plotweb <- function(web,
          lower_labels)
   }
 
-  # Recycle the color vectors
-  if (length(higher_color) < nc) {
-    higher_color <- rep_len(higher_color, nc)
+  #######################################################
+  # Color via attributes ################################
+  #######################################################
+  ## Use the provided column name in higher_attributes of x
+  ## to automatically generate a color vector for the higher species
+  if (!is.null(higher_color_attr)) {
+    stopifnot(higher_color_attr %in% colnames(higher_attributes(web)))
+    higher_color_attr_vec <- higher_attributes(web)[[higher_color_attr]]
+    higher_names <- rownames(higher_attributes(web))
+    print(typeof(higher_color_attr_vec))
+    if (is.logical(higher_color_attr_vec)) {
+      if (length(higher_color) == 2) {
+        higher_color_map <- higher_color
+      }
+      higher_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
+        higher_color_map[v + 1]
+      })
+      names(higher_color) <- colnames(web)
+    }
+    else if (is.numeric(higher_color_attr_vec)) {
+      max_v <- max(higher_color_attr_vec)
+      min_v <- min(higher_color_attr_vec)
+      normalized_vector <- (higher_color_attr_vec - min_v) / (max_v - min_v)
+      print(normalized_vector)
+      ramp <- colorRamp(c("white", "black"))
+      higher_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
+      names(higher_color) <- higher_names
+      print(higher_color)
+    } else if (is.character(higher_color_attr_vec)) {
+      higher_color_attr_vec <- as.factor(higher_color_attr_vec)
+      print(higher_color_attr_vec)
+    }
+    if (is.factor(higher_color_attr_vec)) {
+      nl <- nlevels(higher_color_attr_vec)
+      print(nl)
+      if (length(higher_color) >= nl) {
+        if (length(higher_color) > nl) {
+          higher_color <- higher_color[1:nl]
+        }
+        higher_color_map <- higher_color
+        if (is.null(names(higher_color))) {
+          names(higher_color_map) <- levels(higher_color_attr_vec)
+        }
+        higher_color <- sapply(as.character(higher_color_attr_vec), function(v) {
+          higher_color_map[v]
+        })
+        names(higher_color) <- colnames(web)
+      }
+    }
+  } else {
+    # No higher color attribute given
+    # Recycle the color vectors
+    if (length(higher_color) < nc) {
+      higher_color <- rep_len(higher_color, nc)
+    }
+    # Check whether the color vector is a named vector
+    if (!is.null(names(higher_color))) {
+      # Sort the higher color vector the same way as the web
+      higher_color <- higher_color[c_names]
+    }
   }
-  if (length(lower_color) < nr) {
-    lower_color <- rep_len(lower_color, nr)
-  }
-
-  # Check whether the color vector is a named vector
-  if (!is.null(names(higher_color))) {
-    # Sort the higher color vector the same way as the web
-    higher_color <- higher_color[c_names]
-  }
-  # Check whether the color vector is a named vector
-  if (!is.null(names(lower_color))) {
-    # Sort the higher color vector the same way as the web
-    lower_color <- lower_color[r_names]
+  # Lower color attributes
+  if (!is.null(lower_color_attr)) {
+    stopifnot(lower_color_attr %in% colnames(lower_attributes(web)))
+    lower_color_attr_vec <- lower_attributes(web)[[lower_color_attr]]
+    lower_names <- rownames(lower_attributes(web))
+    print(typeof(lower_color_attr_vec))
+    if (is.numeric(lower_color_attr_vec)) {
+      max_v <- max(lower_color_attr_vec)
+      min_v <- min(lower_color_attr_vec)
+      normalized_vector <- (lower_color_attr_vec - min_v) / (max_v - min_v)
+      print(normalized_vector)
+      ramp <- colorRamp(c("white", "black"))
+      lower_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
+      names(lower_color) <- lower_names
+      print(lower_color)
+    } else if (is.character(lower_color_attr_vec)) {
+      lower_color_attr_vec <- as.factor(lower_color_attr_vec)
+      print(lower_color_attr_vec)
+    }
+    if (is.factor(lower_color_attr_vec)) {
+      nl <- nlevels(lower_color_attr_vec)
+      print(nl)
+      if (length(lower_color) >= nl) {
+        if (length(lower_color) > nl) {
+          lower_color <- lower_color[1:nl]
+        }
+        lower_color_map <- lower_color
+        if (is.null(names(lower_color))) {
+          names(lower_color_map) <- levels(lower_color_attr_vec)
+        }
+        lower_color <- sapply(as.character(lower_color_attr_vec), function(v) {
+          lower_color_map[v]
+        })
+        names(lower_color) <- rownames(web)
+      }
+    }
+  } else {
+    # No lower color attribute given
+    if (length(lower_color) < nr) {
+      lower_color <- rep_len(lower_color, nr)
+    }
+    # Check whether the color vector is a named vector
+    if (!is.null(names(lower_color))) {
+      # Sort the higher color vector the same way as the web
+      lower_color <- lower_color[r_names]
+    }
   }
 
   # lab_distance contains the distance between.
@@ -250,6 +342,10 @@ plotweb <- function(web,
 
   theta_pi <- theta * pi / 180
 
+
+  #######################################################
+  # automatic text size  ################################
+  #######################################################
   ## TODO: Documentation + change 0.2 to actual spacing values
   if (text_size == "auto") {
     # If the bipartite plot is added to an existing plot
@@ -301,6 +397,9 @@ plotweb <- function(web,
     }
   }
 
+  #######################################################
+  # Calculating margins #################################
+  #######################################################
   if (add == FALSE) {
     # Get the maximal width of the higher and lower labels
     # in inches to set the margin accordingly
@@ -357,6 +456,8 @@ plotweb <- function(web,
          ylim = y_lim,
          xlim = x_lim,
          axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+
+    # Adds a title above the plot
     if (!is.null(main)) {
       extra_space <- ifelse(horizontal, max_height_n, c_t_width + u_lab_distance)
       title(main,
@@ -370,7 +471,7 @@ plotweb <- function(web,
     space_size <- y_lim[2] - y_lim[1]
     space_start <- y_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
-    # for latex use in plotting with text()
+    # for later use in plotting with text()
     x_zero_inch <-  grconvertX(0, from = "inches")
     u_lab_distance <- grconvertX(u_lab_distance, from = "inches") - x_zero_inch
     l_lab_distance <- grconvertX(l_lab_distance, from = "inches") - x_zero_inch
@@ -378,12 +479,15 @@ plotweb <- function(web,
     space_size <- x_lim[2] - x_lim[1]
     space_start <- x_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
-    # for latex use in plotting with text()
+    # for later use in plotting with text()
     y_zero_inch <- grconvertY(0, from = "inches")
     u_lab_distance <- grconvertY(u_lab_distance, from = "inches") - y_zero_inch
     l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - y_zero_inch
   }
 
+  ############################################################
+  # Managing higher abundances and their color vectors #######
+  ############################################################
   # If no independent abundances are given for the higher species
   # calculate the sum of all columns as abundances
   if (is.null(higher_abundances)) {
@@ -415,6 +519,9 @@ plotweb <- function(web,
     higher_color <- c(rbind(higher_color, higher_add_color))
   }
 
+  ############################################################
+  # Managing lower abundances and their color vectors ########
+  ############################################################
   # If no independent abundances are given for the lower species
   # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
@@ -588,6 +695,9 @@ plotweb <- function(web,
     lower_box_size <- box_size[2]
   }
 
+  ############################################################
+  # Plotting the boxes and labels ############################
+  ############################################################
   # TODO: Document this whole text label alignment mess!
   # Draw the boxes and labels either horizontal or vertical to each other.
   if (horizontal) {
@@ -645,7 +755,9 @@ plotweb <- function(web,
     }
   }
 
-  # Interactions
+  ############################################################
+  # Preparing and plotting the links #########################
+  ############################################################
   # TODO: short explanation what is going on
   if (!is.null(add_lower_abundances) && !is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),

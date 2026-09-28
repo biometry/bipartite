@@ -36,6 +36,13 @@ bipartite_web <- function(web,
     web <- as.matrix(web)
   }
 
+  if (is.null(rownames(web))) {
+    rownames(web) <- paste0("row", seq_len(nrow(web)))
+  }
+  if (is.null(colnames(web))) {
+    colnames(web) <- paste0("col", seq_len(ncol(web)))
+  }
+
   # Default metadata
   if (is.null(lower_attributes)) {
     lower_attributes <- data.frame(
@@ -159,46 +166,53 @@ print.bipartite_web <- function(x, ...) {
   cat("Dimensions:", nrow(x), "x", ncol(x), "\n")
   cat(strrep("-", 50), "\n")
   cat("Higher species attributes:\n")
-  print(higher_attributes(x))
+  print(higher_attributes(x), ...)
   cat("Lower species attributes:\n")
-  print(lower_attributes(x))
+  print(lower_attributes(x), ...)
   cat("Meta attributes:\n")
-  print(meta_attributes(x))
+  print(meta_attributes(x), ...)
   cat(strrep("-", 50), "\n")
   cat("Matrix:\n")
   print(matrix(x,
                nrow = nrow(x),
                ncol = ncol(x),
-               dimnames = list(rownames(x), colnames(x))))
+               dimnames = list(rownames(x), colnames(x))), ...)
 }
 
 ## Plot function prototype --------------------------------
 ## Wrapper for plotweb function.
 ## TODO: Decide whether to keep / extent the auto color functionality
-plot.bipartite_web <- function(x,
-                               higher_color = "black",
-                               higher_color_attr = NULL,
-                               lower_color_attr = NULL,
-                               ...) {
-  if (!is.null(higher_color_attr)) {
-    stopifnot(higher_color_attr %in% colnames(higher_attributes(x)))
-    higher_color_attr_vec <- higher_attributes(x)[[higher_color_attr]]
-    higher_names <- rownames(higher_attributes(x))
-    print(typeof(higher_color_attr_vec))
-    if (is.numeric(higher_color_attr_vec)) {
-      ramp <- colorRamp(c("white", "black"))
-      max_v <- max(higher_color_attr_vec)
-      min_v <- min(higher_color_attr_vec)
-      normalized_vector <- (higher_color_attr_vec - min_v) / (max_v - min_v)
-      print(normalized_vector)
-      higher_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
-      names(higher_color) <- higher_names
-      print(higher_color)
-    }
-  }
-  plotweb(x, higher_color = higher_color, ...)
+## TODO: If keeping the auto coloring there needs to be a legend option
+plot.bipartite_web <- function(x, ...) {
+  plotweb(x, ...)
 }
 
+## Order function -----------------------------------------
+## Sorts a bipartite_web based on higher or lower attributes columns
+order_web <- function(x,
+                      higher_attr = NULL,
+                      lower_attr = NULL) {
+  if (is.null(higher_attr)) {
+    h_order_names <- colnames(x)
+  } else {
+    higher_attr_vec <- sort(higher_attributes(x)[higher_attr])
+    h_order_names <- rownames(higher_attr_vec)
+  }
+  if (is.null(lower_attr)) {
+    l_order_names <- rownames(x)
+  } else {
+    lower_attr_vec <- sort(lower_attributes(x)[lower_attr])
+    l_order_names <- rownames(lower_attr_vec)
+  }
+  x[l_order_names, h_order_names]
+}
+
+## Filter function ----------------------------------------
+filter_web <- function(x,
+                       higher_filter = NULL,
+                       lower_filter = NULL) {
+  x
+}
 
 # bipartite_webarray class --------------------------------
 ## Wide approach ------------------------------------------
