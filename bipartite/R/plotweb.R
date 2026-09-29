@@ -213,35 +213,62 @@ plotweb <- function(web,
   ## Use the provided column name in higher_attributes of x
   ## to automatically generate a color vector for the higher species
   if (!is.null(higher_color_attr)) {
+    # Check whether 'higher_color_attr'
+    # matches a column-name in higher_attributes.
     stopifnot(higher_color_attr %in% colnames(higher_attributes(web)))
+    # Extract the matching column as a named vector
     higher_color_attr_vec <- higher_attributes(web)[[higher_color_attr]]
     higher_names <- rownames(higher_attributes(web))
     print(typeof(higher_color_attr_vec))
     if (is.logical(higher_color_attr_vec)) {
+      # If the attribute vector is of type boolean
+      # we expect there to be exactly two colors given
+      # in the higher_color vector.
       if (length(higher_color) == 2) {
         higher_color_map <- higher_color
       }
+      # We can then assign a color to each higher species
+      # by first converting the attribute vector to integers (0 and 1)
+      # and adding 1 so that FALSE gets assigned the first
+      # and TRUE the second color.
       higher_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
         higher_color_map[v + 1]
       })
       names(higher_color) <- colnames(web)
-    }
-    else if (is.numeric(higher_color_attr_vec)) {
+    } else if (is.numeric(higher_color_attr_vec)) {
+      # If the attribute vector is of type numeric (floating point numbers)
+      # we assign colors based on a colorRamp.
+      # To do so we first normalize attribute vector to the range [0,1].
       max_v <- max(higher_color_attr_vec)
       min_v <- min(higher_color_attr_vec)
       normalized_vector <- (higher_color_attr_vec - min_v) / (max_v - min_v)
       print(normalized_vector)
-      ramp <- colorRamp(c("white", "black"))
+      # TODO: allow for more different color Ramps
+      if (is.function(higher_color)) {
+        ramp <- higher_color
+      } else if (is.character(higher_color)) {
+        if (length(higher_color) == 1) {
+          ramp <- colorRamp(c("white", higher_color))
+        } else {
+          ramp <- colorRamp(higher_color)
+        }
+      }
       higher_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
       names(higher_color) <- higher_names
       print(higher_color)
     } else if (is.character(higher_color_attr_vec)) {
+      # Convert character attributes to factors,
+      # so that each level can be assigned a color
       higher_color_attr_vec <- as.factor(higher_color_attr_vec)
       print(higher_color_attr_vec)
     }
     if (is.factor(higher_color_attr_vec)) {
+      # If the attribute vector is of type factor,
+      # we will assign a color to each factor level.
       nl <- nlevels(higher_color_attr_vec)
       print(nl)
+      # To do so we create a lookup table (named vector)
+      # that holds a color value for each level.
       if (length(higher_color) >= nl) {
         if (length(higher_color) > nl) {
           higher_color <- higher_color[1:nl]
@@ -250,10 +277,14 @@ plotweb <- function(web,
         if (is.null(names(higher_color))) {
           names(higher_color_map) <- levels(higher_color_attr_vec)
         }
+        # From the lookup table we then retrieve and assign the
+        # corresponding color for each higher species.
         higher_color <- sapply(as.character(higher_color_attr_vec), function(v) {
           higher_color_map[v]
         })
         names(higher_color) <- colnames(web)
+      } else {
+        stop("Not enought colors in higher_color vector for color attribute \"", higher_color_attr, "\".")
       }
     }
   } else {
