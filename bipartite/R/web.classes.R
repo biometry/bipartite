@@ -179,14 +179,6 @@ print.bipartite_web <- function(x, ...) {
                dimnames = list(rownames(x), colnames(x))), ...)
 }
 
-## Plot function prototype --------------------------------
-## Wrapper for plotweb function.
-## TODO: Decide whether to keep / extent the auto color functionality
-## TODO: If keeping the auto coloring there needs to be a legend option
-plot.bipartite_web <- function(x, ...) {
-  plotweb(x, ...)
-}
-
 ## Order function -----------------------------------------
 ## Sorts a bipartite_web based on higher or lower attributes columns
 order_web <- function(x,

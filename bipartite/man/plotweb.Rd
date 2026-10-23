@@ -36,10 +36,12 @@ plotweb(web,
         y_lim = c(0, 1),
         lab_distance = 0.05,
         lower_color = "black",
+        lower_color_attr = NULL,
         lower_border = "same",
         lower_add_color = "red",
         lower_text_color = "black",
         higher_color = "black",
+        higher_color_attr = NULL,
         higher_border = "same",
         higher_add_color = "red",
         higher_text_color = "black",
@@ -56,49 +58,126 @@ plotweb(web,
 }
 
 \arguments{
-  \item{web}{Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
-             Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.}
-  \item{main}{An overall title (on top) for the plot.}
-  \item{sorting}{Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.}
-  \item{empty}{If \code{TRUE} empty columns and rows are removed from the web.}
-  \item{higher_abundances}{Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!}
-  \item{lower_abundances}{Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!}
-  \item{add_higher_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!}
-  \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!}
-  \item{higher_labels}{Boolean or named list. Indicating whether the higher labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
-  \item{lower_labels}{Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
-  \item{scaling}{Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.}
-  \item{font}{An integer which specifies which font to use for the labels. See \code{\link[graphics]{par}}.}
-  \item{family}{The name of a font family for drawing the labels. See \code{\link[graphics]{par}}.}
-  \item{srt}{Orientation of the labels in degrees. (Default: \code{0})}
-  \item{text_size}{Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: \code{"auto"})}
-  \item{spacing}{Either \code{"auto"}, a single value or a numerical vector of the form \code{c(higher, lower)}. Defines the total space between boxes. See Notes!  (Default: \code{0.3})}  \item{plot_axes}{Indicates whether both axes should be drawn on the plot. (Default: \code{FALSE})}
-  \item{box_size}{Size of the boxes. Numerical with either c(higher_box_size, lower_box_size) or one value if both should be the same. (Default: \code{0.1})}
-  \item{higher_italic}{If set to \code{TRUE}, the labels of the higher species are plotted in italics. (Default: \code{FALSE})}
-  \item{lower_italic}{If set to \code{TRUE}, the labels of the lower species are plotted in italics. (Default: \code{FALSE})}
-  \item{x_lim}{Vector with 2 numerical values. The range in which to plot on the x-axis. (Default: \code{c(0, 1)})}
-  \item{y_lim}{Vector with 2 numerical values. The range in which to plot on the y-axis. (Default: \code{c(0, 1)})}
-  \item{lab_distance}{Distance between the boxes and the labels in \strong{inches}}
-  \item{higher_color}{A single color or a list of colors used to plot the higher species (columns) boxes. (Default: \code{"black"})}
-  \item{higher_border}{Either \code{"same"} or a single color or a list of colors used to plot the higher species (columns) boxes borders.
-                      If \code{"same"}, the borders have the same color as the corresponding boxes.}
-  \item{higher_add_color}{Only used when higher additional abundances are defined. 
-                          A single color or a list of colors used to plot the higher (column) additional boxes. (Default: \code{"red"})}
-  \item{higher_text_color}{A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})}
-  \item{lower_color}{A single color or a list of colors used to plot the lower species (rows) boxes. (Default: \code{"black"})}
-  \item{lower_border}{Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
-                      If "same", the borders have the same color as the corresponding boxes.}
-  \item{lower_add_color}{Only used when lower additional abundances are defined. 
-                         A single color or a list of colors used to plot the lower (row) additional boxes. (Default: "red")}
-  \item{lower_text_color}{A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})}
-  \item{horizontal}{Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)}
-  \item{link_color}{"lower", "higher", a single color value, or a matrix with color values for each entry in the interaction web. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")}
-  \item{link_border}{Either "same" or a single color or a list of colors used to plot the link borders.
-                      If "same", the borders have the same color as the corresponding boxes.}
-  \item{link_alpha}{Number between 0.0 and 1.0 setting the transparency of the links. 
-                    0 means full transparency 1 means full opacity. (Default: 0.5)}
-  \item{curved_links}{If \code{FALSE} links are plotted as straight lines otherwise they are curved. (Default: \code{FALSE})}
-  \item{arrow}{Display type of connection between higher and lower boxes, options are 
+  \item{web}{
+    Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
+    Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.
+  }
+  \item{main}{
+    An overall title (on top) for the plot.
+  }
+  \item{sorting}{
+    Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.
+  }
+  \item{empty}{
+    If \code{TRUE} empty columns and rows are removed from the web.
+  }
+  \item{higher_abundances}{
+    Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!
+  }
+  \item{lower_abundances}{
+    Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!
+  }
+  \item{add_higher_abundances}{
+    Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!
+  }
+  \item{add_lower_abundances}{
+    Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!
+  }
+  \item{higher_labels}{
+    Boolean or named list. Indicating whether the higher labels should be plotted. Named list may be used for abbrevations or partly cursive labels.
+  }
+  \item{lower_labels}{
+    Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.
+  }
+  \item{scaling}{
+    Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.
+  }
+  \item{font}{
+    An integer which specifies which font to use for the labels. See \code{\link[graphics]{par}}.
+  }
+  \item{family}{
+    The name of a font family for drawing the labels. See \code{\link[graphics]{par}}.
+  }
+  \item{srt}{
+    Orientation of the labels in degrees. (Default: \code{0})
+  }
+  \item{text_size}{
+    Factor by which the size of the label text should be scaled. Values < 1 makes them smaller, values > 1 makes them greater. (Default: \code{"auto"})
+  }
+  \item{spacing}{
+    Either \code{"auto"}, a single value or a numerical vector of the form \code{c(higher, lower)}. Defines the total space between boxes. See Notes!  (Default: \code{0.3})}  \item{plot_axes}{Indicates whether both axes should be drawn on the plot. (Default: \code{FALSE})
+  }
+  \item{box_size}{
+    Size of the boxes. Numerical with either c(higher_box_size, lower_box_size) or one value if both should be the same. (Default: \code{0.1})
+  }
+  \item{higher_italic}{
+    If set to \code{TRUE}, the labels of the higher species are plotted in italics. (Default: \code{FALSE})
+  }
+  \item{lower_italic}{
+    If set to \code{TRUE}, the labels of the lower species are plotted in italics. (Default: \code{FALSE})
+  }
+  \item{x_lim}{
+    Vector with 2 numerical values. The range in which to plot on the x-axis. (Default: \code{c(0, 1)})
+  }
+  \item{y_lim}{
+    Vector with 2 numerical values. The range in which to plot on the y-axis. (Default: \code{c(0, 1)})
+  }
+  \item{lab_distance}{
+    Distance between the boxes and the labels in \strong{inches}
+  }
+  \item{higher_color}{
+    A single color or a list of colors used to plot the higher species (columns) boxes. (Default: \code{"black"})
+  }
+  \item{higher_color_attr}{
+    
+  }
+  \item{higher_border}{
+    Either \code{"same"} or a single color or a list of colors used to plot the higher species (columns) boxes borders.
+    If \code{"same"}, the borders have the same color as the corresponding boxes.
+  }
+  \item{higher_add_color}{
+    Only used when higher additional abundances are defined. 
+    A single color or a list of colors used to plot the higher (column) additional boxes. (Default: \code{"red"})
+  }
+  \item{higher_text_color}{
+    A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})
+  }
+  \item{lower_color}{
+    A single color or a list of colors used to plot the lower species (rows) boxes. (Default: \code{"black"})
+  }
+  \item{lower_color_attr}{
+
+  }
+  \item{lower_border}{
+    Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
+    If "same", the borders have the same color as the corresponding boxes.
+  }
+  \item{lower_add_color}{
+    Only used when lower additional abundances are defined. 
+    A single color or a list of colors used to plot the lower (row) additional boxes. (Default: "red")
+  }
+  \item{lower_text_color}{
+    A single color or a list of colors used to plot the lower species (rows) labels. (Default: \code{"black"})
+  }
+  \item{horizontal}{
+    Boolean indicating whether the connection between the boxes and the label texts should be plotted horizontally. (Default: FALSE)
+  }
+  \item{link_color}{
+    "lower", "higher", a single color value, or a matrix with color values for each entry in the interaction web. If "lower" or "higher" the link color is taken from the corresponding lower or higher box. Otherwise all links have the defined color. (Default: "higher")
+  }
+  \item{link_border}{
+    Either "same" or a single color or a list of colors used to plot the link borders.
+    If "same", the borders have the same color as the corresponding boxes.
+  }
+  \item{link_alpha}{
+    Number between 0.0 and 1.0 setting the transparency of the links. 
+    0 means full transparency 1 means full opacity. (Default: 0.5)
+  }
+  \item{curved_links}{
+    If \code{FALSE} links are plotted as straight lines otherwise they are curved. (Default: \code{FALSE})
+  }
+  \item{arrow}{
+    Display type of connection between higher and lower boxes, options are 
     \itemize{
       \item \code{"no"} (Default)
       \item \code{"up"}
@@ -109,11 +188,17 @@ plotweb(web,
       \item \code{"both.center"}
     }
   }
-  \item{add}{If set to \code{TRUE} a new bipartite network plot is added to the previous plot. (Default: \code{FALSE})}
-  \item{mar}{A numerical vector of the form \code{c(bottom, left, top, right)} which gives the number of lines of margin to be specified on the four sides of the plot. 
-             The default is NULL which takes the global setting from \code{par()}. }
-  \item{mai}{A numerical vector of the form \code{c(bottom, left, top, right)} which gives the margin size specified in inches.
-             Please note, that the margin is increased so that the labels are always visible in the plot.}
+  \item{add}{
+    If set to \code{TRUE} a new bipartite network plot is added to the previous plot. (Default: \code{FALSE})
+  }
+  \item{mar}{
+    A numerical vector of the form \code{c(bottom, left, top, right)} which gives the number of lines of margin to be specified on the four sides of the plot. 
+    The default is NULL which takes the global setting from \code{par()}.
+  }
+  \item{mai}{
+    A numerical vector of the form \code{c(bottom, left, top, right)} which gives the margin size specified in inches.
+    Please note, that the margin is increased so that the labels are always visible in the plot.
+  }
 }
 \value{
   Returns a window with a bipartite graph of the given web. 

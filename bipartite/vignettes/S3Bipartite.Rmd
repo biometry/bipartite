@@ -114,8 +114,15 @@ options(max.print = 9999)
 print(higher_attributes(Safariland.web))
 ```
 
+## Numerical color attribute
+
 ```{r}
 plot(Safariland.web, higher_color_attr = "rand2", higher_border = "black", link_border = "black")
+plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("green", "blue"), link_border = "black")
+plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("red", "orange", "white"), link_border = "black")
+plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("#440154", "#21918c", "#fde725"), link_border = "black")
+plot(order_web(Safariland.web, "rand2"), higher_color_attr = "rand2", higher_color = c("#440154", "#21918c", "#fde725"), link_border = "black")
+plot(order_web(Safariland.web, "rand2"), higher_color_attr = "rand2", higher_color = rainbow(10), link_border = "black")
 ```
 
 ```{r}
@@ -125,7 +132,7 @@ plot(Safariland.web,
      horizontal = TRUE)
 ```
 
-```{r}
+```{r, error = TRUE}
 plot(Safariland.web,
      higher_color_attr = "Order",
      horizontal = TRUE)
@@ -146,7 +153,7 @@ plot(Safariland.web,
 ## legend
 ```{r}
 plot(Safariland.web,
-     higher_color = c("Hymenoptera" = "Yellow",
+     higher_color = c("Hymenoptera" = "#ffbb00",
                       "Diptera" = "Blue",
                       "Coleoptera" = "Green",
                       "Araneae" = "Red"),
@@ -157,9 +164,9 @@ plot(Safariland.web,
      higher_border = "black",
      lower_border = "black",
      link_border = "black",
-     mar = c(1,1,1,6))
+     mar = c(1,1,1,8))
 par(xpd = T)
-legend(1.2, 1,
+legend(1.25, 1,
        legend = c("Hymenoptera",
                   "Diptera",
                   "Coleoptera",
@@ -173,7 +180,7 @@ legend(1.2, 1,
 
 ```{r}
 plot(Safariland.web,
-     higher_color = c("Hymenoptera" = "Yellow",
+     higher_color = c("Hymenoptera" = "#ffbb00",
                       "Diptera" = "Blue",
                       "Coleoptera" = "Green",
                       "Araneae" = "Red"),
@@ -184,7 +191,7 @@ plot(Safariland.web,
      higher_border = "black",
      lower_border = "black",
      link_border = "black",
-     mar = c(1,1,1,6))
+     mar = c(1,1,1,8))
 par(xpd = T)
 legend(1, 1,
        legend = c("Hymenoptera",
