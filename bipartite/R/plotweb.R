@@ -99,8 +99,8 @@ plot.bipartite_web <- function(x,
             "This leads to mai overriding mar.")
   }
 
-  if (!is.matrix(web)) {
-    web <- as.matrix(web)
+  if (!is.matrix(x)) {
+    x <- as.matrix(x)
         # stop("The argument web must be a matrix.")
   }
 
@@ -131,37 +131,37 @@ plot.bipartite_web <- function(x,
   # rownames and colnames need to be set
   if (is.matrix(link_color)) {
     if (is.null(rownames(link_color))) {
-      rownames(link_color) <- rownames(web)
+      rownames(link_color) <- rownames(x)
     }
     if (is.null(colnames(link_color))) {
-      colnames(link_color) <- colnames(web)
+      colnames(link_color) <- colnames(x)
     }
-  } else if (is.vector(link_color) && length(link_color) == nrow(web) * ncol(web)) {
+  } else if (is.vector(link_color) && length(link_color) == nrow(x) * ncol(x)) {
     # link_color was given as a unnamed vector
     # and needs to be converted to a named matrix
     link_color <- matrix(link_color,
-                         nrow = nrow(web),
-                         ncol = ncol(web))
-    rownames(link_color) <- rownames(web)
-    colnames(link_color) <- colnames(web)
+                         nrow = nrow(x),
+                         ncol = ncol(x))
+    rownames(link_color) <- rownames(x)
+    colnames(link_color) <- colnames(x)
   }
 
   # Sort the web according to the user defined method
-  web <- sortweb(web, sort.order = sorting, empty = empty)
+  x <- sortweb(x, sort.order = sorting, empty = empty)
 
   # Extract the number of rows and columns
-  nr <- nrow(web)
-  nc <- ncol(web)
+  nr <- nrow(x)
+  nc <- ncol(x)
 
   # Extract the row and column names if existing
   # otherwise generate number sequence instead
-  if (!is.null(rownames(web))) {
-    r_names <- rownames(web)
+  if (!is.null(rownames(x))) {
+    r_names <- rownames(x)
   } else {
     r_names <- 1:nr
   }
-  if (!is.null(rownames(web))) {
-    c_names <- colnames(web)
+  if (!is.null(rownames(x))) {
+    c_names <- colnames(x)
   } else {
     c_names <- 1:nc
   }
@@ -171,7 +171,7 @@ plot.bipartite_web <- function(x,
   if (horizontal) {
     r_names <- rev(r_names)
     c_names <- rev(c_names)
-    web <- web[r_names, c_names]
+    x <- x[r_names, c_names]
   }
 
   # link_color needs to be sorted accordingly
@@ -225,10 +225,10 @@ plot.bipartite_web <- function(x,
   if (!is.null(higher_color_attr)) {
     # Check whether 'higher_color_attr'
     # matches a column-name in higher_attributes.
-    stopifnot(higher_color_attr %in% colnames(higher_attributes(web)))
+    stopifnot(higher_color_attr %in% colnames(higher_attributes(x)))
     # Extract the matching column as a named vector
-    higher_color_attr_vec <- higher_attributes(web)[[higher_color_attr]]
-    higher_names <- rownames(higher_attributes(web))
+    higher_color_attr_vec <- higher_attributes(x)[[higher_color_attr]]
+    higher_names <- rownames(higher_attributes(x))
     print(typeof(higher_color_attr_vec))
     if (is.logical(higher_color_attr_vec)) {
       # If the attribute vector is of type boolean
@@ -244,7 +244,7 @@ plot.bipartite_web <- function(x,
       higher_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
         higher_color_map[v + 1]
       })
-      names(higher_color) <- colnames(web)
+      names(higher_color) <- colnames(x)
     } else if (is.numeric(higher_color_attr_vec)) {
       # If the attribute vector is of type numeric (floating point numbers)
       # we assign colors based on a colorRamp.
@@ -292,7 +292,7 @@ plot.bipartite_web <- function(x,
         higher_color <- sapply(as.character(higher_color_attr_vec), function(v) {
           higher_color_map[v]
         })
-        names(higher_color) <- colnames(web)
+        names(higher_color) <- colnames(x)
       } else {
         stop("Not enought colors in higher_color vector for color attribute \"", higher_color_attr, "\".")
       }
@@ -311,9 +311,9 @@ plot.bipartite_web <- function(x,
   }
   # Lower color attributes
   if (!is.null(lower_color_attr)) {
-    stopifnot(lower_color_attr %in% colnames(lower_attributes(web)))
-    lower_color_attr_vec <- lower_attributes(web)[[lower_color_attr]]
-    lower_names <- rownames(lower_attributes(web))
+    stopifnot(lower_color_attr %in% colnames(lower_attributes(x)))
+    lower_color_attr_vec <- lower_attributes(x)[[lower_color_attr]]
+    lower_names <- rownames(lower_attributes(x))
     print(typeof(lower_color_attr_vec))
     if (is.numeric(lower_color_attr_vec)) {
       max_v <- max(lower_color_attr_vec)
@@ -342,7 +342,7 @@ plot.bipartite_web <- function(x,
         lower_color <- sapply(as.character(lower_color_attr_vec), function(v) {
           lower_color_map[v]
         })
-        names(lower_color) <- rownames(web)
+        names(lower_color) <- rownames(x)
       }
     }
   } else {
@@ -532,14 +532,14 @@ plot.bipartite_web <- function(x,
   # If no independent abundances are given for the higher species
   # calculate the sum of all columns as abundances
   if (is.null(higher_abundances)) {
-    higher_abundances <- colSums(web)
+    higher_abundances <- colSums(x)
   } else {
-    higher_abundances <- higher_abundances[colnames(web)]
+    higher_abundances <- higher_abundances[colnames(x)]
   }
   if (!is.null(add_higher_abundances)) {
     # Sort the additional higher abundances 
     # according to the column-order in the web
-    add_higher_abundances <- add_higher_abundances[colnames(web)]
+    add_higher_abundances <- add_higher_abundances[colnames(x)]
     higher_abundances <- c(rbind(higher_abundances, add_higher_abundances))
     # Include the custom colors into the color vector
     if (length(higher_add_color) == 1) {
@@ -553,7 +553,7 @@ plot.bipartite_web <- function(x,
       if (!setequal(names(higher_add_color), c_names)) {
         stop("Names of higher_add_color does not match higher species names.")
       }
-      higher_add_color <- higher_add_color[colnames(web)]
+      higher_add_color <- higher_add_color[colnames(x)]
     } else if (length(higher_add_color) < nc) {
       higher_add_color <- rep_len(higher_add_color, nc)
     }
@@ -566,13 +566,13 @@ plot.bipartite_web <- function(x,
   # If no independent abundances are given for the lower species
   # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
-    lower_abundances <- rowSums(web)
+    lower_abundances <- rowSums(x)
   } else {
-    lower_abundances <- lower_abundances[rownames(web)]
+    lower_abundances <- lower_abundances[rownames(x)]
   }
   if (!is.null(add_lower_abundances)) {
     # Sort the additional lower abundances according to the row-order in the web
-    add_lower_abundances <- add_lower_abundances[rownames(web)]
+    add_lower_abundances <- add_lower_abundances[rownames(x)]
     # Merge the abundances and additional abundances vector
     # by alternating indices
     lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
@@ -588,7 +588,7 @@ plot.bipartite_web <- function(x,
       if (!setequal(names(lower_add_color), r_names)) {
         stop("Names of lower_add_color does not match lower species names.")
       }
-      lower_add_color <- lower_add_color[rownames(web)]
+      lower_add_color <- lower_add_color[rownames(x)]
     } else if (length(lower_add_color) < nr) {
       lower_add_color <- rep_len(lower_add_color, nr)
     }
@@ -803,19 +803,19 @@ plot.bipartite_web <- function(x,
   if (!is.null(add_lower_abundances) && !is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
                          col = rep(seq(1, nc, 2), each = nr/2),
-                         weight = c(web))
+                         weight = c(x))
   } else if (!is.null(add_lower_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc),
                          col = rep(1:nc, each = nr/2),
-                         weight = c(web))
+                         weight = c(x))
   } else if (!is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(1:nr, nc/2),
                          col = rep(seq(1, nc, 2), each = nr),
-                         weight = c(web))
+                         weight = c(x))
   } else {
     web.df <- data.frame(row = rep(1:nr, nc),
                          col = rep(1:nc, each = nr),
-                         weight = c(web))
+                         weight = c(x))
   }
   web.df <- web.df[web.df$weight > 0, ]
 
