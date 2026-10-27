@@ -1,39 +1,41 @@
-plotweb_pair <- function(web1,
-                         web2,
-                         middle = "higher",
-                         sort_by = 1,
-                         sorting = "normal",
-                         higher_abundances = NULL,
-                         lower_abundances = NULL,
-                         add_higher_abundances = NULL,
-                         add_lower_abundances = NULL,
-                         scaling = "absolute",
-                         font = NULL,
-                         family = NULL,
-                         srt = 0,
-                         higher_italic = FALSE,
-                         lower_italic = FALSE,
-                         text_size = "auto",
-                         x_lim = c(0, 1),
-                         y_lim = c(0, 1),
-                         lower_color = "black",
-                         lower_border = "same",
-                         add_lower_color = "red",
-                         higher_color = "black",
-                         higher_border = "same",
-                         add_higher_color = "red",
-                         higher_text_color = "black",
-                         lower_text_color = "black",
-                         horizontal = FALSE,
-                         link_color = "lower",
-                         link_border = "same",
-                         link_alpha = 0.6,
-                         curved_links = FALSE,
-                         arrow = "no",
-                         spacing = 0.3,
-                         mar = c(1, 1, 1, 1),
-                         mai = NULL,
-                         plot_axes = FALSE) {
+plot.bipartite_webarray <- function(x,
+                                    w1 = 1,
+                                    w2 = 2,
+                                    middle = "higher",
+                                    sort_by = 1,
+                                    sorting = "normal",
+                                    higher_abundances = NULL,
+                                    lower_abundances = NULL,
+                                    add_higher_abundances = NULL,
+                                    add_lower_abundances = NULL,
+                                    scaling = "absolute",
+                                    font = NULL,
+                                    family = NULL,
+                                    srt = 0,
+                                    higher_italic = FALSE,
+                                    lower_italic = FALSE,
+                                    text_size = "auto",
+                                    spacing = 0.3,
+                                    x_lim = c(0, 1),
+                                    y_lim = c(0, 1),
+                                    higher_color = "black",
+                                    higher_border = "same",
+                                    higher_add_color = "red",
+                                    higher_text_color = "black",
+                                    lower_color = "black",
+                                    lower_border = "same",
+                                    lower_add_color = "red",
+                                    lower_text_color = "black",
+                                    horizontal = FALSE,
+                                    link_color = "lower",
+                                    link_border = "same",
+                                    link_alpha = 0.5,
+                                    curved_links = FALSE,
+                                    arrow = "no",
+                                    plot_axes = FALSE,
+                                    mar = c(1, 1, 1, 1),
+                                    mai = NULL,
+                                    ...) {
 
   # Copy original par options
   op <- par(no.readonly = TRUE)
@@ -50,6 +52,9 @@ plotweb_pair <- function(web1,
   }
   # Extract newly set margin in inches
   mai <- par()$mai
+
+  web1 <- x[,,w1]
+  web2 <- x[,,w2]
 
   # Check whether the webs have named rows and columns
   # and if not fill them in.
@@ -98,9 +103,9 @@ plotweb_pair <- function(web1,
     higher_border <- lower_border
     lower_border <- tmp
     # swap additional color
-    tmp <- add_higher_color
-    add_higher_color <- add_lower_color
-    add_lower_color <- tmp
+    tmp <- higher_add_color
+    higher_add_color <- lower_add_color
+    lower_add_color <- tmp
     # swap text color
     tmp <- higher_text_color
     higher_text_color <- lower_text_color
@@ -314,24 +319,24 @@ plotweb_pair <- function(web1,
     c_abuns_1 <- c(rbind(c_abuns_1, add_c_abundances_1))
     c_abuns_2 <- c(rbind(c_abuns_2, add_c_abundances_2))
 
-    if (length(add_higher_color) == 1) {
-      if (add_higher_color == "same") {
+    if (length(higher_add_color) == 1) {
+      if (higher_add_color == "same") {
         higher_color <- rep(higher_color, each = 2)
       } else {
-        add_higher_color <- rep_len(add_higher_color, nc)
-        higher_color <- c(rbind(higher_color, add_higher_color))
+        higher_add_color <- rep_len(higher_add_color, nc)
+        higher_color <- c(rbind(higher_color, higher_add_color))
       }
-    } else if (length(add_higher_color) == nc) {
-      if (setequal(names(add_higher_color), c_names)) {
-        add_higher_color <- add_higher_color[colnames(web1)]
+    } else if (length(higher_add_color) == nc) {
+      if (setequal(names(higher_add_color), c_names)) {
+        higher_add_color <- higher_add_color[colnames(web1)]
       }
-      higher_color <- c(rbind(higher_color, add_higher_color))
-    } else if (length(add_higher_color) > nc) {
-      add_higher_color <- rep_len(add_higher_color, nc)
-      higher_color <- c(rbind(higher_color, add_higher_color))
+      higher_color <- c(rbind(higher_color, higher_add_color))
+    } else if (length(higher_add_color) > nc) {
+      higher_add_color <- rep_len(higher_add_color, nc)
+      higher_color <- c(rbind(higher_color, higher_add_color))
     } else {
-      add_higher_color <- rep_len(add_higher_color, nc)
-      higher_color <- c(rbind(higher_color, add_higher_color))
+      higher_add_color <- rep_len(higher_add_color, nc)
+      higher_color <- c(rbind(higher_color, higher_add_color))
     }
 
   }
@@ -402,7 +407,8 @@ plotweb_pair <- function(web1,
   }
   # TODO: use xlim and ylim arguments here.
   plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
-       axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+       axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i", 
+       ...)
 
   ################# auto spacing ###################################
   if (spacing == "auto" && text_size == "auto") {
@@ -453,25 +459,25 @@ plotweb_pair <- function(web1,
     # Increase the color vectors by inserting the colors for
     # additional abundances at the right indices.
     # TODO: fix bug with new lower_color_1 and lower_color_2
-    if (length(add_lower_color) == 1) {
-      if (add_lower_color == "same") {
+    if (length(lower_add_color) == 1) {
+      if (lower_add_color == "same") {
         lower_color_1 <- rep(lower_color_1, each = 2)
         lower_color_2 <- rep(lower_color_2, each = 2)
       } else {
-        add_lower_color_1 <- rep_len(add_lower_color, nr_1)
+        add_lower_color_1 <- rep_len(lower_add_color, nr_1)
         lower_color_1 <- c(rbind(lower_color_1, add_lower_color_1))
-        add_lower_color_2 <- rep_len(add_lower_color, nr_2)
+        add_lower_color_2 <- rep_len(lower_add_color, nr_2)
         lower_color_2 <- c(rbind(lower_color_2, add_lower_color_2))
       }
-    } else if (!is.null(names(add_lower_color))) {
-      stopifnot(length(add_lower_color) == nr)
-      add_lower_color_1 <- add_lower_color[r_names_1]
+    } else if (!is.null(names(lower_add_color))) {
+      stopifnot(length(lower_add_color) == nr)
+      add_lower_color_1 <- lower_add_color[r_names_1]
       lower_color_1 <- c(rbind(lower_color_1, add_lower_color_1))
-      add_lower_color_2 <- add_lower_color[r_names_2]
+      add_lower_color_2 <- lower_add_color[r_names_2]
       lower_color_2 <- c(rbind(lower_color_2, add_lower_color_2))
     } else {
-      lower_color_1 <- c(rbind(lower_color_1, add_lower_color))
-      lower_color_2 <- c(rbind(lower_color_2, add_lower_color))
+      lower_color_1 <- c(rbind(lower_color_1, lower_add_color))
+      lower_color_2 <- c(rbind(lower_color_2, lower_add_color))
     }
   }
 
@@ -706,7 +712,8 @@ plotweb_pair <- function(web1,
         new = TRUE)
   }
   plot(0, type = "n", ylim = c(0, 1), xlim = c(0, 1),
-       axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+       axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i", 
+       ...)
 
   # r_tx_2 <- (r_xr_2 + r_xl_2) / 2
   if (!is.null(add_lower_abundances)) {

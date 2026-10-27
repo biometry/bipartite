@@ -73,16 +73,16 @@ plot.bipartite_web <- function(x,
                                x_lim = c(0, 1),
                                y_lim = c(0, 1),
                                lab_distance = 0.05,
-                               lower_color = "black",
-                               lower_color_attr = NULL,
-                               lower_border = "same",
-                               lower_add_color = "red",
-                               lower_text_color = "black",
                                higher_color = "black",
                                higher_color_attr = NULL,
                                higher_border = "same",
                                higher_add_color = "red",
                                higher_text_color = "black",
+                               lower_color = "black",
+                               lower_color_attr = NULL,
+                               lower_border = "same",
+                               lower_add_color = "red",
+                               lower_text_color = "black",
                                horizontal = FALSE,
                                link_color = "higher",
                                link_border = "same",
@@ -92,7 +92,8 @@ plot.bipartite_web <- function(x,
                                plot_axes = FALSE,
                                add = FALSE,
                                mar = c(1, 1, 1, 1),
-                               mai = NULL) {
+                               mai = NULL,
+                               ...) {
   # Set the figure border via the mai or mar argument
   if (!is.null(mar) & !is.null(mai)) {
     warning("Both mar and mai have been set to values other than NULL. ",
@@ -496,7 +497,8 @@ plot.bipartite_web <- function(x,
     plot(0, type = "n",
          ylim = y_lim,
          xlim = x_lim,
-         axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+         axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i",
+         ...)
 
     # Adds a title above the plot
     if (!is.null(main)) {

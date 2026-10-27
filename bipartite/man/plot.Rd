@@ -36,16 +36,16 @@ A two dimensional matrix is plotted as a bipartite graph.
      x_lim = c(0, 1),
      y_lim = c(0, 1),
      lab_distance = 0.05,
-     lower_color = "black",
-     lower_color_attr = NULL,
-     lower_border = "same",
-     lower_add_color = "red",
-     lower_text_color = "black",
      higher_color = "black",
      higher_color_attr = NULL,
      higher_border = "same",
      higher_add_color = "red",
      higher_text_color = "black",
+     lower_color = "black",
+     lower_color_attr = NULL,
+     lower_border = "same",
+     lower_add_color = "red",
+     lower_text_color = "black",
      horizontal = FALSE,
      link_color = "higher",
      link_border = "same",
@@ -55,7 +55,47 @@ A two dimensional matrix is plotted as a bipartite graph.
      plot_axes = FALSE,
      add = FALSE,
      mar = c(1, 1, 1, 1),
-     mai = NULL)
+     mai = NULL,
+     ...)
+
+\method{plot}{bipartite_webarray}(x,
+     w1 = 1,
+     w2 = 2,
+     middle = "higher",
+     sort_by = 1,
+     sorting = "normal",
+     higher_abundances = NULL,
+     lower_abundances = NULL,
+     add_higher_abundances = NULL,
+     add_lower_abundances = NULL,
+     scaling = "absolute",
+     font = NULL,
+     family = NULL,
+     srt = 0,
+     higher_italic = FALSE,
+     lower_italic = FALSE,
+     text_size = "auto",
+     spacing = 0.3,
+     x_lim = c(0, 1),
+     y_lim = c(0, 1),
+     higher_color = "black",
+     higher_border = "same",
+     higher_add_color = "red",
+     higher_text_color = "black",
+     lower_color = "black",
+     lower_border = "same",
+     lower_add_color = "red",
+     lower_text_color = "black",
+     horizontal = FALSE,
+     link_color = "lower",
+     link_border = "same",
+     link_alpha = 0.5,
+     curved_links = FALSE,
+     arrow = "no",
+     plot_axes = FALSE,
+     mar = c(1, 1, 1, 1),
+     mai = NULL,
+     ...)
 }
 
 \arguments{
@@ -65,6 +105,15 @@ A two dimensional matrix is plotted as a bipartite graph.
   }
   \item{main}{
     An overall title (on top) for the plot.
+  }
+  \item{middle}{
+    Position of the trophic levels:
+    \code{"higher"}—higher trophic level (columns) in the middle,
+    \code{"lower"}—lower trophic level (rows) in the middle.
+  }
+  \item{sort_by}{
+    Choose whether to sort species based on 
+    \code{web1} (\code{= 1}) or \code{web2} (\code{= 2}).
   }
   \item{sorting}{
     Sorting option passed to the \code{\link{sortweb}} function. The default \code{"normal"} doesn't reorder the web.
