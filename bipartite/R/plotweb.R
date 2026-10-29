@@ -100,10 +100,10 @@ plot.bipartite_web <- function(x,
             "This leads to mai overriding mar.")
   }
 
-  if (!is.matrix(x)) {
-    x <- as.matrix(x)
-        # stop("The argument web must be a matrix.")
-  }
+  # if (!is.matrix(x)) {
+  #   x <- as.matrix(x)
+  #       # stop("The argument web must be a matrix.")
+  # }
 
   stopifnot(is.logical(higher_italic),
             is.logical(lower_italic),

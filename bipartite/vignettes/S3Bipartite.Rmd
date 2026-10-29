@@ -32,7 +32,6 @@ options(max.print = 10)
 ```
 
 
-
 ```{r}
 class(Safariland)
 str(Safariland)
@@ -121,8 +120,6 @@ plot(Safariland.web, higher_color_attr = "rand2", higher_border = "black", link_
 plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("green", "blue"), link_border = "black")
 plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("red", "orange", "white"), link_border = "black")
 plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("#440154", "#21918c", "#fde725"), link_border = "black")
-plot(order_web(Safariland.web, "rand2"), higher_color_attr = "rand2", higher_color = c("#440154", "#21918c", "#fde725"), link_border = "black")
-plot(order_web(Safariland.web, "rand2"), higher_color_attr = "rand2", higher_color = rainbow(10), link_border = "black")
 ```
 
 ```{r}
@@ -219,13 +216,6 @@ plot(Safariland.web,
 ```
 
 ```{r}
-plot(order_web(Safariland.web, "Order"),
-     higher_color = rainbow(4),
-     higher_color_attr = "Order",
-     horizontal = TRUE)
-```
-
-```{r}
 Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"]
 
 plot(Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"],
@@ -253,4 +243,21 @@ warray[1:2,higher_attributes(warray)$No > 10,]
 
 ```{r}
 warray[,,1]
+```
+
+```{r}
+plot(warray,
+     2, 1,
+     horizontal = TRUE,
+     spacing = .5)
+plot(warray,
+     2, 1,
+     horizontal = TRUE,
+     spacing = .5,
+     middle = "lower")
+plot(warray,
+     1, 2,
+     horizontal = TRUE,
+     spacing = .5,
+     middle = "lower")
 ```

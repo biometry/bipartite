@@ -78,6 +78,33 @@ bipartite_web <- function(web,
   )
 }
 
+as.bipartite_web <- function(x, ...) {
+  UseMethod("as.bipartite_web")
+}
+
+as.bipartite_web.default <- function(x, ...) {
+  bipartite_web(as.matrix(x))
+}
+
+as.bipartite_web.bipartite_web <- function(x, ...) {
+  x
+}
+
+as.bipartite_web.matrix <- function(x, ...) {
+  bipartite_web(x)
+}
+
+as.bipartite_web.data.frame <- function(x, ...) {
+  bipartite_web(as.matrix(x))
+}
+
+as.matrix.bipartite_web <- function(x, ...) {
+  nc <- ncol(x)
+  nr <- nrow(x)
+  dnames <- dimnames(x)
+  matrix(x, nr, nc, dimnames = dnames)
+}
+
 ## Subsetting ---------------------------------------------
 `[.bipartite_web` <- function(x, i, j, drop = TRUE) {
 
@@ -107,6 +134,17 @@ bipartite_web <- function(web,
     lower_attributes = lower_attributes,
     higher_attributes = higher_attributes,
     meta_attributes = meta_attributes
+  )
+}
+
+## Transposing --------------------------------------------
+t.bipartite_web <- function(x) {
+  y <- NextMethod("t")
+  bipartite_web(
+    y,
+    higher_attributes = lower_attributes(x),
+    lower_attributes =  higher_attributes(x),
+    meta_attributes = meta_attributes(x)
   )
 }
 
@@ -177,33 +215,6 @@ print.bipartite_web <- function(x, ...) {
                nrow = nrow(x),
                ncol = ncol(x),
                dimnames = list(rownames(x), colnames(x))), ...)
-}
-
-## Order function -----------------------------------------
-## Sorts a bipartite_web based on higher or lower attributes columns
-order_web <- function(x,
-                      higher_attr = NULL,
-                      lower_attr = NULL) {
-  if (is.null(higher_attr)) {
-    h_order_names <- colnames(x)
-  } else {
-    higher_attr_vec <- sort(higher_attributes(x)[higher_attr])
-    h_order_names <- rownames(higher_attr_vec)
-  }
-  if (is.null(lower_attr)) {
-    l_order_names <- rownames(x)
-  } else {
-    lower_attr_vec <- sort(lower_attributes(x)[lower_attr])
-    l_order_names <- rownames(lower_attr_vec)
-  }
-  x[l_order_names, h_order_names]
-}
-
-## Filter function ----------------------------------------
-filter_web <- function(x,
-                       higher_filter = NULL,
-                       lower_filter = NULL) {
-  x
 }
 
 # bipartite_webarray class --------------------------------

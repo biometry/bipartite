@@ -1,6 +1,7 @@
 \encoding{UTF-8}
 \name{plot}
 \alias{plot.bipartite_web}
+\alias{plot.bipartite_webarray}
 \alias{plotweb}
 
 \title{Visualize a bipartite interaction matrix (e.g. a foodweb)}
@@ -298,10 +299,10 @@ In case absolute is selected only the boxes of the side with the higher total ab
 }
 \examples{
 data(Safariland)
-plotweb(Safariland)
+plot(Safariland)
 
 # To let the plot look a bit more modern
-plotweb(Safariland, horizontal = TRUE, curved_links = TRUE)
+plot(Safariland, horizontal = TRUE, curved_links = TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -114,7 +114,7 @@ And instead by default the labels are scaled so that they will always fit in the
 The default function call stays the same, so for our randomly generated web the results is. 
 
 ```{r new_safariland}
-plotweb(Safariland)
+plot(Safariland)
 ```
 
 ## Text size and spacing
@@ -125,29 +125,29 @@ available space in that axis, and the size of the text labels is automatically s
 To better understand the `spacing` parameter, let us have a look at a simple layout consisting of 2 columns and 1 row. To help visualize the structure, we enable the x- and y-axes by setting `plot_axes = TRUE`. In the resulting plot, the `row1` box spans exactly `0.7` units in width, while the `col1` and `col2` boxes are each `0.35` units wide. As described above, this leaves `0.3` units—or 30% of the total width—as spacing between the elements.
 
 ```{r}
-web2 <- matrix(c(50, 50), ncol = 2)
-plotweb(web2, plot_axes = TRUE)
+web2 <- bipartite_web(matrix(c(50, 50), ncol = 2))
+plot(web2, plot_axes = TRUE)
 ```
 
 If we explicitly set the `spacing` value to `0.1`, we can see that the width of the lower box increases to `0.9` units, 
 and the size of the upper boxes increases to `0.45` units each.
 
 ```{r}
-plotweb(web2, spacing = 0.1, plot_axes = TRUE)
+plot(web2, spacing = 0.1, plot_axes = TRUE)
 ```
 
 If you prefer larger labels, you can set `text_size` to a value greater than 1 
 to increase their size. Conversely, if you want smaller labels, set `text_size` to a value between 0 and 1.
 
 ```{r}
-plotweb(web2, spacing = 0.1, text_size = 2)
+plot(web2, spacing = 0.1, text_size = 2)
 ```
 
 If you have found a `text_size` that you like and simply want to scale the plot automatically so that labels do not overlap, 
 you can also set `spacing = "auto"`.
 
 ```{r, fig.height=6, fig.width=6}
-plotweb(Safariland, spacing = "auto", text_size = 0.75)
+plot(Safariland, spacing = "auto", text_size = 0.75)
 ```
 
 The option `text_size = "auto"` is designed to automatically reduce the text size only when necessary. If all labels fit within the plot at the default size of 1, that size will be used. Otherwise, the text size is scaled down just enough to ensure everything fits without overlap.
@@ -159,7 +159,8 @@ another option is to rotate the whole plot by 90° altogether.
 This can be accomplished by setting `horizontal = TRUE`.
 
 ```{r web_horizontal}
-plotweb(web, horizontal = TRUE)
+web <- bipartite_web(web)
+plot(web, horizontal = TRUE)
 ```
 
 Now we are able to clearly read every label in the natural reading direction and still interpret the plotted interactions.
@@ -172,7 +173,7 @@ To arrange the plot in a specific order, simply provide that order when calling 
 Like in the example below, in which we reverse the row order for the `plotweb` call. 
 
 ```{r sorting_reverse}
-plotweb(web[rev(rownames(web)), ], horizontal = TRUE)
+plot(web[rev(rownames(web)), ], horizontal = TRUE)
 ```
 
 Now the plant species are plotted in reverse order.
@@ -183,9 +184,9 @@ So `dec` orders the species in decreasing row/column totals, `inc` orders by inc
 and `ca` performs a correspondence analysis which might reduce link crossings in the plot.
 
 ```{r sorting_all}
-plotweb(Safariland, horizontal = TRUE, sorting = "dec")
-plotweb(Safariland, horizontal = TRUE, sorting = "inc")
-plotweb(Safariland, horizontal = TRUE, sorting = "ca")
+plot(Safariland, horizontal = TRUE, sorting = "dec")
+plot(Safariland, horizontal = TRUE, sorting = "inc")
+plot(Safariland, horizontal = TRUE, sorting = "ca")
 ```
 
 ## Adding independent abundances
@@ -209,7 +210,7 @@ Now we have a named vector with a random abundance for each row (lower-level spe
 as required by the function. When we call the function with this argument, we get the following result.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, 
+plot(Safariland, sorting = "ca", horizontal = TRUE, 
         lower_abundances = lower_abundances)
 ```
 
@@ -232,7 +233,7 @@ Both arguments, just as their independent counterparts, take a named vector of a
 To demonstrate we take the same abundances as above.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE,
         add_lower_abundances = lower_abundances)
 ```
 
@@ -251,9 +252,9 @@ To demonstrate the difference we will generate uniformly random abundance values
 n_higher_species <- ncol(Safariland)
 higher_abundances <- sample(0:1000, n_higher_species, replace = TRUE)
 names(higher_abundances) <- colnames(Safariland)
-plotweb(Safariland, sorting = "ca", horizontal = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE,
         higher_abundances = higher_abundances, scaling = "relative")
-plotweb(Safariland, sorting = "ca", horizontal = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE,
         higher_abundances = higher_abundances, scaling = "absolute")
 ```
 
@@ -261,7 +262,7 @@ In the same way as for independent abundances a plot with additional abundances 
 manner. That means the boxes on both sides use as much space as possible. However, 
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE,
         add_lower_abundances = lower_abundances, scaling = "absolute")
 ```
 
@@ -274,13 +275,13 @@ Now that we've covered the basics of plotting bipartite networks, let's explore 
 With the option `curved_links = TRUE` the interaction links can be changed from straight lines to curves.
 
 ```{r}
-plotweb(Safariland, curved_links = TRUE)
+plot(Safariland, curved_links = TRUE)
 ```
 
 This obviously also works for horizontal plots.
 
 ```{r}
-plotweb(Safariland, horizontal = TRUE, curved_links = TRUE)
+plot(Safariland, horizontal = TRUE, curved_links = TRUE)
 ```
 
 ## Cursive species labels
@@ -288,7 +289,7 @@ plotweb(Safariland, horizontal = TRUE, curved_links = TRUE)
 The options `higher_italic` and `lower_italic` make the higher trophic level and lower trophic level species labels respectively cursive.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_italic = TRUE, lower_italic = TRUE)
 ```
 
@@ -302,7 +303,7 @@ higher_species_names <- higher_labels[species_name_selector]
 higher_labels[higher_species_names] <- lapply(higher_species_names,
                                               function(x) bquote(italic(.(x))))
 
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_labels = higher_labels, lower_italic = TRUE)
 ```
 
@@ -311,7 +312,7 @@ plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
 With the arguments `higher_color` and `lower_color` the colors of the boxes can be changed. For example setting these to a single color value changes the color of all boxes on each side.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE, 
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE, 
         higher_labels = higher_labels, lower_italic = TRUE,
         higher_color = "orange", lower_color = "darkgreen")
 
@@ -321,7 +322,7 @@ As you can see all boxes on the left (higher or columns) are <span style="color:
 and all boxes on the right (lower or rows) are <span style="color:darkgreen;">dark green</span>.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_labels = higher_labels, lower_italic = TRUE,
         lower_color = rainbow(nrow(Safariland)))
 ```
@@ -335,7 +336,7 @@ However oftentimes we want to highlight just a few species. For the example belo
 lower_color <- rep("black", nrow(Safariland))
 names(lower_color) <- rownames(Safariland)
 lower_color["Alstroemeria aurea"] <- "orange"
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_labels = higher_labels, lower_italic = TRUE,
         lower_color = lower_color)
 
@@ -348,7 +349,7 @@ As you can see now only the box of <span style="color:orange;">*Alstroemeria aur
 In the example above we highlighted the box of our species of interest. But it would be even nicer if we could highlight all the interactions that species has in the same color as well. To do so we just have to switch the option `link_color = "higher"` to `link_color = "lower"`.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_labels = higher_labels, lower_italic = TRUE,
         lower_color = lower_color, link_color = "lower")
 ```
@@ -356,7 +357,7 @@ plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
 Of course you can also set all the links to a single color value.
 
 ```{r}
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE, curved_links = TRUE,
         higher_labels = higher_labels, lower_italic = TRUE,
         higher_color = "orange", lower_color = "darkgreen",
         link_color = "brown")
@@ -375,7 +376,7 @@ names(lower_add_color) <- rownames(Safariland)
 names(lower_color) <- rownames(Safariland)
 lower_add_color["Alstroemeria aurea"] <- "darkorange"
 lower_color["Alstroemeria aurea"] <- "orange"
-plotweb(Safariland, sorting = "ca", horizontal = TRUE, 
+plot(Safariland, sorting = "ca", horizontal = TRUE, 
         add_lower_abundances = lower_abundances, curved_links = TRUE,
         higher_labels = higher_labels, higher_color = "grey50",
         lower_italic = TRUE, lower_color = lower_color,
@@ -397,7 +398,7 @@ names(lower_add_color) <- rownames(Safariland)
 names(lower_color) <- rownames(Safariland)
 lower_add_color["Alstroemeria aurea"] <- "darkorange4"
 lower_color["Alstroemeria aurea"] <- "orange"
-plotweb(Safariland, sorting = "ca", horizontal = TRUE,
+plot(Safariland, sorting = "ca", horizontal = TRUE,
         add_lower_abundances = lower_abundances,
         curved_links = TRUE, higher_labels = higher_labels,
         higher_color = "grey50", lower_italic = TRUE,

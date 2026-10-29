@@ -82,8 +82,8 @@ Vázquez, P.D., Chacoff, N.,P. and  Cagnolo, L. (2009) Evaluating multiple deter
 	
 	#sortmatr/sortmatrext:
 	sortweb(Safariland, sort.order="inc") #rares species first
-	plotweb(sortweb(Safariland, sort.order="dec"), method="normal")
-	plotweb(sortweb(web=Safariland, sort.order="seq", 
+	plot(sortweb(Safariland, sort.order="dec"), method="normal")
+	plot(sortweb(web=Safariland, sort.order="seq", 
 	  sequence=list(seq.higher=sample(colnames(Safariland)), 
 	  seq.lower=sample(rownames(Safariland)))), 
 	  method="normal")

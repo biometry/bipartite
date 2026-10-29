@@ -3,13 +3,14 @@
 
 
 sortweb <- function(web,
-                     sort.order = "dec",
-                     empty = TRUE,
-                     sequence = NULL) {
+                    sort.order = "dec",
+                    empty = TRUE,
+                    sequence = NULL) {
   if (empty) {
     web <- empty(web)
   }
-  web <- as.matrix(web) # to convert data.frames into matrix: needed for cumsum
+  # web <- as.matrix(web) # to convert data.frames into matrix: needed for cumsum
+  web <- as.bipartite_web(web) # to convert data.frames into matrix: needed for cumsum
 
   # give rownames & colnames if missing
   colnames(web) <- colnames(web, do.NULL = FALSE)

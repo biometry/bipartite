@@ -384,7 +384,7 @@ Vázquez, D.P., Chacoff, N.,P. and  Cagnolo, L. (2009) Evaluating multiple deter
 \examples{
 \dontrun{
 data(Safariland)
-plotweb(Safariland)
+plot(Safariland)
 visweb(Safariland)
 networklevel(Safariland)
 specieslevel(Safariland)
