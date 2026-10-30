@@ -26,8 +26,6 @@ A two dimensional matrix is plotted as a bipartite graph.
      higher_labels = NULL,
      lower_labels = NULL,
      scaling = "relative",
-     font = NULL,
-     family = NULL,
      srt = 0,
      higher_italic = FALSE,
      lower_italic = FALSE,
@@ -70,8 +68,6 @@ A two dimensional matrix is plotted as a bipartite graph.
      add_higher_abundances = NULL,
      add_lower_abundances = NULL,
      scaling = "absolute",
-     font = NULL,
-     family = NULL,
      srt = 0,
      higher_italic = FALSE,
      lower_italic = FALSE,
@@ -129,10 +125,14 @@ A two dimensional matrix is plotted as a bipartite graph.
     If \code{TRUE} empty columns and rows are removed from the web.
   }
   \item{higher_abundances}{
-    Vector with independent abundance estimates for the higher trophic level, \code{NULL} if none exist. See Notes!
+    Either a numeric vector or the name of a higher_attributes column
+    containing independent abundance estimates for the higher trophic level,
+    \code{NULL} if none exist. See Notes!
   }
   \item{lower_abundances}{
-    Vector with independent abundance estimates for the lower trophic level, \code{NULL} if none exist. See Notes!
+    Either a numeric vector or the name of a lower_attributes column
+    containing independent abundance estimates for the lower trophic level,
+    \code{NULL} if none exist. See Notes!
   }
   \item{add_higher_abundances}{
     Vector with additional abundances (e.g. unparasitised hosts) for the higher trophic level, \code{NULL} if none exist. See Notes!
@@ -148,12 +148,6 @@ A two dimensional matrix is plotted as a bipartite graph.
   }
   \item{scaling}{
     Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.
-  }
-  \item{font}{
-    An integer which specifies which font to use for the labels. See \code{\link[graphics]{par}}.
-  }
-  \item{family}{
-    The name of a font family for drawing the labels. See \code{\link[graphics]{par}}.
   }
   \item{srt}{
     Orientation of the labels in degrees. (Default: \code{0})
@@ -257,7 +251,7 @@ A two dimensional matrix is plotted as a bipartite graph.
     Please note, that the margin is increased so that the labels are always visible in the plot.
   }
   \item{...}{
-    Additional arguments passed down to \code{plot.default}.
+    Additional arguments (e.g. \code{font} or \code{family}) passed down.
   }
 }
 \value{

@@ -62,8 +62,6 @@ plot.bipartite_web <- function(x,
                                higher_labels = NULL,
                                lower_labels = NULL,
                                scaling = "relative",
-                               font = NULL,
-                               family = NULL,
                                srt = 0,
                                higher_italic = FALSE,
                                lower_italic = FALSE,
@@ -399,14 +397,14 @@ plot.bipartite_web <- function(x,
       # Get the size of the plotting device in inches
       dev_size <- dev.size("in")
 
-      c_height_1 <- strwidth(higher_labels[1], units = "inches")
+      c_height_1 <- strwidth(higher_labels[1], units = "inches", ...)
       c_height_1 <- cos(theta_pi) * c_height_1
-      r_height_1 <- strwidth(lower_labels[1], units = "inches")
+      r_height_1 <- strwidth(lower_labels[1], units = "inches", ...)
       r_height_1 <- cos(theta_pi) * r_height_1
 
-      c_height_n <- strwidth(higher_labels[nc], units = "inches")
+      c_height_n <- strwidth(higher_labels[nc], units = "inches", ...)
       c_height_n <- cos(theta_pi) * c_height_n
-      r_height_n <- strwidth(lower_labels[nr], units = "inches")
+      r_height_n <- strwidth(lower_labels[nr], units = "inches", ...)
       r_height_n <- cos(theta_pi) * r_height_n
 
       max_height_1 <- max(c_height_1, -r_height_1)
@@ -426,11 +424,15 @@ plot.bipartite_web <- function(x,
     min_distance_at_angle <- tan(a)^2 * abs(cos(a)) + abs(cos(a))
     # if (theta < 45 || theta > 315 || (theta > 135 && theta < 225)) {
     if (min_distance_at_angle > max(nchar(c(higher_labels, lower_labels)))) {
-      sum_str_h <- sum(strwidth(higher_labels, units = "inches"))
-      sum_str_l <- sum(strwidth(lower_labels, units = "inches"))
+      sum_str_h <- sum(strwidth(higher_labels, units = "inches", ...))
+      sum_str_l <- sum(strwidth(lower_labels, units = "inches", ...))
     } else {
-      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(higher_labels, units = "inches"))
-      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(lower_labels, units = "inches"))
+      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(higher_labels,
+                                                                units = "inches",
+                                                                ...))
+      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(lower_labels,
+                                                                units = "inches",
+                                                                ...))
     }
     if (sum_str_h > dev_max || sum_str_l > dev_max) {
       text_size <- min(dev_max / sum_str_h, dev_max / sum_str_l)
@@ -448,30 +450,34 @@ plot.bipartite_web <- function(x,
     if (theta != 0 && theta != 180) {
       c_m_t_width <- max(strwidth(higher_labels,
                                   cex = text_size,
-                                  units = "inches"))
+                                  units = "inches", ...))
       r_m_t_width <- max(strwidth(lower_labels,
                                   cex = text_size,
-                                  units = "inches"))
+                                  units = "inches", ...))
 
       c_t_width <- abs(c_m_t_width * sin(theta_pi))
       r_t_width <- abs(r_m_t_width * sin(theta_pi))
     } else { # If the labels are horizontal use their height.
       c_t_width <- max(strheight(higher_labels,
                                  cex = text_size,
-                                 units = "inches"))
+                                 units = "inches", ...))
       r_t_width <- max(strheight(lower_labels,
                                  cex = text_size,
-                                 units = "inches"))
+                                 units = "inches", ...))
     }
 
-    c_height_1 <- strwidth(higher_labels[1], cex = text_size, units = "inches")
+    c_height_1 <- strwidth(higher_labels[1], cex = text_size,
+                           units = "inches", ...)
     c_height_1 <- cos(theta_pi) * c_height_1
-    r_height_1 <- strwidth(lower_labels[1], cex = text_size, units = "inches")
+    r_height_1 <- strwidth(lower_labels[1], cex = text_size,
+                            units = "inches", ...)
     r_height_1 <- cos(theta_pi) * r_height_1
 
-    c_height_n <- strwidth(higher_labels[nc], cex = text_size, units = "inches")
+    c_height_n <- strwidth(higher_labels[nc], cex = text_size,
+                           units = "inches", ...)
     c_height_n <- cos(theta_pi) * c_height_n
-    r_height_n <- strwidth(lower_labels[nr], cex = text_size, units = "inches")
+    r_height_n <- strwidth(lower_labels[nr], cex = text_size,
+                           units = "inches", ...)
     r_height_n <- cos(theta_pi) * r_height_n
 
     max_height_1 <- max(c_height_1, -r_height_1)
@@ -535,11 +541,18 @@ plot.bipartite_web <- function(x,
   # calculate the sum of all columns as abundances
   if (is.null(higher_abundances)) {
     higher_abundances <- colSums(x)
-  } else {
+  } else if (is.character(higher_abundances)) {
+    # Extract the abundances column from the higher_attributes data.frame
+    stopifnot(higher_abundances %in% colnames(higher_attributes(x)))
+    higher_abundances <- higher_attributes(x)[[higher_abundances]]
+  } else if (is.numeric(higher_abundances)) {
+    stopifnot(length(higher_abundances) == ncol(x))
     higher_abundances <- higher_abundances[colnames(x)]
+  } else {
+    stop("higher_abundances must be either a numeric vector or a column name of higher_attributes.")
   }
   if (!is.null(add_higher_abundances)) {
-    # Sort the additional higher abundances 
+    # Sort the additional higher abundances
     # according to the column-order in the web
     add_higher_abundances <- add_higher_abundances[colnames(x)]
     higher_abundances <- c(rbind(higher_abundances, add_higher_abundances))
@@ -569,8 +582,16 @@ plot.bipartite_web <- function(x,
   # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
     lower_abundances <- rowSums(x)
-  } else {
+  } else if (is.character(lower_abundances)) {
+    # Extract the abundances column from the higher_attributes data.frame
+    stopifnot(lower_abundances %in% colnames(lower_attributes(x)))
+    lower_abundances <- lower_attributes(x)[[lower_abundances]]
+    stopifnot(is.numeric(lower_abundances))
+  } else if (is.numeric(lower_abundances)) {
+    stopifnot(length(lower_abundances) == nrow(x))
     lower_abundances <- lower_abundances[rownames(x)]
+  } else {
+    stop("lower_abundances must be either a numeric vector or a column name of lower_attributes.")
   }
   if (!is.null(add_lower_abundances)) {
     # Sort the additional lower abundances according to the row-order in the web
@@ -604,16 +625,16 @@ plot.bipartite_web <- function(x,
   # }
 
   # Get the not rotated height and width of the higher labels
-  H <- strheight(higher_labels, cex = text_size)
-  W <- strwidth(higher_labels, cex = text_size)
+  H <- strheight(higher_labels, cex = text_size, ...)
+  W <- strwidth(higher_labels, cex = text_size, ...)
 
   # Calculate the effective rotated height and width
   # str_h_c <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
   str_h_c <- abs(H * sin(theta_pi)) + abs(W * cos(theta_pi))
 
   # Get the not rotated height and width of the lower labels
-  H <- strheight(lower_labels, cex = text_size)
-  W <- strwidth(lower_labels, cex = text_size)
+  H <- strheight(lower_labels, cex = text_size, ...)
+  W <- strwidth(lower_labels, cex = text_size, ...)
 
   # Calculate the effective rotated height and width
   # str_h_r <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
@@ -716,8 +737,8 @@ plot.bipartite_web <- function(x,
     lower_border <- lower_color
   }
 
-  c_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size))
-  r_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size))
+  c_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size, ...))
+  r_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size, ...))
 
   # Apply italics to all higher labels
   if (higher_italic) {
@@ -763,11 +784,9 @@ plot.bipartite_web <- function(x,
       l_adj <- c(0, 0.5)
     }
     text(x_start - u_lab_distance, c_tx, higher_labels, adj = u_adj, srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family,
-         col = higher_text_color)
+         cex = text_size, xpd = TRUE, col = higher_text_color, ...)
     text(x_end + l_lab_distance, r_tx, lower_labels, adj = l_adj, srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family,
-         col = lower_text_color)
+         cex = text_size, xpd = TRUE, col = lower_text_color, ...)
 
   } else {
     y_start <- y_lim[1]
@@ -776,11 +795,12 @@ plot.bipartite_web <- function(x,
     rect(c_xl, y_end - higher_box_size, c_xr, y_end, col = higher_color, border = higher_border)
 
     if (srt == 0 | srt == 180) {
-      text(r_tx, y_start - l_lab_distance, lower_labels, pos = 1, cex = text_size,
-           xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
+      text(r_tx, y_start - l_lab_distance, lower_labels,
+           pos = 1, cex = text_size, xpd = TRUE, srt = srt,
+           col = lower_text_color, ...)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            pos = 3, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family, col = higher_text_color)
+           col = higher_text_color, ...)
     } else {
       if (srt > 180) {
         adj_l <- c(0, 0.5)
@@ -790,11 +810,9 @@ plot.bipartite_web <- function(x,
         adj_h <- c(0, 0.5)
       }
       text(r_tx, y_start - l_lab_distance, lower_labels,
-           adj = adj_l, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family)
+           adj = adj_l, cex = text_size, xpd = TRUE, srt = srt, ...)
       text(c_tx, y_end + u_lab_distance, higher_labels,
-           adj = adj_h, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family)
+           adj = adj_h, cex = text_size, xpd = TRUE, srt = srt, ...)
     }
   }
 

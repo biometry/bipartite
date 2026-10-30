@@ -202,6 +202,24 @@ legend(1, 1,
        title = "Order")
 ```
 
+## Abundances as columns
+
+```{r}
+higher_attributes(Safariland.web)$abundances <- 1:ncol(Safariland.web)
+lower_attributes(Safariland.web)$abundances <- nrow(Safariland.web):1
+plot(Safariland.web,
+     higher_abundances = "abundances",
+     lower_abundances = "abundances",
+     scaling = "absolute")
+plot(Safariland.web,
+     higher_abundances = "abundances",
+     lower_abundances = "abundances",
+     scaling = "absolute",
+     family = "mono",
+     font = 2)
+```
+
+
 ## boolean attribute plot
 
 ```{r}
@@ -260,4 +278,14 @@ plot(warray,
      horizontal = TRUE,
      spacing = .5,
      middle = "lower")
+```
+
+```{r}
+
+plot(warray,
+     1, 2,
+     horizontal = TRUE,
+     spacing = .5,
+     middle = "lower",
+     family = "Mono")
 ```

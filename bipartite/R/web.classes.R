@@ -181,8 +181,8 @@ meta_attributes.bipartite_web <- function(x, web_id) {
     stop("`lower_attributes` must be a data frame.")
   }
 
-  if (nrow(value) != ncol(x)) {
-    stop("`lower_attributes` must have one row per matrix column")
+  if (nrow(value) != nrow(x)) {
+    stop("`lower_attributes` must have one row per matrix row")
   }
 
   attr(x, "lower_attributes") <- value

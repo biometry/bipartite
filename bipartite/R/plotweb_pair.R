@@ -9,8 +9,6 @@ plot.bipartite_webarray <- function(x,
                                     add_higher_abundances = NULL,
                                     add_lower_abundances = NULL,
                                     scaling = "absolute",
-                                    font = NULL,
-                                    family = NULL,
                                     srt = 0,
                                     higher_italic = FALSE,
                                     lower_italic = FALSE,
@@ -349,14 +347,14 @@ plot.bipartite_webarray <- function(x,
     # Get the size of the plotting device in inches
     dev_size <- dev.size("in")
 
-    c_height_1 <- strwidth(c_names[1], units = "inches")
+    c_height_1 <- strwidth(c_names[1], units = "inches", ...)
     c_height_1 <- cos(theta_pi) * c_height_1
-    r_height_1 <- strwidth(r_names, units = "inches")
+    r_height_1 <- strwidth(r_names, units = "inches", ...)
     r_height_1 <- cos(theta_pi) * r_height_1
 
-    c_height_n <- strwidth(c_names[nc], units = "inches")
+    c_height_n <- strwidth(c_names[nc], units = "inches", ...)
     c_height_n <- cos(theta_pi) * c_height_n
-    r_height_n <- strwidth(r_names[nr], units = "inches")
+    r_height_n <- strwidth(r_names[nr], units = "inches", ...)
     r_height_n <- cos(theta_pi) * r_height_n
 
     max_height_1 <- max(c_height_1, -r_height_1)
@@ -375,11 +373,15 @@ plot.bipartite_webarray <- function(x,
     min_distance_at_angle <- tan(a)^2 * abs(cos(a)) + abs(cos(a))
     # if (theta < 45 || theta > 315 || (theta > 135 && theta < 225)) {
     if (min_distance_at_angle > max(nchar(c(c_names, r_names)))) {
-      sum_str_h <- sum(strwidth(c_names, units = "inches"))
-      sum_str_l <- sum(strwidth(r_names, units = "inches"))
+      sum_str_h <- sum(strwidth(c_names, units = "inches", ...))
+      sum_str_l <- sum(strwidth(r_names, units = "inches", ...))
     } else {
-      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(c_names, units = "inches"))
-      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(r_names, units = "inches"))
+      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(c_names,
+                                                                units = "inches",
+                                                                ...))
+      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(r_names,
+                                                                units = "inches",
+                                                                ...))
     }
     if (sum_str_h > dev_max || sum_str_l > dev_max) {
       text_size <- min(dev_max / sum_str_h, dev_max / sum_str_l)
@@ -393,9 +395,9 @@ plot.bipartite_webarray <- function(x,
   # Get the maximum width values of the inner and outer labels in inches.
   # These are used to calculate the required margins of the plots.
   # TODO: Actually use the width and height after applying label rotation (srt).
-  c_m_t_width <- max(strwidth(c_names, units = "inches", cex = text_size))
-  r_m_t_width_1 <- max(strwidth(r_names_1, units = "inches", cex = text_size))
-  r_m_t_width_2 <- max(strwidth(r_names_2, units = "inches", cex = text_size))
+  c_m_t_width <- max(strwidth(c_names, units = "inches", cex = text_size, ...))
+  r_m_t_width_1 <- max(strwidth(r_names_1, units = "inches", cex = text_size, ...))
+  r_m_t_width_2 <- max(strwidth(r_names_2, units = "inches", cex = text_size, ...))
 
   # Create the left / upper half of the plot
   if (horizontal) {
@@ -416,9 +418,9 @@ plot.bipartite_webarray <- function(x,
   }
 
   if (spacing == "auto") {
-    c_str_height <- sum(strheight(c_names, cex = text_size))
-    r_str_height_1 <- sum(strheight(r_names_1, cex = text_size))
-    r_str_height_2 <- sum(strheight(r_names_2, cex = text_size))
+    c_str_height <- sum(strheight(c_names, cex = text_size, ...))
+    r_str_height_1 <- sum(strheight(r_names_1, cex = text_size, ...))
+    r_str_height_2 <- sum(strheight(r_names_2, cex = text_size, ...))
 
     max_str_height <- max(c_str_height, r_str_height_1, r_str_height_2)
     if (max_str_height >= 0.95) {
@@ -618,20 +620,20 @@ plot.bipartite_webarray <- function(x,
     rect(0, r_xl_1, 0.1, r_xr_1, col = lower_color_1, border = lower_border_1)
     rect(0.9, c_xl_1, 1, c_xr_1, col = higher_color, border = higher_border)
     text(-0.01, r_tx_1, r_names_1, adj = c(1, 0.5), xpd = TRUE,
-         cex = text_size, srt = srt, col = lower_text_color)
+         cex = text_size, srt = srt, col = lower_text_color, ...)
     text(1 + 0.5 * grconvertX(c_m_t_width + r_m_t_width_1 + 0.3,
                               from = "inches"),
          c_tx, c_names, adj = c(0.5, 0.5), xpd = NA, cex = text_size,
-         srt = srt, col = higher_text_color)
+         srt = srt, col = higher_text_color, ...)
   } else {
     rect(r_xl_1, 0, r_xr_1, 0.1, col = lower_color_1, border = lower_border_1)
     rect(c_xl_1, 0.9, c_xr_1, 1, col = higher_color, border = higher_border)
     text(r_tx_1, -0.01, r_names_1, adj = c(1, 0.5), xpd = TRUE,
-         cex = text_size, srt = srt + 90, col = lower_text_color)
+         cex = text_size, srt = srt + 90, col = lower_text_color, ...)
     text(c_tx, 1 + 0.5 * grconvertY(c_m_t_width + r_m_t_width_1 + 0.3,
                                     from = "inches"),
          c_names, adj = c(0.5, 0.5), xpd = NA, cex = text_size,
-         srt = srt + 90, col = higher_text_color)
+         srt = srt + 90, col = higher_text_color, ...)
   }
   # text(1, c_tx, c_names, adj = c(0, 0.5), xpd=NA)
 
@@ -731,14 +733,13 @@ plot.bipartite_webarray <- function(x,
     rect(0, c_xl_2, 0.1, c_xr_2, col = higher_color, border = higher_border)
     rect(0.9, r_xl_2, 1, r_xr_2, col = lower_color_2, border = lower_border_2)
     text(1.01, r_tx_2, r_names_2, adj = c(0, 0.5), cex = text_size,
-         xpd = TRUE, srt = srt, col = lower_text_color)
+         xpd = TRUE, srt = srt, col = lower_text_color, ...)
   } else {
     rect(c_xl_2, 0, c_xr_2, 0.1, col = higher_color, border = higher_border)
     rect(r_xl_2, 0.9, r_xr_2, 1, col = lower_color_2, border = lower_border_2)
     text(r_tx_2, 1.01, r_names_2, adj = c(0, 0.5), cex = text_size,
-         xpd = TRUE, srt = srt + 90, col = lower_text_color)
+         xpd = TRUE, srt = srt + 90, col = lower_text_color, ...)
   }
-  #text(-0.5 * c_m_t_width, c_tx, c_names, adj = c(0.5, 0.5), xpd=T)
 
   # Interactions
   # web.df_2 <- data.frame(row = rep(1:nr_2, nc_2), col = rep(which(c_names %in% c_names_2), each = nr_2), weight = c(web2))
