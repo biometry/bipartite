@@ -1,6 +1,6 @@
 plot.bipartite_webarray <- function(x,
-                                    w1 = 1,
-                                    w2 = 2,
+                                    web1 = 1,
+                                    web2 = 2,
                                     middle = "higher",
                                     sort_by = 1,
                                     sorting = "normal",
@@ -53,8 +53,8 @@ plot.bipartite_webarray <- function(x,
   # Extract newly set margin in inches
   mai <- par()$mai
 
-  web1 <- x[,,w1]
-  web2 <- x[,,w2]
+  web1 <- x[, , web1]
+  web2 <- x[, , web2]
 
   # Check whether the webs have named rows and columns
   # and if not fill them in.

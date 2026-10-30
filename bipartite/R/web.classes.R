@@ -78,23 +78,23 @@ bipartite_web <- function(web,
   )
 }
 
-as.bipartite_web <- function(x, ...) {
+as.bipartite_web <- function(x) {
   UseMethod("as.bipartite_web")
 }
 
-as.bipartite_web.default <- function(x, ...) {
+as.bipartite_web.default <- function(x) {
   bipartite_web(as.matrix(x))
 }
 
-as.bipartite_web.bipartite_web <- function(x, ...) {
+as.bipartite_web.bipartite_web <- function(x) {
   x
 }
 
-as.bipartite_web.matrix <- function(x, ...) {
+as.bipartite_web.matrix <- function(x) {
   bipartite_web(x)
 }
 
-as.bipartite_web.data.frame <- function(x, ...) {
+as.bipartite_web.data.frame <- function(x) {
   bipartite_web(as.matrix(x))
 }
 

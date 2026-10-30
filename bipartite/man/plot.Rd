@@ -60,8 +60,8 @@ A two dimensional matrix is plotted as a bipartite graph.
      ...)
 
 \method{plot}{bipartite_webarray}(x,
-     w1 = 1,
-     w2 = 2,
+     web1 = 1,
+     web2 = 2,
      middle = "higher",
      sort_by = 1,
      sorting = "normal",
@@ -101,8 +101,14 @@ A two dimensional matrix is plotted as a bipartite graph.
 
 \arguments{
   \item{x}{
-    Web is a matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). 
-    Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.
+    A \code{bipartite_web} object to be plotted. 
+    Or a \code{bipartite_webarray} of which 2 webs are plotted.
+  }
+  \item{web1}{
+    Name or index of the first web to be plotted. (Default: \code{1})
+  }
+  \item{web2}{
+    Name or index of the second web to be plotted. (Default: \code{2})
   }
   \item{main}{
     An overall title (on top) for the plot.
@@ -180,7 +186,7 @@ A two dimensional matrix is plotted as a bipartite graph.
     A single color or a list of colors used to plot the higher species (columns) boxes. (Default: \code{"black"})
   }
   \item{higher_color_attr}{
-    
+    Name of a column in higher_attributes to be used for automatic coloring based on the palette given in \code{higher_color}.
   }
   \item{higher_border}{
     Either \code{"same"} or a single color or a list of colors used to plot the higher species (columns) boxes borders.
@@ -197,7 +203,7 @@ A two dimensional matrix is plotted as a bipartite graph.
     A single color or a list of colors used to plot the lower species (rows) boxes. (Default: \code{"black"})
   }
   \item{lower_color_attr}{
-
+    Name of a column in lower_attributes to be used for automatic coloring based on the palette given in \code{lower_color}.
   }
   \item{lower_border}{
     Either "same" or a single color or a list of colors used to plot the lower species (rows) boxes borders.
@@ -249,6 +255,9 @@ A two dimensional matrix is plotted as a bipartite graph.
   \item{mai}{
     A numerical vector of the form \code{c(bottom, left, top, right)} which gives the margin size specified in inches.
     Please note, that the margin is increased so that the labels are always visible in the plot.
+  }
+  \item{...}{
+    Additional arguments passed down to \code{plot.default}.
   }
 }
 \value{
