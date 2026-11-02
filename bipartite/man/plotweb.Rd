@@ -67,7 +67,7 @@ plotweb(web,
   \item{add_lower_abundances}{Vector with additional abundances (e.g. unparasitised hosts) for the lower trophic level, \code{NULL} if none exist. See Notes!}
   \item{higher_labels}{Boolean or named list. Indicating whether the higher labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
   \item{lower_labels}{Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.}
-  \item{scaling}{Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.}
+  \item{scaling}{Choice of either \code{"relative"} or \code{"absolute"}. For more information see Scaling.}
   \item{font}{An integer which specifies which font to use for the labels. See \code{\link[graphics]{par}}.}
   \item{family}{The name of a font family for drawing the labels. See \code{\link[graphics]{par}}.}
   \item{srt}{Orientation of the labels in degrees. (Default: \code{0})}
