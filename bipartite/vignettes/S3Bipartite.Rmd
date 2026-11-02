@@ -5,8 +5,7 @@ author:
     affiliation: Animal Network Ecology, University of Hamburg
     email: tobias.bauer-2@uni-hamburg.de
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-abstract: This vignette provides an overview of the new object oriented approach of the bipartite package.
-          It includes multiple examples illustrating the intention behind various function arguments.
+abstract: This vignette provides an overview of the new object-oriented approach of the bipartite package.
 toc-title: "Contents"
 output: 
   rmarkdown::html_vignette:
@@ -23,7 +22,7 @@ vignette: >
 
 # Creating S3-objects in bipartite
 
-Starting with version XX.XX the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that mean we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
+Starting with version 3.0 the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that mean we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
 
 ```{r, results = "hide", message = FALSE, cache = FALSE}
 library(bipartite)
@@ -31,15 +30,22 @@ data(Safariland)
 options(max.print = 10)
 ```
 
-
 ```{r}
 class(Safariland)
+```
+
+As the output above indicates `Safariland` is now of typ `bipartite_web` in 
+addition to the types `matrix` and `array`.
+
+```{r}
 str(Safariland)
 ```
 
-The dataset is an integer matrix of size $9\times 27$ with named rows and columns. From the help file we know that the columns represent pollinators and the rows represent plant species. 
+So the dataset in its core is still an integer matrix of size $9\times 27$ with named rows and columns. From the help file, we know that the columns represent pollinators and the rows represent plant species. 
 
 Sometimes, that's all the information available about a network. More often, however, additional information is available about individual nodes or the network as a whole. 
+
+For example, the `Safariland` data has additional information about the plants and pollinators available. We stored this data in two separate CSV files and load those into the workspace as `data.frame` objects.
 
 ```{r}
 plant_attributes <- read.csv("plant_attributes.csv", row.names = 1)
@@ -53,30 +59,94 @@ pollinator_attributes <- pollinator_attributes[colnames(Safariland), ]
 pollinator_attributes
 ```
 
+Now we can create a new `bipartite_web` object combining the interaction matrix with the details on the plants and pollinators as well as some meta information.
+
 ```{r}
 Safariland.web <- bipartite_web(Safariland,
                                 lower_attributes = plant_attributes,
                                 higher_attributes = pollinator_attributes,
                                 meta_attributes = list("type" = "pollination"))
-class(Safariland.web)
+print(Safariland.web)
+```
+
+`Safariland.web` could now be stored and shared as a single R object containing all relevant information on the dataset. 
+
+# 3D (multi-layer) network objects
+
+Version 3.0 also introduces simple multilayer bipartite networks. The S3-class for those is called `bipartite_webarray` and in its core represents a 3D-array, in which the third dimension represents the various networks. 
+
+```{r}
+dim(Safariland.web)
+dim(vazarr)
+warray <- bipartite_webarray(Safariland.web, vazarr)
+dim(warray)
 ```
 
 ```{r}
-print(Safariland.web, max = 10)
-plot(Safariland.web)
+print(warray)
 ```
 
 ```{r}
-attributes(Safariland.web)
+pollinator_attributes <- read.csv("pollinator_attributes.csv", row.names = 1)
+pollinator_attributes
+```
+
+```{r}
+local_higher_attributes <- list("Safariland.web" = NULL, "vazarr" = data.frame(id = 1:41))
+warray <- bipartite_webarray(Safariland.web, vazarr,
+                             global_higher_attributes = pollinator_attributes,
+                             local_higher_attributes = local_higher_attributes)
+warray
+```
+
+```{r,error=TRUE}
+warray[1:2, , ]
+warray[, 1:2, ]
+```
+
+```{r, error = TRUE}
+warray2 <- bipartite_webarray(Safariland.web, vazarr,
+                  #  local_higher_attributes = list("vazarr" = data.frame(id = 1:10)))
+                   local_higher_attributes = list("vazarr" = data.frame(id = 1:10), "b", "c"))
+bipartite_webarray(vazarr, Safariland)
 ```
 
 # Accessing the attributes
+
+```{r}
+higher_attributes(Safariland.web)
+lower_attributes(Safariland.web)
+meta_attributes(Safariland.web)
+```
+
+```{r}
+higher_attributes(Safariland.web)$Order
+higher_attributes(Safariland.web)["Ruizantheda proxima", ]
+```
+
+For `bipartite_webarray` there is a differentiation between the global and local attributes. The global attributes can be accessed by simply calling `*_attributes`:
+
+```{r}
+higher_attributes(warray)
+```
+
+Acccessing the local attributes however requires the use of the `web_id` argument:
+
+```{r}
+higher_attributes(warray, web_id = "vazarr")
+```
+
+# Replacing / changing the attributes
+
 ```{r}
 meta_attributes(Safariland.web)$start_year <- 1999
 meta_attributes(Safariland.web)$end_year <- 2000
-# higher_attributes(Safariland.web) <- data.frame(rand = runif(ncol(Safariland.web)), row.names = colnames(Safariland))
+meta_attributes(Safariland.web)
+```
+
+```{r, max.print = 50}
+higher_attributes(Safariland.web)$id <- 1:ncol(Safariland.web)
 higher_attributes(Safariland.web)
-# higher_attributes(Safariland.web)$rand
 ```
 
 # Subsetting
@@ -90,202 +160,11 @@ Safariland.web[5, 3, drop = T]
 Safariland.web[5, 3, drop = F]
 ```
 
-# Test space
-TODO: check whether names are taken with $ syntax.
-```{r}
-test.web <- bipartite_web(genweb(3, 5))
-rand_v <- runif(5)
-names(rand_v) <- c("col3", "col2", "col4", "col1", "col5")
-print(rand_v)
-higher_attributes(test.web)$rand <- rand_v
-higher_attributes(test.web)
-higher_attributes(test.web)$rand2 <- rand_v[colnames(test.web)]
-higher_attributes(test.web)
+
+```{r bipartite_webarray subsetting, error = TRUE}
+warray[, , ]
 ```
 
 ```{r}
-higher_attributes(Safariland.web)$rand2 <- runif(ncol(Safariland.web))
-higher_attributes(Safariland.web)
-```
-
-```{r, max.print = 100}
-options(max.print = 9999)
-print(higher_attributes(Safariland.web))
-```
-
-## Numerical color attribute
-
-```{r}
-plot(Safariland.web, higher_color_attr = "rand2", higher_border = "black", link_border = "black")
-plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("green", "blue"), link_border = "black")
-plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("red", "orange", "white"), link_border = "black")
-plot(Safariland.web, higher_color_attr = "rand2", higher_color = c("#440154", "#21918c", "#fde725"), link_border = "black")
-```
-
-```{r}
-plot(Safariland.web,
-     higher_color = c("Yellow", "Blue", "Green", "Red"),
-     higher_color_attr = "Order",
-     horizontal = TRUE)
-```
-
-```{r, error = TRUE}
-plot(Safariland.web,
-     higher_color_attr = "Order",
-     horizontal = TRUE)
-```
-
-```{r}
-plot(Safariland.web,
-     higher_color = c("Hymenoptera" = "Yellow",
-                      "Diptera" = "Blue",
-                      "Coleoptera" = "Green",
-                      "Araneae" = "Red"),
-     higher_color_attr = "Order",
-     lower_color_attr = "Life.form",
-     lower_color = rainbow(10),
-     horizontal = TRUE)
-```
-
-## legend
-```{r}
-plot(Safariland.web,
-     higher_color = c("Hymenoptera" = "#ffbb00",
-                      "Diptera" = "Blue",
-                      "Coleoptera" = "Green",
-                      "Araneae" = "Red"),
-     higher_color_attr = "Order",
-     lower_color_attr = "Life.form",
-     lower_color = rainbow(10),
-     horizontal = TRUE,
-     higher_border = "black",
-     lower_border = "black",
-     link_border = "black",
-     mar = c(1,1,1,8))
-par(xpd = T)
-legend(1.25, 1,
-       legend = c("Hymenoptera",
-                  "Diptera",
-                  "Coleoptera",
-                  "Araneae"),
-       fill = c("Yellow",
-                "Blue",
-                "Green",
-                "Red"),
-       title = "Order")
-```
-
-```{r}
-plot(Safariland.web,
-     higher_color = c("Hymenoptera" = "#ffbb00",
-                      "Diptera" = "Blue",
-                      "Coleoptera" = "Green",
-                      "Araneae" = "Red"),
-     higher_color_attr = "Order",
-     lower_color_attr = "Life.form",
-     lower_color = rainbow(10),
-     horizontal = FALSE,
-     higher_border = "black",
-     lower_border = "black",
-     link_border = "black",
-     mar = c(1,1,1,8))
-par(xpd = T)
-legend(1, 1,
-       legend = c("Hymenoptera",
-                  "Diptera",
-                  "Coleoptera",
-                  "Araneae"),
-       fill = c("Yellow",
-                "Blue",
-                "Green",
-                "Red"),
-       title = "Order")
-```
-
-## Abundances as columns
-
-```{r}
-higher_attributes(Safariland.web)$abundances <- 1:ncol(Safariland.web)
-lower_attributes(Safariland.web)$abundances <- nrow(Safariland.web):1
-plot(Safariland.web,
-     higher_abundances = "abundances",
-     lower_abundances = "abundances",
-     scaling = "absolute")
-plot(Safariland.web,
-     higher_abundances = "abundances",
-     lower_abundances = "abundances",
-     scaling = "absolute",
-     family = "mono",
-     font = 2)
-```
-
-
-## boolean attribute plot
-
-```{r}
-higher_attributes(Safariland.web)$hymenoptera <- higher_attributes(Safariland.web)$Order == "Hymenoptera"
-plot(Safariland.web,
-     higher_color = c("Black", "#ffbb00"),
-     higher_color_attr = "hymenoptera",
-     lower_color_attr = "Life.form",
-     lower_color = hcl.colors(4, palette = "Dark 3"),
-     horizontal = TRUE,
-     sorting = "ca")
-```
-
-```{r}
-Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"]
-
-plot(Safariland.web[, higher_attributes(Safariland.web)$Order == "Diptera"],
-     horizontal = TRUE,
-     higher_color_attr = "Family",
-     higher_color = rainbow(5),
-     sorting = "ca")
-```
-
-# Bipartite webarrays
-
-```{r}
-warray <- bipartite_webarray(Safariland, vazarr)
-print(warray)
-```
-
-```{r}
-higher_attributes(warray, "Safariland")$rand <- runif(41)
-print(warray)
-higher_attributes(warray)$No <- 1:41
-warray[,,apply(warray,3,sum) > 50]
-warray[,higher_attributes(warray)$No > 10,]
-warray[1:2,higher_attributes(warray)$No > 10,]
-```
-
-```{r}
-warray[,,1]
-```
-
-```{r}
-plot(warray,
-     2, 1,
-     horizontal = TRUE,
-     spacing = .5)
-plot(warray,
-     2, 1,
-     horizontal = TRUE,
-     spacing = .5,
-     middle = "lower")
-plot(warray,
-     1, 2,
-     horizontal = TRUE,
-     spacing = .5,
-     middle = "lower")
-```
-
-```{r}
-
-plot(warray,
-     1, 2,
-     horizontal = TRUE,
-     spacing = .5,
-     middle = "lower",
-     family = "Mono")
+warray
 ```

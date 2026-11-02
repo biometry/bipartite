@@ -224,10 +224,12 @@ plot.bipartite_webarray <- function(x,
 
   ################ ABUNDANCES / RECT SIZES ###################################
 
+  ## Higher abundances
   c_abuns_1 <- colSums(web1)
   c_abuns_2 <- colSums(web2)
 
   if (!is.null(higher_abundances)) {
+    stopifnot(is.list(higher_abundances) & length(higher_abundances) != 2)
     c_abuns_1 <- higher_abundances[[1]]
     c_abuns_2 <- higher_abundances[[2]]
   }
@@ -434,14 +436,13 @@ plot.bipartite_webarray <- function(x,
     space_lower <- spacing
   }
 
-  ################# Calculate the box sizes ###################################
-
+  ## Lower abundances
   # If no lower abundances were given, approx them with the rowSums.
   if (is.null(lower_abundances)) {
     r_abuns_1 <- rowSums(web1)
     r_abuns_2 <- rowSums(web2)
-  }
-  if (!is.null(lower_abundances)) {
+  } else if (!is.null(lower_abundances)) {
+    stopifnot(is.list(lower_abundances) & length(lower_abundances) == 2)
     r_abuns_1 <- lower_abundances[[1]]
     r_abuns_2 <- lower_abundances[[2]]
   }
@@ -482,6 +483,8 @@ plot.bipartite_webarray <- function(x,
       lower_color_2 <- c(rbind(lower_color_2, lower_add_color))
     }
   }
+
+  ################# Calculate the box sizes ###################################
 
   # Scale the size of the inner boxes based on the selected method.
   # Relative scaling scales by the sum of abundances for each web independently.
@@ -635,7 +638,6 @@ plot.bipartite_webarray <- function(x,
          c_names, adj = c(0.5, 0.5), xpd = NA, cex = text_size,
          srt = srt + 90, col = higher_text_color, ...)
   }
-  # text(1, c_tx, c_names, adj = c(0, 0.5), xpd=NA)
 
   ## Interactions
   # web.df_1 <- data.frame(row = rep(1:nr_1, nc), col = rep(1:nc, each = nr_1), weight = c(web1))
