@@ -37,8 +37,8 @@ meta_attributes(x, web_id = NULL) <- value
 }
 
 \value{
-    \code{higher_attributes} and \code{lower_attributes} return a data.frame;
-    \code{meta_attributes} returns a list.
+    \code{higher_attributes} and \code{lower_attributes} return a data.frame or a list of data.frames;
+    \code{meta_attributes} returns a list or a list of lists.
 }
 
 \author{ Tobias Bauer \email{tobias.bauer-2@uni-hamburg.de} }

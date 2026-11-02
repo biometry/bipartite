@@ -273,7 +273,10 @@ bipartite_webarray <- function(webs, ...,
     )
   } else {
     stopifnot(is.data.frame(global_higher_attributes))
-    global_higher_attributes <- global_higher_attributes[colnames(warray), ]
+    ## Select the rows in the same order as the columns of warray
+    global_higher_attributes <- global_higher_attributes[colnames(warray), , drop = FALSE]
+    ## Reset names in case of missing rows
+    rownames(global_higher_attributes) <- colnames(warray)
   }
   if (is.null(global_lower_attributes)) {
     global_lower_attributes <- data.frame(
@@ -281,7 +284,8 @@ bipartite_webarray <- function(webs, ...,
     )
   } else {
     stopifnot(is.data.frame(global_lower_attributes))
-    global_lower_attributes <- global_lower_attributes[rownames(warray), ]
+    global_lower_attributes <- global_lower_attributes[rownames(warray), , drop = FALSE]
+    rownames(global_lower_attributes) <- rownames(warray)
   }
   if (is.null(local_higher_attributes)) {
     local_higher_attributes <- list()
@@ -305,6 +309,7 @@ bipartite_webarray <- function(webs, ...,
           stop("Element ", name, " in local_higher_attributes is not a data.frame.")
         }
         local_higher_attributes[[name]] <- local_h_df[colnames(warray), , drop = FALSE]
+        rownames(local_higher_attributes[[name]]) <- colnames(warray)
       }
     }
     ## Filter out list elements that don't have a matching web_name
@@ -332,6 +337,7 @@ bipartite_webarray <- function(webs, ...,
           stop("Element ", name, " in local_lower_attributes is not a data.frame.")
         }
         local_lower_attributes[[name]] <- local_l_df[rownames(warray), , drop = FALSE]
+        rownames(local_lower_attributes[[name]]) <- rownames(warray)
       }
     }
     ## Filter out list elements that don't have a matching web_name
@@ -464,6 +470,10 @@ meta_attributes.bipartite_webarray <- function(x, web_id = NULL) {
   y <- NextMethod("[", drop = drop)
   if (!is.array(y)) {
     return(y)
+  } else if (length(dim(y)) < 3) {
+    if (missing(k) || length(k) != 1) {
+      return(y)
+    }
   }
 
   global_higher_attributes <- attr(x, "global_higher_attributes")
@@ -495,12 +505,17 @@ meta_attributes.bipartite_webarray <- function(x, web_id = NULL) {
       local_higher_attributes[[web]]  <- local_higher_attributes[[web]][j, , drop = FALSE]
     }
   }
-
   ## If k has 1 element only 1 web remains.
   ## Return that web as a bipartite_web object instead of an array.
   if (!missing(k) && length(k) == 1) {
     higher_attributes <- cbind(global_higher_attributes, local_higher_attributes)
     lower_attributes  <- cbind(global_lower_attributes, local_lower_attributes)
+    if (length(dim(y)) == 3) {
+      ## For the rare case where drop = TRUE and only one web is selected,
+      ## we need to selectevly drop the 3rd dimension of the array for the
+      ## as.matrix() call inside bipartite_web to work.
+      y = array(y, dim = dim(y)[-3], dimnames = dimnames(y)[-3])
+    }
     meta_attributes   <- c(global_meta_attributes, local_meta_attributes)
     z <- bipartite_web(
       y,
@@ -510,22 +525,6 @@ meta_attributes.bipartite_webarray <- function(x, web_id = NULL) {
     )
     return(z)
   }
-
-
-  print("y")
-  print(y)
-  print("global_higher_attributes")
-  print(global_higher_attributes)
-  print("global_lower_attributes")
-  print(global_lower_attributes)
-  print("local_higher_attributes")
-  print(local_higher_attributes)
-  print("local_lower_attributes")
-  print(local_lower_attributes)
-  print("global_meta_attributes")
-  print(global_meta_attributes)
-  print("local_meta_attributes")
-  print(local_meta_attributes)
 
   bipartite_webarray(
     y,
@@ -563,7 +562,7 @@ print.bipartite_webarray <- function(x, ...) {
     cat("Meta attributes:\n")
     print(meta_attributes(x, web))
     cat("Matrix:\n")
-    web_data <- x[,,web]
+    web_data <- x[, , web]
     web_matrix <- matrix(web_data,
                          nrow = nr,
                          ncol = nc,

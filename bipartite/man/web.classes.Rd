@@ -36,7 +36,7 @@ bipartite_webarray(webs, ...,
 
 \arguments{
     \item{web}{
-        A matrix representing the interactions observed between higher trophic level species (columns) and lower trophic level species (rows). Usually this will be number of pollinators on each species of plants or number of parasitoids on each species of prey.
+        A numeric matrix representing the interactions between higher trophic level species (columns) and lower trophic level species (rows).
     }
     \item{x}{
         An object of class \code{bipartite_web} or \code{bipartite_webarray}.
@@ -86,7 +86,11 @@ bipartite_webarray(webs, ...,
 
 \author{ Tobias Bauer \email{tobias.bauer-2@uni-hamburg.de} }
 
-\seealso{See \link{higher_attributes}, \link{lower_attributes}, \link{meta_attributes} for accessing and replacing the attributes.}
+\seealso{
+    See \link{higher_attributes}, \link{lower_attributes}, \link{meta_attributes} for accessing and replacing the attributes.
+
+    See \link{plot.bipartite_web} for more information on how to create a bipartite plot.
+}
 
 \examples{
     h_names <- c("Insect1", "Insect2", "Insect3")

@@ -92,23 +92,11 @@ pollinator_attributes
 ```
 
 ```{r}
-local_higher_attributes <- list("Safariland.web" = NULL, "vazarr" = data.frame(id = 1:41))
+local_higher_attributes <- list("Safariland.web" = NULL, "vazarr" = data.frame(id = 1:29, row.names = colnames(vazarr)))
 warray <- bipartite_webarray(Safariland.web, vazarr,
                              global_higher_attributes = pollinator_attributes,
                              local_higher_attributes = local_higher_attributes)
 warray
-```
-
-```{r,error=TRUE}
-warray[1:2, , ]
-warray[, 1:2, ]
-```
-
-```{r, error = TRUE}
-warray2 <- bipartite_webarray(Safariland.web, vazarr,
-                  #  local_higher_attributes = list("vazarr" = data.frame(id = 1:10)))
-                   local_higher_attributes = list("vazarr" = data.frame(id = 1:10), "b", "c"))
-bipartite_webarray(vazarr, Safariland)
 ```
 
 # Accessing the attributes
@@ -160,11 +148,24 @@ Safariland.web[5, 3, drop = T]
 Safariland.web[5, 3, drop = F]
 ```
 
-
 ```{r bipartite_webarray subsetting, error = TRUE}
 warray[, , ]
 ```
 
 ```{r}
-warray
+warray[, , 1]
+```
+
+```{r}
+warray[, 1, ]
+warray[1, , ]
+warray[1:2, , 1]
+```
+
+To always receive a `web` or `webarray` object use the option `drop = FALSE`.
+
+```{r webarray subsetting no drop}
+warray[1:2, , 1, drop = FALSE]
+warray[1, , 1, drop = FALSE]
+warray[1, 2, 1, drop = FALSE]
 ```
