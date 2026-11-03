@@ -228,13 +228,15 @@ plot.bipartite_web <- function(x,
     # Extract the matching column as a named vector
     higher_color_attr_vec <- higher_attributes(x)[[higher_color_attr]]
     higher_names <- rownames(higher_attributes(x))
-    print(typeof(higher_color_attr_vec))
     if (is.logical(higher_color_attr_vec)) {
       # If the attribute vector is of type boolean
       # we expect there to be exactly two colors given
       # in the higher_color vector.
       if (length(higher_color) == 2) {
         higher_color_map <- higher_color
+      }
+      if (length(higher_add_color) == 2) {
+        higher_add_color_map <- higher_add_color
       }
       # We can then assign a color to each higher species
       # by first converting the attribute vector to integers (0 and 1)
@@ -244,6 +246,11 @@ plot.bipartite_web <- function(x,
         higher_color_map[v + 1]
       })
       names(higher_color) <- colnames(x)
+
+      higher_add_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
+        higher_add_color_map[v + 1]
+      })
+      names(higher_add_color) <- colnames(x)
     } else if (is.numeric(higher_color_attr_vec)) {
       # If the attribute vector is of type numeric (floating point numbers)
       # we assign colors based on a colorRamp.
@@ -251,7 +258,6 @@ plot.bipartite_web <- function(x,
       max_v <- max(higher_color_attr_vec)
       min_v <- min(higher_color_attr_vec)
       normalized_vector <- (higher_color_attr_vec - min_v) / (max_v - min_v)
-      print(normalized_vector)
       # TODO: allow for more different color Ramps
       if (is.function(higher_color)) {
         ramp <- higher_color
@@ -264,18 +270,15 @@ plot.bipartite_web <- function(x,
       }
       higher_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
       names(higher_color) <- higher_names
-      print(higher_color)
     } else if (is.character(higher_color_attr_vec)) {
       # Convert character attributes to factors,
       # so that each level can be assigned a color
       higher_color_attr_vec <- as.factor(higher_color_attr_vec)
-      print(higher_color_attr_vec)
     }
     if (is.factor(higher_color_attr_vec)) {
       # If the attribute vector is of type factor,
       # we will assign a color to each factor level.
       nl <- nlevels(higher_color_attr_vec)
-      print(nl)
       # To do so we create a lookup table (named vector)
       # that holds a color value for each level.
       if (length(higher_color) >= nl) {
@@ -295,6 +298,23 @@ plot.bipartite_web <- function(x,
       } else {
         stop("Not enought colors in higher_color vector for color attribute \"", higher_color_attr, "\".")
       }
+
+      # Do the same for additional colors
+      if (length(higher_add_color) >= nl) {
+        if (length(higher_add_color) > nl) {
+          higher_add_color <- higher_add_color[1:nl]
+        }
+        higher_add_color_map <- higher_add_color
+        if (is.null(names(higher_add_color))) {
+          names(higher_add_color_map) <- levels(higher_color_attr_vec)
+        }
+        # From the lookup table we then retrieve and assign the
+        # corresponding color for each higher species.
+        higher_add_color <- sapply(as.character(higher_color_attr_vec), function(v) {
+          higher_add_color_map[v]
+        })
+        names(higher_add_color) <- colnames(x)
+      }
     }
   } else {
     # No higher color attribute given
@@ -313,23 +333,18 @@ plot.bipartite_web <- function(x,
     stopifnot(lower_color_attr %in% colnames(lower_attributes(x)))
     lower_color_attr_vec <- lower_attributes(x)[[lower_color_attr]]
     lower_names <- rownames(lower_attributes(x))
-    print(typeof(lower_color_attr_vec))
     if (is.numeric(lower_color_attr_vec)) {
       max_v <- max(lower_color_attr_vec)
       min_v <- min(lower_color_attr_vec)
       normalized_vector <- (lower_color_attr_vec - min_v) / (max_v - min_v)
-      print(normalized_vector)
       ramp <- colorRamp(c("white", "black"))
       lower_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
       names(lower_color) <- lower_names
-      print(lower_color)
     } else if (is.character(lower_color_attr_vec)) {
       lower_color_attr_vec <- as.factor(lower_color_attr_vec)
-      print(lower_color_attr_vec)
     }
     if (is.factor(lower_color_attr_vec)) {
       nl <- nlevels(lower_color_attr_vec)
-      print(nl)
       if (length(lower_color) >= nl) {
         if (length(lower_color) > nl) {
           lower_color <- lower_color[1:nl]
@@ -342,6 +357,22 @@ plot.bipartite_web <- function(x,
           lower_color_map[v]
         })
         names(lower_color) <- rownames(x)
+      } else {
+        stop("Not enought colors in lower_color vector for color attribute \"", lower_color_attr, "\".")
+      }
+      # The same for additional lower colors
+      if (length(lower_add_color) >= nl) {
+        if (length(lower_add_color) > nl) {
+          lower_add_color <- lower_add_color[1:nl]
+        }
+        lower_add_color_map <- lower_add_color
+        if (is.null(names(lower_add_color))) {
+          names(lower_add_color_map) <- levels(lower_color_attr_vec)
+        }
+        lower_add_color <- sapply(as.character(lower_color_attr_vec), function(v) {
+          lower_add_color_map[v]
+        })
+        names(lower_add_color) <- rownames(x)
       }
     }
   } else {
@@ -552,10 +583,21 @@ plot.bipartite_web <- function(x,
     stop("higher_abundances must be either a numeric vector or a column name of higher_attributes.")
   }
   if (!is.null(add_higher_abundances)) {
-    # Sort the additional higher abundances
-    # according to the column-order in the web
-    add_higher_abundances <- add_higher_abundances[colnames(x)]
+    if (is.character(add_higher_abundances)) {
+      stopifnot(add_higher_abundances %in% colnames(higher_attributes(x)))
+      add_higher_abundances <- higher_attributes(x)[[add_higher_abundances]]
+    } else if (is.numeric(add_higher_abundances)) {
+      stopifnot(length(add_higher_abundances) == ncol(x))
+      # Sort the additional higher abundances
+      # according to the column-order in the web
+      add_higher_abundances <- add_higher_abundances[colnames(x)]
+    } else {
+      stop("add_higher_abundances must be either a numeric vector or a column name of higher_attributes.")
+    }
     higher_abundances <- c(rbind(higher_abundances, add_higher_abundances))
+    if (!is.null(higher_color_attr)) {
+
+    }
     # Include the custom colors into the color vector
     if (length(higher_add_color) == 1) {
       if (higher_add_color == "same") {
@@ -586,7 +628,6 @@ plot.bipartite_web <- function(x,
     # Extract the abundances column from the higher_attributes data.frame
     stopifnot(lower_abundances %in% colnames(lower_attributes(x)))
     lower_abundances <- lower_attributes(x)[[lower_abundances]]
-    stopifnot(is.numeric(lower_abundances))
   } else if (is.numeric(lower_abundances)) {
     stopifnot(length(lower_abundances) == nrow(x))
     lower_abundances <- lower_abundances[rownames(x)]
@@ -594,8 +635,16 @@ plot.bipartite_web <- function(x,
     stop("lower_abundances must be either a numeric vector or a column name of lower_attributes.")
   }
   if (!is.null(add_lower_abundances)) {
-    # Sort the additional lower abundances according to the row-order in the web
-    add_lower_abundances <- add_lower_abundances[rownames(x)]
+    if (is.character(add_lower_abundances)) {
+      stopifnot(add_lower_abundances %in% colnames(lower_attributes(x)))
+      add_lower_abundances <- lower_attributes(x)[[add_lower_abundances]]
+    } else if (is.numeric(add_lower_abundances)) {
+      stopifnot(length(add_lower_abundances) == nrow(x))
+      # Sort the additional lower abundances according to the row-order in the web
+      add_lower_abundances <- add_lower_abundances[rownames(x)]
+    } else {
+      stop("add_lower_abundances must be either a numeric vector or a column name of higher_attributes.")
+    }
     # Merge the abundances and additional abundances vector
     # by alternating indices
     lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
