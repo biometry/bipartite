@@ -341,6 +341,7 @@ LOCALMAXIMISATION <-  function(row_marginals,col_marginals,MATRIX,BMatrix,Matsum
 convert2moduleWeb <- function(MATRIX, MODINFO){
   #NET - network biadjacency matrix
   #MODINFO - output from running LPA_wb_plus or Exhaustive_LPA_wb_plus , contains
+  MATRIX <- as.matrix(MATRIX)
   
   #if names are NULL - assign names to network
   if (is.null(rownames(MATRIX)))

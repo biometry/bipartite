@@ -6,13 +6,10 @@
 
 \title{Visualize a bipartite interaction matrix (e.g. a foodweb)}
 \description{
-This is the help file for the new plotweb implementation. 
-For help with the old, deprecated plotweb function see \link{plotweb_deprecated}. 
-
-A more in depth guide on how to use this function to plot biparitte networks with multiple visual examples
-is given in the vignette \code{PlottingWithBipartite}.
-
 A two dimensional matrix is plotted as a bipartite graph.
+
+A more in depth guide on how to use this function to plot biparitte networks with multiple visual examples is given in the vignette \code{PlottingWithBipartite}.
+
 }
 \usage{
 \method{plot}{bipartite_web}(x,
