@@ -29,7 +29,7 @@ draw_link <- function(x1, x2, y1, y2, y3, y4, col,
               border = border)
     }
   } else { # Straight lines
-    if (horizontal) { 
+    if (horizontal) {
       polygon(c(x1, x1, x2, x2), c(y1, y3, y4, y2),
               col = adjustcolor(col, alpha.f = alpha),
               border = border)
@@ -247,9 +247,10 @@ plot.bipartite_web <- function(x,
       })
       names(higher_color) <- colnames(x)
 
-      higher_add_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
-        higher_add_color_map[v + 1]
-      })
+      higher_add_color <- sapply(as.integer(higher_color_attr_vec),
+                                 FUN = function(v) {
+                                   higher_add_color_map[v + 1]
+                                 })
       names(higher_add_color) <- colnames(x)
     } else if (is.numeric(higher_color_attr_vec)) {
       # If the attribute vector is of type numeric (floating point numbers)

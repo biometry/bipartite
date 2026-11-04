@@ -334,7 +334,14 @@ plot(Safariland.web, sorting = "ca", horizontal = TRUE,
 
 # Plotting 2 webs
 
+The S3 method of `plot` for `bipartite_webarray` stacks stacks two networks to create a tripartite graph. By default the first two networks of the array are plotted. However arbitrary arbitrary networks can be selected with the options `web1` and `web2`.
+
 ```{r}
 webs <- bipartite_webarray(Safariland, vazarr)
 plot(webs)
+```
+
+```{r}
+plot(webs, web1 = "vazarr", web2 = "Safariland", horizontal = TRUE,
+     higher_color = "red", higher_border = FALSE)
 ```

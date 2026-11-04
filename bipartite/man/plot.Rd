@@ -306,6 +306,9 @@ plot(Safariland)
 
 # To let the plot look a bit more modern
 plot(Safariland, horizontal = TRUE, curved_links = TRUE)
+
+# Plotting two webs of a webarray
+plot(bipartite_webarray(Safariland, vazarr))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

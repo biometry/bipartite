@@ -231,7 +231,13 @@ plot.bipartite_webarray <- function(x,
   if (!is.null(higher_abundances)) {
     stopifnot(is.list(higher_abundances) & length(higher_abundances) != 2)
     c_abuns_1 <- higher_abundances[[1]]
+    if (is.character(c_abuns_1)) {
+      c_abuns_1 <- higher_attributes(web1)[[c_abuns_1]]
+    }
     c_abuns_2 <- higher_abundances[[2]]
+    if (is.character(c_abuns_2)) {
+      c_abuns_2 <- higher_attributes(web2)[[c_abuns_2]]
+    }
   }
   if (!is.null(add_higher_abundances)) {
     # Assert the abundances are given as a list of length 2
@@ -444,7 +450,13 @@ plot.bipartite_webarray <- function(x,
   } else if (!is.null(lower_abundances)) {
     stopifnot(is.list(lower_abundances) & length(lower_abundances) == 2)
     r_abuns_1 <- lower_abundances[[1]]
+    if (is.character(r_abuns_1)) {
+      r_abuns_1 <- lower_attributes(web1)[[r_abuns_1]]
+    }
     r_abuns_2 <- lower_abundances[[2]]
+    if (is.character(r_abuns_2)) {
+      r_abuns_2 <- lower_attributes(web2)[[r_abuns_2]]
+    }
   }
   if (!is.null(add_lower_abundances)) {
     stopifnot(is.list(add_lower_abundances),
