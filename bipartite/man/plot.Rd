@@ -147,7 +147,7 @@ A two dimensional matrix is plotted as a bipartite graph.
     Boolean or named list. Indicating whether the lower labels should be plotted. Named list may be used for abbrevations or partly cursive labels.
   }
   \item{scaling}{
-    Choice of either \code{"relative"} or \code{"absoulte"}. For more information see Scaling.
+    Choice of either \code{"relative"} or \code{"absolute"}. For more information see Scaling.
   }
   \item{srt}{
     Orientation of the labels in degrees. (Default: \code{0})
