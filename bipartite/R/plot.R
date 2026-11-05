@@ -29,7 +29,7 @@ draw_link <- function(x1, x2, y1, y2, y3, y4, col,
               border = border)
     }
   } else { # Straight lines
-    if (horizontal) { 
+    if (horizontal) {
       polygon(c(x1, x1, x2, x2), c(y1, y3, y4, y2),
               col = adjustcolor(col, alpha.f = alpha),
               border = border)
@@ -41,56 +41,67 @@ draw_link <- function(x1, x2, y1, y2, y3, y4, col,
   }
 }
 
-plotweb <- function(web,
-                    main = NULL,
-                    sorting = "normal",
-                    empty = FALSE,
-                    higher_abundances = NULL,
-                    lower_abundances = NULL,
-                    add_higher_abundances = NULL,
-                    add_lower_abundances = NULL,
-                    higher_labels = NULL,
-                    lower_labels = NULL,
-                    scaling = "relative",
-                    font = NULL,
-                    family = NULL,
-                    srt = 0,
-                    higher_italic = FALSE,
-                    lower_italic = FALSE,
-                    text_size = "auto",
-                    spacing = 0.3,
-                    box_size = 0.1,
-                    x_lim = c(0, 1),
-                    y_lim = c(0, 1),
-                    lab_distance = 0.05,
-                    lower_color = "black",
-                    lower_border = "same",
-                    lower_add_color = "red",
-                    lower_text_color = "black",
-                    higher_color = "black",
-                    higher_border = "same",
-                    higher_add_color = "red",
-                    higher_text_color = "black",
-                    horizontal = FALSE,
-                    link_color = "higher",
-                    link_border = "same",
-                    link_alpha = 0.5,
-                    curved_links = FALSE,
-                    arrow = "no",
-                    plot_axes = FALSE,
-                    add = FALSE,
-                    mar = c(1, 1, 1, 1),
-                    mai = NULL) {
+## Plot function prototype --------------------------------
+## Wrapper for plotweb function.
+## TODO: Decide whether to keep / extent the auto color functionality
+## TODO: If keeping the auto coloring there needs to be a legend option
+plotweb <- function(x, ...) {
+  .Deprecated("plot.bipartite_web")
+  web <- bipartite_web(x)
+  plot(web, ...)
+}
+
+plot.bipartite_web <- function(x,
+                               main = NULL,
+                               sorting = "normal",
+                               empty = FALSE,
+                               higher_abundances = NULL,
+                               lower_abundances = NULL,
+                               add_higher_abundances = NULL,
+                               add_lower_abundances = NULL,
+                               higher_labels = NULL,
+                               lower_labels = NULL,
+                               scaling = "relative",
+                               srt = 0,
+                               higher_italic = FALSE,
+                               lower_italic = FALSE,
+                               text_size = "auto",
+                               spacing = 0.3,
+                               box_size = 0.1,
+                               x_lim = c(0, 1),
+                               y_lim = c(0, 1),
+                               lab_distance = 0.05,
+                               higher_color = "black",
+                               higher_color_attr = NULL,
+                               higher_border = "same",
+                               higher_add_color = "red",
+                               higher_text_color = "black",
+                               lower_color = "black",
+                               lower_color_attr = NULL,
+                               lower_border = "same",
+                               lower_add_color = "red",
+                               lower_text_color = "black",
+                               horizontal = FALSE,
+                               link_color = "higher",
+                               link_border = "same",
+                               link_alpha = 0.5,
+                               curved_links = FALSE,
+                               arrow = "no",
+                               plot_axes = FALSE,
+                               add = FALSE,
+                               mar = c(1, 1, 1, 1),
+                               mai = NULL,
+                               ...) {
   # Set the figure border via the mai or mar argument
   if (!is.null(mar) & !is.null(mai)) {
     warning("Both mar and mai have been set to values other than NULL. ",
             "This leads to mai overriding mar.")
   }
 
-  if (!is.matrix(web)) {
-    web <- as.matrix(web)
-        # stop("The argument web must be a matrix.")
-  }
+  # if (!is.matrix(x)) {
+  #   x <- as.matrix(x)
+  #       # stop("The argument web must be a matrix.")
+  # }
 
   stopifnot(is.logical(higher_italic),
             is.logical(lower_italic),
@@ -119,37 +130,37 @@ plotweb <- function(web,
   # rownames and colnames need to be set
   if (is.matrix(link_color)) {
     if (is.null(rownames(link_color))) {
-      rownames(link_color) <- rownames(web)
+      rownames(link_color) <- rownames(x)
     }
     if (is.null(colnames(link_color))) {
-      colnames(link_color) <- colnames(web)
+      colnames(link_color) <- colnames(x)
     }
-  } else if (is.vector(link_color) && length(link_color) == nrow(web) * ncol(web)) {
+  } else if (is.vector(link_color) && length(link_color) == nrow(x) * ncol(x)) {
     # link_color was given as a unnamed vector
     # and needs to be converted to a named matrix
     link_color <- matrix(link_color,
-                         nrow = nrow(web),
-                         ncol = ncol(web))
-    rownames(link_color) <- rownames(web)
-    colnames(link_color) <- colnames(web)
+                         nrow = nrow(x),
+                         ncol = ncol(x))
+    rownames(link_color) <- rownames(x)
+    colnames(link_color) <- colnames(x)
   }
 
   # Sort the web according to the user defined method
-  web <- sortweb(web, sort.order = sorting, empty = empty)
+  x <- sortweb(x, sort.order = sorting, empty = empty)
 
   # Extract the number of rows and columns
-  nr <- nrow(web)
-  nc <- ncol(web)
+  nr <- nrow(x)
+  nc <- ncol(x)
 
   # Extract the row and column names if existing
   # otherwise generate number sequence instead
-  if (!is.null(rownames(web))) {
-    r_names <- rownames(web)
+  if (!is.null(rownames(x))) {
+    r_names <- rownames(x)
   } else {
     r_names <- 1:nr
   }
-  if (!is.null(rownames(web))) {
-    c_names <- colnames(web)
+  if (!is.null(rownames(x))) {
+    c_names <- colnames(x)
   } else {
     c_names <- 1:nc
   }
@@ -159,7 +170,7 @@ plotweb <- function(web,
   if (horizontal) {
     r_names <- rev(r_names)
     c_names <- rev(c_names)
-    web <- web[r_names, c_names]
+    x <- x[r_names, c_names]
   }
 
   # link_color needs to be sorted accordingly
@@ -205,23 +216,176 @@ plotweb <- function(web,
          lower_labels)
   }
 
-  # Recycle the color vectors
-  if (length(higher_color) < nc) {
-    higher_color <- rep_len(higher_color, nc)
-  }
-  if (length(lower_color) < nr) {
-    lower_color <- rep_len(lower_color, nr)
-  }
+  #######################################################
+  # Color via attributes ################################
+  #######################################################
+  ## Use the provided column name in higher_attributes of x
+  ## to automatically generate a color vector for the higher species
+  if (!is.null(higher_color_attr)) {
+    # Check whether 'higher_color_attr'
+    # matches a column-name in higher_attributes.
+    stopifnot(higher_color_attr %in% colnames(higher_attributes(x)))
+    # Extract the matching column as a named vector
+    higher_color_attr_vec <- higher_attributes(x)[[higher_color_attr]]
+    higher_names <- rownames(higher_attributes(x))
+    if (is.logical(higher_color_attr_vec)) {
+      # If the attribute vector is of type boolean
+      # we expect there to be exactly two colors given
+      # in the higher_color vector.
+      if (length(higher_color) == 2) {
+        higher_color_map <- higher_color
+      }
+      if (length(higher_add_color) == 2) {
+        higher_add_color_map <- higher_add_color
+      }
+      # We can then assign a color to each higher species
+      # by first converting the attribute vector to integers (0 and 1)
+      # and adding 1 so that FALSE gets assigned the first
+      # and TRUE the second color.
+      higher_color <- sapply(as.integer(higher_color_attr_vec), function(v) {
+        higher_color_map[v + 1]
+      })
+      names(higher_color) <- colnames(x)
 
-  # Check whether the color vector is a named vector
-  if (!is.null(names(higher_color))) {
-    # Sort the higher color vector the same way as the web
-    higher_color <- higher_color[c_names]
+      higher_add_color <- sapply(as.integer(higher_color_attr_vec),
+                                 FUN = function(v) {
+                                   higher_add_color_map[v + 1]
+                                 })
+      names(higher_add_color) <- colnames(x)
+    } else if (is.numeric(higher_color_attr_vec)) {
+      # If the attribute vector is of type numeric (floating point numbers)
+      # we assign colors based on a colorRamp.
+      # To do so we first normalize attribute vector to the range [0,1].
+      max_v <- max(higher_color_attr_vec)
+      min_v <- min(higher_color_attr_vec)
+      normalized_vector <- (higher_color_attr_vec - min_v) / (max_v - min_v)
+      # TODO: allow for more different color Ramps
+      if (is.function(higher_color)) {
+        ramp <- higher_color
+      } else if (is.character(higher_color)) {
+        if (length(higher_color) == 1) {
+          ramp <- colorRamp(c("white", higher_color))
+        } else {
+          ramp <- colorRamp(higher_color)
+        }
+      }
+      higher_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
+      names(higher_color) <- higher_names
+    } else if (is.character(higher_color_attr_vec)) {
+      # Convert character attributes to factors,
+      # so that each level can be assigned a color
+      higher_color_attr_vec <- as.factor(higher_color_attr_vec)
+    }
+    if (is.factor(higher_color_attr_vec)) {
+      # If the attribute vector is of type factor,
+      # we will assign a color to each factor level.
+      nl <- nlevels(higher_color_attr_vec)
+      # To do so we create a lookup table (named vector)
+      # that holds a color value for each level.
+      if (length(higher_color) >= nl) {
+        if (length(higher_color) > nl) {
+          higher_color <- higher_color[1:nl]
+        }
+        higher_color_map <- higher_color
+        if (is.null(names(higher_color))) {
+          names(higher_color_map) <- levels(higher_color_attr_vec)
+        }
+        # From the lookup table we then retrieve and assign the
+        # corresponding color for each higher species.
+        higher_color <- sapply(as.character(higher_color_attr_vec), function(v) {
+          higher_color_map[v]
+        })
+        names(higher_color) <- colnames(x)
+      } else {
+        stop("Not enought colors in higher_color vector for color attribute \"", higher_color_attr, "\".")
+      }
+
+      # Do the same for additional colors
+      if (length(higher_add_color) >= nl) {
+        if (length(higher_add_color) > nl) {
+          higher_add_color <- higher_add_color[1:nl]
+        }
+        higher_add_color_map <- higher_add_color
+        if (is.null(names(higher_add_color))) {
+          names(higher_add_color_map) <- levels(higher_color_attr_vec)
+        }
+        # From the lookup table we then retrieve and assign the
+        # corresponding color for each higher species.
+        higher_add_color <- sapply(as.character(higher_color_attr_vec), function(v) {
+          higher_add_color_map[v]
+        })
+        names(higher_add_color) <- colnames(x)
+      }
+    }
+  } else {
+    # No higher color attribute given
+    # Recycle the color vectors
+    if (length(higher_color) < nc) {
+      higher_color <- rep_len(higher_color, nc)
+    }
+    # Check whether the color vector is a named vector
+    if (!is.null(names(higher_color))) {
+      # Sort the higher color vector the same way as the web
+      higher_color <- higher_color[c_names]
+    }
   }
-  # Check whether the color vector is a named vector
-  if (!is.null(names(lower_color))) {
-    # Sort the higher color vector the same way as the web
-    lower_color <- lower_color[r_names]
+  # Lower color attributes
+  if (!is.null(lower_color_attr)) {
+    stopifnot(lower_color_attr %in% colnames(lower_attributes(x)))
+    lower_color_attr_vec <- lower_attributes(x)[[lower_color_attr]]
+    lower_names <- rownames(lower_attributes(x))
+    if (is.numeric(lower_color_attr_vec)) {
+      max_v <- max(lower_color_attr_vec)
+      min_v <- min(lower_color_attr_vec)
+      normalized_vector <- (lower_color_attr_vec - min_v) / (max_v - min_v)
+      ramp <- colorRamp(c("white", "black"))
+      lower_color <- rgb(ramp(normalized_vector), maxColorValue = 255)
+      names(lower_color) <- lower_names
+    } else if (is.character(lower_color_attr_vec)) {
+      lower_color_attr_vec <- as.factor(lower_color_attr_vec)
+    }
+    if (is.factor(lower_color_attr_vec)) {
+      nl <- nlevels(lower_color_attr_vec)
+      if (length(lower_color) >= nl) {
+        if (length(lower_color) > nl) {
+          lower_color <- lower_color[1:nl]
+        }
+        lower_color_map <- lower_color
+        if (is.null(names(lower_color))) {
+          names(lower_color_map) <- levels(lower_color_attr_vec)
+        }
+        lower_color <- sapply(as.character(lower_color_attr_vec), function(v) {
+          lower_color_map[v]
+        })
+        names(lower_color) <- rownames(x)
+      } else {
+        stop("Not enought colors in lower_color vector for color attribute \"", lower_color_attr, "\".")
+      }
+      # The same for additional lower colors
+      if (length(lower_add_color) >= nl) {
+        if (length(lower_add_color) > nl) {
+          lower_add_color <- lower_add_color[1:nl]
+        }
+        lower_add_color_map <- lower_add_color
+        if (is.null(names(lower_add_color))) {
+          names(lower_add_color_map) <- levels(lower_color_attr_vec)
+        }
+        lower_add_color <- sapply(as.character(lower_color_attr_vec), function(v) {
+          lower_add_color_map[v]
+        })
+        names(lower_add_color) <- rownames(x)
+      }
+    }
+  } else {
+    # No lower color attribute given
+    if (length(lower_color) < nr) {
+      lower_color <- rep_len(lower_color, nr)
+    }
+    # Check whether the color vector is a named vector
+    if (!is.null(names(lower_color))) {
+      # Sort the higher color vector the same way as the web
+      lower_color <- lower_color[r_names]
+    }
   }
 
   # lab_distance contains the distance between.
@@ -250,6 +414,10 @@ plotweb <- function(web,
 
   theta_pi <- theta * pi / 180
 
+
+  #######################################################
+  # automatic text size  ################################
+  #######################################################
   ## TODO: Documentation + change 0.2 to actual spacing values
   if (text_size == "auto") {
     # If the bipartite plot is added to an existing plot
@@ -261,14 +429,14 @@ plotweb <- function(web,
       # Get the size of the plotting device in inches
       dev_size <- dev.size("in")
 
-      c_height_1 <- strwidth(higher_labels[1], units = "inches")
+      c_height_1 <- strwidth(higher_labels[1], units = "inches", ...)
       c_height_1 <- cos(theta_pi) * c_height_1
-      r_height_1 <- strwidth(lower_labels[1], units = "inches")
+      r_height_1 <- strwidth(lower_labels[1], units = "inches", ...)
       r_height_1 <- cos(theta_pi) * r_height_1
 
-      c_height_n <- strwidth(higher_labels[nc], units = "inches")
+      c_height_n <- strwidth(higher_labels[nc], units = "inches", ...)
       c_height_n <- cos(theta_pi) * c_height_n
-      r_height_n <- strwidth(lower_labels[nr], units = "inches")
+      r_height_n <- strwidth(lower_labels[nr], units = "inches", ...)
       r_height_n <- cos(theta_pi) * r_height_n
 
       max_height_1 <- max(c_height_1, -r_height_1)
@@ -288,11 +456,15 @@ plotweb <- function(web,
     min_distance_at_angle <- tan(a)^2 * abs(cos(a)) + abs(cos(a))
     # if (theta < 45 || theta > 315 || (theta > 135 && theta < 225)) {
     if (min_distance_at_angle > max(nchar(c(higher_labels, lower_labels)))) {
-      sum_str_h <- sum(strwidth(higher_labels, units = "inches"))
-      sum_str_l <- sum(strwidth(lower_labels, units = "inches"))
+      sum_str_h <- sum(strwidth(higher_labels, units = "inches", ...))
+      sum_str_l <- sum(strwidth(lower_labels, units = "inches", ...))
     } else {
-      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(higher_labels, units = "inches"))
-      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(lower_labels, units = "inches"))
+      sum_str_h <- 1.25 * min_distance_at_angle * sum(strheight(higher_labels,
+                                                                units = "inches",
+                                                                ...))
+      sum_str_l <- 1.25 * min_distance_at_angle * sum(strheight(lower_labels,
+                                                                units = "inches",
+                                                                ...))
     }
     if (sum_str_h > dev_max || sum_str_l > dev_max) {
       text_size <- min(dev_max / sum_str_h, dev_max / sum_str_l)
@@ -301,36 +473,43 @@ plotweb <- function(web,
     }
   }
 
+  #######################################################
+  # Calculating margins #################################
+  #######################################################
   if (add == FALSE) {
     # Get the maximal width of the higher and lower labels
     # in inches to set the margin accordingly
     if (theta != 0 && theta != 180) {
       c_m_t_width <- max(strwidth(higher_labels,
                                   cex = text_size,
-                                  units = "inches"))
+                                  units = "inches", ...))
       r_m_t_width <- max(strwidth(lower_labels,
                                   cex = text_size,
-                                  units = "inches"))
+                                  units = "inches", ...))
 
       c_t_width <- abs(c_m_t_width * sin(theta_pi))
       r_t_width <- abs(r_m_t_width * sin(theta_pi))
     } else { # If the labels are horizontal use their height.
       c_t_width <- max(strheight(higher_labels,
                                  cex = text_size,
-                                 units = "inches"))
+                                 units = "inches", ...))
       r_t_width <- max(strheight(lower_labels,
                                  cex = text_size,
-                                 units = "inches"))
+                                 units = "inches", ...))
     }
 
-    c_height_1 <- strwidth(higher_labels[1], cex = text_size, units = "inches")
+    c_height_1 <- strwidth(higher_labels[1], cex = text_size,
+                           units = "inches", ...)
     c_height_1 <- cos(theta_pi) * c_height_1
-    r_height_1 <- strwidth(lower_labels[1], cex = text_size, units = "inches")
+    r_height_1 <- strwidth(lower_labels[1], cex = text_size,
+                            units = "inches", ...)
     r_height_1 <- cos(theta_pi) * r_height_1
 
-    c_height_n <- strwidth(higher_labels[nc], cex = text_size, units = "inches")
+    c_height_n <- strwidth(higher_labels[nc], cex = text_size,
+                           units = "inches", ...)
     c_height_n <- cos(theta_pi) * c_height_n
-    r_height_n <- strwidth(lower_labels[nr], cex = text_size, units = "inches")
+    r_height_n <- strwidth(lower_labels[nr], cex = text_size,
+                           units = "inches", ...)
     r_height_n <- cos(theta_pi) * r_height_n
 
     max_height_1 <- max(c_height_1, -r_height_1)
@@ -356,7 +535,10 @@ plotweb <- function(web,
     plot(0, type = "n",
          ylim = y_lim,
          xlim = x_lim,
-         axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
+         axes = plot_axes, xlab = "", ylab = "", xaxs = "i", yaxs = "i",
+         ...)
+
+    # Adds a title above the plot
     if (!is.null(main)) {
       extra_space <- ifelse(horizontal, max_height_n, c_t_width + u_lab_distance)
       title(main,
@@ -370,7 +552,7 @@ plotweb <- function(web,
     space_size <- y_lim[2] - y_lim[1]
     space_start <- y_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
-    # for latex use in plotting with text()
+    # for later use in plotting with text()
     x_zero_inch <-  grconvertX(0, from = "inches")
     u_lab_distance <- grconvertX(u_lab_distance, from = "inches") - x_zero_inch
     l_lab_distance <- grconvertX(l_lab_distance, from = "inches") - x_zero_inch
@@ -378,24 +560,45 @@ plotweb <- function(web,
     space_size <- x_lim[2] - x_lim[1]
     space_start <- x_lim[1]
     # Convert the distance between boxes and labels from inches to user unit
-    # for latex use in plotting with text()
+    # for later use in plotting with text()
     y_zero_inch <- grconvertY(0, from = "inches")
     u_lab_distance <- grconvertY(u_lab_distance, from = "inches") - y_zero_inch
     l_lab_distance <- grconvertY(l_lab_distance, from = "inches") - y_zero_inch
   }
 
+  ############################################################
+  # Managing higher abundances and their color vectors #######
+  ############################################################
   # If no independent abundances are given for the higher species
   # calculate the sum of all columns as abundances
   if (is.null(higher_abundances)) {
-    higher_abundances <- colSums(web)
+    higher_abundances <- colSums(x)
+  } else if (is.character(higher_abundances)) {
+    # Extract the abundances column from the higher_attributes data.frame
+    stopifnot(higher_abundances %in% colnames(higher_attributes(x)))
+    higher_abundances <- higher_attributes(x)[[higher_abundances]]
+  } else if (is.numeric(higher_abundances)) {
+    stopifnot(length(higher_abundances) == ncol(x))
+    higher_abundances <- higher_abundances[colnames(x)]
   } else {
-    higher_abundances <- higher_abundances[colnames(web)]
+    stop("higher_abundances must be either a numeric vector or a column name of higher_attributes.")
   }
   if (!is.null(add_higher_abundances)) {
-    # Sort the additional higher abundances 
-    # according to the column-order in the web
-    add_higher_abundances <- add_higher_abundances[colnames(web)]
+    if (is.character(add_higher_abundances)) {
+      stopifnot(add_higher_abundances %in% colnames(higher_attributes(x)))
+      add_higher_abundances <- higher_attributes(x)[[add_higher_abundances]]
+    } else if (is.numeric(add_higher_abundances)) {
+      stopifnot(length(add_higher_abundances) == ncol(x))
+      # Sort the additional higher abundances
+      # according to the column-order in the web
+      add_higher_abundances <- add_higher_abundances[colnames(x)]
+    } else {
+      stop("add_higher_abundances must be either a numeric vector or a column name of higher_attributes.")
+    }
     higher_abundances <- c(rbind(higher_abundances, add_higher_abundances))
+    if (!is.null(higher_color_attr)) {
+
+    }
     # Include the custom colors into the color vector
     if (length(higher_add_color) == 1) {
       if (higher_add_color == "same") {
@@ -408,23 +611,41 @@ plotweb <- function(web,
       if (!setequal(names(higher_add_color), c_names)) {
         stop("Names of higher_add_color does not match higher species names.")
       }
-      higher_add_color <- higher_add_color[colnames(web)]
+      higher_add_color <- higher_add_color[colnames(x)]
     } else if (length(higher_add_color) < nc) {
       higher_add_color <- rep_len(higher_add_color, nc)
     }
     higher_color <- c(rbind(higher_color, higher_add_color))
   }
 
+  ############################################################
+  # Managing lower abundances and their color vectors ########
+  ############################################################
   # If no independent abundances are given for the lower species
   # calculate the sum of all columns as abundances
   if (is.null(lower_abundances)) {
-    lower_abundances <- rowSums(web)
+    lower_abundances <- rowSums(x)
+  } else if (is.character(lower_abundances)) {
+    # Extract the abundances column from the higher_attributes data.frame
+    stopifnot(lower_abundances %in% colnames(lower_attributes(x)))
+    lower_abundances <- lower_attributes(x)[[lower_abundances]]
+  } else if (is.numeric(lower_abundances)) {
+    stopifnot(length(lower_abundances) == nrow(x))
+    lower_abundances <- lower_abundances[rownames(x)]
   } else {
-    lower_abundances <- lower_abundances[rownames(web)]
+    stop("lower_abundances must be either a numeric vector or a column name of lower_attributes.")
   }
   if (!is.null(add_lower_abundances)) {
-    # Sort the additional lower abundances according to the row-order in the web
-    add_lower_abundances <- add_lower_abundances[rownames(web)]
+    if (is.character(add_lower_abundances)) {
+      stopifnot(add_lower_abundances %in% colnames(lower_attributes(x)))
+      add_lower_abundances <- lower_attributes(x)[[add_lower_abundances]]
+    } else if (is.numeric(add_lower_abundances)) {
+      stopifnot(length(add_lower_abundances) == nrow(x))
+      # Sort the additional lower abundances according to the row-order in the web
+      add_lower_abundances <- add_lower_abundances[rownames(x)]
+    } else {
+      stop("add_lower_abundances must be either a numeric vector or a column name of higher_attributes.")
+    }
     # Merge the abundances and additional abundances vector
     # by alternating indices
     lower_abundances <- c(rbind(lower_abundances, add_lower_abundances))
@@ -440,7 +661,7 @@ plotweb <- function(web,
       if (!setequal(names(lower_add_color), r_names)) {
         stop("Names of lower_add_color does not match lower species names.")
       }
-      lower_add_color <- lower_add_color[rownames(web)]
+      lower_add_color <- lower_add_color[rownames(x)]
     } else if (length(lower_add_color) < nr) {
       lower_add_color <- rep_len(lower_add_color, nr)
     }
@@ -454,16 +675,16 @@ plotweb <- function(web,
   # }
 
   # Get the not rotated height and width of the higher labels
-  H <- strheight(higher_labels, cex = text_size)
-  W <- strwidth(higher_labels, cex = text_size)
+  H <- strheight(higher_labels, cex = text_size, ...)
+  W <- strwidth(higher_labels, cex = text_size, ...)
 
   # Calculate the effective rotated height and width
   # str_h_c <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
   str_h_c <- abs(H * sin(theta_pi)) + abs(W * cos(theta_pi))
 
   # Get the not rotated height and width of the lower labels
-  H <- strheight(lower_labels, cex = text_size)
-  W <- strwidth(lower_labels, cex = text_size)
+  H <- strheight(lower_labels, cex = text_size, ...)
+  W <- strwidth(lower_labels, cex = text_size, ...)
 
   # Calculate the effective rotated height and width
   # str_h_r <- abs(H * cos(theta_pi)) + abs(W * sin(theta_pi))
@@ -566,8 +787,8 @@ plotweb <- function(web,
     lower_border <- lower_color
   }
 
-  c_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size))
-  r_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size))
+  c_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size, ...))
+  r_m_t_width <- max(strwidth(higher_labels, srt = srt, cex = text_size, ...))
 
   # Apply italics to all higher labels
   if (higher_italic) {
@@ -588,6 +809,9 @@ plotweb <- function(web,
     lower_box_size <- box_size[2]
   }
 
+  ############################################################
+  # Plotting the boxes and labels ############################
+  ############################################################
   # TODO: Document this whole text label alignment mess!
   # Draw the boxes and labels either horizontal or vertical to each other.
   if (horizontal) {
@@ -610,11 +834,9 @@ plotweb <- function(web,
       l_adj <- c(0, 0.5)
     }
     text(x_start - u_lab_distance, c_tx, higher_labels, adj = u_adj, srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family,
-         col = higher_text_color)
+         cex = text_size, xpd = TRUE, col = higher_text_color, ...)
     text(x_end + l_lab_distance, r_tx, lower_labels, adj = l_adj, srt = srt,
-         cex = text_size, xpd = TRUE, font = font, family = family,
-         col = lower_text_color)
+         cex = text_size, xpd = TRUE, col = lower_text_color, ...)
 
   } else {
     y_start <- y_lim[1]
@@ -623,11 +845,12 @@ plotweb <- function(web,
     rect(c_xl, y_end - higher_box_size, c_xr, y_end, col = higher_color, border = higher_border)
 
     if (srt == 0 | srt == 180) {
-      text(r_tx, y_start - l_lab_distance, lower_labels, pos = 1, cex = text_size,
-           xpd = TRUE, srt = srt, font = font, family = family, col = lower_text_color)
+      text(r_tx, y_start - l_lab_distance, lower_labels,
+           pos = 1, cex = text_size, xpd = TRUE, srt = srt,
+           col = lower_text_color, ...)
       text(c_tx, y_end + u_lab_distance, higher_labels,
            pos = 3, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family, col = higher_text_color)
+           col = higher_text_color, ...)
     } else {
       if (srt > 180) {
         adj_l <- c(0, 0.5)
@@ -637,32 +860,32 @@ plotweb <- function(web,
         adj_h <- c(0, 0.5)
       }
       text(r_tx, y_start - l_lab_distance, lower_labels,
-           adj = adj_l, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family)
+           adj = adj_l, cex = text_size, xpd = TRUE, srt = srt, ...)
       text(c_tx, y_end + u_lab_distance, higher_labels,
-           adj = adj_h, cex = text_size, xpd = TRUE, srt = srt,
-           font = font, family = family)
+           adj = adj_h, cex = text_size, xpd = TRUE, srt = srt, ...)
     }
   }
 
-  # Interactions
+  ############################################################
+  # Preparing and plotting the links #########################
+  ############################################################
   # TODO: short explanation what is going on
   if (!is.null(add_lower_abundances) && !is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc/2),
                          col = rep(seq(1, nc, 2), each = nr/2),
-                         weight = c(web))
+                         weight = c(x))
   } else if (!is.null(add_lower_abundances)) {
     web.df <- data.frame(row = rep(seq(1, nr, 2), nc),
                          col = rep(1:nc, each = nr/2),
-                         weight = c(web))
+                         weight = c(x))
   } else if (!is.null(add_higher_abundances)) {
     web.df <- data.frame(row = rep(1:nr, nc/2),
                          col = rep(seq(1, nc, 2), each = nr),
-                         weight = c(web))
+                         weight = c(x))
   } else {
     web.df <- data.frame(row = rep(1:nr, nc),
                          col = rep(1:nc, each = nr),
-                         weight = c(web))
+                         weight = c(x))
   }
   web.df <- web.df[web.df$weight > 0, ]
 

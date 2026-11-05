@@ -1,7 +1,7 @@
 Package: bipartite
 Type: Package
 Title: Visualising Bipartite Networks and Calculating Some (Ecological) Indices
-Version: 3.00
+Version: 3.0
 Date: 2026-10-10
 Authors@R: c(person(given = "Carsten F.",
                     family = "Dormann",
@@ -76,4 +76,4 @@ URL: https://github.com/biometry/bipartite
 Description: Functions to visualise webs and calculate a series of indices commonly used to describe pattern in (ecological) webs. It focuses on webs consisting of only two levels (bipartite), e.g. pollination webs or predator-prey-webs. Visualisation is important to get an idea of what we are actually looking at, while the indices summarise different aspects of the web's topology. 
 License: GPL
 Packaged: 2021-02-04 08:24:39 UTC; Carsten
-RoxygenNote: 7.1.1
+Config/roxygen2/version: 8.1.1

@@ -24,6 +24,6 @@ Junker, R. R., Blüthgen, N., Brehm, T., Binkenstein, J., Paulus, J., Schaefer, 
 }
 \examples{
 data(junker2013)
-\dontrun{plotweb(junker2013)}
+\dontrun{plot(junker2013)}
 }
 \keyword{datasets}

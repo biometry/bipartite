@@ -1,0 +1,207 @@
+---
+title: Object oriented bipartite
+author: 
+  - name: Tobias Bauer
+    affiliation: Animal Network Ecology, University of Hamburg
+    email: tobias.bauer-2@uni-hamburg.de
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+abstract: This vignette provides an overview of the new object-oriented functionalities of the bipartite package.
+toc-title: "Contents"
+output: 
+  rmarkdown::html_vignette:
+    toc: true  
+    fig_width: 7
+    fig_height: 7
+editor_options: 
+  chunk_output_type: inline
+vignette: >
+  %\VignetteIndexEntry{Object oriented bipartite}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Creating S3-objects in bipartite
+
+Starting with version 3.0 the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that mean we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
+
+```{r, results = "hide", message = FALSE, cache = FALSE}
+library(bipartite)
+data(Safariland)
+options(max.print = 10)
+```
+
+```{r}
+class(Safariland)
+```
+
+As the output above indicates `Safariland` is now of typ `bipartite_web` in 
+addition to the types `matrix` and `array`.
+
+```{r}
+str(Safariland)
+```
+
+So the dataset in its core is still an integer matrix of size $9\times 27$ with named rows and columns. From the help file, we know that the columns represent pollinators and the rows represent plant species. 
+
+Sometimes, that's all the information available about a network. More often, however, additional information is available about individual nodes or the network as a whole. 
+
+For example, the `Safariland` data has additional information about the plants and pollinators available. We stored this data in two separate CSV files and load those into the workspace as `data.frame` objects.
+
+```{r}
+plant_attributes <- read.csv("plant_attributes.csv", row.names = 1)
+plant_attributes <- plant_attributes[rownames(Safariland), ]
+plant_attributes
+```
+
+```{r}
+pollinator_attributes <- read.csv("pollinator_attributes.csv", row.names = 1)
+pollinator_attributes <- pollinator_attributes[colnames(Safariland), ]
+pollinator_attributes
+```
+
+Now we can create a new `bipartite_web` object combining the interaction matrix with the details on the plants and pollinators as well as some meta information.
+
+```{r}
+Safariland.web <- bipartite_web(Safariland,
+                                lower_attributes = plant_attributes,
+                                higher_attributes = pollinator_attributes,
+                                meta_attributes = list("type" = "pollination"))
+print(Safariland.web)
+```
+
+`Safariland.web` could now be stored and shared as a single R object containing all relevant information on the dataset.
+
+```{r, eval = FALSE}
+save(Safariland.web, file = "Safariland.web.RData")
+```
+
+# 3D (multi-layer) network objects
+
+Version 3.0 also introduces simple multilayer bipartite networks. The S3-class for those is called `bipartite_webarray` and in its core represents a 3D-array, in which the third dimension represents the various networks. 
+
+To demonstrate we will combine `Safariland` with the `vazarr` data set, as they stem from the same field work. 
+
+```{r}
+dim(Safariland)
+dim(vazarr)
+```
+
+Looking at the dimensions of the two data sets, we see that in `Safariland` 9 plant species and 27 pollinator species were recorded, and in `vazarr` 10 plant species and 29 pollinator species were recorded.
+
+To combine the two we call `bipartite_webarray` passing both as a an argument. 
+
+```{r}
+warray <- bipartite_webarray(Safariland, vazarr)
+dim(warray)
+```
+
+The new `warray` object now has three dimensions. The first two still represent the plants and pollinators and the third represents the two networks. As we can see the first two dimensions have been blown up to include the union of all plant and pollinator species.
+
+```{r}
+print(warray)
+```
+
+From the `print` output we can tell that the attributes are now separated into global attributes describing the whole `bipartite_webarray` and local attributes for each containing web. 
+
+To further illustrate the difference we will load the plant and pollinator attributes CSV files again, as they contain information on all species observed in the field study. They are going to be the global higher and lower attributes for our new `bipartite_webarray`.
+
+```{r}
+pollinator_attributes <- read.csv("pollinator_attributes.csv", row.names = 1)
+plant_attributes <- read.csv("plant_attributes.csv", row.names = 1)
+```
+
+In addition we create two data.frames containing a single column with an id for the higher species of `vazarr` and the lower species of `Safariland` respectively. Those will be our local attributes.
+
+```{r}
+vazarr_higher_attributes <- data.frame(id = 1:ncol(vazarr),
+                                       row.names = colnames(vazarr))
+safariland_lower_attributes <- data.frame(id = 1:nrow(Safariland),
+                                          row.names = rownames(Safariland))
+warray <- bipartite_webarray(Safariland, vazarr,
+                             global_higher_attributes = pollinator_attributes,
+                             global_lower_attributes = plant_attributes,
+                             global_meta_attributes = list(type = "pollinaton"),
+                             local_higher_attributes = list("vazarr" = vazarr_higher_attributes),
+                             local_lower_attributes = list("Safariland" = safariland_lower_attributes))
+warray
+```
+
+# Accessing the attributes
+
+The attributes can be acccessed using the three access functions `higher_attributes`, `lower_attributes`, and `meta_attributes`. The first two return the underlying `data.frame` the latter the underlying `list`.
+
+```{r}
+higher_attributes(Safariland.web)
+lower_attributes(Safariland.web)
+meta_attributes(Safariland.web)
+```
+
+On the returned `data.frame` further selection of rows and columns is enabled using the `$` or `[` operators.
+
+```{r}
+higher_attributes(Safariland.web)$Order
+higher_attributes(Safariland.web)["Ruizantheda proxima", ]
+```
+
+## Local and global attributes
+
+For `bipartite_webarray` there is a differentiation between the global and local attributes. The global attributes can be accessed by simply calling `*_attributes`:
+
+```{r}
+higher_attributes(warray)
+```
+
+Acccessing the local attributes however requires the use of the `web_id` argument:
+
+```{r}
+higher_attributes(warray, web_id = "vazarr")
+```
+
+# Replacing / changing the attributes
+
+Replacing or changing of the attributes is achieved by using replacement functions. Which in practice means calling `*_attributes`, selecting the desired column/row/cell and replacing it with `<- value`. 
+
+```{r}
+meta_attributes(Safariland.web)$start_year <- 1999
+meta_attributes(Safariland.web)$end_year <- 2000
+meta_attributes(Safariland.web)
+```
+
+```{r, max.print = 50}
+higher_attributes(Safariland.web)$id <- 1:ncol(Safariland.web)
+higher_attributes(Safariland.web)
+```
+
+# Subsetting
+
+`bipartite_web` objects can be subset in the same way as `matrix` objects. Doing this automatically subsets the higher and lower attributes `data.frames` accordingly. 
+
+```{r}
+Safariland.web[1:5, 1:3]
+```
+
+Keep in mind that the standard setting is `drop = TRUE` for subsetting. So if the result isn't a `matrix` anymore it is also not a `bipartite_web` by default. 
+
+```{r}
+Safariland.web[1:5, 1]
+Safariland.web[5, 3]
+```
+
+To avoid this behavior manually set `drop = FALSE`:
+
+```{r}
+Safariland.web[1:5, 1, drop = FALSE]
+Safariland.web[5, 3, drop = FALSE]
+```
+
+Subsetting can also be done using row and column names:
+
+```{r}
+Safariland.web["Rosa eglanteria", "Ruizantheda mutabilis", drop = FALSE]
+```
+
+When subsetting `bipartite_webarray` objects single webs can be extracted as `bipartite_web` objects. Doing this combines the global and local attributes.
+
+```{r}
+warray[, , "vazarr"]
+```

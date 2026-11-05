@@ -36,7 +36,7 @@ Vázquez, D. P., and D. Simberloff. 2003 Changes in interaction biodiversity ind
 
 \examples{
 data(Safariland)
-plotweb(Safariland)
+plot(Safariland)
 }
 
 \keyword{datasets}

@@ -27,6 +27,6 @@ Olito C, Fox JW (2014) Data from: Species traits and abundances predict metrics 
 }
 \examples{
 data(olito2015)
-plotweb(olito2015)
+plot(olito2015)
 }
 \keyword{datasets}
