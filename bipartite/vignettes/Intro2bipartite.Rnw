@@ -4,7 +4,7 @@
 \documentclass[a4paper, 11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ttscale=.7]{libertine} % hack to scale typewriter, despite not using Libertine ...
+\usepackage[ttscale=.8]{libertine} % hack to scale typewriter, despite not using Libertine ...
 \usepackage[sc]{mathpazo}
 
 %\usepackage{authblk} % authors & affiliations
@@ -235,16 +235,20 @@ head(c(rownames(small1976), colnames(small1976)), 16)
 
 
 \section{Visualising bipartite networks}%------------------------------------------------------------------
-
 A useful first step in the analysis of bipartite networks is to plot it. 
-To do so, \package{bipartite} offers two main functions, \indR{plotweb} and \indR{visweb}. 
-They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep{Motten1982}. 
+To do so, \package{bipartite} offers two main functions, \indR{plot} (since version 3.00 the standard way to plot, replacing the previous \texttt{plotweb}) and \indR{visweb}. To be able to use \indR{plot}, the interaction matrix has to be first converted to a "bipartite\_web"-object using \texttt{bipartite\_web}:\footnote{If you don't want to do that, you could also call the internal function directly on your matrix: \texttt{bipartite:::plot.bipartite\_web(web)}.}
+<<>>=
+mymatrix <- genweb(5,7)
+web <- bipartite_web(mymatrix)
+@
+
+They produce a bipartite graph (e.g.~Fig.~\ref{fig:Amotten} top) and a prettified version of the adjacency matrix (Fig.~\ref{fig:Amotten} bottom), respectively \citep[in this case of the network reported by][]{Motten1982}. 
 Both offer a wide range of options to change sizes, colours and placement of labels. 
-Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
-For a more in-depth guide on how to use the \indR{ploweb} function also have a look at the \indR{PlottingWithBipartite} vignette. 
+Please run example code for these functions to get a feeling for their abilities (and hopefully you're impressed).%\footnote{The additional function \code{plotweb2} is still a bit experimental but allows to combine several bipartite plots into a stack of tripartite, quadripartite, pentapartite etc. graphs. See the examples in the function's help page for illustration.}
+For a more in-depth guide on how to use the \indR{plot} function also have a look at the \indR{PlottingWithBipartite} vignette: the topic is so wide, it deserves the attention of a dedicated vignette.
 
 <<eval=F>>=
-plotweb(motten1982, srt= 90, sorting = "ca")
+plot(motten1982)
 visweb(motten1982)
 @
 %pdf(file="figures/motten1982_plotweb.pdf", width=10, height=6)
@@ -501,7 +505,8 @@ So, what we see is for the main module a rather central position for, e.g., \emp
 Let's see what its betweenness score is, using several different functions across R-packages:
 <<>>=
 # convert matrix into one-mode edgelist:
-SafPlantsEL <- as.tnet(as.one.mode(Safariland, project="lower"))
+SafPlantsEL <- as.tnet(as.one.mode(Safariland, project="lower"), 
+                       type="weighted two-mode tnet")
 @
 <<eval=F>>=
 # compute betweenness:
@@ -565,14 +570,14 @@ data(list=web.names) #loads all webs
 netw.indic.webs <- t(sapply(web.names, function(x) networklevel(get(x), 
               index="ALLBUTDD")))
 @
-% save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
-<<load external data, echo=F, eval=T>>=
-#load("/Volumes/Macintosh HD/Users/Carsten/Data/aktuell/bipartite/bipartite/vignettes/figures/netw.indic.webs.Rdata")
-load("./figures/netw.indic.webs.Rdata") # loads the files stored above; avoids re-running this time-consuming analysis!
-@
 <<cache=F, eval=F>>=
 PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
 biplot(PCA.out, xpd=T, las=1)
+@
+% save(PCA.out, netw.indic.webs, file="figures/netw.indic.webs.Rdata")
+<<load external data, echo=F, eval=T>>=
+#load("/Volumes/Macintosh HD/Users/Carsten/Data/aktuell/bipartite/bipartite/vignettes/figures/netw.indic.webs.Rdata")
+load("figures/netw.indic.webs.Rdata") # loads the files stored above; avoids re-running this time-consuming analysis!
 @
 %par(mar=c(4,4,1,4))
 %pdf(file="figures/PCAnetworklevel.pdf", width=7, height=7)
@@ -583,9 +588,6 @@ summary(PCA.out)
 @
 
 Apparently 40, 30 and 10\% of the variation in indices can be partitioned to the first three axes. We can now investigate which indices load on the few axes:
-<<eval=T, echo=F>>=
-PCA.out <- prcomp(netw.indic.webs[,-5], scale.=T)
-@
 <<>>=
 round(PCA.out$rotation[, 1:4], 3)
 @
@@ -898,7 +900,7 @@ This somewhat cryptic term refers to networks that are defined by different type
 
 While statistically and mathematically a lot of things are conceivable, few ideas actually resonate with ecologists (i.e. in application). One idea is that networks evolve and hence change dynamically. Another is that any observed bipartite network is actually embedded in many other networks, e.g. a plant-pollinator-network may continue ``into the ground'' as plant-mycorrhiza networks, ``into the sky'' as pollinator-parasite network, and ``sideways'' as plant-herbivore network \citep{Pocock2012}. 
 
-Currently, \package{bipartite} does not support any such analysis (apart from a pathetic function \code{npartite} and \code{plotweb2} for plotting stacked bipartite networks).
+Currently, \package{bipartite} does not support any such analysis.% (apart from a pathetic function \code{npartite} and \code{plotweb2} for plotting stacked bipartite networks).
 
 Packages such as \package{robber} address some of the challenges of intersecting multiple bipartite networks.
 

@@ -41,7 +41,7 @@ Ulrich, W. and Gotelli, N.J. (2007) Disentangling community patterns of nestedne
 
 \author{ Carsten F. Dormann }
 
-\seealso{\code{nestednodf} in \pkg{vegan} for the best nestedness algorithm in existence today (for both binary and weighted networks!);  \code{\link{nestedness}} for the most commonly used method to calculate nestedness, \code{\link{wine}} for a new, unevaluated but very fast way to calculate nestedness; \code{nestedtemp} (another implementation of the same method used in our \code{nestedness}) and \code{nestedn0} (calculating the number of missing species, which has been shown to be a poor measure of nestedness) in \pkg{vegan}
+\seealso{\code{nestednodf} in \pkg{vegan} for the best nestedness algorithm in existence today (for both binary and weighted networks!);  \code{nestedness} for the most commonly used method to calculate nestedness, \code{\link{wine}} for a new, unevaluated but very fast way to calculate nestedness; \code{nestedtemp} (another implementation of the same method used in our \code{nestedness}) and \code{nestedn0} (calculating the number of missing species, which has been shown to be a poor measure of nestedness) in \pkg{vegan}
 }
 
 \examples{

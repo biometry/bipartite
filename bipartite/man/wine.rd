@@ -83,7 +83,7 @@ This is WINE version 3.2, available also in Matlab and C++ at the certificate-bl
 
 
 \seealso{
-\code{\link{nestedness}} and \code{\link{discrepancy}}.
+\code{nestedness} and \code{\link{discrepancy}}.
 }
 \examples{
 data(Safariland, package="bipartite")

@@ -43,7 +43,7 @@ A vector with values for each of the selected nestedness measures.
 \note{
 The idea behind this function is to encourage the comparison of different nestedness measures. That does not mean, we necessarily see much ecological sense in them (see, e.g., the paper by Blüthgen et al. 2008).
 
-\code{nested} uses one non-default setting for the \code{\link{nestedness}} measures called: \option{null.models=FALSE}. This is simply to speed up the computation. Null models should be built for all nestedness measures, of course, not only for \code{\link{nestedness}}!
+\code{nested} uses one non-default setting for the \code{nestedness} measures called: \option{null.models=FALSE}. This is simply to speed up the computation. Null models should be built for all nestedness measures, of course, not only for \code{nestedness}!
 }
 
 \references{
@@ -73,7 +73,7 @@ Carsten F. Dormann \email{carsten.dormann@biom.uni-freiburg.de}
 
 
 \seealso{
-\code{\link{C.score}}, \code{\link{wine}}, \code{\link{nestedness}}, \code{\link{discrepancy}}; and, within \pkg{vegan}: \code{nestedtemp},   
+\code{\link{C.score}}, \code{\link{wine}}, \code{nestedness}, \code{\link{discrepancy}}; and, within \pkg{vegan}: \code{nestedtemp},   
 \code{nestedchecker}, \code{nesteddisc}, \code{nestednodf}
 }
 \examples{

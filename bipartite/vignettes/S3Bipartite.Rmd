@@ -1,5 +1,5 @@
 ---
-title: Object oriented bipartite
+title: Object-oriented bipartite
 author: 
   - name: Tobias Bauer
     affiliation: Animal Network Ecology, University of Hamburg
@@ -22,7 +22,7 @@ vignette: >
 
 # Creating S3-objects in bipartite
 
-Starting with version 3.0 the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that mean we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
+Starting with version 3.00, the `bipartite`-package enables object-oriented programming (OOP) using the S3 system. To understand what that means we will demonstrate the new functionalities with the aid of the dataset `Safariland`.
 
 ```{r, results = "hide", message = FALSE, cache = FALSE}
 library(bipartite)
@@ -34,8 +34,7 @@ options(max.print = 10)
 class(Safariland)
 ```
 
-As the output above indicates `Safariland` is now of typ `bipartite_web` in 
-addition to the types `matrix` and `array`.
+As the output above indicates `Safariland` is now of type `bipartite_web` in addition to the types `matrix` and `array`.
 
 ```{r}
 str(Safariland)
@@ -187,7 +186,7 @@ Safariland.web[1:5, 1]
 Safariland.web[5, 3]
 ```
 
-To avoid this behavior manually set `drop = FALSE`:
+To avoid this behaviour manually set `drop = FALSE`:
 
 ```{r}
 Safariland.web[1:5, 1, drop = FALSE]

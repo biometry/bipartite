@@ -207,7 +207,7 @@ Labels can now be rotated by specifying text.rot=90.}
 \describe{
 	\item{Function \code{\link{nodespec}} replaces the now obsolete function \code{functspec}.}{The inventor of functional specialisation, 
 Bo Dalsgaard, understands the term \sQuote{functional specialisation} to be restricted to the way in which plants are specialised to pollinators. Although I disagree (and think that \sQuote{functional} actually means very little until defined for a given problem), I renamed the \sQuote{functional specialisation index} into \sQuote{node specialisation index}. This is not a particularly clever name, but at least it indicates that the position of nodes in a network is important when it is calculated.}
-	\item{Bug in \code{\link{networklevel}}:}{Call to \code{nestedness.corso} overwrote results of \code{\link{nestedness}}.}
+	\item{Bug in \code{\link{networklevel}}:}{Call to \code{nestedness.corso} overwrote results of \code{nestedness}.}
 	\item{Various changes related to the analysis of very small webs.}{Very small webs should probably not be used at all for testing theories! 
 Indices are usually VERY sensitive to the exact number of species, number of observations etc. Still, sometimes we simply want to calculate some index, and then \pkg{bipartite} should handle such small networks, too. So, when going through several dozens of very small webs (sometimes only containing one species in one of the two trophic levels), several functions did not perform correctly (usually to such minor programming issues such as matrices being converted to vectors when \code{[} was used with \option{drop=TRUE}, i.e. the default). Changes affected the functions \code{discrepancy}, \code{nestedness.corso}, \code{shuffle.web}, \code{compart} and \code{empty}. Their output remains identical, only they now also work for small webs.}
 	\item{Changes to \code{nestedness.corso} with \option{weighted=TRUE}}{Galeano et al. do not describe how to deal with ties, nor do they make clear if the packed matrix should be sorted by marginal sum of links or marginal sum of interactions! Previously, we used marginal sum of interactions (because it is a weighted index), but now we moved to marginal sum of links, because that is how I interpret their paper after a third (or forth) re-reading. Furthermore, because the real maximum chaos cannot be derived (to my knowledge) algorithmically, we use the 95\% quantile of 500 randomisations as maximum. This will lead to a consistently overestimated nestedness, but it is less sensitive to the number of replicates than the max. (Also, there was an error in the description of the value returned: 0 is nested, 1 is chaos!)}
@@ -233,7 +233,7 @@ Indices are usually VERY sensitive to the exact number of species, number of obs
 \item 0.73 (release date: 1-Sept-2008)
 \describe{	
 	\item{new feature \code{\link{plotweb}}:}{Named abundance-vector for each level can be used.}
-	\item{new function \code{\link{plotweb2}:} (not debugged!)}{For plotting tripartite networks.}
+	\item{new function \code{plotweb2:} (not debugged!)}{For plotting tripartite networks.}
 }
 
 \item 0.72 (release date: 12-June-2008)

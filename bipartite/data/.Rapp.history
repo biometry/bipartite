@@ -1,0 +1,7 @@
+load("/Users/carsten/Data/repositories/bipartite/bipartite/data/barrett1987.rda")
+ls()
+barrett1987
+trace(barrett1987)
+diag(barrett1987)
+barrett1987 %*% t(barrett1987)
+bipartite::plotweb(barrett1987)

@@ -8,7 +8,7 @@ Sys.setenv("R_CHECK_RD_VALIDATE_RD2HTML"=FALSE) # to switch off html-syntax chec
 #Sys.getenv()
 
 R CMD build bipartite --compact-vignettes=gs+qpdf
-R CMD check bipartite_3.00.tar.gz --as-cran
+R CMD check bipartite_3.00.tar.gz --as-cran 
 R CMD install bipartite_3.00.tar.gz
 # now check in the testfile below anything that changed whether it actually works!
 # upload to https://win-builder.r-project.org/upload.aspx and check on R-devel!
@@ -17,10 +17,8 @@ R CMD install bipartite_3.00.tar.gz
 #### check reverse dependencies ####
 # identify, which packages depend on bipartite:
 devtools::revdep("bipartite")
-# [1] "bioregion"     "bipartiteD3"   "bootPLS"       "cassandRa"    
-# [5] "econetwork"    "econullnetr"   "HiveR"         "leiden"       
-# [9] "NIMAA"         "nos"           "PhageCocktail" "plsRbeta"     
-# [13] "plsRglm"       "primer"        "RPANDA"        "tapnet"  
+# [1] "bioregion"  "bipartiteD3" "bootPLS"  "cassandRa" "econullnetr" "emln"  "ggbipart"  "HiveR"  "leiden"  "NIMAA"       "nos"        
+# [12] "plsRbeta"    "plsRglm"     "primer"      "tapnet"
 
 # check whether changes break reverse dependencies:
 pak::pkg_install("r-lib/revdepcheck")
@@ -29,31 +27,40 @@ setwd("bipartite/") # move into package-directory for this test
 getwd()
 revdep_check(num_workers = 4)
 
-# ── CHECK ───────────────────────────────────────────────────────────────────────────────────── 16 packages 
-# ✔ bipartiteD3 0.3.2                     ── E: 1     | W: 0     | N: 0                                          
-# ✔ cassandRa 0.2.0                       ── E: 0     | W: 0     | N: 0                                          
-# ✔ econetwork 0.7.0                      ── E: 1     | W: 0     | N: 0                                          
-# ✔ bootPLS 1.0.1                         ── E: 1     | W: 0     | N: 0                                          
-# ✖ econullnetr 0.2.1                     ── E: 0  +2 | W: 0     | N: 0                                          
-# ✔ bioregion 1.2.0                       ── E: 0     | W: 0     | N: 0                                          
-# ✔ HiveR 0.4.0                           ── E: 0     | W: 0     | N: 0                                          
-# ✔ leiden 0.4.3.1                        ── E: 1     | W: 0     | N: 0                                          
-# ✔ nos 2.0.0                             ── E: 0     | W: 0     | N: 0                                          
-# ✔ PhageCocktail 1.0.3                   ── E: 0     | W: 0     | N: 1                                          
-# ✔ NIMAA 0.2.1                           ── E: 0     | W: 0     | N: 0                                        
-# ✔ plsRbeta 0.3.1                        ── E: 0     | W: 0     | N: 0                                          
-# ✔ plsRglm 1.5.1                         ── E: 0     | W: 0     | N: 0                                          
-# ✔ primer 1.2.0                          ── E: 0     | W: 0     | N: 2                                          
-# ✔ tapnet 0.3                            ── E: 0     | W: 0     | N: 1                                          
-# ✖ RPANDA 2.4                            ── E: 0     | W: 0  +1 | N: 0  +1                                      OK: 14  
+# ── CHECK ──────────────────────────────────────────── 15 packages ─
+# ✔ bipartiteD3 0.3.2                      ── E: 0     | W: 0     | N: 0              
+# ✔ cassandRa 0.2.0                        ── E: 0     | W: 0     | N: 0   
+# ✔ bootPLS 1.2.0                          ── E: 0     | W: 0     | N: 0   
+# ✖ econullnetr 0.2.2                      ── E: 0  +2 | W: 0  +2 | N: 0   
+# ✔ bioregion 1.5.0                        ── E: 0     | W: 0     | N: 0   
+# ✖ emln 1.2.0                             ── E: 0  +1 | W: 0     | N: 0   
+# ✔ ggbipart 0.1.3                         ── E: 0     | W: 0     | N: 0   
+# ✔ HiveR 0.4.0                            ── E: 0     | W: 0     | N: 1   
+# ✔ nos 2.0.0                              ── E: 0     | W: 0     | N: 0   
+# ✔ leiden 0.4.3.1                         ── E: 1     | W: 0     | N: 0   
+# ✔ plsRbeta 0.3.3                         ── E: 0     | W: 0     | N: 0   
+# ✔ NIMAA 0.2.2                            ── E: 0     | W: 0     | N: 0     
+# ✔ primer 1.2.1                           ── E: 0     | W: 0     | N: 0   
+# ✔ tapnet 0.6                             ── E: 0     | W: 0     | N: 0 
+# ✔ plsRglm 1.7.1                          ── E: 0     | W: 0     | N: 0                              
+# OK: 13   
 
-
+library(bipartite)
 # econullnetr
 library(econullnetr)
 sil.null <- generate_null_net(Silene[, 2:7], Silene.plants[, 2:6], sims = 2, c.samples = Silene[, 1], r.samples = Silene.plants[, 1])
 plot_bipartite(sil.null)
 # change in econullnetr::plot_bipartite: method -> sorting
 
+# emln
+library(emln)
+x <- create_monolayer_network(bipartite::memmott1999, bipartite = TRUE,
+                              directed = FALSE, group_names = c('Animals','Plants'))
+!! -> write maintainer: use "as.matrix" or adapt "matrix_to_list_bipartite" to accommodate an objecdt that has also the "bipartite_web" class.
+!! Done so on 9.11.2026
+
+
+# older problems (2.22)
 # RPANDA
 plot_network: possible error in plotweb(as.matrix(link), col.low =
                                           col.P, col.high = col.H, col.interaction = "lightgray", empty =
@@ -64,6 +71,10 @@ try(plotweb(as.matrix(link),col.low=col.P,col.high = col.H,col.interaction = "li
 col.low --> lower_color
 col.high --> higher_color
 col.interaction --> link_color
+
+
+
+
 
 #### bipartite test file ####
 
@@ -163,7 +174,7 @@ C.score(t(m), normalise=TRUE) # should be 0.57, since half of the species have n
 C.score(m, normalise=TRUE) # should be 1!
 n <- matrix(c(1,0,0, 0,1,0, 0,0,1), 3,3)
 C.score(t(n), normalise=T)
-system.time(C.score(memmott1999)) # 3s
+system.time(C.score(memmott1999)) # 0.013s
 
 # CC (closeness centrality)
 CC(Safariland)
@@ -189,7 +200,7 @@ comp1plus <- LPA_wb_plus(cbind(vazquenc, rep(0, nrow(vazquenc))))$modularity
 comp1plus2 <- LPA_wb_plus(rbind(cbind(vazquenc, rep(0, nrow(vazquenc))), rep(0, ncol(vazquenc)+1)) )$modularity
 comp2 <- computeModules(vazquenc, forceLPA=TRUE)
 comp3 <- computeModules(vazquenc, method="DormannStrauss")
-plotModuleWeb(comp1)
+plotModuleWeb(comp1) # wrong class!
 plotModuleWeb(comp2)
 plotModuleWeb(comp3, weighted=F)
 # to be continued ...
@@ -597,3 +608,6 @@ R CMD install bipartite_2.17.tar.gz # optional; check html of help and link to v
 ## * find non-UTF8 characters: find . | egrep [^a-zA-Z0-9_\.\/\-\s]
 ## * check link to external functions: https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Cross_002dreferences
 ## * if something goes wrong with the vignette build, fix and start over with the package building (it is difficult to move the right files into the right folders; R even checks the date of .Rnw files!)
+
+
+# make a histogram of 100 random uniform values
