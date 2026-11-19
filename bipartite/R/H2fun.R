@@ -18,6 +18,11 @@ function(web, H2_integer=TRUE){
     
 
     tot <- sum(web)       #saemtliche Interaktionen im Netz
+	# Safeguard for empty webs. 
+	# Specialization is not defined for empty webs but entropy is 0
+	if (tot == 0) return(c(H2 = NaN, H2min = 0, H2max = 0, H2uncorr = 0))
+
+	
     rs <- rowSums(web)    #Interaktion der Pflanze mit saemtlichen Bestaeubern
     cs <- colSums(web)    #saemtliche Interaktionen des jeweiligen Bestaebers
 
