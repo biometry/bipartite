@@ -39,8 +39,8 @@ For an overview of other computing resources, data, books, journals etc. check o
 \tabular{ll}{
 Package: \tab bipartite\cr
 Type: \tab Package\cr
-Version: \tab 3.00\cr
-Date: \tab 2026-10-10\cr
+Version: \tab 3.0\cr
+Date: \tab 2026-11-19\cr
 License: \tab GPL \cr
 }
 }
@@ -49,7 +49,7 @@ License: \tab GPL \cr
 Please see help page \code{\link{versionlog}} for all changes and updates prior to version 2.00. This page will only list most recent changes. 
 
 \itemize{
-  \item 3.00 (XX-Oct_2026)
+  \item 3.0 (19-Nov_2026)
   This revision is a large step, with user-visible changes in plotting and LLM-revision-based bug fixes. (The code analysis itself can be found on github, and every line of proposed code was checked manually. B12 was rejected as a Claude-induced typo error.)
   \describe{
     \item{Use \code{plot} for plotting, deprecating \code{plotweb}.}{Plotting has become more important over the years, in particular when also visualising some trait of the species, e.g. by giving same-trait species the same colour. \pkg{bipartite} now facilitates this, but to do so we had to create a "\code{bipartite_web}"-class (see next entry), which can take up more than the interaction matrix. For this class, the \code{plot}-command is sufficient, and it is much richer in options than the old, now removed \code{plotweb}. }
