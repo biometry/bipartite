@@ -235,9 +235,6 @@ plot.bipartite_web <- function(x,
       if (length(higher_color) == 2) {
         higher_color_map <- higher_color
       }
-      if (length(higher_add_color) == 2) {
-        higher_add_color_map <- higher_add_color
-      }
       # We can then assign a color to each higher species
       # by first converting the attribute vector to integers (0 and 1)
       # and adding 1 so that FALSE gets assigned the first
@@ -247,11 +244,19 @@ plot.bipartite_web <- function(x,
       })
       names(higher_color) <- colnames(x)
 
-      higher_add_color <- sapply(as.integer(higher_color_attr_vec),
-                                 FUN = function(v) {
-                                   higher_add_color_map[v + 1]
-                                 })
-      names(higher_add_color) <- colnames(x)
+      # Do the same as above for additional abundance colors, 
+      # if they are defined.
+      if (!is.null(add_higher_abundances)) {
+        if (length(higher_add_color) == 2) {
+          higher_add_color_map <- higher_add_color
+        }
+
+        higher_add_color <- sapply(as.integer(higher_color_attr_vec),
+                                  FUN = function(v) {
+                                    higher_add_color_map[v + 1]
+                                  })
+        names(higher_add_color) <- colnames(x)
+      }
     } else if (is.numeric(higher_color_attr_vec)) {
       # If the attribute vector is of type numeric (floating point numbers)
       # we assign colors based on a colorRamp.
@@ -334,6 +339,7 @@ plot.bipartite_web <- function(x,
     stopifnot(lower_color_attr %in% colnames(lower_attributes(x)))
     lower_color_attr_vec <- lower_attributes(x)[[lower_color_attr]]
     lower_names <- rownames(lower_attributes(x))
+    ## Numerical attribute
     if (is.numeric(lower_color_attr_vec)) {
       max_v <- max(lower_color_attr_vec)
       min_v <- min(lower_color_attr_vec)
@@ -344,6 +350,7 @@ plot.bipartite_web <- function(x,
     } else if (is.character(lower_color_attr_vec)) {
       lower_color_attr_vec <- as.factor(lower_color_attr_vec)
     }
+    ## Categorial attribute
     if (is.factor(lower_color_attr_vec)) {
       nl <- nlevels(lower_color_attr_vec)
       if (length(lower_color) >= nl) {
